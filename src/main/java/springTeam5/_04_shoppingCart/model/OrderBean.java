@@ -16,6 +16,8 @@ import javax.persistence.Table;
 
 import org.springframework.stereotype.Component;
 
+import springTeam5._04_shoppingCart.constant.PaymentMethod;
+
 @Entity @Table(name = "memberorder")
 @Component
 public class OrderBean {
@@ -38,6 +40,8 @@ public class OrderBean {
 	private String paymentStstus = "未付款"; // 付款狀態 未付款(預設)/已付款/退款中/已退款
 	@Column(name = "DELIVERYSTSTUS")
 	private String deliveryStstus ="無"; // 送貨狀態 無/備貨中/已發貨/已取貨/退貨中/已退貨
+	private PaymentMethod paymentMethod; //付款方式
+	private String discountID; //折扣碼
 	@Column(name = "TOTALAMOUNT")
 	private Integer totalAmount = 0; // 總金額 0處理中(預設)
 //	private String cancelTag; // 取消
@@ -159,7 +163,23 @@ public class OrderBean {
 	public void setDeliveryStstus(String deliveryStstus) {
 		this.deliveryStstus = deliveryStstus;
 	}
+	
 
+	public PaymentMethod getPaymentMethod() {
+		return paymentMethod;
+	}
+
+	public void setPaymentMethod(PaymentMethod paymentMethod) {
+		this.paymentMethod = paymentMethod;
+	}
+
+	public String getDiscountID() {
+		return discountID;
+	}
+
+	public void setDiscountID(String discountID) {
+		this.discountID = discountID;
+	}
 
 	public Integer getTotalAmount() {
 		return totalAmount;

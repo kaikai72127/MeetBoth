@@ -2,6 +2,23 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<%
+String path = request.getContextPath();
+String basePathHeadMVC = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path
+		+ "/html/fragment/headMVC.jsp";
+%>
+<%
+String basePathTopMVC = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path
+		+ "/html/fragment/topMVC.jsp";
+%>
+<%
+String basePathFooterMVC = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path
+		+ "/html/fragment/footerMVC.jsp";
+%>
+<%
+String basePathJsPath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path
+		+ "/html/fragment/jsPath.jsp";
+%>
 
 
 <!DOCTYPE html>
@@ -9,7 +26,7 @@
 
 <head>
 <!-- 引入共同的headMVC -->
-<jsp:include page="fragment/headMVC.jsp" />
+<jsp:include page="<%=basePathHeadMVC%>" />
 </head>
 
 <!--BOBY-->
@@ -18,7 +35,7 @@
 
 	<!-- header -->
 	<!-- 引入共同的topMVC -->
-	<jsp:include page="fragment/topMVC.jsp" />
+	<jsp:include page="<%=basePathTopMVC%>" />
 
 	<main>
 		<div class="page-loader">
@@ -149,7 +166,7 @@
 
 			<!-- Footer -->
 			<!-- 引入共同的footerMVC -->
-			<jsp:include page="fragment/footerMVC.jsp" />
+			<jsp:include page="<%=basePathFooterMVC%>" />
 	</main>
 
 	<!--  
@@ -157,7 +174,7 @@
     =============================================
     -->
 	<!-- 引入共同的js -->
-	<jsp:include page="fragment/jsPath.jsp" />
+	<jsp:include page="<%=basePathJsPath%>" />
 
 
 

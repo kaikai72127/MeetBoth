@@ -1,6 +1,8 @@
 package springTeam5._04_shoppingCart.model;
 
+import java.util.Date;
 import java.util.LinkedHashSet;
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -18,42 +20,42 @@ import org.springframework.stereotype.Component;
 
 import springTeam5._04_shoppingCart.constant.PaymentMethod;
 
-@Entity @Table(name = "memberorder")
-@Component
+//@Entity @Table(name = "memberorder")
+//@Component
 public class OrderBean {
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "ORDERNO")
+//	@Id
+//	@GeneratedValue(strategy = GenerationType.IDENTITY)
+//	@Column(name = "ORDERNO")
 	private Integer orderNo; // 訂單編號
-	@Column(name = "MEMBERID")
+//	@Column(name = "MEMBERID")
 	private String memberId; // 會員編號
-	@Column(name = "ORDERDATE")
-	private String orderDate; // 訂單日期
-	@Column(name = "UPORDERDATE")
-	private String uporderDate; // 更新日期
-	@Column(name = "SHIPPINGADDRESS")
+//	@Column(name = "ORDERDATE")
+	private Date orderDate; // 訂單日期
+//	@Column(name = "UPORDERDATE")
+	private Date uporderDate; // 更新日期
+//	@Column(name = "SHIPPINGADDRESS")
 	private String shippingAddress; // 收件地址
-	@Column(name = "ORDSTSTUS")
+//	@Column(name = "ORDSTSTUS")
 	private String ordStstus ="處理中"; // 訂單狀態 處理中(預設)/備貨中/已完成
-	@Column(name = "PAYMENTSTSTUS")
+//	@Column(name = "PAYMENTSTSTUS")
 	private String paymentStstus = "未付款"; // 付款狀態 未付款(預設)/已付款/退款中/已退款
-	@Column(name = "DELIVERYSTSTUS")
+//	@Column(name = "DELIVERYSTSTUS")
 	private String deliveryStstus ="無"; // 送貨狀態 無/備貨中/已發貨/已取貨/退貨中/已退貨
-	private PaymentMethod paymentMethod; //付款方式
-	private String discountID; //折扣碼
-	@Column(name = "TOTALAMOUNT")
-	private Integer totalAmount = 0; // 總金額 0處理中(預設)
-//	private String cancelTag; // 取消
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "orderbean",cascade = CascadeType.ALL)
-	@OrderBy("seqno desc") //拿資料的順序自己決定用,增加下一個排序
-	private Set<OrderItemBean> items = new LinkedHashSet<OrderItemBean>(); // itemsList
+	private PaymentMethod paymentMethod; //付款方式 貨到付款/信用卡/轉帳
+	private String discountId; //折扣碼
+//	@Column(name = "TOTALAMOUNT")
+	private Integer totalAmount; // 總金額 0處理中(預設)
+//	@OneToMany(fetch = FetchType.LAZY, mappedBy = "orderbean",cascade = CascadeType.ALL)
+//	@OrderBy("seqno desc") //拿資料的順序自己決定用,增加下一個排序
+//	private Set<OrderItemBean> items = new LinkedHashSet<OrderItemBean>(); // itemsList
+	private List<OrderItemBean> items; // itemsList
 
 	
 	//新增有ID
-	public OrderBean(Integer orderNo, String memberId, String orderDate, String uporderDate, String shippingAddress,
+	public OrderBean(Integer orderNo, String memberId, Date orderDate, Date uporderDate, String shippingAddress,
 			String ordStstus, String paymentStstus, String deliveryStstus, Integer totalAmount,
-			Set<OrderItemBean> items) {
+			List<OrderItemBean> items) {
 		this.memberId = memberId;
 		this.orderDate = orderDate;
 		this.uporderDate = uporderDate;
@@ -67,9 +69,9 @@ public class OrderBean {
 
 	
 	//修改沒有ID
-	public OrderBean( String memberId, String orderDate, String uporderDate, String shippingAddress,
+	public OrderBean( String memberId, Date orderDate, Date uporderDate, String shippingAddress,
 			String ordStstus, String paymentStstus, String deliveryStstus, Integer totalAmount,
-			Set<OrderItemBean> items) {
+			List<OrderItemBean> items) {
 		this.memberId = memberId;
 		this.orderDate = orderDate;
 		this.uporderDate = uporderDate;
@@ -105,22 +107,22 @@ public class OrderBean {
 	}
 
 
-	public String getOrderDate() {
+	public Date getOrderDate() {
 		return orderDate;
 	}
 
 
-	public void setOrderDate(String orderDate) {
+	public void setOrderDate(Date orderDate) {
 		this.orderDate = orderDate;
 	}
 
 
-	public String getUporderDate() {
+	public Date getUporderDate() {
 		return uporderDate;
 	}
 
 
-	public void setUporderDate(String uporderDate) {
+	public void setUporderDate(Date uporderDate) {
 		this.uporderDate = uporderDate;
 	}
 
@@ -173,12 +175,12 @@ public class OrderBean {
 		this.paymentMethod = paymentMethod;
 	}
 
-	public String getDiscountID() {
-		return discountID;
+	public String getDiscountId() {
+		return discountId;
 	}
 
-	public void setDiscountID(String discountID) {
-		this.discountID = discountID;
+	public void setDiscountId(String discountID) {
+		this.discountId = discountID;
 	}
 
 	public Integer getTotalAmount() {
@@ -189,17 +191,13 @@ public class OrderBean {
 		this.totalAmount = totalAmount;
 	}
 
-	public void setTotalAmount() {
-		this.totalAmount = 0;
-	}
 
-
-	public Set<OrderItemBean> getItems() {
+	public List<OrderItemBean> getItems() {
 		return items;
 	}
 
 
-	public void setItems(Set<OrderItemBean> items) {
+	public void setItems(List<OrderItemBean> items) {
 		this.items = items;
 	}
 

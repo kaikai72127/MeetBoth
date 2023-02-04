@@ -145,6 +145,21 @@ public class ProductController {
 		}
 		return "_03_product/newShop";
 	}
+	
+//	隨機搜尋
+	@GetMapping("/_03_product.searchRandomProduct.controller")
+	public String processsearchRandomProductAction(Model mProd) {
+		List<Product> result = pService.findRandomProducts();
+		mProd.addAttribute("allprodlist", result);
+		return "_03_product/newShop";
+	}
+//	類別搜尋 回傳prodList
+	@GetMapping("/_03_product.searchProductByType")
+	public String processsearchProductByTypeAction(Model mProd,@RequestParam("type") Integer type) {
+		List<Product> result = pService.findByProdClass(type);
+		mProd.addAttribute("allprodlist", result);
+		return "_03_product/newShop";
+	}
 //	---------------------------ProductPart-----------------------
 
 //	搜全部
@@ -204,6 +219,7 @@ public class ProductController {
 		newProd.setProdUpdate(getCurrentDate());
 		newProd.setProdImg(image);
 		newProd.setDirections(directions);
+		newProd.setProdSales(0);
 		newProd.setProdtype(currentProdType);
 
 		LinkedHashSet<Product> prods = new LinkedHashSet<Product>();

@@ -53,6 +53,17 @@ public class Product {
 	@Column(name = "PRODIMG")
 	private Blob prodImg;
 
+	@Column(name = "PRODSALES")
+	private Integer prodSales;
+
+	public Integer getProdSales() {
+		return prodSales;
+	}
+
+	public void setProdSales(Integer prodSales) {
+		this.prodSales = prodSales;
+	}
+
 	@Column(name = "PRODCLASS")
 	@Transient
 	private int prodClass;
@@ -164,7 +175,7 @@ public class Product {
 	}
 
 	public Product(int prodID, String prodName, int prodPrice, int memberID, int inventory, String prodPost,
-			String prodUpdate, String directions, Blob prodImg, int prodClass, ProdType prodtype,
+			String prodUpdate, String directions, Blob prodImg, Integer prodSales, int prodClass, ProdType prodtype,
 			List<ProductComment> productComment) {
 		super();
 		this.prodID = prodID;
@@ -176,6 +187,7 @@ public class Product {
 		this.prodUpdate = prodUpdate;
 		this.directions = directions;
 		this.prodImg = prodImg;
+		this.prodSales = prodSales;
 		this.prodClass = prodClass;
 		this.prodtype = prodtype;
 		this.productComment = productComment;

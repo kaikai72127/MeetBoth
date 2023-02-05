@@ -1,22 +1,17 @@
 package springTeam5._04_shoppingCart.controller;
 
 import java.io.IOException;
-import java.util.List;
 
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import springTeam5._04_shoppingCart.model.OrderBean;
-import springTeam5._04_shoppingCart.service.OrderService;
+import springTeam5._04_shoppingCart.service.impl.OrderService;
 
 
 @Controller
@@ -53,12 +48,12 @@ public class OrderController {
 	}
 
 // 刪除------
-	@GetMapping("/_04_shoppingCart.DeleteOrder.controller")
-	public String processDeleteOrderAction(@RequestParam("orderNo") Integer ordernNo) {
-
-		orderService.deleteOrderByNo(ordernNo);	
-		return "redirect:_04_shoppingCart.SelectAll.controller";
-	}
+//	@GetMapping("/_04_shoppingCart.DeleteOrder.controller")
+//	public String processDeleteOrderAction(@RequestParam("orderNo") Integer ordernNo) {
+//
+//		orderService.deleteOrderByNo(ordernNo);	
+//		return "redirect:_04_shoppingCart.SelectAll.controller";
+//	}
 	
 // 修改------
 	// 跳轉到修改頁面

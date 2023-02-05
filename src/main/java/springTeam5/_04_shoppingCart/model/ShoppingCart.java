@@ -11,7 +11,8 @@ public class ShoppingCart {
 	public ShoppingCart() {
 	}
 
-	public Map<Integer, OrderItemBean> getShoppingCart() { // ${ShoppingCart.content}
+	//訂單的所有明細Map
+	public Map<Integer, OrderItemBean> getShoppingCart() { // ${ShoppingCart.getShoppingCart()}
 		return cart;
 	}
 
@@ -53,8 +54,7 @@ public class ShoppingCart {
 	}
 
 	// 取得購物車內商品數量
-	public int getItemQty() { // ShoppingCart.itemNumber
-//		return cart.size();
+	public int getItemQty() {
 		int qty = 0;
 		for (Integer i : cart.keySet()) {
 			OrderItemBean orderItemBean = cart.get(i);

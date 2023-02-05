@@ -16,6 +16,10 @@ public interface ProductRepository extends JpaRepository<Product, Integer> {
 
 //	透過prodID刪除整筆商品資料
 	public void deleteByProdID(Integer prodID);
+	
+//	透過產品類別搜尋
+	@Query(value="select * from Product where prodClass = ?1", nativeQuery=true)
+	public List<Product> findByProdClass(Integer prodClass);
 
 //	條件搜尋
 	@Query(value = "select * from Product where IIF(?1=0,?1,prodClass)=?1 and prodPrice >= ?2 and prodPrice <= ?3 and (prodName like concat('%',?4,'%') or memberID like concat('%',?4,'%')) order by prodID", nativeQuery = true)
@@ -35,4 +39,7 @@ public interface ProductRepository extends JpaRepository<Product, Integer> {
 
 	@Query(value = "select top 4 * from Product where prodClass = ?1 and prodID != ?2 order by prodID", nativeQuery=true)
 	public List<Product> findTop4ProductLikeByProductLike(Integer prodClass,Integer prodID);
+
+	@Query(value = "select top 8 * from Product order by NEWID()", nativeQuery = true)
+	public List<Product> findRandomProducts();
 }

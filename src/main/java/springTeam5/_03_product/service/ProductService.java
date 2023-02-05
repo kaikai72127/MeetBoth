@@ -34,6 +34,11 @@ public class ProductService {
 	public void deleteProdFromProdID(Integer prodID) {
 		pRepo.deleteByProdID(prodID);
 	}
+	
+//	透過產品類別搜尋
+	public List<Product> findByProdClass(Integer prodClass){
+		return pRepo.findByProdClass(prodClass);
+	}
 
 //	透過prodID修改product的資料
 	public void updateProd(Product p) {
@@ -65,5 +70,8 @@ public class ProductService {
 	public List<Product> findTop4ProductLikeByProductLike(Integer prodClass,Integer prodID){
 		return pRepo.findTop4ProductLikeByProductLike(prodClass,prodID);
 	}
-
+	
+	public List<Product> findRandomProducts(){
+		return pRepo.findRandomProducts();
+	}
 }

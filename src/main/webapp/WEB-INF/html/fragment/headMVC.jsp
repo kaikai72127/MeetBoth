@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%
 String pathAnimation = request.getContextPath();
@@ -122,6 +122,7 @@ System.out.println(baseMeetboth96x96);
 <link href="<%=baseOwlDefault%>" rel="stylesheet" />
 <link href="<%=baseMagnificPopup%>" rel="stylesheet" />
 <link href="<%=baseSimpletextrotator%>" rel="stylesheet" />
+
 <!-- Font Awesome -->
 <link
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css"
@@ -148,7 +149,11 @@ System.out.println(baseMeetboth96x96);
     =============================================
     
     -->
-
+<link rel="stylesheet"
+	href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css" />
+<link rel="stylesheet" href="/resources/demos/style.css" />
+<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+<script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
 
 <!-- 動畫 -->
 <link

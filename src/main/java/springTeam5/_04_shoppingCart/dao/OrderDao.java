@@ -25,4 +25,9 @@ public interface OrderDao {
 	
 	//新增訂單明細
 	void createOrderItems(Integer orderId, List<OrderItemBean> orderItemList);
+	
+	//刪除一筆訂單
+	void deleteOrderById(Integer orderId);
+	//刪除一筆訂單所有明細
+	void deleteOrderItemById(Integer orderno);
 }

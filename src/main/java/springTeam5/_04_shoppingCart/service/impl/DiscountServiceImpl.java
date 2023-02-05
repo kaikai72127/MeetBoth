@@ -2,54 +2,58 @@ package springTeam5._04_shoppingCart.service.impl;
 
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
+import javax.transaction.Transactional;
 
-import springTeam5._04_shoppingCart.dao.DiscountDao;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import springTeam5._04_shoppingCart.dto.DiscountQueryParams;
-import springTeam5._04_shoppingCart.dto.DiscountResquest;
 import springTeam5._04_shoppingCart.model.Discount;
+import springTeam5._04_shoppingCart.model.DiscountRepository;
 import springTeam5._04_shoppingCart.service.DiscountService;
 
-@Component
-public class DiscountServiceImpl implements DiscountService{
-	
+@Service
+@Transactional
+public class DiscountServiceImpl implements DiscountService {
+
 	@Autowired
-	private DiscountDao discountDao;
+	private DiscountRepository discountRepository;
 
 	@Override
 	public Integer countDiscount(DiscountQueryParams discountQueryParams) {
-		return discountDao.countDiscount(discountQueryParams);
+		return null;
 	}
 
 	@Override
-	public List<Discount> getDiscount(DiscountQueryParams orderQueryParams) {
-		return discountDao.getDiscount(orderQueryParams);
+	public List<Discount> getDiscount() {
+		return discountRepository.findAll();
 	}
 
 	@Override
 	public Discount getDiscountByDiscountNo(String discountNo) {
-		return discountDao.getDiscountByDiscountNo(discountNo);
+		return discountRepository.getDiscountByDiscountNo(discountNo);
 	}
 
 	@Override
 	public Discount getDiscountByDiscountId(Integer discountId) {
-		return discountDao.getDiscountByDiscountId(discountId);
+		return discountRepository.getDiscountByDiscountId(discountId);
 	}
 
 	@Override
-	public Integer createDiscount(DiscountResquest discountResquest) {
-		return discountDao.createDiscount(discountResquest);
+	public Discount createDiscount(Discount discount) {
+
+		return discountRepository.save(discount);
 	}
 
 	@Override
-	public void updateDiscount(Integer discountId, DiscountResquest discountResquest) {
-		discountDao.updateDiscount(discountId,discountResquest);	
+	public void updateDiscount(Discount discount) {
+		discountRepository.save(discount);
+
 	}
 
 	@Override
-	public void deleteDiscountById(Integer discountId) {
-		discountDao.deleteDiscountById(discountId);
+	public void deleteDiscountByDiscountId(Integer discountId) {
+		discountRepository.deleteById(discountId);
 	}
 
 }

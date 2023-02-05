@@ -1,6 +1,5 @@
 package springTeam5._04_shoppingCart.dto;
 
-import java.util.Date;
 
 import javax.validation.constraints.NotNull;
 
@@ -15,9 +14,9 @@ public class DiscountResquest {
 	@NotNull
 	private String discountDesc;
 	@NotNull
-	private Date discountStart;
+	private String discountStart;
 	@NotNull
-	private Date discountEnd;
+	private String discountEnd;
 	
 	public String getDiscountNo() {
 		return discountNo;
@@ -43,16 +42,16 @@ public class DiscountResquest {
 	public void setDiscountDesc(String discountDesc) {
 		this.discountDesc = discountDesc;
 	}
-	public Date getDiscountStart() {
+	public String getDiscountStart() {
 		return discountStart;
 	}
-	public void setDiscountStart(Date discountStart) {
+	public void setDiscountStart(String discountStart) {
 		this.discountStart = discountStart;
 	}
-	public Date getDiscountEnd() {
+	public String getDiscountEnd() {
 		return discountEnd;
 	}
-	public void setDiscountEnd(Date discountEnd) {
+	public void setDiscountEnd(String discountEnd) {
 		this.discountEnd = discountEnd;
 	}
 

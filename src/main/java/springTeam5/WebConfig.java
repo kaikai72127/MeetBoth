@@ -16,6 +16,7 @@ public class WebConfig implements WebMvcConfigurer {
 		registry.addResourceHandler("/html/assets/scss/**").addResourceLocations("/WEB-INF/resources/assets/sass/");
 		registry.addResourceHandler("/html/assets/images/**").addResourceLocations("/WEB-INF/resources/assets/images/");
 		registry.addResourceHandler("/html/assets/lib/**").addResourceLocations("/WEB-INF/resources/assets/lib/");
+		registry.addResourceHandler("/html/fragment/**").addResourceLocations("/WEB-INF/html/fragment/");
 	}
 	
 	@Override

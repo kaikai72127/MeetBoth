@@ -2,23 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
-<%
-String path = request.getContextPath();
-String basePathHeadMVC = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path
-		+ "/html/fragment/headMVC.jsp";
-%>
-<%
-String basePathTopMVC = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path
-		+ "/html/fragment/topMVC.jsp";
-%>
-<%
-String basePathFooterMVC = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path
-		+ "/html/fragment/footerMVC.jsp";
-%>
-<%
-String basePathJsPath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path
-		+ "/html/fragment/jsPath.jsp";
-%>
+
 
 
 <!DOCTYPE html>
@@ -26,7 +10,9 @@ String basePathJsPath = request.getScheme() + "://" + request.getServerName() + 
 
 <head>
 <!-- 引入共同的headMVC -->
-<jsp:include page="<%=basePathHeadMVC%>" />
+<jsp:include page="/WEB-INF/html/fragment/headMVC.jsp" />
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
 </head>
 
 <!--BOBY-->
@@ -35,7 +21,7 @@ String basePathJsPath = request.getScheme() + "://" + request.getServerName() + 
 
 	<!-- header -->
 	<!-- 引入共同的topMVC -->
-	<jsp:include page="<%=basePathTopMVC%>" />
+	<jsp:include page="/WEB-INF/html/fragment/topMVC.jsp" />
 
 	<main>
 		<div class="page-loader">
@@ -47,17 +33,17 @@ String basePathJsPath = request.getScheme() + "://" + request.getServerName() + 
 				<!-- Header -->
 				<header id="header">
 					<h1 class="logo">
-						<strong>管理者介面　</strong>
+						<strong>管理者介面 </strong>
 					</h1>
 				</header>
 
 				<!-- Content -->
-				<section>
+				<section class="module-medium" id="demos">
 					<header class="main">
-						<h2 style="margin: 0; float: left">訂單管理CRUD　</h2>
+						<h2 style="margin: 0; float: left">折扣碼管理</h2>
 						<form method="post"
-							action="<c:url value='/_04_shoppingCart.InsertOrderMain.controller' />">
-							<button name="orderNo" value="${bean.orderNo}">
+							action="<c:url value='/discountsCreate.controller' />">
+							<button>
 								<i class="fa-solid fa-square-plus"></i>
 							</button>
 						</form>
@@ -75,46 +61,33 @@ String basePathJsPath = request.getScheme() + "://" + request.getServerName() + 
 						<table class="alt">
 							<thead>
 								<tr>
-									<th width=100px>訂單編號</th>
-									<th width=100px>會員編號</th>
-									<th width=120px>訂單日期</th>
-									<th width=120px>更新日期</th>
-									<th>訂單地址</th>
-									<th>訂單狀態</th>
-									<th>付款狀態</th>
-									<th>送貨狀態</th>
-									<th width=80px>總金額</th>
+									<th width=100px>折扣編號</th>
+									<th width=100px>折扣代號</th>
+									<th width=120px>折扣名稱</th>
+									<th>折扣內容</th>
+									<th width=80px>折扣開始日</th>
+									<th width=80px>折扣結束日</th>
 									<th width=80px>編輯</th>
-									<th width=80px>訂單明細</th>
 									<th width=80px>刪除</th>
 								</tr>
 							</thead>
 							<c:forEach var="bean" items="${classList}">
 								<tbody>
 									<tr>
-										<td>${bean.orderNo}</td>
-										<td>${bean.memberId}</td>
-										<td>${bean.orderDate}</td>
-										<td>${bean.uporderDate}</td>
-										<td>${bean.shippingAddress}</td>
-										<td>${bean.ordStstus}</td>
-										<td>${bean.paymentStstus}</td>
-										<td>${bean.deliveryStstus}</td>
-										<td>${bean.totalAmount}</td>
+										<td>${bean.discountId}</td>
+										<td>${bean.discountNo}</td>
+										<td>${bean.discountName}</td>
+										<td>${bean.discountDesc}</td>
+										<td>${bean.discountStart}</td>
+										<td>${bean.discountEnd}</td>
 										<td><form method="post"
-												action="<c:url value='/_04_shoppingCart.UpdateOrderMain.controller' />">
-												<button name="orderNo" value="${bean.orderNo}">
+												action="<c:url value='discountsUpdate.controller/${bean.discountId}' />">
+												<button name="discountId" value="${bean.discountId}">
 													<i class="fa-solid fa-pen-to-square"></i>
 												</button>
 											</form></td>
-										<td><form action="<c:url value='/_04_shoppingCart.InsertOrderItemMain.controller' />"
-												method="post">
-												<button name="orderNo" value="${bean.orderNo}">
-													<i class="fa-solid fa-file-pen"></i>
-												</button>
-											</form></td>
-										<td><button class="deleteThisOrder" name="orderNo"
-												value="${bean.orderNo}">
+										<td><button value="${bean.discountId}"
+												class="deleteThisDiscount" name="discountId">
 												<i class="fa-solid fa-xmark"></i>
 											</button></td>
 									</tr>
@@ -131,7 +104,7 @@ String basePathJsPath = request.getScheme() + "://" + request.getServerName() + 
 
 			<!-- Footer -->
 			<!-- 引入共同的footerMVC -->
-			<jsp:include page="<%=basePathFooterMVC%>" />
+			<jsp:include page="/WEB-INF/html/fragment/footerMVC.jsp" />
 	</main>
 
 	<!--  
@@ -139,8 +112,45 @@ String basePathJsPath = request.getScheme() + "://" + request.getServerName() + 
     =============================================
     -->
 	<!-- 引入共同的js -->
-	<jsp:include page="<%=basePathJsPath%>" />
+	<jsp:include page="/WEB-INF/html/fragment/jsPath.jsp" />
+	<script>
+        $(function(){
+            $('.deleteThisDiscount').click(function(){
+                let id=$(this).attr("value");
+                Swal.fire({
+                  title: '你確定要刪除嗎?',
+                  text: "將無法恢復此訂單!!!",
+                  icon: 'warning',
+                  //icon:  "success", "error", "warning", "info" or "question" 這幾種選項
+                  showCancelButton: true,
+                  confirmButtonColor: '#FFEBAD',
+                  cancelButtonColor: '#F0DBDB',
+                  confirmButtonText: '確定刪除'
+//                   cancelButtonText: '取消',
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        $.ajax({
+                          //專案名稱+servlet
+                          url:'/MeetBoth/discounts.controller/'+id,
+                          method:"get",
+                          dataType:"text",
+                          //對應name設定的名稱 並非value的名稱
+                          data: {"discountId":id},
+                        })
+                            .done(function () {
+                                location.reload();
+                                console.log("delete")
+                             })//done
+                             .fail(function(error) {
+                                 console.log(error)
+                             })//fail end
+                    }//if
+                  })//then
 
+              })//click end
+        });
+        //function end
+    </script>
 
 
 </body>

@@ -16,15 +16,18 @@ public interface OrderItemRepository extends JpaRepository<OrderItemBean, Intege
 	public void deleteOrdItem(@Param("param1")Integer orderNo,@Param("param2") Integer seqno);
 
 	// 查詢該訂單的所有Item
-	@Query(value = "select * from orderitem where orderno =?", nativeQuery = true)
+	@Query(value = "SELECT * FROM orderitem oi LEFT JOIN product AS p ON oi.productId=p.productId  where orderno =?", nativeQuery = true)
 	public List<OrderItemBean> findByOrderno(Integer orderNo);
 
 	// 查詢該訂單的所有Item
-	@Query(value = "select * from orderitem where orderno =?1 and seqno=?2", nativeQuery = true)
+	@Query(value = "SELECT * from orderitem where orderno =?1 and seqno=?2", nativeQuery = true)
 	public List<OrderItemBean> findOrderItem(Integer orderNo, Integer seqno);
 
 	// 查詢該訂單的所有Item
 	@Query(value = "from OrderItemBean where seqno=?1")
 	public List<OrderItemBean> findBySqeno(Integer seqno);
+
+	
+
 
 }

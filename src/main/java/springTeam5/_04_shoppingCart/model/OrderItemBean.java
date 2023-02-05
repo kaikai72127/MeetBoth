@@ -2,67 +2,68 @@ package springTeam5._04_shoppingCart.model;
 
 import java.sql.Blob;
 
-//import javax.persistence.Column;
-//import javax.persistence.Entity;
-//import javax.persistence.GeneratedValue;
-//import javax.persistence.GenerationType;
-//import javax.persistence.Id;
-//import javax.persistence.JoinColumn;
-//import javax.persistence.ManyToOne;
-//import javax.persistence.Table;
-//
-//import org.springframework.stereotype.Component;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
-//@Entity @Table(name = "orderitem")
-//@Component
+import org.springframework.stereotype.Component;
+
+@Entity @Table(name = "orderitem")
+@Component
 public class OrderItemBean {
 	
-//	@ManyToOne
-//	@JoinColumn(name = "ORDERNO_FK")
+	@ManyToOne
+	@JoinColumn(name = "ORDERNO_FK")
 	private OrderBean orderbean; // 訂單編號
-//	@Column(name="ORDERNO")
-	private Integer orderNo;
-	
-//	@Id
-//	@GeneratedValue(strategy = GenerationType.IDENTITY)
-//	@Column(name = "SEQNO")
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "SEQNO")
 	private Integer seqno; // 序號
-//	@Column(name = "PRODID")
+	@Column(name = "PRODID")
 	private Integer prodId; // 商品編號
-//	@Column(name = "QTY")
+	@Column(name = "QTY")
 	private Integer qty; // 數量
-//	@Column(name = "PRODPRICE")
-//	private Integer prodPrice; // 單價
-//	@Column(name = "ITEMTOTAL")
+	@Column(name = "ITEMTOTAL")
 	private Integer itemTotal; // 總金額
 	
 	
+	private Integer prodPrice; // 單價
 	private Blob prodImg;
 	private String prodName;
 
 	
 	//新增有ID
-	public OrderItemBean(OrderBean orderbean, Integer orderNo, Integer seqno, Integer prodId, String prodName,
-			Integer qty, Double discount, Integer itemTotal, String remark) {
+
+	public OrderItemBean(OrderBean orderbean, Integer seqno, Integer prodId, Integer qty,
+			Integer itemTotal, Integer prodPrice, Blob prodImg, String prodName) {
+		super();
 		this.orderbean = orderbean;
-		this.orderNo = orderNo;
 		this.seqno = seqno;
 		this.prodId = prodId;
-
 		this.qty = qty;
-
 		this.itemTotal = itemTotal;
-
+		this.prodPrice = prodPrice;
+		this.prodImg = prodImg;
+		this.prodName = prodName;
 	}
-	
+
+
 	//修改沒有ID
-	public OrderItemBean(OrderBean orderbean, Integer orderNo,  Integer prodId,
-			Integer qty,Integer itemTotal) {
+
+	public OrderItemBean(OrderBean orderbean, Integer prodId, Integer qty, Integer itemTotal,
+			Integer prodPrice, Blob prodImg, String prodName) {
 		this.orderbean = orderbean;
-		this.orderNo = orderNo;
 		this.prodId = prodId;
 		this.qty = qty;
 		this.itemTotal = itemTotal;
+		this.prodPrice = prodPrice;
+		this.prodImg = prodImg;
+		this.prodName = prodName;
 	}
 
 	public OrderItemBean() {
@@ -75,14 +76,6 @@ public class OrderItemBean {
 
 	public void setOrderbean(OrderBean orderbean) {
 		this.orderbean = orderbean;
-	}
-
-	public Integer getOrderNo() {
-		return orderNo;
-	}
-
-	public void setOrderNo(Integer orderNo) {
-		this.orderNo = orderNo;
 	}
 
 	public Integer getSeqno() {
@@ -134,8 +127,13 @@ public class OrderItemBean {
 		this.prodName = prodName;
 	}
 
+	public Integer getProdPrice() {
+		return prodPrice;
+	}
 
-
+	public void setProdPrice(Integer prodPrice) {
+		this.prodPrice = prodPrice;
+	}
 
 	
 }

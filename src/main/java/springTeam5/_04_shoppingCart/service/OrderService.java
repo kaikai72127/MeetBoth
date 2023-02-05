@@ -16,5 +16,9 @@ public interface OrderService {
 	OrderBean getOrderById(Integer orderId);
 
 	Integer createOrder(Integer userId, CreateOrderRequest createOrderRequest,PaymentMethod paymentMethod,String discountId);
+	
+	void deleteOrderByNo(Integer orderNo);
+	
+	String getCurrentDate();
 
 }

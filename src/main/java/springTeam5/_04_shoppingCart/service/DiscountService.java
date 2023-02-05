@@ -3,7 +3,6 @@ package springTeam5._04_shoppingCart.service;
 import java.util.List;
 
 import springTeam5._04_shoppingCart.dto.DiscountQueryParams;
-import springTeam5._04_shoppingCart.dto.DiscountResquest;
 import springTeam5._04_shoppingCart.model.Discount;
 
 public interface DiscountService {
@@ -11,21 +10,21 @@ public interface DiscountService {
 	Integer countDiscount(DiscountQueryParams discountQueryParams);
 
 	// 查詢全部的折扣碼
-	List<Discount> getDiscount(DiscountQueryParams orderQueryParams);
+	List<Discount> getDiscount();
 
 	// 透過no找尋折扣碼
 	Discount getDiscountByDiscountNo(String discountNo);
 
-	// 透過id找尋折扣碼
+	// 透過編號來做單一個折扣資訊搜尋 會回傳一個 Discount
 	Discount getDiscountByDiscountId(Integer discountId);
 
 	// 新增折扣碼
-	Integer createDiscount(DiscountResquest discountResquest);
+	Discount createDiscount(Discount discount);
 	
 	//修改折扣碼
-	void  updateDiscount(Integer discountId,DiscountResquest discountResquest);
+	void  updateDiscount(Discount discount);
 	
 	//刪除折扣碼
-	void deleteDiscountById(Integer discountId);
+	void deleteDiscountByDiscountId(Integer discountId);
 
 }

@@ -2,23 +2,6 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
-<%
-String path = request.getContextPath();
-String basePathHeadMVC = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path
-		+ "/html/fragment/headMVC.jsp";
-%>
-<%
-String basePathTopMVC = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path
-		+ "/html/fragment/topMVC.jsp";
-%>
-<%
-String basePathFooterMVC = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path
-		+ "/html/fragment/footerMVC.jsp";
-%>
-<%
-String basePathJsPath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path
-		+ "/html/fragment/jsPath.jsp";
-%>
 
 
 <!DOCTYPE html>
@@ -26,7 +9,7 @@ String basePathJsPath = request.getScheme() + "://" + request.getServerName() + 
 
 <head>
 <!-- 引入共同的headMVC -->
-<jsp:include page="<%=basePathHeadMVC%>" />
+<jsp:include page="/WEB-INF/html/fragment/headMVC.jsp" />
 </head>
 
 <!--BOBY-->
@@ -34,11 +17,11 @@ String basePathJsPath = request.getScheme() + "://" + request.getServerName() + 
 	data-offset="60">
 	<!-- animation -->
 	<!-- 引入animation -->
-	<jsp:include page="fragment/animation.jsp" />
+	<jsp:include page="/WEB-INF/html/fragment/animation.jsp" />
 
 	<!-- header -->
 	<!-- 引入共同的topMVC -->
-	<jsp:include page="<%=basePathTopMVC%>" />
+	<jsp:include page="/WEB-INF/html/fragment/topMVC.jsp" />
 
 	<main>
 		<div class="page-loader">
@@ -169,7 +152,7 @@ String basePathJsPath = request.getScheme() + "://" + request.getServerName() + 
 
 			<!-- Footer -->
 			<!-- 引入共同的footerMVC -->
-			<jsp:include page="<%=basePathFooterMVC%>" />
+			<jsp:include page="/WEB-INF/html/fragment/footerMVC.jsp" />
 	</main>
 
 	<!--  
@@ -177,7 +160,7 @@ String basePathJsPath = request.getScheme() + "://" + request.getServerName() + 
     =============================================
     -->
 	<!-- 引入共同的js -->
-	<jsp:include page="<%=basePathJsPath%>" />
+	<jsp:include page="/WEB-INF/html/fragment/jsPath.jsp" />
 
 
 	<!-- jQuery animateCss Extend -->

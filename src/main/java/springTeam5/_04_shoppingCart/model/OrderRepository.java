@@ -7,12 +7,14 @@ import org.springframework.data.jpa.repository.Query;
 
 
 public interface OrderRepository extends JpaRepository<OrderBean, Integer> {
+	
 	//找全部訂單資料
 	@Query(value = "select * from memberorder", nativeQuery = true)
 	public List<OrderBean> selectAll();
 	
 	//找單一訂單的資料
 	public List<OrderBean> findByOrderNo(Integer orderNo);
+	
 
 	//模糊搜尋訂單的資料
 	@Query(value = "from OrderBean where orderNo like concat('%', ?1, '%') or memberId like concat('%', ?1, '%') or shippingAddress like concat('%', ?1, '%')"

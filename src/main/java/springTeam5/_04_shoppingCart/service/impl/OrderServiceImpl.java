@@ -13,7 +13,7 @@ import springTeam5._04_shoppingCart.model.OrderRepository;
 
 @Service
 @Transactional
-public class OrderService {
+public class OrderServiceImpl implements springTeam5._04_shoppingCart.service.OrderService {
 
 	@Autowired
 	private OrderRepository orderRepo;
@@ -55,8 +55,6 @@ public class OrderService {
 
 //修改----------
 	// 修改一筆訂單
-
-	@Transactional
 	public OrderBean updateOrder(OrderBean obean) {
 		return orderRepo.save(obean);
 	}

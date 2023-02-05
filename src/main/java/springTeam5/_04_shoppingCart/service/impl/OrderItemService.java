@@ -46,7 +46,7 @@ public class OrderItemService {
 		System.out.println("orderList細項" + orderList);
 		OrderBean orderBean = orderList.get(0);
 		System.out.println("orderBean細項" + orderBean);
-		List<OrderItemBean> items = orderBean.getItems();
+		Set<OrderItemBean> items = orderBean.getItems();
 		Iterator<OrderItemBean> it = items.iterator();
 		while (it.hasNext()) {
 			OrderItemBean ordItemBean = it.next();
@@ -95,7 +95,7 @@ public class OrderItemService {
 		return list;
 	}
 
-	// 搜尋orderNo
+//	// 搜尋orderNo
 //	public OrderItemBean selectOneOrdItem(Integer orderNo) {
 //		return orderItemRepo.selectOneOrdItem(orderNo);
 //	}

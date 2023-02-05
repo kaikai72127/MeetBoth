@@ -43,8 +43,9 @@ public class ShoppingCartController {
 		}
 
 		Product product = productService.searchSingleProductFromProdID(prodId);
-		OrderItemBean ordetItemBean = new OrderItemBean(null, null, prodId, qty, product.getProdPrice() * qty,
-				product.getProdPrice(), product.getProdImg(), product.getProdName());
+		OrderItemBean ordetItemBean = new OrderItemBean();
+		ordetItemBean.setProdId(prodId);
+		ordetItemBean.setQty(qty);
 
 		cart.addToCart(prodId, ordetItemBean);
 
@@ -52,7 +53,7 @@ public class ShoppingCartController {
 
 		Product productAdd = productService.searchSingleProductFromProdID(prodId);
 		m.addAttribute("bean", productAdd);
-		return "_04_shoppingCart/ProductDetail";
+		return "redirect:_03_product.searchAllProduct.controller";
 
 	}
 
@@ -72,8 +73,7 @@ public class ShoppingCartController {
 
 		qty = 1;
 		Product product = productService.searchSingleProductFromProdID(prodId);
-		OrderItemBean ordetItemBean = new OrderItemBean(null, null, prodId, qty, product.getProdPrice() * qty,
-				product.getProdPrice(), product.getProdImg(), product.getProdName());
+		OrderItemBean ordetItemBean = new OrderItemBean();
 
 		cart.addToCart(prodId, ordetItemBean);
 

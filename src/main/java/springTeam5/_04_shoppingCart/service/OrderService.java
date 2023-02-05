@@ -2,23 +2,25 @@ package springTeam5._04_shoppingCart.service;
 
 import java.util.List;
 
-import springTeam5._04_shoppingCart.constant.PaymentMethod;
-import springTeam5._04_shoppingCart.dto.CreateOrderRequest;
-import springTeam5._04_shoppingCart.dto.OrderQueryParams;
 import springTeam5._04_shoppingCart.model.OrderBean;
 
 public interface OrderService {
 
-	Integer countOrder(OrderQueryParams orderQueryParams);
+	// 新增一筆訂單
+	OrderBean insertOrder(OrderBean obean);
 
-	List<OrderBean> getOrders(OrderQueryParams orderQueryParams);
-
-	OrderBean getOrderById(Integer orderId);
-
-	Integer createOrder(Integer userId, CreateOrderRequest createOrderRequest,PaymentMethod paymentMethod,String discountId);
+	// 刪除一筆訂單-透過orderNo
+	void deleteById(Integer orderNo);
 	
-	void deleteOrderByNo(Integer orderNo);
+	// 修改一筆訂單
+	OrderBean updateOrder(OrderBean obean);
+
+	// 查詢全部訂單
+	List<OrderBean> selectAll();
+	// 查詢一筆訂單資料-透過訂單編號
+	List<OrderBean> findByOrderNo(Integer orderNo);
+	// 模糊搜尋全部
+	List<OrderBean> findSearchOrderNo(String searchAll);
 	
-	String getCurrentDate();
 
 }

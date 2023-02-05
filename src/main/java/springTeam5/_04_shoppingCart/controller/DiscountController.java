@@ -66,6 +66,8 @@ public class DiscountController {
 //		return "_04_shoppingCart/discountCRUD";
 //	}
 
+//管理者才可以對折扣碼增刪改查
+	//跳轉到全部折扣碼的地方
 	@GetMapping("/discounts.controller")
 	public String getAllDiscounts(Model odModel) {
 		List<Discount> classList = discountService.getDiscount();
@@ -113,7 +115,8 @@ public class DiscountController {
 	// 修改------
 	// 跳轉到修改頁面
 	@PostMapping("/discountsUpdate.controller/{discountId}")
-	public String processUpdateOrderMainAction(@PathVariable("discountId") int discountId, Model model) {
+	public String processUpdateOrderMainAction(
+			@PathVariable("discountId") int discountId, Model model) {
 
 		Discount discount = discountService.getDiscountByDiscountId(discountId);
 		model.addAttribute("bean", discount);
@@ -137,7 +140,6 @@ public class DiscountController {
 		discount.setDiscountEnd(discountEnd);
 
 		discountService.updateDiscount(discount);
-
 		return "redirect:/discounts.controller";
 	}
 

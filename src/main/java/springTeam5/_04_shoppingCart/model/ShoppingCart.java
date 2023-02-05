@@ -11,28 +11,31 @@ public class ShoppingCart {
 	public ShoppingCart() {
 	}
 
-	//訂單的所有明細Map
+	//購物車內的所有明細Map
 	public Map<Integer, OrderItemBean> getShoppingCart() { // ${ShoppingCart.getShoppingCart()}
 		return cart;
 	}
 
+	//將商品加入購物車
 	public void addToCart(int prodId, OrderItemBean orderItemBean) {
+		
 		if (orderItemBean.getQty() <= 0) {
 			return;
 		}
+		
 		// 如果客戶在伺服器端沒有此項商品的資料，則客戶第一次購買此項商品
 		if (cart.get(prodId) == null) {
 			cart.put(prodId, orderItemBean);
 		} else {
 			// 如果客戶在伺服器端已有此項商品的資料，則客戶『加購』此項商品
 			OrderItemBean orderItemBeanAdd = cart.get(prodId);
-			// 加購的數量：bean.getQuantity()
-			// 原有的數量：oBean.getQuantity()
+			// 加購的數量：orderItemBean.getQty()
+			// 原有的數量：orderItemBeanAdd.getQty()
 			orderItemBeanAdd.setQty(orderItemBean.getQty() + orderItemBeanAdd.getQty());
 		}
 	}
 
-	// 計算數量
+	// 修改購物車商品的數量
 	public boolean modifyQty(int prodId, int newQty) {
 		if (cart.get(prodId) != null) {
 			OrderItemBean orderItemBean = cart.get(prodId);
@@ -43,7 +46,7 @@ public class ShoppingCart {
 		}
 	}
 
-	// 刪除某項商品
+	// 刪除購物車某筆商品
 	public int deleteProduct(int prodId) {
 		if (cart.get(prodId) != null) {
 			cart.remove(prodId); // Map介面的remove()方法
@@ -53,12 +56,22 @@ public class ShoppingCart {
 		}
 	}
 
-	// 取得購物車內商品數量
+	// 取得購物車內商品的總數量(用於顯示總數)
 	public int getItemQty() {
 		int qty = 0;
 		for (Integer i : cart.keySet()) {
 			OrderItemBean orderItemBean = cart.get(i);
 			qty = qty + orderItemBean.getQty();
+		}
+		return qty;
+
+	}
+	
+	// 取得購物車內商品的總數量(用於顯示商品數量)
+	public int showShoppingCartItem() {
+		int qty = 0;
+		for (Integer i : cart.keySet()) {
+			 qty+=1;
 		}
 		return qty;
 
@@ -70,11 +83,14 @@ public class ShoppingCart {
 		Set<Integer> set = cart.keySet();
 		for (int n : set) {
 			OrderItemBean orderItemBean = cart.get(n);
-			Integer price = orderItemBean.getProdPrice();
+			Integer price = orderItemBean.getProduct().getProdPrice();
 			int qty = orderItemBean.getQty();
 			shoppingCartTotal += price * qty;
 		}
+		
 		return shoppingCartTotal;
 	}
+	
+	
 
 }

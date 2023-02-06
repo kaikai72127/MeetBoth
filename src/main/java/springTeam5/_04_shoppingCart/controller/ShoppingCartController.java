@@ -46,14 +46,14 @@ public class ShoppingCartController {
 		OrderItemBean ordetItemBean = new OrderItemBean();
 		ordetItemBean.setProdId(prodId);
 		ordetItemBean.setQty(qty);
+		ordetItemBean.setItemTotal(qty*product.getProdPrice());
 
+		//產品編號對應細項
 		cart.addToCart(prodId, ordetItemBean);
 
 		System.out.println(cart.getShoppingCart());
-
-		Product productAdd = productService.searchSingleProductFromProdID(prodId);
-		m.addAttribute("bean", productAdd);
-		return "redirect:_03_product.searchAllProduct.controller";
+		m.addAttribute("bean", product);
+		return "\"redirect:_03_product.PathToProductDetail.controller?id=" + prodId;
 
 	}
 
@@ -118,7 +118,7 @@ public class ShoppingCartController {
 			sessionStatus.setComplete();
 		}
 
-		//放棄購物會跳轉回找所有商品的頁面
+		// 放棄購物會跳轉回找所有商品的頁面
 		return "redirect:/_03_product.searchAllProduct.controller";
 	}
 

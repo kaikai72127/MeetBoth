@@ -15,10 +15,11 @@ import springTeam5._04_shoppingCart.model.OrderBean;
 import springTeam5._04_shoppingCart.model.OrderItemBean;
 import springTeam5._04_shoppingCart.model.OrderItemRepository;
 import springTeam5._04_shoppingCart.model.OrderRepository;
+import springTeam5._04_shoppingCart.service.OrderItemService;
 
 @Service
 @Transactional
-public class OrderItemService {
+public class OrderItemServiceImpl implements OrderItemService {
 
 	@Autowired
 	private OrderItemRepository orderItemRepo;
@@ -26,6 +27,7 @@ public class OrderItemService {
 	@Autowired
 	private OrderRepository orderRepo;
 	
+//--日期小工具--//
 	public String getCurrentDate() {
 		Date date = new Date();
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy.MM.dd HH:mm:ss");
@@ -94,11 +96,6 @@ public class OrderItemService {
 		list.add(index0);
 		return list;
 	}
-
-//	// 搜尋orderNo
-//	public OrderItemBean selectOneOrdItem(Integer orderNo) {
-//		return orderItemRepo.selectOneOrdItem(orderNo);
-//	}
 
 	// 搜尋單一明細資料
 	public List<OrderItemBean> findBySqeno(Integer seqno) {

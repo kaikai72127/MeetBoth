@@ -1,10 +1,16 @@
 package springTeam5._04_shoppingCart.model;
 
+import java.util.LinkedHashSet;
+import java.util.Set;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import org.springframework.stereotype.Component;
@@ -30,8 +36,11 @@ public class Discount {
 	@Column(name = "DISCOUNT_END")
 	private String discountEnd;
 	
+	@OneToMany(fetch = FetchType.LAZY,mappedBy = "discount",cascade = CascadeType.ALL)
+	private Set<OrderBean> Orders = new LinkedHashSet<OrderBean>();
+	
 	public Discount(Integer discountId, String discountNo, String discountName, Double discountPrice,
-			String discountDesc, String discountStart, String discountEnd) {
+			String discountDesc, String discountStart, String discountEnd, Set<OrderBean> orders) {
 		super();
 		this.discountId = discountId;
 		this.discountNo = discountNo;
@@ -40,10 +49,11 @@ public class Discount {
 		this.discountDesc = discountDesc;
 		this.discountStart = discountStart;
 		this.discountEnd = discountEnd;
+		Orders = orders;
 	}
-
+	
 	public Discount(String discountNo, String discountName, Double discountPrice, String discountDesc,
-			String discountStart, String discountEnd) {
+			String discountStart, String discountEnd, Set<OrderBean> orders) {
 		super();
 		this.discountNo = discountNo;
 		this.discountName = discountName;
@@ -51,9 +61,9 @@ public class Discount {
 		this.discountDesc = discountDesc;
 		this.discountStart = discountStart;
 		this.discountEnd = discountEnd;
+		Orders = orders;
 	}
-	
-	
+
 	public Discount() {
 	}
 	
@@ -99,6 +109,17 @@ public class Discount {
 	public void setDiscountEnd(String discountEnd) {
 		this.discountEnd = discountEnd;
 	}
+	
+	
+	
+	public Set<OrderBean> getOrders() {
+		return Orders;
+	}
+
+	public void setOrders(Set<OrderBean> orders) {
+		Orders = orders;
+	}
+
 	@Override
 	public String toString() {
 		return "Discount [discountId=" + discountId + ", discountNo=" + discountNo + ", discountName=" + discountName

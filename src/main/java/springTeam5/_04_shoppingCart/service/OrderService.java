@@ -21,6 +21,8 @@ public interface OrderService {
 	List<OrderBean> findByOrderNo(Integer orderNo);
 	// 模糊搜尋全部
 	List<OrderBean> findSearchOrderNo(String searchAll);
+	//條件搜尋
+	List<OrderBean> findOrderBySearch(String ordstStus, String paymentStstus, String deliveryStstus, String search);
 	
 
 }

@@ -82,7 +82,7 @@
 										<td>${bean.discountEnd}</td>
 										<td><form method="post"
 												action="<c:url value='discountsUpdate.controller/${bean.discountId}' />">
-												<button name="discountId" value="${bean.discountId}">
+												<button id="create-discount" name="discountId" value="${bean.discountId}">
 													<i class="fa-solid fa-pen-to-square"></i>
 												</button>
 											</form></td>

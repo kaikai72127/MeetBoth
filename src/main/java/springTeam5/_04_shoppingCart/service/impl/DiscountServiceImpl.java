@@ -7,7 +7,6 @@ import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import springTeam5._04_shoppingCart.dto.DiscountQueryParams;
 import springTeam5._04_shoppingCart.model.Discount;
 import springTeam5._04_shoppingCart.model.DiscountRepository;
 import springTeam5._04_shoppingCart.service.DiscountService;
@@ -19,10 +18,6 @@ public class DiscountServiceImpl implements DiscountService {
 	@Autowired
 	private DiscountRepository discountRepository;
 
-	@Override
-	public Integer countDiscount(DiscountQueryParams discountQueryParams) {
-		return null;
-	}
 
 	@Override
 	public List<Discount> getDiscount() {

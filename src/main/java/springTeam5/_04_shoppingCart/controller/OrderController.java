@@ -114,12 +114,25 @@ public class OrderController {
 	
 	// 搜尋全部-模糊搜尋
 	@PostMapping("/shoppingCart.SearchAllorders.controller")
-	public String processSearchAllorders(@RequestParam("search") String search,
+	public String processSearchAllorders(@RequestParam(required = false)  String search,
 			@ModelAttribute("OrderBean") OrderBean od,
 			Model odModel) {
 		List<OrderBean> classList = orderService.findSearchOrderNo(search);
 		odModel.addAttribute("classList", classList);
 		return "_04_shoppingCart/ordersCRUD";
 	}
+	
+	// 搜尋全部-條件搜尋
+	@PostMapping("/shoppingCart.SearchOrders.controller")
+	public String processSearchOrders(@RequestParam(value="ordstStus",required = false)  String ordstStus,
+			@RequestParam(value="paymentStstus",required = false)  String paymentStstus,@RequestParam(value="deliveryStstus",required = false)  String deliveryStstus,
+			@RequestParam(value="search",required = false)  String search,
+			@ModelAttribute("OrderBean") OrderBean od,
+			Model odModel) {
+		List<OrderBean> classList = orderService.findOrderBySearch(ordstStus, paymentStstus, deliveryStstus, search);
+		odModel.addAttribute("classList", classList);
+		return "_04_shoppingCart/ordersCRUD";
+	}
+
 
 }

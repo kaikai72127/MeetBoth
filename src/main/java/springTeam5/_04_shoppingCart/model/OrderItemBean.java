@@ -20,13 +20,7 @@ import springTeam5._03_product.model.Product;
 @Component
 public class OrderItemBean {
 
-	@ManyToOne
-	@JoinColumn(name = "MEMBERORDER")
-	private OrderBean orderbean; // 訂單編號
-
-	@Column(name = "ORDERNO_FK")
-	@Transient
-	private Integer orderNo; // 訂單編號
+	
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -34,12 +28,18 @@ public class OrderItemBean {
 	private Integer seqno; // 序號
 
 	@ManyToOne
-	@JoinColumn(name = "PRODUCT")
-	private Product product;
-
+	@JoinColumn(name = "ORDERNO_FK")
+	private OrderBean orderbean; // 訂單編號
+	@Column(name = "ORDERNO")
+	@Transient
+	private Integer orderNo; 
+	
+	@ManyToOne
+	@JoinColumn(name = "product")
+	private Product product;// 商品編號
 	@Column(name = "PRODUTID_FK")
 	@Transient
-	private Integer prodId; // 商品編號
+	private Integer prodId; 
 
 	@Column(name = "QTY")
 	private Integer qty; // 數量
@@ -48,7 +48,7 @@ public class OrderItemBean {
 	private Integer itemTotal; // 總金額
 
 	// 新增有ID
-	public OrderItemBean(OrderBean orderbean, Integer orderNo, Integer seqno, Product product, Integer prodId,
+	public OrderItemBean(Integer seqno,OrderBean orderbean, Integer orderNo,  Product product, Integer prodId,
 			Integer qty, Integer itemTotal) {
 		super();
 		this.orderbean = orderbean;

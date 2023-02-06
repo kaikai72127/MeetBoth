@@ -17,7 +17,7 @@ public class OrderServiceImpl implements springTeam5._04_shoppingCart.service.Or
 
 	@Autowired
 	private OrderRepository orderRepo;
-	
+
 	public String getCurrentDate() {
 		Date date = new Date();
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy.MM.dd HH:mm:ss");
@@ -52,10 +52,17 @@ public class OrderServiceImpl implements springTeam5._04_shoppingCart.service.Or
 	public List<OrderBean> findSearchOrderNo(String searchAll) {
 		return orderRepo.findSearchOrderNo(searchAll);
 	}
+	//條件搜尋
+	@Override
+	public List<OrderBean> findOrderBySearch(String ordstStus, String paymentStstus, String deliveryStstus,
+			String search) {
+		return orderRepo.findOrderBySearch(ordstStus, paymentStstus, deliveryStstus, search);
+	}
 
-//修改----------
+	// 修改----------
 	// 修改一筆訂單
 	public OrderBean updateOrder(OrderBean obean) {
 		return orderRepo.save(obean);
 	}
+
 }

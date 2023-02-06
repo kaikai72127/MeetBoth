@@ -2,12 +2,10 @@ package springTeam5._04_shoppingCart.service;
 
 import java.util.List;
 
-import springTeam5._04_shoppingCart.dto.DiscountQueryParams;
 import springTeam5._04_shoppingCart.model.Discount;
 
 public interface DiscountService {
 	
-	Integer countDiscount(DiscountQueryParams discountQueryParams);
 
 	// 查詢全部的折扣碼
 	List<Discount> getDiscount();

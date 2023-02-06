@@ -21,7 +21,6 @@ import javax.persistence.Transient;
 import org.springframework.stereotype.Component;
 
 import springTeam5._01_member.model.MemberBean;
-import springTeam5._04_shoppingCart.constant.PaymentMethod;
 
 @Entity @Table(name = "memberorder")
 @Component
@@ -33,16 +32,16 @@ public class OrderBean {
 	private Integer orderNo; // 訂單編號
 	
 	@ManyToOne
-	@JoinColumn(name = "MEMBER")
-	private MemberBean memberBuyBean;
-	@Column(name = "MEMBERBUY_FK")
+	@JoinColumn(name = "MEMBERBUY_FK")
+	private MemberBean memberbuy;
+	@Column(name = "MEMBERBUY")
 	@Transient
 	private Integer memberBuyId; // 買家會員編號
 	
 	@ManyToOne
-	@JoinColumn(name = "MEMBER")
-	private MemberBean memberSaleBean;
-	@Column(name = "MEMBERSALE_FK")
+	@JoinColumn(name = "MEMBERSALE_FK")
+	private MemberBean membersale;
+	@Column(name = "MEMBERSALE")
 	@Transient
 	private Integer memberSaleId; // 賣家會員編號
 	
@@ -59,20 +58,20 @@ public class OrderBean {
 	@Column(name = "ORDSTSTUS")
 	
 	//狀態
-	private String ordStstus ="處理中"; // 訂單狀態 處理中(預設)/備貨中/已完成
+	private String ordStstus ="處理中"; // 訂單狀態 處理中(預設)/備貨中/已完成/取消
 	@Column(name = "PAYMENTSTSTUS")
 	private String paymentStstus = "未付款"; // 付款狀態 未付款(預設)/已付款/退款中/已退款
 	@Column(name = "DELIVERYSTSTUS")
 	private String deliveryStstus ="無"; // 送貨狀態 無(預設)/備貨中/已發貨/已取貨/退貨中/已退貨
 	@Column(name = "PAYMENTMETHOD")
-	private PaymentMethod paymentMethod; //付款方式 貨到付款/信用卡/轉帳
+	private String paymentMethod; //付款方式 貨到付款/信用卡/轉帳
 	
 	@ManyToOne
-	@JoinColumn(name = "DISCOUNT")
+	@JoinColumn(name = "DISCOUNTID_FK")
 	private Discount discount;
-	
-	@Column(name = "DISCOUNTID_FK")
-	private String discountNo; //折扣碼
+	@Transient
+	@Column(name = "DISCOUNTID")
+	private Integer discountId; //折扣碼
 	
 	
 	@Column(name = "TOTALAMOUNT")
@@ -87,15 +86,15 @@ public class OrderBean {
 
 	}
 	//新增有ID
-	public OrderBean(Integer orderNo, MemberBean memberBuyBean, Integer memberBuyId, MemberBean memberSaleBean,
+	public OrderBean(Integer orderNo, MemberBean memberbuy, Integer memberBuyId, MemberBean membersale,
 			Integer memberSaleId, String orderDate, String uporderDate, String shippingName, String shippingPhone,
 		String shippingAddress, String ordStstus, String paymentStstus, String deliveryStstus,
-		PaymentMethod paymentMethod, Discount discount, String discountNo, Integer totalAmount,
+		String paymentMethod, Discount discount, Integer discountId, Integer totalAmount,
 		Set<OrderItemBean> items) {
 	this.orderNo = orderNo;
-	this.memberBuyBean = memberBuyBean;
+	this.memberbuy = memberbuy;
 	this.memberBuyId = memberBuyId;
-	this.memberSaleBean = memberSaleBean;
+	this.membersale = membersale;
 	this.memberSaleId = memberSaleId;
 	this.orderDate = orderDate;
 	this.uporderDate = uporderDate;
@@ -107,19 +106,19 @@ public class OrderBean {
 	this.deliveryStstus = deliveryStstus;
 	this.paymentMethod = paymentMethod;
 	this.discount = discount;
-	this.discountNo = discountNo;
+	this.discountId = discountId;
 	this.totalAmount = totalAmount;
 	this.items = items;
 }
 
-	public OrderBean(MemberBean memberBuyBean, Integer memberBuyId, MemberBean memberSaleBean, Integer memberSaleId,
+	public OrderBean(MemberBean memberbuy, Integer memberBuyId, MemberBean membersale, Integer memberSaleId,
 			String orderDate, String uporderDate, String shippingName, String shippingPhone, String shippingAddress,
-			String ordStstus, String paymentStstus, String deliveryStstus, PaymentMethod paymentMethod,
-			Discount discount, String discountNo, Integer totalAmount, Set<OrderItemBean> items) {
+			String ordStstus, String paymentStstus, String deliveryStstus, String paymentMethod,
+			Discount discount, Integer discountId, Integer totalAmount, Set<OrderItemBean> items) {
 		super();
-		this.memberBuyBean = memberBuyBean;
+		this.memberbuy = memberbuy;
 		this.memberBuyId = memberBuyId;
-		this.memberSaleBean = memberSaleBean;
+		this.membersale = membersale;
 		this.memberSaleId = memberSaleId;
 		this.orderDate = orderDate;
 		this.uporderDate = uporderDate;
@@ -131,7 +130,7 @@ public class OrderBean {
 		this.deliveryStstus = deliveryStstus;
 		this.paymentMethod = paymentMethod;
 		this.discount = discount;
-		this.discountNo = discountNo;
+		this.discountId = discountId;
 		this.totalAmount = totalAmount;
 		this.items = items;
 	}
@@ -144,12 +143,12 @@ public class OrderBean {
 		this.orderNo = orderNo;
 	}
 
-	public MemberBean getMemberBuyBean() {
-		return memberBuyBean;
+	public MemberBean getMemberbuy() {
+		return memberbuy;
 	}
 
-	public void setMemberBuyBean(MemberBean memberBuyBean) {
-		this.memberBuyBean = memberBuyBean;
+	public void setMemberbuy(MemberBean memberbuy) {
+		this.memberbuy = memberbuy;
 	}
 
 	public Integer getMemberBuyId() {
@@ -160,12 +159,12 @@ public class OrderBean {
 		this.memberBuyId = memberBuyId;
 	}
 
-	public MemberBean getMemberSaleBean() {
-		return memberSaleBean;
+	public MemberBean getMembersale() {
+		return membersale;
 	}
 
-	public void setMemberSaleBean(MemberBean memberSaleBean) {
-		this.memberSaleBean = memberSaleBean;
+	public void setMembersale(MemberBean membersale) {
+		this.membersale = membersale;
 	}
 
 	public Integer getMemberSaleId() {
@@ -240,11 +239,11 @@ public class OrderBean {
 		this.deliveryStstus = deliveryStstus;
 	}
 
-	public PaymentMethod getPaymentMethod() {
+	public String getPaymentMethod() {
 		return paymentMethod;
 	}
 
-	public void setPaymentMethod(PaymentMethod paymentMethod) {
+	public void setPaymentMethod(String paymentMethod) {
 		this.paymentMethod = paymentMethod;
 	}
 
@@ -256,12 +255,12 @@ public class OrderBean {
 		this.discount = discount;
 	}
 
-	public String getDiscountNo() {
-		return discountNo;
+	public Integer getDiscountId() {
+		return discountId;
 	}
 
-	public void setDiscountNo(String discountNo) {
-		this.discountNo = discountNo;
+	public void setDiscountId(Integer discountId) {
+		this.discountId = discountId;
 	}
 
 	public Integer getTotalAmount() {

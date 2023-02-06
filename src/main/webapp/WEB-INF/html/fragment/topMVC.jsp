@@ -270,7 +270,9 @@ System.out.println(baseMeetboth96x96);
 								<i class="fa-solid fa-screwdriver-wrench"></i>
 						</a></li>
 						<li><a href="#" class="dropdown-item">Log
-								Out <i class="fa-solid fa-right-from-bracket"></i> </i>
+								Out <i class="fa-solid fa-right-from-bracket"></i>
+						</a></li>
+						<li><a href="/MeetBoth/_03_product/pathToMyPDP.controller" class="dropdown-item">我的賣場 <i class="fa-solid fa-right-from-bracket"></i>
 						</a></li>
 					</ul></li>
 			</ul>

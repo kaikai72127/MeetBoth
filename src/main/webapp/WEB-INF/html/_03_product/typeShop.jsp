@@ -29,13 +29,12 @@ String basePathimg2 = request.getScheme() + "://" + request.getServerName() + ":
 	color: black;
 }
 
-.work-item.illustration.webdesign {
+.work-item.illustration.webdesign{
 	height: 175px;
 	padding: 0 15px 15px 0;
-}
-
-.work-title {
-	font-size: 25px;
+	}
+.work-title{
+	font-size:25px;
 }
 </style>
 </head>
@@ -48,80 +47,39 @@ String basePathimg2 = request.getScheme() + "://" + request.getServerName() + ":
 		<!--       頂端列 -->
 
 		<div class="main" style="background-color: #F0F0F0;">
-
-
+			
+			<!-- 			上方按鈕導覽 -->
+			<div class="container" style="padding: 10px 10px 20px 20px;">
+				<input type="button" value="返回首頁" class="btn btn-info btn-circle"
+					style="font-size: 17px; color: black;"
+					onclick="window.location='/MeetBoth/_03_product.searchAllProduct.controller'">
+				&nbsp; <input type="button" value="隨便看看"
+					class="btn btn-success btn-circle"
+					style="font-size: 17px; color: black;"
+					onclick="window.location='/MeetBoth/_03_product.searchRandomProduct.controller'">
+				&nbsp; <input type="button" value="新增商品"
+					class="btn btn-warning btn-circle"
+					style="font-size: 17px; color: black;"
+					onclick="window.location='/MeetBoth/_03_product.pathToInsertProduct.controller'">
+			</div>
 			<!-- 			上方導覽 -->
-			<!-- 			熱門商品 -->
-			<section class="module-small"
-				style="padding-top: 0px; padding-bottom: 0px;">
-				<div class="container">
-					<div class="row multi-columns-row" style="padding-bottom: 35px;">
-						<div class="row">
-							<div class="col-sm-12" style="">
-								<img src="html/assets/images/shop/熱門商品橫幅.jpg"
-									alt="Title of Image" />
-							</div>
-						</div>
-					</div>
-					<div class="row multi-columns-row">
-						<c:forEach var="HotBean" items="${Hotprodlist}">
-							<div class="col-sm-6 col-md-3 col-lg-3"
-								style="padding-bottom: 10px;">
-								<div class="shop-item">
-									<div id="shop-item-image"
-										style="height: 282px; width: 210px; margin: auto; display: flex; justify-content: center; align-items: center; margin-right: 15px;">
-										<img style="padding: auto;" alt="${HotBean.prodName}"
-											src="<c:url value='/_03_product.showPicture.controller?id=${HotBean.prodID}' />">
-										<div class="shop-item-detail">
-											<a
-												href="/MeetBoth/_03_product.PathToProductDetail.controller?id=${HotBean.prodID}"
-												class="btn btn-round btn-b" style="font-size: 14px;"><span
-												class="icon-heart">進入商品頁面</span><span class="icon-heart"></span></a>
-										</div>
-									</div>
-									<div id="prodName" style="padding-top: 30px;">
-										<strong style="font-size: 16px">${HotBean.prodName}</strong>
-									</div>
-									<div id="prodCheck">
-										<strong style="font-size: 16px">瀏覽次數:&ensp;${HotBean.prodCheck}次</strong>
-									</div>
-									<div id="scoreAVG">
-										<c:forEach var="commentBean" items="${HotBean.productComment}">
-											<input type="hidden" id="starAVG"
-												value="${commentBean.prodScore}">
-										</c:forEach>
-										<div id="starAVGDiv" style="font-size: 17px;"></div>
-									</div>
-								</div>
-							</div>
-						</c:forEach>
-					</div>
-				</div>
-			</section>
-
-			<!-- 			熱門商品 -->
 			<!-- 			中間按鈕導覽 -->
 			<div class="container" style="padding: 10px 10px 20px 20px;">
-				<div class="row multi-columns-row" style="padding-bottom: 20px;">
-					<div class="row">
-						<div class="col-sm-12">
-							<img src="html/assets/images/shop/類別導覽橫幅.jpg"
-								alt="Title of Image" />
-						</div>
-					</div>
-				</div>
 				<ul class="works-grid works-grid-4 works-hover-w" id="works-grid">
-					<li class="work-item illustration webdesign" id="typeBlock"><a
-						href="#"> <span class="work-image"
-							onclick="window.location='/MeetBoth/_03_product.searchProductByType.controller?type=1'"
-							style="width: 100%; height: 100%;"> <img
-								style="height: 100%" src="html/assets/images/shop/文具.jpg"
-								alt="Portfolio Item" /> <span class="work-caption font-alt">
-									<span class="work-title"><img style=""
-										src="html/assets/images/shop/seesee.png" alt="Portfolio Item" /></span>
-							</span>
+					<li class="work-item illustration webdesign" id="typeBlock">
+							<a
+								href="/MeetBoth/_03_product.searchProductByType.controller?type=1">
+						<span class="work-image"  onclick="window.location='/MeetBoth/_03_product.searchProductByType.controller?type=1'"
+							style="width: 100%; height: 100%;">
+								<img style="height:100%" src="html/assets/images/shop/文具.jpg"
+								alt="Portfolio Item" />
+								<span class="work-caption font-alt">
+									<span class="work-title"><img style="" src="html/assets/images/shop/seesee.png"
+								alt="Portfolio Item" /></span>
+								</span>
 						</span>
-					</a></li>
+							</a>
+					</li>
 					<li class="work-item illustration webdesign" id="typeBlock"><a
 						href="/MeetBoth/_03_product.searchProductByType.controller?type=2">
 							<span class="work-image"
@@ -254,6 +212,7 @@ String basePathimg2 = request.getScheme() + "://" + request.getServerName() + ":
 							</span>
 						</span>
 					</a></li>
+					
 				</ul>
 			</div>
 			<!-- 			中間導覽 -->
@@ -271,15 +230,8 @@ String basePathimg2 = request.getScheme() + "://" + request.getServerName() + ":
 
 			<hr class="divider-w">
 			<!--         商品陳列 -->
-
-			<!-- 			熱門排行 -->
-
-
-
-			<!-- 			熱門排行 -->
 			<!--       動態搜尋列 -->
-			<section class="module-small"
-				style="padding-top: 20px; padding-bottom: 0px;">
+			<section class="module-small" style="padding-top: 20px;padding-bottom:0px;">
 				<div class="container" style="">
 					<form class="row"
 						action="<c:url value='/_03_product.searchProductWithCondition.controller'/>"
@@ -289,7 +241,6 @@ String basePathimg2 = request.getScheme() + "://" + request.getServerName() + ":
 							<select name="case" class="form-control"
 								style="padding-right: 0; font-size: 17px">
 								<option value="1">預設排序</option>
-								<option value="6">依瀏覽次數排序</option>
 								<option value="2">依價格由大到小</option>
 								<option value="3">依價格由小到大</option>
 								<option value="4">依上架日期排序</option>
@@ -347,44 +298,24 @@ String basePathimg2 = request.getScheme() + "://" + request.getServerName() + ":
 					</form>
 				</div>
 			</section>
-			<div class="container" style="padding: 0px 10px 50px 20px;">
-				<input type="button" value="返回首頁" class="btn btn-info btn-circle"
-					style="font-size: 17px; color: black;"
-					onclick="window.location='/MeetBoth/_03_product.searchAllProduct.controller'">
-				&nbsp; <input type="button" value="隨便看看"
-					class="btn btn-success btn-circle"
-					style="font-size: 17px; color: black;"
-					onclick="window.location='/MeetBoth/_03_product.searchRandomProduct.controller'">
-				&nbsp; <input type="button" value="新增商品"
-					class="btn btn-warning btn-circle"
-					style="font-size: 17px; color: black;"
-					onclick="window.location='/MeetBoth/_03_product.pathToInsertProduct.controller'">
-			</div>
-			<!-- 			上方按鈕導覽 -->
-			<section class="module-small" style="padding-top: 0px;">
+			<!--         商品陳列 -->
+			<section class="module-small" style="padding-top:0px;">
 				<div class="container">
 					<div class="row multi-columns-row">
 						<c:forEach var="bean" items="${allprodlist}">
 							<div class="col-sm-6 col-md-3 col-lg-3"
-								style="padding-bottom: 10px; display: flex;">
-								<div class="works-grid works-grid-4 works-hover-w"
-									id="works-grid" style="text-align: center;">
-									<div class="work-item illustration webdesign" id="typeBlock"
-										style="height: 250px; width: 100%;">
-										<a
-											href="/MeetBoth/_03_product.PathToProductDetail.controller?id=${bean.prodID}">
-											<span class="work-image"
-											style="width: 100%; height: 100%; margin: auto; display: flex; justify-content: center; align-items: center; margin-right: 15px; text-align: center;">
-												<img
-												style="max-width: 100%; max-height: 100%; height: auto; width: auto;"
-												src="<c:url value='/_03_product.showPicture.controller?id=${bean.prodID}' />"
-												alt="Portfolio Item" /> <span class="work-caption font-alt">
-													<span class="work-title"><img style=""
-														src="html/assets/images/shop/seesee.png"
-														alt="Portfolio Item" /></span>
-											</span>
-										</span>
-										</a>
+								style="padding-bottom: 10px;">
+								<div class="shop-item">
+									<div id="shop-item-image"
+										style="height: 282px; width: 210px; margin: auto; display: flex; justify-content: center; align-items: center;">
+										<img style="padding: auto;" alt="${bean.prodName}"
+											src="<c:url value='/_03_product.showPicture.controller?id=${bean.prodID}' />">
+										<div class="shop-item-detail">
+											<a
+												href="/MeetBoth/_03_product.PathToProductDetail.controller?id=${bean.prodID}"
+												class="btn btn-round btn-b" style="font-size: 14px;"><span
+												class="icon-heart">進入商品頁面</span><span class="icon-heart"></span></a>
+										</div>
 									</div>
 									<div id="prodName">
 										<strong style="font-size: 16px">${bean.prodName}</strong>
@@ -395,10 +326,6 @@ String basePathimg2 = request.getScheme() + "://" + request.getServerName() + ":
 												value="${commentBean.prodScore}">
 										</c:forEach>
 										<div id="starAVGDiv" style="font-size: 17px;"></div>
-									</div>
-									<div id="price">
-										<strong style="font-size: 16px">價格 :
-											瀏覽次數:&nbsp;${bean.prodCheck}&nbsp;次</strong>
 									</div>
 									<div id="price">
 										<strong style="font-size: 16px">價格 :
@@ -511,6 +438,14 @@ String basePathimg2 = request.getScheme() + "://" + request.getServerName() + ":
 							}
 						});
 	</script>
+	<script>
+	window.onload = function() {
+		  window.scroll({
+		    top: document.body.scrollHeight / 2.65,
+		    behavior: 'smooth'
+		  });
+		};
+</script>
 
 </body>
 </html>

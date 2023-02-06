@@ -10,7 +10,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.LinkedHashSet;
 import java.util.List;
-import java.util.Set;
 
 import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.http.HttpServletRequest;
@@ -105,6 +104,7 @@ public class ProductController {
 	public String processPathToProductDetail2(@RequestParam("id") Integer id,
 			 Model mProd, Model mComm,Model mProdLike) throws SQLException {
 		Product prod = pService.searchSingleProductFromProdID(id);
+
 		List<ProductComment> list = prod.getProductComment();
 		ArrayList<ProductComment> comms = new ArrayList<ProductComment>();
 		ProductComment comm = new ProductComment();
@@ -133,42 +133,65 @@ public class ProductController {
 		mProd.addAttribute("bean", prods);
 		return "_03_product/singleProduct";
 	}
-	//搜相似產品(4)
-	@GetMapping("/_03_product.searchProductLikeTop4.controller")
-	public String processsearchProductLikeTop4(Model mProd) {
-		List<Product> result;
-		try {
-			result = pService.searchAllProduct();
-			mProd.addAttribute("allprodlist", result);
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		return "_03_product/newShop";
-	}
 	
 //	隨機搜尋
 	@GetMapping("/_03_product.searchRandomProduct.controller")
 	public String processsearchRandomProductAction(Model mProd) {
 		List<Product> result = pService.findRandomProducts();
 		mProd.addAttribute("allprodlist", result);
-		return "_03_product/newShop";
+		return "_03_product/typeShop";
 	}
 //	類別搜尋 回傳prodList
-	@GetMapping("/_03_product.searchProductByType")
+	@GetMapping("/_03_product.searchProductByType.controller")
 	public String processsearchProductByTypeAction(Model mProd,@RequestParam("type") Integer type) {
 		List<Product> result = pService.findByProdClass(type);
 		mProd.addAttribute("allprodlist", result);
-		return "_03_product/newShop";
+		return "_03_product/typeShop";
+	}
+	
+//	增加瀏覽次數
+	@GetMapping("/product.productCheck.controller")
+	public String processProductCheckAction(@RequestParam("id") Integer id) {
+		try {
+			Product p = pService.searchSingleProductFromProdID(id);
+			Integer prodCheck = p.getProdCheck();
+			prodCheck += 1;
+			p.setProdCheck(prodCheck);
+			pService.updateProd(p);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
+//	更新商品狀態 (上架中/下架)
+	@PostMapping("/product.updateProductState.controller")
+	public String processUpdateProductStateAction(@RequestParam("id") Integer id) {
+		try {
+			Product p = pService.searchSingleProductFromProdID(id);
+			p.setProdState("還沒改好");
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		
+		return null;
 	}
 //	---------------------------ProductPart-----------------------
 
 //	搜全部
 	@GetMapping("/_03_product.searchAllProduct.controller")
-	public String processSearchAllAction(Model mProd) {
+	public String processSearchAllAction(Model mProd,Model mProd2) {
 		List<Product> result;
+		List<Product> HotResult;
 		try {
 			result = pService.searchAllProduct();
+			HotResult = pService.findHotestProducts();
 			mProd.addAttribute("allprodlist", result);
+			mProd2.addAttribute("Hotprodlist", HotResult);
+			
+			
+			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -220,6 +243,8 @@ public class ProductController {
 		newProd.setProdImg(image);
 		newProd.setDirections(directions);
 		newProd.setProdSales(0);
+		newProd.setProdCheck(0);
+		newProd.setProdState("下架");
 		newProd.setProdtype(currentProdType);
 
 		LinkedHashSet<Product> prods = new LinkedHashSet<Product>();
@@ -277,13 +302,16 @@ public class ProductController {
 	@PostMapping("/_03_product.searchProductWithCondition.controller")
 	public String processSearchProductWithCondi(@RequestParam("case") int order, @RequestParam("typecase") Integer type,
 			@RequestParam("lowprice") int low, @RequestParam("highprice") int high,
-			@RequestParam("searchName") String name, Model pm) throws SQLException {
+			@RequestParam("searchName") String name, Model pm, Model mProd) throws SQLException {
 		String orderBy = "";
 		String hasDESC = null;
 		List<Product> result = null;
 		if (name == null) {
 			name = "";
 		}
+		
+		List<Product> HotResult = pService.findHotestProducts();
+			mProd.addAttribute("Hotprodlist", HotResult);
 
 		if (order == 1) {
 			result = pService.searchWithCondiOrderByProdID(type, low, high, name);
@@ -295,6 +323,8 @@ public class ProductController {
 			result = pService.searchWithCondiOrderByProdPost(type, low, high, name);
 		} else if (order == 5) {
 			result = pService.searchWithCondiOrderByProdUpdate(type, low, high, name);
+		}else if (order == 6) {
+			result = pService.findAllByOrderByProdCheckDesc(type, low, high, name);
 		}
 
 		pm.addAttribute("allprodlist", result);
@@ -378,4 +408,16 @@ public class ProductController {
 		mProd.addAttribute("bean", prods);
 		return "_03_product/prodDetail";
 	}
+//	個人賣場part----------------------------------
+	@GetMapping("/_03_product/pathToMyPDP.controller")
+	public String processpathToMyPDPAction(Model mProd) {
+//		List<Product> result = pService.findRandomProducts();
+//		mProd.addAttribute("bean", result);
+		
+		return "/_03_product/myPDP";
+	}
+
+
+
+
 }

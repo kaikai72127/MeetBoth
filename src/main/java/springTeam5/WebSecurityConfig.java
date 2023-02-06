@@ -44,19 +44,12 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	public void configure(HttpSecurity http) throws Exception {
        http
          .authorizeRequests()
+//         .antMatchers("/").permitAll()
          .antMatchers("/index").permitAll()
          .antMatchers("/login/page").permitAll()
          .antMatchers(HttpMethod.GET,"/backIndex.controller").hasAnyAuthority("admin")
          .antMatchers(HttpMethod.POST,"/backIndex.controller").hasRole("admin")
-//         .anyRequest().authenticated()
-         
-         .and()  //Google第三方驗證
-         
-         .oauth2Login()
-//         .authorizationEndpoint()
-//         .baseUri("/login/page")
-//         .authorizationRequestRepository(authorizationRequestRepository())
-//         .and()
+         .anyRequest().permitAll()
          
          .and()
          .exceptionHandling()
@@ -69,6 +62,13 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
          .csrf().disable()
          .formLogin().loginPage("/login/page")
          .defaultSuccessUrl("/")
+         
+         .and()  //Google第三方驗證
+         .oauth2Login()
+//         .authorizationEndpoint()
+//         .baseUri("/login/page")
+//         .authorizationRequestRepository(authorizationRequestRepository())
+//         .and()
          .and()
          
          .logout()

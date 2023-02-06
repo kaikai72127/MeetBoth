@@ -26,5 +26,6 @@ public class WebConfig implements WebMvcConfigurer {
 		registry.addViewController("/logout").setViewName("_01_member/logout");
 		registry.addViewController("/error403").setViewName("errorpages/403");
 		registry.addViewController("/GoogleAuth").setViewName("_01_member/GoogleAuth");
+		registry.addViewController("/mail").setViewName("_01_member/mail");
 	}
 }

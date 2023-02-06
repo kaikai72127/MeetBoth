@@ -29,12 +29,16 @@ public class MemberBean implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	
+//	範本
+//	@OneToMany(mappedBy = "MemberBean")
+//	private List<> ;
+	
 //	@OneToMany(mappedBy = "MemberBean")
 //	private List<StudBean> stud;
-//	
+	
 //	@OneToMany(mappedBy = "MemberBean")
 //	private List<TeacBean> teac;
-
+	
 	@Column(name = "memberID", updatable = false)
 	private int memberID;
 	

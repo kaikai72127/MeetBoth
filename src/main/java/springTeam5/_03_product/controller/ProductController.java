@@ -43,6 +43,15 @@ public class ProductController {
 
 	@Autowired
 	private ProductCommentService pcService;
+//	-----------------------------刻版-----------------------
+	@GetMapping("/_03_product.pathToYTplayer.controller")
+	public String processpathToYTplayerAction(Model mProd) {
+		return "_03_product/ytPlayer";
+	}
+	@GetMapping("/_03_product.index.controller")
+	public String processpathToYTplayer2Action(Model mProd) {
+		return "_03_product/MBCMS";
+	}
 
 //	---------------------------小工具們-----------------------
 //	fileToBlob
@@ -97,6 +106,28 @@ public class ProductController {
 			}
 			;
 		}
+	}
+//	跳轉到管理者商品後台
+	@GetMapping("/_03_product.productindex.controller")
+	public String processproductIndexAction(Model mProd){
+		List<Product> result;
+		try {
+			result = pService.searchAllProduct();
+			mProd.addAttribute("prodList", result);
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return "_03_product/productindex";
+	}
+	
+//	調轉到單一的管理者商品後台
+	@GetMapping("/_03_product.singleProductIndex.controller")
+	public String processSingleProductIndexAction(@RequestParam("id") Integer prodID, Model mProd) throws SQLException{
+		
+		Product result = pService.searchSingleProductFromProdID(prodID);
+		mProd.addAttribute("prod", result);
+		return "_03_product/singleProdIndex";
 	}
 
 //	跳轉到商品明細
@@ -298,7 +329,7 @@ public class ProductController {
 		return "redirect:_03_product.searchAllProduct.controller";
 	}
 
-//	模糊搜尋
+//	模糊搜尋(前台)
 	@PostMapping("/_03_product.searchProductWithCondition.controller")
 	public String processSearchProductWithCondi(@RequestParam("case") int order, @RequestParam("typecase") Integer type,
 			@RequestParam("lowprice") int low, @RequestParam("highprice") int high,
@@ -330,6 +361,39 @@ public class ProductController {
 		pm.addAttribute("allprodlist", result);
 
 		return "_03_product/newShop";
+	}
+//	模糊搜尋(後台)
+	@PostMapping("/_03_product.searchProductWithCondition2.controller")
+	public String processSearchProductWithCondi2(@RequestParam("case") int order, @RequestParam("typecase") Integer type,
+			@RequestParam("lowprice") int low, @RequestParam("highprice") int high,
+			@RequestParam("searchName") String name, Model pm, Model mProd) throws SQLException {
+		String orderBy = "";
+		String hasDESC = null;
+		List<Product> result = null;
+		if (name == null) {
+			name = "";
+		}
+		
+		List<Product> HotResult = pService.findHotestProducts();
+		mProd.addAttribute("Hotprodlist", HotResult);
+		
+		if (order == 1) {
+			result = pService.searchWithCondiOrderByProdID(type, low, high, name);
+		} else if (order == 2) {
+			result = pService.searchWithCondiOrderByProdPriceDesc(type, low, high, name);
+		} else if (order == 3) {
+			result = pService.searchWithCondiOrderByProdPrice(type, low, high, name);
+		} else if (order == 4) {
+			result = pService.searchWithCondiOrderByProdPost(type, low, high, name);
+		} else if (order == 5) {
+			result = pService.searchWithCondiOrderByProdUpdate(type, low, high, name);
+		}else if (order == 6) {
+			result = pService.findAllByOrderByProdCheckDesc(type, low, high, name);
+		}
+		
+		pm.addAttribute("prodList", result);
+		
+		return "_03_product/productindex";
 	}
 
 

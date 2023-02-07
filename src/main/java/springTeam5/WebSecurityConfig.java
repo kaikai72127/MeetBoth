@@ -18,6 +18,7 @@ import org.springframework.security.oauth2.client.web.HttpSessionOAuth2Authoriza
 import org.springframework.security.oauth2.core.endpoint.OAuth2AuthorizationRequest;
 
 import springTeam5._01_member.model.AuthUserDetialService;
+import springTeam5._01_member.model.Oauth2SuccessHandler;
 
 @Configuration
 @EnableWebSecurity
@@ -65,6 +66,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
          
          .and()  //Google第三方驗證
          .oauth2Login()
+         .successHandler(new Oauth2SuccessHandler())
 //         .authorizationEndpoint()
 //         .baseUri("/login/page")
 //         .authorizationRequestRepository(authorizationRequestRepository())

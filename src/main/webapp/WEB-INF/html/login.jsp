@@ -34,7 +34,7 @@
 					<div class="col-sm-5 col-sm-offset-1 mb-sm-40">
 						<h4 class="font-alt h4-p">登入</h4>
 						<hr class="divider-w mb-10">
-						<form class="form" action="<%=request.getContextPath()%>/login/page">
+						<form class="form" action="<%=request.getContextPath()%>/login/page" method="Post">
 							<div class="form-group">
 								<input class="form-control" id="username" type="text"
 									name="username" placeholder="Username" />
@@ -52,6 +52,7 @@
 							</div>
 							<a href="<%=request.getContextPath()%>/oauth2/authorization/google" onclick="onSignIn">Google</a>
 						</form>
+						
 					</div>
 					<div class="col-sm-5">
 						<h4 class=" h4-p">註冊</h4>

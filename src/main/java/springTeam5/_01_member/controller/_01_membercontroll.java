@@ -16,6 +16,7 @@ import javax.sql.rowset.serial.SerialException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -93,17 +94,22 @@ public class _01_membercontroll {
 	public String loginRWD() {
 		String user = "";
 		user = SecurityContextHolder.getContext().getAuthentication().getName();
+//		List<MemberBean> list = ms.searchMemByAccount(user);
+//		MemberBean memberBean = list.get(0);
+//		int memberID = memberBean.getMemberID();
 		return user;
 	}
 	
 //	權限動態控制
 	@ResponseBody
-	@PostMapping("/_01_member.rolecheck.controller")
+	@GetMapping("/_01_member.rolecheck.controller")
 	public String roleRWD() {
 //		String user = "";
 //		user = SecurityContextHolder.getContext().getAuthentication().getName();
 //		List<MemberBean> list = ms.searchMemByAccount(user);
 		String role = SecurityContextHolder.getContext().getAuthentication().getAuthorities().toArray()[0].toString();
+//		String role = SecurityContextHolder.getContext().getAuthentication().getAuthorities().toString();
+//		UserDetails details = (UserDetails)SecurityContextHolder.getContext().getAuthentication().getDetails();
 //		String role = "";
 //		for (MemberBean member : list) {
 //			role = member.getRole();

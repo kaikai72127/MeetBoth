@@ -1,13 +1,14 @@
 package springTeam5._05_teacStu.model;
 
-import java.sql.Blob;
-import java.util.Date;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import org.springframework.stereotype.Component;
@@ -21,33 +22,68 @@ public class TeacBean {
 	@Column(name = "TEACNO")
 	private Integer teacno;
 	@Column(name = "MEMBERID")
-	private Integer memberid;
-	@Column(name = "TITLE")
-	private String title;
-	@Column(name = "POSTDATE")
-	private Date postdate;
-	@Column(name = "DETAIL")
-	private String detail;
+	private Integer memberId;
+	@Column(name = "UPDATEDATE")
+	private String updateDate;
+	@Column(name = "HIGHEDU")
+	private String highEdu;
+	@Column(name = "STUDEXP")
+	private String studExp;
+	@Column(name = "TUTOREXP")
+	private String tutorExp;
+	@Column(name = "TEACLOC")
+	private String teacLoc;
+	@Column(name = "TEACOBJECT")
+	private String teacObject;
+	@Column(name = "CLASSMODE")
+	private String classMode;
+	@Column(name = "WILLTEAC")
+	private String willTeac;
+	@Column(name = "TEACTIME")
+	private String teacTime;
+	@Column(name = "SKILLS")
+	private String skills;
+	@Column(name = "CONMETHOD")
+	private String conMethod;
+	@Column(name = "CONTIME")
+	private String conTime;
 	@Column(name = "PRICE")
 	private Double price;
 	@Column(name = "SUBJECTITEM")
-	private String subjectitem;
-	@Column(name = "CLASSPICTURE")
-	private Blob classpicture;
+	private String subjectItem;
+	@Column(name = "LANABILITY")
+	private String lanAbility;
+	@Column(name = "VIEWS")
+	private Integer views;
+	@OneToMany(mappedBy = "teacher")
+	private List<ReplyTeac> replyTeacs = new ArrayList<>();
 	
 	public TeacBean() {
 	}
-	
-	public TeacBean(Integer teacno, Integer memberid, String title, Date postdate, String detail, Double price,
-			String subjectitem, Blob classpicture) {
+
+	public TeacBean(Integer teacno, Integer memberId, String updateDate, String highEdu, String studExp, String tutorExp,
+			String teacLoc, String teacObject, String classMode, String willTeac, String teacTime, String skills,
+			String conMethod, String conTime, Double price, String subjectItem, String lanAbility, Integer views,
+			List<ReplyTeac> replyTeacs) {
 		this.teacno = teacno;
-		this.memberid = memberid;
-		this.title = title;
-		this.postdate = postdate;
-		this.detail = detail;
+		this.memberId = memberId;
+		this.updateDate = updateDate;
+		this.highEdu = highEdu;
+		this.studExp = studExp;
+		this.tutorExp = tutorExp;
+		this.teacLoc = teacLoc;
+		this.teacObject = teacObject;
+		this.classMode = classMode;
+		this.willTeac = willTeac;
+		this.teacTime = teacTime;
+		this.skills = skills;
+		this.conMethod = conMethod;
+		this.conTime = conTime;
 		this.price = price;
-		this.subjectitem = subjectitem;
-		this.classpicture = classpicture;
+		this.subjectItem = subjectItem;
+		this.lanAbility = lanAbility;
+		this.views = views;
+		this.replyTeacs = replyTeacs;
 	}
 
 	public Integer getTeacno() {
@@ -58,36 +94,108 @@ public class TeacBean {
 		this.teacno = teacno;
 	}
 
-	public Integer getMemberid() {
-		return memberid;
+	public Integer getMemberId() {
+		return memberId;
 	}
 
-	public void setMemberid(Integer memberid) {
-		this.memberid = memberid;
+	public void setMemberId(Integer memberId) {
+		this.memberId = memberId;
 	}
 
-	public String getTitle() {
-		return title;
+	public String getUpdateDate() {
+		return updateDate;
 	}
 
-	public void setTitle(String title) {
-		this.title = title;
+	public void setUpdateDate(String updateDate) {
+		this.updateDate = updateDate;
 	}
 
-	public Date getPostdate() {
-		return postdate;
+	public String getHighEdu() {
+		return highEdu;
 	}
 
-	public void setPostdate(Date postdate) {
-		this.postdate = postdate;
+	public void setHighEdu(String highEdu) {
+		this.highEdu = highEdu;
 	}
 
-	public String getDetail() {
-		return detail;
+	public String getStudExp() {
+		return studExp;
 	}
 
-	public void setDetail(String detail) {
-		this.detail = detail;
+	public void setStudExp(String studExp) {
+		this.studExp = studExp;
+	}
+
+	public String getTutorExp() {
+		return tutorExp;
+	}
+
+	public void setTutorExp(String tutorExp) {
+		this.tutorExp = tutorExp;
+	}
+
+	public String getTeacLoc() {
+		return teacLoc;
+	}
+
+	public void setTeacLoc(String teacLoc) {
+		this.teacLoc = teacLoc;
+	}
+
+	public String getTeacObject() {
+		return teacObject;
+	}
+
+	public void setTeacObject(String teacObject) {
+		this.teacObject = teacObject;
+	}
+
+	public String getClassMode() {
+		return classMode;
+	}
+
+	public void setClassMode(String classMode) {
+		this.classMode = classMode;
+	}
+
+	public String getWillTeac() {
+		return willTeac;
+	}
+
+	public void setWillTeac(String willTeac) {
+		this.willTeac = willTeac;
+	}
+
+	public String getTeacTime() {
+		return teacTime;
+	}
+
+	public void setTeacTime(String teacTime) {
+		this.teacTime = teacTime;
+	}
+
+	public String getSkills() {
+		return skills;
+	}
+
+	public void setSkills(String skills) {
+		this.skills = skills;
+	}
+
+	public String getConMethod() {
+		return conMethod;
+	}
+
+	public void setConMethod(String conMethod) {
+		this.conMethod = conMethod;
+	}
+
+	public String getConTime() {
+		return conTime;
+	}
+
+	public void setConTime(String conTime) {
+		this.conTime = conTime;
 	}
 
 	public Double getPrice() {
@@ -98,19 +206,35 @@ public class TeacBean {
 		this.price = price;
 	}
 
-	public String getSubjectitem() {
-		return subjectitem;
+	public String getSubjectItem() {
+		return subjectItem;
 	}
 
-	public void setSubjectitem(String subjectitem) {
-		this.subjectitem = subjectitem;
+	public void setSubjectItem(String subjectItem) {
+		this.subjectItem = subjectItem;
 	}
 
-	public Blob getClasspicture() {
-		return classpicture;
+	public String getLanAbility() {
+		return lanAbility;
 	}
 
-	public void setClasspicture(Blob classpicture) {
-		this.classpicture = classpicture;
+	public void setLanAbility(String lanAbility) {
+		this.lanAbility = lanAbility;
+	}
+
+	public Integer getViews() {
+		return views;
+	}
+
+	public void setViews(Integer views) {
+		this.views = views;
+	}
+
+	public List<ReplyTeac> getReplyTeacs() {
+		return replyTeacs;
+	}
+
+	public void setReplyTeacs(List<ReplyTeac> replyTeacs) {
+		this.replyTeacs = replyTeacs;
 	}
 }

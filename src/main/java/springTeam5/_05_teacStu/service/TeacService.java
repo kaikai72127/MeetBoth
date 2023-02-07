@@ -40,14 +40,14 @@ public class TeacService implements TeacServiceInterface {
 //	搜尋全部教師貼文依日期降序排序
 	@Override
 	public List<TeacBean> searchAllTeacOBpDate() {
-		List<TeacBean> ts = tRepo.findAllByOrderByPostdateDesc();
+		List<TeacBean> ts = tRepo.findAllByOrderByUpdateDateDesc();
 		return ts;
 	}
 	
 //	搜尋全部教師貼文依會員編號排序
 	@Override
 	public List<TeacBean> searchAllTeacOBmId() {
-		List<TeacBean> ts = tRepo.findAllByOrderByMemberid();
+		List<TeacBean> ts = tRepo.findAllByOrderByMemberId();
 		return ts;
 	}
 	
@@ -67,8 +67,8 @@ public class TeacService implements TeacServiceInterface {
 	
 //	新增教師貼文
 	@Override
-	public void addTeac(TeacBean tableForTeac) {
-		tRepo.save(tableForTeac);
+	public void addTeac(TeacBean tb) {
+		tRepo.save(tb);
 	}
 	
 //	透過ID刪除教師貼文
@@ -79,8 +79,8 @@ public class TeacService implements TeacServiceInterface {
 	
 //	透過ID修改教師貼文
 	@Override
-	public TeacBean updateTeacFromTeacno(TeacBean tableForTeac) {
-		TeacBean ts = tRepo.save(tableForTeac);
+	public TeacBean updateTeacFromTeacno(TeacBean tb) {
+		TeacBean ts = tRepo.save(tb);
 		return ts;
 	}
 }

@@ -10,6 +10,7 @@
 <head>
 <!-- 引入共同的headMVC -->
 <jsp:include page="fragment/headMVC.jsp" />
+<link rel="stylesheet" href="html/assets/css/_05_teacStu/deoindex.css" />
 </head>
 
 <!--BOBY-->
@@ -149,6 +150,72 @@
 					</div>
 				</div>
 			</section>
+			
+			<!-- 內容3 -->
+			<div class="page-container">
+        <div class="newest-list">
+            <div class="newest-list-header">
+                <div class="newest-list-header-icon">
+                    <svg viewbox="0 0 48 48">
+                        <path
+                            d="m23.95 42-14.5-7.95v-12L2 18 23.95 6 46 18v15.85h-3v-14.1l-4.55 2.3v12Zm0-15.4L39.7 18 23.95 9.55 8.3 18Zm0 12 11.5-6.35v-8.4L23.95 30l-11.5-6.25v8.5Zm.05-12Zm-.05 3.7Zm0 0Z" />
+                    </svg>
+                </div>
+                <h1>最新老師</h1>
+                <div class="more-button">
+                    <a href="<c:url value='/_05_teacStu.searchAllTeac.controller'/>">更多</a>
+                </div>
+            </div>
+            <div class="newest-list-body">
+                <div class="newest-list-item">
+                    <div class="teacher-profile">
+                        <img src="https://picsum.photos/200?random=1" alt="">
+                    </div>
+                    <div class="teacher-detail">
+                        <a href="">Kevin老師 #1234</a>
+                        <div>數學, 電腦, 健康教育</div>
+                        <div>電腦 1~2年, 健康教育28年</div>
+                        <div>2023-02-03</div>
+                    </div>
+                </div>
+                <div class="newest-list-item">
+                    <div class="teacher-profile">
+                        <img src="https://picsum.photos/200?random=2" alt="">
+                    </div>
+                    <div class="teacher-detail">
+                        <a href="">Kevin老師 #1234</a>
+                        <div>數學, 電腦, 健康教育</div>
+                        <div>電腦 1~2年, 健康教育28年</div>
+                        <div>2023-02-03</div>
+                    </div>
+                </div>
+                <div class="newest-list-item">
+                    <div class="teacher-profile">
+                        <img src="https://picsum.photos/200?random=3" alt="">
+                    </div>
+                    <div class="teacher-detail">
+                        <a href="">Kevin老師 #1234</a>
+                        <div>數學, 電腦, 健康教育</div>
+                        <div>電腦 1~2年, 健康教育28年</div>
+                        <div>2023-02-03</div>
+                    </div>
+                </div>
+                <div class="newest-list-item">
+                	<c:forEach var="bean" items="${classList}">
+                    <div class="teacher-profile">
+                        <img src="https://picsum.photos/200?random=3" alt="">
+                    </div>
+                    <div class="teacher-detail">
+                        <a href="">Kevin老師 #${bean.memberId}</a>
+                        <div>${bean.subjectItem}</div>
+                        <div>${bean.tutorExp}</div>
+                        <div>${bean.updateDate}</div>
+                    </div>
+                    </c:forEach>
+                </div>
+            </div>
+        </div>
+    </div>
 
 			<!-- Footer -->
 			<!-- 引入共同的footerMVC -->

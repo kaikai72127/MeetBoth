@@ -4,12 +4,13 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 
 
+
 <!DOCTYPE html>
 <html lang="zh-hant-TW">
 
 <head>
 <!-- 引入共同的headMVC -->
-<jsp:include page="fragment/headMVC.jsp" />
+<jsp:include page="/WEB-INF/html/fragment/headMVC.jsp" />
 </head>
 
 <!--BOBY-->
@@ -18,7 +19,7 @@
 
 	<!-- header -->
 	<!-- 引入共同的topMVC -->
-	<jsp:include page="fragment/topMVC.jsp" />
+	<jsp:include page="/WEB-INF/html/fragment/topMVC.jsp" />
 
 	<main>
 		<div class="page-loader">
@@ -149,7 +150,7 @@
 
 			<!-- Footer -->
 			<!-- 引入共同的footerMVC -->
-			<jsp:include page="fragment/footerMVC.jsp" />
+			<jsp:include page="/WEB-INF/html/fragment/footerMVC.jsp" />
 	</main>
 
 	<!--  
@@ -157,7 +158,7 @@
     =============================================
     -->
 	<!-- 引入共同的js -->
-	<jsp:include page="fragment/jsPath.jsp" />
+	<jsp:include page="/WEB-INF/html/fragment/jsPath.jsp" />
 
 
 

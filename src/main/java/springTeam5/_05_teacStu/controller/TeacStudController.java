@@ -5,11 +5,11 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.sql.Blob;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -21,12 +21,15 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
+import springTeam5._05_teacStu.model.ReplyTeac;
 import springTeam5._05_teacStu.model.StudBean;
 import springTeam5._05_teacStu.model.TeacBean;
 import springTeam5._05_teacStu.service.GlobalService;
+import springTeam5._05_teacStu.service.ReplyTeacServiceInterface;
 import springTeam5._05_teacStu.service.StudServiceInterface;
 import springTeam5._05_teacStu.service.TeacServiceInterface;
 
@@ -40,16 +43,42 @@ public class TeacStudController {
 	@Autowired
 	private StudServiceInterface sService;
 	
+	@Autowired
+	private ReplyTeacServiceInterface rtService;
+	
+	public String getCurrentDate() {
+		Date date = new Date();
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy.MM.dd HH:mm:ss");
+		return sdf.format(date);
+	}
+	
+	
 //	搜尋全部教師貼文
 	@GetMapping(path = "/_05_teacStu.searchAllTeac.controller")
-	public String processsearchAllTeacAcction(@ModelAttribute("TeacBean") TeacBean tft, BindingResult result, Model m){
-		
+	public String processsearchAllTeacAction(@ModelAttribute("TeacBean") TeacBean tb, BindingResult result, Model m, @RequestParam(value = "page", defaultValue = "1") int page) {
 		if(result.hasErrors()) {
 			return "membersError";
 		}
 		
 		List<TeacBean> teac = tService.searchAllTeac();
 		m.addAttribute("classList", teac);
+		// 每頁顯示的貼文數量，可以自行修改
+		int pageSize = 5;
+		int totalPages = (int) Math.ceil((double) teac.size() / pageSize);
+		int startIndex = (page - 1) * pageSize;
+		int endIndex = startIndex + pageSize;
+		if (endIndex > teac.size()) {
+		endIndex = teac.size();
+		}
+		if (startIndex >= teac.size()) {
+			startIndex = teac.size() - pageSize;
+		}
+		List<TeacBean> pageTeac = teac.subList(startIndex, endIndex);
+
+		m.addAttribute("pageTeac", pageTeac);
+		m.addAttribute("totalPages", totalPages);
+		m.addAttribute("currentPage", page);
+
 
 		return "_05_teacStu/teacCRUD";
 	}
@@ -188,6 +217,18 @@ public class TeacStudController {
 		return "_05_teacStu/updateteac";
 	}
 	
+//	轉跳教師貼文頁面
+	@GetMapping("/_05_teacStu.teacpostpageMain.controller")
+	public String processTeacPostPageMainAction(@RequestParam("teacno") Integer teacno, 
+			@ModelAttribute("TeacBean") TeacBean tft, BindingResult result, Model m) {
+		if(result.hasErrors()) {
+			return "membersError";
+		}
+		TeacBean teac = tService.searchTeacFromTeacno(teacno);
+		m.addAttribute("bean", teac);
+		return "_05_teacStu/teacresumepage";
+	}
+	
 //	轉跳學生修改頁面
 	@PostMapping("/_05_teacStu.updatedataStudMain.controller")
 	public String processUpdateStudMainAction(@RequestParam("studno") Integer studno, 
@@ -200,28 +241,23 @@ public class TeacStudController {
 		return "_05_teacStu/updatestud";
 	}
 	
+//	轉跳學生貼文頁面
+	@GetMapping("/_05_teacStu.studpostpageMain.controller")
+	public String processStudPostPageMainAction(@RequestParam("studno") Integer studno, 
+			@ModelAttribute("StudBean") StudBean tfs, BindingResult result, Model m) {
+		if(result.hasErrors()) {
+			return "membersError";
+		}
+		StudBean stud = sService.searchStudFromStudno(studno);
+		m.addAttribute("bean", stud);
+		return "_05_teacStu/studpostpage";
+	}
+	
 //	修改教師貼文
 	@PostMapping("/_05_teacStu.updatedata.controller")
-	public String processupdatedataAction(@RequestParam("teacno") Integer teacno, @RequestParam("memberId") Integer memberId, @RequestParam("title") String title,
-			@RequestParam("detail") String detail, @RequestParam("price") Double price, @RequestParam("subjectItem") String subjectItem, 
-			@RequestParam("images") MultipartFile mf) throws IOException, SQLException {
-		InputStream in = mf.getInputStream();
-		long size = mf.getSize();
-		Blob b = GlobalService.fileToBlob(in, size);
-		Date date = new Date();
-		TeacBean teac = tService.searchTeacFromTeacno(teacno);
-		teac.setMemberid(memberId);
-		teac.setTitle(title);
-		teac.setPostdate(date);
-		teac.setDetail(detail);
-		teac.setPrice(price);
-		teac.setSubjectitem(subjectItem);
-		if(size != 0) {
-			teac.setClasspicture(b);
-			tService.updateTeacFromTeacno(teac);
-		}else {
-			tService.updateTeacFromTeacno(teac);
-		}
+	public String processupdatedataAction(@RequestParam("teacno") Integer teacno, @RequestBody TeacBean t) {
+		t.setTeacno(teacno);
+		tService.updateTeacFromTeacno(t);
 		return "redirect:_05_teacStu.searchAllTeac.controller";
 	}
 	
@@ -235,15 +271,15 @@ public class TeacStudController {
 		Blob b = GlobalService.fileToBlob(in, size);
 		Date date = new Date();
 		StudBean stud = sService.searchStudFromStudno(studno);
-		stud.setMemberid(memberId);
+		stud.setmemberId(memberId);
 		stud.setTitle(title);
-		stud.setPostdate(date);
+		stud.setpostDate(date);
 		stud.setDetail(detail);
 		stud.setPrice(price);
-		stud.setSubjectitem(subjectItem);
-		stud.setLearnloc(learnLoc);
+		stud.setsubjectItem(subjectItem);
+		stud.setlearnLoc(learnLoc);
 		if (size != 0) {
-			stud.setClasspicture(b);
+			stud.setclassPicture(b);
 			sService.updateStudFromStudno(stud);
 		}else {
 			sService.updateStudFromStudno(stud);
@@ -265,21 +301,14 @@ public class TeacStudController {
 	
 //	新增教師貼文
 	@PostMapping("/_05_teacStu.insertdata.controller")
-	public String processinsertdataAction(@RequestParam("memberId") Integer memberId, @RequestParam("title") String title, @RequestParam("detail") String detail,
-								@RequestParam("price") Double price, @RequestParam("subjectItem") String subjectItem, @RequestParam("images") MultipartFile mf) throws IllegalStateException, IOException, SQLException, ServletException {
-		InputStream in = mf.getInputStream();
-		long size = mf.getSize();
-		Blob b = GlobalService.fileToBlob(in, size);
-		Date date = new Date();
-		TeacBean t = new TeacBean();
-		t.setMemberid(memberId);
-		t.setTitle(title);
-		t.setPostdate(date);
-		t.setDetail(detail);
-		t.setPrice(price);
-		t.setSubjectitem(subjectItem);
-		t.setClasspicture(b);
-		tService.addTeac(t);
+	public String processinsertdataAction(@RequestBody TeacBean t){
+		t.setUpdateDate(getCurrentDate());
+		List<ReplyTeac> replyTeacs = t.getReplyTeacs();
+		for(ReplyTeac rt:replyTeacs) {
+			rt.setReplyDate(getCurrentDate());
+			rtService.addReplyTeac(rt);
+		}
+	    tService.addTeac(t);
 		return "redirect:_05_teacStu.searchAllTeac.controller";
 	}
 	
@@ -293,14 +322,14 @@ public class TeacStudController {
 		Blob b = GlobalService.fileToBlob(in, size);
 		Date date = new Date();
 		StudBean t = new StudBean();
-		t.setMemberid(memberId);
+		t.setmemberId(memberId);
 		t.setTitle(title);
-		t.setPostdate(date);
+		t.setpostDate(date);
 		t.setDetail(detail);
 		t.setPrice(price);
-		t.setSubjectitem(subjectItem);
-		t.setLearnloc(learnLoc);
-		t.setClasspicture(b);
+		t.setsubjectItem(subjectItem);
+		t.setlearnLoc(learnLoc);
+		t.setclassPicture(b);
 		sService.addStud(t);
 		return "redirect:_05_teacStu.searchAllStud.controller";
 	}
@@ -319,34 +348,6 @@ public class TeacStudController {
 		return "redirect:_05_teacStu.searchAllStud.controller";
 	}
 	
-//	儲存教師貼文圖片
-	@GetMapping(path = "/_05_teacStu.picsave.controller", produces = "text/plain;charset=UTF-8")
-	public void processByteArrayImageAction(HttpServletRequest request, HttpServletResponse response) throws IOException, SQLException {
-		OutputStream os = null;
-		InputStream is = null;
-		Blob blob = null;
-		String id = request.getParameter("id");
-		Integer nId = 0;
-		nId = Integer.parseInt(id);
-		TeacBean bean = tService.searchTeacFromTeacno(nId);
-		if (bean != null) {
-			blob = bean.getClasspicture();
-			if (blob != null) {
-				is = blob.getBinaryStream();
-			}
-		}
-		response.setContentType("jpg/png");
-		os = response.getOutputStream();
-		int len = 0;
-		byte[] bytes = new byte[8192];
-		while ((len = is.read(bytes)) != -1) {
-			os.write(bytes, 0, len);
-		}
-		if (is != null)
-			is.close();
-		if (os != null)
-			os.close();
-	}
 	
 //	儲存學生貼文圖片
 	@GetMapping(path = "/_05_teacStu.picsaveStud.controller", produces = "text/plain;charset=UTF-8")
@@ -358,7 +359,7 @@ public class TeacStudController {
 		Integer nId = Integer.parseInt(id);
 		StudBean bean = sService.searchStudFromStudno(nId);
 		if (bean != null) {
-			blob = bean.getClasspicture();
+			blob = bean.getclassPicture();
 			if (blob != null) {
 				is = blob.getBinaryStream();
 			}

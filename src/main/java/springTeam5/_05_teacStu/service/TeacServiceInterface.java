@@ -27,11 +27,11 @@ public interface TeacServiceInterface {
 	public List<TeacBean> searchAllTeac();
 	
 //	新增教師貼文
-	public void addTeac(TeacBean tableForTeac);
+	public void addTeac(TeacBean tb);
 	
 //	透過ID刪除教師貼文
 	public void deleteTeacfromTeacno(Integer teacno);
 	
 //	透過ID修改教師貼文
-	public TeacBean updateTeacFromTeacno(TeacBean tableForTeac);
+	public TeacBean updateTeacFromTeacno(TeacBean tb);
 }

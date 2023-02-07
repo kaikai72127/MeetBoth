@@ -16,8 +16,8 @@ public class Oauth2SuccessHandler extends SimpleUrlAuthenticationSuccessHandler 
 			Authentication authentication) throws IOException, ServletException {
 		super.onAuthenticationSuccess(request, response, authentication);
 		
-		Google
 		
+		System.out.println(authentication.getAuthorities().toString());
 		
 		
 	}

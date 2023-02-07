@@ -1,6 +1,5 @@
 package springTeam5._03_product.service;
 
-
 import java.sql.SQLException;
 import java.util.List;
 
@@ -34,9 +33,9 @@ public class ProductService {
 	public void deleteProdFromProdID(Integer prodID) {
 		pRepo.deleteByProdID(prodID);
 	}
-	
+
 //	透過產品類別搜尋
-	public List<Product> findByProdClass(Integer prodClass){
+	public List<Product> findByProdClass(Integer prodClass) {
 		return pRepo.findByProdClass(prodClass);
 	}
 
@@ -44,34 +43,54 @@ public class ProductService {
 	public void updateProd(Product p) {
 		pRepo.save(p);
 	}
-	
+
 //	新增評論
 	public void insertComment(Product p) {
 		pRepo.save(p);
 	}
 
 //	模糊搜尋
-	public List<Product> searchWithCondiOrderByProdID(Integer type, Integer low, Integer high, String name)throws SQLException {
+	public List<Product> searchWithCondiOrderByProdID(Integer type, Integer low, Integer high, String name)
+			throws SQLException {
 		return pRepo.findAllByOrderByProdID(type, low, high, name);
 	}
-	public List<Product> searchWithCondiOrderByProdPriceDesc(Integer type, Integer low, Integer high, String name)throws SQLException {
+
+	public List<Product> searchWithCondiOrderByProdPriceDesc(Integer type, Integer low, Integer high, String name)
+			throws SQLException {
 		return pRepo.findAllByOrderByProdPriceDesc(type, low, high, name);
 	}
-	public List<Product> searchWithCondiOrderByProdPrice(Integer type, Integer low, Integer high, String name)throws SQLException {
+
+	public List<Product> searchWithCondiOrderByProdPrice(Integer type, Integer low, Integer high, String name)
+			throws SQLException {
 		return pRepo.findAllByOrderByProdPrice(type, low, high, name);
 	}
-	public List<Product> searchWithCondiOrderByProdPost(Integer type, Integer low, Integer high, String name)throws SQLException {
+
+	public List<Product> searchWithCondiOrderByProdPost(Integer type, Integer low, Integer high, String name)
+			throws SQLException {
 		return pRepo.findAllByOrderByProdID(type, low, high, name);
 	}
-	public List<Product> searchWithCondiOrderByProdUpdate(Integer type, Integer low, Integer high, String name)throws SQLException {
+
+	public List<Product> searchWithCondiOrderByProdUpdate(Integer type, Integer low, Integer high, String name)
+			throws SQLException {
 		return pRepo.findAllByOrderByProdID(type, low, high, name);
 	}
-	
-	public List<Product> findTop4ProductLikeByProductLike(Integer prodClass,Integer prodID){
-		return pRepo.findTop4ProductLikeByProductLike(prodClass,prodID);
+
+	public List<Product> findAllByOrderByProdCheckDesc(Integer type, Integer low, Integer high, String name)
+			throws SQLException {
+		return pRepo.findAllByOrderByProdCheckDesc(type, low, high, name);
 	}
-	
-	public List<Product> findRandomProducts(){
+
+	public List<Product> findTop4ProductLikeByProductLike(Integer prodClass, Integer prodID) {
+		return pRepo.findTop4ProductLikeByProductLike(prodClass, prodID);
+	}
+
+//	隨機搜尋
+	public List<Product> findRandomProducts() {
 		return pRepo.findRandomProducts();
+	}
+
+//	熱門檢索
+	public List<Product> findHotestProducts() {
+		return pRepo.findHotestProducts();
 	}
 }

@@ -107,6 +107,7 @@ String basePathimg2 = request.getScheme() + "://" + request.getServerName() + ":
 								<div class="row mb-20">
 									<div class="col-sm-12">
 										<div class="description">
+										<input type="hidden" value="${bean.prodID}" name="prodIdForAjax"/>
 											<h4>商品編號 : ${bean.prodID}</h4>
 										</div>
 									</div>
@@ -326,14 +327,22 @@ String basePathimg2 = request.getScheme() + "://" + request.getServerName() + ":
 										<div class="shop-item-detail">
 											<a
 												href="/MeetBoth/_03_product.PathToProductDetail.controller?id=${prodLikeBean.prodID}"
-												class="btn btn-round btn-b"><span class="icon-heart">查看商品頁面</span><span
-												class="icon-heart"></span></a>
+												class="btn btn-round btn-b"><span class="icon-heart" style="font-size:18px;">查看商品頁面</span><span
+												class="icon-heart" style="font-size:18px;"></span></a>
 										</div>
 									</div>
 									<h4 class="shop-item-title font-alt">
-										<a href="#">${prodLikeBean.prodName}</a>
+										<a href="#" style="font-size:22px;">${prodLikeBean.prodName}</a>
 									</h4>
-									NT$${prodLikeBean.prodPrice}
+									<div id="scoreAVGTwo">
+										<c:forEach var="commentBeanTwo"
+											items="${prodLikeBean.productComment}">
+											<input type="hidden" id="starAVGTwo"
+												value="${commentBeanTwo.prodScore}">
+										</c:forEach>
+										<div id="starAVGDivTwo" style="font-size: 20px;">123</div>
+									</div>
+									<p style="font-size:20px;">NT$${prodLikeBean.prodPrice}</p>
 								</div>
 							</div>
 						</c:forEach>
@@ -477,6 +486,36 @@ String basePathimg2 = request.getScheme() + "://" + request.getServerName() + ":
 		});
 	</script>
 	<script>
+	document.addEventListener("DOMContentLoaded", function() {
+		  const scores = document.querySelectorAll("#scoreAVGTwo");
+		  for (let i = 0; i < scores.length; i++) {
+		    const score = scores[i];
+		    const starAVGs = score.querySelectorAll("#starAVGTwo");
+		    let totalScore = 0;
+		    for (let j = 0; j < starAVGs.length; j++) {
+		      const starNum = starAVGs[j].value;
+		      totalScore += Number(starNum);
+		    }
+		    let avgScore = roundToTwo(totalScore / starAVGs.length);
+		    let stars = '';
+		    if(isNaN(avgScore)){
+				stars = '&nbsp;(0)';
+			}else{
+				stars = '&nbsp;(' + avgScore + ')';
+			}
+		    for (let k = 0; k < 5; k++) {
+		      if (k < avgScore) {
+		        stars += '<i class="fa fa-star star"></i>';
+		      } else {
+		        stars += '<i class="fa fa-star star-off"></i>';
+		      }
+		    }
+		    stars += '&nbsp;('+ starAVGs.length +'則評論)'
+		    score.querySelector("#starAVGDivTwo").innerHTML = stars;
+		  }
+		});
+	</script>
+	<script>
 	
         $(function(){
         	$('#deleteThisProduct').click(function(){
@@ -516,6 +555,16 @@ String basePathimg2 = request.getScheme() + "://" + request.getServerName() + ":
         //function end
     </script>
 	<script>
+	var prodIdInput = document.querySelector('input[name="prodIdForAjax"]');
+    var prodId = prodIdInput.value;
+    console.log("id="+prodId);
+	window.onload = function() {
+	    var xhr = new XMLHttpRequest();
+	    xhr.open("GET", "/MeetBoth/product.productCheck.controller?id=" + prodId, true);
+	    xhr.send();
+	};
+</script>
+<script>
     let cartCount = 0;
     document.getElementById("addToCartBtn").addEventListener("click", function() {
         cartCount += 1;

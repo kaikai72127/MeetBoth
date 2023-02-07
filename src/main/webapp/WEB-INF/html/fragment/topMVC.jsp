@@ -7,7 +7,7 @@ String baseMeetboth96x96 = request.getScheme() + "://" + request.getServerName()
 		+ "/html/assets/images/meatball/meatball-96x96-New.png";
 System.out.println(baseMeetboth96x96);
 %>
-
+<c:set value="${CartSize}" var="cartsize"/>
 <!-- header -->
 <nav class="navbar navbar-custom navbar-fixed-top headershadow"
 	role="navigation">
@@ -246,9 +246,9 @@ System.out.println(baseMeetboth96x96);
                 </a>
               </li> -->
 				<li>
-					<!-- 購物車 --> <a href="index-shopcheckout.html" class="btn border">
+					<!-- 購物車 --> <a href="<c:url value='/shoppingcart.controller' />" class="btn border" >
 						<i class="fas fa-shopping-cart text-primary"></i> <span
-						class="badge" id="cartCount">0</span>
+						class="badge" id="cartCount" >${cartsize} </span>
 				</a>
 				</li>
 
@@ -270,7 +270,7 @@ System.out.println(baseMeetboth96x96);
 								<i class="fa-solid fa-screwdriver-wrench"></i>
 						</a></li>
 						<li><a href="#" class="dropdown-item">Log
-								Out <i class="fa-solid fa-right-from-bracket"></i> </i>
+								Out <i class="fa-solid fa-right-from-bracket"></i>
 						</a></li>
 					</ul></li>
 			</ul>

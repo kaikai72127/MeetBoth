@@ -51,7 +51,7 @@ public class ShoppingCartController {
 
 		Product product = productService.searchSingleProductFromProdID(prodID);
 		OrderItemBean ordetItemBean = new OrderItemBean();
-		ordetItemBean.setProdId(prodID);
+		ordetItemBean.setProdItem(product);
 		ordetItemBean.setQty(qty);
 		ordetItemBean.setItemTotal(qty * product.getProdPrice());
 
@@ -77,16 +77,22 @@ public class ShoppingCartController {
 				log.info("加入購物車之Controller: 新建ShoppingCart物件");
 			// 並將此新建ShoppingCart的物件放到session物件內，成為它的屬性物件
 			session.setAttribute("ShoppingCart", cart); // ${ShoppingCart.subtotal}
+			
+			
+			
 		}
 
 		
 		// 將明細資料(價格，數量，折扣與BookBean)封裝到OrderItemBean物件內
 		Product product = productService.searchSingleProductFromProdID(prodID);
-		OrderItemBean ordetItemBean = new OrderItemBean(null,null,null,product,prodID,qty,qty*product.getProdPrice());
+		
+		OrderItemBean ordetItemBean = new OrderItemBean(null,null,null,product,qty,qty*product.getProdPrice());
 		// 將OrderItem物件內加入ShoppingCart的物件內
 		cart.addToCart(prodID, ordetItemBean);
 
 		System.out.println("我有加到購物車"+cart.getShoppingCart());
+		System.out.println(cart.getItemNumber()+"-----------------");
+		session.setAttribute("CartSize", cart.getItemNumber());
 		return "redirect:/_03_product.PathToProductDetail.controller?id=" + prodID;
 	}
 
@@ -98,15 +104,15 @@ public class ShoppingCartController {
 		ShoppingCart sc = (ShoppingCart) session.getAttribute("ShoppingCart");
 		if (sc == null) {
 			// 跳轉回空的購物車頁面
-			return "";
+			return "_04_shoppingCart/shoppingCart";
 		}
 		// 跳轉到有購物車的頁面
 		return "_04_shoppingCart/shoppingCart";
 	}
 
 	//移除一個item
-	@GetMapping("/deleteshoppingitem.controller/{prodId}")
-	public String deleleshoppingitem(@PathVariable("prodId") int prodId, HttpServletRequest request) {
+	@GetMapping("/deleteshoppingitem.controller")
+	public String deleleshoppingitem(@RequestParam("prodId") int prodId, HttpServletRequest request) {
 		HttpSession session = null;
 		session = request.getSession(false);
 		ShoppingCart shoppingCart = (ShoppingCart) session.getAttribute("ShoppingCart");
@@ -116,6 +122,7 @@ public class ShoppingCartController {
 			return "redirect:/_03_product.searchAllProduct.controller";
 		}
 		// 刪除購物車內的商品 跳轉回查看我的購物車Controller
+		System.out.println("執行刪除購物車");
 		shoppingCart.deleteProduct(prodId);
 		return "redirect:/shoppingcart.controller";
 	}
@@ -129,6 +136,7 @@ public class ShoppingCartController {
 			//由session物件中移除ShoppingCart物件
 			log.info("放棄購物之Controller: 清空位於Session物件內的購物車物件");
 			session.removeAttribute("ShoppingCart");
+			session.removeAttribute("CartSize");
 			sessionStatus.setComplete();
 		}
 		// 放棄購物會跳轉回找所有商品的頁面
@@ -137,7 +145,7 @@ public class ShoppingCartController {
 
 	// 更新購物車內的Item
 	@PostMapping("/updateshoppingqty.controller/{prodId}")
-	public String updateShoppingCartItem(@PathVariable("prodId") int prodId, @RequestParam("updateQty") int updateQty,
+	public String updateShoppingCartItem(@PathVariable("prodItem") int prodId, @RequestParam("updateQty") int updateQty,
 			HttpServletRequest request) {
 		HttpSession session = null;
 		session = request.getSession(false);

@@ -8,7 +8,7 @@ import springTeam5._04_shoppingCart.model.ShoppingCart;
 public interface OrderService {
 
 	// 新增一筆訂單
-	OrderBean insertOrder(OrderBean obean);
+	OrderBean createOrder(OrderBean obean);
 
 	// 刪除一筆訂單-透過orderNo
 	void deleteById(Integer orderNo);

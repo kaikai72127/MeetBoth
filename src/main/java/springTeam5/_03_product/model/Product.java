@@ -79,7 +79,7 @@ public class Product {
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "product", cascade = CascadeType.ALL)
 	private List<ProductComment> productComment = new ArrayList<ProductComment>();
 	
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "proditem",cascade = CascadeType.ALL)
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "prodItem",cascade = CascadeType.ALL)
 	private Set<OrderItemBean> orderItems = new LinkedHashSet<OrderItemBean>(); // itemsList
 
 	public Product() {

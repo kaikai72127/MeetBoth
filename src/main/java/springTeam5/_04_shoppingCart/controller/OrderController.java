@@ -45,9 +45,9 @@ public class OrderController {
 	}
 
 	@PostMapping("/shoppingCart.createOrder.controller")
-	public String createOrder(@RequestParam("memberBuyId") Integer memberBuyId,
-			@RequestParam("memberSaleId") Integer memberSaleId, @RequestParam("shippingName") String shippingName,
-			@RequestParam("shippingPhone") String shippingPhone,
+	public String createOrder(
+			@RequestParam("memberBuyId") Integer memberBuyId,
+			@RequestParam("shippingName") String shippingName, @RequestParam("shippingPhone") String shippingPhone,
 			@RequestParam("shippingAddress") String shippingAddress, @RequestParam("ordStstus") String ordStstus,
 			@RequestParam("paymentStstus") String paymentStstus, @RequestParam("deliveryStstus") String deliveryStstus,
 			@RequestParam("paymentMethod") String paymentMethod,
@@ -57,10 +57,8 @@ public class OrderController {
 		OrderBean obean = new OrderBean();
 
 		MemberBean memberBuy = memberRepository.searchMemberById(memberBuyId);
-		MemberBean memberSale = memberRepository.searchMemberById(memberSaleId);
 
-		obean.setMemberBuyId(memberBuyId);
-		obean.setMemberSaleId(memberSaleId);
+		obean.setMemberbuy(memberBuy);
 		obean.setShippingName(shippingName);
 		obean.setShippingPhone(shippingPhone);
 		obean.setShippingAddress(shippingAddress);
@@ -85,9 +83,8 @@ public class OrderController {
 		Set<OrderBean> orderBeanSet = new LinkedHashSet<OrderBean>();
 		orderBeanSet.add(obean);
 		memberBuy.setOrderBuy(orderBeanSet);
-		memberSale.setOrderSale(orderBeanSet);
 
-		orderService.insertOrder(obean);
+		orderService.createOrder(obean);
 
 		response.sendRedirect("_04_shoppingCart.SelectAll.controller");
 		return null;
@@ -131,7 +128,7 @@ public class OrderController {
 		obean.setDeliveryStstus(deliveryStstus);
 		obean.setUporderDate(orderService.getCurrentDate());
 
-		System.out.println("有喔~"+ordStstus);
+		System.out.println("有喔~" + ordStstus);
 		orderService.updateOrder(obean);
 
 		return "redirect:shoppingCart.SelectAll.controller";
@@ -144,13 +141,13 @@ public class OrderController {
 			@RequestParam("deliveryStstus") String deliveryStstus, @RequestParam("paymentMethod") String paymentMethod,
 			@RequestParam("discountId") String discountId, @ModelAttribute("OrderBean") OrderBean obean) {
 
-		System.out.println("有喔~"+ordStstus);
+		System.out.println("有喔~" + ordStstus);
 		// 可以修改的地方
 		obean.setOrdStstus(ordStstus);
 		obean.setPaymentStstus(paymentStstus);
 		obean.setDeliveryStstus(deliveryStstus);
 		obean.setUporderDate(orderService.getCurrentDate());
-		System.out.println("有喔~"+ordStstus);
+		System.out.println("有喔~" + ordStstus);
 		orderService.updateOrder(obean);
 
 		return "redirect:shoppingCart.SelectAll.controller";
@@ -166,7 +163,6 @@ public class OrderController {
 
 	}
 
-
 	// 搜尋全部-條件搜尋
 	@PostMapping("/shoppingCart.SearchOrders.controller")
 	public String processSearchOrders(@RequestParam(value = "ordStstus") String ordStstus,
@@ -174,34 +170,35 @@ public class OrderController {
 			@RequestParam(value = "deliveryStstus") String deliveryStstus,
 			@RequestParam(value = "search", required = false) String search, @ModelAttribute("OrderBean") OrderBean od,
 			Model odModel) {
-		List<OrderBean> classList =null;
-		
-		System.out.println("找這些"+ordStstus+" "+" "+paymentStstus+" "+deliveryStstus+" "+search+"結束");
-		
-		if(ordStstus != null && paymentStstus.equals("0") && deliveryStstus.equals("0") && search!=null) {
+		List<OrderBean> classList = null;
+
+		System.out.println("找這些" + ordStstus + " " + " " + paymentStstus + " " + deliveryStstus + " " + search + "結束");
+
+		if (ordStstus != null && paymentStstus.equals("0") && deliveryStstus.equals("0") && search.equals("")) {
 			classList = orderService.findOrderBySearch1(ordStstus, paymentStstus, deliveryStstus, search);
-		}else if(ordStstus.isEmpty() &&paymentStstus != null && deliveryStstus!=null && search!=null) {
+		} else if (ordStstus.isEmpty() && paymentStstus != null && deliveryStstus != null && search != null) {
 			classList = orderService.findOrderBySearch2(paymentStstus, deliveryStstus, search);
-		}else if(ordStstus.isEmpty()&&paymentStstus.isEmpty() && deliveryStstus!=null && search!=null) {
+		} else if (ordStstus.isEmpty() && paymentStstus.isEmpty() && deliveryStstus != null && search != null) {
 			classList = orderService.findOrderBySearch3(deliveryStstus, search);
-		}else if(ordStstus.isEmpty()&&paymentStstus.isEmpty() && deliveryStstus.isEmpty() && search!=null) {
+		} else if (ordStstus.isEmpty() && paymentStstus.isEmpty() && deliveryStstus.isEmpty() && search != null) {
 			classList = orderService.findOrderBySearch4(search);
-		}else if(ordStstus != null&&paymentStstus.isEmpty() && deliveryStstus.isEmpty() && search.isEmpty()) {
-			//判斷只找
+		} else if (ordStstus != null && paymentStstus.isEmpty() && deliveryStstus.isEmpty() && search.isEmpty()) {
+			// 判斷只找
 			classList = orderService.findOrderByOrdStstus(ordStstus);
-		}else if(ordStstus.isEmpty()&&paymentStstus !=null && deliveryStstus.isEmpty() && search.isEmpty()) {
-			//判斷只找
+		} else if (ordStstus.isEmpty() && paymentStstus != null && deliveryStstus.isEmpty() && search.isEmpty()) {
+			// 判斷只找
 			classList = orderService.findOrderByPaymentStstus(paymentStstus);
-		}else if(ordStstus.isEmpty()&&paymentStstus.isEmpty() && deliveryStstus!=null && search.isEmpty()) {
-			//判斷只找
+		} else if (ordStstus.isEmpty() && paymentStstus.isEmpty() && deliveryStstus != null && search.isEmpty()) {
+			// 判斷只找
 			classList = orderService.findOrderByDeliveryStstus(deliveryStstus);
-		}else if(ordStstus.isEmpty()&&paymentStstus.isEmpty() && deliveryStstus.isEmpty() && search.isEmpty()) {
-			//判斷都為0則搜尋全部
+		} else if (ordStstus.isEmpty() && paymentStstus.isEmpty() && deliveryStstus.isEmpty() && search.isEmpty()) {
+			// 判斷都為0則搜尋全部
 			classList = orderService.selectAll();
 		}
 		odModel.addAttribute("classList", classList);
+		System.out.println(classList);
 		return "_04_shoppingCart/ordersCRUD";
-		
+
 	}
 
 }

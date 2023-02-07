@@ -40,11 +40,11 @@
 								<tr>
 									<td><div id="photo">
 											<img id="preImg" style="width: 100px; height: 100px"
-												src="<c:url value='/_03_product.showPicture.controller?id=${bean.proditem.prodID}' />" />
+												src="<c:url value='/_03_product.showPicture.controller?id=${bean.prodItem.prodID}' />" />
 										</div></td>
-									<td>${bean.proditem.prodName}</td>
+									<td>${bean.prodItem.prodName}</td>
 									<td>${bean.qty}</td>
-									<td>${bean.proditem.prodPrice}</td>
+									<td>${bean.prodItem.prodPrice}</td>
 									<td>${bean.itemTotal}</td>
 									<td><form method="post"
 											action="<c:url value='/_04_shoppingCart.UpdateOrderItemMain.controller' />">

@@ -20,6 +20,7 @@ import javax.persistence.Table;
 import org.springframework.stereotype.Component;
 
 import springTeam5._04_shoppingCart.model.OrderBean;
+import springTeam5._04_shoppingCart.model.OrderItemBean;
 
 
 
@@ -78,7 +79,7 @@ public class MemberBean implements Serializable {
 	private Set<OrderBean> orderBuy = new LinkedHashSet<OrderBean>(); // itemsList
 	
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "membersale",cascade = CascadeType.ALL)
-	private Set<OrderBean> orderSale = new LinkedHashSet<OrderBean>(); // itemsList
+	private Set<OrderItemBean> orderSale = new LinkedHashSet<OrderItemBean>(); // itemsList
 	
 	
 	public MemberBean() {
@@ -260,11 +261,12 @@ public class MemberBean implements Serializable {
 		this.orderBuy = orderBuy;
 	}
 
-	public Set<OrderBean> getOrderSale() {
+
+	public Set<OrderItemBean> getOrderSale() {
 		return orderSale;
 	}
 
-	public void setOrderSale(Set<OrderBean> orderSale) {
+	public void setOrderSale(Set<OrderItemBean> orderSale) {
 		this.orderSale = orderSale;
 	}
 

@@ -34,6 +34,7 @@ String basePathimg2 = request.getScheme() + "://" + request.getServerName() + ":
 </head>
 <body data-spy="scroll" data-target=".onpage-navigation"
 	data-offset="60">
+	<c:set value="${CartSize}" var="cartsize" />
 	<main>
 		<div class="page-loader">
 			<div class="loader">Loading...</div>
@@ -64,7 +65,6 @@ String basePathimg2 = request.getScheme() + "://" + request.getServerName() + ":
 							</button>
 						</div>
 					</div>
-					<p id="cartCount">購物車：0</p>
 					<!-- 			按鈕們 -->
 					<div class="container">
 						<div class="row">
@@ -155,11 +155,11 @@ String basePathimg2 = request.getScheme() + "://" + request.getServerName() + ":
 										<Input type='hidden' name='prodID' id="prodID"
 											value='${bean.prodID}'>
 										<div class="col-sm-8">
-<%-- 											<button style="float: right" id="${bean.prodID}" --%>
-<!-- 												class="btn btn-sm text-dark p-0 addtocart"> -->
-<!-- 												<i class="fas fa-shopping-cart text-primary mr-1"></i> 加入購物車 -->
-<!-- 											</button> -->
-											<button type='submit' id="addtocart"
+											<%-- 											<button style="float: right" id="${bean.prodID}" --%>
+											<!-- 												class="btn btn-sm text-dark p-0 addtocart"> -->
+											<!-- 												<i class="fas fa-shopping-cart text-primary mr-1"></i> 加入購物車 -->
+											<!-- 											</button> -->
+											<button type='submit' id="addToCartBtn"
 												class="btn btn-d btn-circle">
 												<i class="fas fa-shopping-cart text-primary mr-1"></i> 加入購物車
 											</button>
@@ -541,5 +541,16 @@ String basePathimg2 = request.getScheme() + "://" + request.getServerName() + ":
         })
     });
 	</script>
+	<script>
+      let cartCount = 0;
+      document
+        .getElementById("addToCartBtn")
+        .addEventListener("click", function () {
+          console.log(cartCount);
+          cartCount += 1;
+          document.getElementById("cartCount").innerHTML =
+            "購物車：" + cartCount;
+        });
+    </script>
 </body>
 </html>

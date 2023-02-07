@@ -3,6 +3,7 @@ package springTeam5._04_shoppingCart.service.impl;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import java.util.Set;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -12,6 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import springTeam5._03_product.service.ProductService;
 import springTeam5._04_shoppingCart.model.OrderBean;
+import springTeam5._04_shoppingCart.model.OrderItemBean;
 import springTeam5._04_shoppingCart.model.OrderRepository;
 
 @Service
@@ -35,7 +37,7 @@ public class OrderServiceImpl implements springTeam5._04_shoppingCart.service.Or
 
 //新增----------
 	// 新增一筆訂單
-	public OrderBean insertOrder(OrderBean obean) {
+	public OrderBean createOrder(OrderBean obean) {
 		return orderRepo.save(obean);
 	}
 

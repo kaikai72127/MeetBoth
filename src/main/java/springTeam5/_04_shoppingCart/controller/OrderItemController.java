@@ -104,7 +104,7 @@ public class OrderItemController {
 	@GetMapping("/_04_shoppingCart.DeleteItemOrder.controller")
 	public String processDeleteOrderAction(@RequestParam("seqno") Integer seqno) {
 		List<OrderItemBean> searchOrderItemBySeq = orderItemService.findBySqeno(seqno);
-		Integer orderNo = searchOrderItemBySeq.get(0).getOrderNo();
+		Integer orderNo = searchOrderItemBySeq.get(0).getOrderbean().getOrderNo();
 		System.out.println("準備要刪除");
 		orderItemService.deleteOrdItem(orderNo, seqno);
 		System.out.println("orderNo" +orderNo +"seqno"+seqno);
@@ -118,7 +118,7 @@ public class OrderItemController {
 	public String processUpdateOrderItemMainAction(@RequestParam("seqno") Integer seqno,
 			 Model odModel) {
 		List<OrderItemBean> searchOrderItemBySeq = orderItemService.findBySqeno(seqno);
-		Integer orderNo = searchOrderItemBySeq.get(0).getOrderNo();
+		Integer orderNo = searchOrderItemBySeq.get(0).getOrderbean().getOrderNo();
 		List<OrderItemBean> classList = orderItemService.findOrderItem(orderNo, seqno);
 		odModel.addAttribute("classList", classList);
 

@@ -162,6 +162,7 @@ tr:nth-of-type(even) td {
 						</thead>
 						<c:forEach var="bean" items="${classList}">
 
+
 							<tbody>
 								<tr>
 									<td id="eachProdBlock" class="mEvent"
@@ -197,7 +198,14 @@ tr:nth-of-type(even) td {
 									<td>${bean.totalAmount}</td>
 									<td><form
 											action="<c:url value='/shoppingCart.UpdateOrder.controller' />"
-											method="get">
+											method="post">
+											<input type="hidden" id="ordS"
+												value="${bean.ordStstus}${param.ordS}"> <input
+												type="hidden" id="paymentS"
+												value="${bean.paymentStstus}${param.paymentS}"> <input
+												type="hidden" id="deliveryS"
+												value="${bean.deliveryStstus}${param.deliveryS}">
+
 											<button name="orderNo" value="${bean.orderNo}">
 												<i class="fa-solid fa-file-pen"></i>
 											</button>

@@ -1,6 +1,5 @@
 package springTeam5._04_shoppingCart.model;
 
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -9,18 +8,16 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-import javax.persistence.Transient;
 
 import org.springframework.stereotype.Component;
 
+import springTeam5._01_member.model.MemberBean;
 import springTeam5._03_product.model.Product;
 
 @Entity
 @Table(name = "orderitem")
 @Component
 public class OrderItemBean {
-
-	
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -30,52 +27,48 @@ public class OrderItemBean {
 	@ManyToOne
 	@JoinColumn(name = "ORDERNO_FK")
 	private OrderBean orderbean; // 訂單編號
-	@Column(name = "ORDERNO")
-	@Transient
-	private Integer orderNo; 
-	
+
+	@ManyToOne
+	@JoinColumn(name = "MEMBERSALE_FK") // 賣家會員編號
+	private MemberBean membersale;
+
 	@ManyToOne
 	@JoinColumn(name = "PRODUTID_FK")
-	private Product proditem;// 商品編號
-	@Column(name = "PRODID")
-	@Transient
-	private Integer prodId; 
+	private Product prodItem;// 商品編號
 
 	@Column(name = "QTY")
 	private Integer qty; // 數量
-	
+
 	@Column(name = "ITEMTOTAL")
 	private Integer itemTotal; // 總金額
 
 	// 新增有ID
-	public OrderItemBean(Integer seqno,OrderBean orderbean, Integer orderNo,  Product proditem, Integer prodId,
-			Integer qty, Integer itemTotal) {
-		super();
-		this.orderbean = orderbean;
-		this.orderNo = orderNo;
+
+	public OrderItemBean(Integer seqno, OrderBean orderbean, MemberBean membersale, Product prodItem, Integer qty,
+			Integer itemTotal) {
 		this.seqno = seqno;
-		this.proditem = proditem;
-		this.prodId = prodId;
+		this.orderbean = orderbean;
+		this.membersale = membersale;
+		this.prodItem = prodItem;
 		this.qty = qty;
 		this.itemTotal = itemTotal;
 	}
 
 	// 修改沒有ID
-	public OrderItemBean(OrderBean orderbean, Integer orderNo, Product proditem, Integer prodId, Integer qty,
-			Integer itemTotal) {
-		super();
+
+	public OrderItemBean(OrderBean orderbean, MemberBean membersale, Product prodItem, Integer qty, Integer itemTotal) {
 		this.orderbean = orderbean;
-		this.orderNo = orderNo;
-		this.proditem = proditem;
-		this.prodId = prodId;
+		this.membersale = membersale;
+		this.prodItem = prodItem;
 		this.qty = qty;
 		this.itemTotal = itemTotal;
 	}
-	
+
 	public OrderItemBean() {
-		
+
 	}
 
+	// Getter Setter
 	public Integer getSeqno() {
 		return seqno;
 	}
@@ -92,28 +85,20 @@ public class OrderItemBean {
 		this.orderbean = orderbean;
 	}
 
-	public Integer getOrderNo() {
-		return orderNo;
+	public MemberBean getMembersale() {
+		return membersale;
 	}
 
-	public void setOrderNo(Integer orderNo) {
-		this.orderNo = orderNo;
+	public void setMembersale(MemberBean membersale) {
+		this.membersale = membersale;
 	}
 
-	public Product getProditem() {
-		return proditem;
+	public Product getProdItem() {
+		return prodItem;
 	}
 
-	public void setProditem(Product proditem) {
-		this.proditem = proditem;
-	}
-
-	public Integer getProdId() {
-		return prodId;
-	}
-
-	public void setProdId(Integer prodId) {
-		this.prodId = prodId;
+	public void setProdItem(Product prodItem) {
+		this.prodItem = prodItem;
 	}
 
 	public Integer getQty() {
@@ -130,8 +115,6 @@ public class OrderItemBean {
 
 	public void setItemTotal(Integer itemTotal) {
 		this.itemTotal = itemTotal;
-	};
-
-
+	}
 
 }

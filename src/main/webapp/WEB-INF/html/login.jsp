@@ -10,6 +10,7 @@
 <head>
 <!-- 引入共同的headMVC -->
 <jsp:include page="fragment/headMVC.jsp" />
+<script src="https://apis.google.com/js/platform.js" async defer></script>
 </head>
 
 <!--BOBY-->
@@ -31,9 +32,9 @@
 			<div class="container">
 				<div class="row">
 					<div class="col-sm-5 col-sm-offset-1 mb-sm-40">
-						<h4 class="font-alt h4-p">Login</h4>
+						<h4 class="font-alt h4-p">登入</h4>
 						<hr class="divider-w mb-10">
-						<form class="form">
+						<form class="form" action="<%=request.getContextPath()%>/login/page">
 							<div class="form-group">
 								<input class="form-control" id="username" type="text"
 									name="username" placeholder="Username" />
@@ -43,18 +44,19 @@
 									name="password" placeholder="Password" />
 							</div>
 							<div class="form-group">
-								<button class="btn btn-round btn-p">Login</button>
+								<button class="btn btn-round btn-p">Login</button>	
 							</div>
 							<div class="form-group">
 								<a href=""><i class="fa-solid fa-circle-xmark"></i> Forgot
 									Password?</a>
 							</div>
+							<a href="<%=request.getContextPath()%>/oauth2/authorization/google" onclick="onSignIn">Google</a>
 						</form>
 					</div>
 					<div class="col-sm-5">
-						<h4 class=" h4-p">Register</h4>
+						<h4 class=" h4-p">註冊</h4>
 						<hr class="divider-w mb-10">
-						<form class="form">
+						<form class="form" >
 							<div class="form-group">
 								<input class="form-control" id="E-mail" type="text" name="email"
 									placeholder="Email" />

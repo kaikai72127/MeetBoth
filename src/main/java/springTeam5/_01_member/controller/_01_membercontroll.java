@@ -15,7 +15,6 @@ import javax.sql.rowset.serial.SerialBlob;
 import javax.sql.rowset.serial.SerialException;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -38,14 +37,14 @@ public class _01_membercontroll {
 	private MemberService ms;
 	
 	
-
+	
 //	網址反應器
 //	@RequestMapping(path = "/html/_01_member/admin",method = RequestMethod.GET)
 //	public String memberAdmin() {
 //		return "_01_member/admin";
 //	}
 	
-					/*這邊用Spring Security替代*/
+//	這邊用Spring Security替代
 ////	登入
 //	@GetMapping(path = "/_01_member.Login.controller")
 //	public String Login() {
@@ -110,11 +109,9 @@ public class _01_membercontroll {
 //			role = member.getRole();
 //		}
 		return role;
-	}
-	
+	}	
 	
 //	查詢類controll
-	@PreAuthorize("hasRole('admin')")
 	@GetMapping("/_01_member.admin.controller")
 	public String admin(Model m) {
 		List<MemberBean> all = ms.searchAllMember();
@@ -195,7 +192,6 @@ public class _01_membercontroll {
 		InputStream is = null;
 		String encodePwd = new BCryptPasswordEncoder().encode(member.getPassword());
 		newMember.setPassword(encodePwd);
-		newMember.setMemberID(0);
 		if (ms.searchMemByAccount(member.getAccount()).size() == 0) {
 			fileName = mf.getOriginalFilename();
 			if (fileName != null && fileName.trim().length() > 0) {
@@ -217,9 +213,9 @@ public class _01_membercontroll {
 //	修改
 	@PostMapping(path = "/_01_member.preupdate.controller")
 	public String preupdate(@RequestParam("preupdate") int memberID, Model m) {
-		List<MemberBean> data = ms.searchMemByID(memberID);
-//		List<MemberBean> list = data.stream().collect(Collectors.toList());
-		m.addAttribute("Member", data);
+		Optional<MemberBean> data = ms.searchMemByID(memberID);
+		List<MemberBean> list = data.stream().collect(Collectors.toList());
+		m.addAttribute("Member", list);
 		return "_01_member/memberupdate";
 	}
 	
@@ -233,7 +229,7 @@ public class _01_membercontroll {
 		if (list.size() != 0) {
 			MemberBean check = list.get(0);
 			newMem.setMemberID(check.getMemberID());
-			newMem.setAccount(check.getAccount());
+			newMem.setAccount(member.getAccount());
 			newMem.setPassword(new BCryptPasswordEncoder().encode(member.getPassword()));
 			newMem.setIdNumber(member.getIdNumber());
 			newMem.setMemName(member.getMemName());
@@ -245,10 +241,9 @@ public class _01_membercontroll {
 			newMem.setPhone(member.getPhone());
 			newMem.setPhoto(check.getPhoto());
 			newMem.setAddress(member.getAddress());
-			newMem.setRole(check.getRole());
-			System.out.println(newMem.toString());
 			fileName = mf.getOriginalFilename();
 			if (fileName != null && fileName != "" && fileName.trim().length() > 0) {
+				System.out.println("這有圖?"+fileName);
 				long size = mf.getSize();
 				InputStream is = mf.getInputStream();
 				byte[] b = new byte[(int) size];
@@ -258,6 +253,7 @@ public class _01_membercontroll {
 				newMem.setPhoto(sb);
 				ms.update(newMem);
 			}else {
+				System.out.println("這沒圖?"+fileName);
 				ms.update(newMem);
 			}
 		}
@@ -266,8 +262,8 @@ public class _01_membercontroll {
 	
 //	刪除
 	@PostMapping(path = "/_01_member.delete.controller")
-	public String delete(@RequestParam("delete") String account) {
-		ms.delete(account);
+	public String delete(@RequestParam("delete") int memberID) {
+		ms.delete(memberID);
 		return "redirect:/_01_member.admin.controller";
 	}
 	

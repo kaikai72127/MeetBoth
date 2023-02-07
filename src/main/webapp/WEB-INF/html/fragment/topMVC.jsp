@@ -253,7 +253,7 @@ System.out.println(baseMeetboth96x96);
 				</li>
 
 				<!--Navbar橫幅 Login會員登入 -->
-				<li class="nav-item dropdown"><a href="<c:url value='./login.jsp' />"
+				<li class="nav-item dropdown"><a href="<%=request.getContextPath()%>/login/page"
 					class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
 						<img class="rounded-circle me-lg-2"
 						src="assets/images/favicon.png" alt=""

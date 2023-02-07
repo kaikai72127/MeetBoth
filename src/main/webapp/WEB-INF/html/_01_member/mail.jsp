@@ -11,7 +11,7 @@
 </head>
 
 <body>
-    <form action="/mailVerify.controller" method="post">
+    <form action="<%=request.getContextPath()%>/mailVerify.controller" method="post">
         <input type="text" name="value" value='${value}'>
         <input type="submit" value="驗證">
     </form>

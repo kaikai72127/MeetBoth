@@ -4,21 +4,15 @@ import java.io.Serializable;
 import java.sql.Blob;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.validation.constraints.Email;
 
 import org.springframework.stereotype.Component;
-
-import springTeam5._05_teacStu.model.StudBean;
-import springTeam5._05_teacStu.model.TeacBean;
 
 
 
@@ -28,21 +22,12 @@ import springTeam5._05_teacStu.model.TeacBean;
 public class MemberBean implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-	
-//	範本
-//	@OneToMany(mappedBy = "MemberBean")
-//	private List<> ;
-	
-//	@OneToMany(mappedBy = "MemberBean")
-//	private List<StudBean> stud;
-	
-//	@OneToMany(mappedBy = "MemberBean")
-//	private List<TeacBean> teac;
-	
-	@Column(name = "memberID", updatable = false)
+
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "memberID")
 	private int memberID;
 	
-	@Id
 	@Column(name = "account")
 	private String account = "";
 		
@@ -84,6 +69,14 @@ public class MemberBean implements Serializable {
 	
 	@Column(name = "role")
 	private String role = "user";
+	
+	public String getRole() {
+		return role;
+	}
+
+	public void setRole(String role) {
+		this.role = role;
+	}
 	
 	public MemberBean() {
 	}
@@ -251,14 +244,6 @@ public class MemberBean implements Serializable {
 
 	public void setRegistime(Date date) {
 		this.registime = date;
-	}
-
-	public String getRole() {
-		return role;
-	}
-
-	public void setRole(String role) {
-		this.role = role;
 	}
 
 	@Override

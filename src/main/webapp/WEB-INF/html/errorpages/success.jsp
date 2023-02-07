@@ -4,9 +4,9 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>GoogleAuth Test</title>
+<title>Insert title here</title>
 </head>
 <body>
-這裡測試頁的啦
+驗證成功
 </body>
 </html>

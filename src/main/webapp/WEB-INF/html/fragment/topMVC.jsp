@@ -248,7 +248,7 @@ System.out.println(baseMeetboth96x96);
 				<li>
 					<!-- 購物車 --> <a href="index-shopcheckout.html" class="btn border">
 						<i class="fas fa-shopping-cart text-primary"></i> <span
-						class="badge">0</span>
+						class="badge" id="cartCount">0</span>
 				</a>
 				</li>
 

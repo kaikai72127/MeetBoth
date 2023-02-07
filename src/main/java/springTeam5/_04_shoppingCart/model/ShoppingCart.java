@@ -46,7 +46,7 @@ public class ShoppingCart {
 		}
 	}
 
-	// 刪除購物車某筆商品
+	// 刪除購物車某筆商品 >>>判斷是否要移除這個item
 	public int deleteProduct(int prodId) {
 		if (cart.get(prodId) != null) {
 			cart.remove(prodId); // Map介面的remove()方法
@@ -67,6 +67,10 @@ public class ShoppingCart {
 
 	}
 	
+	public int getItemNumber(){   // ShoppingCart.itemNumber
+		return cart.size();
+	}
+	
 	// 取得購物車內商品的總數量(用於顯示商品數量)
 	public int showShoppingCartItem() {
 		int qty = 0;
@@ -83,7 +87,7 @@ public class ShoppingCart {
 		Set<Integer> set = cart.keySet();
 		for (int n : set) {
 			OrderItemBean orderItemBean = cart.get(n);
-			Integer price = orderItemBean.getProduct().getProdPrice();
+			Integer price = orderItemBean.getProditem().getProdPrice();
 			int qty = orderItemBean.getQty();
 			shoppingCartTotal += price * qty;
 		}

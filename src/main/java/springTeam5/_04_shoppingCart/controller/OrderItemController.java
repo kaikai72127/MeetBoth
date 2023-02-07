@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -161,12 +162,24 @@ public class OrderItemController {
 
 // 查詢------
 	// 搜尋某筆訂單全部ITEM-跳轉到CRUD的頁面
-	@RequestMapping(path = "/shoppingCart.SelectOrderAllItem.controller/{orderNo}", method = RequestMethod.GET)
-	public String processSelectAllAcction(
-			@PathVariable("orderNo") Integer orderNo,Model odModel) {
-		List<OrderItemBean> classList = orderItemService.findByOrderno(orderNo);
-		odModel.addAttribute("classList", classList);
-		return "_04_shoppingCart/ordersItemCRUD";
-	}
+//	@RequestMapping(path = "/shoppingCart.SelectOrderAllItem.controller/{orderNo}", method = RequestMethod.GET)
+//	public String processSelectAllAcction(
+//			@PathVariable("orderNo") Integer orderNo,Model odModel) {
+//		List<OrderItemBean> classList = orderItemService.findByOrderno(orderNo);
+//		odModel.addAttribute("classList", classList);
+//		return "_04_shoppingCart/ordersItemCRUD";
+//	}
+	
+	
+	// 查詢------
+		// 搜尋某筆訂單全部ITEM-跳轉到CRUD的頁面
+		@RequestMapping(path = "/shoppingCart.SelectOrderAllItem.controller/{orderNo}", method = RequestMethod.GET)
+		public String processSelectAllItemAcction(
+				@PathVariable("orderNo") Integer orderNo,Model odModel,@ModelAttribute("OrderBean") OrderBean od) {
+			List<OrderItemBean> classList = orderItemService.findByOrderno(orderNo);
+			System.out.println("開始找");
+			odModel.addAttribute("classList", classList);
+			return "_04_shoppingCart/ordersItemCRUD";
+		}
 
 }

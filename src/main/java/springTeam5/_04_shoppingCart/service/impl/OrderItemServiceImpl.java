@@ -34,8 +34,9 @@ public class OrderItemServiceImpl implements OrderItemService {
 		return sdf.format(date);
 	}
 
-//	新增一筆訂單 沒有折扣
+//	新增一筆訂單明細 沒有折扣
 	public OrderItemBean insertOItem(OrderItemBean oItemBean) {
+		
 		return orderItemRepo.save(oItemBean);
 	}
 

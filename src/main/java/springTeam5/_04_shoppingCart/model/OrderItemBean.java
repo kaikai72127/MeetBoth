@@ -35,9 +35,9 @@ public class OrderItemBean {
 	private Integer orderNo; 
 	
 	@ManyToOne
-	@JoinColumn(name = "product")
-	private Product product;// 商品編號
-	@Column(name = "PRODUTID_FK")
+	@JoinColumn(name = "PRODUTID_FK")
+	private Product proditem;// 商品編號
+	@Column(name = "PRODID")
 	@Transient
 	private Integer prodId; 
 
@@ -48,25 +48,25 @@ public class OrderItemBean {
 	private Integer itemTotal; // 總金額
 
 	// 新增有ID
-	public OrderItemBean(Integer seqno,OrderBean orderbean, Integer orderNo,  Product product, Integer prodId,
+	public OrderItemBean(Integer seqno,OrderBean orderbean, Integer orderNo,  Product proditem, Integer prodId,
 			Integer qty, Integer itemTotal) {
 		super();
 		this.orderbean = orderbean;
 		this.orderNo = orderNo;
 		this.seqno = seqno;
-		this.product = product;
+		this.proditem = proditem;
 		this.prodId = prodId;
 		this.qty = qty;
 		this.itemTotal = itemTotal;
 	}
 
 	// 修改沒有ID
-	public OrderItemBean(OrderBean orderbean, Integer orderNo, Product product, Integer prodId, Integer qty,
+	public OrderItemBean(OrderBean orderbean, Integer orderNo, Product proditem, Integer prodId, Integer qty,
 			Integer itemTotal) {
 		super();
 		this.orderbean = orderbean;
 		this.orderNo = orderNo;
-		this.product = product;
+		this.proditem = proditem;
 		this.prodId = prodId;
 		this.qty = qty;
 		this.itemTotal = itemTotal;
@@ -74,7 +74,15 @@ public class OrderItemBean {
 	
 	public OrderItemBean() {
 		
-	};
+	}
+
+	public Integer getSeqno() {
+		return seqno;
+	}
+
+	public void setSeqno(Integer seqno) {
+		this.seqno = seqno;
+	}
 
 	public OrderBean getOrderbean() {
 		return orderbean;
@@ -92,20 +100,12 @@ public class OrderItemBean {
 		this.orderNo = orderNo;
 	}
 
-	public Integer getSeqno() {
-		return seqno;
+	public Product getProditem() {
+		return proditem;
 	}
 
-	public void setSeqno(Integer seqno) {
-		this.seqno = seqno;
-	}
-
-	public Product getProduct() {
-		return product;
-	}
-
-	public void setProduct(Product product) {
-		this.product = product;
+	public void setProditem(Product proditem) {
+		this.proditem = proditem;
 	}
 
 	public Integer getProdId() {
@@ -130,6 +130,8 @@ public class OrderItemBean {
 
 	public void setItemTotal(Integer itemTotal) {
 		this.itemTotal = itemTotal;
-	}
+	};
+
+
 
 }

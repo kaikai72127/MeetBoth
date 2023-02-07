@@ -44,13 +44,16 @@ public class OrderCheck {
 		HttpSession session = request.getSession(false);
 		
 		//先判斷會員是否有登入 沒有登入則導入登入會員的頁面
-		
+		//不需要判斷----// 
+		if (session == null) {      // 使用逾時 導回家教網的首頁
+			return "index.controller";
+		}
 		//會員有登入
 		ShoppingCart shoppingCart = (ShoppingCart) session.getAttribute("ShoppingCart");
 		if (shoppingCart == null) {
 			// 處理訂單時如果找不到購物車(通常是Session逾時)，沒有必要往下執行
-			// 導向首頁
-			return "t6_21/front_index";
+			// 導向商品搜尋的首頁
+			return "redirect:/_03_product.searchAllProduct.controller";
 		}
 		
 		

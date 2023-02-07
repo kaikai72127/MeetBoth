@@ -6,6 +6,8 @@ import java.sql.SQLException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.lang.Nullable;
 import org.springframework.stereotype.Controller;
@@ -25,61 +27,70 @@ import springTeam5._04_shoppingCart.model.ShoppingCart;
 @Controller
 @SessionAttributes(names = { "ShoppingCart" })
 public class ShoppingCartController {
+	
+	private static Logger log = LoggerFactory.getLogger(ShoppingCartController.class);
 
 	@Autowired
 	private ProductService productService;
 
 	// Product加入購物車
-	@PostMapping("/shoppingCartAdd.controller")
-	public String processAction(@RequestParam("prodId") int prodId, @RequestParam("qty") @Nullable Integer qty, Model m,
+	@PostMapping("/addToshoppingCart.controller")
+	public String processAction(@RequestParam("prodID") int prodID, @RequestParam("qty") @Nullable Integer qty, Model m,
 			HttpServletRequest request) throws IOException, SQLException {
+		
+		//查看是否存在session 並建立一個新的session
 		HttpSession session = request.getSession(false);
-		ShoppingCart cart = (ShoppingCart) session.getAttribute("ShoppingCart");
+		ShoppingCart cart = (ShoppingCart)session.getAttribute("ShoppingCart");
 		if (cart == null) {
-			// 就新建ShoppingCart物件
+			// 就新建ShoppingCart購物車物件
+			//shoppingCart內就有建立HashMap
 			cart = new ShoppingCart();
-			// 並將此新建ShoppingCart的物件放到session物件內，成為它的屬性物件
-			session.setAttribute("ShoppingCart", cart); // ${ShoppingCart.subtotal}
+			// 並將此新建ShoppingCart的物件放到ShoppingCart session物件內，成為它的屬性物件
+			session.setAttribute("ShoppingCart", cart);
 		}
 
-		Product product = productService.searchSingleProductFromProdID(prodId);
+		Product product = productService.searchSingleProductFromProdID(prodID);
 		OrderItemBean ordetItemBean = new OrderItemBean();
-		ordetItemBean.setProdId(prodId);
+		ordetItemBean.setProdId(prodID);
 		ordetItemBean.setQty(qty);
-		ordetItemBean.setItemTotal(qty*product.getProdPrice());
+		ordetItemBean.setItemTotal(qty * product.getProdPrice());
 
-		//產品編號對應細項
-		cart.addToCart(prodId, ordetItemBean);
+		// 產品編號對應細項
+		cart.addToCart(prodID, ordetItemBean);
 
-		System.out.println(cart.getShoppingCart());
+		System.out.println("確認將產品細項加入了購物車"+cart.getShoppingCart());
 		m.addAttribute("bean", product);
-		return "\"redirect:_03_product.PathToProductDetail.controller?id=" + prodId;
+		return "redirect:/_03_product.PathToProductDetail.controller?id=" + prodID;
 
 	}
 
-	// 課程列表的加入購物車
+	//點加入購物車使用
 	@GetMapping("/shoppingCartAddOnly.controller/{prodId}")
-	public void processAction2(@PathVariable("prodId") int prodId, Integer qty, Model m, HttpServletRequest request)
+	public String processAction2(@PathVariable("prodId") int prodID, Integer qty, Model m, HttpServletRequest request)
 			throws IOException, SQLException {
 		HttpSession session = request.getSession(false);
 		ShoppingCart cart = (ShoppingCart) session.getAttribute("ShoppingCart");
+	
 		if (cart == null) {
 			// 就新建ShoppingCart物件
 			cart = new ShoppingCart();
-//				log.info("加入購物車之Controller: 新建ShoppingCart物件");
+				log.info("加入購物車之Controller: 新建ShoppingCart物件");
 			// 並將此新建ShoppingCart的物件放到session物件內，成為它的屬性物件
 			session.setAttribute("ShoppingCart", cart); // ${ShoppingCart.subtotal}
 		}
 
-		qty = 1;
-		Product product = productService.searchSingleProductFromProdID(prodId);
-		OrderItemBean ordetItemBean = new OrderItemBean();
+		
+		// 將明細資料(價格，數量，折扣與BookBean)封裝到OrderItemBean物件內
+		Product product = productService.searchSingleProductFromProdID(prodID);
+		OrderItemBean ordetItemBean = new OrderItemBean(null,null,null,product,prodID,qty,qty*product.getProdPrice());
+		// 將OrderItem物件內加入ShoppingCart的物件內
+		cart.addToCart(prodID, ordetItemBean);
 
-		cart.addToCart(prodId, ordetItemBean);
-
-		System.out.println(cart.getShoppingCart());
+		System.out.println("我有加到購物車"+cart.getShoppingCart());
+		return "redirect:/_03_product.PathToProductDetail.controller?id=" + prodID;
 	}
 
+	//查看我的購物車頁面
 	@GetMapping("/shoppingcart.controller")
 	public String processMainAction(HttpServletRequest request) {
 		HttpSession session = request.getSession(false);
@@ -89,10 +100,11 @@ public class ShoppingCartController {
 			// 跳轉回空的購物車頁面
 			return "";
 		}
-		// 跳轉購物車頁面
-		return "_04_shoppingCart/shoopingCart";
+		// 跳轉到有購物車的頁面
+		return "_04_shoppingCart/shoppingCart";
 	}
 
+	//移除一個item
 	@GetMapping("/deleteshoppingitem.controller/{prodId}")
 	public String deleleshoppingitem(@PathVariable("prodId") int prodId, HttpServletRequest request) {
 		HttpSession session = null;
@@ -103,21 +115,22 @@ public class ShoppingCartController {
 		if (shoppingCart == null) {
 			return "redirect:/_03_product.searchAllProduct.controller";
 		}
-		// 刪除購物車內的商品 跳轉回
+		// 刪除購物車內的商品 跳轉回查看我的購物車Controller
 		shoppingCart.deleteProduct(prodId);
 		return "redirect:/shoppingcart.controller";
 	}
 
-	// 放棄購買任何產品 清空購物車
+	// 放棄購買任何產品 清空購物車 abandonShopping
 	@GetMapping("/abandonshopping.controller")
 	public String abandonShopping(HttpServletRequest request, SessionStatus sessionStatus) {
 		HttpSession session = request.getSession(false);
 		ShoppingCart shoppingCart = (ShoppingCart) session.getAttribute("ShoppingCart");
 		if (shoppingCart != null) {
+			//由session物件中移除ShoppingCart物件
+			log.info("放棄購物之Controller: 清空位於Session物件內的購物車物件");
 			session.removeAttribute("ShoppingCart");
 			sessionStatus.setComplete();
 		}
-
 		// 放棄購物會跳轉回找所有商品的頁面
 		return "redirect:/_03_product.searchAllProduct.controller";
 	}

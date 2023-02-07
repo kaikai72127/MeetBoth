@@ -2,7 +2,8 @@
 	pageEncoding="UTF-8"%>
 
  <!-- Footer -->
-    <footer class="footer bg-f4f7f7" style="position: fixed; bottom: 0; width: 100%;">
+    <footer class="footer bg-f4f7f7">
+<!--     style="position: fixed; bottom: 0; width: 100% -->
       <div class=" bg-f4f7f7">
         <div class="container">
           <h3 style="text-align: center;">本專題僅供資展國際期末專題使用，不得使用於任何商業用途，如有侵權敬請告知

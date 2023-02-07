@@ -55,9 +55,9 @@ public class OrderBean {
 	private String shippingPhone; // 收件人電話
 	@Column(name = "SHIPPING_ADDRESS")
 	private String shippingAddress; // 收件地址
-	@Column(name = "ORDSTSTUS")
 	
 	//狀態
+	@Column(name = "ORDSTSTUS")
 	private String ordStstus ="處理中"; // 訂單狀態 處理中(預設)/備貨中/已完成/取消
 	@Column(name = "PAYMENTSTSTUS")
 	private String paymentStstus = "未付款"; // 付款狀態 未付款(預設)/已付款/退款中/已退款
@@ -138,146 +138,113 @@ public class OrderBean {
 	public Integer getOrderNo() {
 		return orderNo;
 	}
-
+	public MemberBean getMemberbuy() {
+		return memberbuy;
+	}
+	public void setMemberbuy(MemberBean memberbuy) {
+		this.memberbuy = memberbuy;
+	}
+	public Integer getMemberBuyId() {
+		return memberBuyId;
+	}
+	public void setMemberBuyId(Integer memberBuyId) {
+		this.memberBuyId = memberBuyId;
+	}
+	public MemberBean getMembersale() {
+		return membersale;
+	}
+	public void setMembersale(MemberBean membersale) {
+		this.membersale = membersale;
+	}
+	public Integer getMemberSaleId() {
+		return memberSaleId;
+	}
+	public void setMemberSaleId(Integer memberSaleId) {
+		this.memberSaleId = memberSaleId;
+	}
+	public String getOrderDate() {
+		return orderDate;
+	}
+	public void setOrderDate(String orderDate) {
+		this.orderDate = orderDate;
+	}
+	public String getUporderDate() {
+		return uporderDate;
+	}
+	public void setUporderDate(String uporderDate) {
+		this.uporderDate = uporderDate;
+	}
+	public String getShippingName() {
+		return shippingName;
+	}
+	public void setShippingName(String shippingName) {
+		this.shippingName = shippingName;
+	}
+	public String getShippingPhone() {
+		return shippingPhone;
+	}
+	public void setShippingPhone(String shippingPhone) {
+		this.shippingPhone = shippingPhone;
+	}
+	public String getShippingAddress() {
+		return shippingAddress;
+	}
+	public void setShippingAddress(String shippingAddress) {
+		this.shippingAddress = shippingAddress;
+	}
+	public String getOrdStstus() {
+		return ordStstus;
+	}
+	public void setOrdStstus(String ordStstus) {
+		this.ordStstus = ordStstus;
+	}
+	public String getPaymentStstus() {
+		return paymentStstus;
+	}
+	public void setPaymentStstus(String paymentStstus) {
+		this.paymentStstus = paymentStstus;
+	}
+	public String getDeliveryStstus() {
+		return deliveryStstus;
+	}
+	public void setDeliveryStstus(String deliveryStstus) {
+		this.deliveryStstus = deliveryStstus;
+	}
+	public String getPaymentMethod() {
+		return paymentMethod;
+	}
+	public void setPaymentMethod(String paymentMethod) {
+		this.paymentMethod = paymentMethod;
+	}
+	public Discount getDiscount() {
+		return discount;
+	}
+	public void setDiscount(Discount discount) {
+		this.discount = discount;
+	}
+	public Integer getDiscountId() {
+		return discountId;
+	}
+	public void setDiscountId(Integer discountId) {
+		this.discountId = discountId;
+	}
+	public Integer getTotalAmount() {
+		return totalAmount;
+	}
+	public void setTotalAmount(Integer totalAmount) {
+		this.totalAmount = totalAmount;
+	}
+	public Set<OrderItemBean> getItems() {
+		return items;
+	}
+	public void setItems(Set<OrderItemBean> items) {
+		this.items = items;
+	}
 	public void setOrderNo(Integer orderNo) {
 		this.orderNo = orderNo;
 	}
 
-	public MemberBean getMemberbuy() {
-		return memberbuy;
-	}
-
-	public void setMemberbuy(MemberBean memberbuy) {
-		this.memberbuy = memberbuy;
-	}
-
-	public Integer getMemberBuyId() {
-		return memberBuyId;
-	}
-
-	public void setMemberBuyId(Integer memberBuyId) {
-		this.memberBuyId = memberBuyId;
-	}
-
-	public MemberBean getMembersale() {
-		return membersale;
-	}
-
-	public void setMembersale(MemberBean membersale) {
-		this.membersale = membersale;
-	}
-
-	public Integer getMemberSaleId() {
-		return memberSaleId;
-	}
-
-	public void setMemberSaleId(Integer memberSaleId) {
-		this.memberSaleId = memberSaleId;
-	}
-
-	public String getOrderDate() {
-		return orderDate;
-	}
-
-	public void setOrderDate(String orderDate) {
-		this.orderDate = orderDate;
-	}
-
-	public String getUporderDate() {
-		return uporderDate;
-	}
-
-	public void setUporderDate(String uporderDate) {
-		this.uporderDate = uporderDate;
-	}
-
-	public String getShippingName() {
-		return shippingName;
-	}
-
-	public void setShippingName(String shippingName) {
-		this.shippingName = shippingName;
-	}
-
-	public String getShippingPhone() {
-		return shippingPhone;
-	}
-
-	public void setShippingPhone(String shippingPhone) {
-		this.shippingPhone = shippingPhone;
-	}
-
-	public String getShippingAddress() {
-		return shippingAddress;
-	}
-
-	public void setShippingAddress(String shoppingAddress) {
-		this.shippingAddress = shoppingAddress;
-	}
-
-	public String getOrdStstus() {
-		return ordStstus;
-	}
-
-	public void setOrdStstus(String ordStstus) {
-		this.ordStstus = ordStstus;
-	}
-
-	public String getPaymentStstus() {
-		return paymentStstus;
-	}
-
-	public void setPaymentStstus(String paymentStstus) {
-		this.paymentStstus = paymentStstus;
-	}
-
-	public String getDeliveryStstus() {
-		return deliveryStstus;
-	}
-
-	public void setDeliveryStstus(String deliveryStstus) {
-		this.deliveryStstus = deliveryStstus;
-	}
-
-	public String getPaymentMethod() {
-		return paymentMethod;
-	}
-
-	public void setPaymentMethod(String paymentMethod) {
-		this.paymentMethod = paymentMethod;
-	}
-
-	public Discount getDiscount() {
-		return discount;
-	}
-
-	public void setDiscount(Discount discount) {
-		this.discount = discount;
-	}
-
-	public Integer getDiscountId() {
-		return discountId;
-	}
-
-	public void setDiscountId(Integer discountId) {
-		this.discountId = discountId;
-	}
-
-	public Integer getTotalAmount() {
-		return totalAmount;
-	}
-
-	public void setTotalAmount(Integer totalAmount) {
-		this.totalAmount = totalAmount;
-	}
-
-	public Set<OrderItemBean> getItems() {
-		return items;
-	}
-
-	public void setItems(Set<OrderItemBean> items) {
-		this.items = items;
-	}
+	
 
 	
 

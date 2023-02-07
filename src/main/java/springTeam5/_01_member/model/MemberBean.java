@@ -4,15 +4,22 @@ import java.io.Serializable;
 import java.sql.Blob;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.LinkedHashSet;
+import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import org.springframework.stereotype.Component;
+
+import springTeam5._04_shoppingCart.model.OrderBean;
 
 
 
@@ -66,6 +73,13 @@ public class MemberBean implements Serializable {
 		
 	@Column(name = "registime")
 	private Date registime = new Date();
+	
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "memberbuy",cascade = CascadeType.ALL)
+	private Set<OrderBean> orderBuy = new LinkedHashSet<OrderBean>(); // itemsList
+	
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "membersale",cascade = CascadeType.ALL)
+	private Set<OrderBean> orderSale = new LinkedHashSet<OrderBean>(); // itemsList
+	
 	
 	public MemberBean() {
 	}
@@ -234,6 +248,25 @@ public class MemberBean implements Serializable {
 	public void setRegistime(Date date) {
 		this.registime = date;
 	}
+	
+	
+	
+
+	public Set<OrderBean> getOrderBuy() {
+		return orderBuy;
+	}
+
+	public void setOrderBuy(Set<OrderBean> orderBuy) {
+		this.orderBuy = orderBuy;
+	}
+
+	public Set<OrderBean> getOrderSale() {
+		return orderSale;
+	}
+
+	public void setOrderSale(Set<OrderBean> orderSale) {
+		this.orderSale = orderSale;
+	}
 
 	@Override
 	public String toString() {
@@ -242,5 +275,7 @@ public class MemberBean implements Serializable {
 				+ ", memBirth=" + memBirth + ", memGender=" + memGender + ", eMail=" + eMail + ", phone=" + phone
 				+ ", address=" + address + ", registime=" + new SimpleDateFormat("YYYY/MM/dd").format(registime) + "]";
 	}
+	
+	
 
 }

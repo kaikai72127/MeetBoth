@@ -39,12 +39,12 @@
 							<tbody>
 								<tr>
 									<td><div id="photo">
-											<img id="img"
-												src="<c:url value='/_03_product.showPicture.controller?id=${bean.product.prodID}' />">
+											<img id="preImg" style="width: 100px; height: 100px"
+												src="<c:url value='/_03_product.showPicture.controller?id=${bean.proditem.prodID}' />" />
 										</div></td>
-									<td>${bean.product.prodName}</td>
+									<td>${bean.proditem.prodName}</td>
 									<td>${bean.qty}</td>
-									<td>${bean.product.prodPrice}</td>
+									<td>${bean.proditem.prodPrice}</td>
 									<td>${bean.itemTotal}</td>
 									<td><form method="post"
 											action="<c:url value='/_04_shoppingCart.UpdateOrderItemMain.controller' />">

@@ -265,23 +265,28 @@ String basePathimg4 = request.getScheme() + "://" + request.getServerName() + ":
 								<div id="prod_info">
 									<Strong>商品上次資訊更新日期 : ${bean.prodUpdate}</Strong>
 								</div>
-								<div id="prod_chooseAmount">
-									<Strong> 選擇數量 : <input type="number"
-										name="chooseAmount" value="0" id="amount"
-										onkeyup="value=value.replace(/[^\d]/g,'') "
-										onchange="calToCost(${bean.prodPrice},${bean.inventory})">
-									</Strong>
-								</div>
-								<div id="prod_info">
-									<Strong> 購買金額 : <input type="number" id="Cost"
-										value="0" readonly>
-									</Strong>
-								</div>
-								<div id="prod_info">
-									<p align="right">
-										<input type="button" value="加到購物車" style="background: white;">
-									</p>
-								</div>
+								<form action="<c:url value='/shoppingCartAddOnly.controller/${bean.prodId}' />" 
+                            method="POST">
+
+									<div id="prod_chooseAmount">
+										<Strong> 選擇數量 : <input type="number"
+											name="chooseAmount" value="0" id="amount"
+											onkeyup="value=value.replace(/[^\d]/g,'') "
+											onchange="calToCost(${bean.prodPrice},${bean.inventory})">
+										</Strong>
+									</div>
+									<div id="prod_info">
+										<Strong> 購買金額 : <input type="number" id="Cost"
+											value="0" readonly>
+										</Strong>
+									</div>
+									<div id="prod_info">
+										<p align="right">
+											<input type='submit' id="addToCartBtn" type="button"
+												value="加到購物車" style="background: white;">
+										</p>
+									</div>
+								</form>
 							</div>
 						</div>
 						<div id="middle_div">

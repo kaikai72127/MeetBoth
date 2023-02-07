@@ -110,8 +110,6 @@ public class Discount {
 		this.discountEnd = discountEnd;
 	}
 	
-	
-	
 	public Set<OrderBean> getOrders() {
 		return Orders;
 	}

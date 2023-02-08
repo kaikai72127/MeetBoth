@@ -217,6 +217,14 @@ public class _01_membercontroll {
 	}
 	
 //	修改
+	@PostMapping(path = "_01_member/oathupdate")
+	public String preOath(HttpServletRequest request, Model m) {
+		String account = (String)request.getAttribute("account");
+		List<MemberBean> list = ms.searchMemByAccount(account);
+		m.addAttribute("Member", list);
+		return "_01_member/memberupdate";
+	}
+	
 	@PostMapping(path = "/_01_member.preupdate.controller")
 	public String preupdate(@RequestParam("preupdate") int memberID, Model m) {
 		Optional<MemberBean> data = ms.searchMemByID(memberID);

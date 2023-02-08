@@ -18,8 +18,8 @@ public class IndexController {
 	
 	@GetMapping("/index.controller")
 	public String processMainAction(Model m) {
-		List<TeacBean> teac = tService.searchAllTeac();
-		m.addAttribute("classList", teac);
+		List<TeacBean> teac = tService.findFirst6ByOrderByUpdateDateDesc();
+		m.addAttribute("teac", teac);
 		return "index";
 	}
 

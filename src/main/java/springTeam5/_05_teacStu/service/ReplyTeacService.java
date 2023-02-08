@@ -1,5 +1,7 @@
 package springTeam5._05_teacStu.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -16,14 +18,14 @@ public class ReplyTeacService implements ReplyTeacServiceInterface {
 	
 //	透過回覆編號建立教師貼文回覆查詢
 	@Override
-	public ReplyTeac findByReplyNo(Integer replyNo) {
-		return rtRepo.findByReplyNo(replyNo);
+	public List<ReplyTeac> findByTeacherTeacno(Integer teacno) {
+		return rtRepo.findByTeacherTeacno(teacno);
 	}
 	
 //	刪除教師貼文回覆
 	@Override
-	public void deleteByReplyNo(Integer replyNo) {
-		rtRepo.deleteByReplyNo(replyNo);
+	public void deleteByTeacherTeacno(Integer teacno) {
+		rtRepo.deleteByTeacherTeacno(teacno);
 	}
 	
 //	新增教師貼文回覆

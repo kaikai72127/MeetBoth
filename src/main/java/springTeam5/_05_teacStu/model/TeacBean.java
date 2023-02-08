@@ -8,10 +8,14 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import org.springframework.stereotype.Component;
+
+import springTeam5._01_member.model.MemberBean;
 
 @Entity
 @Table(name = "teacher")
@@ -21,8 +25,6 @@ public class TeacBean {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "TEACNO")
 	private Integer teacno;
-	@Column(name = "MEMBERID")
-	private Integer memberId;
 	@Column(name = "UPDATEDATE")
 	private String updateDate;
 	@Column(name = "HIGHEDU")
@@ -57,16 +59,18 @@ public class TeacBean {
 	private Integer views;
 	@OneToMany(mappedBy = "teacher")
 	private List<ReplyTeac> replyTeacs = new ArrayList<>();
+	@ManyToOne
+	@JoinColumn(name = "MEMBERID")
+	private MemberBean member;
 	
 	public TeacBean() {
 	}
 
-	public TeacBean(Integer teacno, Integer memberId, String updateDate, String highEdu, String studExp, String tutorExp,
-			String teacLoc, String teacObject, String classMode, String willTeac, String teacTime, String skills,
-			String conMethod, String conTime, Double price, String subjectItem, String lanAbility, Integer views,
-			List<ReplyTeac> replyTeacs) {
+	public TeacBean(Integer teacno, String updateDate, String highEdu, String studExp,
+			String tutorExp, String teacLoc, String teacObject, String classMode, String willTeac, String teacTime,
+			String skills, String conMethod, String conTime, Double price, String subjectItem, String lanAbility,
+			Integer views, List<ReplyTeac> replyTeacs, MemberBean member) {
 		this.teacno = teacno;
-		this.memberId = memberId;
 		this.updateDate = updateDate;
 		this.highEdu = highEdu;
 		this.studExp = studExp;
@@ -84,6 +88,7 @@ public class TeacBean {
 		this.lanAbility = lanAbility;
 		this.views = views;
 		this.replyTeacs = replyTeacs;
+		this.member = member;
 	}
 
 	public Integer getTeacno() {
@@ -94,13 +99,6 @@ public class TeacBean {
 		this.teacno = teacno;
 	}
 
-	public Integer getMemberId() {
-		return memberId;
-	}
-
-	public void setMemberId(Integer memberId) {
-		this.memberId = memberId;
-	}
 
 	public String getUpdateDate() {
 		return updateDate;
@@ -236,5 +234,13 @@ public class TeacBean {
 
 	public void setReplyTeacs(List<ReplyTeac> replyTeacs) {
 		this.replyTeacs = replyTeacs;
+	}
+
+	public MemberBean getMember() {
+		return member;
+	}
+
+	public void setMember(MemberBean member) {
+		this.member = member;
 	}
 }

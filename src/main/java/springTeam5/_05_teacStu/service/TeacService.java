@@ -46,8 +46,8 @@ public class TeacService implements TeacServiceInterface {
 	
 //	搜尋全部教師貼文依會員編號排序
 	@Override
-	public List<TeacBean> searchAllTeacOBmId() {
-		List<TeacBean> ts = tRepo.findAllByOrderByMemberId();
+	public List<TeacBean> findAllByOrderByViews() {
+		List<TeacBean> ts = tRepo.findAllByOrderByViews();
 		return ts;
 	}
 	
@@ -82,5 +82,11 @@ public class TeacService implements TeacServiceInterface {
 	public TeacBean updateTeacFromTeacno(TeacBean tb) {
 		TeacBean ts = tRepo.save(tb);
 		return ts;
+	}
+	
+//	搜尋最新更新的前6筆貼文
+	@Override
+	public List<TeacBean> findFirst6ByOrderByUpdateDateDesc(){
+		return tRepo.findFirst6ByOrderByUpdateDateDesc();
 	}
 }

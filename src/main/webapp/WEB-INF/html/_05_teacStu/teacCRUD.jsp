@@ -145,7 +145,7 @@ body {
         <div class="list">
         <!-- 模糊搜尋 -->
 			<div style='width:80%; text-align: center; margin: 0 auto;' class="widget">
-              <form role="form" method="post" action="<c:url value='/_05_teacStu.searchAllLike.controller' />">
+              <form role="form" method="post" action="<c:url value='/_05_teacStu.searchAllLike.controller/1' />">
                   <div class="search-box">
                       <input name="search" class="form-control" type="text" placeholder="Search..."/>
                       <button class="search-btn" type="submit"><i class="fa fa-search"></i></button>
@@ -164,18 +164,18 @@ body {
         <!-- 價格區間搜尋與排列方式 -->
         <div>
         	<div>
-			<form method="post" action="<c:url value='/_05_teacStu.switchsequence.controller' />">
+			<form method="post" action="<c:url value='/_05_teacStu.switchsequence.controller/1' />">
 				<select name="case" onchange="this.form.submit()"
 								style="width: 17%">
 								<option value="">--請選擇排序方式--</option>
-								<option value="1">依會員編號排序</option>
+								<option value="1">依瀏覽次數排序</option>
 								<option value="2">依日期排序</option>
 								<option value="3">依價格排序</option>
 				</select>
 			</form>
 			</div>
 			<div>
-			<form method="post" action="<c:url value='/_05_teacStu.searchAllByPrice.controller' />">
+			<form method="post" action="<c:url value='/_05_teacStu.searchAllByPrice.controller/1' />">
 				<table style="width: 80%">
 					<thead>
 						<tr>
@@ -198,14 +198,14 @@ body {
             <a href="<c:url value='/_05_teacStu.teacpostpageMain.controller?teacno=${bean.teacno}'/>">
             <div class="tutor-item">
                 <div class="tutor-avatar">
-                    <img src="https://picsum.photos/200?random=3" alt="">
+                    <img src="<c:url value='/_01_member.ShowPhoto.controller?${bean.member.memberID}' />" alt="">
                 </div>
                 <div class="tutor-detail">
                     <div class="subject-items">
                         ${bean.subjectItem}
                     </div>
                     <div class="tutor-name">
-                        薯來堡 (小薯)
+                        ${bean.member.memName} (${bean.member.memNickName})
                     </div>
                     <div class="detail-table">
                         <div class="detail-item">
@@ -234,19 +234,23 @@ body {
             
             <!-- 分頁按鈕 -->
             <div class="pagination font-alt" style="display:flex; justify-content:center; align-items:center">
-    			<a href="#" onclick="searchAllTeac(1)"><i class="fa fa-angle-left"></i></a>
+            	<c:if test="${currentPage != 1}">
+    				<a href="/MeetBoth/_05_teacStu.searchAllTeac.controller/${currentPage-1}"><i class="fa fa-angle-left"></i></a>
+    			</c:if>
     			<!-- 迴圈生成每一頁的按鈕 -->
     			<c:forEach var="i" begin="1" end="${totalPages}">
        				<c:choose>
             			<c:when test="${currentPage == i}">
-                			<a class="active" href="#" onclick="searchAllTeac(${i})">${i}</a>
+                			<a class="active" href="/MeetBoth/_05_teacStu.searchAllTeac.controller/${i}">${i}</a>
                 		</c:when>
                 		<c:otherwise>
-                			<a href="#" onclick="searchAllTeac(${i})">${i}</a>
+                			<a href="/MeetBoth/_05_teacStu.searchAllTeac.controller/${i}">${i}</a>
                 		</c:otherwise>
                 	</c:choose>
                 </c:forEach>
-    			<a href="#" onclick="searchAllTeac(${totalPages})"><i class="fa fa-angle-right"></i></a>
+                <c:if test="${currentPage != totalPages}">
+    				<a href="/MeetBoth/_05_teacStu.searchAllTeac.controller/${currentPage+1}"><i class="fa fa-angle-right"></i></a>
+    			</c:if>
             </div>
             <!-- 分頁按鈕結束 -->
         </div>
@@ -265,19 +269,6 @@ body {
     -->
 	<!-- 引入共同的js -->
 	<jsp:include page="/WEB-INF/html/fragment/jsPath.jsp" />
-	<script>
-	function searchAllTeac(page) {
-		$.ajax({
-			url: "/_05_teacStu.searchAllTeac.controller",
-			data: { page: page },
-			success: function(result) {
-				$("#teacCRUD").html(result);
-			}
-		});
-	}
-	</script>
-
-
 
 </body>
 </html>

@@ -3,16 +3,21 @@ package springTeam5._01_member.model;
 import java.io.Serializable;
 import java.sql.Blob;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import org.springframework.stereotype.Component;
+
+import springTeam5._05_teacStu.model.TeacBean;
 
 
 
@@ -66,6 +71,9 @@ public class MemberBean implements Serializable {
 		
 	@Column(name = "registime")
 	private Date registime = new Date();
+	
+	@OneToMany(mappedBy = "member")
+	private List<TeacBean> teacBean = new ArrayList<>();
 	
 	public MemberBean() {
 	}
@@ -233,6 +241,14 @@ public class MemberBean implements Serializable {
 
 	public void setRegistime(Date date) {
 		this.registime = date;
+	}
+	
+	public List<TeacBean> getTeacBean() {
+		return teacBean;
+	}
+
+	public void setTeacBean(List<TeacBean> teacBean) {
+		this.teacBean = teacBean;
 	}
 
 	@Override

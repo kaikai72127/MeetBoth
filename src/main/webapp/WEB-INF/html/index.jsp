@@ -163,56 +163,25 @@
                 </div>
                 <h1>最新老師</h1>
                 <div class="more-button">
-                    <a href="<c:url value='/_05_teacStu.searchAllTeac.controller'/>">更多</a>
+                    <a href="<c:url value='/_05_teacStu.searchAllTeac.controller/1'/>">更多</a>
                 </div>
             </div>
             <div class="newest-list-body">
-                <div class="newest-list-item">
-                    <div class="teacher-profile">
-                        <img src="https://picsum.photos/200?random=1" alt="">
-                    </div>
-                    <div class="teacher-detail">
-                        <a href="">Kevin老師 #1234</a>
-                        <div>數學, 電腦, 健康教育</div>
-                        <div>電腦 1~2年, 健康教育28年</div>
-                        <div>2023-02-03</div>
-                    </div>
-                </div>
-                <div class="newest-list-item">
-                    <div class="teacher-profile">
-                        <img src="https://picsum.photos/200?random=2" alt="">
-                    </div>
-                    <div class="teacher-detail">
-                        <a href="">Kevin老師 #1234</a>
-                        <div>數學, 電腦, 健康教育</div>
-                        <div>電腦 1~2年, 健康教育28年</div>
-                        <div>2023-02-03</div>
-                    </div>
-                </div>
-                <div class="newest-list-item">
-                    <div class="teacher-profile">
-                        <img src="https://picsum.photos/200?random=3" alt="">
-                    </div>
-                    <div class="teacher-detail">
-                        <a href="">Kevin老師 #1234</a>
-                        <div>數學, 電腦, 健康教育</div>
-                        <div>電腦 1~2年, 健康教育28年</div>
-                        <div>2023-02-03</div>
-                    </div>
-                </div>
-                <div class="newest-list-item">
-                	<c:forEach var="bean" items="${classList}">
-                    <div class="teacher-profile">
-                        <img src="https://picsum.photos/200?random=3" alt="">
-                    </div>
-                    <div class="teacher-detail">
-                        <a href="">Kevin老師 #${bean.memberId}</a>
-                        <div>${bean.subjectItem}</div>
-                        <div>${bean.tutorExp}</div>
-                        <div>${bean.updateDate}</div>
-                    </div>
-                    </c:forEach>
-                </div>
+                <c:forEach var="bean" items="${teac}">
+                	<div class="newest-list-item">
+                		<a href="<c:url value='/_05_teacStu.teacpostpageMain.controller?teacno=${bean.teacno}'/>">
+                    		<div class="teacher-profile">
+                        		<img src="<c:url value='/_01_member.ShowPhoto.controller?${bean.member.memberID}' />" alt="">
+                    		</div>
+                		</a>
+                    	<div class="teacher-detail">
+                        	<a href="<c:url value='/_05_teacStu.teacpostpageMain.controller?teacno=${bean.teacno}'/>">${bean.member.memName}老師 #${bean.member.account}</a>
+                        	<div>${bean.subjectItem}</div>
+                        	<div>${bean.tutorExp}</div>
+                        	<div>${bean.updateDate}</div>
+                    	</div>
+                	</div>
+                </c:forEach>
             </div>
         </div>
     </div>

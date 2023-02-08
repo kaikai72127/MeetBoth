@@ -9,6 +9,18 @@
 	border: 5px dashed gray;
 }
 
+.reply1 {
+	background-color: #F0F8FF;
+}
+
+.postpage {
+	border: 1px solid;
+}
+
+.postpagetitle {
+	background-color: #E6E6FA;
+}
+
 .trr {
 	border: 1px dashed gray
 }
@@ -23,19 +35,29 @@
 	padding: 5px;
 	font-size: 14px;
 }
-</style>
 
+.post_headerdeo {
+	background-image:
+		url(https://i2.bahamut.com.tw/forum/background/manager.jpg?v=20170731);
+	padding-bottom: 60px;
+	background-position: bottom center;
+	background-repeat: no-repeat;
+	background-size: cover;
+	padding: 36px;
+	padding-top: 60px;
+	margin-bottom: 18px;
+	margin: 0;
+}
+</style>
 <head>
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<script
-	src="https://cdn.ckeditor.com/ckeditor5/36.0.0/classic/ckeditor.js"></script>
 <!--  
     Document Title
     =============================================
     -->
-<title>Titan | Multipurpose HTML5 Template</title>
+<title>肉丸家教網</title>
 <!--  
     Favicons
     =============================================
@@ -109,6 +131,7 @@
 <link href="html/assets/css/style.css" rel="stylesheet">
 <link id="color-scheme" href="html/assets/css/colors/default.css"
 	rel="stylesheet">
+<link rel="stylesheet" href="html/assets/css/deopostpagestyle.css">
 </head>
 <body data-spy="scroll" data-target=".onpage-navigation"
 	data-offset="60">
@@ -394,53 +417,7 @@
 								<li><a href="shop_single_product.html">Single Product</a></li>
 								<li><a href="shop_checkout.html">Checkout</a></li>
 							</ul></li>
-						<!--li.dropdown.navbar-cart-->
-						<!--    a.dropdown-toggle(href='#', data-toggle='dropdown')-->
-						<!--        span.icon-basket-->
-						<!--        |-->
-						<!--        span.cart-item-number 2-->
-						<!--    ul.dropdown-menu.cart-list(role='menu')-->
-						<!--        li-->
-						<!--            .navbar-cart-item.clearfix-->
-						<!--                .navbar-cart-img-->
-						<!--                    a(href='#')-->
-						<!--                        img(src='assets/images/shop/product-9.jpg', alt='')-->
-						<!--                .navbar-cart-title-->
-						<!--                    a(href='#') Short striped sweater-->
-						<!--                    |-->
-						<!--                    span.cart-amount 2 &times; $119.00-->
-						<!--                    br-->
-						<!--                    |-->
-						<!--                    strong.cart-amount $238.00-->
-						<!--        li-->
-						<!--            .navbar-cart-item.clearfix-->
-						<!--                .navbar-cart-img-->
-						<!--                    a(href='#')-->
-						<!--                        img(src='assets/images/shop/product-10.jpg', alt='')-->
-						<!--                .navbar-cart-title-->
-						<!--                    a(href='#') Colored jewel rings-->
-						<!--                    |-->
-						<!--                    span.cart-amount 2 &times; $119.00-->
-						<!--                    br-->
-						<!--                    |-->
-						<!--                    strong.cart-amount $238.00-->
-						<!--        li-->
-						<!--            .clearfix-->
-						<!--                .cart-sub-totle-->
-						<!--                    strong Total: $476.00-->
-						<!--        li-->
-						<!--            .clearfix-->
-						<!--                a.btn.btn-block.btn-round.btn-font-w(type='submit') Checkout-->
-						<!--li.dropdown-->
-						<!--    a.dropdown-toggle(href='#', data-toggle='dropdown') Search-->
-						<!--    ul.dropdown-menu(role='menu')-->
-						<!--        li-->
-						<!--            .dropdown-search-->
-						<!--                form(role='form')-->
-						<!--                    input.form-control(type='text', placeholder='Search...')-->
-						<!--                    |-->
-						<!--                    button.search-btn(type='submit')-->
-						<!--                        i.fa.fa-search-->
+
 						<li class="dropdown"><a class="dropdown-toggle"
 							href="documentation.html" data-toggle="dropdown">Documentation</a>
 							<ul class="dropdown-menu">
@@ -461,177 +438,283 @@
 		<!-- 中間欄位開始 -->
 		<div class="main">
 			<section class="module">
-				<div class="container">
-					<div class="row">
+				<div class="demo-container">
+					<div class="message-board-container" id="message-board-container">
 
-						<!-- 表格欄位開始 -->
-						<div class="col-sm-8 col-sm-offset-1" style='width: 80%'>
-							<div class="post">
-								<div class="post-header font-alt">
-									<h2 class="post-title">
-										<a href="#">新增貼文</a>
-									</h2>
+						<!-- Post template -->
+
+						<div class="post-container">
+							<div class="user-section">
+								<div class="user-card">
+									<img src="https://picsum.photos/200/300" alt="">
 								</div>
-								<div class="post-entry">
-									<div>
-										<form
-											action='<c:url value="/_06_halaAndQa.AddHala.controller" />'
-											enctype='multipart/form-data' method='post'>
-											<div style="float: left; width: 50%">
-												<select name="halaclassname" style="width: 40%">
-													<option value="">--請選擇您的分類--</option>
-													<option value="公告">公告</option>
-													<option value="閱讀心得">閱讀心得</option>
-													<option value="資料分享">資料分享</option>
-													<option value="圖書推薦">圖書推薦</option>
-													<option value="教學文章">教學文章</option>
-													<option value="JAVA">JAVA</option>
-													<option value="HTML">HTML</option>
-													<option value="Spring">Spring</option>
-													<option value="SpringBoot">SpringBoot</option>
-													<option value="SQL Server">SQL Server</option>
-													<option value="SpringMVC">SpringMVC</option>
-													<option value="My SQL">My SQL</option>
-													<option value="Hibernate">Hibernate</option>
-													<option value="VScode">VScode</option>
-													<option value="eclipse">eclipse</option>
-													<option value="SpringTool">SpringTool</option>
-													<option value="JDBC">JDBC</option>
-													<option value="Servlet">Servlet</option>
-													<option value="JavaScript">JavaScript</option>
-													<option value="jQuery">jQuery</option>
-													<option value="Azure">Azure</option>
-													<option value="RESTful">RESTful</option>
-													<option value="c++">c++</option>
-													<option value="python">python</option>
-													<option value="其他">其他</option>
+							</div>
 
-												</select>
+							<div class="post-section">
+								<div class="post_headerdeo">
+									<h2
+										style="font-size: 26px; padding-left: 15px; font-weight: bolder;">
+										<a href="#" style="color: #FFFFFF;">${bean.title}</a> <input
+											id="halaIdHidden" type="hidden" value="${bean.halaId}" />
+									</h2>
+									<div class="post-header">
+										<div class="post-author">
+											<div class="post-index" style="color: #FFFFFF;">樓主</div>
+											<div class="post-user">
+												<a href="" class="user-name" style="color: #FFFFFF;">Kevin</a>
+												<a href="" class="user-id" style="color: #FFFFFF;">@${bean.memberid}</a>
 											</div>
-											<div style="float: right; width: 30%">
-												<input type="text" class="form-control" name="memberid"
-													value="" placeholder="id">
-											</div>
-											<input type="text" class="form-control" name="title" value=""
-												placeholder="請輸入文章標題⋯">
-											<textarea id="editor" name="halacontent" class="form-control"
-												rows="30" placeholder="請輸入文章內容"></textarea>
-											<input name="images" id="images5278" type="file"
-												style="width: 80%" accept=".jpg, .png"> <br> <img
-												id="preImg" style="width: 150px; height: 200px"
-												src="<c:url value='html/images/meatball-200.png'/>" />
+										</div>
+										<div class="post-detail" style="color: #FFFFFF;">${bean.postdate}</div>
+									</div>
+								</div>
+								<div class="post-body">${bean.halacontent}
+									<div
+										style="position: absolute; z-index: 1; height: 20px; right: 400px">
 
-											<div>
-												<button class="btn btn-primary btn-circle" type="submit">確定送出</button>
-												<button class="btn btn-danger btn-circle" type="button"
-													onclick="window.location.href='http://localhost:8080/SpringBoot_Team5/_06_halaAndQa.SelectAllHala.controller'">取消</button>
+										<div
+											style="position: relative; z-index: 2; display: flex; align-items: center; justify-content: flex-end; padding: 16px 0 32px;">
+											<div style="padding-right: 5%">
+												<div id="targetDiv" style="display: none;">顯示的內容</div>
 											</div>
-										</form>
+										</div>
+
+									</div>
+								</div>
+
+								<!-- 修改按鈕開始 -->
+								<div
+									style="display: flex; align-items: center; justify-content: flex-end; padding: 16px 0 12px;">
+									<div style="padding-right: 5%">
+										<a
+											href="<c:url value='/_06_halaAndQa.GoHalaUpdate.controller?halaId=${bean.halaId}'/>">
+											<button id="updateBtn"
+												style="border: none; background-color: white; height: 17px;">
+												<span style="font-size: 20px" class="icon-gears"
+													aria-hidden="true"></span>
+											</button>
+										</a>
+									</div>
+								</div>
+								<!-- 修改按鈕結束 -->
+
+								<div class="post-footer">
+									<div class="reply-expand-button"></div>
+									<div class="reply-list" id="fuckyoureplylist">
+
+										<c:forEach var="respBean" items="${bean.responseHala}">
+											<div class="reply-item">
+												<div class="reply-avatar">
+													<img src="https://picsum.photos/200" alt="">
+												</div>
+												<div class="reply-content">
+													<div class="reply-user">${bean.memberid}</div>
+													<article class="reply-article">${respBean.responseHalaContent}</article>
+													<div class="reply-content-detail">${respBean.responseHalaPostDate}</div>
+												</div>
+											</div>
+										</c:forEach>
+									</div>
+
+
+									<div id="div1" class="reply-editor">
+										<input class="reply-article" id="textForRespHala"
+											onkeypress="handleKeyPress(event)" type="text"
+											placeholder="Reply">
 									</div>
 								</div>
 							</div>
 						</div>
 					</div>
-				</div>
-			</section>
-			<!-- 表格欄位結束 -->
-			<!-- 中間欄位結束 -->
+					<input type="hidden" value="${bean.halaId}" name="prodIdForAjax" />
 
-			<!-- 下方欄位開始 -->
-			<div class="module-small bg-dark">
-				<div class="container">
-					<div class="row">
-						<div class="col-sm-3">
-							<div class="widget">
-								<h5 class="widget-title font-alt">About Titan</h5>
-								<p>The languages only differ in their grammar, their
-									pronunciation and their most common words.</p>
-								<p>Phone: +1 234 567 89 10</p>
-								Fax: +1 234 567 89 10
-								<p>
-									Email:<a href="#">somecompany@example.com</a>
-								</p>
+
+					<!-- reply template -->
+
+
+
+
+					<!-- 					------------------------------------------- -->
+
+					<c:forEach var="answer" items="${bean.answerHala}">
+						<input id="answerHalaIdHidden" type="hidden"
+							value="${answer.answerId}" />
+						<div class="post-container">
+							<div class="user-section">
+								<div class="user-card">
+									<img src="https://picsum.photos/200/300" alt="">
+								</div>
 							</div>
-						</div>
-						<div class="col-sm-3">
-							<div class="widget">
-								<h5 class="widget-title font-alt">Recent Comments</h5>
-								<ul class="icon-list">
-									<li>Maria on <a href="#">Designer Desk Essentials</a></li>
-									<li>John on <a href="#">Realistic Business Card Mockup</a></li>
-									<li>Andy on <a href="#">Eco bag Mockup</a></li>
-									<li>Jack on <a href="#">Bottle Mockup</a></li>
-									<li>Mark on <a href="#">Our trip to the Alps</a></li>
-								</ul>
-							</div>
-						</div>
-						<div class="col-sm-3">
-							<div class="widget">
-								<h5 class="widget-title font-alt">Blog Categories</h5>
-								<ul class="icon-list">
-									<li><a href="#">Photography - 7</a></li>
-									<li><a href="#">Web Design - 3</a></li>
-									<li><a href="#">Illustration - 12</a></li>
-									<li><a href="#">Marketing - 1</a></li>
-									<li><a href="#">Wordpress - 16</a></li>
-								</ul>
-							</div>
-						</div>
-						<div class="col-sm-3">
-							<div class="widget">
-								<h5 class="widget-title font-alt">Popular Posts</h5>
-								<ul class="widget-posts">
-									<li class="clearfix">
-										<div class="widget-posts-image">
-											<a href="#"><img src="assets/images/rp-1.jpg"
-												alt="Post Thumbnail" /></a>
+
+							<div class="post-section">
+								<div class="post-header">
+									<div class="post-author">
+										<div class="post-index">2樓</div>
+										<div class="post-user">
+											<a href="" class="user-name">Kevin</a> <a href=""
+												class="user-id">${answer.memberId}</a>
 										</div>
-										<div class="widget-posts-body">
-											<div class="widget-posts-title">
-												<a href="#">Designer Desk Essentials</a>
+									</div>
+									<div class="post-detail">${answer.answerDate}</div>
+								</div>
+
+								<div class="post-body">${answer.answerContent}</div>
+
+								<div class="post-footer">
+									<div class="reply-expand-button"></div>
+									<div class="reply-list" id="fuckyoureplylist123">
+										<!----------------------------------------------------回覆留言迴圈開始------------------------ -->
+										<c:forEach var="respAnswerBean"
+											items="${answer.responseAnswerBean}">
+											<div class="reply-item">
+												<div class="reply-avatar">
+													<img src="https://picsum.photos/200" alt="">
+												</div>
+												<div class="reply-content">
+													<div class="reply-user">${respAnswerBean.memberId}</div>
+													<article class="reply-article">${respAnswerBean.responseAnswerContent}</article>
+													<div class="reply-content-detail">${respAnswerBean.responseAnswerDate}</div>
+												</div>
 											</div>
-											<div class="widget-posts-meta">23 january</div>
-										</div>
-									</li>
-									<li class="clearfix">
-										<div class="widget-posts-image">
-											<a href="#"><img src="assets/images/rp-2.jpg"
-												alt="Post Thumbnail" /></a>
-										</div>
-										<div class="widget-posts-body">
-											<div class="widget-posts-title">
-												<a href="#">Realistic Business Card Mockup</a>
-											</div>
-											<div class="widget-posts-meta">15 February</div>
-										</div>
-									</li>
-								</ul>
+										</c:forEach>
+										<!-- -------------------------------------------------------------回覆留言迴圈結束------------------------ -->
+
+									</div>
+									<div id="div1" class="reply-editor">
+										<input class="reply-article" id="textForRespAnswer"
+											onkeypress="handleKeyPress2(event)" type="text"
+											placeholder="Reply">
+									</div>
+								</div>
 							</div>
+						</div>
+
+					</c:forEach>
+				</div>
+
+
+
+				<!-- 新增回覆區域開始 -->
+				<div style='width: 80%; margin: 30px; position: relative;'>
+					<div class="comment-form" style=' margin-left: 130px ;margin-top:0'>
+						<h4 class="comment-form-title font-alt">撰寫回覆</h4>
+						<form
+							action='<c:url value="/_06_halaAndQa.addAnswerHala.controller" />'
+							method="post">
+							<input type="hidden" name="hieId" value="${bean.halaId}">
+							<div class="form-group">
+								<textarea class="form-control" id="answerHalaContent"
+									name="answerHalaContent" rows="4" placeholder="請寫入您的回覆"></textarea>
+							</div>
+							<button class="btn btn-round btn-d" type="submit">Post
+								comment</button>
+						</form>
+					</div>
+				</div>
+				<!-- 新增回覆區域結束 -->
+		</div>
+		</div>
+		</section>
+		<!-- 中間欄位結束 -->
+
+
+		<%-- 			<input type="hidden" value="${bean.halaId}" name="prodIdForAjax" /> --%>
+
+		<!-- 下方欄位開始 -->
+		<div class="module-small bg-dark" id='div2'>
+			<div class="container">
+				<div class="row">
+					<div class="col-sm-3">
+						<div class="widget">
+							<h5 class="widget-title font-alt">About Titan</h5>
+							<p>The languages only differ in their grammar, their
+								pronunciation and their most common words.</p>
+							<p>Phone: +1 234 567 89 10</p>
+							Fax: +1 234 567 89 10
+							<p>
+								Email:<a href="#">somecompany@example.com</a>
+							</p>
+						</div>
+					</div>
+					<div class="col-sm-3">
+						<div class="widget">
+							<h5 class="widget-title font-alt">Recent Comments</h5>
+							<ul class="icon-list">
+								<li>Maria on <a href="#">Designer Desk Essentials</a></li>
+								<li>John on <a href="#">Realistic Business Card Mockup</a></li>
+								<li>Andy on <a href="#">Eco bag Mockup</a></li>
+								<li>Jack on <a href="#">Bottle Mockup</a></li>
+								<li>Mark on <a href="#">Our trip to the Alps</a></li>
+							</ul>
+						</div>
+					</div>
+					<div class="col-sm-3">
+						<div class="widget">
+							<h5 class="widget-title font-alt">Blog Categories</h5>
+							<ul class="icon-list">
+								<li><a href="#">Photography - 7</a></li>
+								<li><a href="#">Web Design - 3</a></li>
+								<li><a href="#">Illustration - 12</a></li>
+								<li><a href="#">Marketing - 1</a></li>
+								<li><a href="#">Wordpress - 16</a></li>
+							</ul>
+						</div>
+					</div>
+					<div class="col-sm-3">
+						<div class="widget">
+							<h5 class="widget-title font-alt">Popular Posts</h5>
+							<ul class="widget-posts">
+								<li class="clearfix">
+									<div class="widget-posts-image">
+										<a href="#"><img src="assets/images/rp-1.jpg"
+											alt="Post Thumbnail" /></a>
+									</div>
+									<div class="widget-posts-body">
+										<div class="widget-posts-title">
+											<a href="#">Designer Desk Essentials</a>
+										</div>
+										<div class="widget-posts-meta">23 january</div>
+									</div>
+								</li>
+								<li class="clearfix">
+									<div class="widget-posts-image">
+										<a href="#"><img src="assets/images/rp-2.jpg"
+											alt="Post Thumbnail" /></a>
+									</div>
+									<div class="widget-posts-body">
+										<div class="widget-posts-title">
+											<a href="#">Realistic Business Card Mockup</a>
+										</div>
+										<div class="widget-posts-meta">15 February</div>
+									</div>
+								</li>
+							</ul>
 						</div>
 					</div>
 				</div>
 			</div>
-			<hr class="divider-d">
-			<footer class="footer bg-dark">
-				<div class="container">
-					<div class="row">
-						<div class="col-sm-6">
-							<p class="copyright font-alt">
-								&copy; 2017&nbsp;<a href="index.html">TitaN</a>, All Rights
-								Reserved
-							</p>
-						</div>
-						<div class="col-sm-6">
-							<div class="footer-social-links">
-								<a href="#"><i class="fa fa-facebook"></i></a><a href="#"><i
-									class="fa fa-twitter"></i></a><a href="#"><i
-									class="fa fa-dribbble"></i></a><a href="#"><i
-									class="fa fa-skype"></i></a>
-							</div>
+		</div>
+		<hr class="divider-d">
+		<footer class="footer bg-dark">
+			<div class="container">
+				<div class="row">
+					<div class="col-sm-6">
+						<p class="copyright font-alt">
+							&copy; 2017&nbsp;<a href="index.html">TitaN</a>, All Rights
+							Reserved
+						</p>
+					</div>
+					<div class="col-sm-6">
+						<div class="footer-social-links">
+							<a href="#"><i class="fa fa-facebook"></i></a><a href="#"><i
+								class="fa fa-twitter"></i></a><a href="#"><i
+								class="fa fa-dribbble"></i></a><a href="#"><i
+								class="fa fa-skype"></i></a>
 						</div>
 					</div>
 				</div>
-			</footer>
+			</div>
+		</footer>
 		</div>
 		<div class="scroll-up">
 			<a href="#totop"><i class="fa fa-angle-double-up"></i></a>
@@ -660,35 +743,211 @@
 	<script src="html/assets/js/plugins.js"></script>
 	<script src="html/assets/js/main.js"></script>
 	<script>
-		$("#images5278").change(function(){
-	     readURL(this);
-	   	});
-		
-		function readURL(input){
-			  if(input.files && input.files[0]){
-			    var reader = new FileReader();
-			    reader.onload = function (e) {
-			       $("#preImg").attr('src', e.target.result);
-			    }
-			    reader.readAsDataURL(input.files[0]);
-			  }
+		window.onscroll = function() {
+			if (document.body.scrollHeight == document.body.scrollTop
+					+ window.innerHeight) {
+				window.scrollTo(0, document.body.scrollHeight);
 			}
-		function onlyNumberKey(event){
-			var ASCIICode = (event.which) ? event.which : event.keyCode
-		            if (ASCIICode > 31 && (ASCIICode < 48 || ASCIICode > 57))
-		            return false;
-		            return true;
-		}
+		};
 	</script>
 	<script>
-                        ClassicEditor
-                                .create( document.querySelector( '#editor' ) )
-                                .then( editor => {
-                                        console.log( editor );
-                                } )
-                                .catch( error => {
-                                        console.error( error );
-                                } );
-                </script>
+		const toggleBtn = document.getElementById("toggleBtn");
+		const targetDiv = document.getElementById("targetDiv");
+
+		toggleBtn.addEventListener("mouseover", function() {
+			targetDiv.style.display = "block";
+		});
+
+		toggleBtn.addEventListener("mouseout", function() {
+			targetDiv.style.display = "none";
+		});
+	</script>
+	<script>
+		var halaIdInput = document.querySelector('input[name="prodIdForAjax"]');
+		var halaId = halaIdInput.value;
+		console.log("id=" + halaId);
+		window.onload = function() {
+			var xhr = new XMLHttpRequest();
+			xhr.open("GET",
+					"/MeetBoth/_06_halaAndQa.watch.controller?halaIdForWatch="
+							+ halaId, true);
+			xhr.send();
+		};
+	</script>
+	<!-- 貼文留言 -->
+	<script>
+		function handleKeyPress(event) {
+			if (event.key == 'Enter') {
+				var newTextValue = document.getElementById("textForRespHala").value;
+				console.log(newTextValue);
+				$.ajax({
+					url : '/MeetBoth/_06_halaAndQa.addResponseHala.controller',
+					type : 'POST',
+					data : {
+						responseHalaContent : $('#textForRespHala').val(),
+						halaId : $('#halaIdHidden').val()
+					},
+					success : function(respones) {
+
+					}
+				});
+				console.log("這是part1")
+				var div0 = document.createElement("div");
+				div0.setAttribute("class", "reply-item")
+
+				var div1 = document.createElement("div");
+				div1.setAttribute("class", "reply-avatar")
+
+				var img1 = document.createElement("img");
+				img1.setAttribute("src", "https://picsum.photos/200")
+				img1.setAttribute("alt", "")
+				console.log("這是part2")
+
+				var div2 = document.createElement("div");
+				div2.setAttribute("class", "reply-content")
+
+				var div3 = document.createElement("div");
+				div3.setAttribute("class", "reply-user")
+				div3.innerHTML = "2222 "
+
+				console.log("這是part3")
+				var article1 = document.createElement("article");
+				article1.setAttribute("class", "reply-article")
+				article1.innerHTML = newTextValue;
+				console.log("這是part3.1: " + newTextValue)
+
+				var div4 = document.createElement("div");
+				var d = new Date();
+				var date = d.getFullYear() + '.'
+						+ (d.getMonth() + 1).toString().padStart(2, '0') + '.'
+						+ d.getDate().toString().padStart(2, '0');
+				var time = d.getHours().toString().padStart(2, '0') + ':'
+						+ d.getMinutes().toString().padStart(2, '0') + ':'
+						+ d.getSeconds().toString().padStart(2, '0');
+				div4.setAttribute("class", "reply-content-detail");
+				div4.innerHTML = date + ' ' + time;
+
+				console.log("這是part4")
+				div2.appendChild(div3);
+				div2.appendChild(article1);
+				div2.appendChild(div4);
+				div1.appendChild(img1);
+				div0.appendChild(div1);
+				div0.appendChild(div2);
+				console.log("這是part5")
+
+				var list = document.getElementById("fuckyoureplylist");
+				console.log("這是part5.1")
+
+				if (!list) {
+					console.error("Cannot find element with id 'reply-List'");
+					return;
+				}
+
+				list.appendChild(div0);
+				console.log("這是part6")
+				document.getElementById("textForRespHala").value = "";
+				console.log("這是part7")
+
+			}
+		}
+	</script>
+
+	<!-- 	回復留言 -->
+	<script>
+		function handleKeyPress2(event) {
+			if (event.key == 'Enter') {
+// 				var newTextValue = document.getElementById("textForRespAnswer").value;
+				
+				var newTextValue = document.querySelectorAll('#textForRespAnswer'); 
+				var hiddenID = document.querySelectorAll('#answerHalaIdHidden'); 
+				
+				for(var i=0;i<newTextValue.length;i++){
+
+						console.log("newTextValue[i]="+newTextValue[i].value.length );
+						if(newTextValue[i].value.length!=0){
+						$.ajax({
+							url : '/MeetBoth/_06_halaAndQa.addResponseAnswer.controller',
+							type : 'POST',
+							data : {
+								responseAnswerContent : newTextValue[i].value,
+								answerId : hiddenID[i].value
+							},
+							success : function(respones) {
+
+							}
+						});
+// 						ajax end
+						// 				innerHTML
+				console.log("這是part1")
+				var div0 = document.createElement("div");
+				div0.setAttribute("class", "reply-item")
+
+				var div1 = document.createElement("div");
+				div1.setAttribute("class", "reply-avatar")
+
+				var img1 = document.createElement("img");
+				img1.setAttribute("src", "https://picsum.photos/200")
+				img1.setAttribute("alt", "")
+				console.log("這是part2")
+
+				var div2 = document.createElement("div");
+				div2.setAttribute("class", "reply-content")
+
+				var div3 = document.createElement("div");
+				div3.setAttribute("class", "reply-user")
+				div3.innerHTML = "2222 "
+
+				console.log("這是part3")
+				var article1 = document.createElement("article");
+				article1.setAttribute("class", "reply-article")
+				article1.innerHTML = newTextValue[i].value;
+				console.log("這是part3.1: " + newTextValue[i])
+
+				var div4 = document.createElement("div");
+				var d = new Date();
+				var date = d.getFullYear() + '.'
+						+ (d.getMonth() + 1).toString().padStart(2, '0') + '.'
+						+ d.getDate().toString().padStart(2, '0');
+				var time = d.getHours().toString().padStart(2, '0') + ':'
+						+ d.getMinutes().toString().padStart(2, '0') + ':'
+						+ d.getSeconds().toString().padStart(2, '0');
+				div4.setAttribute("class", "reply-content-detail");
+				div4.innerHTML = date + ' ' + time;
+
+				console.log("這是part4")
+				div2.appendChild(div3);
+				div2.appendChild(article1);
+				div2.appendChild(div4);
+				div1.appendChild(img1);
+				div0.appendChild(div1);
+				div0.appendChild(div2);
+				console.log("這是part5")
+// 				innerHTML
+						
+				var list = document.querySelectorAll('#fuckyoureplylist123');
+
+// 				var list = document.getElementById("fuckyoureplylist123");
+				console.log("這是part5.1")
+
+				if (!list) {
+					console.error("Cannot find element with id 'reply-List'");
+					return;
+				}
+
+				list[i].appendChild(div0);
+				console.log("這是part6")
+				newTextValue[i].value = "";
+				console.log("這是part7")
+
+						}
+					
+						
+				}//for i end
+				
+
+			}
+		}
+	</script>
 </body>
 </html>

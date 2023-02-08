@@ -66,7 +66,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
          
          .and()  //Google第三方驗證
          .oauth2Login()
-         .successHandler(new Oauth2SuccessHandler())
+//         .successHandler(new Oauth2SuccessHandler()) //毛一堆  浪費時間
 //         .authorizationEndpoint()
 //         .baseUri("/login/page")
 //         .authorizationRequestRepository(authorizationRequestRepository())

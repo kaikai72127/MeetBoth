@@ -253,20 +253,13 @@ System.out.println(baseMeetboth96x96);
 				</li>
 
 				<!--Navbar橫幅 Login會員登入 -->
-				<li id="loginBtn" class="nav-item dropdown"><a href="<%=request.getContextPath()%>/login/page"
-					class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
-						<img class="rounded-circle me-lg-2"
-						src="html/assets/images/meatball/meatball-32x32.png" alt=""
-						style="width: 24px; height: 24px" /> <span
-						class="d-none d-lg-inline-flex">登入<i
-							class="fa-solid fa-right-to-bracket"></i>
-				<li id="logoutBtn" class="nav-item dropdown"><a href="#"
+				<li class="nav-item dropdown"><a href="<%=request.getContextPath()%>/login/page"
 					class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
 						<img class="rounded-circle me-lg-2"
 						src="assets/images/favicon.png" alt=""
 						style="width: 24px; height: 24px" /> <span
-						id="username" class="d-none d-lg-inline-flex"><i
-							class="fa-solid fa-right-to-bracket"></i>
+						class="d-none d-lg-inline-flex">登入 <i
+							class="fa-solid fa-right-to-bracket"></i>口愛狗凍
 					</span>
 				</a>
 					<ul
@@ -276,7 +269,7 @@ System.out.println(baseMeetboth96x96);
 						<li><a href="#" class="dropdown-item">SETTING
 								<i class="fa-solid fa-screwdriver-wrench"></i>
 						</a></li>
-						<li><a href="<%=request.getContextPath()%>/logout" class="dropdown-item">Log
+						<li><a href="#" class="dropdown-item">Log
 								Out <i class="fa-solid fa-right-from-bracket"></i> </i>
 						</a></li>
 					</ul></li>
@@ -284,30 +277,3 @@ System.out.println(baseMeetboth96x96);
 		</div>
 	</div>
 </nav>
-<script>
-	$(function() {
-
-		$.ajax({
-			type : 'POST',
-			url : '_01_member.checklog.controller',
-			contentType : 'application/json',
-
-			success : function(user) {
-
-				if (user == "" || user == "anonymousUser") {
-					console.log(user + "登入");
-					$("#loginBtn").show();
-					$("#logoutBtn").hide();
-					$("#animation").show();
-				} else {
-					console.log(user + "登出");
-					$("#loginBtn").hide();
-					$("#logoutBtn").show();
-					$("#animation").hide();
-					$("#username").innerHTML()
-				}
-			}
-		});
-
-	});
-</script>

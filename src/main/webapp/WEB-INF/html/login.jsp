@@ -50,7 +50,7 @@
 								<a href=""><i class="fa-solid fa-circle-xmark"></i> Forgot
 									Password?</a>
 							</div>
-							<a href="<%=request.getContextPath()%>/oauth2/authorization/google" onclick="onSignIn">Google</a>
+							<button class="btn btn-round btn-p" href="<%=request.getContextPath()%>/oauth2/authorization/google">Google登入</button>
 						</form>
 						
 					</div>

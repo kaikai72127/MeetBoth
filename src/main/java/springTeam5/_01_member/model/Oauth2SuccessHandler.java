@@ -2,6 +2,7 @@ package springTeam5._01_member.model;
 
 import java.io.IOException;
 import java.util.Collection;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -25,8 +26,6 @@ import com.google.api.client.json.gson.GsonFactory;
 
 public class Oauth2SuccessHandler extends SimpleUrlAuthenticationSuccessHandler {
 
-	@Autowired
-	private MemberService mService;
 	
 	@Override
 	public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response,
@@ -38,20 +37,16 @@ public class Oauth2SuccessHandler extends SimpleUrlAuthenticationSuccessHandler 
 	    String provider = parts[parts.length - 1];
 //	    組合第三方帳號
 	    String account = provider.toUpperCase() + "_" + authentication.getName();
+	    System.out.println(account);
 	    OAuth2User oAuth2User = (OAuth2User)authentication.getPrincipal();
-//	    檢查是否註冊過
-//	    若為首次登入
-	    if (mService.searchMemByAccount(account) == null) {
-			MemberBean member = new MemberBean();
-			member.setAccount(account);
-			member.setMemName(oAuth2User.getAttribute("name"));
-			member.seteMail(oAuth2User.getAttribute("email"));
-			mService.add(member);
-			request.setAttribute("account", account);
-			response.sendRedirect("/_01_member/oathupdate");
-		}else {
-			response.sendRedirect("/");
-		}
+	    MemberBean member = new MemberBean();
+	    member.setAccount(account);
+	    member.seteMail(oAuth2User.getAttribute("email"));
+	    member.setMemName(oAuth2User.getAttribute("name"));
+	    request.setAttribute("account", member);
+	    response.sendRedirect("/_01_member/oathupdate");
+	    
+
 	    	
 	}
 	

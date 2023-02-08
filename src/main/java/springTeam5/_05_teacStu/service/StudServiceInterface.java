@@ -28,11 +28,11 @@ public interface StudServiceInterface {
 	public List<StudBean> searchAllStud();
 	
 //	新增學生貼文
-	public void addStud(StudBean tableForStud);
+	public void addStud(StudBean sb);
 	
 //	透過ID刪除學生貼文
 	public void deleteStudfromStudno(Integer studno);
 	
 //	透過ID修改學生貼文
-	public StudBean updateStudFromStudno(StudBean tableForStud);
+	public StudBean updateStudFromStudno(StudBean sb);
 }

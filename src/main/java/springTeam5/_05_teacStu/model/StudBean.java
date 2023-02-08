@@ -21,36 +21,36 @@ public class StudBean {
 	@Column(name = "STUDNO")
 	private Integer studno;
 	@Column(name = "MEMBERID")
-	private Integer memberid;
+	private Integer memberId;
 	@Column(name = "TITLE")
 	private String title;
 	@Column(name = "POSTDATE")
-	private Date postdate;
+	private Date postDate;
 	@Column(name = "DETAIL")
 	private String detail;
 	@Column(name = "PRICE")
 	private Double price;
 	@Column(name = "SUBJECTITEM")
-	private String subjectitem;
+	private String subjectItem;
 	@Column(name = "LEARNLOC")
-	private String learnloc;
+	private String learnLoc;
 	@Column(name = "CLASSPICTURE")
-	private Blob classpicture;
+	private Blob classPicture;
 	
 	public StudBean() {
 	}
 
-	public StudBean(Integer studno, Integer memberid, String title, Date postdate, String detail, Double price,
-			String subjectitem, String learnloc, Blob classpicture) {
+	public StudBean(Integer studno, Integer memberId, String title, Date postDate, String detail, Double price,
+			String subjectItem, String learnLoc, Blob classPicture) {
 		this.studno = studno;
-		this.memberid = memberid;
+		this.memberId = memberId;
 		this.title = title;
-		this.postdate = postdate;
+		this.postDate = postDate;
 		this.detail = detail;
 		this.price = price;
-		this.subjectitem = subjectitem;
-		this.learnloc = learnloc;
-		this.classpicture = classpicture;
+		this.subjectItem = subjectItem;
+		this.learnLoc = learnLoc;
+		this.classPicture = classPicture;
 	}
 
 	public Integer getStudno() {
@@ -61,12 +61,12 @@ public class StudBean {
 		this.studno = studno;
 	}
 
-	public Integer getMemberid() {
-		return memberid;
+	public Integer getmemberId() {
+		return memberId;
 	}
 
-	public void setMemberid(Integer memberid) {
-		this.memberid = memberid;
+	public void setmemberId(Integer memberId) {
+		this.memberId = memberId;
 	}
 
 	public String getTitle() {
@@ -77,12 +77,12 @@ public class StudBean {
 		this.title = title;
 	}
 
-	public Date getPostdate() {
-		return postdate;
+	public Date getpostDate() {
+		return postDate;
 	}
 
-	public void setPostdate(Date postdate) {
-		this.postdate = postdate;
+	public void setpostDate(Date postDate) {
+		this.postDate = postDate;
 	}
 
 	public String getDetail() {
@@ -101,27 +101,27 @@ public class StudBean {
 		this.price = price;
 	}
 
-	public String getSubjectitem() {
-		return subjectitem;
+	public String getsubjectItem() {
+		return subjectItem;
 	}
 
-	public void setSubjectitem(String subjectitem) {
-		this.subjectitem = subjectitem;
+	public void setsubjectItem(String subjectItem) {
+		this.subjectItem = subjectItem;
 	}
 
-	public String getLearnloc() {
-		return learnloc;
+	public String getlearnLoc() {
+		return learnLoc;
 	}
 
-	public void setLearnloc(String learnloc) {
-		this.learnloc = learnloc;
+	public void setlearnLoc(String learnLoc) {
+		this.learnLoc = learnLoc;
 	}
 
-	public Blob getClasspicture() {
-		return classpicture;
+	public Blob getclassPicture() {
+		return classPicture;
 	}
 
-	public void setClasspicture(Blob classpicture) {
-		this.classpicture = classpicture;
+	public void setclassPicture(Blob classPicture) {
+		this.classPicture = classPicture;
 	}
 }

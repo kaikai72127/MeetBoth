@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import springTeam5._04_shoppingCart.model.Discount;
 import springTeam5._04_shoppingCart.service.impl.DiscountServiceImpl;
@@ -142,5 +143,24 @@ public class DiscountController {
 		discountService.updateDiscount(discount);
 		return "redirect:/discounts.controller";
 	}
+	
+//判斷折扣碼是否可以使用
+	@GetMapping("/discountCheck.controller")
+	@ResponseBody
+	public String processCheckDiscountAction(@RequestParam("discountNo") String discountNo) {
+//		Discount discountUse = discountService.getDiscountByDiscountNo(discountNo);
+	
+		List<Discount> allDiscount = discountService.getDiscount();
+		
+		for(Discount i : allDiscount) {
+			System.out.println("找第一個discout-----");
+			if(i.getDiscountNo().equals(discountNo)) {
+				return "OK";				
+			}
+		};
+		return "CANTUSE";
+
+	}
+	
 
 }

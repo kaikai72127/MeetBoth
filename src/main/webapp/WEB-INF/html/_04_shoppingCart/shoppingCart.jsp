@@ -33,6 +33,19 @@ a.ap:hover {
 	background: #ce7777;
 	color: white;
 }
+
+button.removeProduct {
+background-color: #f4f7f7;
+color: #ce7777;
+border: 1px solid #ce7777;
+}
+
+button.removeProduct:hover {
+background-color: #ce7777;
+color: white;
+border: 1px solid #ce7777;
+}
+
 </style>
 
 <!-- SweetAlert js -->
@@ -103,10 +116,10 @@ a.ap:hover {
 														<h5 class="product-title font-alt" id="itemTotal">${shoppingItem.value.itemTotal}</h5>
 													</td>
 													<td class="pr-remove"><button
-															class="deleteClass btn btn-sm btn-primary" name="prodId"
-															id="${shoppingItem.value.prodItem.prodID}"
+															class="removeProduct btn btn-sm btn-primary"
+															name="prodId" id="${shoppingItem.value.prodItem.prodID}"
 															value="${shoppingItem.value.prodItem.prodID}">
-															<i class="fa fa-times"></i>
+															<i class="fa-solid fa-trash"></i>
 														</button></td>
 												</tr>
 											</c:forEach>
@@ -117,21 +130,27 @@ a.ap:hover {
 							<div class="row">
 								<div class="col-sm-3">
 									<div class="form-group">
-										<input class="form-control" type="text" id="" name=""
+										<input class="form-control" type="text" id="discount" name=""
 											placeholder="Coupon code" />
 									</div>
 								</div>
-								<div class="col-sm-3">
+								<div class="col-sm-2">
 									<div class="form-group">
-										<button class="btn btn-round btn-p" type="submit">Apply</button>
+										<button class="btn btn-round btn-p" type="submit"
+											id="checkDiscount" style="margin: 0">Apply</button>
 									</div>
 								</div>
-								<div class="col-sm-3 col-sm-offset-3">
+								<div class="col-sm-2" style="margin: 0">
 									<div class="form-group">
-										<button class="btn btn-block btn-round btn-p pull-right"
-											type="submit">Update Cart</button>
+										<p style="font-size: 16px" id="discountShow"></p>
 									</div>
 								</div>
+								<!-- 								<div class="col-sm-3 col-sm-offset-3"> -->
+								<!-- 									<div class="form-group"> -->
+								<!-- 										<button class="btn btn-block btn-round btn-p pull-right" -->
+								<!-- 											type="submit">Update Cart</button> -->
+								<!-- 									</div> -->
+								<!-- 								</div> -->
 							</div>
 							<hr class="divider-w">
 							<div class="row mt-70">
@@ -145,7 +164,7 @@ a.ap:hover {
 													<td>${ShoppingCart.getItemAmount()}</td>
 												</tr>
 												<tr>
-													<th>Discount Total :</th>
+													<th>Discount :</th>
 													<td>£2.00</td>
 												</tr>
 												<tr class="shop-Cart-totalprice">
@@ -280,20 +299,21 @@ function Abort() {
 	}
 }
 
-$('.deleteClass').on('click', function() {
+$('.removeProduct').on('click', function(e) {
+// 	e.preventDefault(); 可以看console
 	var result = confirm('是否確定刪除?');
 	if (result == true) {
 		let MyValue = $(this).attr("id");
 		console.log(MyValue);
 		console.log("---------------"+MyValue);
 		$.ajax({
-			url : '/removeShoppingCartItem.controlle/',
+			url : 'removeShoppingCartItem.controlle/'+MyValue,
 			method : "get",
 			dataType : "text",
 			//這邊的"id"是給controller的變數名
-			data : {
-				"prodId" : MyValue
-			},
+// 			data : {
+// 				"prodId" : MyValue
+// 			},
 		}).done(function() {
 			location.reload();
 		})
@@ -322,10 +342,44 @@ $(".addtext").change(function() {
 
 });
 </script>
+	<script>
+      let cartCount = 0;
+      document
+        .getElementById("removeProduct")
+        .addEventListener("click", function () {
+          console.log(cartCount);
+          cartCount += 1;
+          document.getElementById("cartCount").innerHTML =
+            "購物車：" + cartCount;
+        });
+    </script>
 
 
+	<!--     判斷是否可以使用折扣碼 -->
+	<script>
+$('#checkDiscount').on('click',function(e){
+	e.preventDefault();
+	let discountNo= $('#discount').val()
+	$.ajax({
+		type:"GET",
+		url : 'discountCheck.controller',
+		dataType : "text",
+		data : {
+			//controller設定的名稱
+			"discountNo" : discountNo,
+		},success:function(check){
+			if(check == 'OK'){
+				$('#discountShow').text('折扣碼可以使用')
+			}else{
+				$('#discountShow').text('不可以使用請重新輸入')
+				$('#discount').val('')
+			}
+		}
+	})
+})
 
-	<!-- 	刪除Alert -->
+</script>
+
 
 
 

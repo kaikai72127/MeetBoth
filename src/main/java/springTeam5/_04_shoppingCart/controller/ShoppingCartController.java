@@ -133,9 +133,9 @@ public class ShoppingCartController {
 	}
 
 	// 移除一個item
-//	@GetMapping("/removeShoppingCartItem.controlle/{prodId}")
-	@GetMapping("/removeShoppingCartItem.controlle")
-	public String deleleshoppingitem(@RequestParam("prodId") int prodId, HttpServletRequest request) {
+	@GetMapping("/removeShoppingCartItem.controlle/{prodId}")
+//	@GetMapping("/removeShoppingCartItem.controlle")
+	public String deleleshoppingitem(@PathVariable("prodId") int prodId, HttpServletRequest request, SessionStatus sessionStatus) {
 		HttpSession session = null;
 		session = request.getSession(false);
 		ShoppingCart shoppingCart = (ShoppingCart) session.getAttribute("ShoppingCart");
@@ -149,6 +149,8 @@ public class ShoppingCartController {
 		// 刪除購物車內的商品 跳轉回查看我的購物車Controller
 		System.out.println("執行刪除購物車");
 		shoppingCart.deleteProduct(prodId);
+		//更新購物車顯示的數量
+		session.setAttribute("CartSize", shoppingCart.getItemNumber());
 		return "redirect:/shoppingcart.controller";
 	}
 
@@ -170,7 +172,7 @@ public class ShoppingCartController {
 
 	// 更新購物車內的Item
 	@PostMapping("/updateshoppingqty.controller/{prodId}")
-	public String updateShoppingCartItem(@PathVariable("prodItem") int prodId, @RequestParam("updateQty") int updateQty,
+	public String updateShoppingCartItem(@PathVariable("prodId") int prodId, @RequestParam("updateQty") int updateQty,
 			HttpServletRequest request) {
 		HttpSession session = null;
 		session = request.getSession(false);

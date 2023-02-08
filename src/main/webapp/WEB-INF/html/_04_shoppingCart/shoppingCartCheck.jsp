@@ -11,12 +11,28 @@
 <head>
 <!-- 引入共同的headMVC -->
 <jsp:include page="/WEB-INF/html/fragment/headMVC.jsp" />
+
+<style>
+button.removeProduct {
+	background-color: #f4f7f7;
+	color: #ce7777;
+	border: 1px solid #ce7777;
+}
+
+button.removeProduct:hover {
+	background-color: #ce7777;
+	color: white;
+	border: 1px solid #ce7777;
+}
+</style>
+
 <script type="text/javascript">
 	function cancelOrder() {
 		if (confirm("確定取消此份訂單 ? ")) {
 			// 接收此資料的Servlet會使用 finalDecision 參數的值
+			console.log = (forms[0].finalDecision.value)
 			document.forms[0].finalDecision.value = "CANCEL";
-			document.forms[0].action = "<c:url value='/_04_ShoppingCart/ProcessOrder.do' />";
+			document.forms[0].action = "<c:url value='/orderConfirmCancel.controller' />";
 			document.forms[0].submit();
 			return;
 		} else {
@@ -57,17 +73,17 @@
 		</div>
 
 		<!-- Checkout Start -->
-		<h3>請確認下列訂單訊息：</h3>
 		<!-- 內容 1-->
-		<section>
-			<form>
+		<section style="margin-bottom: 100px">
+			<form method="POST"
+				action="<c:url value='/shoppingCartConfirm.controller' />">
 				<div class="main">
 					<section class="">
 						<div class="container">
 							<div class="row">
 								<div class="col-sm-6 col-sm-offset-3">
 									<h1 class="module-title font-alt">
-										Checkout <i class="fa-solid fa-cart-shopping"></i>
+										請再次 <i class="fa-solid fa-cart-shopping"></i>
 									</h1>
 								</div>
 							</div>
@@ -83,7 +99,6 @@
 												<th class="hidden-xs">單價</th>
 												<th>數量</th>
 												<th>小計</th>
-												<th>移除</th>
 											</tr>
 											<c:forEach var="shoppingItem"
 												items="${ShoppingCart.getShoppingCart()}">
@@ -101,16 +116,11 @@
 													</td>
 													<td><input class="form-control" type="number"
 														onblur="itemTotalChange()" name="updateQty"
-														value='${shoppingItem.value.qty}' max="50" min="1" />
+														value='${shoppingItem.value.qty}' max="50" min="1" readonly/>
 													<td>
 														<h5 class="product-title font-alt" id="itemTotal">${shoppingItem.value.itemTotal}</h5>
 													</td>
-													<td class="pr-remove"><button
-															class="deleteClass btn btn-sm btn-primary" name="prodId"
-															id="${shoppingItem.value.prodItem.prodID}"
-															value="${shoppingItem.value.prodItem.prodID}">
-															<i class="fa fa-times"></i>
-														</button></td>
+													
 												</tr>
 											</c:forEach>
 										</tbody>
@@ -148,12 +158,14 @@
 													<td>${ShoppingCart.getItemAmount()}</td>
 												</tr>
 												<tr>
-													<th>Discount Total :</th>
+													<th>Discount :</th>
 													<td>£2.00</td>
 												</tr>
 												<tr class="shop-Cart-totalprice">
-													<th>Total :</th>
-													<td>${ShoppingCart.getItemAmount()}</td>
+													<th>Total Amount:</th>
+													<td><input type='text' name='totalAmount'
+														value="${ShoppingCart.getItemAmount()}" class="fieldWidth"
+														style="width: 100px;" readonly /></td>
 												</tr>
 											</tbody>
 										</table>
@@ -162,55 +174,85 @@
 									</div>
 								</div>
 							</div>
+							<!-- ---訂購者資料--- -->
+							<div
+								style="display: flex; justify-content: center; margin-bottom: 50px">
+								<h3>---訂購者資料---</h3>
+								<table class="table table-striped table-border checkout-table">
+									<tbody>
+										<tr>
+											<th>姓名 :</th>
+											<td>${Member.memName}</td>
+										</tr>
+										<tr>
+											<th>電話 :</th>
+											<td>${Member.phone}</td>
+										</tr>
+										<tr>
+											<th>E-mail :</th>
+											<td>${Member.eMail}</td>
+										</tr>
+										<tr>
+											<th>地址 :</th>
+											<td>${Member.address}</td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+							<!-- 收件者資料 -->
+							<div
+								style="display: flex; justify-content: center; margin-bottom: 50px">
+								<h3>---收件者資料---</h3>
+								<table class="table table-striped table-border checkout-table">
+									<tbody>
+										<tr>
+											<th>姓名 :</th>
+											<td><input type='text' name='shippingName'
+												value="${Member.memName}" class="fieldWidth"
+												style="width: 200px;" /></td>
+										</tr>
+										<tr>
+											<th>電話 :</th>
+											<td><input type='text' name='shippingPhone'
+												value="${Member.phone}" class="fieldWidth"
+												style="width: 200px;" /></td>
+										</tr>
+										<tr>
+											<th>E-mail :</th>
+											<td><input type='email' name='email'
+												value="${Member.eMail}" class="fieldWidth"
+												style="width: 200px;" /></td>
+										</tr>
+										<tr>
+											<th>地址 :</th>
+											<td><input type='text' name='shippingAddress'
+												value="${Member.address}" class="fieldWidth"
+												style="width: 200px;" /></td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+							<!-- 							選擇付款方式 -->
+							<div>
+								<h3>付款方式:</h3>
+								<label for="貨到付款">貨到付款</label><input type='radio'
+									name='paymentMethod' value="貨到付款" class="fieldWidth"
+									style="width: 200px;" /> <label for="信用卡">信用卡</label><input
+									type='radio' name='paymentMethod' value="信用卡"
+									class="fieldWidth" style="width: 200px;" /> <label for="轉帳">轉帳</label><input
+									type='radio' name='paymentMethod' value="轉帳" class="fieldWidth"
+									style="width: 200px;" />
+							</div>
+							<div id="btnArea" align="center">
 
-							<div
-								style="display: flex; justify-content: center; margin-bottom: 50px">
-								<h3>---訂購者資料---</h3>
-								<table class="table table-striped table-border checkout-table">
-									<tbody>
-										<tr>
-											<th>姓名 :</th>
-											<td>${Member.memName}</td>
-										</tr>
-										<tr>
-											<th>電話 :</th>
-											<td>${Member.phone}</td>
-										</tr>
-										<tr>
-											<th>E-mail :</th>
-											<td>${Member.eMail}</td>
-										</tr>
-										<tr>
-											<th>地址 :</th>
-											<td>${Member.address}</td>
-										</tr>
-									</tbody>
-								</table>
+								<input type="submit" name="submit" id="submit" value="送出訂單"
+									style="margin-right: 20px" /> <input type="reset" name="cancel"
+									id="cancel" value="重填訂單">
 							</div>
-							<div
-								style="display: flex; justify-content: center; margin-bottom: 50px">
-								<h3>---訂購者資料---</h3>
-								<table class="table table-striped table-border checkout-table">
-									<tbody>
-										<tr>
-											<th>姓名 :</th>
-											<td>${Member.memName}</td>
-										</tr>
-										<tr>
-											<th>電話 :</th>
-											<td>${Member.phone}</td>
-										</tr>
-										<tr>
-											<th>E-mail :</th>
-											<td>${Member.eMail}</td>
-										</tr>
-										<tr>
-											<th>地址 :</th>
-											<td>${Member.address}</td>
-										</tr>
-									</tbody>
-								</table>
-							</div>
+							<a href="<c:url value='/shoppingcart.controller' />"
+								class="btn border" style="font-size: 18px"> <i
+								class="fa-solid fa-angles-left"></i>返回
+							</a>
 						</div>
 					</section>
 				</div>

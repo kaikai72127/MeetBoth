@@ -6,6 +6,8 @@ request.getServerPort() + path +
 "/html/assets/images/meatball/meatball-96x96-New.png";
 System.out.println(baseMeetboth96x96); %>
 <c:set value="${CartSize}" var="cartsize" />
+<c:set value="${ShoppingCart}" var="ShoppingCart" />
+<c:set value="${Member}" var="Member" />
 <!-- header -->
 <nav
   class="navbar navbar-custom navbar-fixed-top headershadow"

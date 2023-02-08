@@ -34,6 +34,10 @@ a.ap:hover {
 	color: white;
 }
 </style>
+
+<!-- SweetAlert js -->
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<!-- SweetAlert js -->
 </head>
 
 <!--BOBY-->
@@ -98,9 +102,11 @@ a.ap:hover {
 													<td>
 														<h5 class="product-title font-alt" id="itemTotal">${shoppingItem.value.itemTotal}</h5>
 													</td>
-													<td class="pr-remove"><button class="removeitem"
-															name="prodId" value="${shoppingItem.key}">
-															<i class="fa-solid fa-xmark"></i>
+													<td class="pr-remove"><button
+															class="deleteClass btn btn-sm btn-primary" name="prodId"
+															id="${shoppingItem.value.prodItem.prodID}"
+															value="${shoppingItem.value.prodItem.prodID}">
+															<i class="fa fa-times"></i>
 														</button></td>
 												</tr>
 											</c:forEach>
@@ -135,11 +141,11 @@ a.ap:hover {
 										<table class="table table-striped table-border checkout-table">
 											<tbody>
 												<tr>
-													<th>Cart Subtotal :</th>
-													<td>£40.00</td>
+													<th>Total :</th>
+													<td>${ShoppingCart.getItemAmount()}</td>
 												</tr>
 												<tr>
-													<th>Shipping Total :</th>
+													<th>Discount Total :</th>
 													<td>£2.00</td>
 												</tr>
 												<tr class="shop-Cart-totalprice">
@@ -164,7 +170,7 @@ a.ap:hover {
 										</td>
 										<td width="265" align='center'><a style="display: block"
 											class="ap"
-											href="<c:url value='/shoppingCartConfirm.controller' />"
+											href="<c:url value='/shoppingcartCheck.controller' />"
 											onClick="return Checkout(${subtotal});">再次確認</a></td>
 										<td width="265" align='center'><a style="display: block"
 											class="ap"
@@ -195,16 +201,10 @@ a.ap:hover {
     -->
 	<!-- 引入共同的js -->
 	<jsp:include page="/WEB-INF/html/fragment/jsPath.jsp" />
+
+
+
 	<script type="text/javascript">
-function confirmDelete(n) {
-	if (confirm("確定刪除此項商品 ? ") ) {
-		document.forms[0].action="<c:url value='/_04_ShoppingCart/UpdateItem.do?cmd=DEL&bookId=" + n +"' />" ;
-		document.forms[0].method="POST";
-		document.forms[0].submit();
-	} else {
-	
-	}
-}
 function modify(key, qty, index) {
 	var x = "newQty" + index;
 	var newQty = document.getElementById(x).value;
@@ -248,6 +248,7 @@ function Checkout(qty) {
 		return false;
 	}
 }
+
 function Abort() {
 	if (confirm("確定放棄購物 ? ") ) {
 		return true;
@@ -255,7 +256,73 @@ function Abort() {
 		return false;
 	}
 }
+
 </script>
+
+	<script type="text/javascript">
+// 	$('.checkout').on('click', function () {
+
+// 		$.ajax({
+//             url: '/shoppingCartCheckout.controller',
+//             method: "post",
+//             dataType: "text",
+//             //這邊的"id"是給controller的變數名
+// //             data: { "classId": MyValue },
+//         })
+
+// 	  });
+
+function Abort() {
+	if (confirm("確定放棄購物 ? ")) {
+		return true;
+	} else {
+		return false;
+	}
+}
+
+$('.deleteClass').on('click', function() {
+	var result = confirm('是否確定刪除?');
+	if (result == true) {
+		let MyValue = $(this).attr("id");
+		console.log(MyValue);
+		console.log("---------------"+MyValue);
+		$.ajax({
+			url : '/removeShoppingCartItem.controlle/',
+			method : "get",
+			dataType : "text",
+			//這邊的"id"是給controller的變數名
+			data : {
+				"prodId" : MyValue
+			},
+		}).done(function() {
+			location.reload();
+		})
+	} else {
+		return;
+	}
+});
+
+$(".addtext").change(function() {
+	let MyValue = $(this).attr("id");
+	var inputValue = $(this).val();
+	console.log("---------------"+MyValue);
+	console.log(inputValue);
+	$.ajax({
+		url : '/removeShoppingCartItem.controlle/' + MyValue,
+		method : "post",
+		dataType : "text",
+		//這邊的"id"是給controller的變數名
+		data : {
+			"prodId" : MyValue,
+			"newQty" : inputValue
+		},
+	}).done(function() {
+		location.reload();
+	})
+
+});
+</script>
+
 
 
 	<!-- 	刪除Alert -->

@@ -58,166 +58,168 @@
 
 		<!-- Checkout Start -->
 		<h3>請確認下列訂單訊息：</h3>
-	<!-- 內容 1-->
-		<!-- check out-->
+		<!-- 內容 1-->
 		<section>
-			<div class="main">
-				<section class="">
-					<div class="container">
-						<div class="row">
-							<div class="col-sm-6 col-sm-offset-3">
-								<h1 class="module-title font-alt">
-									Checkout <i class="fa-solid fa-cart-shopping"></i>
-								</h1>
+			<form>
+				<div class="main">
+					<section class="">
+						<div class="container">
+							<div class="row">
+								<div class="col-sm-6 col-sm-offset-3">
+									<h1 class="module-title font-alt">
+										Checkout <i class="fa-solid fa-cart-shopping"></i>
+									</h1>
+								</div>
 							</div>
-						</div>
-						<hr class="divider-w pt-20">
-						<div class="row">
-							<div class="col-sm-12">
+							<hr class="divider-w pt-20">
+							<div class="row">
+								<div class="col-sm-12">
+									<table class="table table-striped table-border checkout-table">
+										<tbody>
+											<tr>
+												<!-- <th class=""><input type="checkbox">All</th> -->
+												<th class="hidden-xs">photo</th>
+												<th>商品名稱</th>
+												<th class="hidden-xs">單價</th>
+												<th>數量</th>
+												<th>小計</th>
+												<th>移除</th>
+											</tr>
+											<c:forEach var="shoppingItem"
+												items="${ShoppingCart.getShoppingCart()}">
+												<tr>
+													<!-- <td class=""><input type="checkbox"></td> -->
+													<td class="hidden-xs"><a
+														href="_03_product.PathToProductDetail.controller?id=${shoppingItem.value.prodItem.prodID}"><img
+															src="<c:url value='/_03_product.showPicture.controller?id=${shoppingItem.value.prodItem.prodID}' />"
+															alt="" style="width: 100px; float: left;"></a></td>
+													<td>
+														<h5 class="product-title font-alt">${shoppingItem.value.prodItem.prodName}</h5>
+													</td>
+													<td class="hidden-xs">
+														<h5 class="product-title font-alt" id="prodPrice">${shoppingItem.value.prodItem.prodPrice}</h5>
+													</td>
+													<td><input class="form-control" type="number"
+														onblur="itemTotalChange()" name="updateQty"
+														value='${shoppingItem.value.qty}' max="50" min="1" />
+													<td>
+														<h5 class="product-title font-alt" id="itemTotal">${shoppingItem.value.itemTotal}</h5>
+													</td>
+													<td class="pr-remove"><button
+															class="deleteClass btn btn-sm btn-primary" name="prodId"
+															id="${shoppingItem.value.prodItem.prodID}"
+															value="${shoppingItem.value.prodItem.prodID}">
+															<i class="fa fa-times"></i>
+														</button></td>
+												</tr>
+											</c:forEach>
+										</tbody>
+									</table>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-sm-3">
+									<div class="form-group">
+										<input class="form-control" type="text" id="" name=""
+											placeholder="Coupon code" />
+									</div>
+								</div>
+								<div class="col-sm-3">
+									<div class="form-group">
+										<button class="btn btn-round btn-p" type="submit">Apply</button>
+									</div>
+								</div>
+								<div class="col-sm-3 col-sm-offset-3">
+									<div class="form-group">
+										<button class="btn btn-block btn-round btn-p pull-right"
+											type="submit">Update Cart</button>
+									</div>
+								</div>
+							</div>
+							<hr class="divider-w">
+							<div class="row mt-70">
+								<div class="col-sm-5 col-sm-offset-7">
+									<div class="shop-Cart-totalbox">
+										<h4 class="font-alt">Cart Totals</h4>
+										<table class="table table-striped table-border checkout-table">
+											<tbody>
+												<tr>
+													<th>Total :</th>
+													<td>${ShoppingCart.getItemAmount()}</td>
+												</tr>
+												<tr>
+													<th>Discount Total :</th>
+													<td>£2.00</td>
+												</tr>
+												<tr class="shop-Cart-totalprice">
+													<th>Total :</th>
+													<td>${ShoppingCart.getItemAmount()}</td>
+												</tr>
+											</tbody>
+										</table>
+										<button class="btn btn-lg btn-block btn-round btn-p"
+											type="submit">Proceed to Checkout</button>
+									</div>
+								</div>
+							</div>
+
+							<div
+								style="display: flex; justify-content: center; margin-bottom: 50px">
+								<h3>---訂購者資料---</h3>
 								<table class="table table-striped table-border checkout-table">
 									<tbody>
 										<tr>
-											<!-- <th class=""><input type="checkbox">All</th> -->
-											<th class="hidden-xs">photo</th>
-											<th>商品名稱</th>
-											<th class="hidden-xs">單價</th>
-											<th>數量</th>
-											<th>小計</th>
-											<th>移除</th>
+											<th>姓名 :</th>
+											<td>${Member.memName}</td>
 										</tr>
-										<c:forEach var="shoppingItem"
-											items="${ShoppingCart.getShoppingCart()}">
-											<tr>
-												<!-- <td class=""><input type="checkbox"></td> -->
-												<td class="hidden-xs"><a href="#"><img
-														src="<c:url value='/_03_product.showPicture.controller?id=${shoppingItem.value.prodItem.prodID}' />"
-														alt="" style="width: 50%; float: left;"></a></td>
-												<td>
-													<h5 class="product-title font-alt">${shoppingItem.value.prodItem.prodName}</h5>
-												</td>
-												<td class="hidden-xs">
-													<h5 class="product-title font-alt" id="prodPrice">${shoppingItem.value.prodItem.prodPrice}</h5>
-												</td>
-												<td><input class="form-control" type="number" onblur="itemTotalChange()"
-													name="updateQty" value='${shoppingItem.value.qty}' max="50"
-													min="1" />
-												<td>
-													<h5 class="product-title font-alt" id="itemTotal">${shoppingItem.value.itemTotal}</h5>
-												</td>
-												<td class="pr-remove"><a href="#" title="Remove"><i
-														class="fa fa-times"></i></a></td>
-											</tr>
-										</c:forEach>
+										<tr>
+											<th>電話 :</th>
+											<td>${Member.phone}</td>
+										</tr>
+										<tr>
+											<th>E-mail :</th>
+											<td>${Member.eMail}</td>
+										</tr>
+										<tr>
+											<th>地址 :</th>
+											<td>${Member.address}</td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+							<div
+								style="display: flex; justify-content: center; margin-bottom: 50px">
+								<h3>---訂購者資料---</h3>
+								<table class="table table-striped table-border checkout-table">
+									<tbody>
+										<tr>
+											<th>姓名 :</th>
+											<td>${Member.memName}</td>
+										</tr>
+										<tr>
+											<th>電話 :</th>
+											<td>${Member.phone}</td>
+										</tr>
+										<tr>
+											<th>E-mail :</th>
+											<td>${Member.eMail}</td>
+										</tr>
+										<tr>
+											<th>地址 :</th>
+											<td>${Member.address}</td>
+										</tr>
 									</tbody>
 								</table>
 							</div>
 						</div>
-						<div class="row">
-							<div class="col-sm-3">
-								<div class="form-group">
-									<input class="form-control" type="text" id="" name=""
-										placeholder="Coupon code" />
-								</div>
-							</div>
-							<div class="col-sm-3">
-								<div class="form-group">
-									<button class="btn btn-round btn-p" type="submit">Apply</button>
-								</div>
-							</div>
-							<div class="col-sm-3 col-sm-offset-3">
-								<div class="form-group">
-									<button class="btn btn-block btn-round btn-p pull-right"
-										type="submit">Update Cart</button>
-								</div>
-							</div>
-						</div>
-						<hr class="divider-w">
-						<div class="row mt-70">
-							<div class="col-sm-5 col-sm-offset-7">
-								<div class="shop-Cart-totalbox">
-									<h4 class="font-alt">Cart Totals</h4>
-									<table class="table table-striped table-border checkout-table">
-										<tbody>
-											<tr>
-												<th>Cart Subtotal :</th>
-												<td>£40.00</td>
-											</tr>
-											<tr>
-												<th>Shipping Total :</th>
-												<td>£2.00</td>
-											</tr>
-											<tr class="shop-Cart-totalprice">
-												<th>Total :</th>
-												<td>£42.00</td>
-											</tr>
-										</tbody>
-									</table>
-									<button class="btn btn-lg btn-block btn-round btn-p"
-										type="submit">Proceed to Checkout</button>
-								</div>
-							</div>
-						</div>
-					</div>
-				</section>
-			</div>
+					</section>
+				</div>
+			</form>
 		</section>
-		
-		<!-- 資料填寫 -->
-		<section>
-			<div>
-				<h3>訂購者資料:</h3>
-				<table>
-					<tbody>
-						<tr>
-							<th>姓名:</th>
-							<td>肉丸網</td>
-						</tr>
-						<tr>
-							<th>Email:</th>
-							<td>abc@gmail.com</td>
-						</tr>
-						<tr>
-							<th>手機號碼:</th>
-							<td>0988888888</td>
-						</tr>
-						<tr>
-							<th>地址:</th>
-							<td>聖德基督學校</td>
-						</tr>
-					</tbody>
-				</table>
-			</div>
-			<div>
-				<h3>收件人資料:</h3>
-				<table>
-					<tbody>
-						<tr>
-							<th>姓名:</th>
-							<td>肉丸網</td>
-						</tr>
-						<tr>
-							<th>Email:</th>
-							<td>abc@gmail.com</td>
-						</tr>
-						<tr>
-							<th>手機號碼:</th>
-							<td>0988888888</td>
-						</tr>
-						<tr>
-							<th>地址:</th>
-							<td>聖德基督學校</td>
-						</tr>
-					</tbody>
-				</table>
-			</div>
-
-
-		</section>
-
-
 		<!-- Footer -->
 		<!-- 引入共同的footerMVC -->
 		<jsp:include page="/WEB-INF/html/fragment/footerMVC.jsp" />
+
 
 	</main>
 

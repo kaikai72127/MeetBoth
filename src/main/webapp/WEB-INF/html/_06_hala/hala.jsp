@@ -4,7 +4,6 @@
 <! DOCTYPE html>
 <html>
 <head>
-<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path
@@ -19,327 +18,291 @@ String basePathimg = request.getScheme() + "://" + request.getServerName() + ":"
 String basePathimg2 = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path
 		+ "/html/images/meatball-200.png";
 %>
-<%
-String basePathimg3 = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path
-		+ "/html/index.jsp";
-%>
-<%
-String basePathimg4 = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path
-		+ "/html/backIndex.jsp";
-%>
-<%
-String basePath1 = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path
-		+ "/html/assets/js/jquery.min.js";
-%>
 
-<%
-String basePath2 = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path
-		+ "/html/assets/js/browser.min.js";
-%>
-
-<%
-String basePath3 = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path
-		+ "/html/assets/js/breakpoints.min.js";
-%>
-
-<%
-String basePath4 = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path
-		+ "/html/assets/js/util.js";
-%>
-
-<%
-String basePath5 = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path
-		+ "/html/assets/js/main.js";
-%>
-<%
-String basePath6 = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path
-		+ "/html/_06_hala/addhala.jsp";
-%>
-<%
-String basePath8 = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path
-		+ "/html/hala/updateHala.jsp";
-%>
 <!-- 引入共同的頁首 -->
-<%-- <%@ include file="/html/backMVC.jsp" %> --%>
-<%-- <jsp:include page="/html/backMVC.jsp" flush="true" /> --%>
-<!-- <meta charset="UTF-8"> -->
-<!-- <title>Insert title here</title> -->
-<title>肉丸家教網 MEET BOTH</title>
-<meta charset="utf-8" />
-<meta name="viewport"
-	content="width=device-width, initial-scale=1, user-scalable=no" />
+<jsp:include page="/WEB-INF/html/fragment/headMVC.jsp" />
+<jsp:include page="/WEB-INF/html/fragment/topMVC.jsp" />
+<jsp:include page="/WEB-INF/html/fragment/jsPath.jsp" />
 
-<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<meta name="robots" content="index,follow" />
-<meta name="description" content="全台最優質最快速方便的家教網" />
-<meta name="author" content="EEIT56-MEETBOTH" />
-<meta name="keywords" content="最棒最優質的家教網" />
-<meta name="copyright" content="肉丸家教網" />
-<link rel="shortcut icon" href="<%=basePathimg%>" />
-<link rel="bookmark" href="<%=basePathimg%>" />
-<link rel="stylesheet" href="<%=basePath%>" />
+
+<style>
+.star-off {
+	color: black;
+}
+
+.tab {
+	width: 110%;
+	border: 5px double gray;
+	border-radius: 10px;
+}
+
+.trr {
+	border: 1px dashed gray
+}
+
+.td1 {
+	padding: 5px;
+	font-size: 18px
+}
+.td11{
+padding: 5px;
+	width:10%;
+}
+.td12{
+padding: 0;
+	width:8%;
+}
+.td13{
+padding: 0;
+	width:40%;
+}
+.td14{
+padding: 0;
+	width:10%;
+}
+.td15{
+padding: 0;
+	width:10%;
+}
+
+.td2 {
+	padding: 5px;
+	font-size: 14px;
+}
+
+input[type="submit"] {
+  margin: 10px;
+}
+
+.btn-container {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.btn-container button {
+  margin-left: 10px;
+}
+
+.long{
+overflow:hidden;
+ 
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 4;
+  box-sizing:border-box;
+}
+</style>
 
 
 </head>
-<body class="is-preload">
-	<!-- Wrapper -->
-	<div id="wrapper">
+<body data-spy="scroll" data-target=".onpage-navigation"
+	data-offset="60">
+	<main>
+		<div class="page-loader">
+			<div class="loader">Loading...</div>
+		</div>
 
-		<div id="main">
-			<div class="inner">
-				<!-- Header -->
-				<header id="header">
-					<h1 class="logo">
-						<strong>管理者介面</strong>
-					</h1>
-				</header>
 
-				<!-- Content -->
-				<section>
-					<header class="main">
-						<h1>全部貼文</h1>
+
+		<!-- 中間欄位開始 -->
+		<div class="main">
+			<!-- 搜尋方式開始 -->
+			<section class="module">
+			
+			
+			
+			
+			
+			
+			
+				<div class="container">
+					<div class="row">
 						<div>
-							<form
-								action="<c:url value='/_06_halaAndQa.goAddHala.controller'/>"
-								method="GET">
-								<input type="submit" value="新增貼文">
-							</form>
+							<div style='width: 40%; text-align: center; margin: 0 auto;'
+								class="widget">
+								<form role="form" method="post"
+									action="<c:url value='/_06_halaAndQa.searchAllLike.controller' />">
+									<div class="search-box">
+										<input name="search" class="form-control" type="text"
+											placeholder="Search..." />
+										<button class="search-btn" type="submit">
+											<i class="fa fa-search"></i>
+										</button>
+									</div>
+								</form>
+							</div>
 						</div>
-					</header>
-					<header>
-						<h4>分類查詢</h4>
-						<form
-							action="<c:url value='/_06_halaAndQa.SelectHalaClass.controller'/>"
-							method="get">
-							<select name="halaclassname" style="width: 40%">
-								<option value="公告">公告</option>
-								<option value="閱讀心得">閱讀心得</option>
-								<option value="資料分享">資料分享</option>
-								<option value="圖書推薦">圖書推薦</option>
-								<option value="教學文章">教學文章</option>
-								<option value="其他">其他</option>
-							</select> <br> <input type="submit">
-						</form>
-					</header>
-					<br>
-					<div class="table-wrapper">
-						<table class="alt">
-							<thead>
-								<tr>
-									<th>貼文編號</th>
-									<th>分類名稱</th>
-									<th>會員編號</th>
-									<th>貼文標題</th>
-									<th>貼文日期</th>
-									<th>貼文內容</th>
-									<th width=80px>修改</th>
-									<th width=80xp>刪除</th>
-								</tr>
-							</thead>
-							<c:forEach var="bean" items="${classList}">
-								<tbody>
-									<tr>
-										<td>${bean.halaid}</td>
-										<td>${bean.halaclassname}</td>
-										<td>${bean.memberid}</td>
-										<td>${bean.title}</td>
-										<td>${bean.postdate}</td>
-										<td>${bean.halacontent}</td>
-										<td><a
-											href="<c:url value='/_06_halaAndQa.GoHalaUpdate.controller?halaid=${bean.halaid}'/>">
-												<input type="button" value="修改">
-										</a></td>
-										<td>
-											<button class="deleteThisHala" name="halaid"
-												value="${bean.halaid}">
-												<i class="fa-solid fa-xmark"></i>
-											</button>
-										</td>
-									</tr>
-								</tbody>
-							</c:forEach>
-						</table>
+						<br>
+						<!-- 搜尋方式結束 -->
+
+						<!-- 表格欄位開始 -->
+						<div class="col-sm-8 col-sm-offset-1" style='width: 80%'>
+							<div class="post">
+								<div class="post-header font-alt">
+									<h2 class="post-title">
+										<a href="#">哈拉區貼文列表</a>
+									</h2>
+									<div class="btn-container">
+  <form action="<c:url value='/_06_halaAndQa.SelectAllHala.controller' />">
+    <button style="float: right" class="btn btn-b btn-circle" type="submit">查詢全部貼文</button>
+  </form>
+  <form action="<c:url value='/_06_halaAndQa.goAddHala.controller' />">
+    <button style="float: right" class="btn btn-b btn-circle" type="submit">發文</button>
+  </form>
+</div>
+								</div>
+								<div>
+  <form method="get" action="<c:url value='/_06_halaAndQa.SelectHalaClass.controller' />">
+    <input type="submit" name="halaclassname" value="公告" style="width: 17%">
+    <input type="submit" name="halaclassname" value="閱讀心得" style="width: 17%">
+    <input type="submit" name="halaclassname" value="資料分享" style="width: 17%">
+    <input type="submit" name="halaclassname" value="圖書推薦" style="width: 17%">
+    <input type="submit" name="halaclassname" value="教學文章" style="width: 17%">
+    <input type="submit" name="halaclassname" value="JAVA" style="width: 17%">
+    <input type="submit" name="halaclassname" value="HTML" style="width: 17%">
+    <input type="submit" name="halaclassname" value="Spring" style="width: 17%">
+    <input type="submit" name="halaclassname" value="SpringBoot" style="width: 17%">
+    <input type="submit" name="halaclassname" value="SpringMVC" style="width: 17%">
+    <input type="submit" name="halaclassname" value="SQL Server" style="width: 17%">
+    <input type="submit" name="halaclassname" value="My SQL" style="width: 17%">
+    <input type="submit" name="halaclassname" value="Hibernate" style="width: 17%">
+    <input type="submit" name="halaclassname" value="VScode" style="width: 17%">
+    <input type="submit" name="halaclassname" value="eclipse" style="width: 17%">
+    <input type="submit" name="halaclassname" value="SpringTool" style="width: 17%">
+    <input type="submit" name="halaclassname" value="JDBC" style="width: 17%">
+    <input type="submit" name="halaclassname" value="Servlet" style="width: 17%">
+    <input type="submit" name="halaclassname" value="JavaScript" style="width: 17%">
+    <input type="submit" name="halaclassname" value="jQuery" style="width: 17%">
+    <input type="submit" name="halaclassname" value="Azure" style="width: 17%">
+    <input type="submit" name="halaclassname" value="RESTful" style="width: 17%">
+    <input type="submit" name="halaclassname" value="c++" style="width: 17%">
+    <input type="submit" name="halaclassname" value="python" style="width: 17%">
+    <input type="submit" name="halaclassname" value="其他" style="width: 17%">
+  </form>
+</div>
+								<div class="post-entry">
+									<table class="tab">
+										<tr class="trr">
+											<td class="td11">圖片</td>
+											<td class="td12">文章分類</td>
+											<td class="td13">標題/內容</td>
+											<td class="td14">讚/瀏覽次數</td>
+											<td class="td15">貼文/修改日期</td>
+										</tr>
+										<c:forEach var="bean" items="${classList}">
+											<tr class="trr">
+												<td><img width='80'
+													src="<c:url value='/_06_halaAndQa.picsave.controller?id=${bean.halaId}' />"></td>
+												<td class="td2"><p>${bean.halaclassname}</p></td>
+												<td class="td2"><a
+													href="<c:url value='/_06_halaAndQa.goHalaPage.controller?halaid=${bean.halaId}'/>">
+														<div class="long">
+															<div >
+																<p>${bean.title}</p>
+															</div>
+															<p >${bean.halacontent}</p>
+														</div>
+												</a></td>
+												<td class="td2"><button id="tumbBtn">讚</button>
+													<p id="tumbhere">讚:${bean.tumb}
+														<input type="hidden" id="tumbid" value="${bean.halaId}">
+													</p>
+                                                    <p id="watch">瀏覽次數:${bean.watch}
+                                                         
+                                                    </p>   												
+													</td>
+												<td class="td2"><p>${bean.postdate}</p></td>
+											</tr>
+										</c:forEach>
+									</table>
+									<div class="pagination font-alt">
+										<a href="#"><i class="fa fa-angle-left"></i></a><a
+											class="active" href="#">1</a><a href="#">2</a><a href="#">3</a><a
+											href="#">4</a><a href="#"><i class="fa fa-angle-right"></i></a>
+									</div>
+								</div>
+							</div>
+						</div>
 					</div>
-				</section>
-			</div>
-		</div>
-
-		<!-- Sidebar -->
-		<div id="sidebar">
-			<div class="inner">
-
-				<!-- Search -->
-				<!-- 				<section id="search" class="alt"> -->
-				<!-- 					<form method="post" action="#"> -->
-				<!-- 						<input type="text" name="query" id="query" placeholder="Search" /> -->
-				<!-- 					</form> -->
-				<!-- 				</section> -->
-
-				<!-- Menu -->
-				<nav id="menu">
-					<header class="major">
-						<h2>
-							<img src="<%=basePathimg2%>" alt="" />
-						</h2>
-					</header>
-
-					<ul>
-						<li><a href="<c:url value='/index.controller' />">首頁 <i class="fa-solid fa-house"></i></a></li>
-						<li><a href="<c:url value='/backIndex.controller' />">後台管理 <i
-								class="fa-solid fa-gears"></i></a></li>
-						<li><a href="<c:url value='/_01_member.admin' />">會員資料 <i
-								class="fa-solid fa-users-viewfinder"></i></a></li>
-						<li><span class="opener">科目地區資料 <i
-								class="fa-solid fa-magnifying-glass-location"></i></span>
-							<ul>
-								<li><a href="<c:url value='/_02_subLocation.SelectAllSub.controller' />">科目搜尋</a>
-								<li><a href="<c:url value='/_02_subLocation.SelectAllLoc.controller' />">地點搜尋</a>
-							</ul></li>
-						<li><a href="<c:url value='/_03_product.searchAllProduct.controller'/>">商品資料 <i
-								class="fa-solid fa-store"></i></a></li>
-						<li><a
-							href="<c:url value='/_04_shoppingCart.SelectAll.controller' />">訂單資料
-								<i class="fa-solid fa-cart-shopping"></i>
-						</a></li>
-						<li><span class="opener">老師學生資料 <i
-								class="fa-solid fa-users"></i></span>
-							<ul>
-								<li><a href="<c:url value='/_05_teacStu.searchAllTeac.controller' />">老師貼文資料</a></li>
-								<li><a href="<c:url value='/_05_teacStu.searchAllStud.controller' />">學生貼文資料</a></li>
-							</ul></li>
-						<li><span class="opener">哈拉區 <i
-								class="fa-solid fa-comments"></i></span>
-							<ul>
-								<li><a href="<c:url value='/_06_halaAndQa.SelectAllHala.controller' />">討論公告區</a></li>
-								<li><a href="<c:url value='/_06_halaAndQa.SelectAllQa.controller' />">Q&A解答區</a></li>
-							</ul></li>
-					</ul>
-					
-				</nav>
-
-
-				<!-- Section -->
-				<section>
-					<header class="major">
-						<h2>聯絡我們</h2>
-					</header>
-					<p>肉丸家教網是一個希望不管是學生還是老師，都能在這裡精進自己，花最少的時間，找到最棒的老師/學生。</p>
-					<ul class="contact">
-						<li class="icon solid fa-envelope"><a href="#">information@untitled.tld</a>
-						</li>
-						<li class="icon solid fa-phone">(000) 000-0000</li>
-						<li class="icon solid fa-home">1234 Somewhere Road #8254<br />
-							Nashville, TN 00000-0000
-						</li>
-					</ul>
-				</section>
-
-				<!-- Footer -->
-				<footer id="footer">
-					<p class="copyright">
-						&copy; Untitled. All rights reserved. Demo Images: <a
-							href="https://unsplash.com">Unsplash</a>. Design: <a
-							href="https://html5up.net">HTML5 UP</a>.
-					</p>
-				</footer>
-			</div>
-		</div>
+				</div>
+			</section>
+			<!-- 表格欄位結束 -->
+			<!-- 中間欄位結束 -->
+	</main>
+	<jsp:include page="/WEB-INF/html/fragment/footerMVC.jsp" />
 	</div>
-
-	<!-- Scripts -->
-
+	<div class="scroll-up">
+		<a href="#totop"><i class="fa fa-angle-double-up"></i></a>
+	</div>
+	</main>
+	<!--  
+    JavaScripts
+    =============================================
+    -->
 	<%
-	String basePathIndex1 = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path
+	String basePath1 = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path
 			+ "/html/assets/js/jquery.min.js";
 	%>
 
 	<%
-	String basePathIndex2 = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path
+	String basePath2 = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path
 			+ "/html/assets/js/browser.min.js";
 	%>
 
 	<%
-	String basePathIndex3 = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path
+	String basePath3 = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path
 			+ "/html/assets/js/breakpoints.min.js";
 	%>
 
 	<%
-	String basePathIndex4 = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path
+	String basePath4 = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path
 			+ "/html/assets/js/util.js";
 	%>
 
 	<%
-	String basePathIndex5 = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path
+	String basePath5 = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path
 			+ "/html/assets/js/main.js";
 	%>
-	<script src=<%=basePathIndex1%>></script>
-	<script src=<%=basePathIndex2%>></script>
-	<script src=<%=basePathIndex3%>></script>
-	<script src=<%=basePathIndex4%>></script>
-	<script src=<%=basePathIndex5%>></script>
+	<script src=<%=basePath1%>></script>
+	<script src=<%=basePath2%>></script>
+	<script src=<%=basePath3%>></script>
+	<script src=<%=basePath4%>></script>
+	<script src=<%=basePath5%>></script>
 	<script src="https://kit.fontawesome.com/25590258af.js"
 		crossorigin="anonymous"></script>
+	
 	<script>
-        $(function(){
-            $('.deleteThisHala').click(function(){
-                let id=$(this).attr("value");
-                Swal.fire({
-                  title: '你確定要刪除嗎?',
-                  text: "將無法恢復此筆貼文!!!",
-                  icon: 'warning',
-                  //icon:  "success", "error", "warning", "info" or "question" 這幾種選項
-                  showCancelButton: true,
-                  confirmButtonColor: 'lightred',
-                  cancelButtonColor: 'lightgrey',
-                  confirmButtonText: '確定刪除'
-//                   cancelButtonText: '取消',
-                }).then((result) => {
-                    if (result.isConfirmed) {
-                        $.ajax({
-                          //專案名稱+servlet
-                          url:'/SpringBoot_Team5/_06_halaAndQa.deketeHala.controller',
-                          method:"get",
-                          dataType:"text",
-                          //對應name設定的名稱 並非value的名稱
-                          data: {"halaid":id},
-                        })
-                            .done(function () {
-                                location.reload();
-                                console.log("delete")
-                             })//done
-                             .fail(function(error) {
-                                 console.log(error)
-                             })//fail end
-                    }//if
-                  })//then
+	const tumbBtn = document.getElementById("tumbBtn");
+	const tumbhere = document.getElementById("tumbhere");
+	var i = 0;
+	tumbBtn.addEventListener("click", function () {
+	    i++;
+	    let currentCount = parseInt(tumbhere.innerHTML);
+	    if (i % 2 == 1) {
+	        tumbhere.innerHTML = currentCount + 1;
+	    } else {
+	        tumbhere.innerHTML = currentCount - 1;
+	    }
+	    console.log(i % 2);
 
-              })//click end
-        });
-        //function end
-    </script>
+	    const tumbid = document.getElementById("tumbid");
+	    let tumbValue = tumbid.value;
+
+	    fetch(`/MeetBoth/tumbhere.controller/${tumbhere.innerHTML}/${tumbValue}`, {
+	        method: 'POST',
+	        headers: {
+	            'Content-Type': 'application/json'
+	        },
+	    })
+	        .then(function (response) {
+	            if (response.status == 200) {
+
+	            }
+	        });
+	});
+	</script>
+	
+	
 </body>
 </html>
-<!--      <td> -->
-<%--                      <Form  action="<c:url value='/Servlet/searchAllTeacServlet' />"  --%>
-<!--                             method="POST"> -->
-<!--                                 教師貼文數量: -->
-<!--                         <select name='qty'> -->
-<!--                            <option value="1">1</option> -->
-<!--                            <option value="2">2</option> -->
-<!--                            <option value="3">3</option> -->
-<!--                            <option value="4">4</option> -->
-<!--                            <option value="5">5</option> -->
-<!--                            <option value="6">6</option> -->
-<!--                            <option value="7">7</option> -->
-<!--                            <option value="8">8</option> -->
-<!--                            <option value="9">9</option> -->
-<!--                            <option value="10">10</option> -->
-<!--                        </select> -->
-<!--                        這些隱藏欄位都會送到後端 -->
-<%--                        <Input type='hidden' name='bookId' value='${entry.value.bookId}'> --%>
-<%--                        <Input type='hidden' name='pageNo' value='${param.pageNo}'> --%>
-<!--                        <label><i class="fa-solid fa-cart-shopping"></i><Input type='submit' value='加入購物車'> -->
-<!--                        </label> -->
-<!--                      </Form> -->
-<!--     </td> -->

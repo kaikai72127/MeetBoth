@@ -1,10 +1,16 @@
 package springTeam5._06_halaAndQa.model;
 
+import java.sql.Blob;
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import org.springframework.stereotype.Component;
@@ -17,7 +23,7 @@ public class HalaBean {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name="HALAID")
-	private Integer halaid;
+	private Integer halaId;
 	
 	@Column(name = "HALACLASSNAME")
 	private String halaclassname;
@@ -33,6 +39,24 @@ public class HalaBean {
 	
 	@Column(name = "HALACONTENT")
 	private String halacontent;
+	
+	@Column(name = "TUMB")
+	private Integer tumb;
+	
+	@Column(name = "TUMBOFF")
+	private Integer tumboff;
+	
+	@Column(name="WATCH")
+	private Integer watch;
+	
+	@Column(name = "PICTURE")
+	private Blob picture;
+	
+    @OneToMany(fetch = FetchType.LAZY,mappedBy = "hala",cascade = CascadeType.ALL)
+    private List<ResponseHalaBean> responseHala;
+    
+    @OneToMany(fetch = FetchType.LAZY,mappedBy = "hala",cascade = CascadeType.ALL)
+    private List<AnswerHalaBean> answerHala;
 	
 
 	public HalaBean() {
@@ -52,7 +76,7 @@ public class HalaBean {
 	public HalaBean(Integer halaid, String halaclassname, Integer memberid, String title, String postdate,
 			String halacontent) {
 		super();
-		this.halaid = halaid;
+		this.halaId = halaid;
 		this.halaclassname = halaclassname;
 		this.memberid = memberid;
 		this.title = title;
@@ -61,13 +85,175 @@ public class HalaBean {
 	}
 
 
-	public Integer getHalaid() {
-		return halaid;
+
+
+
+
+
+	public HalaBean(Integer halaId, String halaclassname, Integer memberid, String title, String postdate,
+			String halacontent, Integer tumb, Integer tumboff, Blob picture) {
+		super();
+		this.halaId = halaId;
+		this.halaclassname = halaclassname;
+		this.memberid = memberid;
+		this.title = title;
+		this.postdate = postdate;
+		this.halacontent = halacontent;
+		this.tumb = tumb;
+		this.tumboff = tumboff;
+		this.picture = picture;
 	}
 
 
-	public void setHalaid(Integer halaid) {
-		this.halaid = halaid;
+
+
+	public List<AnswerHalaBean> getAnswerHala() {
+		return answerHala;
+	}
+
+
+	public void setAnswerHala(List<AnswerHalaBean> answerHala) {
+		this.answerHala = answerHala;
+	}
+
+
+
+	public HalaBean(String halaclassname, Integer memberid, String title, String postdate, String halacontent,
+			Integer tumb, Integer tumboff, Integer watch, Blob picture, List<ResponseHalaBean> responseHala,
+			List<AnswerHalaBean> answerHala) {
+		super();
+		this.halaclassname = halaclassname;
+		this.memberid = memberid;
+		this.title = title;
+		this.postdate = postdate;
+		this.halacontent = halacontent;
+		this.tumb = tumb;
+		this.tumboff = tumboff;
+		this.watch = watch;
+		this.picture = picture;
+		this.responseHala = responseHala;
+		this.answerHala = answerHala;
+	}
+
+
+	public HalaBean(Integer halaId, String halaclassname, Integer memberid, String title, String postdate,
+			String halacontent, Integer tumb, Integer tumboff, Integer watch, Blob picture,
+			List<ResponseHalaBean> responseHala, List<AnswerHalaBean> answerHala) {
+		super();
+		this.halaId = halaId;
+		this.halaclassname = halaclassname;
+		this.memberid = memberid;
+		this.title = title;
+		this.postdate = postdate;
+		this.halacontent = halacontent;
+		this.tumb = tumb;
+		this.tumboff = tumboff;
+		this.watch = watch;
+		this.picture = picture;
+		this.responseHala = responseHala;
+		this.answerHala = answerHala;
+	}
+
+
+	public Integer getWatch() {
+		return watch;
+	}
+
+
+	public void setWatch(Integer watch) {
+		this.watch = watch;
+	}
+
+
+	public HalaBean(Integer halaId, String halaclassname, Integer memberid, String title, String postdate,
+			String halacontent, Integer tumb, Integer tumboff, Blob picture, List<ResponseHalaBean> responseHala,
+			List<AnswerHalaBean> answerHala) {
+		super();
+		this.halaId = halaId;
+		this.halaclassname = halaclassname;
+		this.memberid = memberid;
+		this.title = title;
+		this.postdate = postdate;
+		this.halacontent = halacontent;
+		this.tumb = tumb;
+		this.tumboff = tumboff;
+		this.picture = picture;
+		this.responseHala = responseHala;
+		this.answerHala = answerHala;
+	}
+
+
+	public HalaBean(String halaclassname, Integer memberid, String title, String postdate, String halacontent,
+			Integer tumb, Integer tumboff, Blob picture, List<ResponseHalaBean> responseHala,
+			List<AnswerHalaBean> answerHala) {
+		super();
+		this.halaclassname = halaclassname;
+		this.memberid = memberid;
+		this.title = title;
+		this.postdate = postdate;
+		this.halacontent = halacontent;
+		this.tumb = tumb;
+		this.tumboff = tumboff;
+		this.picture = picture;
+		this.responseHala = responseHala;
+		this.answerHala = answerHala;
+	}
+
+
+	public List<ResponseHalaBean> getResponseHala() {
+		return responseHala;
+	}
+
+
+	public void setResponseHala(List<ResponseHalaBean> responseHala) {
+		this.responseHala = responseHala;
+	}
+
+
+	public void setHalaId(Integer halaId) {
+		this.halaId = halaId;
+	}
+
+
+	public Integer getTumb() {
+		return tumb;
+	}
+
+
+	public void setTumb(Integer tumb) {
+		this.tumb = tumb;
+	}
+
+
+	public Integer getTumboff() {
+		return tumboff;
+	}
+
+
+	public void setTumboff(Integer tumboff) {
+		this.tumboff = tumboff;
+	}
+
+
+	public Blob getPicture() {
+		return picture;
+	}
+
+
+	public void setPicture(Blob picture) {
+		this.picture = picture;
+	}
+
+
+
+
+	public Integer getHalaId() {
+		return halaId;
+	}
+
+
+	public void setHalaid(Integer halaId) {
+		this.halaId = halaId;
 	}
 
 

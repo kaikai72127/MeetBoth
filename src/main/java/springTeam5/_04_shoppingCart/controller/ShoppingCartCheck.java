@@ -25,10 +25,12 @@ import springTeam5._01_member.model.MemberBean;
 import springTeam5._01_member.model.MemberService;
 import springTeam5._03_product.model.Product;
 import springTeam5._03_product.service.ProductService;
+import springTeam5._04_shoppingCart.model.Discount;
 import springTeam5._04_shoppingCart.model.OrderBean;
 import springTeam5._04_shoppingCart.model.OrderItemBean;
 import springTeam5._04_shoppingCart.model.ShoppingCart;
 import springTeam5._04_shoppingCart.service.ShoppingCartMailService;
+import springTeam5._04_shoppingCart.service.impl.DiscountServiceImpl;
 import springTeam5._04_shoppingCart.service.impl.OrderServiceImpl;
 
 @Controller
@@ -45,6 +47,9 @@ public class ShoppingCartCheck {
 	@Autowired
 	private ProductService productService;
 	@Autowired
+	private DiscountServiceImpl discountService;
+	
+	@Autowired
 	private ShoppingCartMailService mailService;
 
 	// 綠界使用
@@ -54,7 +59,7 @@ public class ShoppingCartCheck {
 	@PostMapping("/shoppingCartConfirm.controller")
 	public String processConfirmAction(HttpServletRequest request,
 			SessionStatus sessionStatus, Model model) throws SQLException {
-		HttpSession session = request.getSession(false);
+		HttpSession session = request.getSession(true);
 		log.info("處理訂單之Controller: 開始");
 		
 		// ----------------------
@@ -63,8 +68,8 @@ public class ShoppingCartCheck {
 		int orderNumber = Integer.parseInt(id);
 		System.out.println(orderNumber);
 		OrderBean orderBean = orderService.findByOrderNo(orderNumber).get(0);
-//		orderService.updatePaymentStatus(orderNumber);
-		model.addAttribute("orderBean", orderBean);
+		orderBean.setPaymentMethod(obj.getChoosePayment());
+		orderService.updateOrder(orderBean);
 
 		MemberBean memberbuy = orderBean.getMemberbuy();
 
@@ -95,13 +100,14 @@ public class ShoppingCartCheck {
 		return "_04_shoppingCart/shoppingCartSuccess";
 	}
 
-	// 加入綠界API版本
+	// 加入綠界API 先經過綠界 才會到訂購成功的畫面
 	@PostMapping("/shoppingCartPayConfirm.controller")
 	@ResponseBody
 	public String processConfirmAllAction(@RequestParam(value = "shippingName") String shippingName,
 			@RequestParam(value = "shippingPhone") String shippingPhone,
 			@RequestParam(value = "shippingAddress") String shippingAddress,
-			@RequestParam(value = "email") String email, @RequestParam(value = "paymentMethod") String paymentMethod,
+			@RequestParam(value = "email") String email, @RequestParam(value = "paymentMethod", required = false) String paymentMethod,
+			@RequestParam(value = "discount", required = false) String discount,
 			@RequestParam(value = "totalAmount") Integer totalAmount, HttpServletRequest request,
 			SessionStatus sessionStatus, Model model) throws SQLException {
 		HttpSession session = request.getSession(false);
@@ -130,10 +136,27 @@ public class ShoppingCartCheck {
 		}
 
 		// 先建立一個新的訂單 並存入訂單資料
+		
+		OrderBean orderBean = new OrderBean();
+		Discount discountUse =new Discount();
+		
+		System.out.println("----------------"+discount);
+		
+//		判斷是否有使用discount
+		if(discount!=null) {
+			
+			discountUse = discountService.getDiscountByDiscountNo(discount);
+			Integer discountPrice = (int)Math.round(discountUse.getDiscountPrice());
+			totalAmount=shoppingCart.getItemAmount()-discountPrice;
+			orderBean = new OrderBean(null, memberBean, orderService.getCurrentDate(),
+					orderService.getCurrentDate(), shippingName, shippingPhone, shippingAddress, "處理中", "未付款", "無",
+					paymentMethod, discountUse, totalAmount, null);
+		}else {
+			orderBean = new OrderBean(null, memberBean, orderService.getCurrentDate(),
+					orderService.getCurrentDate(), shippingName, shippingPhone, shippingAddress, "處理中", "未付款", "無",
+					paymentMethod, null, shoppingCart.getItemAmount(), null);
+		}
 
-		OrderBean orderBean = new OrderBean(null, memberBean, orderService.getCurrentDate(),
-				orderService.getCurrentDate(), shippingName, shippingPhone, shippingAddress, "處理中", "未付款", "無",
-				paymentMethod, null, shoppingCart.getItemAmount(), null);
 		orderService.createOrder(orderBean);
 		// 取出存放在購物車內的商品，放入Map型態的變數cart，準備將其內的商品一個一個轉換為OrderItemBean，
 		Map<Integer, OrderItemBean> content = shoppingCart.getShoppingCart();
@@ -149,6 +172,7 @@ public class ShoppingCartCheck {
 			MemberBean memberSale = memberService.searchMemberById(meberSaleId);
 			orderItemBean.setMembersale(memberSale);
 			items.add(orderItemBean);
+			
 
 			// 更新賣家會員資料
 			memberSale.setOrderSale(items);
@@ -169,7 +193,7 @@ public class ShoppingCartCheck {
 
 		// 執行到此，購物車內所有購買的商品已經全部轉換為為OrderItemBean物件，並放在Items內
 		orderBean.setItems(items);
-		// 儲存這個訂單
+		// 更新這個訂單內容存入訂單細項
 		orderService.updateOrder(orderBean);
 
 		// 訂單完成後要更新------------
@@ -178,6 +202,11 @@ public class ShoppingCartCheck {
 		orderBuy.add(orderBean);
 		memberBean.setOrderBuy(orderBuy);
 		memberService.update(memberBean);
+		//更新折扣碼的使用
+		if(discount!=null){
+			discountUse.setOrders(orderBuy);
+			discountService.updateDiscount(discountUse);
+		}
 
 		// 訂購完成寄信給買家確認訂單明細----Email
 		System.out.println(email);

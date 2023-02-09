@@ -76,7 +76,7 @@ button.removeProduct:hover {
 		<!-- 內容 1-->
 		<section style="margin-bottom: 100px">
 			<form method="POST"
-				action="<c:url value='/shoppingCartConfirm.controller' />">
+				action="<c:url value='/shoppingCartPayConfirm.controller' />">
 				<div class="main">
 					<section class="">
 						<div class="container">

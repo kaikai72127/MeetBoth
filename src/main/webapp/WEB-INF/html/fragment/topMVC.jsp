@@ -314,7 +314,7 @@
 									href="<%=request.getContextPath()%>/login/page" class="nav-link dropdown-toggle"
 									data-bs-toggle="dropdown">
 									<img class="rounded-circle me-lg-2"
-										src="html/assets/images/meatball/meatball-32x32.png" alt=""
+										src="<%=request.getContextPath()%>/html/assets/images/meatball/meatball-32x32.png" alt=""
 										style="width: 24px; height: 24px" /> <span class="d-none d-lg-inline-flex">登入<i
 											class="fa-solid fa-right-to-bracket"></i>
 							<li id="logoutBtn" class="nav-item dropdown"><a href="#" class="nav-link dropdown-toggle"

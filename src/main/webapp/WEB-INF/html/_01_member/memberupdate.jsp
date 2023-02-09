@@ -321,6 +321,16 @@
                                                                                     value="${Member.address}" required>
                                                                             </td>
                                                                         </tr>
+                                                                        <tr>
+                                                                            <td style="width: 150px;"><label>權限：</label>
+                                                                            </td>
+                                                                            <td colspan="2"><select name="role">
+                                                                                <option value="user" selected>使用者</option>
+                                                                                <option value="admin">管理員</option>
+                                                                            </select>
+                                                                            </td>
+                                                                        </tr>
+
 
                                                                         <tr height="42">
                                                                             <td colspan='4'>

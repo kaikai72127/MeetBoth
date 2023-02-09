@@ -111,7 +111,7 @@ public class _01_membercontroll {
 		String role = SecurityContextHolder.getContext().getAuthentication().getAuthorities().toArray()[0].toString();
 //		String role = SecurityContextHolder.getContext().getAuthentication().getAuthorities().toString();
 //		UserDetails details = (UserDetails)SecurityContextHolder.getContext().getAuthentication().getDetails();
-		
+//		String role = details.getAuthorities().toString();
 //		String role = "";
 //		for (MemberBean member : list) {
 //			role = member.getRole();
@@ -283,6 +283,8 @@ public class _01_membercontroll {
 			newMem.setPhone(member.getPhone());
 			newMem.setPhoto(check.getPhoto());
 			newMem.setAddress(member.getAddress());
+			newMem.setRole(member.getRole());
+			System.out.println(member.getRole());
 			fileName = mf.getOriginalFilename();
 			if (fileName != null && fileName != "" && fileName.trim().length() > 0) {
 				System.out.println("這有圖?"+fileName);
@@ -323,6 +325,7 @@ public class _01_membercontroll {
 			newMem.setPhone(member.getPhone());
 			newMem.setPhoto(check.getPhoto());
 			newMem.setAddress(member.getAddress());
+			newMem.setRole(member.getRole());
 			fileName = mf.getOriginalFilename();
 			if (fileName != null && fileName != "" && fileName.trim().length() > 0) {
 				System.out.println("這有圖?"+fileName);

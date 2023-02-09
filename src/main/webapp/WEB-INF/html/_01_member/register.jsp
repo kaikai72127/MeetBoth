@@ -32,7 +32,7 @@
 
 									success: function (user) {
 
-										if (user != "" || user != "anonymousUser") {
+										if (user != "" && user != "anonymousUser") {
 											location.href = 'justlogin';
 										}
 									}

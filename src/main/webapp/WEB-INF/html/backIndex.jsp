@@ -1,231 +1,256 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
-	<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-		<! DOCTYPE html>
-			<html>
+    <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+        <! DOCTYPE html>
+            <html>
 
-			<head>
+            <head>
+                <% String path=request.getContextPath(); String basePath=request.getScheme() + "://" +
+                    request.getServerName() + ":" + request.getServerPort() + path + "/html/assets/css/main.css" ; %>
+                    <% String pathimg=request.getContextPath(); String basePathimg=request.getScheme() + "://" +
+                        request.getServerName() + ":" + request.getServerPort() + pathimg
+                        + "/html/images/meatball-icon.png" ; %>
+                        <% String basePathimg2=request.getScheme() + "://" + request.getServerName() + ":" +
+                            request.getServerPort() + path + "/html/images/meatball-200.png" ; %>
 
-				<% String path=request.getContextPath(); String basePath=request.getScheme() + "://" +
-					request.getServerName() + ":" + request.getServerPort() + path + "/html/assets/css/main.css" ; %>
-					<% String pathimg=request.getContextPath(); String basePathimg=request.getScheme() + "://" +
-						request.getServerName() + ":" + request.getServerPort() + pathimg
-						+ "/html/images/meatball-icon.png" ; %>
-						<% String basePathimg2=request.getScheme() + "://" + request.getServerName() + ":" +
-							request.getServerPort() + path + "/html/images/meatball-200.png" ; %>
-							<title>肉丸家教網 MEET BOTH</title>
-							<meta charset="utf-8" />
-							<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+                            <!-- 引入共同的頁首 -->
+                            <jsp:include page="/WEB-INF/html/fragment/headMVC.jsp" />
+                            <%-- <jsp:include page="/WEB-INF/html/fragment/topMVC.jsp" /> --%>
+                            <jsp:include page="/WEB-INF/html/fragment/jsPath.jsp" />
 
-							<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-							<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-							<meta name="robots" content="index,follow" />
-							<meta name="description" content="全台最優質最快速方便的家教網" />
-							<meta name="author" content="EEIT56-MEETBOTH" />
-							<meta name="keywords" content="最棒最優質的家教網" />
-							<meta name="copyright" content="肉丸家教網" />
-							<link rel="shortcut icon" href="<%=basePathimg%>" />
-							<link rel="bookmark" href="<%=basePathimg%>" />
-							<link rel="stylesheet" href="<%=basePath%>" />
-							<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
-							<script>
-								$(function () {
+                            <style>
+                                .star-off {
+                                    color: black;
+                                }
 
-									$.ajax({
-										type: 'POST',
-										url: '_01_member.checklog.controller',
-										contentType: 'application/json',
+                                h1 {
+                                    font-size: 18px;
+                                    font-weight: 700;
+                                    text-align: center;
+                                    margin: 20px 0;
+                                }
 
-										success: function (user) {
+                                .cart>li>a {
+                                    border: 1px solid gray;
+                                    border-radius: 10px;
+                                    color: gray;
+                                    font-weight: 600;
+                                    font-size: 16px;
+                                    padding: 10px;
+                                    text-align: center;
+                                }
 
-											if (user == "" || user == "anonymousUser") {
+                                .cart>li {
+                                    padding-bottom: 10px;
+                                }
 
-												$("#loginBtn").show();
-												$("#logoutBtn").hide();
-											} else {
+                                .cart>li>ul>li>a {
+                                    border: solid 1px gray;
+                                    border-radius: 10px;
+                                    text-align: center;
+                                    font-size: 18px;
+                                }
 
-												$("#loginBtn").hide();
-												$("#logoutBtn").show();
-											}
-										}
-									});
+                                .cart a {
+                                    display: block;
+                                    text-decoration: none;
+                                }
 
-								});
-							</script>
-			</head>
+                                .cart ul {
+                                    display: none;
+                                }
 
-			<body class="is-preload">
-				<!-- Wrapper -->
-				<div id="wrapper">
+                                .cart ul li {
+                                    margin: 10px;
+                                }
 
-					<div id="main">
-						<div class="inner">
-							<!-- Header -->
-							<header id="header">
-								<a href="/backIndex.controller" class="logo"><strong>後台管理系統</strong></a>
-								<ul class="icons">
-									<li id="logincontroll">
-										<button id="loginBtn"
-											onclick="location.href='/SpringBoot_Team5/login/page'">登入</button>
-										<button id="logoutBtn"
-											onclick="location.href='/SpringBoot_Team5/logout'">登出</button>
-									</li>
-									<!-- 						<li><a href="#" class="icon brands fa-twitter"><span -->
-									<!-- 								class="label">Twitter</span></a></li> -->
-									<!-- 						<li><a href="#" class="icon brands fa-facebook-f"><span -->
-									<!-- 								class="label">Facebook</span></a></li> -->
-									<!-- 						<li><a href="#" class="icon brands fa-snapchat-ghost"><span -->
-									<!-- 								class="label">Snapchat</span></a></li> -->
-									<!-- 						<li><a href="#" class="icon brands fa-instagram"><span -->
-									<!-- 								class="label">Instagram</span></a></li> -->
-								</ul>
-							</header>
+                                .cart ul li a {
+                                    color: #000;
+                                }
 
+                                .navbar.navbar-custom.navbar-fixed-top.headershadow {
+                                    background-color: black;
+                                    margin-bottom: 0;
+                                }
 
-							<!-- Content -->
-							<section>
-								<header class="main">
-									<h2>~歡迎使用~</h2>
-								</header>
-								<!-- Search -->
-								<section id="search" class="alt">
-									<form method="post" action="<a herf='www.google.com'>">
-										<input type="text" name="query" id="query" placeholder="Search" />
-									</form>
-								</section>
-							</section>
-							<br>
-							<br>
-							<br>
-							<br>
-							<br>
-							<br>
-							<br>
-							<br>
-							<br>
-							<br>
-							<br>
-							<br>
-							<br>
-							<br>
-						</div>
-					</div>
+                                .navbar.navbar-custom.navbar-fixed-top.headershadow>div>div>img {
+                                    height: 70;
+                                }
 
-					<!-- Sidebar -->
-					<div id="sidebar">
-						<div class="inner">
+                                .nav.navbar-nav.navbar-right>li>a {
+                                    color: white !important;
+                                }
 
-							<!-- Search -->
-							<!-- 				<section id="search" class="alt"> -->
-							<!-- 					<form method="post" action="#"> -->
-							<!-- 						<input type="text" name="query" id="query" placeholder="Search" /> -->
-							<!-- 					</form> -->
-							<!-- 				</section> -->
+                                .fas.fa-shopping-cart.text-primary {
+                                    color: white !important;
+                                }
 
-							<!-- Menu -->
-							<nav id="menu">
-								<header class="major">
-									<h2>
-										<img src="<%=basePathimg2%>" alt="" />
-									</h2>
-								</header>
+                                #ChartData>div>div>div>div>svg>g>text {
+                                    font-size: 22px;
+                                }
 
-								<ul>
-									<li><a href="<c:url value='/index.controller' />">首頁 <i
-												class="fa-solid fa-house"></i></a></li>
-									<li><a href="<c:url value='/backIndex.controller' />">後台管理 <i
-												class="fa-solid fa-gears"></i></a></li>
-									<li><a href="<c:url value='/_01_member.admin.controller' />">會員資料 <i
-												class="fa-solid fa-users-viewfinder"></i></a></li>
-									<li><span class="opener">科目地區資料 <i
-												class="fa-solid fa-magnifying-glass-location"></i></span>
-										<ul>
-											<li><a
-													href="<c:url value='/_02_subLocation.SelectAllSub.controller' />">科目搜尋</a>
-											<li><a
-													href="<c:url value='/_02_subLocation.SelectAllLoc.controller' />">地點搜尋</a>
-										</ul>
-									</li>
-									<li><a href="<c:url value='/_03_product.searchAllProduct.controller'/>">商品資料 <i
-												class="fa-solid fa-store"></i></a></li>
-									<li><a href="<c:url value='/_04_shoppingCart.SelectAll.controller' />">訂單資料
-											<i class="fa-solid fa-cart-shopping"></i>
-										</a></li>
-									<li><span class="opener">老師學生資料 <i class="fa-solid fa-users"></i></span>
-										<ul>
-											<li><a
-													href="<c:url value='/_05_teacStu.searchAllTeac.controller' />">老師貼文資料</a>
-											</li>
-											<li><a
-													href="<c:url value='/_05_teacStu.searchAllStud.controller' />">學生貼文資料</a>
-											</li>
-										</ul>
-									</li>
-									<li><span class="opener">哈拉區 <i class="fa-solid fa-comments"></i></span>
-										<ul>
-											<li><a
-													href="<c:url value='/_06_halaAndQa.SelectAllHala.controller' />">討論公告區</a>
-											</li>
-											<li><a
-													href="<c:url value='/_06_halaAndQa.SelectAllQa.controller' />">Q&A解答區</a>
-											</li>
-										</ul>
-									</li>
-								</ul>
+                                #ChartData>div>div>div>div>svg>g>g>g>text {
+                                    font-size: 17px;
+                                }
 
-							</nav>
+                                .navbar-brand {
+                                    color: white !important;
+                                }
 
+                                p {
+                                    color: white;
+                                    font-size: 25px;
+                                    font-width: 550;
+                                }
+                            </style>
+            </head>
 
-							<!-- Section -->
-							<section>
-								<header class="major">
-									<h2>聯絡我們</h2>
-								</header>
-								<p>肉丸家教網是一個希望不管是學生還是老師，都能在這裡精進自己，花最少的時間，找到最棒的老師/學生。</p>
-								<ul class="contact">
-									<li class="icon solid fa-envelope"><a href="#">information@untitled.tld</a>
-									</li>
-									<li class="icon solid fa-phone">(000) 000-0000</li>
-									<li class="icon solid fa-home">1234 Somewhere Road #8254<br />
-										Nashville, TN 00000-0000
-									</li>
-								</ul>
-							</section>
+            <body data-spy="scroll" data-target=".onpage-navigation" data-offset="60">
+                <main>
+                    <div class="page-loader">
+                        <div class="loader">Loading...</div>
+                    </div>
+                    <div class="main" style="background-color: black;">
+                        <section class="module" style="padding-top: 10px;padding-bottom:0px;">
+                            <div class="container" style="width: 100%; background-color: black;">
+                                <!-- 整頁 -->
+                                <div class="row">
+                                    <!-- 整頁 -->
+                                    <!-- 左邊欄位開始 -->
+                                    <div class="col-sm-4 col-md-3 sidebar" style="width:20%;padding-right:0px;">
+                                        <div class="widget">
+                                            <a href="#"><img src="/MeetBoth/html/assets/images/shop/警告.jpg"
+                                                    style="padding-bottom: 10px;"></a>
+                                            <ul class="cart">
+                                                <li><a href="#" style="color: white;font-size:20px;"
+                                                        class="btn btn-d btn-round">會員管理&ensp;<i
+                                                            class="fa-solid fa-angle-double-down"></i></a>
+                                                    <ul style="">
+                                                        <li><a href="_01_member.admin.controller"
+                                                                style="color: white;font-weight:600;"
+                                                                class="btn btn-d btn-round">所有會員清單</a></li>
+                                                    </ul>
+                                                </li>
+                                                <li><a href="#" style="color: white;font-size:20px;"
+                                                        class="btn btn-d btn-round">商品管理&ensp;<i
+                                                            class="fa-solid fa-angle-double-down"></i></a>
+                                                    <ul style="">
+                                                        <li><a href="#" style="color: white;font-weight:600;"
+                                                                class="btn btn-d btn-round">所有商品清單</a></li>
+                                                    </ul>
+                                                </li>
+                                                <li><a href="#" style="color: white;font-size:20px;"
+                                                        class="btn btn-d btn-round">課程管理&ensp;<i
+                                                            class="fa-solid fa-angle-double-down"></i></a>
+                                                    <ul style="">
+                                                        <li><a href="#" style="color: white;font-weight:600;"
+                                                                class="btn btn-d btn-round">所有課程清單</a></li>
+                                                    </ul>
+                                                </li>
+                                                <li><a href="#" style="color: white;font-size:20px;"
+                                                        class="btn btn-d btn-round">徵才管理&ensp;<i
+                                                            class="fa-solid fa-angle-double-down"></i></a>
+                                                    <ul style="">
+                                                        <li><a href="#" style="color: white;font-weight:600;"
+                                                                class="btn btn-d btn-round">所有貼文清單</a></li>
+                                                    </ul>
+                                                </li>
+                                                <li><a href="#" style="color: white;font-size:20px;"
+                                                        class="btn btn-d btn-round">討論區管理&ensp;<i
+                                                            class="fa-solid fa-angle-double-down"></i></a>
+                                                    <ul style="">
+                                                        <li><a href="#" style="color: white;font-weight:600;"
+                                                                class="btn btn-d btn-round">所有貼文清單</a></li>
+                                                    </ul>
+                                                </li>
+                                                <li><a href="#" style="color: white;font-size:20px;"
+                                                        class="btn btn-d btn-round">購物車管理&ensp;<i
+                                                            class="fa-solid fa-angle-double-down"></i></a>
+                                                    <ul style="">
+                                                        <li><a href="#" style="color: white;font-weight:600;"
+                                                                class="btn btn-d btn-round">所有購物單清單</a></li>
+                                                    </ul>
+                                                </li>
+                                            </ul>
+                                            <a href="#"><img src="/MeetBoth/html/assets/images/shop/警告2.jpg"
+                                                    style="padding-bottom: 10px;"></a>
+                                        </div>
+                                    </div>
+                                    <!-- 左邊欄位結束 -->
+                                    <!-- 						右邊欄位開始 -->
+                                    <div class="col-sm-8 col-sm-offset-1"
+                                        style="margin-left: 20px;width:75%;border-left:solid 1px yellow;">
+                                        <div class="post">
+                                            <!-- 							標題 -->
+                                            <div class="post-thumbnail" style="padding-bottom:0;margin-bottom:0;">
+                                                <h1
+                                                    style="padding-bottom: 0px;margin-bottom:0; text-align: center; font-size: 50px; color:white;">
+                                                    網站資料</h1>
+                                            </div>
+                                            <hr class="divider-w pt-20">
+                                            <!-- 							標題 -->
+                                            <!--       右邊第一部分開始 -->
+                                            <div class="post">
+                                                <div class="post-video embed-responsive embed-responsive-16by9">
+                                                    <div>
+                                                        <p>網站名稱 : 肉丸家教網 MeetBoth</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!--       右邊第一部分結束 -->
+                                            <hr class="divider-w pt-20">
+                                        </div>
+                                    </div>
+                                    <!-- 		右邊欄位結束 -->
+                                </div>
+                            </div>
+                        </section>
+                        <%-- <jsp:include page="/WEB-INF/html/fragment/footerMVC.jsp" /> --%>
+                    </div>
+                    <div class="scroll-up">
+                        <a href="#totop"><i class="fa fa-angle-double-up"></i></a>
+                    </div>
+                </main>
+                <!--  
+    JavaScripts
+    =============================================
+    -->
+                <% String basePath1=request.getScheme() + "://" + request.getServerName() + ":" +
+                    request.getServerPort() + path + "/html/assets/js/jquery.min.js" ; %>
 
-							<!-- Footer -->
-							<footer id="footer">
-								<p class="copyright">
-									&copy; Untitled. All rights reserved. Demo Images: <a
-										href="https://unsplash.com">Unsplash</a>. Design: <a
-										href="https://html5up.net">HTML5 UP</a>.
-								</p>
-							</footer>
-						</div>
-					</div>
-				</div>
+                    <% String basePath2=request.getScheme() + "://" + request.getServerName() + ":" +
+                        request.getServerPort() + path + "/html/assets/js/browser.min.js" ; %>
 
-				<!-- Scripts -->
+                        <% String basePath3=request.getScheme() + "://" + request.getServerName() + ":" +
+                            request.getServerPort() + path + "/html/assets/js/breakpoints.min.js" ; %>
 
-				<% String basePath1=request.getScheme() + "://" + request.getServerName() + ":" +
-					request.getServerPort() + path + "/html/assets/js/jquery.min.js" ; %>
+                            <% String basePath4=request.getScheme() + "://" + request.getServerName() + ":" +
+                                request.getServerPort() + path + "/html/assets/js/util.js" ; %>
 
-					<% String basePath2=request.getScheme() + "://" + request.getServerName() + ":" +
-						request.getServerPort() + path + "/html/assets/js/browser.min.js" ; %>
+                                <% String basePath5=request.getScheme() + "://" + request.getServerName() + ":" +
+                                    request.getServerPort() + path + "/html/assets/js/main.js" ; %>
+                                    <script src=<%=basePath1%>></script>
+                                    <script src=<%=basePath2%>></script>
+                                    <script src=<%=basePath3%>></script>
+                                    <script src=<%=basePath4%>></script>
+                                    <script src=<%=basePath5%>></script>
+                                    <script src="assets/lib/jquery.mb.ytplayer/dist/jquery.mb.YTPlayer.js"></script>
+                                    <script src="https://kit.fontawesome.com/25590258af.js"
+                                        crossorigin="anonymous"></script>
+                                    <script>
+                                            $(document).ready(function () {
+                                                //以ul li包子選單
+                                                $('.cart>li>a').click(function (event) {
+                                                    event.preventDefault();
+                                                    $(this).toggleClass('active');
+                                                    $(this).siblings('ul').slideToggle(500);
+                                                });
+                                                //html以div h3 h5包子選單
+                                                $('.list h3').click(function (event) {
+                                                    $(this).toggleClass('active');
+                                                    $(this).siblings('h5').slideToggle(500);
+                                                });
 
-						<% String basePath3=request.getScheme() + "://" + request.getServerName() + ":" +
-							request.getServerPort() + path + "/html/assets/js/breakpoints.min.js" ; %>
+                                            });
+                                    </script>
 
-							<% String basePath4=request.getScheme() + "://" + request.getServerName() + ":" +
-								request.getServerPort() + path + "/html/assets/js/util.js" ; %>
-
-								<% String basePath5=request.getScheme() + "://" + request.getServerName() + ":" +
-									request.getServerPort() + path + "/html/assets/js/main.js" ; %>
-									<script src=<%=basePath1%>></script>
-									<script src=<%=basePath2%>></script>
-									<script src=<%=basePath3%>></script>
-									<script src=<%=basePath4%>></script>
-									<script src=<%=basePath5%>></script>
-									<script src="https://kit.fontawesome.com/25590258af.js"
-										crossorigin="anonymous"></script>
-			</body>
-
-			</html>
+            </html>

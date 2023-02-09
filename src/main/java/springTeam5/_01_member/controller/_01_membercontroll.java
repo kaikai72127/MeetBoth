@@ -23,6 +23,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
@@ -102,7 +103,7 @@ public class _01_membercontroll {
 	
 //	權限動態控制
 	@ResponseBody
-	@GetMapping("/_01_member.rolecheck.controller")
+	@PostMapping("/_01_member.rolecheck.controller")
 	public String roleRWD() {
 //		String user = "";
 //		user = SecurityContextHolder.getContext().getAuthentication().getName();
@@ -110,10 +111,12 @@ public class _01_membercontroll {
 		String role = SecurityContextHolder.getContext().getAuthentication().getAuthorities().toArray()[0].toString();
 //		String role = SecurityContextHolder.getContext().getAuthentication().getAuthorities().toString();
 //		UserDetails details = (UserDetails)SecurityContextHolder.getContext().getAuthentication().getDetails();
+		
 //		String role = "";
 //		for (MemberBean member : list) {
 //			role = member.getRole();
 //		}
+		System.out.println(role);
 		return role;
 	}	
 	
@@ -185,7 +188,7 @@ public class _01_membercontroll {
 	}
 	
 //	新增
-	@PostMapping("/_01_member.register.controller")
+	@RequestMapping("/_01_member.register.controller")
 	public String register() {
 		return "_01_member/register";
 	}

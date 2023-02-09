@@ -45,9 +45,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	public void configure(HttpSecurity http) throws Exception {
        http
          .authorizeRequests()
-//         .antMatchers("/").permitAll()
-         .antMatchers("/index").permitAll()
-         .antMatchers("/login/page").permitAll()
          .antMatchers(HttpMethod.GET,"/backIndex.controller").hasAnyAuthority("admin")
          .antMatchers(HttpMethod.POST,"/backIndex.controller").hasRole("admin")
          .anyRequest().permitAll()

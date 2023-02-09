@@ -1,8 +1,8 @@
 package springTeam5._01_member.model;
 
-import java.util.Collections;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -18,7 +18,8 @@ public class AuthUserDetialService implements UserDetailsService {
 	@Override
 	public UserDetails loadUserByUsername(String account) throws UsernameNotFoundException {
 		MemberBean member = loginService.MemberLogin(account);
-		return new User(member.getAccount(), member.getPassword(), Collections.emptyList());
+		System.out.println(member.getRole());
+		return new User(member.getAccount(), member.getPassword(), AuthorityUtils.createAuthorityList(member.getRole()));
 	}
 
 }

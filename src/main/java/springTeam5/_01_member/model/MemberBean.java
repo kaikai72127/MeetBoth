@@ -68,7 +68,7 @@ public class MemberBean implements Serializable {
 	private Date registime = new Date();
 	
 	@Column(name = "role")
-	private String role = "Newbie";
+	private String role = "user";
 	
 	public String getRole() {
 		return role;

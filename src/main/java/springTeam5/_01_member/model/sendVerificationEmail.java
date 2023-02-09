@@ -13,7 +13,7 @@ public class sendVerificationEmail {
 
 	public sendVerificationEmail() {
 		String secretKey = "本丸大家族";
-		long expiration = 6000*15; //15分鐘
+		long expiration = 8640000; //8640000一天 90000十五分鐘
 		
 		this.jwtToken = Jwts.builder()
 				.setExpiration(new Date(System.currentTimeMillis()+expiration))

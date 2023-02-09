@@ -54,8 +54,8 @@
 
 								</div>
 								<div class="col-sm-5">
-									<h4 class=" h4-p">沒有帳號嗎？<a
-											href="<%=request.getContextPath()%>/_01_member.register.controller">註冊</a>
+									<h4 class=" h4-p">沒有帳號嗎？<a href="<%=request.getContextPath()%>/mail"
+											target="_blank">註冊</a>
 									</h4>
 
 								</div>

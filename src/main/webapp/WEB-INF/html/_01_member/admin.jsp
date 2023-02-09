@@ -214,7 +214,7 @@
 
                                                         <form:form action="#" method="POST" modelAttribute="Member">
                                                             <button name="register"
-                                                                onclick="this.form.action='01_member.register.controller'">新增會員</button>
+                                                                onclick="this.form.action='01_member.backregister.controller'">新增會員</button>
                                                             <button name="selectAll"
                                                                 onclick="this.form.action='_01_member.selectAll.controller'">取得所有會員</button>
                                                         </form:form>

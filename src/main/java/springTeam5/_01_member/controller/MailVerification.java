@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestAttribute;
@@ -22,7 +23,7 @@ public class MailVerification {
 	private JavaMailSender mailSender;
 	
 	@PostMapping(path = "/mailVerify.controller")
-	public void mailverify(@RequestParam("value") String email) {
+	public String mailverify(@RequestParam("value") String email) {
 		
 		sendVerificationEmail token = new sendVerificationEmail();
 		String jwtToken = token.getJwtToken();
@@ -32,14 +33,15 @@ public class MailVerification {
 		  message.setFrom("meetboth@gmail.com");
 		  message.setTo(email);
 		  message.setSubject("Meet Both Email verification");
-		  message.setText("請在15分鐘內點擊以下網址以驗證您的email: http://localhost:8080/MeetBoth/verify?token=" + jwtToken);
+		  message.setText("請在15分鐘內點擊以下網址以驗證您的email: http://localhost:8080/MeetBoth/verify?email="+email+"&token=" + jwtToken);
 
 		  // 發送郵件
 		  mailSender.send(message);
+		  return "_01_member/mailsend";
 		}
 	
 	@GetMapping(path = "/verify")
-	public String verify(@RequestParam("token") String token) {
+	public String verify(@RequestParam("token") String token, @RequestParam("email") String email, Model m) {
 		try {
 
 			String secretKey = "本丸大家族";
@@ -49,7 +51,8 @@ public class MailVerification {
 			System.out.println("Subject: " + claims.getSubject());
 			System.out.println("Expiration: " + claims.getExpiration());
 			
-			return "errorpages/success";
+			m.addAttribute("member", email);
+			return "_01_member/register";
 		} catch (Exception e) {
 			System.out.println("Invalid Token");
 			return "errorpages/invalid";

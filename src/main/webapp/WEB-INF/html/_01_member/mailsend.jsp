@@ -31,22 +31,10 @@
 						<div class="container">
 							<div class="row">
 								<div class="col-sm-5 col-sm-offset-1 mb-sm-40">
-									<h4 class="font-alt h4-p">開始註冊前，請先驗證信箱</h4>
+									<h5 class="font-alt h5-p">已送出驗證信，請至信箱進行驗證</h5><br>
+									<h5 id="timeBox" class="font-alt h5-p">
+									</h5>
 									<hr class="divider-w mb-10">
-									<form class="form" action="<%=request.getContextPath()%>/mailVerify.controller"
-										method="Post">
-										<div class="form-group">
-											<input class="form-control" style="text-transform: none;" id="mail"
-												type="text" name="value" value='${value}' placeholder="請輸入電子郵件信箱" />
-										</div>
-
-										<div class="form-group">
-											<button class="btn btn-round btn-p">進行驗證</button>
-										</div>
-
-
-									</form>
-
 								</div>
 
 							</div>
@@ -57,7 +45,24 @@
 					<!-- 引入共同的footerMVC -->
 					<jsp:include page="../fragment/footerMVC.jsp" />
 				</main>
-
+				<script type="text/javascript">
+					//設定秒數
+					let count = 5;
+					function countDown() {
+						// 將秒數寫在指定元素中
+						document.getElementById("timeBox").innerHTML = count + "秒後關閉頁面！";
+						// 每次執行就減1
+						count -= 1;
+						// 當 count = 0 時跳轉頁面
+						if (count == 0) {
+							window.close();
+						}
+						// 設定每秒執行1次
+						setTimeout("countDown()", 1000);
+					}
+					// 執行 countDown
+					countDown();
+				</script>
 				<!--  
     JavaScripts
     =============================================

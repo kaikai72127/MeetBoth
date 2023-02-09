@@ -188,13 +188,39 @@ public class _01_membercontroll {
 	}
 	
 //	新增
-	@RequestMapping("/_01_member.register.controller")
+	@RequestMapping("/_01_member.backregister.controller")
 	public String register() {
-		return "_01_member/register";
+		return "_01_member/backregister";
 	}
 	
 	@PostMapping("/_01_member.add.controller")
 	public String add(@ModelAttribute() MemberBean member,@RequestParam("photofile") MultipartFile mf , Model m) throws IOException, SerialException, SQLException {
+		
+		String fileName = "";
+		MemberBean newMember = member;
+		InputStream is = null;
+		String encodePwd = new BCryptPasswordEncoder().encode(member.getPassword());
+		newMember.setPassword(encodePwd);
+		if (ms.searchMemByAccount(member.getAccount()).size() == 0) {
+			fileName = mf.getOriginalFilename();
+			if (fileName != null && fileName.trim().length() > 0) {
+				long size = mf.getSize();
+				is = mf.getInputStream();
+				byte[] b = new byte[(int) size];
+				SerialBlob sb = null;
+				is.read(b);
+				sb = new SerialBlob(b);
+				newMember.setPhoto(sb);
+				ms.add(newMember);
+			}else {
+				ms.add(newMember);
+			}
+		}
+		return "redirect:/";
+	}
+	
+	@PostMapping("/_01_member.backadd.controller")
+	public String backadd(@ModelAttribute() MemberBean member,@RequestParam("photofile") MultipartFile mf , Model m) throws IOException, SerialException, SQLException {
 		
 		String fileName = "";
 		MemberBean newMember = member;

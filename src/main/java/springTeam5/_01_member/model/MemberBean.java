@@ -3,8 +3,10 @@ package springTeam5._01_member.model;
 import java.io.Serializable;
 import java.sql.Blob;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.LinkedHashSet;
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -18,6 +20,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import org.springframework.stereotype.Component;
+
+import springTeam5._05_teacStu.model.TeacBean;
 
 import springTeam5._04_shoppingCart.model.OrderBean;
 import springTeam5._04_shoppingCart.model.OrderItemBean;
@@ -74,6 +78,9 @@ public class MemberBean implements Serializable {
 		
 	@Column(name = "registime")
 	private Date registime = new Date();
+	
+	@OneToMany(mappedBy = "member")
+	private List<TeacBean> teacBean = new ArrayList<>();
 	
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "memberbuy",cascade = CascadeType.ALL)
 	private Set<OrderBean> orderBuy = new LinkedHashSet<OrderBean>(); // itemsList
@@ -248,6 +255,14 @@ public class MemberBean implements Serializable {
 
 	public void setRegistime(Date date) {
 		this.registime = date;
+	}
+	
+	public List<TeacBean> getTeacBean() {
+		return teacBean;
+	}
+
+	public void setTeacBean(List<TeacBean> teacBean) {
+		this.teacBean = teacBean;
 	}
 	
 	

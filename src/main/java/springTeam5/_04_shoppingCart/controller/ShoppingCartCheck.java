@@ -102,7 +102,7 @@ public class ShoppingCartCheck {
 	}
 
 	// 加入綠界API 先經過綠界 才會到訂購成功的畫面
-	@PostMapping("/shoppingCartPayAioConfirm.controller")
+	@PostMapping("/shoppingCartPayConfirm.controller")
 	@ResponseBody
 	public String processConfirmAllAction(@RequestParam(value = "shippingName") String shippingName,
 			@RequestParam(value = "shippingPhone") String shippingPhone,
@@ -138,6 +138,7 @@ public class ShoppingCartCheck {
 
 		// 先建立一個新的訂單 並存入訂單資料
 		
+		System.out.println("---------------------------------------開始確認訂單");
 		OrderBean orderBean = new OrderBean();
 		Discount discountUse =new Discount();
 		

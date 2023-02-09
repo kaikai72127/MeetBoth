@@ -368,52 +368,32 @@ System.out.println(baseMeetboth96x96); %>
           </a>
         </li>
 
-        <!--Navbar橫幅 Login會員登入 -->
-        <li class="nav-item dropdown">
-          <a
-            href="<c:url value='./login.jsp' />"
-            class="nav-link dropdown-toggle"
-            data-bs-toggle="dropdown"
-          >
-            <img
-              class="rounded-circle me-lg-2"
-              src="assets/images/favicon.png"
-              alt=""
-              style="width: 24px; height: 24px"
-            />
-            <span class="d-none d-lg-inline-flex"
-              >Login <i class="fa-solid fa-right-to-bracket"></i>口愛狗凍
-            </span>
-          </a>
-          <ul
-            class="dropdown-menu dropdown-menu-end bg-light border-0 rounded-0 rounded-bottom m-0"
-          >
-            <li>
-              <a href="#" class="dropdown-item"
-                >My Profile <i class="fa-solid fa-user"></i
-              ></a>
-            </li>
-            <li>
-              <a href="#" class="dropdown-item"
-                >SETTING
-                <i class="fa-solid fa-screwdriver-wrench"></i>
-              </a>
-            </li>
-            <li>
-              <a href="#" class="dropdown-item"
-                >Log Out <i class="fa-solid fa-right-from-bracket"></i>
-              </a>
-            </li>
-            <li>
-              <a
-                href="/MeetBoth/_03_product/pathToMyPDP.controller"
-                class="dropdown-item"
-                >我的賣場 <i class="fa-solid fa-right-from-bracket"></i>
-              </a>
-            </li>
-          </ul>
-        </li>
-      </ul>
-    </div>
-  </div>
+				<!--Navbar橫幅 Login會員登入 -->
+				<li class="nav-item dropdown"><a href="<c:url value='./login.jsp' />"
+					class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
+						<img class="rounded-circle me-lg-2"
+						src="assets/images/favicon.png" alt=""
+						style="width: 24px; height: 24px" /> <span
+						class="d-none d-lg-inline-flex">Login <i
+							class="fa-solid fa-right-to-bracket"></i>口愛狗凍
+					</span>
+				</a>
+					<ul
+						class="dropdown-menu dropdown-menu-end bg-light border-0 rounded-0 rounded-bottom m-0">
+						<li><a href="#" class="dropdown-item">My Profile <i
+								class="fa-solid fa-user"></i></a></li>
+						<li><a href="#" class="dropdown-item">SETTING
+								<i class="fa-solid fa-screwdriver-wrench"></i>
+						</a></li>
+						<li><a href="#" class="dropdown-item">Log
+								Out <i class="fa-solid fa-right-from-bracket"></i>
+						</a></li>
+						<li><a href="/MeetBoth/_03_product/pathToMyPDP.controller" class="dropdown-item">我的賣場 <i class="fa-solid fa-right-from-bracket"></i>
+						</a></li>
+						<li><a href="/MeetBoth/_03_product.index.controller" class="dropdown-item">後臺管理 <i class="fa-solid fa-right-from-bracket"></i>
+						</a></li>
+					</ul></li>
+			</ul>
+		</div>
+	</div>
 </nav>

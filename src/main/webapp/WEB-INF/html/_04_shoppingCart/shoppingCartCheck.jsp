@@ -76,7 +76,7 @@ button.removeProduct:hover {
 		<!-- 內容 1-->
 		<section style="margin-bottom: 100px">
 			<form method="POST"
-				action="<c:url value='/shoppingCartConfirm.controller' />">
+				action="<c:url value='/shoppingCartPayConfirm.controller' />">
 				<div class="main">
 					<section class="">
 						<div class="container">
@@ -116,11 +116,12 @@ button.removeProduct:hover {
 													</td>
 													<td><input class="form-control" type="number"
 														onblur="itemTotalChange()" name="updateQty"
-														value='${shoppingItem.value.qty}' max="50" min="1" readonly/>
+														value='${shoppingItem.value.qty}' max="50" min="1"
+														readonly />
 													<td>
 														<h5 class="product-title font-alt" id="itemTotal">${shoppingItem.value.itemTotal}</h5>
 													</td>
-													
+
 												</tr>
 											</c:forEach>
 										</tbody>
@@ -130,13 +131,19 @@ button.removeProduct:hover {
 							<div class="row">
 								<div class="col-sm-3">
 									<div class="form-group">
-										<input class="form-control" type="text" id="" name=""
-											placeholder="Coupon code" />
+										<input class="form-control" type="text" id="discount"
+											name="discount" placeholder="Coupon code" value=""/>
 									</div>
 								</div>
-								<div class="col-sm-3">
+								<div class="col-sm-2">
 									<div class="form-group">
-										<button class="btn btn-round btn-p" type="submit">Apply</button>
+										<button class="btn btn-round btn-p" type="submit"
+											id="checkDiscount" style="margin: 0">Apply</button>
+									</div>
+								</div>
+								<div class="col-sm-2" style="margin: 0">
+									<div class="form-group">
+										<p style="font-size: 16px" id="discountShow"></p>
 									</div>
 								</div>
 								<div class="col-sm-3 col-sm-offset-3">
@@ -246,8 +253,8 @@ button.removeProduct:hover {
 							<div id="btnArea" align="center">
 
 								<input type="submit" name="submit" id="submit" value="送出訂單"
-									style="margin-right: 20px" /> <input type="reset" name="cancel"
-									id="cancel" value="重填訂單">
+									style="margin-right: 20px" /> <input type="reset"
+									name="cancel" id="cancel" value="重填訂單">
 							</div>
 							<a href="<c:url value='/shoppingcart.controller' />"
 								class="btn border" style="font-size: 18px"> <i
@@ -271,7 +278,30 @@ button.removeProduct:hover {
     -->
 	<!-- 引入共同的js -->
 	<jsp:include page="/WEB-INF/html/fragment/jsPath.jsp" />
-
+	<!--     判斷是否可以使用折扣碼 -->
+	<script>
+		$('#checkDiscount').on('click', function(e) {
+			e.preventDefault();
+			let discountNo = $('#discount').val()
+			$.ajax({
+				type : "GET",
+				url : 'discountCheck.controller',
+				dataType : "text",
+				data : {
+					//controller設定的名稱
+					"discountNo" : discountNo,
+				},
+				success : function(check) {
+					if (check == 'OK') {
+						$('#discountShow').text('折扣碼可以使用')
+					} else {
+						$('#discountShow').text('不可以使用請重新輸入')
+						$('#discount').val('')
+					}
+				}
+			})
+		})
+	</script>
 
 
 </body>

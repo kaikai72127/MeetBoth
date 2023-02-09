@@ -15,7 +15,7 @@ public class TestController {
 	@GetMapping("/testS.controller")
 	public String processAdminAction(HttpSession session) {
 		System.out.println(orderServiceImpl.findByOrderNo(1).toString());
-		return "_04_shoppingCart/shoppingCartCheck";
+		return "_04_shoppingCart/shoppingCartSuccess";
 	}
 
 }

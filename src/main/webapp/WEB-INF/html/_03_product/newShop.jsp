@@ -355,10 +355,10 @@ String basePathimg2 = request.getScheme() + "://" + request.getServerName() + ":
 					class="btn btn-success btn-circle"
 					style="font-size: 17px; color: black;"
 					onclick="window.location='/MeetBoth/_03_product.searchRandomProduct.controller'">
-				&nbsp; <input type="button" value="新增商品"
-					class="btn btn-warning btn-circle"
-					style="font-size: 17px; color: black;"
-					onclick="window.location='/MeetBoth/_03_product.pathToInsertProduct.controller'">
+				<!-- 				&nbsp; <input type="button" value="新增商品" -->
+				<!-- 					class="btn btn-warning btn-circle" -->
+				<!-- 					style="font-size: 17px; color: black;" -->
+				<!-- 					onclick="window.location='/MeetBoth/_03_product.pathToInsertProduct.controller'"> -->
 			</div>
 			<!-- 			上方按鈕導覽 -->
 			<section class="module-small" style="padding-top: 0px;">
@@ -417,7 +417,8 @@ String basePathimg2 = request.getScheme() + "://" + request.getServerName() + ":
 					</div>
 					<div class="row">
 						<div class="col-sm-12">
-							<div class="pagination font-alt">
+							<div class="pagination font-alt"
+								style="margin: auto; display: flex; justify-content: center;">
 								<a href="#"><i class="fa fa-angle-left"></i></a><a
 									class="active" href="#">1</a><a href="#">2</a><a href="#">3</a><a
 									href="#">4</a><a href="#"><i class="fa fa-angle-right"></i></a>

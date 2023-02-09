@@ -43,16 +43,109 @@ public class ProductController {
 
 	@Autowired
 	private ProductCommentService pcService;
-//	-----------------------------刻版-----------------------
-	@GetMapping("/_03_product.pathToYTplayer.controller")
-	public String processpathToYTplayerAction(Model mProd) {
-		return "_03_product/ytPlayer";
-	}
+//	-----------------------------後台-----------------------
+//	導到後台
 	@GetMapping("/_03_product.index.controller")
-	public String processpathToYTplayer2Action(Model mProd) {
+	public String processpathToYTplayerAction(Model mProd) {
 		return "_03_product/MBCMS";
 	}
+	
+//	導到後台insert
+	@GetMapping("/_03_product.MBinsertProd.controller")
+	public String processpathToMBinsertPordAction() {
+		return "_03_product/MBinsertProd";
+	}
+	
+	@PostMapping("/_03_product.MBinsertProdAction.controller")
+	public String processMBinsertPordAction(
+			@RequestParam("pst")String prodState,
+			@RequestParam("pna")String prodName,
+			@RequestParam("pty")Integer prodType,
+			@RequestParam("ppr")Integer prodPrice,
+			@RequestParam("pmid")Integer memID,
+			@RequestParam("pinvt")Integer prodInvt,
+			@RequestParam("pps")Integer prodSales,
+			@RequestParam("pch")Integer prodCheck,
+			@RequestParam("pPic") MultipartFile file,
+			@RequestParam("pdr")String prodDir
+			) throws IOException, SQLException {
+		Blob image = null;
+		InputStream in = file.getInputStream();
+		long size = file.getSize();
+		image = fileToBlob(in, size);
 
+		ProdType currentProdType = ptService.findByProdclass(prodType);
+		Product newProd = new Product();
+
+		newProd.setProdState(prodState);
+		newProd.setProdName(prodName);
+		newProd.setProdtype(currentProdType);
+		newProd.setProdPrice(prodPrice);
+		newProd.setMemberID(memID);
+		newProd.setInventory(prodInvt);
+		newProd.setProdPost(getCurrentDate());
+		newProd.setProdUpdate(getCurrentDate());
+		newProd.setProdSales(prodSales);
+		newProd.setProdCheck(prodCheck);
+		newProd.setProdImg(image);
+		newProd.setDirections(prodDir);
+
+		LinkedHashSet<Product> prods = new LinkedHashSet<Product>();
+		prods.add(newProd);
+		currentProdType.setProduct(prods);
+
+		ptService.insertProduct(currentProdType);
+		
+		return "redirect:_03_product.productindex.controller";
+	}
+	@GetMapping("/_03_product.pathToMBinsertProd.controller")
+	public String processpathToMBinsertProdAction(Model m,@RequestParam("id")Integer prodid) throws SQLException {
+		Product p = pService.searchSingleProductFromProdID(prodid);
+		m.addAttribute("prod",p);
+		return "_03_product/MBupdateProd";
+	}
+	
+	@PostMapping("/_03_product.MBupdateProdAction.controller")
+	public String processMBupdatePordAction(
+			@RequestParam("pst")String prodState,
+			@RequestParam("pna")String prodName,
+			@RequestParam("pid")Integer prodID,
+			@RequestParam("pty")Integer prodType,
+			@RequestParam("ppr")Integer prodPrice,
+			@RequestParam("pmid")Integer memID,
+			@RequestParam("pinvt")Integer prodInvt,
+			@RequestParam("pps")Integer prodSales,
+			@RequestParam("pch")Integer prodCheck,
+			@RequestParam("pPic") MultipartFile file,
+			@RequestParam("pdr")String prodDir
+			) throws IOException, SQLException {
+			Blob image = null;
+
+			InputStream in = file.getInputStream();
+			long size = file.getSize();
+			image = fileToBlob(in, size);
+
+			ProdType pType = ptService.findByProdclass(prodType);
+			Product prod = pService.searchSingleProductFromProdID(prodID);
+			prod.setProdState(prodState);
+			prod.setProdName(prodName);
+			prod.setProdPrice(prodPrice);
+			prod.setMemberID(memID);
+			prod.setInventory(prodInvt);
+			prod.setDirections(prodDir);
+			prod.setProdSales(prodSales);
+			prod.setProdCheck(prodCheck);
+			prod.setProdUpdate(getCurrentDate());
+			prod.setProdtype(pType);
+			if (size != 0) {
+				prod.setProdImg(image);
+				pService.updateProd(prod);
+			} else {
+				pService.updateProd(prod);
+			}
+		
+		return "redirect:_03_product.productindex.controller";
+	}
 //	---------------------------小工具們-----------------------
 //	fileToBlob
 	public Blob fileToBlob(InputStream is, long size) throws IOException, SQLException {
@@ -322,11 +415,17 @@ public class ProductController {
 		return "redirect:_03_product.searchAllProduct.controller";
 	}
 
-//	delete
+//	前台delete
 	@PostMapping("/_03_product.deleteProductById.controller")
 	public String processDeleteProductByIdAction(@RequestParam("id") Integer id) {
 		pService.deleteProdFromProdID(id);
 		return "redirect:_03_product.searchAllProduct.controller";
+	}
+//	後台delete
+	@PostMapping("/_03_product.MBdeleteProductById.controller")
+	public String processMBDeleteProductByIdAction(@RequestParam("id") Integer id) {
+		pService.deleteProdFromProdID(id);
+		return "redirect:_03_product.productindex.controller";
 	}
 
 //	模糊搜尋(前台)

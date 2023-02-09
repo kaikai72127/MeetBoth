@@ -96,8 +96,17 @@ String basePathimg2 = request.getScheme() + "://" + request.getServerName() + ":
 													name="prodClass"
 													style="width: 80%; font-size: 20px; letter-spacing: 0px; border: 1px solid black; border-radius: 15px; text-align: center;">
 													<option value="1">文具</option>
-													<option value="2">書籍資料</option>
-													<option value="3">線上課程</option>
+													<option value="2">教具</option>
+													<option value="3">運動用品</option>
+													<option value="4">辦公用品</option>
+													<option value="5">全新教科書</option>
+													<option value="6">全新好數</option>
+													<option value="7">二手教科書</option>
+													<option value="8">二手好書</option>
+													<option value="9">桌上小物</option>
+													<option value="10">教室小物</option>
+													<option value="11">3c小物</option>
+													<option value="12">益智小物</option>
 												</select>
 											</div>
 										</div>

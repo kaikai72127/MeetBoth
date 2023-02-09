@@ -274,6 +274,8 @@ System.out.println(baseMeetboth96x96);
 						</a></li>
 						<li><a href="/MeetBoth/_03_product/pathToMyPDP.controller" class="dropdown-item">我的賣場 <i class="fa-solid fa-right-from-bracket"></i>
 						</a></li>
+						<li><a href="/MeetBoth/_03_product.index.controller" class="dropdown-item">後臺管理 <i class="fa-solid fa-right-from-bracket"></i>
+						</a></li>
 					</ul></li>
 			</ul>
 		</div>

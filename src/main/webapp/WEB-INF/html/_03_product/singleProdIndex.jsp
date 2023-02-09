@@ -211,6 +211,10 @@ a:hover {
 												href="/MeetBoth/_03_product.productindex.controller"
 												style="color: white; font-weight: 600;"
 												class="btn btn-d btn-round">所有商品清單</a></li>
+												<li><a
+												href="/MeetBoth/_03_product.MBinsertProd.controller"
+												style="color: white; font-weight: 600;"
+												class="btn btn-d btn-round">新增商品</a></li>
 										</ul></li>
 									<li><a href="#" style="color: white; font-size: 20px;"
 										class="btn btn-d btn-round">課程管理&ensp;<i
@@ -263,12 +267,14 @@ a:hover {
 								<div class="post">
 									<div class="post-video embed-responsive embed-responsive-16by9"
 										style="height: auto; padding-bottom: 100px;">
-										<div style="display:flex">
+										<div style="display: flex">
 											<span>商品資料 :&ensp;</span>
 										</div>
-										<div style="display:flex">
-											<button class="MBbtn">修改</button>
-											<button class="MBbtn">刪除</button>
+										<div style="display: flex">
+											<button class="MBbtn" onclick="window.location='/MeetBoth/_03_product.productindex.controller'">返回</button>
+											<button class="MBbtn" onclick="window.location='/MeetBoth/_03_product.pathToMBinsertProd.controller?id=${prod.prodID}'">修改</button>
+											<button class="MBbtn" id="deleteThisProduct"
+												name="${prod.prodID}">刪除</button>
 										</div>
 										<div>
 											<span>商品狀態 :&ensp;${prod.prodState}</span>
@@ -279,7 +285,7 @@ a:hover {
 										<div>
 											<span>商品名稱 :&ensp;${prod.prodName}</span>
 										</div>
-										<div style="display:flex;">
+										<div style="display: flex;">
 											<span>商品圖片 :&ensp;</span>
 											<div
 												style="width: 150px; height: 200px; display: flex; justify-content: center; align-items: center; text-align: center;">
@@ -313,15 +319,16 @@ a:hover {
 											<span>瀏覽次數 :&ensp;${prod.prodCheck}</span>
 										</div>
 										<div>
-											<textarea style="margin-left:10px;resize: none; height: 325px; width: 975px; overflow-y: auto; overflow-y: auto; font-size: 17px; color: white;background-color:black;"
+											<textarea
+												style="margin-left: 10px; resize: none; height: 325px; width: 975px; overflow-y: auto; overflow-y: auto; font-size: 17px; color: white; background-color: black;"
 												readonly>${prod.directions}</textarea>
 										</div>
-										
+
 										<div>
-											<div>
+											<div id="commentDiv">
 												<span>商品評論 :&ensp;</span>
 											</div>
-											<div>
+											<div id="commentTable">
 												<table style="color: white; text-align: center;"
 													class="prodtable">
 													<thead>
@@ -336,7 +343,7 @@ a:hover {
 															<th style="border-right: none"></th>
 														</tr>
 													</thead>
-													<tbody>
+													<tbody id="commentBody">
 														<c:forEach var="commBean" items="${prod.productComment}">
 															<tr>
 																<td style="">${commBean.commentID}</td>
@@ -405,6 +412,9 @@ a:hover {
 	<script src=<%=basePath3%>></script>
 	<script src=<%=basePath4%>></script>
 	<script src=<%=basePath5%>></script>
+	<!-- SweetAlert js -->
+	<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+	<!-- SweetAlert js -->
 	<script type="text/javascript"
 		src="https://www.gstatic.com/charts/loader.js"></script>
 	<script src="assets/lib/jquery.mb.ytplayer/dist/jquery.mb.YTPlayer.js"></script>
@@ -443,14 +453,14 @@ a:hover {
                     if (result.isConfirmed) {
                         $.ajax({
                           //專案名稱+servlet
-                         url:'/MeetBoth/_03_product.deleteProductById.controller',
+                         url:'/MeetBoth/_03_product.MBdeleteProductById.controller',
                           method:"post",
                           dataType:"text",
                           //對應name設定的名稱 並非value的名稱
                           data: {"id":id},
                         })
                             .done(function () {
-                            	window.location='/MeetBoth/_03_product.searchAllProduct.controller'
+                            	window.location='/MeetBoth/_03_product.productindex.controller'
                                 console.log("delete")
                              })//done
                              .fail(function(error) {
@@ -463,4 +473,21 @@ a:hover {
         });
         //function end
     </script>
+
+	<script>
+    window.onload = function() {
+    	var tbody = document.getElementById("commentBody")
+    	var div = document.getElementById("commentDiv")
+    	var div2 = document.getElementById("commentTable")
+        if (tbody.innerHTML.trim()==='') {
+          div.innerHTML = "<span>商品評論 :&ensp;</span><span>沒有商品評論評論</span>";
+          div2.innerHTML = "";
+        }
+    	};
+    
+  
+</script>
+
+
+
 </html>

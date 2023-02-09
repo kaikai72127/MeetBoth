@@ -59,9 +59,9 @@ String basePathimg2 = request.getScheme() + "://" + request.getServerName() + ":
 						<div class="row">
 							<!-- 						圖片BLOCK -->
 							<div class="col-sm-6 mb-sm-40" style="width: 42%;">
-								<span class="amount">上傳商品照片</span> <input type="file"
-									name="pPic" id="images5278" style="width: 80%"
-									accept=".jpg,.png"> <img id="preImg" style="" src="#" />
+								<span class="amount">上傳商品照片</span> 
+								<input type="file"name="pPic" id="images5278" style="width: 80%"accept=".jpg,.png"> 
+									<img id="preImg" style="" src="#" />
 							</div>
 							<!-- 							圖片右邊BLOCK -->
 							<div class="col-sm-6" style="margin-top: 68px; width: 58%">
@@ -88,9 +88,9 @@ String basePathimg2 = request.getScheme() + "://" + request.getServerName() + ":
 												<option value="3">運動用品</option>
 												<option value="4">辦公用品</option>
 												<option value="5">全新教科書</option>
-												<option value="6">全新課外讀物</option>
+												<option value="6">全新好書</option>
 												<option value="7">二手教科書</option>
-												<option value="8">二手課外讀物</option>
+												<option value="8">二手好書</option>
 												<option value="9">桌上小物</option>
 												<option value="10">教室小物</option>
 												<option value="11">3c小物</option>

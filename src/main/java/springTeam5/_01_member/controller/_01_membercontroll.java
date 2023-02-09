@@ -246,6 +246,12 @@ public class _01_membercontroll {
 	}
 	
 //	修改
+	@GetMapping(path = "/_01_member.membercenter.controller")
+	public String membercenter(@RequestParam("account") String account, Model m) {
+		List<MemberBean> list = ms.searchMemByAccount(account);
+		m.addAttribute("Member", list);
+		return "_01_member/frontmemberupdate";
+	}
 	
 	@PostMapping(path = "/_01_member.preupdate.controller")
 	public String preupdate(@RequestParam("preupdate") int memberID, Model m) {
@@ -294,6 +300,46 @@ public class _01_membercontroll {
 			}
 		}
 		return "redirect:/_01_member.admin.controller";
+	}
+	@PostMapping(path = "/_01_member.frontupdate.controller")
+	public String frontupdate(@ModelAttribute() MemberBean member,@RequestParam("photofile") MultipartFile mf) throws IOException, SerialException, SQLException {
+		
+		String fileName ="";
+		MemberBean newMem = new MemberBean();
+		List<MemberBean> list = ms.searchMemByAccount(member.getAccount());
+		
+		if (list.size() != 0) {
+			MemberBean check = list.get(0);
+			newMem.setMemberID(check.getMemberID());
+			newMem.setAccount(member.getAccount());
+			newMem.setPassword(new BCryptPasswordEncoder().encode(member.getPassword()));
+			newMem.setIdNumber(member.getIdNumber());
+			newMem.setMemName(member.getMemName());
+			newMem.setMemNickName(member.getMemNickName());
+			newMem.setMemOld(member.getMemOld());
+			newMem.setMemBirth(member.getMemBirth());
+			newMem.setMemGender(member.getMemGender());
+			newMem.seteMail(member.geteMail());
+			newMem.setPhone(member.getPhone());
+			newMem.setPhoto(check.getPhoto());
+			newMem.setAddress(member.getAddress());
+			fileName = mf.getOriginalFilename();
+			if (fileName != null && fileName != "" && fileName.trim().length() > 0) {
+				System.out.println("這有圖?"+fileName);
+				long size = mf.getSize();
+				InputStream is = mf.getInputStream();
+				byte[] b = new byte[(int) size];
+				SerialBlob sb = null;
+				is.read(b);
+				sb = new SerialBlob(b);
+				newMem.setPhoto(sb);
+				ms.update(newMem);
+			}else {
+				System.out.println("這沒圖?"+fileName);
+				ms.update(newMem);
+			}
+		}
+		return "redirect:/";
 	}
 	
 //	刪除

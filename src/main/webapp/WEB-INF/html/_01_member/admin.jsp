@@ -203,21 +203,21 @@
                                                         <header class="main">
                                                             <h3>會員管理列表</h3>
                                                         </header>
-                                                        <form:form action="#" method="POST" modelAttribute="Member">
+                                                        <form action="#" method="POST" modelAttribute="Member">
                                                             <input type="text" name="value" value="${value}" required>
                                                             <input type="submit" name="selectByAccount" value="以帳號查詢"
                                                                 onclick="this.form.action='_01_member.selectByAccount.controller'" />
                                                             <input type="submit" name="selectByName" value="以姓名查詢"
                                                                 onclick="this.form.action='_01_member.selectByName.controller'" />
-                                                        </form:form>
+                                                        </form>
 
 
-                                                        <form:form action="#" method="POST" modelAttribute="Member">
+                                                        <form action="#" method="POST" modelAttribute="Member">
                                                             <button name="register"
-                                                                onclick="this.form.action='01_member.backregister.controller'">新增會員</button>
+                                                                onclick="this.form.action='_01_member.backregister.controller'">新增會員</button>
                                                             <button name="selectAll"
                                                                 onclick="this.form.action='_01_member.selectAll.controller'">取得所有會員</button>
-                                                        </form:form>
+                                                        </form>
 
                                                         <div class="table-wrapper">
                                                             <table class="alt"

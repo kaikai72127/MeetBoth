@@ -35,18 +35,19 @@
 									<hr class="divider-w mb-10">
 									<form class="form" action="<%=request.getContextPath()%>/login/page" method="Post">
 										<div class="form-group">
-											<input class="form-control" id="username" type="text" name="username"
-												placeholder="Username" />
+											<input style="text-transform: none;" class="form-control" id="username"
+												type="text" name="username" placeholder="Username" />
 										</div>
 										<div class="form-group">
-											<input class="form-control" id="password" type="password" name="password"
-												placeholder="Password" />
+											<input style="text-transform: none;" class="form-control" id="password"
+												type="password" name="password" placeholder="Password" />
 										</div>
 										<div class="form-group">
-											<button class="btn btn-round btn-p">Login</button>
+											<button class="btn btn-round btn-p">登入</button>
 										</div>
 										<div class="form-group">
-											<a href=""><i class="fa-solid fa-circle-xmark"></i>忘記密碼?</a>
+											<a href="<%=request.getContextPath()%>/forgetpassword"><i
+													class="fa-solid fa-circle-xmark"></i>忘記密碼?</a>
 										</div>
 										<button class="btn btn-round btn-p"
 											href="<%=request.getContextPath()%>/oauth2/authorization/google">Google登入</button>

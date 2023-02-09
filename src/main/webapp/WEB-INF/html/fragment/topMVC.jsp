@@ -322,12 +322,14 @@
 									<img class="rounded-circle me-lg-2"
 										src="<c:url value='/_01_member.ShowPhoto.controller?account=${pageContext.request.userPrincipal.name}'/>"
 										alt="" style="width: 24px; height: 24px" /> <span id="username"
-										class="d-none d-lg-inline-flex"><i class="fa-solid fa-right-to-bracket"></i>
+										class="d-none d-lg-inline-flex" style="border-radius: 200px
+										;"><i class="fa-solid fa-right-to-bracket"></i>
 									</span>
 								</a>
 								<ul
 									class="dropdown-menu dropdown-menu-end bg-light border-0 rounded-0 rounded-bottom m-0">
-									<li><a href="#" class="dropdown-item">會員中心<i class="fa-solid fa-user"></i></a>
+									<li><a href="<c:url value='_01_member.membercenter.controller?account=${pageContext.request.userPrincipal.name}'/>"
+											class="dropdown-item">會員資料修改<i class="fa-solid fa-user"></i></a>
 									</li>
 									<li id="admincontroller"><a href="<%=request.getContextPath()%>/backIndex"
 											class="dropdown-item">管理員控制台

@@ -392,11 +392,9 @@ String basePathimg2 = request.getScheme() + "://" + request.getServerName() + ":
 	<script src=<%=basePath5%>></script>
 	<script src="https://kit.fontawesome.com/25590258af.js"
 		crossorigin="anonymous"></script>
-	</div>
 	<div class="scroll-up">
 		<a href="#totop"><i class="fa fa-angle-double-up"></i></a>
 	</div>
-	</main>
 	<!--  
     JavaScripts
     =============================================
@@ -417,6 +415,9 @@ String basePathimg2 = request.getScheme() + "://" + request.getServerName() + ":
 		src="html/assets/lib/simple-text-rotator/jquery.simple-text-rotator.min.js"></script>
 	<script src="html/assets/js/plugins.js"></script>
 	<script src="html/assets/js/main.js"></script>
+	<!-- SweetAlert js -->
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<!-- SweetAlert js -->
 	<script>
 		const scores = document.querySelectorAll("#score");
 

@@ -201,6 +201,10 @@ a:hover {
 												href="/MeetBoth/_03_product.productindex.controller"
 												style="color: white; font-weight: 600;"
 												class="btn btn-d btn-round">所有商品清單</a></li>
+												<li><a
+												href="/MeetBoth/_03_product.MBinsertProd.controller"
+												style="color: white; font-weight: 600;"
+												class="btn btn-d btn-round">新增商品</a></li>
 										</ul></li>
 									<li><a href="#" style="color: white; font-size: 20px;"
 										class="btn btn-d btn-round">課程管理&ensp;<i

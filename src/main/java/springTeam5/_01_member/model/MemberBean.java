@@ -3,16 +3,27 @@ package springTeam5._01_member.model;
 import java.io.Serializable;
 import java.sql.Blob;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.LinkedHashSet;
+import java.util.List;
+import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import org.springframework.stereotype.Component;
+
+import springTeam5._04_shoppingCart.model.OrderBean;
+import springTeam5._04_shoppingCart.model.OrderItemBean;
+import springTeam5._05_teacStu.model.TeacBean;
 
 
 
@@ -66,10 +77,18 @@ public class MemberBean implements Serializable {
 		
 	@Column(name = "registime")
 	private Date registime = new Date();
-	
+
 	@Column(name = "role")
 	private String role = "user";
 	
+	@OneToMany(mappedBy = "member")
+	private List<TeacBean> teacBean = new ArrayList<>();
+	
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "memberbuy",cascade = CascadeType.ALL)
+	private Set<OrderBean> orderBuy = new LinkedHashSet<OrderBean>(); // itemsList
+	
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "membersale",cascade = CascadeType.ALL)
+	private Set<OrderItemBean> orderSale = new LinkedHashSet<OrderItemBean>(); // itemsList
 	public String getRole() {
 		return role;
 	}
@@ -241,11 +260,33 @@ public class MemberBean implements Serializable {
 		return new SimpleDateFormat("YYYY/MM/dd").format(registime);
 	}
 
-
 	public void setRegistime(Date date) {
 		this.registime = date;
 	}
+	
+	public List<TeacBean> getTeacBean() {
+		return teacBean;
+	}
 
+	public void setTeacBean(List<TeacBean> teacBean) {
+		this.teacBean = teacBean;
+	}
+
+	public Set<OrderBean> getOrderBuy() {
+		return orderBuy;
+	}
+
+	public void setOrderBuy(Set<OrderBean> orderBuy) {
+		this.orderBuy = orderBuy;
+	}
+
+	public Set<OrderItemBean> getOrderSale() {
+		return orderSale;
+	}
+
+	public void setOrderSale(Set<OrderItemBean> orderSale) {
+		this.orderSale = orderSale;
+	}
 	@Override
 	public String toString() {
 		return "MemberBean [memberID=" + memberID + ", account=" + account + ", password=" + password + ", idNumber="

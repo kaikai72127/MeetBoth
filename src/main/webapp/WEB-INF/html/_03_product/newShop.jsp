@@ -1,478 +1,404 @@
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html lang="en-US" dir="ltr">
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<! DOCTYPE html>
+<html>
 <head>
-<meta charset="utf-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<!--  
-    Document Title
-    =============================================
-    -->
-<title>Titan | Multipurpose HTML5 Template</title>
-<!--  
-    Favicons
-    =============================================
-    -->
-<link rel="apple-touch-icon" sizes="57x57"
-	href="html/assets/images/favicons/apple-icon-57x57.png">
-<link rel="apple-touch-icon" sizes="60x60"
-	href="html/assets/images/favicons/apple-icon-60x60.png">
-<link rel="apple-touch-icon" sizes="72x72"
-	href="html/assets/images/favicons/apple-icon-72x72.png">
-<link rel="apple-touch-icon" sizes="76x76"
-	href="html/assets/images/favicons/apple-icon-76x76.png">
-<link rel="apple-touch-icon" sizes="114x114"
-	href="html/assets/images/favicons/apple-icon-114x114.png">
-<link rel="apple-touch-icon" sizes="120x120"
-	href="html/assets/images/favicons/apple-icon-120x120.png">
-<link rel="apple-touch-icon" sizes="144x144"
-	href="html/assets/images/favicons/apple-icon-144x144.png">
-<link rel="apple-touch-icon" sizes="152x152"
-	href="html/assets/images/favicons/apple-icon-152x152.png">
-<link rel="apple-touch-icon" sizes="180x180"
-	href="html/assets/images/favicons/apple-icon-180x180.png">
-<link rel="icon" type="image/png" sizes="192x192"
-	href="html/assets/images/favicons/android-icon-192x192.png">
-<link rel="icon" type="image/png" sizes="32x32"
-	href="html/assets/images/favicons/favicon-32x32.png">
-<link rel="icon" type="image/png" sizes="96x96"
-	href="html/assets/images/favicons/favicon-96x96.png">
-<link rel="icon" type="image/png" sizes="16x16"
-	href="html/assets/images/favicons/favicon-16x16.png">
-<link rel="manifest" href="/manifest.json">
-<meta name="msapplication-TileColor" content="#ffffff">
-<meta name="msapplication-TileImage"
-	content="html/assets/images/favicons/ms-icon-144x144.png">
-<meta name="theme-color" content="#ffffff">
-<!--  
-    Stylesheets
-    =============================================
-    
-    -->
-<!-- Default stylesheets-->
-<link href="html/assets/lib/bootstrap/dist/css/bootstrap.min.css"
-	rel="stylesheet">
-<!-- Template specific stylesheets-->
-<link
-	href="https://fonts.googleapis.com/css?family=Roboto+Condensed:400,700"
-	rel="stylesheet">
-<link href="https://fonts.googleapis.com/css?family=Volkhov:400i"
-	rel="stylesheet">
-<link
-	href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800"
-	rel="stylesheet">
-<link href="html/assets/lib/animate.css/animate.css" rel="stylesheet">
-<link
-	href="html/assets/lib/components-font-awesome/css/font-awesome.min.css"
-	rel="stylesheet">
-<link href="html/assets/lib/et-line-font/et-line-font.css"
-	rel="stylesheet">
-<link href="html/assets/lib/flexslider/flexslider.css" rel="stylesheet">
-<link
-	href="html/assets/lib/owl.carousel/dist/html/assets/owl.carousel.min.css"
-	rel="stylesheet">
-<link
-	href="html/assets/lib/owl.carousel/dist/html/assets/owl.theme.default.min.css"
-	rel="stylesheet">
-<link href="html/assets/lib/magnific-popup/dist/magnific-popup.css"
-	rel="stylesheet">
-<link href="html/assets/lib/simple-text-rotator/simpletextrotator.css"
-	rel="stylesheet">
-<!-- Main stylesheet and color file-->
-<link href="html/assets/css/style.css" rel="stylesheet">
-<link id="color-scheme" href="html/assets/css/colors/default.css"
-	rel="stylesheet">
+<%
+String path = request.getContextPath();
+String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path
+		+ "/html/assets/css/main.css";
+%>
+<%
+String pathimg = request.getContextPath();
+String basePathimg = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + pathimg
+		+ "/html/images/meatball-icon.png";
+%>
+<%
+String basePathimg2 = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path
+		+ "/html/images/meatball-200.png";
+%>
+
+<!-- 引入共同的頁首 -->
+<jsp:include page="/WEB-INF/html/fragment/headMVC.jsp" />
+<jsp:include page="/WEB-INF/html/fragment/topMVC.jsp" />
+<jsp:include page="/WEB-INF/html/fragment/jsPath.jsp" />
+
+<style>
+.star-off {
+	color: black;
+}
+
+.work-item.illustration.webdesign {
+	height: 175px;
+	padding: 0 15px 15px 0;
+}
+
+.work-title {
+	font-size: 25px;
+}
+</style>
 </head>
 <body data-spy="scroll" data-target=".onpage-navigation"
 	data-offset="60">
 	<main>
+		<!-- 		<div class="page-loader"> -->
+		<!-- 			<div class="loader">Loading...</div> -->
+		<!-- 		</div> -->
 		<!--       頂端列 -->
-		<nav class="navbar navbar-custom navbar-fixed-top" role="navigation">
-			<div class="container">
-				<div class="navbar-header">
-					<button class="navbar-toggle" type="button" data-toggle="collapse"
-						data-target="#custom-collapse">
-						<span class="sr-only">Toggle navigation</span><span
-							class="icon-bar"></span><span class="icon-bar"></span><span
-							class="icon-bar"></span>
-					</button>
-					<a class="navbar-brand" href="index.html">Titan</a>
+
+		<div class="main" style="background-color: #F0F0F0;">
+
+
+			<!-- 			上方導覽 -->
+			<!-- 			熱門商品 -->
+			<section class="module-small"
+				style="padding-top: 0px; padding-bottom: 0px;">
+				<div class="container">
+					<div class="row multi-columns-row" style="padding-bottom: 35px;">
+						<div class="row">
+							<div class="col-sm-12" style="">
+								<img src="html/assets/images/shop/熱門商品橫幅.jpg"
+									alt="Title of Image" />
+							</div>
+						</div>
+					</div>
+					<div class="row multi-columns-row">
+						<c:forEach var="HotBean" items="${Hotprodlist}">
+							<div class="col-sm-6 col-md-3 col-lg-3"
+								style="padding-bottom: 10px;">
+								<div class="shop-item">
+									<div id="shop-item-image"
+										style="height: 282px; width: 210px; margin: auto; display: flex; justify-content: center; align-items: center; margin-right: 15px;">
+										<img style="padding: auto;" alt="${HotBean.prodName}"
+											src="<c:url value='/_03_product.showPicture.controller?id=${HotBean.prodID}' />">
+										<div class="shop-item-detail">
+											<a
+												href="/MeetBoth/_03_product.PathToProductDetail.controller?id=${HotBean.prodID}"
+												class="btn btn-round btn-b" style="font-size: 14px;"><span
+												class="icon-heart">進入商品頁面</span><span class="icon-heart"></span></a>
+										</div>
+									</div>
+									<div id="prodName" style="padding-top: 30px;">
+										<strong style="font-size: 16px">${HotBean.prodName}</strong>
+									</div>
+									<div id="prodCheck">
+										<strong style="font-size: 16px">瀏覽次數:&ensp;${HotBean.prodCheck}次</strong>
+									</div>
+									<div id="scoreAVG">
+										<c:forEach var="commentBean" items="${HotBean.productComment}">
+											<input type="hidden" id="starAVG"
+												value="${commentBean.prodScore}">
+										</c:forEach>
+										<div id="starAVGDiv" style="font-size: 17px;"></div>
+									</div>
+								</div>
+							</div>
+						</c:forEach>
+					</div>
 				</div>
-				<div class="collapse navbar-collapse" id="custom-collapse">
-					<ul class="nav navbar-nav navbar-right">
-						<li class="dropdown"><a class="dropdown-toggle" href="#"
-							data-toggle="dropdown">Home</a>
-							<ul class="dropdown-menu">
-								<li><a href="index_mp_fullscreen_video_background.html">Default</a></li>
-								<li><a href="index_op_fullscreen_gradient_overlay.html">One
-										Page</a></li>
-								<li><a href="index_agency.html">Agency</a></li>
-								<li><a href="index_portfolio.html">Portfolio</a></li>
-								<li><a href="index_restaurant.html">Restaurant</a></li>
-								<li><a href="index_finance.html">Finance</a></li>
-								<li><a href="index_landing.html">Landing Page</a></li>
-								<li><a href="index_photography.html">Photography</a></li>
-								<li><a href="index_shop.html">Shop</a></li>
-							</ul></li>
-						<li class="dropdown"><a class="dropdown-toggle" href="#"
-							data-toggle="dropdown">Headers</a>
-							<ul class="dropdown-menu">
-								<li class="dropdown"><a class="dropdown-toggle" href="#"
-									data-toggle="dropdown">Static Image Header</a>
-									<ul class="dropdown-menu">
-										<li><a href="index_mp_fullscreen_static.html">Fulscreen</a></li>
-										<li><a href="index_mp_classic_static.html">Classic</a></li>
-									</ul></li>
-								<li class="dropdown"><a class="dropdown-toggle" href="#"
-									data-toggle="dropdown">Flexslider Header</a>
-									<ul class="dropdown-menu">
-										<li><a href="index_mp_fullscreen_flexslider.html">Fulscreen</a></li>
-										<li><a href="index_mp_classic_flexslider.html">Classic</a></li>
-									</ul></li>
-								<li class="dropdown"><a class="dropdown-toggle" href="#"
-									data-toggle="dropdown">Video Background Header</a>
-									<ul class="dropdown-menu">
-										<li><a href="index_mp_fullscreen_video_background.html">Fulscreen</a></li>
-										<li><a href="index_mp_classic_video_background.html">Classic</a></li>
-									</ul></li>
-								<li class="dropdown"><a class="dropdown-toggle" href="#"
-									data-toggle="dropdown">Text Rotator Header</a>
-									<ul class="dropdown-menu">
-										<li><a href="index_mp_fullscreen_text_rotator.html">Fulscreen</a></li>
-										<li><a href="index_mp_classic_text_rotator.html">Classic</a></li>
-									</ul></li>
-								<li class="dropdown"><a class="dropdown-toggle" href="#"
-									data-toggle="dropdown">Gradient Overlay Header</a>
-									<ul class="dropdown-menu">
-										<li><a href="index_mp_fullscreen_gradient_overlay.html">Fulscreen</a></li>
-										<li><a href="index_mp_classic_gradient_overlay.html">Classic</a></li>
-									</ul></li>
-							</ul></li>
-						<li class="dropdown"><a class="dropdown-toggle" href="#"
-							data-toggle="dropdown">Pages</a>
-							<ul class="dropdown-menu">
-								<li class="dropdown"><a class="dropdown-toggle" href="#"
-									data-toggle="dropdown">About</a>
-									<ul class="dropdown-menu">
-										<li><a href="about1.html">About 1</a></li>
-										<li><a href="about2.html">About 2</a></li>
-										<li><a href="about3.html">About 3</a></li>
-										<li><a href="about4.html">About 4</a></li>
-										<li><a href="about5.html">About 5</a></li>
-									</ul></li>
-								<li class="dropdown"><a class="dropdown-toggle" href="#"
-									data-toggle="dropdown">Services</a>
-									<ul class="dropdown-menu">
-										<li><a href="service1.html">Service 1</a></li>
-										<li><a href="service2.html">Service 2</a></li>
-										<li><a href="service3.html">Service 3</a></li>
-									</ul></li>
-								<li class="dropdown"><a class="dropdown-toggle" href="#"
-									data-toggle="dropdown">Pricing</a>
-									<ul class="dropdown-menu">
-										<li><a href="pricing1.html">Pricing 1</a></li>
-										<li><a href="pricing2.html">Pricing 2</a></li>
-									</ul></li>
-								<li class="dropdown"><a class="dropdown-toggle" href="#"
-									data-toggle="dropdown">Gallery</a>
-									<ul class="dropdown-menu">
-										<li><a href="gallery_col_2.html">2 Columns</a></li>
-										<li><a href="gallery_col_3.html">3 Columns</a></li>
-										<li><a href="gallery_col_4.html">4 Columns</a></li>
-										<li><a href="gallery_col_6.html">6 Columns</a></li>
-									</ul></li>
-								<li class="dropdown"><a class="dropdown-toggle" href="#"
-									data-toggle="dropdown">Contact</a>
-									<ul class="dropdown-menu">
-										<li><a href="contact1.html">Contact 1</a></li>
-										<li><a href="contact2.html">Contact 2</a></li>
-										<li><a href="contact3.html">Contact 3</a></li>
-									</ul></li>
-								<li class="dropdown"><a class="dropdown-toggle" href="#"
-									data-toggle="dropdown">Restaurant menu</a>
-									<ul class="dropdown-menu">
-										<li><a href="restaurant_menu1.html">Menu 2 Columns</a></li>
-										<li><a href="restaurant_menu2.html">Menu 3 Columns</a></li>
-									</ul></li>
-								<li><a href="login_register.html">Login / Register</a></li>
-								<li><a href="faq.html">FAQ</a></li>
-								<li><a href="404.html">Page 404</a></li>
-							</ul></li>
-						<li class="dropdown"><a class="dropdown-toggle" href="#"
-							data-toggle="dropdown">Portfolio</a>
-							<ul class="dropdown-menu" role="menu">
-								<li class="dropdown"><a class="dropdown-toggle" href="#"
-									data-toggle="dropdown">Boxed</a>
-									<ul class="dropdown-menu">
-										<li><a href="portfolio_boxed_col_2.html">2 Columns</a></li>
-										<li><a href="portfolio_boxed_col_3.html">3 Columns</a></li>
-										<li><a href="portfolio_boxed_col_4.html">4 Columns</a></li>
-									</ul></li>
-								<li class="dropdown"><a class="dropdown-toggle" href="#"
-									data-toggle="dropdown">Boxed - Gutter</a>
-									<ul class="dropdown-menu">
-										<li><a href="portfolio_boxed_gutter_col_2.html">2
-												Columns</a></li>
-										<li><a href="portfolio_boxed_gutter_col_3.html">3
-												Columns</a></li>
-										<li><a href="portfolio_boxed_gutter_col_4.html">4
-												Columns</a></li>
-									</ul></li>
-								<li class="dropdown"><a class="dropdown-toggle" href="#"
-									data-toggle="dropdown">Full Width</a>
-									<ul class="dropdown-menu">
-										<li><a href="portfolio_full_width_col_2.html">2
-												Columns</a></li>
-										<li><a href="portfolio_full_width_col_3.html">3
-												Columns</a></li>
-										<li><a href="portfolio_full_width_col_4.html">4
-												Columns</a></li>
-									</ul></li>
-								<li class="dropdown"><a class="dropdown-toggle" href="#"
-									data-toggle="dropdown">Full Width - Gutter</a>
-									<ul class="dropdown-menu">
-										<li><a href="portfolio_full_width_gutter_col_2.html">2
-												Columns</a></li>
-										<li><a href="portfolio_full_width_gutter_col_3.html">3
-												Columns</a></li>
-										<li><a href="portfolio_full_width_gutter_col_4.html">4
-												Columns</a></li>
-									</ul></li>
-								<li class="dropdown"><a class="dropdown-toggle" href="#"
-									data-toggle="dropdown">Masonry</a>
-									<ul class="dropdown-menu">
-										<li class="dropdown"><a class="dropdown-toggle" href="#"
-											data-toggle="dropdown">Boxed</a>
-											<ul class="dropdown-menu">
-												<li><a href="portfolio_masonry_boxed_col_2.html">2
-														Columns</a></li>
-												<li><a href="portfolio_masonry_boxed_col_3.html">3
-														Columns</a></li>
-												<li><a href="portfolio_masonry_boxed_col_4.html">4
-														Columns</a></li>
-											</ul></li>
-										<li class="dropdown"><a class="dropdown-toggle" href="#"
-											data-toggle="dropdown">Full Width</a>
-											<ul class="dropdown-menu">
-												<li><a href="portfolio_masonry_full_width_col_2.html">2
-														Columns</a></li>
-												<li><a href="portfolio_masonry_full_width_col_3.html">3
-														Columns</a></li>
-												<li><a href="portfolio_masonry_full_width_col_4.html">4
-														Columns</a></li>
-											</ul></li>
-									</ul></li>
-								<li class="dropdown"><a class="dropdown-toggle" href="#"
-									data-toggle="dropdown">Hover Style</a>
-									<ul class="dropdown-menu">
-										<li><a href="portfolio_hover_black.html">Black</a></li>
-										<li><a href="portfolio_hover_gradient.html">Gradient</a></li>
-									</ul></li>
-								<li class="dropdown"><a class="dropdown-toggle" href="#"
-									data-toggle="dropdown">Single</a>
-									<ul class="dropdown-menu">
-										<li class="dropdown"><a class="dropdown-toggle" href="#"
-											data-toggle="dropdown">Featured Image</a>
-											<ul class="dropdown-menu">
-												<li><a href="portfolio_single_featured_image1.html">Style
-														1</a></li>
-												<li><a href="portfolio_single_featured_image2.html">Style
-														2</a></li>
-											</ul></li>
-										<li class="dropdown"><a class="dropdown-toggle" href="#"
-											data-toggle="dropdown">Featured Slider</a>
-											<ul class="dropdown-menu">
-												<li><a href="portfolio_single_featured_slider1.html">Style
-														1</a></li>
-												<li><a href="portfolio_single_featured_slider2.html">Style
-														2</a></li>
-											</ul></li>
-										<li class="dropdown"><a class="dropdown-toggle" href="#"
-											data-toggle="dropdown">Featured Video</a>
-											<ul class="dropdown-menu">
-												<li><a href="portfolio_single_featured_video1.html">Style
-														1</a></li>
-												<li><a href="portfolio_single_featured_video2.html">Style
-														2</a></li>
-											</ul></li>
-									</ul></li>
-							</ul></li>
-						<li class="dropdown"><a class="dropdown-toggle" href="#"
-							data-toggle="dropdown">Blog</a>
-							<ul class="dropdown-menu" role="menu">
-								<li class="dropdown"><a class="dropdown-toggle" href="#"
-									data-toggle="dropdown">Standard</a>
-									<ul class="dropdown-menu">
-										<li><a href="blog_standard_left_sidebar.html">Left
-												Sidebar</a></li>
-										<li><a href="blog_standard_right_sidebar.html">Right
-												Sidebar</a></li>
-									</ul></li>
-								<li class="dropdown"><a class="dropdown-toggle" href="#"
-									data-toggle="dropdown">Grid</a>
-									<ul class="dropdown-menu">
-										<li><a href="blog_grid_col_2.html">2 Columns</a></li>
-										<li><a href="blog_grid_col_3.html">3 Columns</a></li>
-										<li><a href="blog_grid_col_4.html">4 Columns</a></li>
-									</ul></li>
-								<li class="dropdown"><a class="dropdown-toggle" href="#"
-									data-toggle="dropdown">Masonry</a>
-									<ul class="dropdown-menu">
-										<li><a href="blog_grid_masonry_col_2.html">2 Columns</a></li>
-										<li><a href="blog_grid_masonry_col_3.html">3 Columns</a></li>
-										<li><a href="blog_grid_masonry_col_4.html">4 Columns</a></li>
-									</ul></li>
-								<li class="dropdown"><a class="dropdown-toggle" href="#"
-									data-toggle="dropdown">Single</a>
-									<ul class="dropdown-menu">
-										<li><a href="blog_single_left_sidebar.html">Left
-												Sidebar</a></li>
-										<li><a href="blog_single_right_sidebar.html">Right
-												Sidebar</a></li>
-									</ul></li>
-							</ul></li>
-						<li class="dropdown"><a class="dropdown-toggle" href="#"
-							data-toggle="dropdown">Features</a>
-							<ul class="dropdown-menu" role="menu">
-								<li><a href="alerts-and-wells.html"><i
-										class="fa fa-bolt"></i> Alerts and Wells</a></li>
-								<li><a href="buttons.html"><i class="fa fa-link fa-sm"></i>
-										Buttons</a></li>
-								<li><a href="tabs_and_accordions.html"><i
-										class="fa fa-tasks"></i> Tabs &amp; Accordions</a></li>
-								<li><a href="content_box.html"><i
-										class="fa fa-list-alt"></i> Contents Box</a></li>
-								<li><a href="forms.html"><i
-										class="fa fa-check-square-o"></i> Forms</a></li>
-								<li><a href="icons.html"><i class="fa fa-star"></i>
-										Icons</a></li>
-								<li><a href="progress-bars.html"><i
-										class="fa fa-server"></i> Progress Bars</a></li>
-								<li><a href="typography.html"><i class="fa fa-font"></i>
-										Typography</a></li>
-							</ul></li>
-						<li class="dropdown"><a class="dropdown-toggle" href="#"
-							data-toggle="dropdown">Shop</a>
-							<ul class="dropdown-menu" role="menu">
-								<li class="dropdown"><a class="dropdown-toggle" href="#"
-									data-toggle="dropdown">Product</a>
-									<ul class="dropdown-menu">
-										<li><a href="shop_product_col_3.html">3 columns</a></li>
-										<li><a href="shop_product_col_4.html">4 columns</a></li>
-									</ul></li>
-								<li><a href="shop_single_product.html">Single Product</a></li>
-								<li><a href="shop_checkout.html">Checkout</a></li>
-							</ul></li>
-						<li class="dropdown"><a class="dropdown-toggle"
-							href="documentation.html" data-toggle="dropdown">Documentation</a>
-							<ul class="dropdown-menu">
-								<li><a href="documentation.html#contact">Contact Form</a></li>
-								<li><a href="documentation.html#reservation">Reservation
-										Form</a></li>
-								<li><a href="documentation.html#mailchimp">Mailchimp</a></li>
-								<li><a href="documentation.html#gmap">Google Map</a></li>
-								<li><a href="documentation.html#plugin">Plugins</a></li>
-								<li><a href="documentation.html#changelog">Changelog</a></li>
-							</ul></li>
-					</ul>
+			</section>
+
+			<!-- 			熱門商品 -->
+			<!-- 			中間按鈕導覽 -->
+			<div class="container" style="padding: 10px 10px 20px 20px;">
+				<div class="row multi-columns-row" style="padding-bottom: 20px;">
+					<div class="row">
+						<div class="col-sm-12">
+							<img src="html/assets/images/shop/類別導覽橫幅.jpg"
+								alt="Title of Image" />
+						</div>
+					</div>
+				</div>
+				<ul class="works-grid works-grid-4 works-hover-w" id="works-grid">
+					<li class="work-item illustration webdesign" id="typeBlock"><a
+						href="#"> <span class="work-image"
+							onclick="window.location='/MeetBoth/_03_product.searchProductByType.controller?type=1'"
+							style="width: 100%; height: 100%;"> <img
+								style="height: 100%" src="html/assets/images/shop/文具.jpg"
+								alt="Portfolio Item" /> <span class="work-caption font-alt">
+									<span class="work-title"><img style=""
+										src="html/assets/images/shop/seesee.png" alt="Portfolio Item" /></span>
+							</span>
+						</span>
+					</a></li>
+					<li class="work-item illustration webdesign" id="typeBlock"><a
+						href="/MeetBoth/_03_product.searchProductByType.controller?type=2">
+							<span class="work-image"
+							onclick="window.location='/MeetBoth/_03_product.searchProductByType.controller?type=2'"
+							style="width: 100%; height: 100%;"> <img
+								style="height: 100%;" src="html/assets/images/shop/教具.png"
+								alt="Portfolio Item" /> <span class="work-caption font-alt">
+									<span class="work-title"><img style=""
+										src="html/assets/images/shop/seesee.png" alt="Portfolio Item" /></span>
+							</span>
+						</span>
+					</a></li>
+					<li class="work-item illustration webdesign" id="typeBlock"><a
+						href="/MeetBoth/_03_product.searchProductByType.controller?type=3">
+							<span class="work-image"
+							onclick="window.location='/MeetBoth/_03_product.searchProductByType.controller?type=3'"
+							style="width: 100%; height: 100%;"> <img
+								style="height: 100%;" src="html/assets/images/shop/運動用品.jpg"
+								alt="Portfolio Item" /> <span class="work-caption font-alt">
+									<span class="work-title"><img style=""
+										src="html/assets/images/shop/seesee.png" alt="Portfolio Item" /></span>
+							</span>
+						</span>
+					</a></li>
+					<li class="work-item illustration webdesign" id="typeBlock"><a
+						href="/MeetBoth/_03_product.searchProductByType.controller?type=4">
+							<span class="work-image"
+							onclick="window.location='/MeetBoth/_03_product.searchProductByType.controller?type=4'"
+							style="width: 100%; height: 100%;"> <img
+								style="height: 100%;" src="html/assets/images/shop/學生用品.jpg"
+								alt="Portfolio Item" /> <span class="work-caption font-alt">
+									<span class="work-title"><img style=""
+										src="html/assets/images/shop/seesee.png" alt="Portfolio Item" /></span>
+							</span>
+						</span>
+					</a></li>
+					<li class="work-item illustration webdesign" id="typeBlock"><a
+						href="/MeetBoth/_03_product.searchProductByType.controller?type=5">
+							<span class="work-image"
+							onclick="window.location='/MeetBoth/_03_product.searchProductByType.controller?type=5'"
+							style="width: 100%; height: 100%;"> <img
+								style="height: 100%;" src="html/assets/images/shop/全新教科書.jpg"
+								alt="Portfolio Item" /> <span class="work-caption font-alt">
+									<span class="work-title"><img style=""
+										src="html/assets/images/shop/seesee.png" alt="Portfolio Item" /></span>
+							</span>
+						</span>
+					</a></li>
+					<li class="work-item illustration webdesign" id="typeBlock"><a
+						href="/MeetBoth/_03_product.searchProductByType.controller?type=6">
+							<span class="work-image"
+							onclick="window.location='/MeetBoth/_03_product.searchProductByType.controller?type=6'"
+							style="width: 100%; height: 100%;"> <img
+								style="height: 100%;" src="html/assets/images/shop/全新好書.jpg"
+								alt="Portfolio Item" /> <span class="work-caption font-alt">
+									<span class="work-title"><img style=""
+										src="html/assets/images/shop/seesee.png" alt="Portfolio Item" /></span>
+							</span>
+						</span>
+					</a></li>
+					<li class="work-item illustration webdesign" id="typeBlock"><a
+						href="/MeetBoth/_03_product.searchProductByType.controller?type=7">
+							<span class="work-image"
+							onclick="window.location='/MeetBoth/_03_product.searchProductByType.controller?type=7'"
+							style="width: 100%; height: 100%;"> <img
+								style="height: 100%;" src="html/assets/images/shop/二手教科書.jpg"
+								alt="Portfolio Item" /> <span class="work-caption font-alt">
+									<span class="work-title"><img style=""
+										src="html/assets/images/shop/seesee.png" alt="Portfolio Item" /></span>
+							</span>
+						</span>
+					</a></li>
+					<li class="work-item illustration webdesign" id="typeBlock"><a
+						href="/MeetBoth/_03_product.searchProductByType.controller?type=8">
+							<span class="work-image"
+							onclick="window.location='/MeetBoth/_03_product.searchProductByType.controller?type=8'"
+							style="width: 100%; height: 100%;"> <img
+								style="height: 100%;" src="html/assets/images/shop/二手好書.jpg"
+								alt="Portfolio Item" /> <span class="work-caption font-alt">
+									<span class="work-title"><img style=""
+										src="html/assets/images/shop/seesee.png" alt="Portfolio Item" /></span>
+							</span>
+						</span>
+					</a></li>
+					<li class="work-item illustration webdesign" id="typeBlock"><a
+						href="/MeetBoth/_03_product.searchProductByType.controller?type=9">
+							<span class="work-image"
+							onclick="window.location='/MeetBoth/_03_product.searchProductByType.controller?type=9'"
+							style="width: 100%; height: 100%;"> <img
+								style="height: 100%;" src="html/assets/images/shop/桌上小物.jpg"
+								alt="Portfolio Item" /> <span class="work-caption font-alt">
+									<span class="work-title"><img style=""
+										src="html/assets/images/shop/seesee.png" alt="Portfolio Item" /></span>
+							</span>
+						</span>
+					</a></li>
+					<li class="work-item illustration webdesign" id="typeBlock"><a
+						href="/MeetBoth/_03_product.searchProductByType.controller?type=10">
+							<span class="work-image"
+							onclick="window.location='/MeetBoth/_03_product.searchProductByType.controller?type=10'"
+							style="width: 100%; height: 100%;"> <img
+								style="height: 100%;" src="html/assets/images/shop/教室用品.jpg"
+								alt="Portfolio Item" /> <span class="work-caption font-alt">
+									<span class="work-title"><img style=""
+										src="html/assets/images/shop/seesee.png" alt="Portfolio Item" /></span>
+							</span>
+						</span>
+					</a></li>
+					<li class="work-item illustration webdesign" id="typeBlock"><a
+						href="/MeetBoth/_03_product.searchProductByType.controller?type=11">
+							<span class="work-image"
+							onclick="window.location='/MeetBoth/_03_product.searchProductByType.controller?type=11'"
+							style="width: 100%; height: 100%;"> <img
+								style="height: 100%;" src="html/assets/images/shop/3c.png"
+								alt="Portfolio Item" /> <span class="work-caption font-alt">
+									<span class="work-title"><img style=""
+										src="html/assets/images/shop/seesee.png" alt="Portfolio Item" /></span>
+							</span>
+						</span>
+					</a></li>
+					<li class="work-item illustration webdesign" id="typeBlock"><a
+						href="/MeetBoth/_03_product.searchProductByType.controller?type=12">
+							<span class="work-image"
+							onclick="window.location='/MeetBoth/_03_product.searchProductByType.controller?type=12'"
+							style="width: 100%; height: 100%;"> <img
+								style="height: 100%;" src="html/assets/images/shop/益智小物.jpg"
+								alt="Portfolio Item" /> <span class="work-caption font-alt">
+									<span class="work-title"><img style=""
+										src="html/assets/images/shop/seesee.png" alt="Portfolio Item" /></span>
+							</span>
+						</span>
+					</a></li>
+				</ul>
+			</div>
+			<!-- 			中間導覽 -->
+			<hr class="divider-w">
+			<div class="container">
+				<div class="row multi-columns-row">
+					<div class="row">
+						<div class="col-sm-12">
+							<img src="html/assets/images/shop/全部商品橫幅.jpg"
+								alt="Title of Image" />
+						</div>
+					</div>
 				</div>
 			</div>
-		</nav>
-		<div class="main" style="background-color: #F0F0F0;">
+
+			<hr class="divider-w">
+			<!--         商品陳列 -->
+
+			<!-- 			熱門排行 -->
+
+
+
+			<!-- 			熱門排行 -->
 			<!--       動態搜尋列 -->
-			<section class="module-small" style="padding-bottom: 10px;">
-				<div class="container" style="height: 45px;">
+			<section class="module-small"
+				style="padding-top: 20px; padding-bottom: 0px;">
+				<div class="container" style="">
 					<form class="row"
 						action="<c:url value='/_03_product.searchProductWithCondition.controller'/>"
 						method="post">
-						<div class="col-sm-4 mb-sm-20" style="width: 20%;">
+						<div class="col-sm-4 mb-sm-20"
+							style="width: 17%; padding-right: 0;">
 							<select name="case" class="form-control"
-								style="height: 45px; font-size: 17px">
+								style="padding-right: 0; font-size: 17px">
 								<option value="1">預設排序</option>
+								<option value="6">依瀏覽次數排序</option>
 								<option value="2">依價格由大到小</option>
 								<option value="3">依價格由小到大</option>
 								<option value="4">依上架日期排序</option>
 								<option value="5">依更新日期排序</option>
 							</select>
 						</div>
-						<div class="col-sm-2 mb-sm-20" style="width: 20%">
+						<div class="col-sm-2 mb-sm-20"
+							style="width: 15%; padding-right: 0;">
 							<select name="typecase" class="form-control"
-								style="height: 45px; font-size: 17px">
+								style="font-size: 17px">
 								<option value="0">全部類別</option>
 								<option value="1">文具</option>
-								<option value="2">書籍資料</option>
-								<option value="3">線上課程</option>
+								<option value="2">教具</option>
+								<option value="3">運動用品</option>
+								<option value="4">學生用品</option>
+								<option value="5">全新教科書</option>
+								<option value="6">全新好書</option>
+								<option value="7">二手教科書</option>
+								<option value="8">二手好書</option>
+								<option value="9">桌上小物</option>
+								<option value="10">教室小物</option>
+								<option value="11">3c小物</option>
+								<option value="12">益智小物</option>
 							</select>
 						</div>
 						<div class="col-sm-2 mb-sm-20"
-							style="width: 10%; padding: 0px 0px 0px 0px;">
-							<p align="right" style="font-size: 22px;">價格區間:&ensp;</p>
+							style="width: 9.5%; padding: 0px 0px 0px 0px;">
+							<p align="right" style="font-size: 17px; color: black;">價格區間:&ensp;</p>
 						</div>
 						<div class="col-sm-2 mb-sm-20"
 							style="width: 10%; padding-left: 0;">
 							<input class="form-control input-sm" type="text" name="lowprice"
-								placeholder="0" value="0" style="height: 45px; font-size: 17px"
+								placeholder="0" value="0"
+								style="text-align: center; font-size: 17px"
 								onkeyup="value=value.replace(/[^\d]/g,'') " />
 						</div>
 						<div class="col-sm-2 mb-sm-20" style="width: 0.5%; padding: 0px;">
-							<p align="right" style="height: 45px; font-size: 22px">~</p>
+							<p align="right" style="font-size: 17px">~</p>
 						</div>
-						<div class="col-sm-2 mb-sm-20" style="width: 10%">
+						<div class="col-sm-2 mb-sm-20"
+							style="width: 10%; padding-right: 0;">
 							<input class="form-control input-sm" type="text" name="highprice"
 								placeholder="999999" value="999999"
-								style="height: 45px; font-size: 17px"
+								style="text-align: center; font-size: 17px"
 								onkeyup="value=value.replace(/[^\d]/g,'') " />
 						</div>
-						<div class="col-sm-2 mb-sm-20" style="width: 19.5%">
+						<div class="col-sm-2 mb-sm-20" style="width: 25%">
 							<input class="form-control" type="text" name="searchName"
-								style="height: 45px; font-size: 17px" placeholder="搜尋名稱" />
+								style="font-size: 17px" placeholder="搜尋名稱" />
 						</div>
 						<div class="col-sm-3" style="width: 10%">
-							<button class="btn btn-p btn-round" type="submit"
-								style="height: 45px; font-size: 17px">搜尋</button>
+							<button class="btn btn-d btn-round" type="submit"
+								style="font-size: 17px">搜尋</button>
 						</div>
 					</form>
 				</div>
 			</section>
-			<!-- 			新增商品 -->
-			<div class="container" style="padding: 10px 10px 20px 20px;">
+			<div class="container" style="padding: 0px 10px 50px 20px;">
 				<input type="button" value="返回首頁" class="btn btn-info btn-circle"
-					style="height: 43px; font-size: 19px;"
-					onclick="window.location='/SpringBoot_Team5/_03_product.searchAllProduct.controller'">
-				&nbsp; <input type="button" value="新增商品"
-					class="btn btn-warning btn-circle"
-					style="height: 43px; font-size: 19px;"
-					onclick="window.location='/SpringBoot_Team5/_03_product.pathToInsertProduct.controller'">
+					style="font-size: 17px; color: black;"
+					onclick="window.location='/MeetBoth/_03_product.searchAllProduct.controller'">
+				&nbsp; <input type="button" value="隨便看看"
+					class="btn btn-success btn-circle"
+					style="font-size: 17px; color: black;"
+					onclick="window.location='/MeetBoth/_03_product.searchRandomProduct.controller'">
+				<!-- 				&nbsp; <input type="button" value="新增商品" -->
+				<!-- 					class="btn btn-warning btn-circle" -->
+				<!-- 					style="font-size: 17px; color: black;" -->
+				<!-- 					onclick="window.location='/MeetBoth/_03_product.pathToInsertProduct.controller'"> -->
 			</div>
-			<!-- 			新增商品 -->
-			<hr class="divider-w">
-			<!--         商品陳列 -->
-			<section class="module-small">
+			<!-- 			上方按鈕導覽 -->
+			<section class="module-small" style="padding-top: 0px;">
 				<div class="container">
 					<div class="row multi-columns-row">
 						<c:forEach var="bean" items="${allprodlist}">
 							<div class="col-sm-6 col-md-3 col-lg-3"
-								style="padding-bottom: 10px;">
-								<div class="shop-item">
-									<div id="shop-item-image"
-										style="height: 282px; width: 210px; margin: auto; display: flex; justify-content: center; align-items: center;">
-										<img style="padding: auto;" alt="${bean.prodName}"
-											src="<c:url value='/_03_product.showPicture.controller?id=${bean.prodID}' />">
-										<div class="shop-item-detail">
-											<a
-												href="/SpringBoot_Team5/_03_product.PathToProductDetail.controller?id=${bean.prodID}"
-												class="btn btn-round btn-p" style="font-size: 14px;"><span
-												class="icon-heart">進入商品頁面</span><span class="icon-heart"></span></a>
-										</div>
-									</div>
-									<div id="memberName">
-										<strong style="font-size: 16px">賣家 : ${bean.memberID}</strong>
+								style="padding-bottom: 10px; display: flex;">
+								<div class="works-grid works-grid-4 works-hover-w"
+									id="works-grid" style="text-align: center;">
+									<div class="work-item illustration webdesign" id="typeBlock"
+										style="height: 250px; width: 100%;">
+										<a
+											href="/MeetBoth/_03_product.PathToProductDetail.controller?id=${bean.prodID}">
+											<span class="work-image"
+											style="width: 100%; height: 100%; margin: auto; display: flex; justify-content: center; align-items: center; margin-right: 15px; text-align: center;">
+												<img
+												style="max-width: 100%; max-height: 100%; height: auto; width: auto;"
+												src="<c:url value='/_03_product.showPicture.controller?id=${bean.prodID}' />"
+												alt="Portfolio Item" /> <span class="work-caption font-alt">
+													<span class="work-title"><img style=""
+														src="html/assets/images/shop/seesee.png"
+														alt="Portfolio Item" /></span>
+											</span>
+										</span>
+										</a>
 									</div>
 									<div id="prodName">
 										<strong style="font-size: 16px">${bean.prodName}</strong>
+									</div>
+									<div id="scoreAVG">
+										<c:forEach var="commentBean" items="${bean.productComment}">
+											<input type="hidden" id="starAVG"
+												value="${commentBean.prodScore}">
+										</c:forEach>
+										<div id="starAVGDiv" style="font-size: 17px;"></div>
+									</div>
+									<div id="price">
+										<strong style="font-size: 16px">價格 :
+											瀏覽次數:&nbsp;${bean.prodCheck}&nbsp;次</strong>
 									</div>
 									<div id="price">
 										<strong style="font-size: 16px">價格 :
@@ -491,7 +417,8 @@
 					</div>
 					<div class="row">
 						<div class="col-sm-12">
-							<div class="pagination font-alt">
+							<div class="pagination font-alt"
+								style="margin: auto; display: flex; justify-content: center;">
 								<a href="#"><i class="fa fa-angle-left"></i></a><a
 									class="active" href="#">1</a><a href="#">2</a><a href="#">3</a><a
 									href="#">4</a><a href="#"><i class="fa fa-angle-right"></i></a>
@@ -500,100 +427,7 @@
 					</div>
 				</div>
 			</section>
-			<div class="module-small bg-dark">
-				<div class="container">
-					<div class="row">
-						<div class="col-sm-3">
-							<div class="widget">
-								<h5 class="widget-title font-alt">About Titan</h5>
-								<p>The languages only differ in their grammar, their
-									pronunciation and their most common words.</p>
-								<p>Phone: +1 234 567 89 10</p>
-								Fax: +1 234 567 89 10
-								<p>
-									Email:<a href="#">somecompany@example.com</a>
-								</p>
-							</div>
-						</div>
-						<div class="col-sm-3">
-							<div class="widget">
-								<h5 class="widget-title font-alt">Recent Comments</h5>
-								<ul class="icon-list">
-									<li>Maria on <a href="#">Designer Desk Essentials</a></li>
-									<li>John on <a href="#">Realistic Business Card Mockup</a></li>
-									<li>Andy on <a href="#">Eco bag Mockup</a></li>
-									<li>Jack on <a href="#">Bottle Mockup</a></li>
-									<li>Mark on <a href="#">Our trip to the Alps</a></li>
-								</ul>
-							</div>
-						</div>
-						<div class="col-sm-3">
-							<div class="widget">
-								<h5 class="widget-title font-alt">Blog Categories</h5>
-								<ul class="icon-list">
-									<li><a href="#">Photography - 7</a></li>
-									<li><a href="#">Web Design - 3</a></li>
-									<li><a href="#">Illustration - 12</a></li>
-									<li><a href="#">Marketing - 1</a></li>
-									<li><a href="#">Wordpress - 16</a></li>
-								</ul>
-							</div>
-						</div>
-						<div class="col-sm-3">
-							<div class="widget">
-								<h5 class="widget-title font-alt">Popular Posts</h5>
-								<ul class="widget-posts">
-									<li class="clearfix">
-										<div class="widget-posts-image">
-											<a href="#"><img src="html/assets/images/rp-1.jpg"
-												alt="Post Thumbnail" /></a>
-										</div>
-										<div class="widget-posts-body">
-											<div class="widget-posts-title">
-												<a href="#">Designer Desk Essentials</a>
-											</div>
-											<div class="widget-posts-meta">23 january</div>
-										</div>
-									</li>
-									<li class="clearfix">
-										<div class="widget-posts-image">
-											<a href="#"><img src="html/assets/images/rp-2.jpg"
-												alt="Post Thumbnail" /></a>
-										</div>
-										<div class="widget-posts-body">
-											<div class="widget-posts-title">
-												<a href="#">Realistic Business Card Mockup</a>
-											</div>
-											<div class="widget-posts-meta">15 February</div>
-										</div>
-									</li>
-								</ul>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-			<hr class="divider-d">
-			<footer class="footer bg-dark">
-				<div class="container">
-					<div class="row">
-						<div class="col-sm-6">
-							<p class="copyright font-alt">
-								&copy; 2017&nbsp;<a href="index.html">TitaN</a>, All Rights
-								Reserved
-							</p>
-						</div>
-						<div class="col-sm-6">
-							<div class="footer-social-links">
-								<a href="#"><i class="fa fa-facebook"></i></a><a href="#"><i
-									class="fa fa-twitter"></i></a><a href="#"><i
-									class="fa fa-dribbble"></i></a><a href="#"><i
-									class="fa fa-skype"></i></a>
-							</div>
-						</div>
-					</div>
-				</div>
-			</footer>
+			<jsp:include page="/WEB-INF/html/fragment/footerMVC.jsp" />
 		</div>
 		<div class="scroll-up">
 			<a href="#totop"><i class="fa fa-angle-double-up"></i></a>
@@ -603,21 +437,81 @@
     JavaScripts
     =============================================
     -->
-	<script src="html/assets/lib/jquery/dist/jquery.js"></script>
-	<script src="html/assets/lib/bootstrap/dist/js/bootstrap.min.js"></script>
-	<script src="html/assets/lib/wow/dist/wow.js"></script>
-	<script
-		src="html/assets/lib/jquery.mb.ytplayer/dist/jquery.mb.YTPlayer.js"></script>
-	<script src="html/assets/lib/isotope/dist/isotope.pkgd.js"></script>
-	<script src="html/assets/lib/imagesloaded/imagesloaded.pkgd.js"></script>
-	<script src="html/assets/lib/flexslider/jquery.flexslider.js"></script>
-	<script src="html/assets/lib/owl.carousel/dist/owl.carousel.min.js"></script>
-	<script src="html/assets/lib/smoothscroll.js"></script>
-	<script
-		src="html/assets/lib/magnific-popup/dist/jquery.magnific-popup.js"></script>
-	<script
-		src="html/assets/lib/simple-text-rotator/jquery.simple-text-rotator.min.js"></script>
-	<script src="html/assets/js/plugins.js"></script>
-	<script src="html/assets/js/main.js"></script>
+	<%
+	String basePath1 = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path
+			+ "/html/assets/js/jquery.min.js";
+	%>
+
+	<%
+	String basePath2 = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path
+			+ "/html/assets/js/browser.min.js";
+	%>
+
+	<%
+	String basePath3 = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path
+			+ "/html/assets/js/breakpoints.min.js";
+	%>
+
+	<%
+	String basePath4 = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path
+			+ "/html/assets/js/util.js";
+	%>
+
+	<%
+	String basePath5 = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path
+			+ "/html/assets/js/main.js";
+	%>
+	<script src=<%=basePath1%>></script>
+	<script src=<%=basePath2%>></script>
+	<script src=<%=basePath3%>></script>
+	<script src=<%=basePath4%>></script>
+	<script src=<%=basePath5%>></script>
+	<script src="https://kit.fontawesome.com/25590258af.js"
+		crossorigin="anonymous"></script>
+	<script>
+		function roundToTwo(num) {
+			return +(Math.round(num + "e+2") + "e-2");
+		}
+
+		const score = document.querySelectorAll("#starAVG");
+
+		document
+				.addEventListener(
+						"DOMContentLoaded",
+						function() {
+							const scores = document
+									.querySelectorAll("#scoreAVG");
+							for (let i = 0; i < scores.length; i++) {
+								const score = scores[i];
+								const starAVGs = score
+										.querySelectorAll("#starAVG");
+								let totalScore = 0;
+								for (let j = 0; j < starAVGs.length; j++) {
+									const starNum = starAVGs[j].value;
+									totalScore += Number(starNum);
+								}
+								let avgScore = roundToTwo(totalScore
+										/ starAVGs.length);
+								let stars = '';
+								if (isNaN(avgScore)) {
+									stars = '&nbsp;(0)';
+								} else {
+									stars = '&nbsp;(' + avgScore + ')';
+								}
+								let onstar = '<span><i class="fa fa-star star"></i></span>';
+								let offstar = '<span><i class="fa fa-star star-off"></i></span>';
+								for (var k = 0; k < 5; k++) {
+									if (k < avgScore) {
+										stars += onstar;
+									} else {
+										stars += offstar;
+									}
+								}
+								stars += '&nbsp;(' + starAVGs.length + '則評論)'
+								score.querySelector("#starAVGDiv").innerHTML = stars;
+							}
+						});
+	</script>
+
 </body>
 </html>

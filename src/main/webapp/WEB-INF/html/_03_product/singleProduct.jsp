@@ -1,394 +1,44 @@
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html lang="en-US" dir="ltr">
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<! DOCTYPE html>
+<html>
 <head>
-<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-<meta charset="utf-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<!--  
-    Document Title
-    =============================================
-    -->
-<title>Titan | Multipurpose HTML5 Template</title>
-<!--  
-    Favicons
-    =============================================
-    -->
-<link rel="apple-touch-icon" sizes="57x57"
-	href="html/assets/images/favicons/apple-icon-57x57.png">
-<link rel="apple-touch-icon" sizes="60x60"
-	href="html/assets/images/favicons/apple-icon-60x60.png">
-<link rel="apple-touch-icon" sizes="72x72"
-	href="html/assets/images/favicons/apple-icon-72x72.png">
-<link rel="apple-touch-icon" sizes="76x76"
-	href="html/assets/images/favicons/apple-icon-76x76.png">
-<link rel="apple-touch-icon" sizes="114x114"
-	href="html/assets/images/favicons/apple-icon-114x114.png">
-<link rel="apple-touch-icon" sizes="120x120"
-	href="html/assets/images/favicons/apple-icon-120x120.png">
-<link rel="apple-touch-icon" sizes="144x144"
-	href="html/assets/images/favicons/apple-icon-144x144.png">
-<link rel="apple-touch-icon" sizes="152x152"
-	href="html/assets/images/favicons/apple-icon-152x152.png">
-<link rel="apple-touch-icon" sizes="180x180"
-	href="html/assets/images/favicons/apple-icon-180x180.png">
-<link rel="icon" type="image/png" sizes="192x192"
-	href="html/assets/images/favicons/android-icon-192x192.png">
-<link rel="icon" type="image/png" sizes="32x32"
-	href="html/assets/images/favicons/favicon-32x32.png">
-<link rel="icon" type="image/png" sizes="96x96"
-	href="html/assets/images/favicons/favicon-96x96.png">
-<link rel="icon" type="image/png" sizes="16x16"
-	href="html/assets/images/favicons/favicon-16x16.png">
-<link rel="manifest" href="/manifest.json">
-<meta name="msapplication-TileColor" content="#ffffff">
-<meta name="msapplication-TileImage"
-	content="html/assets/images/favicons/ms-icon-144x144.png">
-<meta name="theme-color" content="#ffffff">
-<!--  
-    Stylesheets
-    =============================================
-    
-    -->
-<!-- Default stylesheets-->
-<link href="html/assets/lib/bootstrap/dist/css/bootstrap.min.css"
-	rel="stylesheet">
-<!-- Template specific stylesheets-->
-<link
-	href="https://fonts.googleapis.com/css?family=Roboto+Condensed:400,700"
-	rel="stylesheet">
-<link href="https://fonts.googleapis.com/css?family=Volkhov:400i"
-	rel="stylesheet">
-<link
-	href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800"
-	rel="stylesheet">
-<link href="html/assets/lib/animate.css/animate.css" rel="stylesheet">
-<link
-	href="html/assets/lib/components-font-awesome/css/font-awesome.min.css"
-	rel="stylesheet">
-<link href="html/assets/lib/et-line-font/et-line-font.css"
-	rel="stylesheet">
-<link href="html/assets/lib/flexslider/flexslider.css" rel="stylesheet">
-<link
-	href="html/assets/lib/owl.carousel/dist/html/assets/owl.carousel.min.css"
-	rel="stylesheet">
-<link
-	href="html/assets/lib/owl.carousel/dist/html/assets/owl.theme.default.min.css"
-	rel="stylesheet">
-<link href="html/assets/lib/magnific-popup/dist/magnific-popup.css"
-	rel="stylesheet">
-<link href="html/assets/lib/simple-text-rotator/simpletextrotator.css"
-	rel="stylesheet">
-<!-- Main stylesheet and color file-->
-<link href="html/assets/css/style.css" rel="stylesheet">
-<link id="color-scheme" href="html/assets/css/colors/default.css"
-	rel="stylesheet">
+<%
+String path = request.getContextPath();
+String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path
+		+ "/html/assets/css/main.css";
+%>
+<%
+String pathimg = request.getContextPath();
+String basePathimg = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + pathimg
+		+ "/html/images/meatball-icon.png";
+%>
+<%
+String basePathimg2 = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path
+		+ "/html/images/meatball-200.png";
+%>
+
+<!-- 引入共同的頁首 -->
+<jsp:include page="/WEB-INF/html/fragment/headMVC.jsp" />
+<jsp:include page="/WEB-INF/html/fragment/topMVC.jsp" />
+<jsp:include page="/WEB-INF/html/fragment/jsPath.jsp" />
+
 <style>
 .star-off {
 	color: black;
 }
 </style>
+
+
 </head>
 <body data-spy="scroll" data-target=".onpage-navigation"
 	data-offset="60">
+	<c:set value="${CartSize}" var="cartsize" />
 	<main>
 		<div class="page-loader">
 			<div class="loader">Loading...</div>
 		</div>
-		<nav class="navbar navbar-custom navbar-fixed-top" role="navigation">
-			<div class="container">
-				<div class="navbar-header">
-					<button class="navbar-toggle" type="button" data-toggle="collapse"
-						data-target="#custom-collapse">
-						<span class="sr-only">Toggle navigation</span><span
-							class="icon-bar"></span><span class="icon-bar"></span><span
-							class="icon-bar"></span>
-					</button>
-					<a class="navbar-brand" href="index.html">Titan</a>
-				</div>
-				<div class="collapse navbar-collapse" id="custom-collapse">
-					<ul class="nav navbar-nav navbar-right">
-						<li class="dropdown"><a class="dropdown-toggle" href="#"
-							data-toggle="dropdown">Home</a>
-							<ul class="dropdown-menu">
-								<li><a href="index_mp_fullscreen_video_background.html">Default</a></li>
-								<li><a href="index_op_fullscreen_gradient_overlay.html">One
-										Page</a></li>
-								<li><a href="index_agency.html">Agency</a></li>
-								<li><a href="index_portfolio.html">Portfolio</a></li>
-								<li><a href="index_restaurant.html">Restaurant</a></li>
-								<li><a href="index_finance.html">Finance</a></li>
-								<li><a href="index_landing.html">Landing Page</a></li>
-								<li><a href="index_photography.html">Photography</a></li>
-								<li><a href="index_shop.html">Shop</a></li>
-							</ul></li>
-						<li class="dropdown"><a class="dropdown-toggle" href="#"
-							data-toggle="dropdown">Headers</a>
-							<ul class="dropdown-menu">
-								<li class="dropdown"><a class="dropdown-toggle" href="#"
-									data-toggle="dropdown">Static Image Header</a>
-									<ul class="dropdown-menu">
-										<li><a href="index_mp_fullscreen_static.html">Fulscreen</a></li>
-										<li><a href="index_mp_classic_static.html">Classic</a></li>
-									</ul></li>
-								<li class="dropdown"><a class="dropdown-toggle" href="#"
-									data-toggle="dropdown">Flexslider Header</a>
-									<ul class="dropdown-menu">
-										<li><a href="index_mp_fullscreen_flexslider.html">Fulscreen</a></li>
-										<li><a href="index_mp_classic_flexslider.html">Classic</a></li>
-									</ul></li>
-								<li class="dropdown"><a class="dropdown-toggle" href="#"
-									data-toggle="dropdown">Video Background Header</a>
-									<ul class="dropdown-menu">
-										<li><a href="index_mp_fullscreen_video_background.html">Fulscreen</a></li>
-										<li><a href="index_mp_classic_video_background.html">Classic</a></li>
-									</ul></li>
-								<li class="dropdown"><a class="dropdown-toggle" href="#"
-									data-toggle="dropdown">Text Rotator Header</a>
-									<ul class="dropdown-menu">
-										<li><a href="index_mp_fullscreen_text_rotator.html">Fulscreen</a></li>
-										<li><a href="index_mp_classic_text_rotator.html">Classic</a></li>
-									</ul></li>
-								<li class="dropdown"><a class="dropdown-toggle" href="#"
-									data-toggle="dropdown">Gradient Overlay Header</a>
-									<ul class="dropdown-menu">
-										<li><a href="index_mp_fullscreen_gradient_overlay.html">Fulscreen</a></li>
-										<li><a href="index_mp_classic_gradient_overlay.html">Classic</a></li>
-									</ul></li>
-							</ul></li>
-						<li class="dropdown"><a class="dropdown-toggle" href="#"
-							data-toggle="dropdown">Pages</a>
-							<ul class="dropdown-menu">
-								<li class="dropdown"><a class="dropdown-toggle" href="#"
-									data-toggle="dropdown">About</a>
-									<ul class="dropdown-menu">
-										<li><a href="about1.html">About 1</a></li>
-										<li><a href="about2.html">About 2</a></li>
-										<li><a href="about3.html">About 3</a></li>
-										<li><a href="about4.html">About 4</a></li>
-										<li><a href="about5.html">About 5</a></li>
-									</ul></li>
-								<li class="dropdown"><a class="dropdown-toggle" href="#"
-									data-toggle="dropdown">Services</a>
-									<ul class="dropdown-menu">
-										<li><a href="service1.html">Service 1</a></li>
-										<li><a href="service2.html">Service 2</a></li>
-										<li><a href="service3.html">Service 3</a></li>
-									</ul></li>
-								<li class="dropdown"><a class="dropdown-toggle" href="#"
-									data-toggle="dropdown">Pricing</a>
-									<ul class="dropdown-menu">
-										<li><a href="pricing1.html">Pricing 1</a></li>
-										<li><a href="pricing2.html">Pricing 2</a></li>
-									</ul></li>
-								<li class="dropdown"><a class="dropdown-toggle" href="#"
-									data-toggle="dropdown">Gallery</a>
-									<ul class="dropdown-menu">
-										<li><a href="gallery_col_2.html">2 Columns</a></li>
-										<li><a href="gallery_col_3.html">3 Columns</a></li>
-										<li><a href="gallery_col_4.html">4 Columns</a></li>
-										<li><a href="gallery_col_6.html">6 Columns</a></li>
-									</ul></li>
-								<li class="dropdown"><a class="dropdown-toggle" href="#"
-									data-toggle="dropdown">Contact</a>
-									<ul class="dropdown-menu">
-										<li><a href="contact1.html">Contact 1</a></li>
-										<li><a href="contact2.html">Contact 2</a></li>
-										<li><a href="contact3.html">Contact 3</a></li>
-									</ul></li>
-								<li class="dropdown"><a class="dropdown-toggle" href="#"
-									data-toggle="dropdown">Restaurant menu</a>
-									<ul class="dropdown-menu">
-										<li><a href="restaurant_menu1.html">Menu 2 Columns</a></li>
-										<li><a href="restaurant_menu2.html">Menu 3 Columns</a></li>
-									</ul></li>
-								<li><a href="login_register.html">Login / Register</a></li>
-								<li><a href="faq.html">FAQ</a></li>
-								<li><a href="404.html">Page 404</a></li>
-							</ul></li>
-						<li class="dropdown"><a class="dropdown-toggle" href="#"
-							data-toggle="dropdown">Portfolio</a>
-							<ul class="dropdown-menu" role="menu">
-								<li class="dropdown"><a class="dropdown-toggle" href="#"
-									data-toggle="dropdown">Boxed</a>
-									<ul class="dropdown-menu">
-										<li><a href="portfolio_boxed_col_2.html">2 Columns</a></li>
-										<li><a href="portfolio_boxed_col_3.html">3 Columns</a></li>
-										<li><a href="portfolio_boxed_col_4.html">4 Columns</a></li>
-									</ul></li>
-								<li class="dropdown"><a class="dropdown-toggle" href="#"
-									data-toggle="dropdown">Boxed - Gutter</a>
-									<ul class="dropdown-menu">
-										<li><a href="portfolio_boxed_gutter_col_2.html">2
-												Columns</a></li>
-										<li><a href="portfolio_boxed_gutter_col_3.html">3
-												Columns</a></li>
-										<li><a href="portfolio_boxed_gutter_col_4.html">4
-												Columns</a></li>
-									</ul></li>
-								<li class="dropdown"><a class="dropdown-toggle" href="#"
-									data-toggle="dropdown">Full Width</a>
-									<ul class="dropdown-menu">
-										<li><a href="portfolio_full_width_col_2.html">2
-												Columns</a></li>
-										<li><a href="portfolio_full_width_col_3.html">3
-												Columns</a></li>
-										<li><a href="portfolio_full_width_col_4.html">4
-												Columns</a></li>
-									</ul></li>
-								<li class="dropdown"><a class="dropdown-toggle" href="#"
-									data-toggle="dropdown">Full Width - Gutter</a>
-									<ul class="dropdown-menu">
-										<li><a href="portfolio_full_width_gutter_col_2.html">2
-												Columns</a></li>
-										<li><a href="portfolio_full_width_gutter_col_3.html">3
-												Columns</a></li>
-										<li><a href="portfolio_full_width_gutter_col_4.html">4
-												Columns</a></li>
-									</ul></li>
-								<li class="dropdown"><a class="dropdown-toggle" href="#"
-									data-toggle="dropdown">Masonry</a>
-									<ul class="dropdown-menu">
-										<li class="dropdown"><a class="dropdown-toggle" href="#"
-											data-toggle="dropdown">Boxed</a>
-											<ul class="dropdown-menu">
-												<li><a href="portfolio_masonry_boxed_col_2.html">2
-														Columns</a></li>
-												<li><a href="portfolio_masonry_boxed_col_3.html">3
-														Columns</a></li>
-												<li><a href="portfolio_masonry_boxed_col_4.html">4
-														Columns</a></li>
-											</ul></li>
-										<li class="dropdown"><a class="dropdown-toggle" href="#"
-											data-toggle="dropdown">Full Width</a>
-											<ul class="dropdown-menu">
-												<li><a href="portfolio_masonry_full_width_col_2.html">2
-														Columns</a></li>
-												<li><a href="portfolio_masonry_full_width_col_3.html">3
-														Columns</a></li>
-												<li><a href="portfolio_masonry_full_width_col_4.html">4
-														Columns</a></li>
-											</ul></li>
-									</ul></li>
-								<li class="dropdown"><a class="dropdown-toggle" href="#"
-									data-toggle="dropdown">Hover Style</a>
-									<ul class="dropdown-menu">
-										<li><a href="portfolio_hover_black.html">Black</a></li>
-										<li><a href="portfolio_hover_gradient.html">Gradient</a></li>
-									</ul></li>
-								<li class="dropdown"><a class="dropdown-toggle" href="#"
-									data-toggle="dropdown">Single</a>
-									<ul class="dropdown-menu">
-										<li class="dropdown"><a class="dropdown-toggle" href="#"
-											data-toggle="dropdown">Featured Image</a>
-											<ul class="dropdown-menu">
-												<li><a href="portfolio_single_featured_image1.html">Style
-														1</a></li>
-												<li><a href="portfolio_single_featured_image2.html">Style
-														2</a></li>
-											</ul></li>
-										<li class="dropdown"><a class="dropdown-toggle" href="#"
-											data-toggle="dropdown">Featured Slider</a>
-											<ul class="dropdown-menu">
-												<li><a href="portfolio_single_featured_slider1.html">Style
-														1</a></li>
-												<li><a href="portfolio_single_featured_slider2.html">Style
-														2</a></li>
-											</ul></li>
-										<li class="dropdown"><a class="dropdown-toggle" href="#"
-											data-toggle="dropdown">Featured Video</a>
-											<ul class="dropdown-menu">
-												<li><a href="portfolio_single_featured_video1.html">Style
-														1</a></li>
-												<li><a href="portfolio_single_featured_video2.html">Style
-														2</a></li>
-											</ul></li>
-									</ul></li>
-							</ul></li>
-						<li class="dropdown"><a class="dropdown-toggle" href="#"
-							data-toggle="dropdown">Blog</a>
-							<ul class="dropdown-menu" role="menu">
-								<li class="dropdown"><a class="dropdown-toggle" href="#"
-									data-toggle="dropdown">Standard</a>
-									<ul class="dropdown-menu">
-										<li><a href="blog_standard_left_sidebar.html">Left
-												Sidebar</a></li>
-										<li><a href="blog_standard_right_sidebar.html">Right
-												Sidebar</a></li>
-									</ul></li>
-								<li class="dropdown"><a class="dropdown-toggle" href="#"
-									data-toggle="dropdown">Grid</a>
-									<ul class="dropdown-menu">
-										<li><a href="blog_grid_col_2.html">2 Columns</a></li>
-										<li><a href="blog_grid_col_3.html">3 Columns</a></li>
-										<li><a href="blog_grid_col_4.html">4 Columns</a></li>
-									</ul></li>
-								<li class="dropdown"><a class="dropdown-toggle" href="#"
-									data-toggle="dropdown">Masonry</a>
-									<ul class="dropdown-menu">
-										<li><a href="blog_grid_masonry_col_2.html">2 Columns</a></li>
-										<li><a href="blog_grid_masonry_col_3.html">3 Columns</a></li>
-										<li><a href="blog_grid_masonry_col_4.html">4 Columns</a></li>
-									</ul></li>
-								<li class="dropdown"><a class="dropdown-toggle" href="#"
-									data-toggle="dropdown">Single</a>
-									<ul class="dropdown-menu">
-										<li><a href="blog_single_left_sidebar.html">Left
-												Sidebar</a></li>
-										<li><a href="blog_single_right_sidebar.html">Right
-												Sidebar</a></li>
-									</ul></li>
-							</ul></li>
-						<li class="dropdown"><a class="dropdown-toggle" href="#"
-							data-toggle="dropdown">Features</a>
-							<ul class="dropdown-menu" role="menu">
-								<li><a href="alerts-and-wells.html"><i
-										class="fa fa-bolt"></i> Alerts and Wells</a></li>
-								<li><a href="buttons.html"><i class="fa fa-link fa-sm"></i>
-										Buttons</a></li>
-								<li><a href="tabs_and_accordions.html"><i
-										class="fa fa-tasks"></i> Tabs &amp; Accordions</a></li>
-								<li><a href="content_box.html"><i
-										class="fa fa-list-alt"></i> Contents Box</a></li>
-								<li><a href="forms.html"><i
-										class="fa fa-check-square-o"></i> Forms</a></li>
-								<li><a href="icons.html"><i class="fa fa-star"></i>
-										Icons</a></li>
-								<li><a href="progress-bars.html"><i
-										class="fa fa-server"></i> Progress Bars</a></li>
-								<li><a href="typography.html"><i class="fa fa-font"></i>
-										Typography</a></li>
-							</ul></li>
-						<li class="dropdown"><a class="dropdown-toggle" href="#"
-							data-toggle="dropdown">Shop</a>
-							<ul class="dropdown-menu" role="menu">
-								<li class="dropdown"><a class="dropdown-toggle" href="#"
-									data-toggle="dropdown">Product</a>
-									<ul class="dropdown-menu">
-										<li><a href="shop_product_col_3.html">3 columns</a></li>
-										<li><a href="shop_product_col_4.html">4 columns</a></li>
-									</ul></li>
-								<li><a href="shop_single_product.html">Single Product</a></li>
-								<li><a href="shop_checkout.html">Checkout</a></li>
-							</ul></li>
-						<li class="dropdown"><a class="dropdown-toggle"
-							href="documentation.html" data-toggle="dropdown">Documentation</a>
-							<ul class="dropdown-menu">
-								<li><a href="documentation.html#contact">Contact Form</a></li>
-								<li><a href="documentation.html#reservation">Reservation
-										Form</a></li>
-								<li><a href="documentation.html#mailchimp">Mailchimp</a></li>
-								<li><a href="documentation.html#gmap">Google Map</a></li>
-								<li><a href="documentation.html#plugin">Plugins</a></li>
-								<li><a href="documentation.html#changelog">Changelog</a></li>
-							</ul></li>
-					</ul>
-				</div>
-			</div>
-		</nav>
 		<div class="main" style="background-color: #F0F0F0;">
 			<section class="module">
 				<!--         forEach -->
@@ -398,13 +48,13 @@
 						<div class="row">
 							<button class="btn btn-warning btn-circle" type="button"
 								style="height: 43px; font-size: 19px;"
-								onclick="window.location='/SpringBoot_Team5/_03_product.searchAllProduct.controller'">
+								onclick="window.location='/MeetBoth/_03_product.searchAllProduct.controller'">
 								<span class="icon-browser">&ensp;回到商品目錄</span>
 							</button>
 							&nbsp;
 							<button class="btn btn-primary  btn-circle" type="button"
 								style="height: 43px; font-size: 19px;"
-								onclick="window.location='/SpringBoot_Team5/_03_product.catchSingleProductDate.controller?id=${bean.prodID}'">
+								onclick="window.location='/MeetBoth/_03_product.catchSingleProductDate.controller?id=${bean.prodID}'">
 								<span class=" icon-gears">&ensp;修改商品</span>
 							</button>
 							&nbsp;
@@ -457,6 +107,7 @@
 								<div class="row mb-20">
 									<div class="col-sm-12">
 										<div class="description">
+										<input type="hidden" value="${bean.prodID}" name="prodIdForAjax"/>
 											<h4>商品編號 : ${bean.prodID}</h4>
 										</div>
 									</div>
@@ -490,18 +141,33 @@
 									</div>
 								</div>
 								<!-- 								商品資訊 -->
+
 								<div class="row mb-20">
-									<div class="col-sm-4 mb-sm-20">
-										<input class="form-control input-lg" type="number"
-											name="chooseAmount" id="amount" value="1"
-											max="${bean.inventory}" min="1" required="required"
-											style="font-size: 25px; letter-spacing: 0px; border: 1px solid black; border-radius: 30px; text-align: center;" />
-									</div>
-									<div class="col-sm-8">
-										<a class="btn btn-d btn-circle" href="#"
-											style="height: 43px; font-size: 19px;">加入購物車</a>
-									</div>
+									<form
+										action="<c:url value='/shoppingCartAddOnly.controller/${bean.prodID}' />"
+										method="GET">
+										<div class="col-sm-4 mb-sm-20">
+											<input class="form-control input-lg" type="number" name="qty"
+												id="qty" value="1" max="${bean.inventory}" min="1"
+												required="required"
+												style="font-size: 25px; letter-spacing: 0px; border: 1px solid black; border-radius: 30px; text-align: center;" />
+										</div>
+										<!-- 隱藏ID -->
+										<Input type='hidden' name='prodID' id="prodID"
+											value='${bean.prodID}'>
+										<div class="col-sm-8">
+											<%-- 											<button style="float: right" id="${bean.prodID}" --%>
+											<!-- 												class="btn btn-sm text-dark p-0 addtocart"> -->
+											<!-- 												<i class="fas fa-shopping-cart text-primary mr-1"></i> 加入購物車 -->
+											<!-- 											</button> -->
+											<button type='submit' id="addToCartBtn"
+												class="btn btn-d btn-circle">
+												<i class="fas fa-shopping-cart text-primary mr-1"></i> 加入購物車
+											</button>
+										</div>
+									</form>
 								</div>
+
 								<!-- 								商品資訊 -->
 							</div>
 						</div>
@@ -558,7 +224,8 @@
 									<div class="tab-pane" id="reviews">
 										<div class="comments reviews">
 											<!-- 										商品評論 forEach -->
-											<div style="height: 650px; width: 100%; overflow-y: scroll;">
+											<div style="height: 650px; width: 100%; overflow-y: scroll;"
+												id="commentForEach">
 												<c:forEach var="commbean" items="${commBean}">
 													<div class="comment clearfix">
 														<div class="comment-avatar">
@@ -659,15 +326,23 @@
 											alt="Cold Garb" />
 										<div class="shop-item-detail">
 											<a
-												href="/SpringBoot_Team5/_03_product.PathToProductDetail.controller?id=${prodLikeBean.prodID}"
-												class="btn btn-round btn-b"><span class="icon-heart">查看商品頁面</span><span
-												class="icon-heart"></span></a>
+												href="/MeetBoth/_03_product.PathToProductDetail.controller?id=${prodLikeBean.prodID}"
+												class="btn btn-round btn-b"><span class="icon-heart" style="font-size:18px;">查看商品頁面</span><span
+												class="icon-heart" style="font-size:18px;"></span></a>
 										</div>
 									</div>
 									<h4 class="shop-item-title font-alt">
-										<a href="#">${prodLikeBean.prodName}</a>
+										<a href="#" style="font-size:22px;">${prodLikeBean.prodName}</a>
 									</h4>
-									NT$${prodLikeBean.prodPrice}
+									<div id="scoreAVGTwo">
+										<c:forEach var="commentBeanTwo"
+											items="${prodLikeBean.productComment}">
+											<input type="hidden" id="starAVGTwo"
+												value="${commentBeanTwo.prodScore}">
+										</c:forEach>
+										<div id="starAVGDivTwo" style="font-size: 20px;">123</div>
+									</div>
+									<p style="font-size:20px;">NT$${prodLikeBean.prodPrice}</p>
 								</div>
 							</div>
 						</c:forEach>
@@ -675,106 +350,51 @@
 				</div>
 			</section>
 			<!-- 			類似產品 end-->
-
-			<div class="module-small bg-dark">
-				<div class="container">
-					<div class="row">
-						<div class="col-sm-3">
-							<div class="widget">
-								<h5 class="widget-title font-alt">About Titan</h5>
-								<p>The languages only differ in their grammar, their
-									pronunciation and their most common words.</p>
-								<p>Phone: +1 234 567 89 10</p>
-								Fax: +1 234 567 89 10
-								<p>
-									Email:<a href="#">somecompany@example.com</a>
-								</p>
-							</div>
-						</div>
-						<div class="col-sm-3">
-							<div class="widget">
-								<h5 class="widget-title font-alt">Recent Comments</h5>
-								<ul class="icon-list">
-									<li>Maria on <a href="#">Designer Desk Essentials</a></li>
-									<li>John on <a href="#">Realistic Business Card Mockup</a></li>
-									<li>Andy on <a href="#">Eco bag Mockup</a></li>
-									<li>Jack on <a href="#">Bottle Mockup</a></li>
-									<li>Mark on <a href="#">Our trip to the Alps</a></li>
-								</ul>
-							</div>
-						</div>
-						<div class="col-sm-3">
-							<div class="widget">
-								<h5 class="widget-title font-alt">Blog Categories</h5>
-								<ul class="icon-list">
-									<li><a href="#">Photography - 7</a></li>
-									<li><a href="#">Web Design - 3</a></li>
-									<li><a href="#">Illustration - 12</a></li>
-									<li><a href="#">Marketing - 1</a></li>
-									<li><a href="#">Wordpress - 16</a></li>
-								</ul>
-							</div>
-						</div>
-						<div class="col-sm-3">
-							<div class="widget">
-								<h5 class="widget-title font-alt">Popular Posts</h5>
-								<ul class="widget-posts">
-									<li class="clearfix">
-										<div class="widget-posts-image">
-											<a href="#"><img src="html/assets/images/rp-1.jpg"
-												alt="Post Thumbnail" /></a>
-										</div>
-										<div class="widget-posts-body">
-											<div class="widget-posts-title">
-												<a href="#">Designer Desk Essentials</a>
-											</div>
-											<div class="widget-posts-meta">23 january</div>
-										</div>
-									</li>
-									<li class="clearfix">
-										<div class="widget-posts-image">
-											<a href="#"><img src="html/assets/images/rp-2.jpg"
-												alt="Post Thumbnail" /></a>
-										</div>
-										<div class="widget-posts-body">
-											<div class="widget-posts-title">
-												<a href="#">Realistic Business Card Mockup</a>
-											</div>
-											<div class="widget-posts-meta">15 February</div>
-										</div>
-									</li>
-								</ul>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-			<hr class="divider-d">
-			<footer class="footer bg-dark">
-				<div class="container">
-					<div class="row">
-						<div class="col-sm-6">
-							<p class="copyright font-alt">
-								&copy; 2017&nbsp;<a href="index.html">TitaN</a>, All Rights
-								Reserved
-							</p>
-						</div>
-						<div class="col-sm-6">
-							<div class="footer-social-links">
-								<a href="#"><i class="fa fa-facebook"></i></a><a href="#"><i
-									class="fa fa-twitter"></i></a><a href="#"><i
-									class="fa fa-dribbble"></i></a><a href="#"><i
-									class="fa fa-skype"></i></a>
-							</div>
-						</div>
-					</div>
-				</div>
-			</footer>
+			<!-- 						中間BLOCK end-->
+			<jsp:include page="/WEB-INF/html/fragment/footerMVC.jsp" />
 		</div>
 		<div class="scroll-up">
 			<a href="#totop"><i class="fa fa-angle-double-up"></i></a>
 		</div>
 	</main>
+	<!--  
+    JavaScripts
+    =============================================
+    -->
+	<%
+	String basePath1 = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path
+			+ "/html/assets/js/jquery.min.js";
+	%>
+
+	<%
+	String basePath2 = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path
+			+ "/html/assets/js/browser.min.js";
+	%>
+
+	<%
+	String basePath3 = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path
+			+ "/html/assets/js/breakpoints.min.js";
+	%>
+
+	<%
+	String basePath4 = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path
+			+ "/html/assets/js/util.js";
+	%>
+
+	<%
+	String basePath5 = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path
+			+ "/html/assets/js/main.js";
+	%>
+	<script src=<%=basePath1%>></script>
+	<script src=<%=basePath2%>></script>
+	<script src=<%=basePath3%>></script>
+	<script src=<%=basePath4%>></script>
+	<script src=<%=basePath5%>></script>
+	<script src="https://kit.fontawesome.com/25590258af.js"
+		crossorigin="anonymous"></script>
+	<div class="scroll-up">
+		<a href="#totop"><i class="fa fa-angle-double-up"></i></a>
+	</div>
 	<!--  
     JavaScripts
     =============================================
@@ -795,13 +415,16 @@
 		src="html/assets/lib/simple-text-rotator/jquery.simple-text-rotator.min.js"></script>
 	<script src="html/assets/js/plugins.js"></script>
 	<script src="html/assets/js/main.js"></script>
+	<!-- SweetAlert js -->
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<!-- SweetAlert js -->
 	<script>
 		const scores = document.querySelectorAll("#score");
 
-		document
-				.addEventListener(
+		document.addEventListener(
 						"DOMContentLoaded",
 						function() {
+							if(scores.length!=0){
 							for (let i = 0; i < scores.length; i++) {
 								const starNum = scores[i].value;
 								const starDiv = scores[i].closest("#starDiv");
@@ -817,6 +440,10 @@
 									}
 								}
 								starDiv.innerHTML = stars;
+								
+							}
+							}else{
+								starDiv.innerHTML='沒有評論';
 							}
 						});
 	</script>
@@ -826,7 +453,9 @@
 		}
 
 		const score = document.querySelectorAll("#starAVG");
-
+		console.log(score.length)
+		
+		
 		document.addEventListener("DOMContentLoaded", function() {
 			var totalScore = 0;
 			for (let i = 0; i < score.length; i++) {
@@ -834,7 +463,11 @@
 				totalScore += Number(starNum);
 			}
 			let avgScore = roundToTwo(totalScore / score.length);
-			let stars = '&nbsp;(' + avgScore + ')';
+			if(isNaN(avgScore)){
+				stars = '&nbsp;(0)';
+			}else{
+				stars = '&nbsp;(' + avgScore + ')';
+			}
 			let onstar = '<span><i class="fa fa-star star"></i></span>';
 			let offstar = '<span><i class="fa fa-star star-off"></i></span>';
 			for (var j = 0; j < 5; j++) {
@@ -844,8 +477,43 @@
 					stars += offstar;
 				}
 			}
-			stars += '&nbsp;('+ score.length +'則評論)'
+			if(score.length!=0){
+				stars += '&nbsp;('+ score.length +'則評論)'
+			}else{
+				stars += '&nbsp;(0則評論)'		
+				document.getElementById("commentForEach").innerHTML = "<p style='font-size: 30px; text-align: center;'>沒有評論</p>";
+			}
 			document.getElementById("starAVGDiv").innerHTML = stars;
+		});
+	</script>
+	<script>
+	document.addEventListener("DOMContentLoaded", function() {
+		  const scores = document.querySelectorAll("#scoreAVGTwo");
+		  for (let i = 0; i < scores.length; i++) {
+		    const score = scores[i];
+		    const starAVGs = score.querySelectorAll("#starAVGTwo");
+		    let totalScore = 0;
+		    for (let j = 0; j < starAVGs.length; j++) {
+		      const starNum = starAVGs[j].value;
+		      totalScore += Number(starNum);
+		    }
+		    let avgScore = roundToTwo(totalScore / starAVGs.length);
+		    let stars = '';
+		    if(isNaN(avgScore)){
+				stars = '&nbsp;(0)';
+			}else{
+				stars = '&nbsp;(' + avgScore + ')';
+			}
+		    for (let k = 0; k < 5; k++) {
+		      if (k < avgScore) {
+		        stars += '<i class="fa fa-star star"></i>';
+		      } else {
+		        stars += '<i class="fa fa-star star-off"></i>';
+		      }
+		    }
+		    stars += '&nbsp;('+ starAVGs.length +'則評論)'
+		    score.querySelector("#starAVGDivTwo").innerHTML = stars;
+		  }
 		});
 	</script>
 	<script>
@@ -867,14 +535,14 @@
                     if (result.isConfirmed) {
                         $.ajax({
                           //專案名稱+servlet
-                         url:'/SpringBoot_Team5/_03_product.deleteProductById.controller',
+                         url:'/MeetBoth/_03_product.deleteProductById.controller',
                           method:"post",
                           dataType:"text",
                           //對應name設定的名稱 並非value的名稱
                           data: {"id":id},
                         })
                             .done(function () {
-                            	window.location='/SpringBoot_Team5/_03_product.searchAllProduct.controller'
+                            	window.location='/MeetBoth/_03_product.searchAllProduct.controller'
                                 console.log("delete")
                              })//done
                              .fail(function(error) {
@@ -888,20 +556,51 @@
         //function end
     </script>
 	<script>
-		function calToCost(price,invt){
-			var amount = document.getElementById("amount").value;
-			if(amount>invt){
-				alert("訂購數量超過庫存")
-				document.getElementById("amount").value = invt;
-				amount = invt;
-			}else if(amount < 0){
-				alert("訂購數量不得為負值")
-				document.getElementById("amount").value = 0;
-				amount=0;
-			}
-			var cost = amount*price; 
-			document.getElementById("Cost").value = cost;
-		}
+	var prodIdInput = document.querySelector('input[name="prodIdForAjax"]');
+    var prodId = prodIdInput.value;
+    console.log("id="+prodId);
+	window.onload = function() {
+	    var xhr = new XMLHttpRequest();
+	    xhr.open("GET", "/MeetBoth/product.productCheck.controller?id=" + prodId, true);
+	    xhr.send();
+	};
+</script>
+<script>
+    let cartCount = 0;
+    document.getElementById("addToCartBtn").addEventListener("click", function() {
+        cartCount += 1;
+        document.getElementById("cartCount").innerHTML = "購物車：" + cartCount;
+    });
+</script>
+	<script type="text/javascript">
+    $('.addtocart').on('click', function () {
+        let MyValue = $(this).attr("id");
+        console.log(MyValue);
+        $.ajax({
+            url: '/shoppingCartAddOnly.controller/' + MyValue,
+            method: "get",
+            dataType: "text",
+            //這邊的"id"是給controller的變數名
+            data: { "prodID": MyValue },
+        }).done(function () {
+//         	alert("成功")
+            location.reload();
+        }).fail(function () {
+//         	alert("失敗")
+        	location.reload();
+        })
+    });
 	</script>
+	<script>
+      let cartCount = 0;
+      document
+        .getElementById("addToCartBtn")
+        .addEventListener("click", function () {
+          console.log(cartCount);
+          cartCount += 1;
+          document.getElementById("cartCount").innerHTML =
+            "購物車：" + cartCount;
+        });
+    </script>
 </body>
 </html>

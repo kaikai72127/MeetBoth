@@ -10,7 +10,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.LinkedHashSet;
 import java.util.List;
-import java.util.Set;
 
 import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.http.HttpServletRequest;
@@ -44,7 +43,109 @@ public class ProductController {
 
 	@Autowired
 	private ProductCommentService pcService;
+//	-----------------------------後台-----------------------
+//	導到後台
+	@GetMapping("/_03_product.index.controller")
+	public String processpathToYTplayerAction(Model mProd) {
+		return "_03_product/MBCMS";
+	}
+	
+//	導到後台insert
+	@GetMapping("/_03_product.MBinsertProd.controller")
+	public String processpathToMBinsertPordAction() {
+		return "_03_product/MBinsertProd";
+	}
+	
+	@PostMapping("/_03_product.MBinsertProdAction.controller")
+	public String processMBinsertPordAction(
+			@RequestParam("pst")String prodState,
+			@RequestParam("pna")String prodName,
+			@RequestParam("pty")Integer prodType,
+			@RequestParam("ppr")Integer prodPrice,
+			@RequestParam("pmid")Integer memID,
+			@RequestParam("pinvt")Integer prodInvt,
+			@RequestParam("pps")Integer prodSales,
+			@RequestParam("pch")Integer prodCheck,
+			@RequestParam("pPic") MultipartFile file,
+			@RequestParam("pdr")String prodDir
+			) throws IOException, SQLException {
+		Blob image = null;
+		InputStream in = file.getInputStream();
+		long size = file.getSize();
+		image = fileToBlob(in, size);
 
+		ProdType currentProdType = ptService.findByProdclass(prodType);
+		Product newProd = new Product();
+
+		newProd.setProdState(prodState);
+		newProd.setProdName(prodName);
+		newProd.setProdtype(currentProdType);
+		newProd.setProdPrice(prodPrice);
+		newProd.setMemberID(memID);
+		newProd.setInventory(prodInvt);
+		newProd.setProdPost(getCurrentDate());
+		newProd.setProdUpdate(getCurrentDate());
+		newProd.setProdSales(prodSales);
+		newProd.setProdCheck(prodCheck);
+		newProd.setProdImg(image);
+		newProd.setDirections(prodDir);
+
+		LinkedHashSet<Product> prods = new LinkedHashSet<Product>();
+		prods.add(newProd);
+		currentProdType.setProduct(prods);
+
+		ptService.insertProduct(currentProdType);
+		
+		return "redirect:_03_product.productindex.controller";
+	}
+	@GetMapping("/_03_product.pathToMBinsertProd.controller")
+	public String processpathToMBinsertProdAction(Model m,@RequestParam("id")Integer prodid) throws SQLException {
+		Product p = pService.searchSingleProductFromProdID(prodid);
+		m.addAttribute("prod",p);
+		return "_03_product/MBupdateProd";
+	}
+	
+	@PostMapping("/_03_product.MBupdateProdAction.controller")
+	public String processMBupdatePordAction(
+			@RequestParam("pst")String prodState,
+			@RequestParam("pna")String prodName,
+			@RequestParam("pid")Integer prodID,
+			@RequestParam("pty")Integer prodType,
+			@RequestParam("ppr")Integer prodPrice,
+			@RequestParam("pmid")Integer memID,
+			@RequestParam("pinvt")Integer prodInvt,
+			@RequestParam("pps")Integer prodSales,
+			@RequestParam("pch")Integer prodCheck,
+			@RequestParam("pPic") MultipartFile file,
+			@RequestParam("pdr")String prodDir
+			) throws IOException, SQLException {
+			Blob image = null;
+
+			InputStream in = file.getInputStream();
+			long size = file.getSize();
+			image = fileToBlob(in, size);
+
+			ProdType pType = ptService.findByProdclass(prodType);
+			Product prod = pService.searchSingleProductFromProdID(prodID);
+			prod.setProdState(prodState);
+			prod.setProdName(prodName);
+			prod.setProdPrice(prodPrice);
+			prod.setMemberID(memID);
+			prod.setInventory(prodInvt);
+			prod.setDirections(prodDir);
+			prod.setProdSales(prodSales);
+			prod.setProdCheck(prodCheck);
+			prod.setProdUpdate(getCurrentDate());
+			prod.setProdtype(pType);
+			if (size != 0) {
+				prod.setProdImg(image);
+				pService.updateProd(prod);
+			} else {
+				pService.updateProd(prod);
+			}
+		
+		return "redirect:_03_product.productindex.controller";
+	}
 //	---------------------------小工具們-----------------------
 //	fileToBlob
 	public Blob fileToBlob(InputStream is, long size) throws IOException, SQLException {
@@ -99,12 +200,35 @@ public class ProductController {
 			;
 		}
 	}
+//	跳轉到管理者商品後台
+	@GetMapping("/_03_product.productindex.controller")
+	public String processproductIndexAction(Model mProd){
+		List<Product> result;
+		try {
+			result = pService.searchAllProduct();
+			mProd.addAttribute("prodList", result);
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return "_03_product/productindex";
+	}
+	
+//	調轉到單一的管理者商品後台
+	@GetMapping("/_03_product.singleProductIndex.controller")
+	public String processSingleProductIndexAction(@RequestParam("id") Integer prodID, Model mProd) throws SQLException{
+		
+		Product result = pService.searchSingleProductFromProdID(prodID);
+		mProd.addAttribute("prod", result);
+		return "_03_product/singleProdIndex";
+	}
 
 //	跳轉到商品明細
 	@GetMapping("/_03_product.PathToProductDetail.controller")
 	public String processPathToProductDetail2(@RequestParam("id") Integer id,
 			 Model mProd, Model mComm,Model mProdLike) throws SQLException {
 		Product prod = pService.searchSingleProductFromProdID(id);
+
 		List<ProductComment> list = prod.getProductComment();
 		ArrayList<ProductComment> comms = new ArrayList<ProductComment>();
 		ProductComment comm = new ProductComment();
@@ -133,27 +257,65 @@ public class ProductController {
 		mProd.addAttribute("bean", prods);
 		return "_03_product/singleProduct";
 	}
-	//搜相似產品(4)
-	@GetMapping("/_03_product.searchProductLikeTop4.controller")
-	public String processsearchProductLikeTop4(Model mProd) {
-		List<Product> result;
+	
+//	隨機搜尋
+	@GetMapping("/_03_product.searchRandomProduct.controller")
+	public String processsearchRandomProductAction(Model mProd) {
+		List<Product> result = pService.findRandomProducts();
+		mProd.addAttribute("allprodlist", result);
+		return "_03_product/typeShop";
+	}
+//	類別搜尋 回傳prodList
+	@GetMapping("/_03_product.searchProductByType.controller")
+	public String processsearchProductByTypeAction(Model mProd,@RequestParam("type") Integer type) {
+		List<Product> result = pService.findByProdClass(type);
+		mProd.addAttribute("allprodlist", result);
+		return "_03_product/typeShop";
+	}
+	
+//	增加瀏覽次數
+	@GetMapping("/product.productCheck.controller")
+	public String processProductCheckAction(@RequestParam("id") Integer id) {
 		try {
-			result = pService.searchAllProduct();
-			mProd.addAttribute("allprodlist", result);
+			Product p = pService.searchSingleProductFromProdID(id);
+			Integer prodCheck = p.getProdCheck();
+			prodCheck += 1;
+			p.setProdCheck(prodCheck);
+			pService.updateProd(p);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		return "_03_product/newShop";
+		return null;
+	}
+	
+//	更新商品狀態 (上架中/下架)
+	@PostMapping("/product.updateProductState.controller")
+	public String processUpdateProductStateAction(@RequestParam("id") Integer id) {
+		try {
+			Product p = pService.searchSingleProductFromProdID(id);
+			p.setProdState("還沒改好");
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		
+		return null;
 	}
 //	---------------------------ProductPart-----------------------
 
 //	搜全部
 	@GetMapping("/_03_product.searchAllProduct.controller")
-	public String processSearchAllAction(Model mProd) {
+	public String processSearchAllAction(Model mProd,Model mProd2) {
 		List<Product> result;
+		List<Product> HotResult;
 		try {
 			result = pService.searchAllProduct();
+			HotResult = pService.findHotestProducts();
 			mProd.addAttribute("allprodlist", result);
+			mProd2.addAttribute("Hotprodlist", HotResult);
+			
+			
+			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -204,6 +366,9 @@ public class ProductController {
 		newProd.setProdUpdate(getCurrentDate());
 		newProd.setProdImg(image);
 		newProd.setDirections(directions);
+		newProd.setProdSales(0);
+		newProd.setProdCheck(0);
+		newProd.setProdState("下架");
 		newProd.setProdtype(currentProdType);
 
 		LinkedHashSet<Product> prods = new LinkedHashSet<Product>();
@@ -250,24 +415,33 @@ public class ProductController {
 		return "redirect:_03_product.searchAllProduct.controller";
 	}
 
-//	delete
+//	前台delete
 	@PostMapping("/_03_product.deleteProductById.controller")
 	public String processDeleteProductByIdAction(@RequestParam("id") Integer id) {
 		pService.deleteProdFromProdID(id);
 		return "redirect:_03_product.searchAllProduct.controller";
 	}
+//	後台delete
+	@PostMapping("/_03_product.MBdeleteProductById.controller")
+	public String processMBDeleteProductByIdAction(@RequestParam("id") Integer id) {
+		pService.deleteProdFromProdID(id);
+		return "redirect:_03_product.productindex.controller";
+	}
 
-//	模糊搜尋
+//	模糊搜尋(前台)
 	@PostMapping("/_03_product.searchProductWithCondition.controller")
 	public String processSearchProductWithCondi(@RequestParam("case") int order, @RequestParam("typecase") Integer type,
 			@RequestParam("lowprice") int low, @RequestParam("highprice") int high,
-			@RequestParam("searchName") String name, Model pm) throws SQLException {
+			@RequestParam("searchName") String name, Model pm, Model mProd) throws SQLException {
 		String orderBy = "";
 		String hasDESC = null;
 		List<Product> result = null;
 		if (name == null) {
 			name = "";
 		}
+		
+		List<Product> HotResult = pService.findHotestProducts();
+			mProd.addAttribute("Hotprodlist", HotResult);
 
 		if (order == 1) {
 			result = pService.searchWithCondiOrderByProdID(type, low, high, name);
@@ -279,11 +453,46 @@ public class ProductController {
 			result = pService.searchWithCondiOrderByProdPost(type, low, high, name);
 		} else if (order == 5) {
 			result = pService.searchWithCondiOrderByProdUpdate(type, low, high, name);
+		}else if (order == 6) {
+			result = pService.findAllByOrderByProdCheckDesc(type, low, high, name);
 		}
 
 		pm.addAttribute("allprodlist", result);
 
 		return "_03_product/newShop";
+	}
+//	模糊搜尋(後台)
+	@PostMapping("/_03_product.searchProductWithCondition2.controller")
+	public String processSearchProductWithCondi2(@RequestParam("case") int order, @RequestParam("typecase") Integer type,
+			@RequestParam("lowprice") int low, @RequestParam("highprice") int high,
+			@RequestParam("searchName") String name, Model pm, Model mProd) throws SQLException {
+		String orderBy = "";
+		String hasDESC = null;
+		List<Product> result = null;
+		if (name == null) {
+			name = "";
+		}
+		
+		List<Product> HotResult = pService.findHotestProducts();
+		mProd.addAttribute("Hotprodlist", HotResult);
+		
+		if (order == 1) {
+			result = pService.searchWithCondiOrderByProdID(type, low, high, name);
+		} else if (order == 2) {
+			result = pService.searchWithCondiOrderByProdPriceDesc(type, low, high, name);
+		} else if (order == 3) {
+			result = pService.searchWithCondiOrderByProdPrice(type, low, high, name);
+		} else if (order == 4) {
+			result = pService.searchWithCondiOrderByProdPost(type, low, high, name);
+		} else if (order == 5) {
+			result = pService.searchWithCondiOrderByProdUpdate(type, low, high, name);
+		}else if (order == 6) {
+			result = pService.findAllByOrderByProdCheckDesc(type, low, high, name);
+		}
+		
+		pm.addAttribute("prodList", result);
+		
+		return "_03_product/productindex";
 	}
 
 
@@ -362,4 +571,16 @@ public class ProductController {
 		mProd.addAttribute("bean", prods);
 		return "_03_product/prodDetail";
 	}
+//	個人賣場part----------------------------------
+	@GetMapping("/_03_product/pathToMyPDP.controller")
+	public String processpathToMyPDPAction(Model mProd) {
+//		List<Product> result = pService.findRandomProducts();
+//		mProd.addAttribute("bean", result);
+		
+		return "/_03_product/myPDP";
+	}
+
+
+
+
 }

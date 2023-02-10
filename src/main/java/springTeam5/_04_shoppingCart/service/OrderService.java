@@ -1,63 +1,47 @@
 package springTeam5._04_shoppingCart.service;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
-
 import springTeam5._04_shoppingCart.model.OrderBean;
-import springTeam5._04_shoppingCart.model.OrderRepository;
+import springTeam5._04_shoppingCart.model.ShoppingCart;
 
-@Service
-@Transactional
-public class OrderService {
+public interface OrderService {
 
-	@Autowired
-	private OrderRepository orderRepo;
-	
-	public String getCurrentDate() {
-		Date date = new Date();
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy.MM.dd HH:mm:ss");
-		return sdf.format(date);
-	}
-
-//新增----------
 	// 新增一筆訂單
-	public OrderBean insertOrder(OrderBean obean) {
-		return orderRepo.save(obean);
-	}
+	OrderBean createOrder(OrderBean obean);
 
-//刪除----------
 	// 刪除一筆訂單-透過orderNo
-	public void deleteById(Integer orderNo) {
-		orderRepo.deleteById(orderNo);
-	}
+	void deleteById(Integer orderNo);
 
-//查詢----------
+	// 修改一筆訂單
+	OrderBean updateOrder(OrderBean obean);
+
 	// 查詢全部訂單
-	public List<OrderBean> selectAll() {
-		return orderRepo.selectAll();
-	}
+	List<OrderBean> selectAll();
+
+	// 查詢買賣家的訂單資料
+	List<OrderBean> findByMemberbuy(Integer memberbuy_FK);
+
+	List<OrderBean> findByMembersale(Integer membersale_FK);
 
 	// 查詢一筆訂單資料-透過訂單編號
+	List<OrderBean> findByOrderNo(Integer orderNo);
 
-	public List<OrderBean> findByOrderNo(Integer orderNo) {
-		return orderRepo.findByOrderNo(orderNo);
-	}
+	// 條件搜尋
+	List<OrderBean> findOrderBySearch1(String ordStstus, String paymentStstus, String deliveryStstus, String search);
 
-	// 模糊搜尋全部
-	public List<OrderBean> findSearchOrderNo(String searchAll) {
-		return orderRepo.findSearchOrderNo(searchAll);
-	}
+	List<OrderBean> findOrderBySearch2(String paymentStstus, String deliveryStstus, String search);
 
-//修改----------
-	// 修改一筆訂單
+	List<OrderBean> findOrderBySearch3(String deliveryStstus, String search);
 
-	@Transactional
-	public OrderBean updateOrder(OrderBean obean) {
-		return orderRepo.save(obean);
-	}
+	List<OrderBean> findOrderBySearch4(String search);
+
+	List<OrderBean> findOrderByOrdStstus(String ordStstus);
+
+	List<OrderBean> findOrderByPaymentStstus(String paymentStstus);
+
+	List<OrderBean> findOrderByDeliveryStstus(String deliveryStstus);
+	// 檢查購物車
+//	void preCheckStock(ShoppingCart shoppingCart);
+
 }

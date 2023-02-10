@@ -1,251 +1,312 @@
+<%@page import="springTeam5._04_shoppingCart.model.*"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<! DOCTYPE html>
-<html>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+
+
+
+<!DOCTYPE html>
+<html lang="zh-hant-TW">
+
 <head>
-<%
-String path = request.getContextPath();
-String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path
-		+ "/html/assets/css/main.css";
-%>
-<%
-String pathimg = request.getContextPath();
-String basePathimg = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + pathimg
-		+ "/html/images/meatball-icon.png";
-%>
-<%
-String basePathimg2 = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path
-		+ "/images/meatball-200.png";
-%>
+<!-- 引入共同的headMVC -->
+<jsp:include page="/WEB-INF/html/fragment/headMVC.jsp" />
 
-<title>肉丸家教網 MEET BOTH</title>
-<meta charset="utf-8" />
-<meta name="viewport"
-	content="width=device-width, initial-scale=1, user-scalable=no" />
+<style>
+.wrapmain {
+	overflow: hidden;
+	border-radius: 10px 10px 0px 0px;
+	box-shadow: 0 0 20px rgba(0, 0, 0, 0.35);
+}
 
-<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<meta name="robots" content="index,follow" />
-<meta name="description" content="全台最優質最快速方便的家教網" />
-<meta name="author" content="EEIT56-MEETBOTH" />
-<meta name="keywords" content="最棒最優質的家教網" />
-<meta name="copyright" content="肉丸家教網" />
-<link rel="shortcut icon" href="<%=basePathimg%>" />
-<link rel="bookmark" href="<%=basePathimg%>" />
-<link rel="stylesheet" href="<%=basePath%>" />
-<!-- DataTable css -->
-<link rel="stylesheet" type="text/css"
-	href="https://cdn.datatables.net/1.13.1/css/jquery.dataTables.css">
-<!-- DataTable js -->
-<script type="text/javascript" charset="utf8"
-	src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.js"></script>
+table {
+	font-family: 'Oswald', sans-serif;
+	border-collapse: collapse;
+}
+
+th {
+	font-size: 16px;
+	background-color: #ce7777;
+	color: #ffffff;
+	width: 25vw;
+	height: 3rem;
+	background-color: #ce7777;
+}
+
+td {
+	background-color: #ffffff;
+	width: 25vw;
+	height: 50px;
+	text-align: center;
+}
+
+tr {
+	border-bottom: 1px solid #dddddd;
+}
+
+tr:last-of-type {
+	border-bottom: 2px solid #ce7777;
+}
+
+tr:nth-of-type(even) td {
+	background-color: #f3f3f3;
+}
+</style>
+
+<!-- datatable -->
+<!-- CSS -->
+<link rel="stylesheet"
+	href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.min.css">
+<!-- jq -->
+<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+<script
+	src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
+
 <!-- SweetAlert js -->
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<!-- SweetAlert js -->
+<!-- datatable -->
+
+<script type="text/javascript">
+	$(document).ready(function() {
+		$('#table_id').DataTable();
+	});
+</script>
+
 
 </head>
-<body class="is-preload">
-	<!-- Wrapper -->
-	<div id="wrapper">
 
-		<div id="main">
-			<div class="inner">
-				<!-- Header -->
-				<header id="header">
-					<h1 class="logo">
-						<strong>管理者介面　</strong>
-					</h1>
-				</header>
+<!--BOBY-->
+<body data-spy="scroll" data-target=".onpage-navigation"
+	data-offset="60">
 
-				<!-- Content -->
-				<section>
-					<header class="main">
-						<h2 style="margin: 0; float: left">訂單管理CRUD　</h2>
-						<form method="post"
-							action="<c:url value='/_04_shoppingCart.InsertOrderMain.controller' />">
-							<button name="orderNo" value="${bean.orderNo}">
-								<i class="fa-solid fa-square-plus"></i>
-							</button>
-						</form>
-					</header>
-					<!-- Search -->
-					<section id="search" class="alt">
-						<form method="post"
-							action="<c:url value='/_04_shoppingCart.SearchAllorders.controller' />">
-							<input type="text" name="search" id="search" placeholder="Search" />
-						</form>
-					</section>
+	<!-- header -->
+	<!-- 引入共同的topMVC -->
+	<jsp:include page="/WEB-INF/html/fragment/topMVC.jsp" />
 
-					<!-- Table -->
-					<div class="table-wrapper">
-						<table class="alt">
-							<thead>
-								<tr>
-									<th width=100px>訂單編號</th>
-									<th width=100px>會員編號</th>
-									<th width=120px>訂單日期</th>
-									<th width=120px>更新日期</th>
-									<th>訂單地址</th>
-									<th>訂單狀態</th>
-									<th>付款狀態</th>
-									<th>送貨狀態</th>
-									<th width=80px>總金額</th>
-									<th width=80px>編輯</th>
-									<th width=80px>訂單明細</th>
-									<th width=80px>刪除</th>
-								</tr>
-							</thead>
-							<c:forEach var="bean" items="${classList}">
-								<tbody>
-									<tr>
-										<td>${bean.orderNo}</td>
-										<td>${bean.memberId}</td>
-										<td>${bean.orderDate}</td>
-										<td>${bean.uporderDate}</td>
-										<td>${bean.shippingAddress}</td>
-										<td>${bean.ordStstus}</td>
-										<td>${bean.paymentStstus}</td>
-										<td>${bean.deliveryStstus}</td>
-										<td>${bean.totalAmount}</td>
-										<td><form method="post"
-												action="<c:url value='/_04_shoppingCart.UpdateOrderMain.controller' />">
-												<button name="orderNo" value="${bean.orderNo}">
-													<i class="fa-solid fa-pen-to-square"></i>
-												</button>
-											</form></td>
-										<td><form action="<c:url value='/_04_shoppingCart.InsertOrderItemMain.controller' />"
-												method="post">
-												<button name="orderNo" value="${bean.orderNo}">
-													<i class="fa-solid fa-file-pen"></i>
-												</button>
-											</form></td>
-										<td><button class="deleteThisOrder" name="orderNo"
-												value="${bean.orderNo}">
-												<i class="fa-solid fa-xmark"></i>
-											</button></td>
-									</tr>
-								</tbody>
-							</c:forEach>
-						</table>
-						<div style="display: flex; justify-content: center">
-							<a href="backIndex.controller"> 返回<i
-								class="fa-solid fa-left-long"></i></a>
-						</div>
+	<main>
+
+		<!--       動態搜尋列 -->
+		<section class="module-small" style="padding-bottom: 10px;">
+			<div class="container" style="">
+				<form class="row"
+					action="<c:url value='/shoppingCart.SearchOrders.controller'/>"
+					method="post">
+					<div class="col-sm-2 mb-sm-20 main"
+						style="width: 15%; padding-right: 0;">
+						<select name="ordStstus" class="form-control"
+							style="font-size: 17px">
+							<option value="0">訂單狀態</option>
+							<option value="處理中">處理中</option>
+							<option value="備貨中">備貨中</option>
+							<option value="已完成">已完成</option>
+							<option value="取消">取消</option>
+						</select>
 					</div>
-				</section>
+					<div class="col-sm-2 mb-sm-20"
+						style="width: 15%; padding-right: 0;">
+						<select name="paymentStstus" class="form-control"
+							style="font-size: 17px">
+							<option value="0">付款狀態</option>
+							<option value="未付款">未付款</option>
+							<option value="已付款">已付款</option>
+							<option value="退款中">退款中</option>
+							<option value="已退款">已退款</option>
+						</select>
+					</div>
+					<div class="col-sm-2 mb-sm-20"
+						style="width: 15%; padding-right: 0;">
+						<select name="deliveryStstus" class="form-control"
+							style="font-size: 17px">
+							<option value="0">送貨狀態</option>
+							<option value="無">無</option>
+							<option value="備貨中">備貨中</option>
+							<option value="已發貨">已發貨</option>
+							<option value="已取貨">已取貨</option>
+							<option value="退貨中">退貨中</option>
+							<option value="已退貨">已退貨</option>
+						</select>
+					</div>
+					<div class="col-sm-2 mb-sm-20" style="width: 25%">
+						<input class="form-control" type="text" name="search"
+							style="font-size: 17px" placeholder="搜尋名稱" />
+					</div>
+					<div class="col-sm-3" style="width: 10%">
+						<button class="btn btn-d btn-round" type="submit"
+							style="font-size: 17px">搜尋</button>
+					</div>
+				</form>
 			</div>
-		</div>
+		</section>
 
-		<!-- Sidebar -->
-		<div id="sidebar">
-			<div class="inner">
+		<section>
 
-
-
-				<!-- Menu -->
-				<nav id="menu">
-					<header class="major">
-						<h2>
-							<img src="<%=basePathimg2%>" alt="" />
-						</h2>
-					</header>
-					
-					<ul>
-						<li><a href="<c:url value='/index.controller' />">首頁 <i class="fa-solid fa-house"></i></a></li>
-						<li><a href="<c:url value='/backIndex.controller' />">後台管理 <i
-								class="fa-solid fa-gears"></i></a></li>
-						<li><a href="<c:url value='/_01_member.admin' />">會員資料 <i
-								class="fa-solid fa-users-viewfinder"></i></a></li>
-						<li><span class="opener">科目地區資料 <i
-								class="fa-solid fa-magnifying-glass-location"></i></span>
-							<ul>
-								<li><a href="<c:url value='/_02_subLocation.SelectAllSub.controller' />">科目搜尋</a>
-								<li><a href="<c:url value='/_02_subLocation.SelectAllLoc.controller' />">地點搜尋</a>
-							</ul></li>
-						<li><a href="<c:url value='/_03_product.searchAllProduct.controller'/>">商品資料 <i
-								class="fa-solid fa-store"></i></a></li>
-						<li><a
-							href="<c:url value='/_04_shoppingCart.SelectAll.controller' />">訂單資料
-								<i class="fa-solid fa-cart-shopping"></i>
-						</a></li>
-						<li><span class="opener">老師學生資料 <i
-								class="fa-solid fa-users"></i></span>
-							<ul>
-								<li><a href="<c:url value='/_05_teacStu.searchAllTeac.controller' />">老師貼文資料</a></li>
-								<li><a href="<c:url value='/_05_teacStu.searchAllStud.controller' />">學生貼文資料</a></li>
-							</ul></li>
-						<li><span class="opener">哈拉區 <i
-								class="fa-solid fa-comments"></i></span>
-							<ul>
-								<li><a href="<c:url value='/_06_halaAndQa.SelectAllHala.controller' />">討論公告區</a></li>
-								<li><a href="<c:url value='/_06_halaAndQa.SelectAllQa.controller' />">Q&A解答區</a></li>
-							</ul></li>
-					</ul>
-					
-				</nav>
+			<!-- Table -->
+			<div class="col-sm-6 col-sm-offset-3 ">
+				<div class="wrapmain">
+					<table class="alt" id="table_id" class="display">
+						<thead>
+							<tr>
+								<th width=120px>訂單編號</th>
+								<th width=120px>會員編號</th>
+								<th width=120px>訂單日期</th>
+								<th width=120px>更新日期</th>
+								<th width=120px>訂單狀態</th>
+								<th width=120px>付款狀態</th>
+								<th width=120px>送貨狀態</th>
+								<th width=80px>總計</th>
+								<th width=80px>修改</th>
+								<th width=80px>刪除</th>
+							</tr>
+						</thead>
+						<c:forEach var="bean" items="${classList}">
 
 
-				<!-- Section -->
-				<section>
-					<header class="major">
-						<h2>聯絡我們</h2>
-					</header>
-					<p>肉丸家教網是一個希望不管是學生還是老師，都能在這裡精進自己，花最少的時間，找到最棒的老師/學生。</p>
-					<ul class="contact">
-						<li class="icon solid fa-envelope"><a href="#">information@untitled.tld</a>
-						</li>
-						<li class="icon solid fa-phone">(000) 000-0000</li>
-						<li class="icon solid fa-home">1234 Somewhere Road #8254<br />
-							Nashville, TN 00000-0000
-						</li>
-					</ul>
-				</section>
+							<tbody>
+								<tr>
+									<td id="eachProdBlock" class="mEvent"
+										onclick="window.location='/MeetBoth/shoppingCart.SelectOrderAllItem.controller/${bean.orderNo}'">${bean.orderNo}</td>
+									<td>${bean.memberbuy.memberID}</td>
+									<td>${bean.orderDate}</td>
+									<td>${bean.uporderDate}</td>
+									<td><input type="hidden" id="ordS"
+										value="${bean.ordStstus}${param.ordS}"><select
+										name='ordStstus' class="fieldWidth" style="width: 80px;">
+											<option class="A1" value="處理中">處理中</option>
+											<option class="A2" value="備貨中">備貨中</option>
+											<option class="A3" value="已完成">已完成</option>
+									</select></td>
+									<td><input type="hidden" id="paymentS"
+										value="${bean.paymentStstus}${param.paymentS}"> <select
+										name='paymentStstus' class="fieldWidth" style="width: 80px;">
+											<option class="B1" value="未付款">未付款</option>
+											<option class="B2" value="已付款">已付款</option>
+											<option class="B3" value="退款中">退款中</option>
+											<option class="B4" value="已退款">已退款</option>
+									</select></td>
+									<td><input type="hidden" id="deliveryS"
+										value="${bean.deliveryStstus}${param.deliveryS}"> <select
+										name='deliveryStstus' class="fieldWidth" style="width: 80px;">
+											<option class="C1" value="無">無</option>
+											<option class="C2" value="備貨中">備貨中</option>
+											<option class="C3" value="已發貨">已發貨</option>
+											<option class="C4" value="已取貨">已取貨</option>
+											<option class="C5" value="退貨中">退貨中</option>
+											<option class="C6" value="已退貨">已退貨</option>
+									</select></td>
+									<td>${bean.totalAmount}</td>
+									<td><form
+											action="<c:url value='/shoppingCart.UpdateOrder.controller' />"
+											method="post">
+											<input type="hidden" id="ordS"
+												value="${bean.ordStstus}${param.ordS}"> <input
+												type="hidden" id="paymentS"
+												value="${bean.paymentStstus}${param.paymentS}"> <input
+												type="hidden" id="deliveryS"
+												value="${bean.deliveryStstus}${param.deliveryS}">
 
-				<!-- Footer -->
-				<footer id="footer">
-					<p class="copyright">
-						&copy; Untitled. All rights reserved. Demo Images: <a
-							href="https://unsplash.com">Unsplash</a>. Design: <a
-							href="https://html5up.net">HTML5 UP</a>.
-					</p>
-				</footer>
+											<button name="orderNo" value="${bean.orderNo}">
+												<i class="fa-solid fa-file-pen"></i>
+											</button>
+										</form></td>
+
+									<td><button class="deleteThisOrder" name="orderNo"
+											value="${bean.orderNo}">
+											<i class="fa-solid fa-xmark"></i>
+										</button></td>
+								</tr>
+							</tbody>
+
+						</c:forEach>
+					</table>
+				</div>
+
+				<div style="display: flex; justify-content: center">
+					<a href="backIndex.controller"> 返回<i
+						class="fa-solid fa-left-long"></i></a>
+				</div>
 			</div>
-		</div>
-	</div>
 
-	<!-- Scripts -->
+		</section>
 
-	<%
-	String basePath1 = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path
-			+ "/html/assets/js/jquery.min.js";
-	%>
 
-	<%
-	String basePath2 = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path
-			+ "/html/assets/js/browser.min.js";
-	%>
+		<!-- Footer -->
+		<!-- 引入共同的footerMVC -->
+		<jsp:include page="/WEB-INF/html/fragment/footerMVC.jsp" />
+	</main>
 
-	<%
-	String basePath3 = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path
-			+ "/html/assets/js/breakpoints.min.js";
-	%>
+	<!--  
+    JavaScripts
+    =============================================
+    -->
+	<!-- 引入共同的js -->
+	<jsp:include page="/WEB-INF/html/fragment/jsPath.jsp" />
 
-	<%
-	String basePath4 = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path
-			+ "/html/assets/js/util.js";
-	%>
+	<!-- 用於下拉選單 -->
+	<script>
+		// 	var v = document.querySelector('#ii').getAttribute('value');
+		var v = $('#ordS').val();
+		console.log(v)
+		switch (v) {
+		case '處理中':
+			$(".A1").attr('selected', true)
+			break;
+		case '備貨中':
+			$(".A2").attr('selected', true)
+			break;
+		case '已完成':
+			$(".A3").attr('selected', true)
+			break;
+		}
+	</script>
+	<script>
+		// 	var v = document.querySelector('#ii').getAttribute('value');
+		var v = $('#paymentS').val();
+		console.log(v)
+		switch (v) {
+		case '未付款':
+			$(".B1").attr('selected', true)
+			break;
+		case '已付款':
+			$(".B2").attr('selected', true)
+			break;
+		case '退款中':
+			$(".B3").attr('selected', true)
+			break;
+		case '已退款':
+			$(".B4").attr('selected', true)
+			break;
+		}
+	</script>
+	<script>
+		// 	var v = document.querySelector('#ii').getAttribute('value');
+		var v = $('#deliveryS').val();
+		console.log(v)
+		switch (v) {
+		case '無':
+			$(".C1").attr('selected', true)
+			break;
+		case '備貨中':
+			$(".C2").attr('selected', true)
+			break;
+		case '已發貨':
+			$(".C3").attr('selected', true)
+			break;
+		case '已取貨':
+			$(".C4").attr('selected', true)
+			break;
+		case '退貨中':
+			$(".C5").attr('selected', true)
+			break;
+		case '已退貨':
+			$(".C6").attr('selected', true)
+			break;
+		}
+	</script>
+	<!-- 用於下拉選單 -->
+	<!-- 刪除Alert -->
 
-	<%
-	String basePath5 = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path
-			+ "/html/assets/js/main.js";
-	%>
-	<script src=<%=basePath1%>></script>
-	<script src=<%=basePath2%>></script>
-	<script src=<%=basePath3%>></script>
-	<script src=<%=basePath4%>></script>
-	<script src=<%=basePath5%>></script>
-	<script src="https://kit.fontawesome.com/25590258af.js"
-		crossorigin="anonymous"></script>
 	<script>
         $(function(){
             $('.deleteThisOrder').click(function(){
@@ -264,7 +325,7 @@ String basePathimg2 = request.getScheme() + "://" + request.getServerName() + ":
                     if (result.isConfirmed) {
                         $.ajax({
                           //專案名稱+servlet
-                          url:'/SpringBoot_Team5/_04_shoppingCart.DeleteOrder.controller',
+                          url:'/MeetBoth/shoppingCart.DeleteOrder.controller',
                           method:"get",
                           dataType:"text",
                           //對應name設定的名稱 並非value的名稱
@@ -284,28 +345,25 @@ String basePathimg2 = request.getScheme() + "://" + request.getServerName() + ":
         });
         //function end
     </script>
+	<!-- 	刪除Alert -->
+
+
+	<script>
+		$(".mEvent")
+				.mouseenter(
+						function() {
+							$(this).css("background-color", "pink");
+							$(this).css("cursor", "pointer");
+							$(this)
+									.url(
+											"/_03_product.PathToProductDetail.controller?id=${bean.prodID}")
+						})
+		$(".mEvent").mouseleave(function() {
+			$(this).css("background-color", "white");
+		})
+	</script>
+
+
+
 </body>
 </html>
-<!--      <td> -->
-<%--                      <Form  action="<c:url value='/Servlet/searchAllTeacServlet' />"  --%>
-<!--                             method="POST"> -->
-<!--                                 教師貼文數量: -->
-<!--                         <select name='qty'> -->
-<!--                            <option value="1">1</option> -->
-<!--                            <option value="2">2</option> -->
-<!--                            <option value="3">3</option> -->
-<!--                            <option value="4">4</option> -->
-<!--                            <option value="5">5</option> -->
-<!--                            <option value="6">6</option> -->
-<!--                            <option value="7">7</option> -->
-<!--                            <option value="8">8</option> -->
-<!--                            <option value="9">9</option> -->
-<!--                            <option value="10">10</option> -->
-<!--                        </select> -->
-<!--                        這些隱藏欄位都會送到後端 -->
-<%--                        <Input type='hidden' name='bookId' value='${entry.value.bookId}'> --%>
-<%--                        <Input type='hidden' name='pageNo' value='${param.pageNo}'> --%>
-<!--                        <label><i class="fa-solid fa-cart-shopping"></i><Input type='submit' value='加入購物車'> -->
-<!--                        </label> -->
-<!--                      </Form> -->
-<!--     </td> -->

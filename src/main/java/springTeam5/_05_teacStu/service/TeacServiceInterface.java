@@ -18,7 +18,7 @@ public interface TeacServiceInterface {
 	public List<TeacBean> searchAllTeacOBpDate();
 	
 //	搜尋全部教師貼文依會員編號排序
-	public List<TeacBean> searchAllTeacOBmId();
+	public List<TeacBean> findAllByOrderByViews();
 	
 //	透過貼文編號建立教師貼文查詢
 	public TeacBean searchTeacFromTeacno(Integer teacno);
@@ -27,11 +27,14 @@ public interface TeacServiceInterface {
 	public List<TeacBean> searchAllTeac();
 	
 //	新增教師貼文
-	public void addTeac(TeacBean tableForTeac);
+	public void addTeac(TeacBean tb);
 	
 //	透過ID刪除教師貼文
 	public void deleteTeacfromTeacno(Integer teacno);
 	
 //	透過ID修改教師貼文
-	public TeacBean updateTeacFromTeacno(TeacBean tableForTeac);
+	public TeacBean updateTeacFromTeacno(TeacBean tb);
+	
+//	搜尋最新更新的前6筆貼文
+	public List<TeacBean> findFirst6ByOrderByUpdateDateDesc();
 }

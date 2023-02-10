@@ -104,6 +104,7 @@
 																<link href="<%=baseMagnificPopup%>" rel="stylesheet" />
 																<link href="<%=baseSimpletextrotator%>"
 																	rel="stylesheet" />
+
 																<!-- Font Awesome -->
 																<link
 																	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css"
@@ -131,8 +132,62 @@
     =============================================
     
     -->
-
+																<link rel="stylesheet"
+																	href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css" />
+																<link rel="stylesheet"
+																	href="/resources/demos/style.css" />
+																<script
+																	src="https://code.jquery.com/jquery-3.6.0.js"></script>
+																<script
+																	src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
 
 																<!-- 動畫 -->
 																<link
 																	href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+
+																<script>
+																	$(function () {
+																		$.ajax({
+																			type: 'POST',
+																			url: 'http://localhost:8080/MeetBoth/_01_member.checklog.controller',
+																			contentType: 'application/json',
+
+																			success: function (user) {
+
+																				if (user == "" || user == "anonymousUser") {
+																					console.log(user + "登入");
+																					$("#loginBtn").show();
+																					$("#logoutBtn").hide();
+																					$("#animation").show();
+																				} else {
+																					console.log(user + "登出");
+																					$("#loginBtn").hide();
+																					$("#logoutBtn").show();
+																					$("#animation").hide();
+																					$("#username").text("你好，" + user)
+																				}
+																			}
+																		});
+																	});
+																	$(function () {
+																		$.ajax({
+																			type: 'POST',
+																			url: 'http://localhost:8080/MeetBoth/_01_member.rolecheck.controller',
+																			contentType: 'application/json',
+																			success: function (role) {
+																				if (role == "admin") {
+																					console.log(role + "管理員");
+
+																					//管理員要執行的動作
+																					$("admincontroller").show();
+																					//這裡是ID標籤
+
+																				} else {
+																					console.log(role + "用戶");
+																					//使用者要執行的動作
+																					$("#admincontroller").hide();
+																				}
+																			}
+																		});
+																	});
+																</script>

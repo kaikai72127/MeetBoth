@@ -125,6 +125,7 @@ public class ShoppingCartController {
 		HttpSession session = request.getSession(false);
 
 		ShoppingCart shoppingCart = (ShoppingCart) session.getAttribute("ShoppingCart");
+		
 		//需有兩個判斷才可以
 		if (shoppingCart != null && shoppingCart.getItemQty()!=0) {
 			// 跳轉到有購物車的頁面
@@ -133,6 +134,7 @@ public class ShoppingCartController {
 		}
 		// 如果沒有商品 則跳轉回搜尋商品的頁面
 		return "redirect:/_03_product.searchAllProduct.controller";
+		
 	}
 
 	// 移除一個item

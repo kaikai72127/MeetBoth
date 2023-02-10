@@ -419,7 +419,7 @@ color:lightgrey;
                         </div>
                     </div>
                     	<div style="display:flex">
-                        <button onclick="checkUserAndTeacNo" style="display:flex; justify-content:center; align-items:center; margin:15px auto 0 auto" class="btn btn-b btn-circle" type="submit">匹配度測試</button>
+                        <button onclick="checkUserAndTeacNo()" style="display:flex; justify-content:center; align-items:center; margin:15px auto 0 auto" class="btn btn-b btn-circle" type="submit">匹配度測試</button>
                         <button onclick="window.location='/MeetBoth/_05_teacStu.searchAllStud.controller/1'" style="display:flex; justify-content:center; align-items:center; margin:15px auto 0 auto" class="btn btn-b btn-circle" type="submit">返回上一頁</button>
                         </div>
                 </div>
@@ -519,16 +519,21 @@ color:lightgrey;
 	</script>
 	<script>
 		function checkUserAndTeacNo() {
-    		if (!('${pageContext.request.userPrincipal.name}')) {
+			let isUserLoggedIn = '${pageContext.request.userPrincipal.name}';
+			let isTeacnoExist = '${m.teacno}' && '${m.m}';
+    		if (!isUserLoggedIn) {
         		alert('請先登入');
         		window.location.href = '/MeetBoth/login/page.jsp';
+        		return;
     		}
-
-    		if (!('${m.teacno}')) {
+			
+    		// 還要再給一個判斷teacno是否存在
+			if (!isTeacnoExist) {
         		alert('請先成為教師');
         		window.location='/MeetBoth/_05_teacStu.searchAllTeac.controller/1';
+        		return;
     		}
-
+    		
     		window.location='/MeetBoth/_05_teacStu.compare.controller';
 		}
 	</script>

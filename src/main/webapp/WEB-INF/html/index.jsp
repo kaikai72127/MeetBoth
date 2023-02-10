@@ -233,7 +233,7 @@
                         		</div>
                     		</div>
                     		<c:forEach var="bean" items="${stud}">
-                    		<div class="comment-table-row">
+                    		<div class="comment-table-row" onclick="window.location='<c:url value='/_05_teacStu.studpostpageMain.controller?studno=${bean.studno}'/>'">
                         		<div class="comment-table-col">
                             		<div class="comment-table-col-content">
                                 		${bean.updateDate}

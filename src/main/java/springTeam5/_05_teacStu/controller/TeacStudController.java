@@ -439,8 +439,12 @@ public class TeacStudController {
 		StudBean stud = sService.searchStudFromStudno(studno);
 		String account = SecurityContextHolder.getContext().getAuthentication().getName();
 		List<MemberBean> list = mService.searchMemByAccount(account);
-		MemberBean member = list.get(0);
-		m.addAttribute("m", member);
+		if (list != null && list.size() > 0) {
+			  MemberBean member = list.get(0);
+			  m.addAttribute("m", member);
+			} else {
+			  m.addAttribute("m", null);
+			}
 		m.addAttribute("bean", stud);
 		return "_05_teacStu/studpostpage";
 	}
@@ -665,13 +669,14 @@ public class TeacStudController {
 	
 //	匹配度測試2
 	@GetMapping("/_05_teacStu.compare.controller")
-	public double compareTeacBeanAndStudBean(TeacBean teacBean, StudBean studBean) {
+	public double compareTeacBeanAndStudBean(@RequestParam("teacno") Integer teacno, @RequestParam("studno") Integer studno) {
 	    double similarity = 0.0;
-
-	    similarity += calculateSimilarity(teacBean.getHighEdu(), studBean.getEducaLimit());
-	    similarity += calculateSimilarity(teacBean.getTeacLoc(), studBean.getStudLoc());
-	    similarity += calculateSimilarity(teacBean.getClassMode(), studBean.getClassMode());
-	    similarity += calculateSimilarity(teacBean.getSubjectItem(), studBean.getSubjectItem());
+	    TeacBean t = tService.searchTeacFromTeacno(teacno);
+	    StudBean s = sService.searchStudFromStudno(studno);
+	    similarity += calculateSimilarity(t.getHighEdu(), s.getEducaLimit());
+	    similarity += calculateSimilarity(t.getTeacLoc(), s.getStudLoc());
+	    similarity += calculateSimilarity(t.getClassMode(), s.getClassMode());
+	    similarity += calculateSimilarity(t.getSubjectItem(), s.getSubjectItem());
 
 	    return similarity;
 	}

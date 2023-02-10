@@ -321,7 +321,7 @@ color:lightgrey;
 	<!-- 內容-履歷表 -->
 		<div class="page-container">
         <div class="resume-container">
-            <h1 class="resume-title">新增履歷表</h1>
+            <h1 class="resume-title">修改履歷表</h1>
             <form action='<c:url value="/_05_teacStu.updatedata.controller" />' enctype='multipart/form-data' method='post'>
             <input name="teacno" type="hidden" value="${bean.teacno}">
             <div class="resume-body">

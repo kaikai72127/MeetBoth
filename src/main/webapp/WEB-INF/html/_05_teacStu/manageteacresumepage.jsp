@@ -271,8 +271,8 @@ a:hover {
 											<span>履歷資料 :&ensp;</span>
 										</div>
 										<div style="display: flex">
-											<button class="MBbtn" onclick="window.location='/MeetBoth/_03_teacStu.manageteac.controller'">返回</button>
-											<button class="MBbtn" onclick="window.location='/MeetBoth/_03_teacStu.updateteac.controller?teacno=${bean.teacno}'">修改</button>
+											<button class="MBbtn" onclick="window.location='/MeetBoth/admin/_03_teacStu.searchAllTeac.controller/1'">返回</button>
+											<button class="MBbtn" onclick="window.location='/MeetBoth/admin/_05_teacStu.updateteac.controller?teacno=${bean.teacno}'">修改</button>
 											<button class="MBbtn" id="deleteThisProduct"
 												name="${bean.teacno}">刪除</button>
 										</div>
@@ -408,14 +408,14 @@ a:hover {
                     if (result.isConfirmed) {
                         $.ajax({
                           //專案名稱+servlet
-                         url:'/MeetBoth/_03_product.MBdeleteProductById.controller',
+                         url:'/MeetBoth/admin/_05_teacStu.deletedata.controller',
                           method:"post",
                           dataType:"text",
                           //對應name設定的名稱 並非value的名稱
                           data: {"id":id},
                         })
                             .done(function () {
-                            	window.location='/MeetBoth/_03_product.productindex.controller'
+                            	window.location='/MeetBoth/admin/_05_teacStu.searchAllTeac.controller/1'
                                 console.log("delete")
                              })//done
                              .fail(function(error) {

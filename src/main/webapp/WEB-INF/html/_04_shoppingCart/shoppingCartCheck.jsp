@@ -76,7 +76,7 @@ button.removeProduct:hover {
 		<!-- 內容 1-->
 		<section style="margin-bottom: 50px; margin-top: 100px">
 			<form method="POST"
-				action="<c:url value='/shoppingCartPayConfirm.controller' />">
+				action="<c:url value='/shoppingCartPayAioConfirm.controller' />">
 				<div class="main">
 					<section class="">
 						<div class="container">
@@ -114,7 +114,8 @@ button.removeProduct:hover {
 													<td class="hidden-xs">
 														<h5 class="product-title font-alt" id="prodPrice">${shoppingItem.value.prodItem.prodPrice}</h5>
 													</td>
-													<td><h5 class="product-title font-alt" id="${shoppingItem.value.prodItem.prodID}">${shoppingItem.value.prodItem.prodID}</h5>
+													<td><h5 class="product-title font-alt"
+															id="${shoppingItem.value.prodItem.prodID}">${shoppingItem.value.prodItem.prodID}</h5>
 													<td>
 														<h5 class="product-title font-alt itemTotal"
 															id="itemTotal">${shoppingItem.value.itemTotal}</h5>
@@ -153,15 +154,17 @@ button.removeProduct:hover {
 											<tbody>
 												<tr>
 													<th>Total :</th>
-													<td>${ShoppingCart.getItemAmount()}</td>
+													<td id="itemAmount">${ShoppingCart.getItemAmount()}</td>
 												</tr>
 												<tr>
 													<th>Discount :</th>
-													<td style="color:red">123</td>
+													<td style="color: red" id="discountPrice"></td>
 												</tr>
 												<tr class="shop-Cart-totalprice">
 													<th>Total Amount:</th>
-													<td>${ShoppingCart.getItemAmount()}</td>
+													<td><input type="hidden" name="totalAmount"
+														value="${ShoppingCart.getItemAmount()}" id="totalAmount" /><span
+														id="showPrice">${ShoppingCart.getItemAmount()}</span></td>
 												</tr>
 											</tbody>
 										</table>
@@ -291,11 +294,21 @@ button.removeProduct:hover {
 					"discountNo" : discountNo,
 				},
 				success : function(check) {
-					if (check == 'OK') {
-						$('#discountShow').text('折扣碼可以使用')
-					} else {
+					if (check == 'CANTUSE') {
 						$('#discountShow').text('不可以使用請重新輸入')
 						$('#discount').val('')
+					} else {
+						var price = $('#itemAmount').text()
+						var totalAmount = price - check
+						$('#discountShow').text('折扣碼可以使用')
+						$('#discountPrice').text(check)
+						if (totalAmount > 0) {
+							$('#totalAmount').val(totalAmount)
+							$('#showPrice').text(totalAmount)
+						} else {
+							$('#totalAmount').val(0)
+							$('#showPrice').text(0)
+						}
 					}
 				}
 			})

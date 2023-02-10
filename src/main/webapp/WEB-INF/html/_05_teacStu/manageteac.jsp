@@ -271,7 +271,7 @@ a:hover {
 											<span>所有商品資料 :&ensp;</span>
 										</div>
 										<form class="row"
-											action="<c:url value='/_05_teacStu.searchAllLike.controller/1' />"
+											action="<c:url value='/admin/_05_teacStu.searchAllLike.controller/1' />"
 											method="post">
 											<div style="display: flex; margin-bottom: 15px;">
 												<div class="" style="">
@@ -281,7 +281,7 @@ a:hover {
 												</div>
 												<div style="">
 													<input type="button" class="MBbtn" value="新增"
-														onclick="window.location='/MeetBoth/_05_teacStu.insertdataMain.controller'">
+														onclick="window.location='/MeetBoth/admin/_05_teacStu.insertdataMain.controller'">
 												</div>
 											</div>
 										</form>
@@ -322,9 +322,9 @@ a:hover {
 																<td>${bean.views}次</td>
 																<td>${bean.updateDate}</td>
 																<td><input type="button" class="MBbtn" value="更多"
-																	onclick="window.location='/MeetBoth/_05_teacStu.manageteacresumepage.controller?teacno=${bean.teacno}'"></td>
+																	onclick="window.location='/MeetBoth/admin/_05_teacStu.teacpostpageMain.controller?teacno=${bean.teacno}'"></td>
 																<td><input type="button" class="MBbtn" value="修改"
-																	onclick="window.location='/MeetBoth/_05_teacStu.updateteac.controller?teacno=${bean.teacno}'"></td>
+																	onclick="window.location='/MeetBoth/admin/_05_teacStu.updateteac.controller?teacno=${bean.teacno}'"></td>
 																<td style="border-right: none"><input type="button"
 																	class="MBbtn deleteThisProduct" value="刪除" id="deleteThisProduct"
 																	name="${bean.teacno}"></td>
@@ -423,14 +423,14 @@ a:hover {
                     if (result.isConfirmed) {
                         $.ajax({
                           //專案名稱+servlet
-                         url:'/MeetBoth/_05_teacStu.deletedata.controller',
+                         url:'/MeetBoth/admin/_05_teacStu.deletedata.controller',
                           method:"post",
                           dataType:"text",
                           //對應name設定的名稱 並非value的名稱
                           data: {"id":id},
                         })
                             .done(function () {
-                            	window.location='/MeetBoth/_05_teacStu.manageteac.controller'
+                            	window.location='/MeetBoth/admin/_05_teacStu.searchAllTeac.controller/1'
                                 console.log("delete")
                              })//done
                              .fail(function(error) {
@@ -443,4 +443,5 @@ a:hover {
         });
         //function end
     </script>
+</body>
 </html>

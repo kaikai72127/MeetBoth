@@ -523,7 +523,7 @@ color:lightgrey;
 			let isTeacnoExist = '${m.teacno}' && '${m.m}';
     		if (!isUserLoggedIn) {
         		alert('請先登入');
-        		window.location.href = '/MeetBoth/login/page.jsp';
+        		window.location.href = '/MeetBoth/login';
         		return;
     		}
 			

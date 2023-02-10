@@ -265,12 +265,12 @@ a:hover {
 								<!-- 							標題 -->
 								<!--       右邊第一部分開始 -->
 								<div class="post">
-								<form action="<c:url value='/_05_teacStu.insertdata.controller' />" method="Post" enctype="multipart/form-data">
+								<form action="<c:url value='/admin/_05_teacStu.insertdata.controller' />" method="Post" enctype="multipart/form-data">
 									<div class="post-video embed-responsive embed-responsive-16by9"
 										style="height: auto; padding-bottom: 100px;">
 										<div style="display: flex">
 											<button class="MBbtn"
-												onclick="window.location='/MeetBoth/_03_product.productindex.controller'">返回</button>
+												onclick="window.location='/MeetBoth/admin/_05_teacStu.searchAllTeac.controller/1'">返回</button>
 										</div>
 										<div>
 											<span>會員編號 :&ensp;<input type="text" name="pid" class="MBinput" placeholder="自動產生" readonly></span>
@@ -392,4 +392,5 @@ a:hover {
 
 		});
 	</script>
+</body>
 </html>

@@ -254,9 +254,10 @@ public class ShoppingCartCheck {
 		return form;
 	}
 
-	// 貨到付款 與轉帳 的訂購成功的畫面
-	@PostMapping("/shoppingCartPayConfirm.controller")
-	public String processConfirmPayAction(@RequestParam(value = "shippingName") String shippingName,
+	
+	// 選擇貨到付款
+	@PostMapping("/shoppingCartPayCashConfirm.controller")
+	public String processConfirmCashAllAction(@RequestParam(value = "shippingName") String shippingName,
 			@RequestParam(value = "shippingPhone") String shippingPhone,
 			@RequestParam(value = "shippingAddress") String shippingAddress,
 			@RequestParam(value = "email") String email,
@@ -273,12 +274,6 @@ public class ShoppingCartCheck {
 			return "redirect:/index.controller";
 		}
 
-		// 取得會員資料
-//		String user = SecurityContextHolder.getContext().getAuthentication().getName();
-//		List<MemberBean> list = memberService.searchMemByAccount(user);
-//		// 登入會員資料
-//		MemberBean memberBean = list.get(0);
-//		int memberID = memberBean.getMemberID();
 
 		// 會員有登入
 		ShoppingCart shoppingCart = (ShoppingCart) session.getAttribute("ShoppingCart");
@@ -294,6 +289,7 @@ public class ShoppingCartCheck {
 		System.out.println("---------------------------------------開始確認訂單");
 		OrderBean orderBean = new OrderBean();
 		Discount discountUse = discountService.getDiscountByDiscountNo(discount);
+		System.out.println("------------------------------" + discount);
 
 //		判斷是否有使用discount
 		if (!discount.isEmpty()) {
@@ -374,10 +370,10 @@ public class ShoppingCartCheck {
 //		String orderMessageSale = "";
 //		mailService.prepareAndSendForSale(recipientSale,  memberNameSale, orderMessageSale);
 
-		String meetBothNo = "MeetBoth";
-		meetBothNo = meetBothNo + String.valueOf(orderBean.getOrderNo());
 
-		return "redirect:/index.controller";
+
+		return "redirect:/shoppingCartConfirm.controller";
 	}
+	
 
 }

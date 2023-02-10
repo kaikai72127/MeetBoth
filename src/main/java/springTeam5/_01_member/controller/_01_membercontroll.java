@@ -16,12 +16,14 @@ import javax.sql.rowset.serial.SerialException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
@@ -93,9 +95,30 @@ public class _01_membercontroll {
 	public String loginRWD() {
 		String user = "";
 		user = SecurityContextHolder.getContext().getAuthentication().getName();
+//		List<MemberBean> list = ms.searchMemByAccount(user);
+//		MemberBean memberBean = list.get(0);
+//		int memberID = memberBean.getMemberID();
 		return user;
 	}
 	
+//	權限動態控制
+	@ResponseBody
+	@PostMapping("/_01_member.rolecheck.controller")
+	public String roleRWD() {
+//		String user = "";
+//		user = SecurityContextHolder.getContext().getAuthentication().getName();
+//		List<MemberBean> list = ms.searchMemByAccount(user);
+		String role = SecurityContextHolder.getContext().getAuthentication().getAuthorities().toArray()[0].toString();
+//		String role = SecurityContextHolder.getContext().getAuthentication().getAuthorities().toString();
+//		UserDetails details = (UserDetails)SecurityContextHolder.getContext().getAuthentication().getDetails();
+		
+//		String role = "";
+//		for (MemberBean member : list) {
+//			role = member.getRole();
+//		}
+		System.out.println(role);
+		return role;
+	}	
 	
 //	查詢類controll
 	@GetMapping("/_01_member.admin.controller")
@@ -165,9 +188,9 @@ public class _01_membercontroll {
 	}
 	
 //	新增
-	@PostMapping("/_01_member.register.controller")
+	@RequestMapping("/_01_member.backregister.controller")
 	public String register() {
-		return "_01_member/register";
+		return "_01_member/backregister";
 	}
 	
 	@PostMapping("/_01_member.add.controller")
@@ -193,10 +216,43 @@ public class _01_membercontroll {
 				ms.add(newMember);
 			}
 		}
+		return "redirect:/";
+	}
+	
+	@PostMapping("/_01_member.backadd.controller")
+	public String backadd(@ModelAttribute() MemberBean member,@RequestParam("photofile") MultipartFile mf , Model m) throws IOException, SerialException, SQLException {
+		
+		String fileName = "";
+		MemberBean newMember = member;
+		InputStream is = null;
+		String encodePwd = new BCryptPasswordEncoder().encode(member.getPassword());
+		newMember.setPassword(encodePwd);
+		if (ms.searchMemByAccount(member.getAccount()).size() == 0) {
+			fileName = mf.getOriginalFilename();
+			if (fileName != null && fileName.trim().length() > 0) {
+				long size = mf.getSize();
+				is = mf.getInputStream();
+				byte[] b = new byte[(int) size];
+				SerialBlob sb = null;
+				is.read(b);
+				sb = new SerialBlob(b);
+				newMember.setPhoto(sb);
+				ms.add(newMember);
+			}else {
+				ms.add(newMember);
+			}
+		}
 		return "redirect:/_01_member.admin.controller";
 	}
 	
 //	修改
+	@GetMapping(path = "/_01_member.membercenter.controller")
+	public String membercenter(@RequestParam("account") String account, Model m) {
+		List<MemberBean> list = ms.searchMemByAccount(account);
+		m.addAttribute("Member", list);
+		return "_01_member/frontmemberupdate";
+	}
+	
 	@PostMapping(path = "/_01_member.preupdate.controller")
 	public String preupdate(@RequestParam("preupdate") int memberID, Model m) {
 		Optional<MemberBean> data = ms.searchMemByID(memberID);
@@ -244,6 +300,46 @@ public class _01_membercontroll {
 			}
 		}
 		return "redirect:/_01_member.admin.controller";
+	}
+	@PostMapping(path = "/_01_member.frontupdate.controller")
+	public String frontupdate(@ModelAttribute() MemberBean member,@RequestParam("photofile") MultipartFile mf) throws IOException, SerialException, SQLException {
+		
+		String fileName ="";
+		MemberBean newMem = new MemberBean();
+		List<MemberBean> list = ms.searchMemByAccount(member.getAccount());
+		
+		if (list.size() != 0) {
+			MemberBean check = list.get(0);
+			newMem.setMemberID(check.getMemberID());
+			newMem.setAccount(member.getAccount());
+			newMem.setPassword(new BCryptPasswordEncoder().encode(member.getPassword()));
+			newMem.setIdNumber(member.getIdNumber());
+			newMem.setMemName(member.getMemName());
+			newMem.setMemNickName(member.getMemNickName());
+			newMem.setMemOld(member.getMemOld());
+			newMem.setMemBirth(member.getMemBirth());
+			newMem.setMemGender(member.getMemGender());
+			newMem.seteMail(member.geteMail());
+			newMem.setPhone(member.getPhone());
+			newMem.setPhoto(check.getPhoto());
+			newMem.setAddress(member.getAddress());
+			fileName = mf.getOriginalFilename();
+			if (fileName != null && fileName != "" && fileName.trim().length() > 0) {
+				System.out.println("這有圖?"+fileName);
+				long size = mf.getSize();
+				InputStream is = mf.getInputStream();
+				byte[] b = new byte[(int) size];
+				SerialBlob sb = null;
+				is.read(b);
+				sb = new SerialBlob(b);
+				newMem.setPhoto(sb);
+				ms.update(newMem);
+			}else {
+				System.out.println("這沒圖?"+fileName);
+				ms.update(newMem);
+			}
+		}
+		return "redirect:/";
 	}
 	
 //	刪除

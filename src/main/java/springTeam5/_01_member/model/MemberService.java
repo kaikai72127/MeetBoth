@@ -22,43 +22,41 @@ public class MemberService {
 
 	@Autowired
 	private MemberRepository memberRepository;
-
+	
 //	新增
 	public MemberBean add(MemberBean member) {
 		return memberRepository.save(member);
 	}
-
+	
 //	刪除
 	public void delete(Integer memberID) {
 		memberRepository.deleteById(memberID);
 	}
-
+	
 //	修改
 	public MemberBean update(MemberBean member) {
 		return memberRepository.save(member);
 	}
-
+	
 //	查詢系列
-	public List<MemberBean> searchMemByNameLike(String name) {
+	public List<MemberBean> searchMemByNameLike(String name){
 		return memberRepository.searchMemByNameLike(name);
 	}
-
-	public List<MemberBean> searchMemByAccountLike(String account) {
+	
+	public List<MemberBean> searchMemByAccountLike(String account){
 		return memberRepository.searchMemByAccountLike(account);
 	}
-
-	public List<MemberBean> searchMemByAccount(String account) {
+	
+	public List<MemberBean> searchMemByAccount(String account){
 		return memberRepository.searchMemByAccount(account);
 	}
-
-	public Optional<MemberBean> searchMemByID(int memID) {
+	
+	public Optional<MemberBean> searchMemByID(int memID){
 		return memberRepository.findById(memID);
 	}
-
-	public List<MemberBean> searchAllMember() {
+	public List<MemberBean> searchAllMember(){
 		return memberRepository.findAll();
 	}
-
 	public Blob showPhoto(String account) throws SQLException, IOException {
 		List<MemberBean> member = memberRepository.searchMemByAccount(account);
 		Iterator<MemberBean> it = member.iterator();
@@ -68,10 +66,9 @@ public class MemberService {
 			image = memberBean.getPhoto();
 		}
 		if (image != null) {
-			return image;
-		} else {
-			FileInputStream fis = new FileInputStream(
-					"../SpringBoot_Team5/src/main/webapp/WEB-INF/resources/images/meatball-200.png");
+			return image;			
+		}else {
+			FileInputStream fis = new FileInputStream("../SpringBoot_Team5/src/main/webapp/WEB-INF/resources/images/meatball-200.png");
 			InputStream is = new BufferedInputStream(fis);
 			byte[] b = new byte[fis.available()];
 			SerialBlob sb = null;
@@ -80,8 +77,5 @@ public class MemberService {
 			return sb;
 		}
 	}
-
-	public MemberBean searchMemberById(Integer memberId) {
-		return memberRepository.searchMemberById(memberId);
-	}
 }
+

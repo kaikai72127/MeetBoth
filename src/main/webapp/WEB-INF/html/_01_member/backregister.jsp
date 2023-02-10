@@ -23,22 +23,6 @@
 						<!-- header -->
 						<!-- 引入共同的topMVC -->
 						<jsp:include page="../fragment/topMVC.jsp" />
-						<script>
-							$(function () {
-								$.ajax({
-									type: 'POST',
-									url: 'http://localhost:8080/MeetBoth/_01_member.checklog.controller',
-									contentType: 'application/json',
-
-									success: function (user) {
-
-										if (user != "" && user != "anonymousUser") {
-											location.href = 'justlogin';
-										}
-									}
-								});
-							});
-						</script>
 						<main>
 							<div class="page-loader">
 								<div class="loader">Loading...</div>
@@ -47,7 +31,7 @@
 							<!--Register-->
 
 							<section class="register">
-								<form class="form-controll" action="_01_member.add.controller" method="POST"
+								<form class="form-controll" action="_01_member.backadd.controller" method="POST"
 									enctype="multipart/form-data">
 
 									<div class="form-group">
@@ -115,7 +99,7 @@
 												<td style="width: 150px;"><label>電子郵件：</label></td>
 												<td><input class="form-control" style="text-transform: none;"
 														type="text" name="eMail" id="mail" onblur="checkmail()"
-														value="${param.email}" required readonly>
+														value="${param.email}" required>
 												</td>
 											</tr>
 											<tr>

@@ -155,7 +155,11 @@ public class DiscountController {
 		for(Discount i : allDiscount) {
 			System.out.println("找第一個discout-----");
 			if(i.getDiscountNo().equals(discountNo)) {
-				return "OK";				
+				
+				Double discountPrice = i.getDiscountPrice();
+				String price = String.valueOf(Math.round(discountPrice));
+				
+				return price;				
 			}
 		};
 		return "CANTUSE";

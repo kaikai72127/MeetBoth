@@ -74,16 +74,16 @@ button.removeProduct:hover {
 
 		<!-- Checkout Start -->
 		<!-- 內容 1-->
-		<section style="margin-bottom: 100px">
+		<section style="margin-bottom: 50px; margin-top: 100px">
 			<form method="POST"
-				action="<c:url value='/shoppingCartPayConfirm.controller' />">
+				action="<c:url value='/shoppingCartPayAioConfirm.controller' />">
 				<div class="main">
 					<section class="">
 						<div class="container">
 							<div class="row">
 								<div class="col-sm-6 col-sm-offset-3">
 									<h1 class="module-title font-alt">
-										請再次 <i class="fa-solid fa-cart-shopping"></i>
+										Checkout <i class="fa-solid fa-cart-shopping"></i>
 									</h1>
 								</div>
 							</div>
@@ -114,14 +114,12 @@ button.removeProduct:hover {
 													<td class="hidden-xs">
 														<h5 class="product-title font-alt" id="prodPrice">${shoppingItem.value.prodItem.prodPrice}</h5>
 													</td>
-													<td><input class="form-control" type="number"
-														onblur="itemTotalChange()" name="updateQty"
-														value='${shoppingItem.value.qty}' max="50" min="1"
-														readonly />
+													<td><h5 class="product-title font-alt"
+															id="${shoppingItem.value.prodItem.prodID}">${shoppingItem.value.prodItem.prodID}</h5>
 													<td>
-														<h5 class="product-title font-alt" id="itemTotal">${shoppingItem.value.itemTotal}</h5>
+														<h5 class="product-title font-alt itemTotal"
+															id="itemTotal">${shoppingItem.value.itemTotal}</h5>
 													</td>
-
 												</tr>
 											</c:forEach>
 										</tbody>
@@ -132,7 +130,7 @@ button.removeProduct:hover {
 								<div class="col-sm-3">
 									<div class="form-group">
 										<input class="form-control" type="text" id="discount"
-											name="discount" placeholder="Coupon code" value=""/>
+											name="discount" placeholder="Coupon Code" />
 									</div>
 								</div>
 								<div class="col-sm-2">
@@ -146,12 +144,6 @@ button.removeProduct:hover {
 										<p style="font-size: 16px" id="discountShow"></p>
 									</div>
 								</div>
-								<div class="col-sm-3 col-sm-offset-3">
-									<div class="form-group">
-										<button class="btn btn-block btn-round btn-p pull-right"
-											type="submit">Update Cart</button>
-									</div>
-								</div>
 							</div>
 							<hr class="divider-w">
 							<div class="row mt-70">
@@ -162,83 +154,93 @@ button.removeProduct:hover {
 											<tbody>
 												<tr>
 													<th>Total :</th>
-													<td>${ShoppingCart.getItemAmount()}</td>
+													<td id="itemAmount">${ShoppingCart.getItemAmount()}</td>
 												</tr>
 												<tr>
 													<th>Discount :</th>
-													<td>£2.00</td>
+													<td style="color: red" id="discountPrice"></td>
 												</tr>
 												<tr class="shop-Cart-totalprice">
 													<th>Total Amount:</th>
-													<td><input type='text' name='totalAmount'
-														value="${ShoppingCart.getItemAmount()}" class="fieldWidth"
-														style="width: 100px;" readonly /></td>
+													<td><input type="hidden" name="totalAmount"
+														value="${ShoppingCart.getItemAmount()}" id="totalAmount" /><span
+														id="showPrice">${ShoppingCart.getItemAmount()}</span></td>
 												</tr>
 											</tbody>
 										</table>
-										<button class="btn btn-lg btn-block btn-round btn-p"
-											type="submit">Proceed to Checkout</button>
 									</div>
 								</div>
 							</div>
-							<!-- ---訂購者資料--- -->
-							<div
-								style="display: flex; justify-content: center; margin-bottom: 50px">
-								<h3>---訂購者資料---</h3>
-								<table class="table table-striped table-border checkout-table">
-									<tbody>
-										<tr>
-											<th>姓名 :</th>
-											<td>${Member.memName}</td>
-										</tr>
-										<tr>
-											<th>電話 :</th>
-											<td>${Member.phone}</td>
-										</tr>
-										<tr>
-											<th>E-mail :</th>
-											<td>${Member.eMail}</td>
-										</tr>
-										<tr>
-											<th>地址 :</th>
-											<td>${Member.address}</td>
-										</tr>
-									</tbody>
-								</table>
+							<!-- ---資料填寫--- -->
+							<div style="width: 500px; text-align: center;">
+								<div style="margin: auto">
+									<h3>---訂購者資料---</h3>
+									<div
+										style="display: flex; justify-content: center; margin-bottom: 50px">
+
+										<table class="table table-striped table-border checkout-table">
+											<tbody>
+												<tr>
+													<th>姓名 :</th>
+													<td>${Member.memName}</td>
+												</tr>
+												<tr>
+													<th>電話 :</th>
+													<td>${Member.phone}</td>
+												</tr>
+												<tr>
+													<th>E-mail :</th>
+													<td>${Member.eMail}</td>
+												</tr>
+												<tr>
+													<th>地址 :</th>
+													<td>${Member.address}</td>
+												</tr>
+											</tbody>
+										</table>
+									</div>
+								</div>
+
+								<div>
+									<!-- 收件者資料 -->
+									<h3>---收件者資料---</h3>
+									<div
+										style="display: flex; justify-content: center; margin-bottom: 50px">
+
+										<table class="table table-striped table-border checkout-table">
+											<tbody>
+												<tr>
+													<th>姓名 :</th>
+													<td><input type='text' name='shippingName'
+														value="${Member.memName}" class="fieldWidth"
+														style="width: 200px;" /></td>
+												</tr>
+												<tr>
+													<th>電話 :</th>
+													<td><input type='text' name='shippingPhone'
+														value="${Member.phone}" class="fieldWidth"
+														style="width: 200px;" /></td>
+												</tr>
+												<tr>
+													<th>E-mail :</th>
+													<td><input type='email' name='email'
+														value="${Member.eMail}" class="fieldWidth"
+														style="width: 200px;" /></td>
+												</tr>
+												<tr>
+													<th>地址 :</th>
+													<td><input type='text' name='shippingAddress'
+														value="${Member.address}" class="fieldWidth"
+														style="width: 200px;" /></td>
+												</tr>
+											</tbody>
+										</table>
+									</div>
+								</div>
+
+
 							</div>
-							<!-- 收件者資料 -->
-							<div
-								style="display: flex; justify-content: center; margin-bottom: 50px">
-								<h3>---收件者資料---</h3>
-								<table class="table table-striped table-border checkout-table">
-									<tbody>
-										<tr>
-											<th>姓名 :</th>
-											<td><input type='text' name='shippingName'
-												value="${Member.memName}" class="fieldWidth"
-												style="width: 200px;" /></td>
-										</tr>
-										<tr>
-											<th>電話 :</th>
-											<td><input type='text' name='shippingPhone'
-												value="${Member.phone}" class="fieldWidth"
-												style="width: 200px;" /></td>
-										</tr>
-										<tr>
-											<th>E-mail :</th>
-											<td><input type='email' name='email'
-												value="${Member.eMail}" class="fieldWidth"
-												style="width: 200px;" /></td>
-										</tr>
-										<tr>
-											<th>地址 :</th>
-											<td><input type='text' name='shippingAddress'
-												value="${Member.address}" class="fieldWidth"
-												style="width: 200px;" /></td>
-										</tr>
-									</tbody>
-								</table>
-							</div>
+
 							<!-- 							選擇付款方式 -->
 							<div>
 								<h3>付款方式:</h3>
@@ -292,11 +294,21 @@ button.removeProduct:hover {
 					"discountNo" : discountNo,
 				},
 				success : function(check) {
-					if (check == 'OK') {
-						$('#discountShow').text('折扣碼可以使用')
-					} else {
+					if (check == 'CANTUSE') {
 						$('#discountShow').text('不可以使用請重新輸入')
 						$('#discount').val('')
+					} else {
+						var price = $('#itemAmount').text()
+						var totalAmount = price - check
+						$('#discountShow').text('折扣碼可以使用')
+						$('#discountPrice').text(check)
+						if (totalAmount > 0) {
+							$('#totalAmount').val(totalAmount)
+							$('#showPrice').text(totalAmount)
+						} else {
+							$('#totalAmount').val(0)
+							$('#showPrice').text(0)
+						}
 					}
 				}
 			})

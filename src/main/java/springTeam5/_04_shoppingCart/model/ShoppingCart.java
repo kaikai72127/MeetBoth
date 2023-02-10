@@ -48,6 +48,7 @@ public class ShoppingCart {
 		if (cart.get(prodId) != null) {
 			OrderItemBean orderItemBean = cart.get(prodId);
 			orderItemBean.setQty(newQty);
+			orderItemBean.setItemTotal(newQty*orderItemBean.getProdItem().getProdPrice());
 			return true;
 		} else {
 			return false;

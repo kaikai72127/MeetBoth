@@ -16,9 +16,6 @@ public interface MemberRepository extends JpaRepository<MemberBean, Integer> {
 	
 	@Query(value = "from MemberBean where account = :account")
 	public List<MemberBean> searchMemByAccount(String account);
-	
-	@Query(value = "from MemberBean where memberId = :memberId")
-	public MemberBean searchMemberById(Integer memberId);
 
 
 

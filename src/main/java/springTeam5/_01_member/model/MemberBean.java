@@ -21,10 +21,9 @@ import javax.persistence.Table;
 
 import org.springframework.stereotype.Component;
 
-import springTeam5._05_teacStu.model.TeacBean;
-
 import springTeam5._04_shoppingCart.model.OrderBean;
 import springTeam5._04_shoppingCart.model.OrderItemBean;
+import springTeam5._05_teacStu.model.TeacBean;
 
 
 
@@ -78,6 +77,9 @@ public class MemberBean implements Serializable {
 		
 	@Column(name = "registime")
 	private Date registime = new Date();
+
+	@Column(name = "role")
+	private String role = "user";
 	
 	@OneToMany(mappedBy = "member")
 	private List<TeacBean> teacBean = new ArrayList<>();
@@ -87,7 +89,13 @@ public class MemberBean implements Serializable {
 	
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "membersale",cascade = CascadeType.ALL)
 	private Set<OrderItemBean> orderSale = new LinkedHashSet<OrderItemBean>(); // itemsList
-	
+	public String getRole() {
+		return role;
+	}
+
+	public void setRole(String role) {
+		this.role = role;
+	}
 	
 	public MemberBean() {
 	}
@@ -252,7 +260,6 @@ public class MemberBean implements Serializable {
 		return new SimpleDateFormat("YYYY/MM/dd").format(registime);
 	}
 
-
 	public void setRegistime(Date date) {
 		this.registime = date;
 	}
@@ -264,9 +271,6 @@ public class MemberBean implements Serializable {
 	public void setTeacBean(List<TeacBean> teacBean) {
 		this.teacBean = teacBean;
 	}
-	
-	
-	
 
 	public Set<OrderBean> getOrderBuy() {
 		return orderBuy;
@@ -276,7 +280,6 @@ public class MemberBean implements Serializable {
 		this.orderBuy = orderBuy;
 	}
 
-
 	public Set<OrderItemBean> getOrderSale() {
 		return orderSale;
 	}
@@ -284,7 +287,6 @@ public class MemberBean implements Serializable {
 	public void setOrderSale(Set<OrderItemBean> orderSale) {
 		this.orderSale = orderSale;
 	}
-
 	@Override
 	public String toString() {
 		return "MemberBean [memberID=" + memberID + ", account=" + account + ", password=" + password + ", idNumber="
@@ -292,7 +294,5 @@ public class MemberBean implements Serializable {
 				+ ", memBirth=" + memBirth + ", memGender=" + memGender + ", eMail=" + eMail + ", phone=" + phone
 				+ ", address=" + address + ", registime=" + new SimpleDateFormat("YYYY/MM/dd").format(registime) + "]";
 	}
-	
-	
 
 }

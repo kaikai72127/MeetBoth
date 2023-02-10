@@ -324,6 +324,8 @@ color:lightgrey;
 		<div class="page-container">
         <div class="resume-container">
             <h1 class="resume-title">履歷表</h1>
+            <input type="hidden" name="user" value="${pageContext.request.userPrincipal.name}">
+            <input type="hidden" name="owner" value="${bean.member.account}">
             <h2 class="resume-last-update">Last updata: ${bean.updateDate}</h2>
             <div class="resume-body">
                 <div class="resume-section">
@@ -428,7 +430,7 @@ color:lightgrey;
                 			<a href="/MeetBoth/_05_teacStu.updatedataMain.controller?teacno=${bean.teacno}">修改履歷</a>
             			</div>
             			<div class="nav-item">
-                			<a class="delete" href="#">刪除履歷</a>
+                			<a class="delete" id="${bean.teacno}" href="#">刪除履歷</a>
             			</div>
         			</div>
                     <div id="hiddenitem2" style="display:inline-block; height:86.75px" class="nav-container">
@@ -656,7 +658,7 @@ color:lightgrey;
 	<script>
         $(function(){
             $('.delete').click(function(){
-                let id=$(this).attr("${bean.teacno}");
+                let id=$(this).attr("id");
                 Swal.fire({
                   title: '你確定要刪除嗎?',
                   text: "將無法恢復此筆貼文!!!",
@@ -678,6 +680,7 @@ color:lightgrey;
                           data: {"teacno":id},
                         })
                             .done(function () {
+                            	window.location='/MeetBoth/_05_teacStu.searchAllTeac.controller/1'
                                 console.log("delete")
                              })//done
                              .fail(function(error) {
@@ -690,5 +693,12 @@ color:lightgrey;
         });
         //function end
     </script>
+    <script>
+    	const user = document.querySelector('input[name="user"]').value;
+    	const owner = document.querySelector('input[name="owner"]').value;
+    	if (user !== owner) {
+        	document.getElementById("replace").style.display = "none";
+    	}
+	</script>
 </body>
 </html>

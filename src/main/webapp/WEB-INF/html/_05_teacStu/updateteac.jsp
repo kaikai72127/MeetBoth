@@ -321,8 +321,9 @@ color:lightgrey;
 	<!-- 內容-履歷表 -->
 		<div class="page-container">
         <div class="resume-container">
-            <h1 class="resume-title">新增履歷表</h1>
+            <h1 class="resume-title">修改履歷表</h1>
             <form action='<c:url value="/_05_teacStu.updatedata.controller" />' enctype='multipart/form-data' method='post'>
+            <input name="teacno" type="hidden" value="${bean.teacno}">
             <div class="resume-body">
                 <div class="resume-section">
                     <h2 class="resume-body-title">PROFILE</h2>
@@ -414,7 +415,7 @@ color:lightgrey;
                     </div>
                     	<div style="display:flex">
                         <button style="display:flex; justify-content:center; align-items:center; margin:15px auto 0 auto" class="btn btn-b btn-circle" type="submit">確定修改</button>
-                        <button onclick="window.location='/MeetBoth/_05_teacStu.searchAllTeac.controller/1'" style="display:flex; justify-content:center; align-items:center; margin:15px auto 0 auto" class="btn btn-b btn-circle" type="submit">取消</button>
+                        <button type="button" id="cancel-btn" style="display:flex; justify-content:center; align-items:center; margin:15px auto 0 auto" class="btn btn-b btn-circle">取消</button>
                         </div>
                 </div>
                 <div class="avatar-section">
@@ -439,5 +440,11 @@ color:lightgrey;
     -->
 	<!-- 引入共同的js -->
 	<jsp:include page="/WEB-INF/html/fragment/jsPath.jsp" />
+	<script>
+  		document.getElementById("cancel-btn").addEventListener("click", function(event) {
+    	event.preventDefault();
+    	window.location.href = "/MeetBoth/_05_teacStu.searchAllTeac.controller/1";
+  		});
+	</script>
 </body>
 </html>

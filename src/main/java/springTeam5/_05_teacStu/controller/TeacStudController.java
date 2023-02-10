@@ -437,6 +437,10 @@ public class TeacStudController {
 			return "membersError";
 		}
 		StudBean stud = sService.searchStudFromStudno(studno);
+		String account = SecurityContextHolder.getContext().getAuthentication().getName();
+		List<MemberBean> list = mService.searchMemByAccount(account);
+		MemberBean member = list.get(0);
+		m.addAttribute("m", member);
 		m.addAttribute("bean", stud);
 		return "_05_teacStu/studpostpage";
 	}
@@ -621,5 +625,54 @@ public class TeacStudController {
 	public String processdeletedataStudAction(@RequestParam("studno") Integer studno) {
 		sService.deleteStudfromStudno(studno);
 		return "redirect:_05_teacStu.searchAllStud.controller/1";
+	}
+	
+//	匹配度測試1
+	public double calculateSimilarity(String s1, String s2) {
+	    int m = s1.length();
+	    int n = s2.length();
+
+	    if (m == 0 || n == 0) {
+	        return 0.0;
+	    }
+
+	    int p = 0;
+	    int t = 0;
+	    for (int i = 0; i < m; i++) {
+	        int j = Math.max(0, Math.max(i - (n - m), i) - t);
+	        while (j < n && !(s1.charAt(i) == s2.charAt(j))) {
+	            j++;
+	        }
+	        if (j < n) {
+	            p++;
+	            t = j - i;
+	        }
+	    }
+
+	    if (p == 0) {
+	        return 0.0;
+	    }
+
+	    int s = 0;
+	    int k = 0;
+	    while (k < p && s1.charAt(k + s) == s2.charAt(k)) {
+	        k++;
+	    }
+	    s = k;
+
+	    return (p / (double) m + p / (double) n + (p - s) / (double) p) / 3.0;
+	}
+	
+//	匹配度測試2
+	@GetMapping("/_05_teacStu.compare.controller")
+	public double compareTeacBeanAndStudBean(TeacBean teacBean, StudBean studBean) {
+	    double similarity = 0.0;
+
+	    similarity += calculateSimilarity(teacBean.getHighEdu(), studBean.getEducaLimit());
+	    similarity += calculateSimilarity(teacBean.getTeacLoc(), studBean.getStudLoc());
+	    similarity += calculateSimilarity(teacBean.getClassMode(), studBean.getClassMode());
+	    similarity += calculateSimilarity(teacBean.getSubjectItem(), studBean.getSubjectItem());
+
+	    return similarity;
 	}
 }

@@ -419,7 +419,7 @@ color:lightgrey;
                         </div>
                     </div>
                     	<div style="display:flex">
-                        <button onclick="window.location='/MeetBoth/_05_teacStu.searchAllStud.controller/1'" style="display:flex; justify-content:center; align-items:center; margin:15px auto 0 auto" class="btn btn-b btn-circle" type="submit">匹配度測試</button>
+                        <button onclick="checkUserAndTeacNo" style="display:flex; justify-content:center; align-items:center; margin:15px auto 0 auto" class="btn btn-b btn-circle" type="submit">匹配度測試</button>
                         <button onclick="window.location='/MeetBoth/_05_teacStu.searchAllStud.controller/1'" style="display:flex; justify-content:center; align-items:center; margin:15px auto 0 auto" class="btn btn-b btn-circle" type="submit">返回上一頁</button>
                         </div>
                 </div>
@@ -516,6 +516,21 @@ color:lightgrey;
     	if (user !== owner) {
         	document.getElementById("replace").style.display = "none";
     	}
+	</script>
+	<script>
+		function checkUserAndTeacNo() {
+    		if (!('${pageContext.request.userPrincipal.name}')) {
+        		alert('請先登入');
+        		window.location.href = '/MeetBoth/login/page.jsp';
+    		}
+
+    		if (!('${m.teacno}')) {
+        		alert('請先成為教師');
+        		window.location='/MeetBoth/_05_teacStu.searchAllTeac.controller/1';
+    		}
+
+    		window.location='/MeetBoth/_05_teacStu.compare.controller';
+		}
 	</script>
 </body>
 </html>

@@ -269,6 +269,15 @@ body {
     -->
 	<!-- 引入共同的js -->
 	<jsp:include page="/WEB-INF/html/fragment/jsPath.jsp" />
-
+	<script>
+   	document.querySelector('form[action*="_05_teacStu.insertdataMain.controller"] button[type="submit"]').addEventListener('click', function (e) {
+     	const user = '${pageContext.request.userPrincipal.name}';
+     	if (!user) {
+       	e.preventDefault();
+       	alert('請先登入');
+       	window.location.href = '/MeetBoth/login/page.jsp';
+     	}
+   	});
+	</script>
 </body>
 </html>

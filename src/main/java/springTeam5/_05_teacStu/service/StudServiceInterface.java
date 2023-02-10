@@ -18,8 +18,8 @@ public interface StudServiceInterface {
 //	搜尋全部學生貼文依日期降序排序
 	public List<StudBean> searchAllStudOBpDate();
 	
-//	搜尋全部學生貼文依會員編號排序
-	public List<StudBean> searchAllStudOBmId();
+//	搜尋全部學生貼文依瀏覽次數排序
+	public List<StudBean> findAllByOrderByViews();
 	
 //	透過貼文編號建立學生貼文查詢
 	public StudBean searchStudFromStudno(Integer studno);
@@ -35,4 +35,7 @@ public interface StudServiceInterface {
 	
 //	透過ID修改學生貼文
 	public StudBean updateStudFromStudno(StudBean sb);
+	
+//	搜尋最新更新的前6筆貼文
+	public List<StudBean> findFirst6ByOrderByUpdateDateDesc();
 }

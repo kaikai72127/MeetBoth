@@ -17,6 +17,7 @@ import javax.persistence.Table;
 
 import org.springframework.stereotype.Component;
 
+import springTeam5._05_teacStu.model.StudBean;
 import springTeam5._05_teacStu.model.TeacBean;
 
 
@@ -74,6 +75,8 @@ public class MemberBean implements Serializable {
 	
 	@OneToMany(mappedBy = "member")
 	private List<TeacBean> teacBean = new ArrayList<>();
+	@OneToMany(mappedBy = "member")
+	private List<StudBean> studBean = new ArrayList<>();
 	
 	public MemberBean() {
 	}

@@ -26,7 +26,7 @@ public interface TeacRepository extends JpaRepository<TeacBean, Integer>{
 //	搜尋全部教師貼文依日期降序排序
 	public List<TeacBean> findAllByOrderByUpdateDateDesc();
 
-//	搜尋全部教師貼文依會員編號排序
+//	搜尋全部教師貼文依瀏覽次數排序
 	public List<TeacBean> findAllByOrderByViews();
 
 //	透過貼文編號建立教師貼文查詢

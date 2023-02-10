@@ -312,7 +312,8 @@ public class ShoppingCartCheck {
 			orderItemBean.setOrderbean(orderBean);
 			// 取得賣家資料
 			int meberSaleId = orderItemBean.getProdItem().getMemberID();
-			MemberBean memberSale = memberService.searchMemberById(meberSaleId);
+			Optional<MemberBean> list = memberService.searchMemByID(meberSaleId);
+			MemberBean memberSale = list.get();			
 			orderItemBean.setMembersale(memberSale);
 			items.add(orderItemBean);
 			

@@ -2,6 +2,7 @@ package springTeam5._04_shoppingCart.controller;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -123,33 +124,35 @@ public class ShoppingCartController {
 	public String processCheckMainAction(HttpServletRequest request) {
 		HttpSession session = request.getSession(false);
 
-		ShoppingCart sc = (ShoppingCart) session.getAttribute("ShoppingCart");
-		if (sc == null) {
-			// 跳轉回空的購物車頁面
-			return "_04_shoppingCart/shoppingCart";
+		ShoppingCart shoppingCart = (ShoppingCart) session.getAttribute("ShoppingCart");
+		//需有兩個判斷才可以
+		if (shoppingCart != null && shoppingCart.getItemQty()!=0) {
+			// 跳轉到有購物車的頁面
+			return "_04_shoppingCart/shoppingCartCheck";
+
 		}
-		// 跳轉到有購物車的頁面
-		return "_04_shoppingCart/shoppingCartCheck";
+		// 如果沒有商品 則跳轉回搜尋商品的頁面
+		return "redirect:/_03_product.searchAllProduct.controller";
 	}
 
 	// 移除一個item
 	@GetMapping("/removeShoppingCartItem.controlle/{prodId}")
-//	@GetMapping("/removeShoppingCartItem.controlle")
-	public String deleleshoppingitem(@PathVariable("prodId") int prodId, HttpServletRequest request, SessionStatus sessionStatus) {
+	public String deleleshoppingitem(@PathVariable("prodId") int prodId, HttpServletRequest request,
+			SessionStatus sessionStatus) {
 		HttpSession session = null;
 		session = request.getSession(false);
 		ShoppingCart shoppingCart = (ShoppingCart) session.getAttribute("ShoppingCart");
-
-		System.out.println("執行刪除--------------------");
 
 		// 如果購物車內沒有東西 跳轉回搜尋全部商品的頁面
 		if (shoppingCart == null) {
 			return "redirect:/_03_product.searchAllProduct.controller";
 		}
+
 		// 刪除購物車內的商品 跳轉回查看我的購物車Controller
 		System.out.println("執行刪除購物車");
 		shoppingCart.deleteProduct(prodId);
-		//更新購物車顯示的數量
+
+		// 更新購物車顯示的數量
 		session.setAttribute("CartSize", shoppingCart.getItemNumber());
 		return "redirect:/shoppingcart.controller";
 	}

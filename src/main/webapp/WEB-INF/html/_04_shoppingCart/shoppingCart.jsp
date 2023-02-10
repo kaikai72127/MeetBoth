@@ -35,17 +35,16 @@ a.ap:hover {
 }
 
 button.removeProduct {
-background-color: #f4f7f7;
-color: #ce7777;
-border: 1px solid #ce7777;
+	background-color: #f4f7f7;
+	color: #ce7777;
+	border: 1px solid #ce7777;
 }
 
 button.removeProduct:hover {
-background-color: #ce7777;
-color: white;
-border: 1px solid #ce7777;
+	background-color: #ce7777;
+	color: white;
+	border: 1px solid #ce7777;
 }
-
 </style>
 
 <!-- SweetAlert js -->
@@ -72,7 +71,7 @@ border: 1px solid #ce7777;
 		<section>
 			<form>
 				<div class="main">
-					<section class="">
+					<section class="" style="margin-bottom:120px;margin-top:100px">
 						<div class="container">
 							<div class="row">
 								<div class="col-sm-6 col-sm-offset-3">
@@ -107,13 +106,15 @@ border: 1px solid #ce7777;
 														<h5 class="product-title font-alt">${shoppingItem.value.prodItem.prodName}</h5>
 													</td>
 													<td class="hidden-xs">
-														<h5 class="product-title font-alt" id="prodPrice">${shoppingItem.value.prodItem.prodPrice}</h5>
+														<h5 class="product-title font-alt prodPrice"
+															id="prodPrice">${shoppingItem.value.prodItem.prodPrice}</h5>
 													</td>
-													<td><input class="form-control" type="number"
-														onblur="itemTotalChange()" name="updateQty"
+													<td><input class="form-control prodQtyChange"
+														type="number" name="updateQty" id="${shoppingItem.value.prodItem.prodID}"
 														value='${shoppingItem.value.qty}' max="50" min="1" />
 													<td>
-														<h5 class="product-title font-alt" id="itemTotal">${shoppingItem.value.itemTotal}</h5>
+														<h5 class="product-title font-alt itemTotal"
+															id="itemTotal">${shoppingItem.value.itemTotal}</h5>
 													</td>
 													<td class="pr-remove"><button
 															class="removeProduct btn btn-sm btn-primary"
@@ -128,23 +129,7 @@ border: 1px solid #ce7777;
 								</div>
 							</div>
 							<div class="row">
-								<div class="col-sm-3">
-									<div class="form-group">
-										<input class="form-control" type="text" id="discount" name=""
-											placeholder="Coupon code" />
-									</div>
-								</div>
-								<div class="col-sm-2">
-									<div class="form-group">
-										<button class="btn btn-round btn-p" type="submit"
-											id="checkDiscount" style="margin: 0">Apply</button>
-									</div>
-								</div>
-								<div class="col-sm-2" style="margin: 0">
-									<div class="form-group">
-										<p style="font-size: 16px" id="discountShow"></p>
-									</div>
-								</div>
+								
 								<!-- 								<div class="col-sm-3 col-sm-offset-3"> -->
 								<!-- 									<div class="form-group"> -->
 								<!-- 										<button class="btn btn-block btn-round btn-p pull-right" -->
@@ -160,26 +145,20 @@ border: 1px solid #ce7777;
 										<table class="table table-striped table-border checkout-table">
 											<tbody>
 												<tr>
-													<th>Total :</th>
-													<td>${ShoppingCart.getItemAmount()}</td>
-												</tr>
-												<tr>
-													<th>Discount :</th>
-													<td>£2.00</td>
+													<th>Item :</th>
+													<td id=ShoopintCartItem>${ShoppingCart.getItemQty()}</td>
 												</tr>
 												<tr class="shop-Cart-totalprice">
 													<th>Total :</th>
-													<td>£42.00</td>
+													<td>${ShoppingCart.getItemAmount()}</td>
 												</tr>
 											</tbody>
 										</table>
-										<button class="btn btn-lg btn-block btn-round btn-p"
-											type="submit">Proceed to Checkout</button>
 									</div>
 								</div>
 							</div>
 							<div
-								style="display: flex; justify-content: center; margin-bottom: 50px">
+								style="display: flex; justify-content: center; margin-bottom: 50px;margin-top: 50px">
 
 								<table border='1' class="btn-p">
 									<tr>
@@ -208,11 +187,11 @@ border: 1px solid #ce7777;
 
 
 
-		<!-- Footer -->
-		<!-- 引入共同的footerMVC -->
-		<jsp:include page="/WEB-INF/html/fragment/footerMVC.jsp" />
 
 	</main>
+	<!-- Footer -->
+	<!-- 引入共同的footerMVC -->
+	<jsp:include page="/WEB-INF/html/fragment/footerMVC.jsp" />
 
 	<!--  
     JavaScripts
@@ -224,40 +203,11 @@ border: 1px solid #ce7777;
 
 
 	<script type="text/javascript">
-function modify(key, qty, index) {
-	var x = "newQty" + index;
-	var newQty = document.getElementById(x).value;
-	if  (newQty < 0 ) {
-		window.alert ('數量不能小於 0');
-		return ; 
-	}
-	if  (newQty == 0 ) {
-		window.alert ("請執行刪除功能來刪除此項商品");
-		document.getElementById(x).value = qty;
-		return ; 
-	}
-	if  (newQty == qty ) {
-		window.alert ("新、舊數量相同，不必修改");
-		return ; 
-	}
-	if (confirm("確定將此商品的數量由" + qty + " 改為 " + newQty + " ? ") ) {
-		document.forms[0].action="<c:url value='/_04_ShoppingCart/UpdateItem.do?cmd=MOD&bookId=" + key + "&newQty=" + newQty +"' />" ;
-		document.forms[0].method="POST";
-		document.forms[0].submit();
-	} else {
-		document.getElementById(x).value = qty;
-	}
-}
-function isNumberKey(evt)
-{
-   var charCode = (evt.which) ? evt.which : event.keyCode
-   if (charCode > 31 && (charCode < 48 || charCode > 57)){
-      return false;
-   }
-   return true;
-}
-function Checkout(qty) {
-	if (qty == 0)  {
+
+
+function Checkout(ShoopintCartItem) {
+	console.log(ShoopintCartItem)
+	if (ShoopintCartItem == 0)  {
 		alert("無購買任何商品，不需結帳");
 		return false;
 	}
@@ -298,7 +248,7 @@ function Abort() {
 		return false;
 	}
 }
-
+//---------移除購物車
 $('.removeProduct').on('click', function(e) {
 // 	e.preventDefault(); 可以看console
 	var result = confirm('是否確定刪除?');
@@ -310,10 +260,6 @@ $('.removeProduct').on('click', function(e) {
 			url : 'removeShoppingCartItem.controlle/'+MyValue,
 			method : "get",
 			dataType : "text",
-			//這邊的"id"是給controller的變數名
-// 			data : {
-// 				"prodId" : MyValue
-// 			},
 		}).done(function() {
 			location.reload();
 		})
@@ -321,26 +267,28 @@ $('.removeProduct').on('click', function(e) {
 		return;
 	}
 });
-
-$(".addtext").change(function() {
-	let MyValue = $(this).attr("id");
-	var inputValue = $(this).val();
-	console.log("---------------"+MyValue);
-	console.log(inputValue);
+//-----更新商品數量--------------------------
+$(".prodQtyChange").change(function() {
+	let prodId = $(this).attr("id");
+	var updateQty = $(this).val();
+	console.log("---------------"+prodId);
+	console.log(updateQty);
 	$.ajax({
-		url : '/removeShoppingCartItem.controlle/' + MyValue,
+		url : 'updateshoppingqty.controller/'+ prodId,
 		method : "post",
 		dataType : "text",
 		//這邊的"id"是給controller的變數名
 		data : {
-			"prodId" : MyValue,
-			"newQty" : inputValue
+			"prodId" : prodId,
+			"updateQty" : updateQty
 		},
 	}).done(function() {
 		location.reload();
 	})
 
 });
+
+//---------------------------------
 </script>
 	<script>
       let cartCount = 0;
@@ -353,7 +301,6 @@ $(".addtext").change(function() {
             "購物車：" + cartCount;
         });
     </script>
-
 
 	<!--     判斷是否可以使用折扣碼 -->
 	<script>
@@ -377,6 +324,8 @@ $('#checkDiscount').on('click',function(e){
 		}
 	})
 })
+
+<!--     判斷是否可以使用折扣碼 -->
 
 </script>
 

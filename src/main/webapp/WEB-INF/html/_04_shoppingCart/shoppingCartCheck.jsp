@@ -57,6 +57,7 @@ button.removeProduct:hover {
 		}
 	}
 </script>
+
 </head>
 
 <!--BOBY-->

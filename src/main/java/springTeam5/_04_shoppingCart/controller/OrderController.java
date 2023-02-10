@@ -3,11 +3,13 @@ package springTeam5._04_shoppingCart.controller;
 import java.io.IOException;
 import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,6 +22,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import springTeam5._01_member.model.MemberBean;
 import springTeam5._01_member.model.MemberRepository;
+import springTeam5._01_member.model.MemberService;
 import springTeam5._04_shoppingCart.model.Discount;
 import springTeam5._04_shoppingCart.model.OrderBean;
 import springTeam5._04_shoppingCart.service.impl.DiscountServiceImpl;
@@ -32,7 +35,7 @@ public class OrderController {
 	private OrderServiceImpl orderService;
 
 	@Autowired
-	private MemberRepository memberRepository;
+	private MemberService memberService;
 
 	@Autowired
 	private DiscountServiceImpl discountService;
@@ -45,8 +48,7 @@ public class OrderController {
 	}
 
 	@PostMapping("/shoppingCart.createOrder.controller")
-	public String createOrder(
-			@RequestParam("memberBuyId") Integer memberBuyId,
+	public String createOrder(@RequestParam("memberBuyId") Integer memberBuyId,
 			@RequestParam("shippingName") String shippingName, @RequestParam("shippingPhone") String shippingPhone,
 			@RequestParam("shippingAddress") String shippingAddress, @RequestParam("ordStstus") String ordStstus,
 			@RequestParam("paymentStstus") String paymentStstus, @RequestParam("deliveryStstus") String deliveryStstus,
@@ -56,7 +58,9 @@ public class OrderController {
 
 		OrderBean obean = new OrderBean();
 
-		MemberBean memberBuy = memberRepository.searchMemberById(memberBuyId);
+		Optional<MemberBean> list = memberService.searchMemByID(memberBuyId);
+		MemberBean memberBuy = list.get();
+
 
 		obean.setMemberbuy(memberBuy);
 		obean.setShippingName(shippingName);

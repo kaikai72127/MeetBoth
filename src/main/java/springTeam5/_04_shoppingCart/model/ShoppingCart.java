@@ -58,12 +58,23 @@ public class ShoppingCart {
 	// 刪除購物車某筆商品 >>>判斷是否要移除這個item
 	public int deleteProduct(int prodId) {
 
-		System.out.println("開始要刪除囉~~~~" + prodId);
 		if (cart.get(prodId) != null) {
 			cart.remove(prodId); // Map介面的remove()方法
 			return 1;
 		} else {
 			return 0;
+		}
+	}
+	
+	// 刪除購物車所有商品內容
+	public void deleteAllProduct() {
+		
+		System.out.println("清除所有購物車內容");
+		Set<Integer> set = cart.keySet();
+		for (int n : set) {
+			OrderItemBean orderItemBean = cart.get(n);
+			int prodID = orderItemBean.getProdItem().getProdID();
+			cart.remove(prodID);
 		}
 	}
 

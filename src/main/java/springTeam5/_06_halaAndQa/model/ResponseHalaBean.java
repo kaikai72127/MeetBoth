@@ -15,6 +15,8 @@ import javax.persistence.Transient;
 
 import org.springframework.stereotype.Component;
 
+import springTeam5._01_member.model.MemberBean;
+
 @Entity
 @Table(name = "RESPONSEHALA")
 @Component
@@ -33,8 +35,13 @@ public class ResponseHalaBean {
 	@Transient
 	private Integer halaId;
 
-	@Column(name = "MEMBERID")
-	private Integer memberId;
+	@Column(name = "memberID")
+	@Transient
+	private Integer memberID;
+	
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name="memberID")
+	private MemberBean memberBean;
 
 	@Column(name = "RESPONSEHALADATE")
 	private String responseHalaPostDate;
@@ -55,12 +62,12 @@ public class ResponseHalaBean {
 
 	}
 
-	public ResponseHalaBean(Integer responseHalaId, Integer halaId, Integer memberId, String responseHalaPostDate,
+	public ResponseHalaBean(Integer responseHalaId, Integer halaId, Integer memberID, String responseHalaPostDate,
 			String responseHalaContent, Integer tumb, Integer tumboff, Blob picture) {
 		super();
 		this.responseHalaId = responseHalaId;
 		this.halaId = halaId;
-		this.memberId = memberId;
+		this.memberID = memberID;
 		this.responseHalaPostDate = responseHalaPostDate;
 		this.responseHalaContent = responseHalaContent;
 		this.tumb = tumb;
@@ -76,13 +83,45 @@ public class ResponseHalaBean {
 		this.hala = hala;
 	}
 
-	public ResponseHalaBean(Integer responseHalaId, HalaBean hala, Integer halaId, Integer memberId,
+	public Integer getMemberID() {
+		return memberID;
+	}
+
+	public void setMemberID(Integer memberID) {
+		this.memberID = memberID;
+	}
+
+	public MemberBean getMemberBean() {
+		return memberBean;
+	}
+
+	public void setMemberBean(MemberBean memberBean) {
+		this.memberBean = memberBean;
+	}
+
+	public ResponseHalaBean(Integer responseHalaId, HalaBean hala, Integer halaId, Integer memberID,
+			MemberBean memberBean, String responseHalaPostDate, String responseHalaContent, Integer tumb,
+			Integer tumboff, Blob picture) {
+		super();
+		this.responseHalaId = responseHalaId;
+		this.hala = hala;
+		this.halaId = halaId;
+		this.memberID = memberID;
+		this.memberBean = memberBean;
+		this.responseHalaPostDate = responseHalaPostDate;
+		this.responseHalaContent = responseHalaContent;
+		this.tumb = tumb;
+		this.tumboff = tumboff;
+		this.picture = picture;
+	}
+
+	public ResponseHalaBean(Integer responseHalaId, HalaBean hala, Integer halaId, Integer memberID,
 			String responseHalaPostDate, String responseHalaContent, Integer tumb, Integer tumboff, Blob picture) {
 		super();
 		this.responseHalaId = responseHalaId;
 		this.hala = hala;
 		this.halaId = halaId;
-		this.memberId = memberId;
+		this.memberID = memberID;
 		this.responseHalaPostDate = responseHalaPostDate;
 		this.responseHalaContent = responseHalaContent;
 		this.tumb = tumb;
@@ -106,12 +145,12 @@ public class ResponseHalaBean {
 		this.halaId = halaId;
 	}
 
-	public Integer getMemberId() {
-		return memberId;
+	public Integer getmemberID() {
+		return memberID;
 	}
 
-	public void setMemberId(Integer memberId) {
-		this.memberId = memberId;
+	public void setmemberID(Integer memberID) {
+		this.memberID = memberID;
 	}
 
 	public String getResponseHalaPostDate() {

@@ -172,7 +172,7 @@
 											<div class="post-index" style="color: #FFFFFF;">樓主</div>
 											<div class="post-user">
 												<a href="" class="user-name" style="color: #FFFFFF;">Kevin</a>
-												<a href="" class="user-id" style="color: #FFFFFF;">@${bean.memberid}</a>
+												<a href="" class="user-id" style="color: #FFFFFF;">@${bean.memberBean.memberID}</a>
 											</div>
 										</div>
 										<div class="post-detail" style="color: #FFFFFF;">${bean.postdate}</div>
@@ -207,18 +207,20 @@
 									</div>
 								</div>
 								<!-- 修改按鈕結束 -->
-
+                                <!-- 回復貼文開始 -->
 								<div class="post-footer">
 									<div class="reply-expand-button"></div>
 									<div class="reply-list" id="fuckyoureplylist">
 
+											<input type="hidden" value="${member.memNickName}" id="memberNickName" class="memberNickName">
+											<input type="hidden" value="${member.memberID}" name="memberid" id="memberIDforAjax">
 										<c:forEach var="respBean" items="${bean.responseHala}">
 											<div class="reply-item">
 												<div class="reply-avatar">
 													<img src="https://picsum.photos/200" alt="">
 												</div>
 												<div class="reply-content">
-													<div class="reply-user">${bean.memberid}</div>
+													<div class="reply-user">${respBean.memberBean.memNickName}</div>
 													<article class="reply-article">${respBean.responseHalaContent}</article>
 													<div class="reply-content-detail">${respBean.responseHalaPostDate}</div>
 												</div>
@@ -233,6 +235,7 @@
 											placeholder="Reply">
 									</div>
 								</div>
+								  <!-- 回復貼文結束 -->
 							</div>
 						</div>
 					</div>
@@ -247,8 +250,11 @@
 					<!-- 					------------------------------------------- -->
 
 					<c:forEach var="answer" items="${bean.answerHala}">
-						<input id="answerHalaIdHidden" type="hidden"
+						<input class="answerHalaIdHidden" type="hidden"
 							value="${answer.answerId}" />
+<!-- 							<input id="answerHalaIdHidden" type="hidden" -->
+<%-- 							value="${member.memberID}" name="memberid" id="memberIDforAjax2" /> --%>
+							
 						<div class="post-container">
 							<div class="user-section">
 								<div class="user-card">
@@ -262,7 +268,7 @@
 										<div class="post-index">2樓</div>
 										<div class="post-user">
 											<a href="" class="user-name">Kevin</a> <a href=""
-												class="user-id">${answer.memberId}</a>
+												class="user-id">${answer.memberBean.memberID}</a>
 										</div>
 									</div>
 									<div class="post-detail">${answer.answerDate}</div>
@@ -276,12 +282,13 @@
 										<!----------------------------------------------------回覆留言迴圈開始------------------------ -->
 										<c:forEach var="respAnswerBean"
 											items="${answer.responseAnswerBean}">
+										<input type="hidden" value="${member.memNickName}" id="memberNickName" class="memberNickName">
 											<div class="reply-item">
 												<div class="reply-avatar">
 													<img src="https://picsum.photos/200" alt="">
 												</div>
 												<div class="reply-content">
-													<div class="reply-user">${respAnswerBean.memberId}</div>
+													<div class="reply-user">${bean.memberBean.memNickName}</div>
 													<article class="reply-article">${respAnswerBean.responseAnswerContent}</article>
 													<div class="reply-content-detail">${respAnswerBean.responseAnswerDate}</div>
 												</div>
@@ -291,7 +298,7 @@
 
 									</div>
 									<div id="div1" class="reply-editor">
-										<input class="reply-article" id="textForRespAnswer"
+										<input class="reply-article textForRespAnswer"
 											onkeypress="handleKeyPress2(event)" type="text"
 											placeholder="Reply">
 									</div>
@@ -312,6 +319,7 @@
 							action='<c:url value="/_06_halaAndQa.addAnswerHala.controller" />'
 							method="post">
 							<input type="hidden" name="hieId" value="${bean.halaId}">
+							<input type="hidden" name="memberid" value="${member.memberID}">
 							<div class="form-group">
 								<textarea class="form-control" id="answerHalaContent"
 									name="answerHalaContent" rows="4" placeholder="請寫入您的回覆"></textarea>
@@ -390,13 +398,16 @@
 		function handleKeyPress(event) {
 			if (event.key == 'Enter') {
 				var newTextValue = document.getElementById("textForRespHala").value;
-				console.log(newTextValue);
+				var mID = document.getElementById("memberIDforAjax").value;
+				console.log("newTextValue="+newTextValue);
+				console.log("mID="+mID);
 				$.ajax({
 					url : '/MeetBoth/_06_halaAndQa.addResponseHala.controller',
 					type : 'POST',
 					data : {
 						responseHalaContent : $('#textForRespHala').val(),
-						halaId : $('#halaIdHidden').val()
+						halaId : $('#halaIdHidden').val(),
+						memberid : mID
 					},
 					success : function(respones) {
 
@@ -419,7 +430,8 @@
 
 				var div3 = document.createElement("div");
 				div3.setAttribute("class", "reply-user")
-				div3.innerHTML = "2222 "
+				var memN = document.getElementById("memberNickName").value
+				div3.innerHTML =memN;
 
 				console.log("這是part3")
 				var article1 = document.createElement("article");
@@ -470,8 +482,13 @@
 			if (event.key == 'Enter') {
 // 				var newTextValue = document.getElementById("textForRespAnswer").value;
 				
-				var newTextValue = document.querySelectorAll('#textForRespAnswer'); 
-				var hiddenID = document.querySelectorAll('#answerHalaIdHidden'); 
+				var newTextValue = document.querySelectorAll('.textForRespAnswer'); 
+				var hiddenID = document.querySelectorAll('.answerHalaIdHidden'); 
+// 				var newTextValue = document.getElemensByClass('textForRespAnswer'); 
+// 				var hiddenID = document.getElemensByClass('answerHalaIdHidden'); 
+				
+				
+				var mID = document.getElementById("memberIDforAjax").value;
 				
 				for(var i=0;i<newTextValue.length;i++){
 
@@ -507,7 +524,8 @@
 
 				var div3 = document.createElement("div");
 				div3.setAttribute("class", "reply-user")
-				div3.innerHTML = "2222 "
+				var memN = document.getElementById("memberNickName").value
+				div3.innerHTML =memN
 
 				console.log("這是part3")
 				var article1 = document.createElement("article");

@@ -8,11 +8,14 @@ import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -25,6 +28,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
+import springTeam5._01_member.model.MemberBean;
+import springTeam5._01_member.model.MemberService;
 import springTeam5._06_halaAndQa.model.AnswerHalaBean;
 import springTeam5._06_halaAndQa.model.HalaBean;
 import springTeam5._06_halaAndQa.model.HalaRepository;
@@ -39,6 +44,9 @@ public class HalaController {
 
 	@Autowired
 	private HalaService halaService;
+	
+	@Autowired
+	private MemberService memberService;
 
 	public String getCurrentDate() {
 		Date date = new Date();
@@ -52,6 +60,11 @@ public class HalaController {
 //		if (result.hasErrors()) {
 //			return "Error";
 //		}
+//		String account = SecurityContextHolder.getContext().getAuthentication().getName();
+//		List<MemberBean> mem = memberService.searchMemByAccount(account);
+//		HttpSession session = request.getSession(false);
+//		session.setAttribute("Member", mem.get(0));
+		
 		List<HalaBean> classList = halaRepo.findAllHala();
 		haModel.addAttribute("classList", classList);
 		List<HalaBean>topList = halaService.findTopHot();
@@ -77,11 +90,7 @@ public class HalaController {
 	
 	
 
-	// 前往新增畫面
-	@RequestMapping(path = "/_06_halaAndQa.goAddHala.controller", method = RequestMethod.GET)
-	public String processMainAction1() {
-		return "_06_hala/addhala";
-	}
+	
 
 //	//前往貼文畫面
 //	@RequestMapping(path = "/_06_halaAndQa.goHalaPage.controller",method = RequestMethod.GET)
@@ -96,12 +105,19 @@ public class HalaController {
 			@RequestParam("halacontent") String halacontent, @RequestParam("images") MultipartFile mf)
 			throws IllegalStateException, IOException, SQLException {
 
+//		String user = SecurityContextHolder.getContext().getAuthentication().getName();
+//		List<MemberBean> list = memberService.searchMemByAccount(user);
+//		int ID = list.get(0).getMemberID();
+		Optional<MemberBean> member = memberService.searchMemByID(memberid);
+		
+		
+		
 		InputStream in = mf.getInputStream();
 		long size = mf.getSize();
 		Blob b = PictureService.fileToBlob(in, size);
 		HalaBean hb = new HalaBean();
 		hb.setHalaclassname(halaclassname);
-		hb.setMemberid(memberid);
+       hb.setMemberBean(member.get());
 		hb.setTitle(title);
 		hb.setPostdate(getCurrentDate());
 		hb.setHalacontent(halacontent);
@@ -129,16 +145,37 @@ public class HalaController {
 
 	// 前往貼文頁面
 	@RequestMapping(path = "/_06_halaAndQa.goHalaPage.controller", method = RequestMethod.GET)
-	public String processAction11(@RequestParam("halaid") Integer halaid, Model haModel, Model resModel) {
+	public String processAction11(HttpServletRequest request,@RequestParam("halaid") Integer halaid, Model haModel, Model resModel) {
 		HalaBean Bean = halaRepo.findByHalaId(halaid);
 		haModel.addAttribute("bean", Bean);
+		String account = SecurityContextHolder.getContext().getAuthentication().getName();
+		List<MemberBean> mem = memberService.searchMemByAccount(account);
+		resModel.addAttribute("member",mem.get(0) );
 
-		for (AnswerHalaBean a : Bean.getAnswerHala()) {
-			System.out.println("媽的給我跑出來出來" + a.getAnswerContent());
-		}
+	
 
 		return "_06_hala/halapostpage";
 	}
+	
+	
+	// 前往新增畫面
+		@RequestMapping(path = "/_06_halaAndQa.goAddHala.controller", method = RequestMethod.GET)
+		public String processMainAction1(HttpServletRequest request) {
+			HttpSession session = request.getSession(false);
+			
+			//查看是否有登入 如果沒有登入則轉跳登入頁面
+					String account = SecurityContextHolder.getContext().getAuthentication().getName();
+					List<MemberBean> mem = memberService.searchMemByAccount(account);
+
+					if (mem.size() == 0) {
+						return "login";
+					}else {
+						session.setAttribute("Member", mem.get(0));
+						return "_06_hala/addhala";
+					}
+					
+					
+		}
 
 	// 修改
 	@PostMapping("/_06_halaAndQa.updateHala.controller")
@@ -344,7 +381,7 @@ public class HalaController {
 			Blob b = PictureService.fileToBlob(in, size);
 			HalaBean hb = new HalaBean();
 			hb.setHalaclassname(halaclassname);
-			hb.setMemberid(memberid);
+			hb.setMemberID(memberid);
 			hb.setTitle(title);
 			hb.setPostdate(getCurrentDate());
 			hb.setHalacontent(halacontent);

@@ -172,7 +172,7 @@ input[type="submit"] {
 									href="<c:url value='/_06_halaAndQa.goHalaPage.controller?halaid=${topList.halaId}'/>">
 										&#128293;${topList.title} </a></td>
 								<td style="border-left: outset black">&#129321;${topList.watch}</td>
-								<td style="border-left: outset black">&#128585;${topList.memberid}</td>
+								<td style="border-left: outset black">&#128585;${topList.memberBean.memberID}</td>
 							</tr>
 						</c:forEach>
 					</table>

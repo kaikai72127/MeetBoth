@@ -108,7 +108,7 @@ String basePathimg2 = request.getScheme() + "://" + request.getServerName() + ":
 											</div>
 											<div style="float: right; width: 30%">
 												<input type="text" class="form-control" name="memberid"
-													value="" placeholder="id">
+													value="${Member.memberID}" placeholder="id">
 											</div>
 											<input type="text" class="form-control" name="title" value=""
 												placeholder="請輸入文章標題⋯">
@@ -122,7 +122,7 @@ String basePathimg2 = request.getScheme() + "://" + request.getServerName() + ":
 											<div>
 												<button class="btn btn-primary btn-circle" type="submit">確定送出</button>
 												<button class="btn btn-danger btn-circle" type="button"
-													onclick="window.location.href='http://localhost:8080/SpringBoot_Team5/_06_halaAndQa.SelectAllHala.controller'">取消</button>
+													onclick="window.location.href='http://localhost:8080/MeetBoth/_06_halaAndQa.SelectAllHala.controller'">取消</button>
 											</div>
 										</form>
 									</div>

@@ -224,7 +224,7 @@ a:hover {
 										class="btn btn-d btn-round">討論區管理&ensp;<i
 											class="fa-solid fa-angle-double-down"></i></a>
 										<ul style="">
-											<li><a href="#" style="color: white; font-weight: 600;"
+											<li><a href="/MeetBoth/_06_halaAndQa.SelectAllHalaIndex.controller" style="color: white; font-weight: 600;"
 												class="btn btn-d btn-round">所有貼文清單</a></li>
 										</ul></li>
 									<li><a href="#" style="color: white; font-size: 20px;"

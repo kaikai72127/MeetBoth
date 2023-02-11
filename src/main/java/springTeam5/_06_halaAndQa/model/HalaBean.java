@@ -10,10 +10,15 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import org.springframework.stereotype.Component;
+
+import springTeam5._01_member.model.MemberBean;
 
 @Entity
 @Table(name="HALA")
@@ -28,8 +33,13 @@ public class HalaBean {
 	@Column(name = "HALACLASSNAME")
 	private String halaclassname;
 	
-	@Column(name = "MEMBERID")
-	private Integer memberid;
+	@Column(name = "memberID")
+	@Transient
+	private Integer memberID;
+	
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name="memberID")
+	private MemberBean memberBean;
 	
 	@Column(name = "TITLE")
 	private String title;
@@ -63,22 +73,22 @@ public class HalaBean {
 	}
 
 
-	public HalaBean(String halaclassname, Integer memberid, String title, String postdate, String halacontent) {
+	public HalaBean(String halaclassname, Integer memberID, String title, String postdate, String halacontent) {
 		super();
 		this.halaclassname = halaclassname;
-		this.memberid = memberid;
+		this.memberID = memberID;
 		this.title = title;
 		this.postdate = postdate;
 		this.halacontent = halacontent;
 	}
 
 
-	public HalaBean(Integer halaid, String halaclassname, Integer memberid, String title, String postdate,
+	public HalaBean(Integer halaid, String halaclassname, Integer memberID, String title, String postdate,
 			String halacontent) {
 		super();
 		this.halaId = halaid;
 		this.halaclassname = halaclassname;
-		this.memberid = memberid;
+		this.memberID = memberID;
 		this.title = title;
 		this.postdate = postdate;
 		this.halacontent = halacontent;
@@ -90,12 +100,52 @@ public class HalaBean {
 
 
 
-	public HalaBean(Integer halaId, String halaclassname, Integer memberid, String title, String postdate,
+	public HalaBean(Integer halaId, String halaclassname, Integer memberID, MemberBean memberBean, String title,
+			String postdate, String halacontent, Integer tumb, Integer tumboff, Integer watch, Blob picture,
+			List<ResponseHalaBean> responseHala, List<AnswerHalaBean> answerHala) {
+		super();
+		this.halaId = halaId;
+		this.halaclassname = halaclassname;
+		this.memberID = memberID;
+		this.memberBean = memberBean;
+		this.title = title;
+		this.postdate = postdate;
+		this.halacontent = halacontent;
+		this.tumb = tumb;
+		this.tumboff = tumboff;
+		this.watch = watch;
+		this.picture = picture;
+		this.responseHala = responseHala;
+		this.answerHala = answerHala;
+	}
+
+
+	public Integer getMemberID() {
+		return memberID;
+	}
+
+
+	public void setMemberID(Integer memberID) {
+		this.memberID = memberID;
+	}
+
+
+	public MemberBean getMemberBean() {
+		return memberBean;
+	}
+
+
+	public void setMemberBean(MemberBean memberBean) {
+		this.memberBean = memberBean;
+	}
+
+
+	public HalaBean(Integer halaId, String halaclassname, Integer memberID, String title, String postdate,
 			String halacontent, Integer tumb, Integer tumboff, Blob picture) {
 		super();
 		this.halaId = halaId;
 		this.halaclassname = halaclassname;
-		this.memberid = memberid;
+		this.memberID = memberID;
 		this.title = title;
 		this.postdate = postdate;
 		this.halacontent = halacontent;
@@ -118,12 +168,12 @@ public class HalaBean {
 
 
 
-	public HalaBean(String halaclassname, Integer memberid, String title, String postdate, String halacontent,
+	public HalaBean(String halaclassname, Integer memberID, String title, String postdate, String halacontent,
 			Integer tumb, Integer tumboff, Integer watch, Blob picture, List<ResponseHalaBean> responseHala,
 			List<AnswerHalaBean> answerHala) {
 		super();
 		this.halaclassname = halaclassname;
-		this.memberid = memberid;
+		this.memberID = memberID;
 		this.title = title;
 		this.postdate = postdate;
 		this.halacontent = halacontent;
@@ -136,13 +186,13 @@ public class HalaBean {
 	}
 
 
-	public HalaBean(Integer halaId, String halaclassname, Integer memberid, String title, String postdate,
+	public HalaBean(Integer halaId, String halaclassname, Integer memberID, String title, String postdate,
 			String halacontent, Integer tumb, Integer tumboff, Integer watch, Blob picture,
 			List<ResponseHalaBean> responseHala, List<AnswerHalaBean> answerHala) {
 		super();
 		this.halaId = halaId;
 		this.halaclassname = halaclassname;
-		this.memberid = memberid;
+		this.memberID = memberID;
 		this.title = title;
 		this.postdate = postdate;
 		this.halacontent = halacontent;
@@ -165,13 +215,13 @@ public class HalaBean {
 	}
 
 
-	public HalaBean(Integer halaId, String halaclassname, Integer memberid, String title, String postdate,
+	public HalaBean(Integer halaId, String halaclassname, Integer memberID, String title, String postdate,
 			String halacontent, Integer tumb, Integer tumboff, Blob picture, List<ResponseHalaBean> responseHala,
 			List<AnswerHalaBean> answerHala) {
 		super();
 		this.halaId = halaId;
 		this.halaclassname = halaclassname;
-		this.memberid = memberid;
+		this.memberID = memberID;
 		this.title = title;
 		this.postdate = postdate;
 		this.halacontent = halacontent;
@@ -183,12 +233,12 @@ public class HalaBean {
 	}
 
 
-	public HalaBean(String halaclassname, Integer memberid, String title, String postdate, String halacontent,
+	public HalaBean(String halaclassname, Integer memberID, String title, String postdate, String halacontent,
 			Integer tumb, Integer tumboff, Blob picture, List<ResponseHalaBean> responseHala,
 			List<AnswerHalaBean> answerHala) {
 		super();
 		this.halaclassname = halaclassname;
-		this.memberid = memberid;
+		this.memberID = memberID;
 		this.title = title;
 		this.postdate = postdate;
 		this.halacontent = halacontent;
@@ -267,13 +317,13 @@ public class HalaBean {
 	}
 
 
-	public Integer getMemberid() {
-		return memberid;
+	public Integer getmemberID() {
+		return memberID;
 	}
 
 
-	public void setMemberid(Integer memberid) {
-		this.memberid = memberid;
+	public void setmemberID(Integer memberID) {
+		this.memberID = memberID;
 	}
 
 

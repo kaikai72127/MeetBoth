@@ -59,9 +59,9 @@ String basePathimg2 = request.getScheme() + "://" + request.getServerName() + ":
 						<div class="row">
 							<!-- 						圖片BLOCK -->
 							<div class="col-sm-6 mb-sm-40" style="width: 42%;">
-								<span class="amount">上傳商品照片</span> 
-								<input type="file"name="pPic" id="images5278" style="width: 80%"accept=".jpg,.png"> 
-									<img id="preImg" style="" src="#" />
+								<span class="amount">上傳商品照片</span> <input type="file"
+									name="pPic" id="images5278" style="width: 80%"
+									accept=".jpg,.png"> <img id="preImg" style="" src="#" />
 							</div>
 							<!-- 							圖片右邊BLOCK -->
 							<div class="col-sm-6" style="margin-top: 68px; width: 58%">
@@ -112,17 +112,9 @@ String basePathimg2 = request.getScheme() + "://" + request.getServerName() + ":
 									</div>
 								</div>
 								<!-- 							會員資料 -->
-								<div class="row mb-20">
-									<div class="col-sm-12">
-										<div class="price font-alt" style="display: flex;">
-											<span class="amount"
-												style="font-size: 25px; text-align: center;">賣家編號:&ensp;</span>
-											<input class="form-control input-lg" type="text" name="memID"
-												required="required"
-												style="width: 80%; font-size: 20px; letter-spacing: 0px; border: 1px solid black; border-radius: 15px; text-align: center;" />
-										</div>
-									</div>
-								</div>
+								<input class="form-control input-lg" type="hidden" name="memID"
+									required="required" value="${memberBean.memberID}"
+									style="width: 80%; font-size: 20px; letter-spacing: 0px; border: 1px solid black; border-radius: 15px; text-align: center;" />
 								<div class="row mb-20">
 									<div class="col-sm-12">
 										<div class="price font-alt" style="display: flex;">

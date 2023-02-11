@@ -17,7 +17,12 @@ public class ProductCommentService {
 
 	@Autowired
 	private ProductCommentRepository pcRepo;
-
+	
+	public void insertPorductComment(ProductComment pc) {
+		pcRepo.save(pc);
+	}
+	
+	
 //	透過 ProdID 搜尋全部的 commentBean
 	public List<ProductComment> searchAllCommentByProdID(Integer id) throws SQLException {
 		return pcRepo.findByAllLike(id);

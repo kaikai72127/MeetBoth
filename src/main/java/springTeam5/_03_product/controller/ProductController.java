@@ -10,13 +10,16 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Optional;
 
 import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import javax.sql.rowset.serial.SerialBlob;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -24,6 +27,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
+import springTeam5._01_member.model.MemberBean;
+import springTeam5._01_member.model.MemberService;
 import springTeam5._03_product.model.ProdType;
 import springTeam5._03_product.model.Product;
 import springTeam5._03_product.model.ProductComment;
@@ -43,10 +48,14 @@ public class ProductController {
 
 	@Autowired
 	private ProductCommentService pcService;
+	
+	@Autowired
+	private MemberService memberService;
 //	-----------------------------後台-----------------------
 //	導到後台
 	@GetMapping("/_03_product.index.controller")
 	public String processpathToYTplayerAction(Model mProd) {
+		
 		return "_03_product/MBCMS";
 	}
 	
@@ -233,15 +242,7 @@ public class ProductController {
 		ArrayList<ProductComment> comms = new ArrayList<ProductComment>();
 		ProductComment comm = new ProductComment();
 
-		if (list.isEmpty()) {
-			comm.setProdScore(0);
-			comm.setCustomID(404);
-			comm.setComment("no comment");
-			comms.add(comm);
-			mComm.addAttribute("commBean", comms);
-		} else {
-			mComm.addAttribute("commBean", list);
-		}
+		mComm.addAttribute("commBean", list);
 
 		if (prod.getDirections() == null) {
 			prod.setDirections("--此商品沒有詳細內容說明--");
@@ -339,17 +340,32 @@ public class ProductController {
 
 //	導到insert.jsp
 	@GetMapping("/_03_product.pathToInsertProduct.controller")
-	public String processPathToInsertProductAction() {
-		return "/_03_product/InsertProduct";
+	public String processPathToInsertProductAction(HttpServletRequest request,Model m) {
+		HttpSession session = request.getSession(false);
+		
+		String account = SecurityContextHolder.getContext().getAuthentication().getName();
+		List<MemberBean> mem = memberService.searchMemByAccount(account);
+
+		if (mem.size() == 0) {
+			return "login";
+		}else {
+			m.addAttribute("memberBean",mem.get(0));
+			return "/_03_product/InsertProduct";
+		}
 	}
 
 //	insert
 	@PostMapping("/_03_product.insertProduct.controller")
 	public String processInsertProductAction(@RequestParam("pClass") Integer pClass,
 			@RequestParam("pName") String pName, @RequestParam("pPrice") Integer pPrice,
-			@RequestParam("memID") Integer memID, @RequestParam("invt") Integer invt,
+			@RequestParam("memID") Integer memID, @RequestParam("invt") Integer invt,HttpServletRequest request,
 			@RequestParam("directions") String directions, @RequestParam("pPic") MultipartFile file)
 			throws IOException, SQLException {
+		HttpSession session = request.getSession(false);
+		
+		Optional<MemberBean> currentMemberList = memberService.searchMemByID(memID);
+		MemberBean currentMember = currentMemberList.get();
+		
 		Blob image = null;
 		InputStream in = file.getInputStream();
 		long size = file.getSize();
@@ -360,7 +376,6 @@ public class ProductController {
 
 		newProd.setProdName(pName);
 		newProd.setProdPrice(pPrice);
-		newProd.setMemberID(memID);
 		newProd.setInventory(invt);
 		newProd.setProdPost(getCurrentDate());
 		newProd.setProdUpdate(getCurrentDate());
@@ -370,12 +385,15 @@ public class ProductController {
 		newProd.setProdCheck(0);
 		newProd.setProdState("下架");
 		newProd.setProdtype(currentProdType);
+		newProd.setMemberBean(currentMember);
 
-		LinkedHashSet<Product> prods = new LinkedHashSet<Product>();
-		prods.add(newProd);
-		currentProdType.setProduct(prods);
-
-		ptService.insertProduct(currentProdType);
+//		LinkedHashSet<Product> prods = new LinkedHashSet<Product>();
+//		prods.add(newProd);
+//		currentProdType.setProduct(prods);
+//		currentMember.setProduct(prods);
+		
+		
+		pService.insertProduct(newProd);
 
 		return "redirect:_03_product.searchAllProduct.controller";
 	}
@@ -384,7 +402,7 @@ public class ProductController {
 	@PostMapping("/_03_product.updateProductDate.controller")
 	public String processUpdateProductAction(@RequestParam("prodClass") Integer pClass,
 			@RequestParam("prodName") String pName, @RequestParam("prodID") Integer prodID,
-			@RequestParam("prodPrice") Integer pPrice, @RequestParam("memberID") Integer memID,
+			@RequestParam("prodPrice") Integer pPrice, 
 			@RequestParam("inventory") Integer invt, @RequestParam("directions") String directions,
 			@RequestParam("images") MultipartFile file) {
 		Blob image = null;
@@ -398,7 +416,6 @@ public class ProductController {
 			Product prod = pService.searchSingleProductFromProdID(prodID);
 			prod.setProdName(pName);
 			prod.setProdPrice(pPrice);
-			prod.setMemberID(memID);
 			prod.setInventory(invt);
 			prod.setDirections(directions);
 			prod.setProdUpdate(getCurrentDate());
@@ -500,22 +517,31 @@ public class ProductController {
 //	新增商品評論
 	@PostMapping("/_03_product.InsertProdComment.controller")
 	public String processInsertProdCommentAction(@RequestParam(value="id",required = false) Integer prodID,
-			@RequestParam("comm") String comment, @RequestParam("score") Integer score) {
+			@RequestParam("comm") String comment, @RequestParam("score") Integer score,HttpServletRequest request) {
 		try {
-			Product product = pService.searchSingleProductFromProdID(prodID);
-			ProductComment comm = new ProductComment();
-
-			comm.setCustomID(1001);
-			comm.setProdScore(score);
-			comm.setComment(comment);
-			comm.setCommentDate(getCurrentDate());
-			comm.setProduct(product);
-
-			List<ProductComment> prodCommment = new ArrayList<ProductComment>();
-			prodCommment.add(comm);
-			product.setProductComment(prodCommment);
-
-			pService.insertComment(product);
+			HttpSession session = request.getSession(false);
+			
+			String account = SecurityContextHolder.getContext().getAuthentication().getName();
+			List<MemberBean> mem = memberService.searchMemByAccount(account);
+			
+			if (mem.size() == 0) {
+				return "login";
+			}else {
+				MemberBean member = mem.get(0);
+				
+				Product product = pService.searchSingleProductFromProdID(prodID);
+				ProductComment comm = new ProductComment();
+				
+				comm.setMemberBean(member);
+				comm.setProdScore(score);
+				comm.setComment(comment);
+				comm.setCommentDate(getCurrentDate());
+				comm.setProduct(product);
+				
+				pcService.insertPorductComment(comm);
+			}
+			
+			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -573,11 +599,53 @@ public class ProductController {
 	}
 //	個人賣場part----------------------------------
 	@GetMapping("/_03_product/pathToMyPDP.controller")
-	public String processpathToMyPDPAction(Model mProd) {
-//		List<Product> result = pService.findRandomProducts();
-//		mProd.addAttribute("bean", result);
+	public String processpathToMyPDPAction(Model mProd,HttpServletRequest request) {
+		HttpSession session = request.getSession(false);
+		MemberBean member = (MemberBean) session.getAttribute("Member");
+				
+		String account = SecurityContextHolder.getContext().getAuthentication().getName();
+		List<MemberBean> mem = memberService.searchMemByAccount(account);
 		
-		return "/_03_product/myPDP";
+		if (mem.size() == 0) {
+			return "login";
+		}else {
+			mProd.addAttribute("memberBean", mem.get(0));
+			return "/_03_product/myPDP";
+		}
+		
+	}
+//	模糊搜尋(個人賣場)
+	@PostMapping("/_03_product.searchProductWithCondition3.controller")
+	public String processSearchProductWithCondi3(@RequestParam("case") int order, @RequestParam("typecase") Integer type,
+			@RequestParam("lowprice") int low, @RequestParam("highprice") int high,
+			@RequestParam("searchName") String name, Model pm, Model mProd) throws SQLException {
+		String orderBy = "";
+		String hasDESC = null;
+		List<Product> result = null;
+		if (name == null) {
+			name = "";
+		}
+		
+		List<Product> HotResult = pService.findHotestProducts();
+		mProd.addAttribute("Hotprodlist", HotResult);
+		
+		if (order == 1) {
+			result = pService.searchWithCondiOrderByProdID(type, low, high, name);
+		} else if (order == 3) {
+			result = pService.searchWithCondiOrderByProdPriceDesc(type, low, high, name);
+		} else if (order == 2) {
+			result = pService.searchWithCondiOrderByProdPrice(type, low, high, name);
+		} else if (order == 4) {
+			result = pService.searchWithCondiOrderByProdPost(type, low, high, name);
+		} else if (order == 5) {
+			result = pService.searchWithCondiOrderByProdUpdate(type, low, high, name);
+		}else if (order == 6) {
+			result = pService.findAllByOrderByProdCheckDesc(type, low, high, name);
+		}
+		
+		pm.addAttribute("prodList", result);
+		
+		return "redirect:_03_product/pathToMyPDP.controller";
 	}
 
 

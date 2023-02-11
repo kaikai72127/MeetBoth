@@ -108,14 +108,6 @@ height : 500px
 												onkeyup="value=value.replace(/[^\d]/g,'') "></td>
 										</tr>
 										<tr>
-											<td>賣家編號：</td>
-										</tr>
-										<tr>
-											<td><input name="memberID" type="text"
-												value="${bean.memberID}" style="width: 80%"
-												onkeyup="value=value.replace(/[^\d]/g,'') "></td>
-										</tr>
-										<tr>
 											<td>產品庫存:</td>
 										</tr>
 										<tr>

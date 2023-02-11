@@ -84,11 +84,13 @@ h1 {
 .cart ul li a {
 	color: #000;
 }
-#ChartData>div>div>div>div>svg>g>text{
-	font-size:22px;
+
+#ChartData>div>div>div>div>svg>g>text {
+	font-size: 22px;
 }
-#ChartData>div>div>div>div>svg>g>g>g>text{
-	font-size:17px;
+
+#ChartData>div>div>div>div>svg>g>g>g>text {
+	font-size: 17px;
 }
 </style>
 </head>
@@ -111,9 +113,8 @@ h1 {
 									<li><a href="#">商品管理&ensp;<i
 											class="fa-solid fa-angle-double-down"></i></a>
 										<ul style="">
-											<li><a href="#">我的商品</a></li>
-											<li><a href="#">新增商品</a></li>
-											<li><a href="#">已售完商品</a></li>
+											<li><a href="<c:url value='/_03_product/pathToMyPDP.controller'/>">我的商品</a></li>
+											<li><a href="<c:url value='/_03_product.pathToInsertProduct.controller'/>">新增商品</a></li>
 										</ul></li>
 									<li><a href="#" style="">訂單管理&ensp;<i
 											class="fa-solid fa-angle-double-down"></i></a>
@@ -148,9 +149,9 @@ h1 {
 						<div class="col-sm-8 col-sm-offset-1" style="margin-left: 20px;">
 							<div class="post">
 								<div class="post-thumbnail">
-									<a href="#"><img
+									<img
 										src="/MeetBoth/html/assets/images/shop/個人賣場.jpg"
-										style="padding-bottom: 10px;"> </a>
+										style="padding-bottom: 10px;">
 								</div>
 								<div class="post-header font-alt" style="display: flex;">
 									<img style="" src="/MeetBoth/html/assets/images/shop/兔年海報.jpg"
@@ -161,7 +162,7 @@ h1 {
 									style="padding-top: 20px; padding-bottom: 0px;">
 									<div class="container" style="">
 										<form class="row"
-											action="<c:url value='/_03_product.searchProductWithCondition.controller'/>"
+											action="<c:url value='/_03_product.searchProductWithCondition3.controller'/>"
 											method="post">
 											<div class="col-sm-4 mb-sm-20"
 												style="width: 17%; padding-right: 0;">
@@ -198,6 +199,8 @@ h1 {
 												<input class="form-control" type="text" name="searchName"
 													style="font-size: 17px" placeholder="搜尋名稱" />
 											</div>
+											<input type="hidden" name="lowprice" value="0" /> <input
+													type="hidden" name="highprice" value="9999999" />
 											<div class="col-sm-3" style="width: 10%">
 												<button class="btn btn-d btn-round" type="submit"
 													style="font-size: 17px">搜尋</button>
@@ -223,107 +226,52 @@ h1 {
 									style="overflow-y: scroll; overflow-x: hidden; width: 110%; height: 720px;">
 									<div class="widget">
 										<ul class="widget-posts">
-											<li class="clearfix"
-												style="background-image: url('/MeetBoth/html/assets/images/shop/backgroundimg.jpg'); background-size: cover; padding-left: 10px; height: 321px;">
-												<div class="widget-posts-image"
-													style="height: 300px; width: 200px; margin: auto; display: flex; justify-content: center; align-items: center; margin-right: 15px;">
-													<a href="#"
-														style="margin: auto; display: flex; justify-content: center; align-items: center;"><img
-														style="padding: auto;"
-														src="/MeetBoth/html/assets/images/shop/toy.jpg" /></a>
-												</div>
-												<div class="widget-posts-body" style="font-size: 22px;">
-													<div class="widget-posts-title">
-														<a href="#">商品名稱</a>
+											<c:forEach var="prodBean" items="${memberBean.product}">
+												<li class="clearfix"
+													style="background-image: url('/MeetBoth/html/assets/images/shop/backgroundimg.jpg'); background-size: cover; padding-left: 10px; height: 322.5px;">
+													<div class="widget-posts-image"
+														style="height: 300px; width: 200px; margin: auto; display: flex; justify-content: center; align-items: center; margin-right: 15px;">
+														<a href="<c:url value='/_03_product.PathToProductDetail.controller?id=${prodBean.prodID}' />"
+															style="margin: auto; display: flex; justify-content: center; align-items: center;"><img
+															style="padding: auto;"
+															src="<c:url value='/_03_product.showPicture.controller?id=${prodBean.prodID}' />" /></a>
 													</div>
-													<div class="widget-posts-meta" style="display: flex">
-														商品狀態
-														<div style="position: relative; left: 310; bottom: 30;">
-															<button class="btn btn-b btn-circle"
-																style="font-size: 17px;">修改</button>
+													<div class="widget-posts-body" style="font-size: 22px;">
+														<div class="widget-posts-title">
+															<a href="<c:url value='/_03_product.PathToProductDetail.controller?id=${prodBean.prodID}' />">商品名稱 : ${prodBean.prodName}</a>
+														</div>
+														<div class="widget-posts-meta" style="display: flex;height:38px;">
+															商品狀態 : ${prodBean.prodState}
+															<div style="position: relative; left: 310; bottom: 30;display:grid;">
+																<button class="btn btn-b btn-circle"
+																	style="font-size: 17px;margin-bottom:10px;"onclick="window.location='/MeetBoth/_03_product.catchSingleProductDate.controller?id=${prodBean.prodID}'">修改</button>
+																<button class="btn btn-b btn-circle deleteThisProduct" name="${prodBean.prodID}"
+																	style="font-size: 17px;">刪除</button>
+															</div>
+														</div>
+														<div class="widget-posts-meta" style="display: flex">
+															商品價格 : NT$${prodBean.prodPrice}
+														</div>
+														<div class="widget-posts-meta">商品庫存 :
+															${prodBean.inventory}</div>
+														<div class="widget-posts-meta">商品瀏覽次數 :
+															${prodBean.prodCheck}</div>
+														<div id="scoreAVG" class="widget-posts-meta">
+															<c:forEach var="commentBean"
+																items="${prodBean.productComment}">
+																<input type="hidden" id="starAVG"
+																	value="${commentBean.prodScore}">
+															</c:forEach>
+															<div id="starAVGDiv" style="font-size: 17px;"></div>
 														</div>
 													</div>
-													<div class="widget-posts-meta" style="display: flex">
-														商品價格
-														<div style="position: relative; left: 310; bottom: 20;">
-															<button class="btn btn-b btn-circle"
-																style="font-size: 17px;">刪除</button>
-														</div>
-													</div>
-													<div class="widget-posts-meta">商品庫存</div>
-													<div class="widget-posts-meta">商品瀏覽次數</div>
-													<div class="widget-posts-meta">商品評價</div>
-												</div>
-											</li>
-											<li class="clearfix"
-												style="background-image: url('/MeetBoth/html/assets/images/shop/backgroundimg.jpg'); background-size: cover; padding-left: 10px; height: 321px;">
-												<div class="widget-posts-image"
-													style="height: 300px; width: 200px; margin: auto; display: flex; justify-content: center; align-items: center; margin-right: 15px;">
-													<a href="#"
-														style="margin: auto; display: flex; justify-content: center; align-items: center;"><img
-														style="padding: auto;"
-														src="/MeetBoth/html/assets/images/shop/全新好書.jpg" /></a>
-												</div>
-												<div class="widget-posts-body" style="font-size: 22px;">
-													<div class="widget-posts-title">
-														<a href="#">商品名稱</a>
-													</div>
-													<div class="widget-posts-meta" style="display: flex">
-														商品狀態
-														<div style="position: relative; left: 310; bottom: 30;">
-															<button class="btn btn-b btn-circle"
-																style="font-size: 17px;">修改</button>
-														</div>
-													</div>
-													<div class="widget-posts-meta" style="display: flex">
-														商品價格
-														<div style="position: relative; left: 310; bottom: 20;">
-															<button class="btn btn-b btn-circle"
-																style="font-size: 17px;">刪除</button>
-														</div>
-													</div>
-													<div class="widget-posts-meta">商品庫存</div>
-													<div class="widget-posts-meta">商品瀏覽次數</div>
-													<div class="widget-posts-meta">商品評價</div>
-												</div>
-											</li>
-											<li class="clearfix"
-												style="background-image: url('/MeetBoth/html/assets/images/shop/backgroundimg.jpg'); background-size: cover; padding-left: 10px; height: 321px;">
-												<div class="widget-posts-image"
-													style="height: 300px; width: 200px; margin: auto; display: flex; justify-content: center; align-items: center; margin-right: 15px;">
-													<a href="#"
-														style="margin: auto; display: flex; justify-content: center; align-items: center;"><img
-														style="padding: auto;"
-														src="/MeetBoth/html/assets/images/shop/全新好書.jpg" /></a>
-												</div>
-												<div class="widget-posts-body" style="font-size: 22px;">
-													<div class="widget-posts-title">
-														<a href="#">商品名稱</a>
-													</div>
-													<div class="widget-posts-meta" style="display: flex">
-														商品狀態
-														<div style="position: relative; left: 310; bottom: 30;">
-															<button class="btn btn-b btn-circle"
-																style="font-size: 17px;">修改</button>
-														</div>
-													</div>
-													<div class="widget-posts-meta" style="display: flex">
-														商品價格
-														<div style="position: relative; left: 310; bottom: 20;">
-															<button class="btn btn-b btn-circle"
-																style="font-size: 17px;">刪除</button>
-														</div>
-													</div>
-													<div class="widget-posts-meta">商品庫存</div>
-													<div class="widget-posts-meta">商品瀏覽次數</div>
-													<div class="widget-posts-meta">商品評價</div>
-												</div>
-											</li>
+												</li>
+											</c:forEach>
 										</ul>
 									</div>
 								</div>
 							</div>
-								<!--       商品列 -->
+							<!--       商品列 -->
 							<!--訂單管理 -->
 							<div class="post-header font-alt" style="display: flex;">
 								<img src="/MeetBoth/html/assets/images/shop/兔年海報2.jpg"
@@ -556,8 +504,8 @@ h1 {
 							<!-- 數據中心 -->
 							<div class="row">
 								<div class="col-sm-12" style="display: flex;" id="ChartData">
-									<div id="chart_div" style="width: 50%;height:500px;"></div>
-									<div id="curve_chart" style="width: 50%;height:500px;"></div>
+									<div id="chart_div" style="width: 50%; height: 500px;"></div>
+									<div id="curve_chart" style="width: 50%; height: 500px;"></div>
 								</div>
 							</div>
 
@@ -607,8 +555,94 @@ h1 {
 	<script src=<%=basePath5%>></script>
 	<script src="https://kit.fontawesome.com/25590258af.js"
 		crossorigin="anonymous"></script>
+			<!-- SweetAlert js -->
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<!-- SweetAlert js -->
 	<script type="text/javascript"
 		src="https://www.gstatic.com/charts/loader.js"></script>
+		<script>
+	
+        $(function(){
+        	$('.deleteThisProduct').click(function(){
+                let id=$(this).attr("name");
+                Swal.fire({
+                  title: '你確定要刪除嗎?',
+                  text: "將無法恢復此筆訂單!!!",
+                  icon: 'warning',
+                  //icon:  "success", "error", "warning", "info" or "question" 這幾種選項
+                  showCancelButton: true,
+                  confirmButtonColor: '#f7d966',
+                  cancelButtonColor: '#3d3b39',
+                  cancelButtonText: '取消',
+                  confirmButtonText: '確定刪除'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        $.ajax({
+                          //專案名稱+servlet
+                         url:'/MeetBoth/_03_product.deleteProductById.controller',
+                          method:"post",
+                          dataType:"text",
+                          //對應name設定的名稱 並非value的名稱
+                          data: {"id":id},
+                        })
+                            .done(function () {
+                            	window.location='/MeetBoth/_03_product.searchAllProduct.controller'
+                                console.log("delete")
+                             })//done
+                             .fail(function(error) {
+                                 console.log(error)
+                             })//fail end
+                    }//if
+                  })//then
+
+              })//click end
+        });
+        //function end
+    </script>
+		<script>
+		function roundToTwo(num) {
+			return +(Math.round(num + "e+2") + "e-2");
+		}
+
+		const score = document.querySelectorAll("#starAVG");
+
+		document
+				.addEventListener(
+						"DOMContentLoaded",
+						function() {
+							const scores = document
+									.querySelectorAll("#scoreAVG");
+							for (let i = 0; i < scores.length; i++) {
+								const score = scores[i];
+								const starAVGs = score
+										.querySelectorAll("#starAVG");
+								let totalScore = 0;
+								for (let j = 0; j < starAVGs.length; j++) {
+									const starNum = starAVGs[j].value;
+									totalScore += Number(starNum);
+								}
+								let avgScore = roundToTwo(totalScore
+										/ starAVGs.length);
+								let stars = '';
+								if (isNaN(avgScore)) {
+									stars = '&nbsp;(0)';
+								} else {
+									stars = '&nbsp;(' + avgScore + ')';
+								}
+								let onstar = '<span><i class="fa fa-star star"></i></span>';
+								let offstar = '<span><i class="fa fa-star star-off"></i></span>';
+								for (var k = 0; k < 5; k++) {
+									if (k < avgScore) {
+										stars += onstar;
+									} else {
+										stars += offstar;
+									}
+								}
+								stars += '&nbsp;(' + starAVGs.length + '則評論)'
+								score.querySelector("#starAVGDiv").innerHTML = stars;
+							}
+						});
+	</script>
 	<script type="text/javascript">
       google.charts.load('current', {'packages':['corechart']});
       google.charts.setOnLoadCallback(drawChart);

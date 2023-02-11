@@ -22,6 +22,8 @@ import javax.persistence.Table;
 import org.springframework.stereotype.Component;
 
 import springTeam5._05_teacStu.model.StudBean;
+import springTeam5._03_product.model.Product;
+import springTeam5._03_product.model.ProductComment;
 import springTeam5._04_shoppingCart.model.OrderBean;
 import springTeam5._04_shoppingCart.model.OrderItemBean;
 import springTeam5._05_teacStu.model.TeacBean;
@@ -92,6 +94,16 @@ public class MemberBean implements Serializable {
 	
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "membersale",cascade = CascadeType.ALL)
 	private Set<OrderItemBean> orderSale = new LinkedHashSet<OrderItemBean>(); // itemsList
+	
+//	連結商品
+	@OneToMany(fetch = FetchType.LAZY,mappedBy = "memberBean",cascade = CascadeType.ALL)
+	private Set<Product> product = new LinkedHashSet<Product>();
+
+	@OneToMany(fetch = FetchType.LAZY,mappedBy = "memberBean",cascade = CascadeType.ALL)
+	private Set<ProductComment> productComment = new LinkedHashSet<ProductComment>();
+//	連結商品 結束
+	
+	
 	public String getRole() {
 		return role;
 	}
@@ -154,6 +166,22 @@ public class MemberBean implements Serializable {
 //		this.registime = registime;
 //	}
 //	
+
+	public Set<Product> getProduct() {
+		return product;
+	}
+
+	public void setProduct(Set<Product> product) {
+		this.product = product;
+	}
+
+	public Set<ProductComment> getProductComment() {
+		return productComment;
+	}
+
+	public void setProductComment(Set<ProductComment> productComment) {
+		this.productComment = productComment;
+	}
 
 	public int getMemberID() {
 		return memberID;

@@ -1,6 +1,10 @@
 package springTeam5._04_shoppingCart.controller;
 
+import java.sql.SQLException;
 import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -13,8 +17,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import springTeam5._03_product.model.Product;
+import springTeam5._03_product.service.ProductService;
 import springTeam5._04_shoppingCart.model.OrderBean;
 import springTeam5._04_shoppingCart.model.OrderItemBean;
+import springTeam5._04_shoppingCart.model.ShoppingCart;
 import springTeam5._04_shoppingCart.service.impl.OrderItemServiceImpl;
 import springTeam5._04_shoppingCart.service.impl.OrderServiceImpl;
 
@@ -27,7 +34,8 @@ public class OrderItemController {
 	@Autowired
 	private OrderServiceImpl orderService;
 	
-	
+	@Autowired
+	private ProductService productService;
 
 // 新增------ ---取消 管理員無權限由後台做新增一筆訂單項目
 	// 判斷是否有訂明細項 跳轉頁面
@@ -107,7 +115,7 @@ public class OrderItemController {
 		Integer orderNo = searchOrderItemBySeq.get(0).getOrderbean().getOrderNo();
 		System.out.println("準備要刪除");
 		orderItemService.deleteOrdItem(orderNo, seqno);
-		System.out.println("orderNo" +orderNo +"seqno"+seqno);
+		System.out.println("orderNo" + orderNo + "seqno" + seqno);
 
 		return "redirect:_04_shoppingCart.SelectAll.controller";
 	}
@@ -115,8 +123,7 @@ public class OrderItemController {
 // 修改------
 	// 跳轉到修改頁面
 	@PostMapping("/_04_shoppingCart.UpdateOrderItemMain.controller")
-	public String processUpdateOrderItemMainAction(@RequestParam("seqno") Integer seqno,
-			 Model odModel) {
+	public String processUpdateOrderItemMainAction(@RequestParam("seqno") Integer seqno, Model odModel) {
 		List<OrderItemBean> searchOrderItemBySeq = orderItemService.findBySqeno(seqno);
 		Integer orderNo = searchOrderItemBySeq.get(0).getOrderbean().getOrderNo();
 		List<OrderItemBean> classList = orderItemService.findOrderItem(orderNo, seqno);
@@ -126,12 +133,46 @@ public class OrderItemController {
 
 	}
 
+	// 更新訂單內的Item
+	@PostMapping("/updateOrderItemQty.controller")
+	public String updateOrderShoppingCartItem(@RequestParam("seqno") Integer seqno,
+			@RequestParam("updateQty") int updateQty) throws SQLException {
+
+		List<OrderItemBean> orderItemBeanList = orderItemService.findBySqeno(seqno);
+		OrderItemBean orderItemBean = orderItemBeanList.get(0);
+		Integer orderNo = orderItemBean.getOrderbean().getOrderNo();
+		List<OrderBean> searchOrderByONo = orderService.findByOrderNo(orderNo);
+		OrderBean orderBean = searchOrderByONo.get(0);
+		
+		System.out.println("-------------------有更新嗎");
+
+		if (orderItemBean.getSeqno() == seqno) {
+			// 原本的資料金額
+			Integer itemTotal = orderItemBean.getItemTotal();
+			Integer totalAmount = orderBean.getTotalAmount();
+			Integer itemTotal2 = updateQty * orderItemBean.getProdItem().getProdPrice();
+
+			// 更新資料
+			orderItemBean.setQty(updateQty);
+			orderItemBean.setItemTotal(itemTotal2);
+			orderItemService.updateOrderItem(orderItemBean);
+			// 更新訂單的總金額與時間
+			orderBean.setTotalAmount(totalAmount - itemTotal + (updateQty * orderItemBean.getProdItem().getProdPrice()));
+			orderBean.setUporderDate(orderService.getCurrentDate());
+
+			orderService.updateOrder(orderBean);
+		}
+
+		return "redirect:shoppingCartUpdateOrder.controller/"+orderNo;
+
+	}
+
 	// 修改頁面
 	@PostMapping("/_04_shoppingCart.UpdateItemOrder.controller")
 	public String processUpdateOrderItemAction(@RequestParam("orderNo") Integer orderNo,
 			@RequestParam("seqno") Integer seqno, @RequestParam("qty") Integer qty,
 			@RequestParam("prodPrice") Integer prodPrice) {
-		
+
 		List<OrderItemBean> orderItemBeanList = orderItemService.findBySqeno(seqno);
 		OrderItemBean orderItemBean = orderItemBeanList.get(0);
 
@@ -142,19 +183,19 @@ public class OrderItemController {
 			// 原本的資料金額
 			Integer itemTotal = orderItemBean.getItemTotal();
 			Integer totalAmount = orderBean.getTotalAmount();
-			Integer itemTotal2 = Integer.parseInt(String.valueOf(Math.round(qty * prodPrice )));
+			Integer itemTotal2 = Integer.parseInt(String.valueOf(Math.round(qty * prodPrice)));
 
 			// 更新資料
 			orderItemBean.setQty(qty);
 			orderItemBean.setItemTotal(itemTotal2);
 			orderItemService.updateOrderItem(orderItemBean);
 			// 更新訂單的總金額與時間
-			orderBean.setTotalAmount(Integer
-					.parseInt(String.valueOf(Math.round(totalAmount - itemTotal + (qty * prodPrice)))));
+			orderBean.setTotalAmount(
+					Integer.parseInt(String.valueOf(Math.round(totalAmount - itemTotal + (qty * prodPrice)))));
 			orderBean.setUporderDate(orderService.getCurrentDate());
 
 			orderService.updateOrder(orderBean);
-			}
+		}
 
 		return "redirect:_04_shoppingCart.SelectAll.controller";
 
@@ -169,17 +210,16 @@ public class OrderItemController {
 //		odModel.addAttribute("classList", classList);
 //		return "_04_shoppingCart/ordersItemCRUD";
 //	}
-	
-	
+
 	// 查詢------
-		// 搜尋某筆訂單全部ITEM-跳轉到CRUD的頁面
-		@RequestMapping(path = "/shoppingCart.SelectOrderAllItem.controller/{orderNo}", method = RequestMethod.GET)
-		public String processSelectAllItemAcction(
-				@PathVariable("orderNo") Integer orderNo,Model odModel,@ModelAttribute("OrderBean") OrderBean od) {
-			List<OrderItemBean> classList = orderItemService.findByOrderno(orderNo);
-			System.out.println("開始找");
-			odModel.addAttribute("classList", classList);
-			return "_04_shoppingCart/ordersItemCRUD";
-		}
+	// 搜尋某筆訂單全部ITEM-跳轉到CRUD的頁面
+	@RequestMapping(path = "/shoppingCart.SelectOrderAllItem.controller/{orderNo}", method = RequestMethod.GET)
+	public String processSelectAllItemAcction(@PathVariable("orderNo") Integer orderNo, Model odModel,
+			@ModelAttribute("OrderBean") OrderBean od) {
+		List<OrderItemBean> classList = orderItemService.findByOrderno(orderNo);
+		System.out.println("開始找");
+		odModel.addAttribute("classList", classList);
+		return "_04_shoppingCart/ordersItemCRUD";
+	}
 
 }

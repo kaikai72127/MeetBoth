@@ -163,6 +163,16 @@ a:hover {
 	color: yellow;
 	border-bottom: solid 1px yellow;
 }
+
+.prodtable>thead>tr>th {
+	border-right: solid 1px white;
+	text-align: center;
+}
+
+.prodtable>tbody>tr>td {
+	border-right: solid 1px white;
+	border-top: solid 1px white;
+}
 </style>
 </head>
 <body data-spy="scroll" data-target=".onpage-navigation"
@@ -193,7 +203,7 @@ a:hover {
 											<li><a href="#" style="color: white; font-weight: 600;"
 												class="btn btn-d btn-round">所有會員清單</a></li>
 										</ul></li>
-									<li><a href="#" style="color: white; font-size: 20px;"
+									<li><a href="" style="color: white; font-size: 20px;"
 										class="btn btn-d btn-round">商品管理&ensp;<i
 											class="fa-solid fa-angle-double-down"></i></a>
 										<ul style="">
@@ -201,7 +211,7 @@ a:hover {
 												href="/MeetBoth/_03_product.productindex.controller"
 												style="color: white; font-weight: 600;"
 												class="btn btn-d btn-round">所有商品清單</a></li>
-												<li><a
+											<li><a
 												href="/MeetBoth/_03_product.MBinsertProd.controller"
 												style="color: white; font-weight: 600;"
 												class="btn btn-d btn-round">新增商品</a></li>
@@ -228,11 +238,12 @@ a:hover {
 												class="btn btn-d btn-round">所有貼文清單</a></li>
 										</ul></li>
 									<li><a href="#" style="color: white; font-size: 20px;"
-										class="btn btn-d btn-round">購物車管理&ensp;<i
+										class="btn btn-d btn-round">訂單管理&ensp;<i
 											class="fa-solid fa-angle-double-down"></i></a>
 										<ul style="">
-											<li><a href="#" style="color: white; font-weight: 600;"
-												class="btn btn-d btn-round">所有購物單清單</a></li>
+											<li><a href="/MeetBoth/shoppingCartOrders.controller"
+												style="color: white; font-weight: 600;"
+												class="btn btn-d btn-round">所有訂單清單</a></li>
 										</ul></li>
 								</ul>
 								<a href="#"><img
@@ -244,15 +255,12 @@ a:hover {
 						<!-- 						右邊欄位開始 -->
 						<div class="col-sm-8 col-sm-offset-1"
 							style="margin-left: 20px; width: 75%; border-left: solid 1px yellow;">
-							<div class="col-sm-12">
-								<img src="html/assets/images/shop/2023.png" alt="Title of Image" />
-							</div>
 							<div class="post">
 								<!-- 							標題 -->
 								<div class="post-thumbnail"
 									style="padding-bottom: 0; margin-bottom: 0;">
 									<h1
-										style="padding-bottom: 0px; margin-bottom: 0; text-align: center; font-size: 50px; color: white;">網站基本資料</h1>
+										style="padding-bottom: 0px; margin-bottom: 0; text-align: center; font-size: 50px; color: white;">訂單後臺管理</h1>
 								</div>
 								<hr class="divider-w pt-20">
 								<!-- 							標題 -->
@@ -261,48 +269,103 @@ a:hover {
 									<div class="post-video embed-responsive embed-responsive-16by9"
 										style="height: auto; padding-bottom: 100px;">
 										<div>
-											<span>網站名稱 :&ensp;</span><span id="MBSPAN">肉丸學習網
-												MeetBoth</span> <input type="text" value="" class="MBinput"
-												id="MBText" style="display: none;"> <input
-												type="button" value="修改" class="MBbtn" id="MBUpDate">
-											<input type="button" value="確認" class="MBbtn" id="MBCommit"
-												style="display: none;">
+											<span>所有訂單資料 :&ensp;</span>
 										</div>
+										<form class="row"
+											action="<c:url value='/shoppingCartSearchOrders.controller'/>"
+											method="post">
+											<div style="display: flex; margin-bottom: 15px;">
+												<div style="padding-right: 0; margin: auto 10px;">
+													<input type="hidden" id="ordS"
+														value="${bean.ordStstus}${param.ordS}"> <select
+														name="ordStstus" class="form-control"
+														style="padding-right: 0; font-size: 17px; color: black;">
+														<option value="0">訂單狀態</option>
+														<option value="處理中">處理中</option>
+														<option value="備貨中">備貨中</option>
+														<option value="已完成">已完成</option>
+														<option value="取消">取消</option>
+													</select>
+												</div>
+												<div style="padding-right: 0; margin: auto 10px;">
+													<input type="hidden" id="paymentS"
+														value="${bean.paymentStstus}${param.paymentS}"> <select
+														name="paymentStstus" class="form-control"
+														style="font-size: 17px; color: black;">
+														<option value="0">付款狀態</option>
+														<option value="未付款">未付款</option>
+														<option value="已付款">已付款</option>
+														<option value="退款中">退款中</option>
+														<option value="已退款">已退款</option>
+													</select>
+												</div>
+												<div style="padding-right: 0; margin: auto 10px;">
+													<input type="hidden" id="deliveryS"
+														value="${bean.deliveryStstus}${param.deliveryS}">
+													<select name="deliveryStstus" class="form-control"
+														style="font-size: 17px; color: black;">
+														<option value="0">送貨狀態</option>
+														<option value="無">無</option>
+														<option value="備貨中">備貨中</option>
+														<option value="已發貨">已發貨</option>
+														<option value="已取貨">已取貨</option>
+														<option value="退貨中">退貨中</option>
+														<option value="已退貨">已退貨</option>
+													</select>
+												</div>
+												<input type="hidden" name="lowprice" value="0" /> <input
+													type="hidden" name="highprice" value="9999999" />
+												<div class="" style="">
+													<input class="MBinput" type="text" name="search"
+														style="font-size: 17px; color: white; margin: 10px 10px;"
+														placeholder="搜尋名稱" />
+												</div>
+												<div style="">
+													<button class="MBbtn" type="submit" style="">搜尋</button>
+												</div>
+											</div>
+										</form>
 										<div>
-											<span>網站首頁網址 :&ensp;</span><span><a href="#"
-												id="webSPAN">MeetBoth/index.controller</a></span> <input
-												type="text" value="" class="MBinput" id="webText"
-												style="display: none; width: 500px;"> <input
-												type="button" value="修改" class="MBbtn" id="webUpDate">
-											<input type="button" value="確認" class="MBbtn" id="webCommit"
-												style="display: none;">
-										</div>
-										<div style="display: flex;">
-											<span>網站LOGO :&ensp;</span>
-											<div
-												style="height: 100px; width: 100px; background-color: white;">
-												<img
-													style="height: auto; width: auto; max-height: 100%; max-width: 100%;"
-													src="/MeetBoth/html/images/meatball-200.png">
+
+
+											<div>
+												<table style="color: white; text-align: center;"
+													class="prodtable">
+													<thead>
+														<tr style="">
+															<th style="width: 5%;">編號</th>
+															<th style="width: 15%; padding-left: 5px;">訂購會員</th>
+															<th style="width: 10%">訂單日期</th>
+															<th style="width: 10%">更新日期</th>
+															<th style="width: 10%">訂單狀態</th>
+															<th style="width: 10%">付款狀態</th>
+															<th style="width: 10%">送貨狀態</th>
+															<th></th>
+															<th style="border-right:none;"></th>
+														</tr>
+													</thead>
+													<tbody>
+														<c:forEach var="bean" items="${orderList}">
+															<tr>
+																<td id="eachProdBlock" class="mEvent"
+																	onclick="window.location='/MeetBoth/shoppingCart.SelectOrderAllItem.controller/${bean.orderNo}'">${bean.orderNo}</td>
+																<td style="">${bean.memberbuy.memName}</td>
+																<td>${bean.orderDate}</td>
+																<td>${bean.uporderDate}</td>
+																<td>${bean.ordStstus}</td>
+																<td>${bean.paymentStstus}</td>
+																<td>${bean.deliveryStstus}</td>
+																<td><input type="button" class="MBbtn" value="更多"
+																	onclick="window.location='/MeetBoth/shoppingCartUpdateOrder.controller/${bean.orderNo}'"></td>
+																<td style="border-right: none"><input type="button"
+																	class="MBbtn deleteThisOrder" value="刪除" id=""
+																	name="${bean.orderNo}"></td>
+															</tr>
+														</c:forEach>
+													</tbody>
+												</table>
 											</div>
 										</div>
-										<div>
-											<span>網站理念 :&ensp;</span><span id="MBSPAN">打造一個最方便的學習網</span>
-										</div>
-										<div>
-											<span>網站用戶人數(截至2023.01) :&ensp;</span><span id="MBSPAN">1742人</span>
-										</div>
-										<div>
-											<div id="columnchart_values" style=""></div>
-										</div>
-										<div>
-											<span>網站總瀏覽次數(2022.07至2023.01) :&ensp;</span><span
-												id="MBSPAN">20,123次</span>
-										</div>
-										<div>
-											<div id="chart_div"></div>
-										</div>
-
 									</div>
 								</div>
 								<!--       右邊第一部分結束 -->
@@ -355,6 +418,12 @@ a:hover {
 	<script type="text/javascript"
 		src="https://www.gstatic.com/charts/loader.js"></script>
 	<script src="assets/lib/jquery.mb.ytplayer/dist/jquery.mb.YTPlayer.js"></script>
+	<!-- SweetAlert js -->
+	<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+	<!-- SweetAlert js -->
+
+
+
 	<script>
 		$(document).ready(function() {
 			//以ul li包子選單
@@ -371,159 +440,72 @@ a:hover {
 
 		});
 	</script>
+
+	<!--     刪除訂單 -->
 	<script>
-		// 		網站理念修改框
-		// 		原本的文字框
-		var p = document.getElementById("webSPAN");
-		// 		原本的修改按鈕
-		var q = document.getElementById("webUpDate");
-		// 		要顯示出來的輸入框
-		var r = document.getElementById("webText");
-		// 		要顯示出來的確定按鈕
-		var s = document.getElementById("webCommit");
+        $(function(){
+        	$('.deleteThisOrder').click(function(){
+                let id=$(this).attr("name");
+                Swal.fire({
+                  title: '你確定要刪除嗎?',
+                  text: "將無法恢復此筆訂單!!!",
+                  icon: 'warning',
+                  //icon:  "success", "error", "warning", "info" or "question" 這幾種選項
+                  showCancelButton: true,
+                  confirmButtonColor: '#f7d966',
+                  cancelButtonColor: '#3d3b39',
+                  cancelButtonText: '取消',
+                  confirmButtonText: '確定刪除'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        $.ajax({
+                          //專案名稱+servlet
+                         url:'/MeetBoth/shoppingCart.DeleteOrder.controller',
+                          method:"get",
+                          dataType:"text",
+                          //對應name設定的名稱 並非value的名稱
+                          data: {"orderNo":id},
+                        })
+                            .done(function () {
+                            	window.location='/MeetBoth/shoppingCartOrders.controller'
+                                console.log("delete")
+                             })//done
+                             .fail(function(error) {
+                                 console.log(error)
+                             })//fail end
+                    }//if
+                  })//then
 
-		q.onclick = function() {
-			r.value = p.innerHTML;
-			q.style.display = "none";
-			p.style.display = "none";
-			s.style.display = "inline-block";
-			r.style.display = "inline-block";
-		};
-		s.onclick = function() {
-			p.innerHTML = r.value;
-			s.style.display = "none";
-			r.style.display = "none";
-			q.style.display = "inline-block";
-			p.style.display = "inline-block";
-		};
-	</script>
+              })//click end
+        });
+        //function end
+    </script>
+
+	<!--     刪除訂單 -->
+
+
 	<script>
-		// 		網站理念修改框 closest寫法
+	var commentAmounts = document.querySelectorAll("#commentAmount");
+	var AVGscores = document.querySelectorAll("#AVGscore");
 
-		document.getElementById("MBUpDate").onclick = function() {
-			var parent = this.parentNode;
-			var MBText = parent.querySelector('#MBText');
-			var MBCommit = parent.querySelector('#MBCommit');
-			var MBSPAN = parent.querySelector('#MBSPAN');
+	for (var i = 0; i < commentAmounts.length; i++) {
+		var commentList = commentAmounts[i].querySelector("#commmentList").value;
+    	if(commentList === '[]'){
+  		commentAmounts[i].innerHTML = 0;
+    	}else{
+  		commentAmounts[i].innerHTML = commentList.split(",").length;
+    	}
 
-			MBText.style.display = "inline-block";
-			MBCommit.style.display = "inline-block";
-			MBSPAN.style.display = "none";
-			MBText.value = MBSPAN.innerHTML;
-			this.style.display = "none";
-		};
-
-		document.getElementById("MBCommit").onclick = function() {
-			var parent = this.parentNode;
-			var MBText = parent.querySelector('#MBText');
-			var MBCommit = parent.querySelector('#MBCommit');
-			var MBSPAN = parent.querySelector('#MBSPAN');
-
-			MBSPAN.innerHTML = MBText.value;
-			MBSPAN.style.display = "inline-block";
-			parent.querySelector('#MBUpDate').style.display = "inline-block";
-			MBText.style.display = "none";
-			this.style.display = "none";
-		};
-	</script>
-	<script>
-		// 		document.getElementById("MBUpDate").onclick = function() {
-		// 			document.getElementById("MBUpDate").closest('#MBText').style.display = "inline-block";
-		// 			document.getElementById("MBUpDate").closest('#MBCommit').style.display = "inline-block";
-		// 			document.getElementById("MBUpDate").closest('#MBSPAN').style.display = "none";
-		// 			document.getElementById("MBUpDate").closest('#MBText').value = document.getElementById("MBUpDate").closest('#MBSPAN').innerHTML
-		// 			document.getElementById("MBUpDate").style.display = "none";
-		// 		};
-		// 		document.getElementById("MBCommit").onclick = function() {
-		// 			document.getElementById("MBCommit").closest('#MBSPAN').innerHTML = document.getElementById("MBCommit").closest('#MBText').value;
-		// 			document.getElementById("MBCommit").closest('#MBSPAN').style.display = "inline-block";
-		// 			document.getElementById("MBCommit").closest('#MBUpDate').style.display = "inline-block";
-		// 			document.getElementById("MBCommit").closest('#MBText').style.display = "none";
-		// 			document.getElementById("MBCommit").style.display = "none";
-		// 		};
-	</script>
-	<script>
-		google.charts.load("current", {
-			packages : [ 'corechart' ]
-		});
-		google.charts.setOnLoadCallback(drawChart);
-		function drawChart() {
-			var data = google.visualization
-					.arrayToDataTable([ [ "Element", "Density", {
-						role : "style"
-					} ], [ "2022.07", 166, "silver" ],
-							[ "2022.08", 274, "gold" ],
-							[ "2022.09", 319, "silver" ],
-							[ "2022.10", 558, "gold" ],
-							[ "2022.11", 891, "silver" ],
-							[ "2022.12", 1293, "gold" ],
-							[ "2023.1", 1742, "silver" ] ]);
-
-			var view = new google.visualization.DataView(data);
-			view.setColumns([ 0, 1, {
-				calc : "stringify",
-				sourceColumn : 1,
-				type : "string",
-				role : "annotation"
-			}, 2 ]);
-
-			var options = {
-				title : "網站累績註冊會員人數",
-				//     titleTextStyle: {
-				//         color: 'white'
-				//       },
-				width : 700,
-				height : 400,
-				//     backgroundColor : "black",
-				bar : {
-					groupWidth : "95%"
-				},
-				legend : {
-					position : "none"
-				},
-			};
-			var chart = new google.visualization.ColumnChart(document
-					.getElementById("columnchart_values"));
-			chart.draw(view, options);
-		}
-	</script>
-	<script>
-		google.charts.load('current', {
-			packages : [ 'corechart', 'line' ]
-		});
-		google.charts.setOnLoadCallback(drawBasic);
-
-		function drawBasic() {
-
-			var data = new google.visualization.DataTable();
-			data.addColumn('number', 'X');
-			data.addColumn('number', '瀏覽次數');
-
-			data.addRows([ [ 1, 0 ], [ 5, 12 ], [ 10, 35 ], [ 15, 77 ],
-					[ 20, 107 ], [ 25, 355 ], [ 30, 784 ], [ 35, 1112 ],
-					[ 40, 1548 ], [ 45, 1925 ], [ 50, 2554 ], [ 55, 3010 ],
-					[ 60, 3899 ], [ 65, 4950 ], [ 70, 5952 ], [ 75, 6555 ],
-					[ 80, 7892 ], [ 85, 9107 ], [ 90, 10111 ], [ 100, 10254 ],
-					[ 105, 10142 ], [ 110, 11055 ], [ 115, 12456 ],
-					[ 120, 13057 ], [ 125, 13360 ], [ 130, 13548 ],
-					[ 135, 14011 ], [ 140, 14975 ], [ 145, 15084 ],
-					[ 150, 15120 ], [ 155, 15278 ], [ 160, 15475 ],
-					[ 165, 16612 ], [ 170, 17477 ], [ 175, 18212 ],
-					[ 180, 19012 ], [ 185, 20123 ] ]);
-
-			var options = {
-				hAxis : {
-					title : '日期(天數)'
-				},
-				vAxis : {
-					title : '瀏覽次數'
-				}
-			};
-
-			var chart = new google.visualization.LineChart(document
-					.getElementById('chart_div'));
-
-			chart.draw(data, options);
-		}
-	</script>
+  		var scoreList = AVGscores[i].querySelectorAll("#commmentList");
+  		var sum = 0;
+  		for (var j = 0; j < scoreList.length; j++) {
+    		sum += parseInt(scoreList[j].value);
+  		}
+  		if(isNaN((sum / scoreList.length).toFixed(2))){
+  			AVGscores[i].innerHTML = '無'
+  		}else{
+	  		AVGscores[i].innerHTML = (sum / scoreList.length).toFixed(2);
+  		}
+	}
+</script>
 </html>

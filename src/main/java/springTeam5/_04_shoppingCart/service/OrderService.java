@@ -28,6 +28,8 @@ public interface OrderService {
 	List<OrderBean> findByOrderNo(Integer orderNo);
 
 	// 條件搜尋
+	List<OrderBean> findOrderBySearchAllLike(String ordStstus, String paymentStstus, String deliveryStstus, String search);
+	
 	List<OrderBean> findOrderBySearch1(String ordStstus, String paymentStstus, String deliveryStstus, String search);
 
 	List<OrderBean> findOrderBySearch2(String paymentStstus, String deliveryStstus, String search);

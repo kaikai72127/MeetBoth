@@ -23,5 +23,9 @@ public interface HalaRepository extends JpaRepository<HalaBean, Integer> {
 
 	// 刪除
 	public void deleteByHalaId(Integer halaid);
+	
+	//熱門前5
+	@Query(value = "select top 5 * from hala order by watch DESC",nativeQuery = true)
+	public List<HalaBean> findTopfive();
 
 }

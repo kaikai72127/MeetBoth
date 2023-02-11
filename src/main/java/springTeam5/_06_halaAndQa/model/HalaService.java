@@ -53,5 +53,10 @@ public class HalaService {
 	public void updatetumb(HalaBean halaBean) {
 		halaRepo.save(halaBean);
 	}
+	
+	//熱門前5
+	public List<HalaBean> findTopHot(){
+		return halaRepo.findTopfive();
+	}
 
 }

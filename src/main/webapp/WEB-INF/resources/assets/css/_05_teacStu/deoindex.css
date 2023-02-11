@@ -1,0 +1,193 @@
+* {
+    padding: 0;
+    margin: 0;
+}
+
+*,
+::before,
+::after {
+    background-repeat: no-repeat;
+    box-sizing: inherit;
+}
+
+body {
+    background: #F8F8F8;
+}
+
+.page-container {
+    width: 80%;
+    margin: 5rem auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.newest-list {
+    width: 100%;
+    border-radius: 0.25rem;
+    box-shadow: 0px 2px 6px rgb(0 0 0 / 33%);
+    overflow: hidden;
+}
+
+/* #region Header*/
+.newest-list-header {
+    display: flex;
+    align-items: center;
+    background: white;
+    color: #333333;
+    padding: 0.5rem 0.25rem;
+}
+
+.newest-list-header .newest-list-header-icon {
+    width: 2rem;
+    height: 2rem;
+    padding-left: 1rem;
+}
+
+.newest-list-header .newest-list-header-icon>svg {
+    fill: #333333;
+}
+
+.newest-list-header h1 {
+    font-size: 1rem;
+    flex: 1;
+    padding-left: 1rem;
+}
+
+.newest-list-header .more-button {
+    font-size: 1rem;
+    padding: 0.25rem 0.75rem;
+    cursor: pointer;
+}
+
+.newest-list-header .more-button:hover {
+    background: #eaeaea;
+}
+/* #endregion Header */
+
+.newest-list-body {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.newest-list-item {
+    flex: 1 0 calc(50% - 2px);
+    max-width: 50%;
+    display: flex;
+    border: #eaeaea 1px solid;
+
+}
+
+.teacher-profile {
+    width: 100px;
+    height: 100px;
+}
+
+.teacher-profile>img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+.teacher-detail {
+    padding-left: 0.75rem;
+}
+
+.teacher-detail > a {
+    color: #0089ac;
+    text-decoration: none;
+}
+
+.case-list {
+    border-radius: 0.25rem;
+    box-shadow: 0px 2px 6px rgb(0 0 0 / 33%);
+    overflow: hidden;
+}
+
+.case-list-header {
+    display: flex;
+    align-items: center;
+    background: #efd9d9;
+    color: #ce7777;
+    padding: 0.5rem 0.25rem;
+}
+
+.case-list-header-icon {
+    width: 2rem;
+    height: 2rem;
+    padding-left: 1rem;
+}
+
+.case-list-header-icon>svg {
+    fill: #ce7777;
+}
+
+.case-list-header h1 {
+    font-size: 1rem;
+    flex: 1;
+    padding-left: 1rem;
+}
+
+.case-list-header .more-button {
+    font-size: 1rem;
+    padding: 0.25rem 0.75rem;
+    cursor: pointer;
+}
+
+.case-list-header .more-button:hover {
+    background: #eaeaea;
+}
+
+.case-list-body {
+    padding: 1.5rem 1.5rem 2rem;
+}
+
+/* Migrant from Resume to Case list */
+/* #region Comment Table */
+.comment-table {
+    display: table;
+    table-layout: fixed;
+    position: relative;
+    width: 100%;
+    border-spacing: 0 1rem;
+    margin: -1rem 0;
+}
+
+.comment-table-row {
+    display: table-row;
+}
+
+.comment-table-row:hover:not(.header) .comment-table-col-content {
+    background: #e7e7e7;
+}
+
+.comment-table-col {
+    display: table-cell;
+}
+
+.comment-table-col-content {
+    display: flex;
+    padding: 0.75rem 1rem;
+    border-top: 1px #777 solid;
+    border-bottom: 1px #777 solid;
+}
+
+.comment-table-col:first-child>.comment-table-col-content {
+    border-top-left-radius: 1rem;
+    border-bottom-left-radius: 1rem;
+    border-left: 1px #777 solid;
+}
+
+.comment-table-col:last-child>.comment-table-col-content {
+    border-top-right-radius: 1rem;
+    border-bottom-right-radius: 1rem;
+    border-right: 1px #777 solid;
+}
+
+.comment-table-row.header .comment-table-col-content {
+    background: #ce7777;
+    color: #f8f8f8;
+    border: none;
+}
+
+/* #endregion */

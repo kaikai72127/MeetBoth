@@ -40,14 +40,14 @@ public class StudService implements StudServiceInterface{
 //	搜尋全部學生貼文依日期降序排序
 	@Override
 	public List<StudBean> searchAllStudOBpDate() {
-		List<StudBean> ts = sRepo.findAllByOrderByPostdateDesc();
+		List<StudBean> ts = sRepo.findAllByOrderByUpdateDateDesc();
 		return ts;
 	}
 	
 //	搜尋全部學生貼文依會員編號排序
 	@Override
-	public List<StudBean> searchAllStudOBmId() {
-		List<StudBean> ts = sRepo.findAllByOrderByMemberid();
+	public List<StudBean> findAllByOrderByViews() {
+		List<StudBean> ts = sRepo.findAllByOrderByViews();
 		return ts;
 	}
 	
@@ -67,8 +67,8 @@ public class StudService implements StudServiceInterface{
 	
 //	新增學生貼文
 	@Override
-	public void addStud(StudBean tableForStud) {
-		sRepo.save(tableForStud);
+	public void addStud(StudBean sb) {
+		sRepo.save(sb);
 	}
 	
 //	透過ID刪除學生貼文
@@ -79,8 +79,14 @@ public class StudService implements StudServiceInterface{
 	
 //	透過ID修改學生貼文
 	@Override
-	public StudBean updateStudFromStudno(StudBean tableForStud) {
-		StudBean ts = sRepo.save(tableForStud);
+	public StudBean updateStudFromStudno(StudBean sb) {
+		StudBean ts = sRepo.save(sb);
 		return ts;
+	}
+	
+//	搜尋最新更新的前6筆貼文
+	@Override
+	public List<StudBean> findFirst6ByOrderByUpdateDateDesc(){
+		return sRepo.findFirst6ByOrderByUpdateDateDesc();
 	}
 }

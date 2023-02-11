@@ -1,292 +1,283 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<! DOCTYPE html>
-<html>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+
+
+
+<!DOCTYPE html>
+<html lang="zh-hant-TW">
+
 <head>
-<%
-String path = request.getContextPath();
-String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path
-		+ "/html/assets/css/main.css";
-%>
-<%
-String pathimg = request.getContextPath();
-String basePathimg = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + pathimg
-		+ "/html/images/meatball-icon.png";
-%>
-<%
-String basePathimg2 = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path
-		+ "/html/images/meatball-200.png";
-%>
-<title>肉丸家教網 MEET BOTH</title>
-<meta charset="utf-8" />
-<meta name="viewport"
-	content="width=device-width, initial-scale=1, user-scalable=no" />
+<!-- 引入共同的headMVC -->
+<jsp:include page="/WEB-INF/html/fragment/headMVC.jsp" />
+<style type="text/css">
+* {
+    padding: 0;
+    margin: 0;
+}
 
-<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<meta name="robots" content="index,follow" />
-<meta name="description" content="全台最優質最快速方便的家教網" />
-<meta name="author" content="EEIT56-MEETBOTH" />
-<meta name="keywords" content="最棒最優質的家教網" />
-<meta name="copyright" content="肉丸家教網" />
-<link rel="shortcut icon" href="<%=basePathimg%>" />
-<link rel="bookmark" href="<%=basePathimg%>" />
-<link rel="stylesheet" href="<%=basePath%>" />
-<%
-	String basePath1 = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path
-			+ "/html/assets/js/jquery.min.js";
-	%>
+*,
+::before,
+::after {
+    background-repeat: no-repeat;
+    box-sizing: inherit;
+}
 
-	<%
-	String basePath2 = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path
-			+ "/html/assets/js/browser.min.js";
-	%>
+body {
+    background: #F8F8F8;
+    color: #333333;
+}
 
-	<%
-	String basePath3 = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path
-			+ "/html/assets/js/breakpoints.min.js";
-	%>
+.page-container {
+    width: 100%;
+    margin: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 
-	<%
-	String basePath4 = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path
-			+ "/html/assets/js/util.js";
-	%>
+.list {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    margin: 2rem 0;
+    width:60%
+}
 
-	<%
-	String basePath5 = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path
-			+ "/html/assets/js/main.js";
-	%>
-	<script src=<%=basePath1%>></script>
-	<script src=<%=basePath2%>></script>
-	<script src=<%=basePath3%>></script>
-	<script src=<%=basePath4%>></script>
-	<script src=<%=basePath5%>></script>
-	<script src="https://kit.fontawesome.com/25590258af.js"
-		crossorigin="anonymous"></script>
-	<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+.tutor-item {
+    display: flex;
+    width: 100%;
+    position: relative;
+    gap: 1rem;
+    cursor: pointer;
+    --avatar-width: 120px;
+    padding: 1rem 1.5rem;
+    border-radius: 0.25rem;
+    background: #FFFFFF;
+    overflow: hidden;
+    transition: box-shadow 0.5s;
+}
+
+.tutor-item::after {
+    content: "";
+    position: absolute;
+    background: #ce7777;
+    height: 100%;
+    width: 0.25rem;
+    top: 0;
+    left: 0;
+}
+
+.tutor-item:hover {
+    box-shadow: 0px 2px 6px rgb(0 0 0 / 33%);
+}
+
+.tutor-avatar {
+    display: flex;
+    width: var(--avatar-width);
+    height: var(--avatar-width);
+    border-radius: calc(var(--avatar-width) / 8);
+    border: #ce7777 0.25rem solid;
+    overflow: hidden;
+}
+
+.tutor-avatar>img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+.tutor-detail {
+    display: flex;
+    flex-direction: column;
+    /* gap: 1rem; */
+}
+
+.tutor-name {
+    font-size: 1.25rem;
+    margin-bottom: 1rem;
+}
+
+.subject-items {
+    color: #ce7777;
+}
+
+.detail-table {
+    display: inline-grid;
+    border-spacing: 1rem 0.5rem;
+    margin: -0.5rem -1rem;
+}
+
+.detail-item {
+    display: table-row;
+}
+
+.detail-item-title {
+    display: table-cell;
+    position: relative;
+    color: #777;
+    padding-right: 1rem;
+    min-width: 80px;
+}
+
+.detail-item-content {
+    display: table-cell;
+}
+</style>
 </head>
-<body class="is-preload">
-	<!-- Wrapper -->
-	<div id="wrapper">
 
-		<div id="main">
-			<div class="inner">
-				<!-- Header -->
-				<header id="header">
-					<a href="/backIndex.controller" class="logo"><strong>後台管理系統</strong></a>
-				</header>
+<!--BOBY-->
+<body data-spy="scroll" data-target=".onpage-navigation"
+	data-offset="60">
 
+	<!-- header -->
+	<!-- 引入共同的topMVC -->
+	<jsp:include page="/WEB-INF/html/fragment/topMVC.jsp" />
 
-				<!-- Content -->
-				<section>
-					<header class="main">
-						<h1 style="font-size: 30px">教師貼文CRUD</h1>
-						<input type="button" value="新增"
-							onclick="location.href='<c:url value='/_05_teacStu.insertdataMain.controller' />'">
-					</header>
-					<form method="post"
-						action="<c:url value='/_05_teacStu.searchAllLike.controller' />">
-						<input type="text" name="search" id="search" placeholder="Search"
-							style="width: 80%" />
-					</form>
-					<br>
-					<div>
-						<form method="post"
-							action="<c:url value='/_05_teacStu.switchsequence.controller' />">
-							<h3>請選擇排列方式</h3>
-							<select name="case" onchange="this.form.submit()"
-								style="width: 80%">
+	<main>
+		<div class="page-loader">
+			<div class="loader">Loading...</div>
+		</div>
+
+		<!-- 中間內文 -->
+		<div class="page-container">
+        <div class="list">
+        <!-- 模糊搜尋 -->
+			<div style='width:80%; text-align: center; margin: 0 auto;' class="widget">
+              <form role="form" method="post" action="<c:url value='/_05_teacStu.searchAllLike.controller/1' />">
+                  <div class="search-box">
+                      <input name="search" class="form-control" type="text" placeholder="Search..."/>
+                      <button class="search-btn" type="submit"><i class="fa fa-search"></i></button>
+                  </div>
+              </form>
+            </div>
+        <!-- 模糊搜尋結束 -->
+        
+        <!-- 標題 -->
+        <div class="post-header font-alt">
+           <h2 class="post-title"><a href="#">教師貼文列表</a></h2>
+           <form action="<c:url value='/_05_teacStu.insertdataMain.controller' />"><button style="float:right" class="btn btn-b btn-circle" type="submit">成為教師</button></form>
+        </div>
+        <!-- 標題結束 -->
+        
+        <!-- 價格區間搜尋與排列方式 -->
+        <div>
+        	<div>
+			<form method="post" action="<c:url value='/_05_teacStu.switchsequence.controller/1' />">
+				<select name="case" onchange="this.form.submit()"
+								style="width: 17%">
 								<option value="">--請選擇排序方式--</option>
-								<option value="1">依會員編號排序</option>
+								<option value="1">依瀏覽次數排序</option>
 								<option value="2">依日期排序</option>
 								<option value="3">依價格排序</option>
-							</select>
-						</form>
-					</div>
-					<div>
-						<form method="post"
-							action="<c:url value='/_05_teacStu.searchAllByPrice.controller' />">
-							<table style="width: 80%">
-								<thead>
-									<tr>
-										<th>請輸入查詢的時薪區間:</th>
-										<th><input name="low" type="text" value="最低時薪"
-											onfocus="javascript:if(this.value=='最低時薪')this.value='';"></th>
-										<th>至</th>
-										<th><input name="high" type="text" value="最高時薪"
-											onfocus="javascript:if(this.value=='最高時薪')this.value='';"></th>
-										<th><input type="submit" value="搜尋"></th>
-									</tr>
-								</thead>
-							</table>
-						</form>
-					</div>
-					<div class="table-wrapper">
-						<table class="alt" style="width: 80%">
-							<thead>
-								<tr>
-									<th>教師貼文編號</th>
-									<th>會員編號</th>
-									<th>貼文標題</th>
-									<th>貼文日期</th>
-									<th>文章內容</th>
-									<th>時薪</th>
-									<th>科目</th>
-									<th>圖片</th>
-									<th>修改</th>
-									<th>刪除</th>
-								</tr>
-							</thead>
-							<c:forEach var="bean" items="${classList}">
-								<tbody>
-									<tr>
-										<td>${bean.teacno}</td>
-										<td>${bean.memberid}</td>
-										<td>${bean.title}</td>
-										<td>${bean.postdate}</td>
-										<td>${bean.detail}</td>
-										<td>${bean.price}</td>
-										<td>${bean.subjectitem}</td>
-										<td><img height='100' width='80'
-											src="<c:url value='/_05_teacStu.picsave.controller?id=${bean.teacno}' />"></td>
-										<td><form method="post"
-												action="<c:url value='/_05_teacStu.updatedataMain.controller' />">
-												<button name="teacno" value="${bean.teacno}">
-													修改
-												</button>
-											</form></td>
-										<td><button class="delete" name="teacno"
-												value="${bean.teacno}">刪除</button></td>
-									</tr>
-								</tbody>
-							</c:forEach>
-						</table>
-					</div>
-				</section>
+				</select>
+			</form>
+			</div>
+			<div>
+			<form method="post" action="<c:url value='/_05_teacStu.searchAllByPrice.controller/1' />">
+				<table style="width: 80%">
+					<thead>
+						<tr>
+							<th>請輸入查詢的時薪區間:</th>
+							<th><input name="low" type="text" value="最低時薪" onfocus="javascript:if(this.value=='最低時薪')this.value='';"></th>
+							<th>至</th>
+							<th><input name="high" type="text" value="最高時薪" onfocus="javascript:if(this.value=='最高時薪')this.value='';"></th>
+							<th><button class="btn btn-g btn-round btn-xs" type="submit">搜尋</button></th>
+						</tr>
+					</thead>
+				</table>
+			</form>
 			</div>
 		</div>
+        <!-- 價格區間搜尋與排列方式結束 -->
+        
+        <!-- 貼文開始 -->
+            
+            <c:forEach var="bean" items="${pageTeac}">
+            <a href="<c:url value='/_05_teacStu.teacpostpageMain.controller?teacno=${bean.teacno}'/>">
+            <div class="tutor-item">
+                <div class="tutor-avatar">
+                    <img src="<c:url value='/_01_member.ShowPhoto.controller?${bean.member.memberID}' />" alt="">
+                </div>
+                <div class="tutor-detail">
+                    <div class="subject-items">
+                        ${bean.subjectItem}
+                    </div>
+                    <div class="tutor-name">
+                        ${bean.member.memName} (${bean.member.memNickName})
+                    </div>
+                    <div class="detail-table">
+                        <div class="detail-item">
+                            <div class="detail-item-title">授課對象</div>
+                            <div class="detail-item-content">${bean.teacObject}</div>
+                        </div>
+                        <div class="detail-item">
+                            <div class="detail-item-title">學歷</div>
+                            <div class="detail-item-content">${bean.highEdu}</div>
+                        </div>
+                        <div class="detail-item">
+                            <div class="detail-item-title">家教經驗</div>
+                            <div class="detail-item-content">${bean.tutorExp}</div>
+                        </div>
+                        <div class="detail-item">
+                            <div class="detail-item-title">授課地區</div>
+                            <div class="detail-item-content">${bean.teacLoc}</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            </a>
+            </c:forEach>
+            
+            <!-- ------------------------- -->
+            
+            <!-- 分頁按鈕 -->
+            <div class="pagination font-alt" style="display:flex; justify-content:center; align-items:center">
+            	<c:if test="${currentPage != 1}">
+    				<a href="/MeetBoth/_05_teacStu.searchAllTeac.controller/${currentPage-1}"><i class="fa fa-angle-left"></i></a>
+    			</c:if>
+    			<!-- 迴圈生成每一頁的按鈕 -->
+    			<c:forEach var="i" begin="1" end="${totalPages}">
+       				<c:choose>
+            			<c:when test="${currentPage == i}">
+                			<a class="active" href="/MeetBoth/_05_teacStu.searchAllTeac.controller/${i}">${i}</a>
+                		</c:when>
+                		<c:otherwise>
+                			<a href="/MeetBoth/_05_teacStu.searchAllTeac.controller/${i}">${i}</a>
+                		</c:otherwise>
+                	</c:choose>
+                </c:forEach>
+                <c:if test="${currentPage != totalPages}">
+    				<a href="/MeetBoth/_05_teacStu.searchAllTeac.controller/${currentPage+1}"><i class="fa fa-angle-right"></i></a>
+    			</c:if>
+            </div>
+            <!-- 分頁按鈕結束 -->
+        </div>
+    </div>
+    <div class="pagination-bar"></div>
+    </div>
 
-		<!-- Sidebar -->
-		<div id="sidebar">
-			<div class="inner">
+			<!-- Footer -->
+			<!-- 引入共同的footerMVC -->
+			<jsp:include page="/WEB-INF/html/fragment/footerMVC.jsp" />
+	</main>
 
-				<!-- Search -->
-				<!-- 				<section id="search" class="alt"> -->
-				<!-- 					<form method="post" action="#"> -->
-				<!-- 						<input type="text" name="query" id="query" placeholder="Search" /> -->
-				<!-- 					</form> -->
-				<!-- 				</section> -->
-
-				<!-- Menu -->
-				<nav id="menu">
-					<header class="major">
-						<h2>
-							<img src="<%=basePathimg2%>" alt="" />
-						</h2>
-					</header>
-
-					<ul>
-						<li><a href="<c:url value='/index.controller' />">首頁 <i class="fa-solid fa-house"></i></a></li>
-						<li><a href="<c:url value='/backIndex.controller' />">後台管理 <i
-								class="fa-solid fa-gears"></i></a></li>
-						<li><a href="<c:url value='/_01_member.admin' />">會員資料 <i
-								class="fa-solid fa-users-viewfinder"></i></a></li>
-						<li><span class="opener">科目地區資料 <i
-								class="fa-solid fa-magnifying-glass-location"></i></span>
-							<ul>
-								<li><a href="<c:url value='/_02_subLocation.SelectAllSub.controller' />">科目搜尋</a>
-								<li><a href="<c:url value='/_02_subLocation.SelectAllLoc.controller' />">地點搜尋</a>
-							</ul></li>
-						<li><a href="<c:url value='/_03_product.searchAllProduct.controller'/>">商品資料 <i
-								class="fa-solid fa-store"></i></a></li>
-						<li><a
-							href="<c:url value='/_04_shoppingCart.SelectAll.controller' />">訂單資料
-								<i class="fa-solid fa-cart-shopping"></i>
-						</a></li>
-						<li><span class="opener">老師學生資料 <i
-								class="fa-solid fa-users"></i></span>
-							<ul>
-								<li><a href="<c:url value='/_05_teacStu.searchAllTeac.controller' />">老師貼文資料</a></li>
-								<li><a href="<c:url value='/_05_teacStu.searchAllStud.controller' />">學生貼文資料</a></li>
-							</ul></li>
-						<li><span class="opener">哈拉區 <i
-								class="fa-solid fa-comments"></i></span>
-							<ul>
-								<li><a href="<c:url value='/_06_halaAndQa.SelectAllHala.controller' />">討論公告區</a></li>
-								<li><a href="<c:url value='/_06_halaAndQa.SelectAllQa.controller' />">Q&A解答區</a></li>
-							</ul></li>
-					</ul>
-					
-				</nav>
-
-
-				<!-- Section -->
-				<section>
-					<header class="major">
-						<h2>聯絡我們</h2>
-					</header>
-					<p>肉丸家教網是一個希望不管是學生還是老師，都能在這裡精進自己，花最少的時間，找到最棒的老師/學生。</p>
-					<ul class="contact">
-						<li class="icon solid fa-envelope"><a href="#">information@untitled.tld</a>
-						</li>
-						<li class="icon solid fa-phone">(000) 000-0000</li>
-						<li class="icon solid fa-home">1234 Somewhere Road #8254<br />
-							Nashville, TN 00000-0000
-						</li>
-					</ul>
-				</section>
-
-				<!-- Footer -->
-				<footer id="footer">
-					<p class="copyright">
-						&copy; Untitled. All rights reserved. Demo Images: <a
-							href="https://unsplash.com">Unsplash</a>. Design: <a
-							href="https://html5up.net">HTML5 UP</a>.
-					</p>
-				</footer>
-			</div>
-		</div>
-	</div>
-
-	<!-- Scripts -->
+	<!--  
+    JavaScripts
+    =============================================
+    -->
+	<!-- 引入共同的js -->
+	<jsp:include page="/WEB-INF/html/fragment/jsPath.jsp" />
 	<script>
-        $(function(){
-            $('.delete').click(function(){
-                let id=$(this).attr("value");
-                Swal.fire({
-                  title: '你確定要刪除嗎?',
-                  text: "將無法恢復此筆貼文!!!",
-                  icon: 'warning',
-                  //icon:  "success", "error", "warning", "info" or "question" 這幾種選項
-                  showCancelButton: true,
-                  confirmButtonColor: 'lightred',
-                  cancelButtonColor: 'lightgrey',
-                  confirmButtonText: '確定刪除'
-//                   cancelButtonText: '取消',
-                }).then((result) => {
-                    if (result.isConfirmed) {
-                        $.ajax({
-                          //專案名稱+servlet
-                          url:'/SpringBoot_Team5/_05_teacStu.deletedata.controller',
-                          method:"get",
-                          dataType:"text",
-                          //對應name設定的名稱 並非value的名稱
-                          data: {"teacno":id},
-                        })
-                            .done(function () {
-                                location.reload();
-                                console.log("delete")
-                             })//done
-                             .fail(function(error) {
-                                 console.log(error)
-                             })//fail end
-                    }//if
-                  })//then
-
-              })//click end
-        });
-        //function end
-    </script>
+   	document.querySelector('form[action*="_05_teacStu.insertdataMain.controller"] button[type="submit"]').addEventListener('click', function (e) {
+     	const user = '${pageContext.request.userPrincipal.name}';
+     	if (!user) {
+       	e.preventDefault();
+       	alert('請先登入');
+       	window.location.href = '/MeetBoth/login/page.jsp';
+     	}
+   	});
+	</script>
 </body>
 </html>

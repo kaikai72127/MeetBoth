@@ -1,323 +1,347 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
-	<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-		<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
-			<%-- <% --%>
-				<!-- // 	String redirect = request.getContextPath(); -->
-				<!-- // 	String redirectPath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + redirect -->
-				<!-- // 		+ "/html/MeetBothMember/Login.jsp"; -->
-				<!-- // 	UserLoginData user = (UserLoginData)session.getAttribute("user"); -->
-				<!-- // 	if(user == null ) -->
-				<!-- // 	{ -->
-				<!-- // 	  response.sendRedirect(redirectPath); -->
-				<!-- // 	return; -->
-				<!-- // 	}  -->
-				<%-- %> --%>
-					<% String path=request.getContextPath(); String basePath=request.getScheme() + "://" +
-						request.getServerName() + ":" + request.getServerPort() + path + "/html/assets/css/main.css" ;
-						%>
-						<% String pathimg=request.getContextPath(); String basePathimg=request.getScheme() + "://" +
-							request.getServerName() + ":" + request.getServerPort() + pathimg
-							+ "/html/images/meatball-icon.png" ; %>
-							<% String basePathimg2=request.getScheme() + "://" + request.getServerName() + ":" +
-								request.getServerPort() + path + "/html/images/meatball-200.png" ; %>
-								<!DOCTYPE HTML>
-								<!--
-	Editorial by HTML5 UP
-	html5up.net | @ajlkn
-	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
--->
-								<html>
+    <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+        <! DOCTYPE html>
+            <html>
 
-								<head>
-									<title>會員管理</title>
-									<meta charset="utf-8" />
-									<meta name="viewport"
-										content="width=device-width, initial-scale=1, user-scalable=no" />
-									<link rel="stylesheet" href="<%=basePath%>" />
-									<link rel="shortcut icon" href="<%=basePathimg%>" />
-									<script src="https://kit.fontawesome.com/2688683da7.js"
-										crossorigin="anonymous"></script>
-									<script
-										src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
-									<script>
-										$(function () {
+            <head>
+                <% String path=request.getContextPath(); String basePath=request.getScheme() + "://" +
+                    request.getServerName() + ":" + request.getServerPort() + path + "/html/assets/css/main.css" ; %>
+                    <% String pathimg=request.getContextPath(); String basePathimg=request.getScheme() + "://" +
+                        request.getServerName() + ":" + request.getServerPort() + pathimg
+                        + "/html/images/meatball-icon.png" ; %>
+                        <% String basePathimg2=request.getScheme() + "://" + request.getServerName() + ":" +
+                            request.getServerPort() + path + "/html/images/meatball-200.png" ; %>
 
-											$.ajax({
-												type: 'POST',
-												url: '_01_member.checklog.controller',
-												contentType: 'application/json',
+                            <!-- 引入共同的頁首 -->
+                            <jsp:include page="/WEB-INF/html/fragment/headMVC.jsp" />
+                            <%-- <jsp:include page="/WEB-INF/html/fragment/topMVC.jsp" /> --%>
+                            <jsp:include page="/WEB-INF/html/fragment/jsPath.jsp" />
 
-												success: function (user) {
+                            <style>
+                                .star-off {
+                                    color: black;
+                                }
 
-													if (user == "" || user == "anonymousUser") {
-														console.log(user + "登入");
-														$("#loginBtn").show();
-														$("#logoutBtn").hide();
-													} else {
-														console.log(user + "登出");
-														$("#loginBtn").hide();
-														$("#logoutBtn").show();
-													}
-												}
-											});
+                                h1 {
+                                    font-size: 18px;
+                                    font-weight: 700;
+                                    text-align: center;
+                                    margin: 20px 0;
+                                }
 
-										});
-									</script>
-								</head>
+                                .cart>li>a {
+                                    border: 1px solid gray;
+                                    border-radius: 10px;
+                                    color: gray;
+                                    font-weight: 600;
+                                    font-size: 16px;
+                                    padding: 10px;
+                                    text-align: center;
+                                }
 
-								<body class="is-preload">
+                                .cart>li {
+                                    padding-bottom: 10px;
+                                }
 
-									<!-- Wrapper -->
-									<div id="wrapper">
+                                .cart>li>ul>li>a {
+                                    border: solid 1px gray;
+                                    border-radius: 10px;
+                                    text-align: center;
+                                    font-size: 18px;
+                                }
 
-										<!-- Main -->
-										<div id="main">
-											<div class="inner">
+                                .cart a {
+                                    display: block;
+                                    text-decoration: none;
+                                }
 
-												<!-- Header -->
-												<header id="header">
-													<a href="index.html" class="logo"><strong>會員管理</strong></a>
-													<ul class="icons">
-														<!-- 						<li><a href="#" class="icon brands fa-twitter"><span class="label">Twitter</span></a></li> -->
-														<!-- 						<li><a href="#" class="icon brands fa-facebook-f"><span class="label">Facebook</span></a></li> -->
-														<!-- 						<li><a href="#" class="icon brands fa-snapchat-ghost"><span class="label">Snapchat</span></a> -->
-														<!-- 						</li> -->
-														<!-- 						<li><a href="#" class="icon brands fa-instagram"><span class="label">Instagram</span></a></li> -->
-														<!-- 						<li><a href="#" class="icon brands fa-medium-m"><span class="label">Medium</span></a></li> -->
-														<li id="logincontroll">
-															<button id="loginBtn"
-																onclick="location.href='/SpringBoot_Team5/login/page'">登入</button>
-															<button id="logoutBtn"
-																onclick="location.href='/SpringBoot_Team5/logout'">登出</button>
-														</li>
-													</ul>
-												</header>
+                                .cart ul {
+                                    display: none;
+                                }
 
-												<!-- Content -->
-												<section>
-													<header class="main">
-														<h3>會員管理列表</h3>
-													</header>
-													<form:form action="#" method="POST" modelAttribute="Member">
-														<input type="text" name="value" value="${value}" required>
-														<input type="submit" name="selectByAccount" value="以帳號查詢"
-															onclick="this.form.action='_01_member.selectByAccount.controller'" />
-														<input type="submit" name="selectByName" value="以姓名查詢"
-															onclick="this.form.action='_01_member.selectByName.controller'" />
-													</form:form>
+                                .cart ul li {
+                                    margin: 10px;
+                                }
 
+                                .cart ul li a {
+                                    color: #000;
+                                }
 
-													<form:form action="#" method="POST" modelAttribute="Member">
-														<button name="register"
-															onclick="this.form.action='_01_member.register.controller'">新增會員</button>
-														<button name="selectAll"
-															onclick="this.form.action='_01_member.selectAll.controller'">取得所有會員</button>
-													</form:form>
+                                .navbar.navbar-custom.navbar-fixed-top.headershadow {
+                                    background-color: black;
+                                    margin-bottom: 0;
+                                }
 
-													<div class="table-wrapper">
-														<table class="alt"
-															style="table-layout: fixed; word-wrap: break-word;">
-															<thead>
-																<tr>
-																	<th>會員編號</th>
-																	<th>帳號</th>
-<!-- 																	<th>密碼</th> -->
-																	<th>身分證字號</th>
-																	<th>姓名</th>
-																	<th>年齡</th>
-																	<th>生日</th>
-																	<th>性別</th>
-																	<th>電子郵件</th>
-																	<th>電話號碼</th>
-																	<th>地址</th>
-																	<th>註冊時間</th>
-																	<th>修改</th>
-																	<th>移除</th>
-																</tr>
-															</thead>
-															<c:forEach var="Member" items="${Member}">
-																<tbody>
-																	<tr>
-																		<td>${Member.memberID}</td>
-																		<td>${Member.account}</td>
-<%-- 																		<td>${Member.password}</td> --%>
-																		<td>${Member.idNumber}</td>
-																		<td>${Member.memName}</td>
-																		<td>${Member.memOld}</td>
-																		<td>${Member.memBirth}</td>
-																		<td>${Member.memGender}</td>
-																		<td>${Member.eMail}</td>
-																		<td>${Member.phone}</td>
-																		<td>${Member.address}</td>
-																		<td>${Member.registime}</td>
-																		<td>
-																			<form method="post"
-																				action="_01_member.preupdate.controller">
-																				<button name="preupdate"
-																					value="${Member.memberID}">
-																					<i class="fa-solid fa-user"></i>
-																				</button>
-																			</form>
-																		</td>
-																		<td>
-																			<form method="post"
-																				action="_01_member.delete.controller">
-																				<button name="delete"
-																					value="${Member.memberID}">
-																					<i class="fa-solid fa-xmark"></i>
-																				</button>
-																			</form>
-																		</td>
-																	</tr>
-																</tbody>
-															</c:forEach>
-														</table>
-													</div>
+                                .navbar.navbar-custom.navbar-fixed-top.headershadow>div>div>img {
+                                    height: 70;
+                                }
 
+                                .nav.navbar-nav.navbar-right>li>a {
+                                    color: white !important;
+                                }
 
+                                .fas.fa-shopping-cart.text-primary {
+                                    color: white !important;
+                                }
 
+                                #ChartData>div>div>div>div>svg>g>text {
+                                    font-size: 22px;
+                                }
 
+                                #ChartData>div>div>div>div>svg>g>g>g>text {
+                                    font-size: 17px;
+                                }
 
-												</section>
+                                .navbar-brand {
+                                    color: white !important;
+                                }
 
-											</div>
-										</div>
+                                p {
+                                    color: white;
+                                    font-size: 25px;
+                                    font-width: 550;
+                                }
+                            </style>
+                            <!-- CSS -->
+                            <link rel="stylesheet"
+                                href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.min.css">
+                            <!-- jq -->
+                            <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+                            <script src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
+            </head>
 
-										<!-- Sidebar -->
-										<div id="sidebar">
-											<div class="inner">
+            <body data-spy="scroll" data-target=".onpage-navigation" data-offset="60">
+                <main>
+                    <div class="page-loader">
+                        <div class="loader">Loading...</div>
+                    </div>
+                    <div class="main" style="background-color: black;">
+                        <section class="module" style="padding-top: 10px;padding-bottom:0px;">
+                            <div class="container" style="width: 100%; background-color: black;">
+                                <!-- 整頁 -->
+                                <div class="row">
+                                    <!-- 整頁 -->
+                                    <!-- 左邊欄位開始 -->
+                                    <div class="col-sm-4 col-md-3 sidebar" style="width:20%;padding-right:0px;">
+                                        <div class="widget">
+                                            <a href="#"><img src="/MeetBoth/html/assets/images/shop/警告.jpg"
+                                                    style="padding-bottom: 10px;"></a>
+                                            <ul class="cart">
+                                                <li><a href="#" style="color: white;font-size:20px;"
+                                                        class="btn btn-d btn-round">會員管理&ensp;<i
+                                                            class="fa-solid fa-angle-double-down"></i></a>
+                                                    <ul style="">
+                                                        <li><a href="_01_member.admin.controller"
+                                                                style="color: white;font-weight:600;"
+                                                                class="btn btn-d btn-round">所有會員清單</a></li>
+                                                    </ul>
+                                                </li>
+                                                <li><a href="#" style="color: white;font-size:20px;"
+                                                        class="btn btn-d btn-round">商品管理&ensp;<i
+                                                            class="fa-solid fa-angle-double-down"></i></a>
+                                                    <ul style="">
+                                                        <li><a href="#" style="color: white;font-weight:600;"
+                                                                class="btn btn-d btn-round">所有商品清單</a></li>
+                                                    </ul>
+                                                </li>
+                                                <li><a href="#" style="color: white;font-size:20px;"
+                                                        class="btn btn-d btn-round">課程管理&ensp;<i
+                                                            class="fa-solid fa-angle-double-down"></i></a>
+                                                    <ul style="">
+                                                        <li><a href="#" style="color: white;font-weight:600;"
+                                                                class="btn btn-d btn-round">所有課程清單</a></li>
+                                                    </ul>
+                                                </li>
+                                                <li><a href="#" style="color: white;font-size:20px;"
+                                                        class="btn btn-d btn-round">徵才管理&ensp;<i
+                                                            class="fa-solid fa-angle-double-down"></i></a>
+                                                    <ul style="">
+                                                        <li><a href="#" style="color: white;font-weight:600;"
+                                                                class="btn btn-d btn-round">所有貼文清單</a></li>
+                                                    </ul>
+                                                </li>
+                                                <li><a href="#" style="color: white;font-size:20px;"
+                                                        class="btn btn-d btn-round">討論區管理&ensp;<i
+                                                            class="fa-solid fa-angle-double-down"></i></a>
+                                                    <ul style="">
+                                                        <li><a href="#" style="color: white;font-weight:600;"
+                                                                class="btn btn-d btn-round">所有貼文清單</a></li>
+                                                    </ul>
+                                                </li>
+                                                <li><a href="#" style="color: white;font-size:20px;"
+                                                        class="btn btn-d btn-round">購物車管理&ensp;<i
+                                                            class="fa-solid fa-angle-double-down"></i></a>
+                                                    <ul style="">
+                                                        <li><a href="#" style="color: white;font-weight:600;"
+                                                                class="btn btn-d btn-round">所有購物單清單</a></li>
+                                                    </ul>
+                                                </li>
+                                            </ul>
+                                            <a href="#"><img src="/MeetBoth/html/assets/images/shop/警告2.jpg"
+                                                    style="padding-bottom: 10px;"></a>
+                                        </div>
+                                    </div>
+                                    <!-- 左邊欄位結束 -->
+                                    <!-- 						右邊欄位開始 -->
+                                    <div class="col-sm-8 col-sm-offset-1"
+                                        style="margin-left: 20px;width:75%;border-left:solid 1px yellow;">
+                                        <div class="post">
+                                            <!-- 							標題 -->
+                                            <div class="post-thumbnail" style="padding-bottom:0;margin-bottom:0;">
+                                                <h1
+                                                    style="padding-bottom: 0px;margin-bottom:0; text-align: center; font-size: 50px; color:white;">
+                                                    網站資料</h1>
+                                            </div>
+                                            <hr class="divider-w pt-20">
+                                            <!-- 							標題 -->
+                                            <!--       右邊第一部分開始 -->
+                                            <div class="post">
+                                                <div class="post-video embed-responsive embed-responsive-16by9">
 
-												<!-- 				Search -->
-												<!-- 				<section id="search" class="alt"> -->
-												<!-- 					<form method="post" action="#"> -->
-												<!-- 						<input type="text" name="query" id="query" placeholder="Search" /> -->
-												<!-- 					</form> -->
-												<!-- 				</section> -->
-
-												<!-- Menu -->
-												<nav id="menu">
-													<header class="major">
-														<h2>
-															<img src="<%=basePathimg2%>" alt="" />
-														</h2>
-													</header>
-
-													<ul>
-														<li><a href="<c:url value='/index.controller' />">首頁 <i
-																	class="fa-solid fa-house"></i></a></li>
-														<li><a href="<c:url value='/backIndex.controller' />">後台管理
-																<i class="fa-solid fa-gears"></i>
-															</a></li>
-														<li><a href="<c:url value='/_01_member.admin.controller' />">會員資料 <i
-																	class="fa-solid fa-users-viewfinder"></i></a></li>
-														<li><span class="opener">科目地區資料 <i
-																	class="fa-solid fa-magnifying-glass-location"></i></span>
-															<ul>
-																<li><a
-																		href="<c:url value='/_02_subLocation.SelectAllSub.controller' />">科目搜尋</a>
-																<li><a
-																		href="<c:url value='/_02_subLocation.SelectAllLoc.controller' />">地點搜尋</a>
-															</ul>
-														</li>
-														<li><a
-																href="<c:url value='/_03_product.searchAllProduct.controller'/>">商品資料
-																<i class="fa-solid fa-store"></i>
-															</a></li>
-														<li><a
-																href="<c:url value='/_04_shoppingCart.SelectAll.controller' />">訂單資料
-																<i class="fa-solid fa-cart-shopping"></i>
-															</a></li>
-														<li><span class="opener">老師學生資料 <i
-																	class="fa-solid fa-users"></i></span>
-															<ul>
-																<li><a
-																		href="<c:url value='/_05_teacStu.searchAllTeac.controller' />">老師貼文資料</a>
-																</li>
-																<li><a
-																		href="<c:url value='/_05_teacStu.searchAllStud.controller' />">學生貼文資料</a>
-																</li>
-															</ul>
-														</li>
-														<li><span class="opener">哈拉區 <i
-																	class="fa-solid fa-comments"></i></span>
-															<ul>
-																<li><a
-																		href="<c:url value='/_06_halaAndQa.SelectAllHala.controller' />">討論公告區</a>
-																</li>
-																<li><a
-																		href="<c:url value='/_06_halaAndQa.SelectAllQa.controller' />">Q&A解答區</a>
-																</li>
-															</ul>
-														</li>
-													</ul>
-
-												</nav>
+                                                    <!-- Content -->
+                                                    <section>
+                                                        <header class="main">
+                                                            <h3>會員管理列表</h3>
+                                                        </header>
+                                                        <form action="#" method="POST" modelAttribute="Member">
+                                                            <input type="text" name="value" value="${value}" required>
+                                                            <input type="submit" name="selectByAccount" value="以帳號查詢"
+                                                                onclick="this.form.action='_01_member.selectByAccount.controller'" />
+                                                            <input type="submit" name="selectByName" value="以姓名查詢"
+                                                                onclick="this.form.action='_01_member.selectByName.controller'" />
+                                                        </form>
 
 
-												<!-- Section -->
-												<section>
-													<header class="major">
-														<h2>聯絡我們</h2>
-													</header>
-													<p>肉丸家教網是一個希望不管是學生還是老師，都能在這裡精進自己，花最少的時間，找到最棒的老師/學生。</p>
-													<ul class="contact">
-														<li class="icon solid fa-envelope"><a
-																href="#">information@untitled.tld</a>
-														</li>
-														<li class="icon solid fa-phone">(000) 000-0000</li>
-														<li class="icon solid fa-home">1234 Somewhere Road #8254<br />
-															Nashville, TN 00000-0000
-														</li>
-													</ul>
-												</section>
+                                                        <form action="#" method="POST" modelAttribute="Member">
+                                                            <button name="register"
+                                                                onclick="this.form.action='_01_member.backregister.controller'">新增會員</button>
+                                                            <button name="selectAll"
+                                                                onclick="this.form.action='_01_member.selectAll.controller'">取得所有會員</button>
+                                                        </form>
 
-												<!-- Footer -->
-												<footer id="footer">
-													<p class="copyright">
-														&copy; Untitled. All rights reserved. Demo Images: <a
-															href="https://unsplash.com">Unsplash</a>. Design: <a
-															href="https://html5up.net">HTML5 UP</a>.
-													</p>
-												</footer>
+                                                        <div class="table-wrapper">
+                                                            <table class="alt"
+                                                                style="table-layout: fixed; word-wrap: break-word;">
+                                                                <thead>
+                                                                    <tr>
+                                                                        <th>會員編號</th>
+                                                                        <th>帳號</th>
+                                                                        <!-- <th>密碼</th> -->
+                                                                        <!-- <th>身分證字號</th> -->
+                                                                        <th>姓名</th>
+                                                                        <!-- <th>年齡</th> -->
+                                                                        <!-- <th>生日</th> -->
+                                                                        <th>性別</th>
+                                                                        <th>電子郵件</th>
+                                                                        <th>電話號碼</th>
+                                                                        <!-- <th>地址</th> -->
+                                                                        <th>註冊時間</th>
+                                                                        <th>修改</th>
+                                                                        <th>移除</th>
+                                                                    </tr>
+                                                                </thead>
+                                                                <c:forEach var="Member" items="${Member}">
+                                                                    <tbody>
+                                                                        <tr>
+                                                                            <td>${Member.memberID}</td>
+                                                                            <td>${Member.account}</td>
+                                                                            <!-- <td>${Member.password}</td> -->
+                                                                            <!-- <td>${Member.idNumber}</td> -->
+                                                                            <td>${Member.memName}</td>
+                                                                            <!-- <td>${Member.memOld}</td> -->
+                                                                            <!-- <td>${Member.memBirth}</td> -->
+                                                                            <td>${Member.memGender}</td>
+                                                                            <td>${Member.eMail}</td>
+                                                                            <td>${Member.phone}</td>
+                                                                            <!-- <td>${Member.address}</td> -->
+                                                                            <td>${Member.registime}</td>
+                                                                            <td>
+                                                                                <form method="post"
+                                                                                    action="_01_member.preupdate.controller">
+                                                                                    <button name="preupdate"
+                                                                                        value="${Member.memberID}">
+                                                                                        <i class="fa-solid fa-user"></i>
+                                                                                    </button>
+                                                                                </form>
+                                                                            </td>
+                                                                            <td>
+                                                                                <form method="post"
+                                                                                    action="_01_member.delete.controller">
+                                                                                    <button name="delete"
+                                                                                        value="${Member.memberID}">
+                                                                                        <i
+                                                                                            class="fa-solid fa-xmark"></i>
+                                                                                    </button>
+                                                                                </form>
+                                                                            </td>
+                                                                        </tr>
+                                                                    </tbody>
+                                                                </c:forEach>
+                                                            </table>
+                                                        </div>
+                                                    </section>
 
-											</div>
-										</div>
+                                                </div>
+                                            </div>
 
-									</div>
+                                        </div>
+                                    </div>
 
-									<!-- Scripts -->
+                                    <!--       右邊第一部分結束 -->
+                                    <hr class="divider-w pt-20">
+                                </div>
+                            </div>
+                            <!-- 		右邊欄位結束 -->
+                    </div>
+                    </div>
+                    </section>
+                    <%-- <jsp:include page="/WEB-INF/html/fragment/footerMVC.jsp" /> --%>
+                    </div>
+                    <div class="scroll-up">
+                        <a href="#totop"><i class="fa fa-angle-double-up"></i></a>
+                    </div>
+                </main>
+                <!--  
+    JavaScripts
+    =============================================
+    -->
+                <% String basePath1=request.getScheme() + "://" + request.getServerName() + ":" +
+                    request.getServerPort() + path + "/html/assets/js/jquery.min.js" ; %>
 
-									<% String basePath6=request.getScheme() + "://" + request.getServerName() + ":" +
-										request.getServerPort() + path + "/html/assets/js/app.js" ; %>
+                    <% String basePath2=request.getScheme() + "://" + request.getServerName() + ":" +
+                        request.getServerPort() + path + "/html/assets/js/browser.min.js" ; %>
 
-										<% String basePath1=request.getScheme() + "://" + request.getServerName() + ":"
-											+ request.getServerPort() + path + "/html/assets/js/jquery.min.js" ;
-											log(basePath1); %>
+                        <% String basePath3=request.getScheme() + "://" + request.getServerName() + ":" +
+                            request.getServerPort() + path + "/html/assets/js/breakpoints.min.js" ; %>
 
-											<% String basePath2=request.getScheme() + "://" + request.getServerName()
-												+ ":" + request.getServerPort() + path
-												+ "/html/assets/js/browser.min.js" ; %>
+                            <% String basePath4=request.getScheme() + "://" + request.getServerName() + ":" +
+                                request.getServerPort() + path + "/html/assets/js/util.js" ; %>
 
-												<% String basePath3=request.getScheme() + "://" +
-													request.getServerName() + ":" + request.getServerPort() + path
-													+ "/html/assets/js/breakpoints.min.js" ; %>
+                                <% String basePath5=request.getScheme() + "://" + request.getServerName() + ":" +
+                                    request.getServerPort() + path + "/html/assets/js/main.js" ; %>
+                                    <script src=<%=basePath1%>></script>
+                                    <script src=<%=basePath2%>></script>
+                                    <script src=<%=basePath3%>></script>
+                                    <script src=<%=basePath4%>></script>
+                                    <script src=<%=basePath5%>></script>
+                                    <script src="assets/lib/jquery.mb.ytplayer/dist/jquery.mb.YTPlayer.js"></script>
+                                    <script src="https://kit.fontawesome.com/25590258af.js"
+                                        crossorigin="anonymous"></script>
+                                    <script>
+                                            $(document).ready(function () {
+                                                //以ul li包子選單
+                                                $('.cart>li>a').click(function (event) {
+                                                    event.preventDefault();
+                                                    $(this).toggleClass('active');
+                                                    $(this).siblings('ul').slideToggle(500);
+                                                });
+                                                //html以div h3 h5包子選單
+                                                $('.list h3').click(function (event) {
+                                                    $(this).toggleClass('active');
+                                                    $(this).siblings('h5').slideToggle(500);
+                                                });
 
-													<% String basePath4=request.getScheme() + "://" +
-														request.getServerName() + ":" + request.getServerPort() + path
-														+ "/html/assets/js/util.js" ; %>
+                                            });
+                                    </script>
 
-														<% String basePath5=request.getScheme() + "://" +
-															request.getServerName() + ":" + request.getServerPort() +
-															path + "/html/assets/js/main.js" ; %>
-															<script src=<%=basePath6%>></script>
-															<script src=<%=basePath1%>></script>
-															<script src=<%=basePath2%>></script>
-															<script src=<%=basePath3%>></script>
-															<script src=<%=basePath4%>></script>
-															<script src=<%=basePath5%>></script>
-															<script src="https://kit.fontawesome.com/25590258af.js"
-																crossorigin="anonymous"></script>
-
-								</body>
-
-								</html>
+            </html>

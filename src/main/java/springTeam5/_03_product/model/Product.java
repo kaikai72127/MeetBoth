@@ -2,7 +2,9 @@ package springTeam5._03_product.model;
 
 import java.sql.Blob;
 import java.util.ArrayList;
+import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -18,6 +20,8 @@ import javax.persistence.Table;
 import javax.persistence.Transient;
 
 import org.springframework.stereotype.Component;
+
+import springTeam5._04_shoppingCart.model.OrderItemBean;
 
 @Entity
 @Table(name = "PRODUCT")
@@ -72,6 +76,9 @@ public class Product {
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "product", cascade = CascadeType.ALL)
 	private List<ProductComment> productComment = new ArrayList<ProductComment>();
+	
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "prodItem",cascade = CascadeType.ALL)
+	private Set<OrderItemBean> orderItems = new LinkedHashSet<OrderItemBean>(); // itemsList
 
 	public Product() {
 	}
@@ -214,6 +221,35 @@ public class Product {
 	}
 
 	public void setProductComment(List<ProductComment> productComment) {
+		this.productComment = productComment;
+	}
+
+	
+	
+	public Set<OrderItemBean> getOrderItems() {
+		return orderItems;
+	}
+
+	public void setOrderItems(Set<OrderItemBean> orderItems) {
+		this.orderItems = orderItems;
+	}
+
+	public Product(int prodID, String prodName, int prodPrice, int memberID, int inventory, String prodPost,
+			String prodUpdate, String directions, Blob prodImg, Integer prodSales, int prodClass, ProdType prodtype,
+			List<ProductComment> productComment) {
+		super();
+		this.prodID = prodID;
+		this.prodName = prodName;
+		this.prodPrice = prodPrice;
+		this.memberID = memberID;
+		this.inventory = inventory;
+		this.prodPost = prodPost;
+		this.prodUpdate = prodUpdate;
+		this.directions = directions;
+		this.prodImg = prodImg;
+		this.prodSales = prodSales;
+		this.prodClass = prodClass;
+		this.prodtype = prodtype;
 		this.productComment = productComment;
 	}
 

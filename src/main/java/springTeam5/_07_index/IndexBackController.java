@@ -12,5 +12,10 @@ public class IndexBackController {
 	public String processMainAction(HttpSession session) {
 		return "backIndex";
 	}
+	
+	@GetMapping("/shoopingCart.backIndex.controller")
+	public String processAdminAction(HttpSession session) {
+		return "_04_shoppingCart/admin";
+	}
 
 }

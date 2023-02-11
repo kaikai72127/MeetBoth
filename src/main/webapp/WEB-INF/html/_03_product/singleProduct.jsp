@@ -29,9 +29,12 @@ String basePathimg2 = request.getScheme() + "://" + request.getServerName() + ":
 	color: black;
 }
 </style>
+
+
 </head>
 <body data-spy="scroll" data-target=".onpage-navigation"
 	data-offset="60">
+	<c:set value="${CartSize}" var="cartsize" />
 	<main>
 		<div class="page-loader">
 			<div class="loader">Loading...</div>
@@ -138,18 +141,33 @@ String basePathimg2 = request.getScheme() + "://" + request.getServerName() + ":
 									</div>
 								</div>
 								<!-- 								商品資訊 -->
+
 								<div class="row mb-20">
-									<div class="col-sm-4 mb-sm-20">
-										<input class="form-control input-lg" type="number"
-											name="chooseAmount" id="amount" value="1"
-											max="${bean.inventory}" min="1" required="required"
-											style="font-size: 25px; letter-spacing: 0px; border: 1px solid black; border-radius: 30px; text-align: center;" />
-									</div>
-									<div class="col-sm-8">
-										<a class="btn btn-d btn-circle" href="#"
-											style="height: 43px; font-size: 19px;">加入購物車</a>
-									</div>
+									<form
+										action="<c:url value='/shoppingCartAddOnly.controller/${bean.prodID}' />"
+										method="GET">
+										<div class="col-sm-4 mb-sm-20">
+											<input class="form-control input-lg" type="number" name="qty"
+												id="qty" value="1" max="${bean.inventory}" min="1"
+												required="required"
+												style="font-size: 25px; letter-spacing: 0px; border: 1px solid black; border-radius: 30px; text-align: center;" />
+										</div>
+										<!-- 隱藏ID -->
+										<Input type='hidden' name='prodID' id="prodID"
+											value='${bean.prodID}'>
+										<div class="col-sm-8">
+											<%-- 											<button style="float: right" id="${bean.prodID}" --%>
+											<!-- 												class="btn btn-sm text-dark p-0 addtocart"> -->
+											<!-- 												<i class="fas fa-shopping-cart text-primary mr-1"></i> 加入購物車 -->
+											<!-- 											</button> -->
+											<button type='submit' id="addToCartBtn"
+												class="btn btn-d btn-circle">
+												<i class="fas fa-shopping-cart text-primary mr-1"></i> 加入購物車
+											</button>
+										</div>
+									</form>
 								</div>
+
 								<!-- 								商品資訊 -->
 							</div>
 						</div>
@@ -547,5 +565,42 @@ String basePathimg2 = request.getScheme() + "://" + request.getServerName() + ":
 	    xhr.send();
 	};
 </script>
+<script>
+    let cartCount = 0;
+    document.getElementById("addToCartBtn").addEventListener("click", function() {
+        cartCount += 1;
+        document.getElementById("cartCount").innerHTML = "購物車：" + cartCount;
+    });
+</script>
+	<script type="text/javascript">
+    $('.addtocart').on('click', function () {
+        let MyValue = $(this).attr("id");
+        console.log(MyValue);
+        $.ajax({
+            url: '/shoppingCartAddOnly.controller/' + MyValue,
+            method: "get",
+            dataType: "text",
+            //這邊的"id"是給controller的變數名
+            data: { "prodID": MyValue },
+        }).done(function () {
+//         	alert("成功")
+            location.reload();
+        }).fail(function () {
+//         	alert("失敗")
+        	location.reload();
+        })
+    });
+	</script>
+	<script>
+      let cartCount = 0;
+      document
+        .getElementById("addToCartBtn")
+        .addEventListener("click", function () {
+          console.log(cartCount);
+          cartCount += 1;
+          document.getElementById("cartCount").innerHTML =
+            "購物車：" + cartCount;
+        });
+    </script>
 </body>
 </html>

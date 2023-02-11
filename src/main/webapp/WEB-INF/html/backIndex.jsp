@@ -1,231 +1,166 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
-	<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-		<! DOCTYPE html>
-			<html>
-
-			<head>
-
-				<% String path=request.getContextPath(); String basePath=request.getScheme() + "://" +
-					request.getServerName() + ":" + request.getServerPort() + path + "/html/assets/css/main.css" ; %>
-					<% String pathimg=request.getContextPath(); String basePathimg=request.getScheme() + "://" +
-						request.getServerName() + ":" + request.getServerPort() + pathimg
-						+ "/html/images/meatball-icon.png" ; %>
-						<% String basePathimg2=request.getScheme() + "://" + request.getServerName() + ":" +
-							request.getServerPort() + path + "/html/images/meatball-200.png" ; %>
-							<title>肉丸家教網 MEET BOTH</title>
-							<meta charset="utf-8" />
-							<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-
-							<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-							<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-							<meta name="robots" content="index,follow" />
-							<meta name="description" content="全台最優質最快速方便的家教網" />
-							<meta name="author" content="EEIT56-MEETBOTH" />
-							<meta name="keywords" content="最棒最優質的家教網" />
-							<meta name="copyright" content="肉丸家教網" />
-							<link rel="shortcut icon" href="<%=basePathimg%>" />
-							<link rel="bookmark" href="<%=basePathimg%>" />
-							<link rel="stylesheet" href="<%=basePath%>" />
-							<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
-							<script>
-								$(function () {
-
-									$.ajax({
-										type: 'POST',
-										url: '_01_member.checklog.controller',
-										contentType: 'application/json',
-
-										success: function (user) {
-
-											if (user == "" || user == "anonymousUser") {
-
-												$("#loginBtn").show();
-												$("#logoutBtn").hide();
-											} else {
-
-												$("#loginBtn").hide();
-												$("#logoutBtn").show();
-											}
-										}
-									});
-
-								});
-							</script>
-			</head>
-
-			<body class="is-preload">
-				<!-- Wrapper -->
-				<div id="wrapper">
-
-					<div id="main">
-						<div class="inner">
-							<!-- Header -->
-							<header id="header">
-								<a href="/backIndex.controller" class="logo"><strong>後台管理系統</strong></a>
-								<ul class="icons">
-									<li id="logincontroll">
-										<button id="loginBtn"
-											onclick="location.href='/SpringBoot_Team5/login/page'">登入</button>
-										<button id="logoutBtn"
-											onclick="location.href='/SpringBoot_Team5/logout'">登出</button>
-									</li>
-									<!-- 						<li><a href="#" class="icon brands fa-twitter"><span -->
-									<!-- 								class="label">Twitter</span></a></li> -->
-									<!-- 						<li><a href="#" class="icon brands fa-facebook-f"><span -->
-									<!-- 								class="label">Facebook</span></a></li> -->
-									<!-- 						<li><a href="#" class="icon brands fa-snapchat-ghost"><span -->
-									<!-- 								class="label">Snapchat</span></a></li> -->
-									<!-- 						<li><a href="#" class="icon brands fa-instagram"><span -->
-									<!-- 								class="label">Instagram</span></a></li> -->
-								</ul>
-							</header>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 
 
-							<!-- Content -->
-							<section>
-								<header class="main">
-									<h2>~歡迎使用~</h2>
-								</header>
-								<!-- Search -->
-								<section id="search" class="alt">
-									<form method="post" action="<a herf='www.google.com'>">
-										<input type="text" name="query" id="query" placeholder="Search" />
-									</form>
-								</section>
-							</section>
-							<br>
-							<br>
-							<br>
-							<br>
-							<br>
-							<br>
-							<br>
-							<br>
-							<br>
-							<br>
-							<br>
-							<br>
-							<br>
-							<br>
+
+<!DOCTYPE html>
+<html lang="zh-hant-TW">
+
+<head>
+<!-- 引入共同的headMVC -->
+<jsp:include page="/WEB-INF/html/fragment/headMVC.jsp" />
+</head>
+
+<!--BOBY-->
+<body data-spy="scroll" data-target=".onpage-navigation"
+	data-offset="60">
+
+	<!-- header -->
+	<!-- 引入共同的topMVC -->
+	<jsp:include page="/WEB-INF/html/fragment/topMVC.jsp" />
+
+	<main>
+		<div class="page-loader">
+			<div class="loader">Loading...</div>
+		</div>
+
+		<!-- 內容 1-->
+		<section class="bg-dark-30 showcase-page-header module parallax-bg"
+			data-background="assets/images/showcase_bg.jpg">
+			<div class="titan-caption">
+				<div class="caption-content">
+					<div class="font-alt mb-30 titan-title-size-1">Powerful.
+						Multipurpose.</div>
+					<div class="font-alt mb-40 titan-title-size-4">100+ Layouts</div>
+					<a class="section-scroll btn btn-border-w btn-round" href="#demos">See
+						Demos</a>
+				</div>
+			</div>
+		</section>
+
+		<div class="main showcase-page">
+			<section class="module-extra-small bg-dark">
+				<div class="container">
+					<div class="row">
+						<div class="col-sm-6 col-md-8 col-lg-9">
+							<div class="callout-text font-alt">
+								<h4 style="margin-top: 0px;">Start Creating Beautiful
+									Websites</h4>
+								<p style="margin-bottom: 0px">Download Titan Free today!</p>
+							</div>
 						</div>
-					</div>
-
-					<!-- Sidebar -->
-					<div id="sidebar">
-						<div class="inner">
-
-							<!-- Search -->
-							<!-- 				<section id="search" class="alt"> -->
-							<!-- 					<form method="post" action="#"> -->
-							<!-- 						<input type="text" name="query" id="query" placeholder="Search" /> -->
-							<!-- 					</form> -->
-							<!-- 				</section> -->
-
-							<!-- Menu -->
-							<nav id="menu">
-								<header class="major">
-									<h2>
-										<img src="<%=basePathimg2%>" alt="" />
-									</h2>
-								</header>
-
-								<ul>
-									<li><a href="<c:url value='/index.controller' />">首頁 <i
-												class="fa-solid fa-house"></i></a></li>
-									<li><a href="<c:url value='/backIndex.controller' />">後台管理 <i
-												class="fa-solid fa-gears"></i></a></li>
-									<li><a href="<c:url value='/_01_member.admin.controller' />">會員資料 <i
-												class="fa-solid fa-users-viewfinder"></i></a></li>
-									<li><span class="opener">科目地區資料 <i
-												class="fa-solid fa-magnifying-glass-location"></i></span>
-										<ul>
-											<li><a
-													href="<c:url value='/_02_subLocation.SelectAllSub.controller' />">科目搜尋</a>
-											<li><a
-													href="<c:url value='/_02_subLocation.SelectAllLoc.controller' />">地點搜尋</a>
-										</ul>
-									</li>
-									<li><a href="<c:url value='/_03_product.searchAllProduct.controller'/>">商品資料 <i
-												class="fa-solid fa-store"></i></a></li>
-									<li><a href="<c:url value='/_04_shoppingCart.SelectAll.controller' />">訂單資料
-											<i class="fa-solid fa-cart-shopping"></i>
-										</a></li>
-									<li><span class="opener">老師學生資料 <i class="fa-solid fa-users"></i></span>
-										<ul>
-											<li><a
-													href="<c:url value='/_05_teacStu.searchAllTeac.controller' />">老師貼文資料</a>
-											</li>
-											<li><a
-													href="<c:url value='/_05_teacStu.searchAllStud.controller' />">學生貼文資料</a>
-											</li>
-										</ul>
-									</li>
-									<li><span class="opener">哈拉區 <i class="fa-solid fa-comments"></i></span>
-										<ul>
-											<li><a
-													href="<c:url value='/_06_halaAndQa.SelectAllHala.controller' />">討論公告區</a>
-											</li>
-											<li><a
-													href="<c:url value='/_06_halaAndQa.SelectAllQa.controller' />">Q&A解答區</a>
-											</li>
-										</ul>
-									</li>
-								</ul>
-
-							</nav>
-
-
-							<!-- Section -->
-							<section>
-								<header class="major">
-									<h2>聯絡我們</h2>
-								</header>
-								<p>肉丸家教網是一個希望不管是學生還是老師，都能在這裡精進自己，花最少的時間，找到最棒的老師/學生。</p>
-								<ul class="contact">
-									<li class="icon solid fa-envelope"><a href="#">information@untitled.tld</a>
-									</li>
-									<li class="icon solid fa-phone">(000) 000-0000</li>
-									<li class="icon solid fa-home">1234 Somewhere Road #8254<br />
-										Nashville, TN 00000-0000
-									</li>
-								</ul>
-							</section>
-
-							<!-- Footer -->
-							<footer id="footer">
-								<p class="copyright">
-									&copy; Untitled. All rights reserved. Demo Images: <a
-										href="https://unsplash.com">Unsplash</a>. Design: <a
-										href="https://html5up.net">HTML5 UP</a>.
-								</p>
-							</footer>
+						<div class="col-sm-6 col-md-4 col-lg-3">
+							<div class="callout-btn-box">
+								<a class="btn btn-border-w btn-circle"
+									href="https://themewagon.com/themes/titan/">Downlaod Free</a>
+							</div>
 						</div>
 					</div>
 				</div>
+			</section>
 
-				<!-- Scripts -->
+			<!-- 內容 2-->
+			<section class="module-medium" id="demos">
+				<div class="container">
+					<div class="row multi-columns-row">
+						<div class="col-md-4 col-sm-6 col-xs-12">
+							<a class="content-box"
+								href="index_mp_fullscreen_video_background.html">
+								<div class="content-box-image">
+									<img src="assets/images/screenshots/main_demo.jpg"
+										alt="Main Demo" />
+								</div>
+								<h3 class="content-box-title font-serif">Main Demo</h3>
+							</a>
+						</div>
+						<div class="col-md-4 col-sm-6 col-xs-12">
+							<a class="content-box" href="index_agency.html">
+								<div class="content-box-image">
+									<img src="assets/images/screenshots/agency.jpg" alt="Agency" />
+								</div>
+								<h3 class="content-box-title font-serif">Agency</h3>
+							</a>
+						</div>
+						<div class="col-md-4 col-sm-6 col-xs-12">
+							<a class="content-box" href="index_portfolio.html">
+								<div class="content-box-image">
+									<img src="assets/images/screenshots/portfolio.jpg"
+										alt="Portfolio" />
+								</div>
+								<h3 class="content-box-title font-serif">Portfolio</h3>
+							</a>
+						</div>
+						<div class="col-md-4 col-sm-6 col-xs-12">
+							<a class="content-box" href="index_restaurant.html">
+								<div class="content-box-image">
+									<img src="assets/images/screenshots/restaurant.jpg"
+										alt="Restaurant" />
+								</div>
+								<h3 class="content-box-title font-serif">Restaurant</h3>
+							</a>
+						</div>
+						<div class="col-md-4 col-sm-6 col-xs-12">
+							<a class="content-box" href="index_finance.html">
+								<div class="content-box-image">
+									<img src="assets/images/screenshots/finance.jpg" alt="Finance" />
+								</div>
+								<h3 class="content-box-title font-serif">Finance</h3>
+							</a>
+						</div>
+						<div class="col-md-4 col-sm-6 col-xs-12">
+							<a class="content-box" href="index_landing.html">
+								<div class="content-box-image">
+									<img src="assets/images/screenshots/landing.jpg" alt="Landing" />
+								</div>
+								<h3 class="content-box-title font-serif">Landing</h3>
+							</a>
+						</div>
+						<div class="col-md-4 col-sm-6 col-xs-12">
+							<a class="content-box" href="index_photography.html">
+								<div class="content-box-image">
+									<img src="assets/images/screenshots/photography.jpg"
+										alt="Photography" />
+								</div>
+								<h3 class="content-box-title font-serif">Photography</h3>
+							</a>
+						</div>
+						<div class="col-md-4 col-sm-6 col-xs-12">
+							<a class="content-box" href="index_shop.html">
+								<div class="content-box-image">
+									<img src="assets/images/screenshots/shop.jpg" alt="Shop" />
+								</div>
+								<h3 class="content-box-title font-serif">Shop</h3>
+							</a>
+						</div>
+						<div class="col-md-4 col-sm-6 col-xs-12">
+							<a class="content-box"
+								href="index_op_fullscreen_gradient_overlay.html">
+								<div class="content-box-image">
+									<img src="assets/images/screenshots/one_page.jpg"
+										alt="One Page" />
+								</div>
+								<h3 class="content-box-title font-serif">One Page</h3>
+							</a>
+						</div>
+					</div>
+				</div>
+			</section>
 
-				<% String basePath1=request.getScheme() + "://" + request.getServerName() + ":" +
-					request.getServerPort() + path + "/html/assets/js/jquery.min.js" ; %>
+			<!-- Footer -->
+			<!-- 引入共同的footerMVC -->
+			<jsp:include page="/WEB-INF/html/fragment/footerMVC.jsp" />
+	</main>
 
-					<% String basePath2=request.getScheme() + "://" + request.getServerName() + ":" +
-						request.getServerPort() + path + "/html/assets/js/browser.min.js" ; %>
+	<!--  
+    JavaScripts
+    =============================================
+    -->
+	<!-- 引入共同的js -->
+	<jsp:include page="/WEB-INF/html/fragment/jsPath.jsp" />
 
-						<% String basePath3=request.getScheme() + "://" + request.getServerName() + ":" +
-							request.getServerPort() + path + "/html/assets/js/breakpoints.min.js" ; %>
 
-							<% String basePath4=request.getScheme() + "://" + request.getServerName() + ":" +
-								request.getServerPort() + path + "/html/assets/js/util.js" ; %>
 
-								<% String basePath5=request.getScheme() + "://" + request.getServerName() + ":" +
-									request.getServerPort() + path + "/html/assets/js/main.js" ; %>
-									<script src=<%=basePath1%>></script>
-									<script src=<%=basePath2%>></script>
-									<script src=<%=basePath3%>></script>
-									<script src=<%=basePath4%>></script>
-									<script src=<%=basePath5%>></script>
-									<script src="https://kit.fontawesome.com/25590258af.js"
-										crossorigin="anonymous"></script>
-			</body>
-
-			</html>
+</body>
+</html>

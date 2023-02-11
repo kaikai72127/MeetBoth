@@ -7,6 +7,10 @@ import org.springframework.data.jpa.repository.Query;
 
 public interface HalaRepository extends JpaRepository<HalaBean, Integer> {
 
+	// 模糊查詢全部
+	@Query(value = "from HalaBean where memberid like concat('%', ?1, '%') or title like concat('%', ?1, '%') or halacontent like concat('%', ?1, '%') or halaclassname like concat('%',?1,'%')")
+	public List<HalaBean> findByAllLike(String searchAllLike);
+
 	// 查詢全部
 	@Query(value = "select * from Hala", nativeQuery = true)
 	public List<HalaBean> findAllHala();
@@ -15,9 +19,9 @@ public interface HalaRepository extends JpaRepository<HalaBean, Integer> {
 	public List<HalaBean> findByHalaclassname(String halaclassname);
 
 	// ID查詢
-	public HalaBean findByHalaid(Integer halaid);
+	public HalaBean findByHalaId(Integer halaid);
 
 	// 刪除
-	public void deleteByHalaid(Integer halaid);
+	public void deleteByHalaId(Integer halaid);
 
 }

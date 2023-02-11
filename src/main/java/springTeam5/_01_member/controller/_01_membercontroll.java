@@ -140,6 +140,18 @@ public class _01_membercontroll {
 		}
 	}
 	
+//	信箱檢查
+	@ResponseBody
+	@GetMapping("/mailcheck")
+	public String mailcheck(@RequestParam("email") String email) {
+		List<MemberBean> list = ms.searchMemByMail(email);
+		if (list.size() == 0) {
+			return "0";
+		}else {
+			return "1";
+		}
+	}
+	
 	
 //	查詢類controll
 	@GetMapping("/_01_member.admin.controller")

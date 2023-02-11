@@ -313,17 +313,14 @@
                       href="/MeetBoth/_01_member.membercenter.controller?account=${pageContext.request.userPrincipal.name}"
                       class="dropdown-item">會員資料修改<i class="fa-solid fa-user"></i></a>
                   </li>
-                  <li id="admincontroller"><a href="/MeetBoth/backIndex" class="dropdown-item">管理員控制台
-                      <i class="fa-solid fa-screwdriver-wrench"></i>
-                    </a></li>
                   <li><a href="/MeetBoth/_03_product/pathToMyPDP.controller" class="dropdown-item">我的賣場 <i
                         class="fa-solid fa-right-from-bracket"></i>
                     </a></li>
-                  <li><a href="/MeetBoth/_03_product.index.controller" class="dropdown-item">後臺管理 <i
-                        class="fa-solid fa-right-from-bracket"></i>
+                  <li id="admincontroller"><a href="/MeetBoth/_03_product.index.controller" class="dropdown-item">後臺管理
+                      <i class="fa-solid fa-right-from-bracket"></i>
                     </a></li>
-                  <li><a href="/MeetBoth/logout" class="dropdown-item">Log
-                      Out <i class="fa-solid fa-right-from-bracket"></i> </i>
+                  <li><a href="/MeetBoth/logout" class="dropdown-item">登出<i class="fa-solid fa-right-from-bracket"></i>
+                      </i>
                     </a></li>
                 </ul>
               </li>

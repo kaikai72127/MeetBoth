@@ -158,6 +158,7 @@ public class OrderController {
 	}
 
 // 查詢------
+	//後台管理使用---------------------------------------------------------------------------
 	// 搜尋全部-跳轉到CRUD的頁面用
 	@RequestMapping(path = "/shoppingCart.SelectAll.controller", method = RequestMethod.GET)
 	public String processSelectAllAcction(@ModelAttribute("OrderBean") OrderBean od, Model odModel) {

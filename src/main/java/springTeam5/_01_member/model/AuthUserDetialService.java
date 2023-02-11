@@ -18,7 +18,6 @@ public class AuthUserDetialService implements UserDetailsService {
 	@Override
 	public UserDetails loadUserByUsername(String account) throws UsernameNotFoundException {
 		MemberBean member = loginService.MemberLogin(account);
-		System.out.println(member.getRole());
 		return new User(member.getAccount(), member.getPassword(), AuthorityUtils.createAuthorityList(member.getRole()));
 	}
 

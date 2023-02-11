@@ -3,6 +3,7 @@
     <% String path=request.getContextPath(); String baseMeetboth96x96=request.getScheme() + "://" +
       request.getServerName() + ":" + request.getServerPort() + path
       + "/html/assets/images/meatball/meatball-96x96-New.png" ; System.out.println(baseMeetboth96x96); %>
+
       <c:set value="${CartSize}" var="cartsize" />
       <c:set value="${ShoppingCart}" var="ShoppingCart" />
       <c:set value="${Member}" var="Member" />
@@ -292,7 +293,8 @@
               <!--Navbar橫幅 Login會員登入 -->
               <li id="loginBtn" class="nav-item dropdown"><a href="<%=request.getContextPath()%>/login/page"
                   class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
-                  <img class="rounded-circle me-lg-2" src="html/assets/images/meatball/meatball-32x32.png" alt=""
+                  <img class="rounded-circle me-lg-2"
+                    src="<%=request.getContextPath()%>/html/assets/images/meatball/meatball-32x32.png" alt=""
                     style="width: 24px; height: 24px" /> <span class="d-none d-lg-inline-flex">登入<i
                       class="fa-solid fa-right-to-bracket"></i>
                   </span>

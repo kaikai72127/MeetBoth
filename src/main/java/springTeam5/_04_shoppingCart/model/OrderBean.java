@@ -53,7 +53,7 @@ public class OrderBean {
 	@Column(name = "DELIVERYSTSTUS")
 	private String deliveryStstus = "無"; // 送貨狀態 無(預設)/備貨中/已發貨/已取貨/退貨中/已退貨
 	@Column(name = "PAYMENTMETHOD")
-	private String paymentMethod; // 付款方式 貨到付款/信用卡/轉帳
+	private String paymentMethod; // 付款方式 信用卡/轉帳
 
 	@ManyToOne
 	@JoinColumn(name = "DISCOUNTID_FK")

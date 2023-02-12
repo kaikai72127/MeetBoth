@@ -51,4 +51,11 @@ public class DiscountServiceImpl implements DiscountService {
 		discountRepository.deleteById(discountId);
 	}
 
+	@Override
+	public List<Discount> findDiscountBySearchAllLike(String dateStart, String dateEnd, String search) {
+		return discountRepository.findDiscountBySearchAllLike(dateStart, dateEnd, search);
+	}
+	
+	
+
 }

@@ -24,5 +24,8 @@ public interface DiscountService {
 	
 	//刪除折扣碼
 	void deleteDiscountByDiscountId(Integer discountId);
+	
+	//模糊搜尋折扣碼
+	List<Discount> findDiscountBySearchAllLike(String dateStart, String dateEnd,String search);
 
 }

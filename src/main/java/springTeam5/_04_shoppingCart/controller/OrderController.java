@@ -25,6 +25,7 @@ import springTeam5._01_member.model.MemberRepository;
 import springTeam5._01_member.model.MemberService;
 import springTeam5._04_shoppingCart.model.Discount;
 import springTeam5._04_shoppingCart.model.OrderBean;
+import springTeam5._04_shoppingCart.model.OrderItemBean;
 import springTeam5._04_shoppingCart.service.impl.DiscountServiceImpl;
 import springTeam5._04_shoppingCart.service.impl.OrderServiceImpl;
 
@@ -60,7 +61,6 @@ public class OrderController {
 
 		Optional<MemberBean> list = memberService.searchMemByID(memberBuyId);
 		MemberBean memberBuy = list.get();
-
 
 		obean.setMemberbuy(memberBuy);
 		obean.setShippingName(shippingName);
@@ -99,30 +99,34 @@ public class OrderController {
 	@GetMapping("/shoppingCart.DeleteOrder.controller")
 	public String processDeleteOrderAction(@RequestParam("orderNo") Integer orderNo) {
 		orderService.deleteById(orderNo);
-		return "redirect:shoppingCart.SelectAll.controller";
+		return "redirect:shoppingCartOrders.controller";
 	}
 
 // 修改------
 	// 跳轉到修改頁面
-	@PostMapping("/shoppingCart.UpdateOrderMain.controller/{ordernNo}")
+	@GetMapping("/shoppingCartUpdateOrder.controller/{orderNo}")
 	public String processUpdateOrderMainAction(@PathVariable("orderNo") Integer orderNo, Model odModel) {
 
-		List<OrderBean> classList = orderService.findByOrderNo(orderNo);
-		odModel.addAttribute("classList", classList);
+		List<OrderBean> orderBeanList = orderService.findByOrderNo(orderNo);
+		OrderBean orderBean = orderBeanList.get(0);
+		Set<OrderItemBean> orderItems = orderBean.getItems();
 
-		return "_04_shoppingCart/orderUpdate";
+		odModel.addAttribute("orderBean", orderBean);
+		odModel.addAttribute("orderItems", orderItems);
+
+		return "_04_shoppingCart/adminOrdersUpdate";
 
 	}
 
 	// 修改頁面
-	@PostMapping("/_04_shoppingCart.UpdateOrder.controller/{orderNo}")
-	public String processUpdateOrderMainAction1(@PathVariable("orderNo") Integer orderNo,
+	@PostMapping("/shoppingCartUpdateOrderMain.controller")
+	public String processUpdateOrderMainAction1(@RequestParam("orderNo") Integer orderNo,
 			@RequestParam("shippingName") String shippingName, @RequestParam("shippingPhone") String shippingPhone,
 			@RequestParam("shippingAddress") String shippingAddress, @RequestParam("ordStstus") String ordStstus,
 			@RequestParam("paymentStstus") String paymentStstus, @RequestParam("deliveryStstus") String deliveryStstus,
-			@RequestParam("paymentMethod") String paymentMethod, @RequestParam("discountId") String discountId,
-			@ModelAttribute("OrderBean") OrderBean obean) {
+			@RequestParam("discountNo") String discountNo) {
 
+		OrderBean obean = orderService.findByOrderNo(orderNo).get(0);
 		// 可以修改的地方
 		obean.setShippingName(shippingName);
 		obean.setShippingPhone(shippingPhone);
@@ -130,12 +134,12 @@ public class OrderController {
 		obean.setOrdStstus(ordStstus);
 		obean.setPaymentStstus(paymentStstus);
 		obean.setDeliveryStstus(deliveryStstus);
+		Discount discount = discountService.getDiscountByDiscountNo(discountNo);
+		obean.setDiscount(discount);
 		obean.setUporderDate(orderService.getCurrentDate());
-
-		System.out.println("有喔~" + ordStstus);
 		orderService.updateOrder(obean);
 
-		return "redirect:shoppingCart.SelectAll.controller";
+		return "redirect:shoppingCartUpdateOrder.controller/" + orderNo;
 	}
 
 	// 主頁面直接修改
@@ -158,51 +162,33 @@ public class OrderController {
 	}
 
 // 查詢------
+	// 後台管理使用---------------------------------------------------------------------------
 	// 搜尋全部-跳轉到CRUD的頁面用
-	@RequestMapping(path = "/shoppingCart.SelectAll.controller", method = RequestMethod.GET)
+	@RequestMapping(path = "/shoppingCartOrders.controller", method = RequestMethod.GET)
 	public String processSelectAllAcction(@ModelAttribute("OrderBean") OrderBean od, Model odModel) {
 		List<OrderBean> classList = orderService.selectAll();
-		odModel.addAttribute("classList", classList);
-		return "_04_shoppingCart/ordersCRUD";
-
+		odModel.addAttribute("orderList", classList);
+		return "_04_shoppingCart/adminOrders";
 	}
 
-	// 搜尋全部-條件搜尋
-	@PostMapping("/shoppingCart.SearchOrders.controller")
-	public String processSearchOrders(@RequestParam(value = "ordStstus") String ordStstus,
-			@RequestParam(value = "paymentStstus") String paymentStstus,
-			@RequestParam(value = "deliveryStstus") String deliveryStstus,
+	// 模糊搜尋全部
+	@RequestMapping(path = "/shoppingCartSearchOrders.controller", method = RequestMethod.POST)
+	public String processSearchAllAcction(@RequestParam(value = "ordStstus", required = false) String ordStstus,
+			@RequestParam(value = "paymentStstus", required = false) String paymentStstus,
+			@RequestParam(value = "deliveryStstus", required = false) String deliveryStstus,
 			@RequestParam(value = "search", required = false) String search, @ModelAttribute("OrderBean") OrderBean od,
 			Model odModel) {
-		List<OrderBean> classList = null;
 
-		System.out.println("找這些" + ordStstus + " " + " " + paymentStstus + " " + deliveryStstus + " " + search + "結束");
-
-		if (ordStstus != null && paymentStstus.equals("0") && deliveryStstus.equals("0") && search.equals("")) {
-			classList = orderService.findOrderBySearch1(ordStstus, paymentStstus, deliveryStstus, search);
-		} else if (ordStstus.isEmpty() && paymentStstus != null && deliveryStstus != null && search != null) {
-			classList = orderService.findOrderBySearch2(paymentStstus, deliveryStstus, search);
-		} else if (ordStstus.isEmpty() && paymentStstus.isEmpty() && deliveryStstus != null && search != null) {
-			classList = orderService.findOrderBySearch3(deliveryStstus, search);
-		} else if (ordStstus.isEmpty() && paymentStstus.isEmpty() && deliveryStstus.isEmpty() && search != null) {
-			classList = orderService.findOrderBySearch4(search);
-		} else if (ordStstus != null && paymentStstus.isEmpty() && deliveryStstus.isEmpty() && search.isEmpty()) {
-			// 判斷只找
-			classList = orderService.findOrderByOrdStstus(ordStstus);
-		} else if (ordStstus.isEmpty() && paymentStstus != null && deliveryStstus.isEmpty() && search.isEmpty()) {
-			// 判斷只找
-			classList = orderService.findOrderByPaymentStstus(paymentStstus);
-		} else if (ordStstus.isEmpty() && paymentStstus.isEmpty() && deliveryStstus != null && search.isEmpty()) {
-			// 判斷只找
-			classList = orderService.findOrderByDeliveryStstus(deliveryStstus);
-		} else if (ordStstus.isEmpty() && paymentStstus.isEmpty() && deliveryStstus.isEmpty() && search.isEmpty()) {
-			// 判斷都為0則搜尋全部
-			classList = orderService.selectAll();
+		if (search == null) {
+			search = "";
 		}
-		odModel.addAttribute("classList", classList);
-		System.out.println(classList);
-		return "_04_shoppingCart/ordersCRUD";
+		System.out.println(ordStstus + "---" + paymentStstus + "---" + deliveryStstus + "---123" + search + "QQ-----");
 
+		List<OrderBean> classList = orderService.findOrderBySearchAllLike(ordStstus, paymentStstus, deliveryStstus,
+				search);
+		odModel.addAttribute("orderList", classList);
+		return "_04_shoppingCart/adminOrders";
 	}
+
 
 }

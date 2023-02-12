@@ -135,6 +135,7 @@ public class ShoppingCartController {
 		//查看是否有登入 如果沒有登入則轉跳登入頁面
 		String account = SecurityContextHolder.getContext().getAuthentication().getName();
 		List<MemberBean> mem = memberService.searchMemByAccount(account);
+		
 
 		if (mem.size() == 0) {
 			return "login";
@@ -142,7 +143,9 @@ public class ShoppingCartController {
 		
 		//存資料進session
 		Optional<MemberBean> list = memberService.searchMemByID(mem.get(0).getMemberID());
+		
 		member = list.get();
+		
 
 		session.setAttribute("Member", member);
 		// 需有兩個判斷才可以

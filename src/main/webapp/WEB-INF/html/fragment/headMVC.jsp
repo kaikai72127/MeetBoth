@@ -149,7 +149,7 @@
 																	$(function () {
 																		$.ajax({
 																			type: 'POST',
-																			url: 'http://localhost:8080/MeetBoth/memberdata',
+																			url: '/MeetBoth/memberdata',
 																			contentType: 'application/json',
 
 																			success: function (memberdata) {

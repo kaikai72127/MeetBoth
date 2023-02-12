@@ -28,6 +28,12 @@ public interface OrderRepository extends JpaRepository<OrderBean, Integer> {
 	@Query(value = "select * from memberorder where ordStstus LIKE concat('%',IIF(?1='0','',?1),'%') and paymentStstus LIKE concat('%',IIF(?2='0','',?2),'%') and deliveryStstus LIKE concat('%',IIF(?3='0','',?3),'%') and (orderNo like concat('%',?4,'%') or memberbuy_FK like concat('%',?4,'%')) order by orderNo", nativeQuery = true)
 	public List<OrderBean> findOrderBySearchAllLike(String ordStstus, String paymentStstus, String deliveryStstus,String search);
 	
+
+	// 模糊選擇的條件式訂單資料搜尋
+	@Query(value = "select * from memberorder where orderUID like concat('%',?1,'%') order by orderNo", nativeQuery = true)
+	public List<OrderBean> findOrderByUID(String orderUID);
+	
+	
 	// 全部都選擇的條件式訂單資料搜尋
 	@Query(value = "select * from memberorder where  ordStstus=?1 and paymentStstus=?2 and deliveryStstus=?3 and (orderNo like concat('%',?4,'%') or memberbuy_FK like concat('%',?4,'%') ) order by orderNo", nativeQuery = true)
 	public List<OrderBean> findOrderBySearch1(String ordStstus, String paymentStstus, String deliveryStstus,

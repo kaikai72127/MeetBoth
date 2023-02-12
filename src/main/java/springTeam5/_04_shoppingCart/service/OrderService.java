@@ -26,6 +26,9 @@ public interface OrderService {
 
 	// 查詢一筆訂單資料-透過訂單編號
 	List<OrderBean> findByOrderNo(Integer orderNo);
+	
+	//訂單流水號生成使用
+	List<OrderBean> findOrderByUID(String orderUID);
 
 	// 條件搜尋
 	List<OrderBean> findOrderBySearchAllLike(String ordStstus, String paymentStstus, String deliveryStstus, String search);

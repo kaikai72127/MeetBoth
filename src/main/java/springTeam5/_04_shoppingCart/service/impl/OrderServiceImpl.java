@@ -47,7 +47,6 @@ public class OrderServiceImpl implements springTeam5._04_shoppingCart.service.Or
 		orderRepo.deleteById(orderNo);
 	}
 
-	
 // 修改----------
 	// 修改一筆訂單
 	public OrderBean updateOrder(OrderBean obean) {
@@ -67,14 +66,19 @@ public class OrderServiceImpl implements springTeam5._04_shoppingCart.service.Or
 	}
 
 	// 條件搜尋----模糊搜尋用
-	
+
 	@Override
 	public List<OrderBean> findOrderBySearchAllLike(String ordStstus, String paymentStstus, String deliveryStstus,
 			String search) {
 		return orderRepo.findOrderBySearchAllLike(ordStstus, paymentStstus, deliveryStstus, search);
 	}
-	
-	
+
+	// 訂單流水號生成使用
+	@Override
+	public List<OrderBean> findOrderByUID(String orderUID) {
+		return orderRepo.findOrderByUID(orderUID);
+	}
+
 	@Override
 	public List<OrderBean> findOrderBySearch1(String ordStstus, String paymentStstus, String deliveryStstus,
 			String search) {
@@ -93,7 +97,7 @@ public class OrderServiceImpl implements springTeam5._04_shoppingCart.service.Or
 
 	@Override
 	public List<OrderBean> findOrderBySearch2(String paymentStstus, String deliveryStstus, String search) {
-		return orderRepo.findOrderBySearch2(paymentStstus,deliveryStstus,search);
+		return orderRepo.findOrderBySearch2(paymentStstus, deliveryStstus, search);
 	}
 
 	@Override
@@ -120,8 +124,17 @@ public class OrderServiceImpl implements springTeam5._04_shoppingCart.service.Or
 	public List<OrderBean> findOrderByDeliveryStstus(String deliveryStstus) {
 		return findOrderByDeliveryStstus(deliveryStstus);
 	}
-	
-	
+
+	// 訂單編號生成小工具
+
+	public String generateOrderNumber() {
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
+		String date = sdf.format(new Date());
+
+		List<OrderBean> orderList = orderRepo.findOrderByUID(date);
+		int size = orderList.size();
+		return "MeetBoth" + date + "-" + (size+1);
+	}
 
 //	// 檢查購物車----
 //	@Override

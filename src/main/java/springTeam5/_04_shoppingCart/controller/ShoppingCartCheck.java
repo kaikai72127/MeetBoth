@@ -1,6 +1,8 @@
 package springTeam5._04_shoppingCart.controller;
 
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
@@ -72,6 +74,7 @@ public class ShoppingCartCheck {
 		System.out.println(orderNumber);
 		OrderBean orderBean = orderService.findByOrderNo(orderNumber).get(0);
 		orderBean.setPaymentMethod(obj.getChoosePayment());
+		orderBean.setPaymentStstus("已付款");
 		System.out.println("");
 		orderService.updateOrder(orderBean);
 
@@ -158,11 +161,16 @@ public class ShoppingCartCheck {
 		if (!discount.isEmpty()) {
 			Integer discountPrice = (int) Math.round(discountUse.getDiscountPrice());
 			totalAmount = shoppingCart.getItemAmount() - discountPrice;
-			orderBean = new OrderBean(null, memberBean, orderService.getCurrentDate(), orderService.getCurrentDate(),
+			System.out.println("-------------------"+totalAmount);
+			System.out.println("------------------------自動生成"+orderService.generateOrderNumber());
+			orderBean = new OrderBean(null,orderService.generateOrderNumber(), memberBean, orderService.getCurrentDate(), orderService.getCurrentDate(),
 					shippingName, shippingPhone, shippingAddress, "處理中", "未付款", "無", paymentMethod, discountUse,
 					totalAmount, null);
 		} else {
-			orderBean = new OrderBean(null, memberBean, orderService.getCurrentDate(), orderService.getCurrentDate(),
+			
+			System.out.println("-------------------"+totalAmount);
+			System.out.println("------------------------自動生成"+orderService.generateOrderNumber());
+			orderBean = new OrderBean(null,orderService.generateOrderNumber(), memberBean, orderService.getCurrentDate(), orderService.getCurrentDate(),
 					shippingName, shippingPhone, shippingAddress, "處理中", "未付款", "無", paymentMethod, null,
 					shoppingCart.getItemAmount(), null);
 		}
@@ -178,8 +186,10 @@ public class ShoppingCartCheck {
 			OrderItemBean orderItemBean = content.get(i);
 			orderItemBean.setOrderbean(orderBean);
 			// 取得賣家資料
-			int meberSaleId = orderItemBean.getProdItem().getMemberID();
+			int meberSaleId = orderItemBean.getProdItem().getMemberBean().getMemberID();
 			Optional<MemberBean> list = memberService.searchMemByID(meberSaleId);
+			System.out.println("------------GET----------"+meberSaleId+"-----------");
+			System.out.println(list.get());
 			MemberBean memberSale = list.get();
 			orderItemBean.setMembersale(memberSale);
 			items.add(orderItemBean);
@@ -253,4 +263,5 @@ public class ShoppingCartCheck {
 
 		return form;
 	}
+
 }

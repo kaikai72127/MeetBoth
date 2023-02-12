@@ -9,7 +9,36 @@
 			<head>
 				<!-- 引入共同的headMVC -->
 				<jsp:include page="../fragment/headMVC.jsp" />
+<<<<<<< HEAD
 
+=======
+				<script>
+					function mailcheck() {
+						var email = $("#mail").val();
+						if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email)) {
+							$.ajax({
+								type: 'GET',
+								url: 'http://localhost:8080/MeetBoth/mailcheck',
+								data: { "email": email },
+								contentType: 'application/json',
+								success: function (check) {
+									if (check == "1") {
+										$("#errormessage").text("信箱已被註冊！")
+										$("#push").hide();
+									} else {
+										event.preventDefault();
+										$("#errormessage").css({ "font-size": "medium", color: "green" }).text("信箱未被註冊！");
+										$("#push").show();
+									}
+								}
+							});
+						} else {
+							$("#errormessage").text("信箱不可使用！")
+							$("#push").hide();
+						}
+					}
+				</script>
+>>>>>>> origin/_01_Seal
 			</head>
 
 			<!--BOBY-->
@@ -37,11 +66,24 @@
 										method="Post">
 										<div class="form-group">
 											<input class="form-control" style="text-transform: none;" id="mail"
+<<<<<<< HEAD
 												type="text" name="value" value='${value}' placeholder="請輸入電子郵件信箱" />
 										</div>
 
 										<div class="form-group">
 											<button class="btn btn-round btn-p">進行驗證</button>
+=======
+												type="text" name="email" oninput='mailcheck()' value='${value}'
+												placeholder="請輸入正確的電子郵件信箱" />
+											<label id="errormessage" style="font-size: medium; color: red;">
+											</label>
+
+										</div>
+
+										<div class="form-group">
+											<button id="push" class="btn btn-round btn-p"
+												style="display: none;">進行驗證</button>
+>>>>>>> origin/_01_Seal
 										</div>
 
 

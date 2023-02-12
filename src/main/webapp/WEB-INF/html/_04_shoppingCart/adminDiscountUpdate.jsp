@@ -279,12 +279,12 @@ a:hover {
 											style="height: auto; padding-bottom: 100px; display: flex;">
 											<div style="width: 50%;">
 												<div>
-													<span>訂單&ensp;&ensp;編號 :&ensp;<input
+													<span>折扣&ensp;&ensp;編號 :&ensp;<input
 														value="${orderBean.orderNo}" type="text" name="orderNo"
 														class="MBinput" readonly></span>
 												</div>
 												<div>
-													<span>會員&ensp;&ensp;姓名 :&ensp;<input
+													<span>折扣&ensp;&ensp;姓名 :&ensp;<input
 														value="${orderBean.memberbuy.memName}" type="text"
 														class="MBinput" readonly></span>
 												</div>

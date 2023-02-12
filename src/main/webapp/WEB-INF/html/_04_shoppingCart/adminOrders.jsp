@@ -244,7 +244,7 @@ a:hover {
 											<li><a href="/MeetBoth/shoppingCartOrders.controller"
 												style="color: white; font-weight: 600;"
 												class="btn btn-d btn-round">所有訂單清單</a></li>
-											<li><a href="/MeetBoth/shoppingCartOrders.controller"
+											<li><a href="/MeetBoth/discounts.controller"
 												style="color: white; font-weight: 600;"
 												class="btn btn-d btn-round">折扣碼管理</a></li>
 										</ul></li>
@@ -332,14 +332,14 @@ a:hover {
 
 
 											<div>
-												<table style="color: white; text-align: center;"
+												<table style="color: white; text-align: center;font-size: 20px"
 													class="prodtable">
 													<thead>
 														<tr style="">
 															<th style="width: 5%;">編號</th>
-															<th style="width: 15%; padding-left: 5px;">訂購會員</th>
-															<th style="width: 10%">訂單日期</th>
-															<th style="width: 10%">更新日期</th>
+															<th style="width: 10%; padding-left: 5px;">訂購會員</th>
+															<th style="width: 15%;padding-left:10px">訂單日期</th>
+															<th style="width: 15%;padding-left:10px">更新日期</th>
 															<th style="width: 10%">訂單狀態</th>
 															<th style="width: 10%">付款狀態</th>
 															<th style="width: 10%">送貨狀態</th>

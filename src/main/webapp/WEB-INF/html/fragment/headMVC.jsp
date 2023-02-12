@@ -149,32 +149,32 @@
 																	$(function () {
 																		$.ajax({
 																			type: 'POST',
-																			url: 'http://localhost:8080/MeetBoth/_01_member.checklog.controller',
+																			url: 'http://localhost:8080/MeetBoth/memberdata',
 																			contentType: 'application/json',
 
-																			success: function (user) {
+																			success: function (memberdata) {
+																				var memberID = memberdata.memberID
+																				var account = memberdata.account;
+																				var name = memberdata.memName;
+																				var nickName = memberdata.memNickName;
+																				var role = memberdata.role;
 
-																				if (user == "" || user == "anonymousUser") {
-																					console.log(user + "登入");
+																				if (account == "" || account == "anonymousUser") {
+																					console.log(account + "登入");
 																					$("#loginBtn").show();
 																					$("#logoutBtn").hide();
 																					$("#animation").show();
 																				} else {
-																					console.log(user + "登出");
+																					console.log(account + "登出");
 																					$("#loginBtn").hide();
 																					$("#logoutBtn").show();
 																					$("#animation").hide();
-																					$("#username").text("你好，" + user)
+																					if (nickName != "") {
+																						$("#username").text("你好，" + nickName)
+																					} else {
+																						$("#username").text("你好，" + name)
+																					}
 																				}
-																			}
-																		});
-																	});
-																	$(function () {
-																		$.ajax({
-																			type: 'POST',
-																			url: 'http://localhost:8080/MeetBoth/_01_member.rolecheck.controller',
-																			contentType: 'application/json',
-																			success: function (role) {
 																				if (role == "admin") {
 																					console.log(role + "管理員");
 

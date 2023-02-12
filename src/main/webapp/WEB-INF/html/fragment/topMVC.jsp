@@ -3,7 +3,7 @@
     <% String path=request.getContextPath(); String baseMeetboth96x96=request.getScheme() + "://" +
       request.getServerName() + ":" + request.getServerPort() + path
       + "/html/assets/images/meatball/meatball-96x96-New.png" ; System.out.println(baseMeetboth96x96); %>
-<<<<<<< HEAD
+      <c:set value="${CartSize}" var="cartsize" />
       <c:set value="${CartSize}" var="cartsize" />
       <c:set value="${ShoppingCart}" var="ShoppingCart" />
       <c:set value="${Member}" var="Member" />

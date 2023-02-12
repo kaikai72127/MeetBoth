@@ -51,26 +51,14 @@ String basePathimg2 = request.getScheme() + "://" + request.getServerName() + ":
 								onclick="window.location='/MeetBoth/_03_product.searchAllProduct.controller'">
 								<span class="icon-browser">&ensp;回到商品目錄</span>
 							</button>
-							&nbsp;
-							<button class="btn btn-primary  btn-circle" type="button"
-								style="height: 43px; font-size: 19px;"
-								onclick="window.location='/MeetBoth/_03_product.catchSingleProductDate.controller?id=${bean.prodID}'">
-								<span class=" icon-gears">&ensp;修改商品</span>
-							</button>
-							&nbsp;
-							<button class="btn btn-danger btn-circle" type="button"
-								id="deleteThisProduct" name="${bean.prodID}"
-								style="height: 43px; font-size: 19px;">
-								<span class="icon-recycle">&ensp;刪除商品</span>
-							</button>
 						</div>
 					</div>
 					<!-- 			按鈕們 -->
 					<div class="container">
 						<div class="row">
 							<!-- 						圖片BLOCK -->
-							<div class="col-sm-6 mb-sm-40">
-								<img id="preImg" style="width: 445px; height: 600px"
+							<div class="col-sm-6 mb-sm-40" style="width: 445px; height: 600px; display: flex; justify-content: center; align-items: center;">
+								<img id="preImg" style="max-width: 100%; max-height: 100%; height: auto; width: auto;"
 									src="<c:url value='/_03_product.showPicture.controller?id=${bean.prodID}' />" />
 							</div>
 							<!-- 							圖片右邊BLOCK -->
@@ -162,7 +150,7 @@ String basePathimg2 = request.getScheme() + "://" + request.getServerName() + ":
 											<!-- 												<i class="fas fa-shopping-cart text-primary mr-1"></i> 加入購物車 -->
 											<!-- 											</button> -->
 											<button type='submit' id="addToCartBtn"
-												class="btn btn-d btn-circle">
+												class="btn btn-d btn-circle" style="font-size:17px;">
 												<i class="fas fa-shopping-cart text-primary mr-1"></i> 加入購物車
 											</button>
 										</div>
@@ -190,18 +178,18 @@ String basePathimg2 = request.getScheme() + "://" + request.getServerName() + ":
 										<div style="display: flex;">
 											<div class="shop-item-image"
 												style="width: 200px; height: 250px;">
-												<img src="html/assets/images/shop/product-12.jpg"
+												<img src="<c:url value='/_01_member.ShowPhoto.controller?account=${bean.memberBean.account}'/>"
 													alt="avatar" />
 											</div>
 											<div class="comment-content clearfix"
 												style="margin-left: 10px; width: 70%;">
 												<div class="comment-author font-alt">
 													<h3>
-														<a href="#">賣家暱稱</a>
+														<a href="#">${bean.memberBean.memNickName}</a><span style="font-size:17px">(${bean.memberBean.account})</span>
 													</h3>
-													<p style="font-size: 20px;">賣家訊息1</p>
-													<p style="font-size: 20px;">賣家訊息2</p>
-													<p style="font-size: 20px;">賣家訊息3</p>
+													<p style="font-size: 20px;"></p>
+													<p style="font-size: 20px;">E-mail : ${bean.memberBean.eMail}</p>
+													<p style="font-size: 20px;">Phone : ${bean.memberBean.phone}</p>
 												</div>
 											</div>
 											<div style="margin-top: 170px;">
@@ -230,12 +218,13 @@ String basePathimg2 = request.getScheme() + "://" + request.getServerName() + ":
 												<c:forEach var="commbean" items="${commBean}">
 													<div class="comment clearfix">
 														<div class="comment-avatar">
-															<img src="html/assets/images/shop/product-12.jpg"
-																alt="賣家圖片" />
+															 <img id="preImg"
+															width="250px" height="250px"
+															src="<c:url value='/_01_member.ShowPhoto.controller?account=${commbean.memberBean.account}'/>">
 														</div>
 														<div class="comment-content clearfix">
 															<div class="comment-author font-alt" style="margin: 0;">
-																<a href="#" style="font-size: 15px;">賣家暱稱</a>
+																<a href="#" style="font-size: 15px;">${commbean.memberBean.memNickName}</a>
 															</div>
 															<div class="comment-meta font-alt"
 																style="font-size: 14px;">
@@ -263,14 +252,6 @@ String basePathimg2 = request.getScheme() + "://" + request.getServerName() + ":
 												action="<c:url value='/_03_product.InsertProdComment.controller' />">
 												<input type="hidden" name="id" value="${bean.prodID}" />
 												<div class="row">
-													<div class="col-sm-4">
-														<div class="form-group">
-															<label class="sr-only" for="name">Name</label> <input
-																class="form-control" id="name" type="text" name="name"
-																placeholder="Name"
-																style="text-transform: none; font-size: 17px; height: 35px;" />
-														</div>
-													</div>
 													<div class="col-sm-4">
 														<div class="form-group">
 															<select class="form-control" name="score"
@@ -518,45 +499,7 @@ String basePathimg2 = request.getScheme() + "://" + request.getServerName() + ":
 		  }
 		});
 	</script>
-	<script>
 	
-        $(function(){
-        	$('#deleteThisProduct').click(function(){
-                let id=$(this).attr("name");
-                Swal.fire({
-                  title: '你確定要刪除嗎?',
-                  text: "將無法恢復此筆訂單!!!",
-                  icon: 'warning',
-                  //icon:  "success", "error", "warning", "info" or "question" 這幾種選項
-                  showCancelButton: true,
-                  confirmButtonColor: '#f7d966',
-                  cancelButtonColor: '#3d3b39',
-                  cancelButtonText: '取消',
-                  confirmButtonText: '確定刪除'
-                }).then((result) => {
-                    if (result.isConfirmed) {
-                        $.ajax({
-                          //專案名稱+servlet
-                         url:'/MeetBoth/_03_product.deleteProductById.controller',
-                          method:"post",
-                          dataType:"text",
-                          //對應name設定的名稱 並非value的名稱
-                          data: {"id":id},
-                        })
-                            .done(function () {
-                            	window.location='/MeetBoth/_03_product.searchAllProduct.controller'
-                                console.log("delete")
-                             })//done
-                             .fail(function(error) {
-                                 console.log(error)
-                             })//fail end
-                    }//if
-                  })//then
-
-              })//click end
-        });
-        //function end
-    </script>
 	<script>
 	var prodIdInput = document.querySelector('input[name="prodIdForAjax"]');
     var prodId = prodIdInput.value;

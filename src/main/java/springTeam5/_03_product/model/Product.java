@@ -21,6 +21,7 @@ import javax.persistence.Transient;
 
 import org.springframework.stereotype.Component;
 
+import springTeam5._01_member.model.MemberBean;
 import springTeam5._04_shoppingCart.model.OrderItemBean;
 
 @Entity
@@ -38,9 +39,6 @@ public class Product {
 
 	@Column(name = "PRODPRICE")
 	private int prodPrice;
-
-	@Column(name = "MEMBERID")
-	private int memberID;
 
 	@Column(name = "INVENTORY")
 	private int inventory;
@@ -76,21 +74,36 @@ public class Product {
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "product", cascade = CascadeType.ALL)
 	private List<ProductComment> productComment = new ArrayList<ProductComment>();
-	
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "prodItem",cascade = CascadeType.ALL)
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "prodItem", cascade = CascadeType.ALL)
 	private Set<OrderItemBean> orderItems = new LinkedHashSet<OrderItemBean>(); // itemsList
 
+	@Column(name = "MemberID")
+	@Transient
+	private int memberID;
+	
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "MemberID")
+	private MemberBean memberBean;
+	
 	public Product() {
 	}
+	public MemberBean getMemberBean() {
+		return memberBean;
+	}
 
-	public Product(int prodID, String prodName, int prodPrice, int memberID, int inventory, String prodPost,
-			String prodUpdate, String directions, Blob prodImg, Integer prodSales, Integer prodCheck, int prodClass,
-			String prodState, ProdType prodtype, List<ProductComment> productComment) {
+	public void setMemberBean(MemberBean memberBean) {
+		this.memberBean = memberBean;
+	}
+
+	public Product(int prodID, String prodName, int prodPrice, int inventory, String prodPost, String prodUpdate,
+			String directions, Blob prodImg, Integer prodSales, Integer prodCheck, int prodClass, String prodState,
+			ProdType prodtype, List<ProductComment> productComment, Set<OrderItemBean> orderItems, int memberID,
+			MemberBean memberBean) {
 		super();
 		this.prodID = prodID;
 		this.prodName = prodName;
 		this.prodPrice = prodPrice;
-		this.memberID = memberID;
 		this.inventory = inventory;
 		this.prodPost = prodPost;
 		this.prodUpdate = prodUpdate;
@@ -102,6 +115,9 @@ public class Product {
 		this.prodState = prodState;
 		this.prodtype = prodtype;
 		this.productComment = productComment;
+		this.orderItems = orderItems;
+		this.memberID = memberID;
+		this.memberBean = memberBean;
 	}
 
 	public String getProdState() {
@@ -224,33 +240,12 @@ public class Product {
 		this.productComment = productComment;
 	}
 
-	
-	
 	public Set<OrderItemBean> getOrderItems() {
 		return orderItems;
 	}
 
 	public void setOrderItems(Set<OrderItemBean> orderItems) {
 		this.orderItems = orderItems;
-	}
-
-	public Product(int prodID, String prodName, int prodPrice, int memberID, int inventory, String prodPost,
-			String prodUpdate, String directions, Blob prodImg, Integer prodSales, int prodClass, ProdType prodtype,
-			List<ProductComment> productComment) {
-		super();
-		this.prodID = prodID;
-		this.prodName = prodName;
-		this.prodPrice = prodPrice;
-		this.memberID = memberID;
-		this.inventory = inventory;
-		this.prodPost = prodPost;
-		this.prodUpdate = prodUpdate;
-		this.directions = directions;
-		this.prodImg = prodImg;
-		this.prodSales = prodSales;
-		this.prodClass = prodClass;
-		this.prodtype = prodtype;
-		this.productComment = productComment;
 	}
 
 	@Override
@@ -261,7 +256,7 @@ public class Product {
 				+ prodCheck + ", prodClass=" + prodClass + ", prodtype=" + prodtype + ", productComment="
 				+ productComment + "]";
 	}
-	
+
 //	CREATE TABLE PRODUCT(
 //			prodClass int foreign key references PRODTYPE(prodClass), --產品類別編號
 //			prodID int not null IDENTITY (1,1) primary key, --產品編號
@@ -277,6 +272,5 @@ public class Product {
 //			prodCheck int, -- 商品瀏覽次數
 //			prodState nvarchar --商品狀態
 //			);
-
 
 }

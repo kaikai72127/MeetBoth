@@ -480,14 +480,14 @@ a:hover {
     	var div = document.getElementById("commentDiv")
     	var div2 = document.getElementById("commentTable")
         if (tbody.innerHTML.trim()==='') {
-          div.innerHTML = "<span>商品評論 :&ensp;</span><span>沒有商品評論評論</span>";
+          div.innerHTML = "<span>商品評論 :&ensp;</span><span>沒有商品評論</span>";
           div2.innerHTML = "";
         }
     	};
     
   
 </script>
-
+</body>
 
 
 </html>

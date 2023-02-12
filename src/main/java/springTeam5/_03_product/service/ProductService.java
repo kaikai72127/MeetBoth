@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import springTeam5._03_product.model.ProductRepository;
+import springTeam5._03_product.model.ProdType;
 import springTeam5._03_product.model.Product;
 
 @Service
@@ -17,6 +18,11 @@ public class ProductService {
 
 	@Autowired
 	private ProductRepository pRepo;
+	
+//	新增商品
+	public void insertProduct(Product p) {
+		pRepo.save(p);
+	}
 
 //	搜尋全部商品
 //	@Override

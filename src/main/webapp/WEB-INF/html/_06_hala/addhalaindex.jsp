@@ -211,7 +211,7 @@ a:hover {
 												href="/MeetBoth/_03_product.productindex.controller"
 												style="color: white; font-weight: 600;"
 												class="btn btn-d btn-round">所有商品清單</a></li>
-												<li><a
+											<li><a
 												href="/MeetBoth/_03_product.MBinsertProd.controller"
 												style="color: white; font-weight: 600;"
 												class="btn btn-d btn-round">新增商品</a></li>
@@ -259,114 +259,83 @@ a:hover {
 								<div class="post-thumbnail"
 									style="padding-bottom: 0; margin-bottom: 0;">
 									<h1
-										style="padding-bottom: 0px; margin-bottom: 0; text-align: center; font-size: 50px; color: white;">商品後臺管理</h1>
+										style="padding-bottom: 0px; margin-bottom: 0; text-align: center; font-size: 50px; color: white;">後臺管理-新增貼文</h1>
 								</div>
 								<hr class="divider-w pt-20">
 								<!-- 							標題 -->
 								<!--       右邊第一部分開始 -->
 								<div class="post">
+								<form action="<c:url value='/_06_halaAndQa.AddHalaIndex.controller' />" method="Post" enctype="multipart/form-data">
 									<div class="post-video embed-responsive embed-responsive-16by9"
 										style="height: auto; padding-bottom: 100px;">
-										<div>
-											<span>所有商品資料 :&ensp;</span>
+										<div style="display: flex">
+											<button class="MBbtn"
+												onclick="window.location='/MeetBoth/_06_halaAndQa.SelectAllHalaIndex.controller'">返回</button>
 										</div>
-										<form class="row"
-											action="<c:url value='/_03_product.searchProductWithCondition2.controller'/>"
-											method="post">
-											<div style="display: flex; margin-bottom: 15px;">
-												<div style="padding-right: 0; margin: auto 10px;">
-													<select name="case" class="form-control"
-														style="padding-right: 0; font-size: 17px; color: black;">
-														<option value="1">預設排序</option>
-														<option value="6">依瀏覽次數排序</option>
-														<option value="2">依價格由大到小</option>
-														<option value="3">依價格由小到大</option>
-														<option value="4">依上架日期排序</option>
-														<option value="5">依更新日期排序</option>
-													</select>
-												</div>
-												<div style="padding-right: 0; margin: auto 10px;">
-													<select name="typecase" class="form-control"
-														style="font-size: 17px; color: black;">
-														<option value="0">全部類別</option>
-														<option value="1">文具</option>
-														<option value="2">教具</option>
-														<option value="3">運動用品</option>
-														<option value="4">學生用品</option>
-														<option value="5">全新教科書</option>
-														<option value="6">全新好書</option>
-														<option value="7">二手教科書</option>
-														<option value="8">二手好書</option>
-														<option value="9">桌上小物</option>
-														<option value="10">教室小物</option>
-														<option value="11">3c小物</option>
-														<option value="12">益智小物</option>
-													</select>
-												</div>
-												<input type="hidden" name="lowprice" value="0" /> <input
-													type="hidden" name="highprice" value="9999999" />
-												<div class="" style="">
-													<input class="MBinput" type="text" name="searchName"
-														style="font-size: 17px; color: white; margin: 10px 10px;"
-														placeholder="搜尋名稱" />
-												</div>
-												<div style="">
-													<button class="MBbtn" type="submit" style="">搜尋</button>
-													<input type="button" class="MBbtn" value="新增"
-														onclick="window.location='/MeetBoth/_03_product.MBinsertProd.controller'">
-												</div>
-											</div>
-										</form>
+										
 										<div>
-
-
-											<div>
-												<table style="color: white; text-align: center;"
-													class="prodtable">
-													<thead>
-														<tr style="">
-															<th style="width: 5%;">編號</th>
-															<th style="width: 25%; padding-left: 5px;">名稱</th>
-															<th style="width: 10%">類別</th>
-															<th style="width: 10%">價格</th>
-															<th style="width: 5%">賣家</th>
-															<th style="width: 10%">狀態</th>
-															<th style="width: 10%">留言數</th>
-															<th style="width: 5%">評價</th>
-															<th style="width: 10%">觀看次數</th>
-															<th style="width: 15%">上架日期</th>
-															<th></th>
-															<th></th>
-															<th style="border-right: none"></th>
-														</tr>
-													</thead>
-													<tbody>
-														<c:forEach var="prodBean" items="${prodList}">
-															<tr>
-																<td style="">${prodBean.prodID}</td>
-																<td>${prodBean.prodName}</td>
-																<td>${prodBean.prodtype.prodClassName}</td>
-																<td>NT$${prodBean.prodPrice}</td>
-																<td>${prodBean.memberID}</td>
-																<td>${prodBean.prodState}</td>
-																<td id="commentAmount"><input type="hidden" id="commmentList" value="${prodBean.productComment}"></td>
-																<td id="AVGscore"><c:forEach var="commentBean" items="${prodBean.productComment}"><input type="hidden" id="commmentList" value="${commentBean.prodScore}"></c:forEach></td>
-																<td>${prodBean.prodCheck}次</td>
-																<td>${prodBean.prodPost}</td>
-																<td><input type="button" class="MBbtn" value="更多"
-																	onclick="window.location='/MeetBoth/_03_product.singleProductIndex.controller?id=${prodBean.prodID}'"></td>
-																<td><input type="button" class="MBbtn" value="修改"
-																	onclick="window.location='/MeetBoth/_03_product.pathToMBinsertProd.controller?id=${prodBean.prodID}'"></td>
-																<td style="border-right: none"><input type="button"
-																	class="MBbtn deleteThisProduct" value="刪除" id="deleteThisProduct"
-																	name="${prodBean.prodID}"></td>
-															</tr>
-														</c:forEach>
-													</tbody>
-												</table>
+											<span>貼文編號 :&ensp;<input type="text" name="halaId" class="MBinput" placeholder="自動產生" readonly></span>
+										</div>
+										<div>
+											<span>標題 :&ensp;<input type="text" name="title" class="MBinput" placeholder="不能為空"></span>
+										</div>
+										<div>
+											<span>貼文類別 :&ensp;<select name="halaclassname"
+												style="" class="MBinput">
+												<option value="公告">公告</option>
+														<option value="閱讀心得">閱讀心得</option>
+														<option value="資料分享">資料分享</option>
+														<option value="圖書推薦">圖書推薦</option>
+														<option value="教學文章">教學文章</option>
+														<option value="JAVA">JAVA</option>
+														<option value="HTML">HTML</option>
+														<option value="Spring">Spring</option>
+														<option value="SpringBoot">SpringBoot</option>
+														<option value="SpringMVC">SpringMVC</option>
+														<option value="SQL Server">SQL Server</option>
+														<option value="My SQL">My SQL</option>
+														<option value="Hibernate">Hibernate</option>
+														<option value="VScode">VScode</option>
+														<option value="eclipse">eclipse</option>
+														<option value="SpringTool">SpringTool</option>
+														<option value="JDBC">JDBC</option>
+														<option value="Servlet">Servlet</option>
+														<option value="JavaScript">JavaScript</option>
+														<option value="jQuery">jQuery</option>
+														<option value="Azure">Azureoption</option>
+														<option value="RESTful">RESTful</option>
+														<option value="c++">c++</option>
+														<option value="python">python</option>
+														<option value="其他">其他</option>
+											</select></span>
+										</div>
+										
+										<div>
+											<span>會員編號 :&ensp;<input type="text" name="memberid" class="MBinput" placeholder="只能編號"></span>
+										</div>
+										
+										<div style="display: flex;">
+											<span>上傳照片</span> 
+											<div style="height:200px;width:200px;background-color:#272727;text-align:center;margin:15px;">
+											<img id="preImg" style="max-width: 100%; max-height: 100%; height: auto; width: auto;" src="#" />
 											</div>
+											<input class="MBinput" type="file" name="images" id="images5278" accept=".jpg,.png"> 
+										</div>
+										<div>
+											<div id="commentDiv">
+												<span>文章內容 :&ensp;</span>
+											</div>
+										</div>
+										<div>
+											<textarea name="halacontent"
+												style="margin-left: 10px; resize: none; height: 325px; width: 975px; overflow-y: auto; overflow-y: auto; font-size: 25px; color: white; background-color: black;" placeholder="請輸入文章內容"
+												></textarea>
+										</div>
+										<div>
+											<input type="submit" class="MBbtn" value="確定" style="margin-top:15px;margin-left:900px;font-size:35px;">
 										</div>
 									</div>
+									</form>
 								</div>
 								<!--       右邊第一部分結束 -->
 								<hr class="divider-w pt-20">
@@ -418,9 +387,6 @@ a:hover {
 	<script type="text/javascript"
 		src="https://www.gstatic.com/charts/loader.js"></script>
 	<script src="assets/lib/jquery.mb.ytplayer/dist/jquery.mb.YTPlayer.js"></script>
-	<!-- SweetAlert js -->
-	<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-	<!-- SweetAlert js -->
 	<script>
 		$(document).ready(function() {
 			//以ul li包子選單
@@ -438,67 +404,19 @@ a:hover {
 		});
 	</script>
 	<script>
-	
-        $(function(){
-        	$('.deleteThisProduct').click(function(){
-                let id=$(this).attr("name");
-                Swal.fire({
-                  title: '你確定要刪除嗎?',
-                  text: "將無法恢復此筆訂單!!!",
-                  icon: 'warning',
-                  //icon:  "success", "error", "warning", "info" or "question" 這幾種選項
-                  showCancelButton: true,
-                  confirmButtonColor: '#f7d966',
-                  cancelButtonColor: '#3d3b39',
-                  cancelButtonText: '取消',
-                  confirmButtonText: '確定刪除'
-                }).then((result) => {
-                    if (result.isConfirmed) {
-                        $.ajax({
-                          //專案名稱+servlet
-                         url:'/MeetBoth/_03_product.MBdeleteProductById.controller',
-                          method:"post",
-                          dataType:"text",
-                          //對應name設定的名稱 並非value的名稱
-                          data: {"id":id},
-                        })
-                            .done(function () {
-                            	window.location='/MeetBoth/_03_product.productindex.controller'
-                                console.log("delete")
-                             })//done
-                             .fail(function(error) {
-                                 console.log(error)
-                             })//fail end
-                    }//if
-                  })//then
+		$("#images5278").change(function() {
+			readURL(this);
+		});
 
-              })//click end
-        });
-        //function end
-    </script>
-    <script>
-	var commentAmounts = document.querySelectorAll("#commentAmount");
-	var AVGscores = document.querySelectorAll("#AVGscore");
-
-	for (var i = 0; i < commentAmounts.length; i++) {
-		var commentList = commentAmounts[i].querySelector("#commmentList").value;
-    	if(commentList === '[]'){
-  		commentAmounts[i].innerHTML = 0;
-    	}else{
-  		commentAmounts[i].innerHTML = commentList.split(",").length;
-    	}
-
-  		var scoreList = AVGscores[i].querySelectorAll("#commmentList");
-  		var sum = 0;
-  		for (var j = 0; j < scoreList.length; j++) {
-    		sum += parseInt(scoreList[j].value);
-  		}
-  		if(isNaN((sum / scoreList.length).toFixed(2))){
-  			AVGscores[i].innerHTML = '無'
-  		}else{
-	  		AVGscores[i].innerHTML = (sum / scoreList.length).toFixed(2);
-  		}
-	}
-</script>
-</body>
+		function readURL(input) {
+			if (input.files && input.files[0]) {
+				var reader = new FileReader();
+				reader.onload = function(e) {
+					$("#preImg").attr('src', e.target.result);
+				}
+				reader.readAsDataURL(input.files[0]);
+			}
+		}
+	</script>
+	</body>
 </html>

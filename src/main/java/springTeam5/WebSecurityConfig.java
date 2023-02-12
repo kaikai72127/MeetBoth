@@ -42,6 +42,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
          .authorizeRequests()
          .antMatchers(HttpMethod.GET,"/backIndex.controller").hasAnyAuthority("admin")
          .antMatchers(HttpMethod.POST,"/backIndex.controller").hasRole("admin")
+         .antMatchers(HttpMethod.GET,"/_03_product.index.controller").hasAnyAuthority("admin")
          .anyRequest().permitAll()
          
          .and()

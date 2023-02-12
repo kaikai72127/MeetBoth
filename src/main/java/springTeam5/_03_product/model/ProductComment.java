@@ -14,6 +14,8 @@ import javax.persistence.Transient;
 
 import org.springframework.stereotype.Component;
 
+import springTeam5._01_member.model.MemberBean;
+
 @Entity
 @Table(name = "PRODUCTCOMMENT")
 @Component
@@ -23,9 +25,6 @@ public class ProductComment {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "COMMENTID")
 	private int commentID;
-
-	@Column(name = "CUSTOMID")
-	private int customID;
 
 	@Column(name = "PRODSCORE")
 	private int prodScore;
@@ -44,11 +43,40 @@ public class ProductComment {
 	@JoinColumn(name = "PRODID")
 	private Product product;
 
+	@Column(name = "CUSTOMID")
+	@Transient
+	private int customID;
+
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "CUSTOMID")
+	private MemberBean memberBean;
+
 	public ProductComment() {
 	}
 
 	public int getCommentID() {
 		return commentID;
+	}
+
+	public ProductComment(int commentID, int prodScore, String comment, String commentDate, int prodID, Product product,
+			int customID, MemberBean memberBean) {
+		super();
+		this.commentID = commentID;
+		this.prodScore = prodScore;
+		this.comment = comment;
+		this.commentDate = commentDate;
+		this.prodID = prodID;
+		this.product = product;
+		this.customID = customID;
+		this.memberBean = memberBean;
+	}
+
+	public MemberBean getMemberBean() {
+		return memberBean;
+	}
+
+	public void setMemberBean(MemberBean memberBean) {
+		this.memberBean = memberBean;
 	}
 
 	public void setCommentID(int commentID) {
@@ -100,18 +128,6 @@ public class ProductComment {
 	}
 
 	public void setProduct(Product product) {
-		this.product = product;
-	}
-
-	public ProductComment(int commentID, int customID, int prodScore, String comment, String commentDate, int prodID,
-			Product product) {
-		super();
-		this.commentID = commentID;
-		this.customID = customID;
-		this.prodScore = prodScore;
-		this.comment = comment;
-		this.commentDate = commentDate;
-		this.prodID = prodID;
 		this.product = product;
 	}
 

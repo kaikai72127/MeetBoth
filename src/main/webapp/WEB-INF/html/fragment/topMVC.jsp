@@ -309,8 +309,9 @@
                   </span>
                 </a>
                 <ul class="dropdown-menu dropdown-menu-end bg-light border-0 rounded-0 rounded-bottom m-0">
-                  <li><a
-                      href="/MeetBoth/_01_member.membercenter.controller?account=${pageContext.request.userPrincipal.name}"
+                  <li>
+                    <form action="_01_member.membercenter.controller" method="post" id="memberCenter"></form><a href="#"
+                      onclick="document.getElementById('memberCenter').submit();return false"
                       class="dropdown-item">會員資料修改<i class="fa-solid fa-user"></i></a>
                   </li>
                   <li><a href="/MeetBoth/_03_product/pathToMyPDP.controller" class="dropdown-item">我的賣場 <i

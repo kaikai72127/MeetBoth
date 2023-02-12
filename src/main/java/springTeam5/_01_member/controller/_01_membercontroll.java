@@ -136,6 +136,7 @@ public class _01_membercontroll {
 		}else {
 			List<MemberBean> list = ms.searchMemByAccount(user);
 			MemberBean memberdata = list.get(0);
+			memberdata.setPhoto(null);
 			return memberdata;			
 		}
 	}
@@ -279,9 +280,12 @@ public class _01_membercontroll {
 	}
 	
 //	修改
-	@GetMapping(path = "/_01_member.membercenter.controller")
-	public String membercenter(@RequestParam("account") String account, Model m) {
+	@PostMapping(path = "/_01_member.membercenter.controller")
+	public String membercenter(Model m) {
+		String account = SecurityContextHolder.getContext().getAuthentication().getName();
 		List<MemberBean> list = ms.searchMemByAccount(account);
+		
+		list.get(0).getPassword();
 		m.addAttribute("Member", list);
 		return "_01_member/frontmemberupdate";
 	}
@@ -305,7 +309,12 @@ public class _01_membercontroll {
 			MemberBean check = list.get(0);
 			newMem.setMemberID(check.getMemberID());
 			newMem.setAccount(member.getAccount());
-			newMem.setPassword(new BCryptPasswordEncoder().encode(member.getPassword()));
+			String pwd = new BCryptPasswordEncoder().encode(member.getPassword());
+			if (check.getPassword().equals(pwd)) {
+				newMem.setPassword(pwd);				
+			}else {
+				newMem.setPassword(check.getPassword());
+			}
 			newMem.setIdNumber(member.getIdNumber());
 			newMem.setMemName(member.getMemName());
 			newMem.setMemNickName(member.getMemNickName());
@@ -347,7 +356,12 @@ public class _01_membercontroll {
 			MemberBean check = list.get(0);
 			newMem.setMemberID(check.getMemberID());
 			newMem.setAccount(member.getAccount());
-			newMem.setPassword(new BCryptPasswordEncoder().encode(member.getPassword()));
+			String pwd = new BCryptPasswordEncoder().encode(member.getPassword());
+			if (check.getPassword().equals(pwd)) {
+				newMem.setPassword(pwd);				
+			}else {
+				newMem.setPassword(check.getPassword());
+			}
 			newMem.setIdNumber(member.getIdNumber());
 			newMem.setMemName(member.getMemName());
 			newMem.setMemNickName(member.getMemNickName());
@@ -358,7 +372,7 @@ public class _01_membercontroll {
 			newMem.setPhone(member.getPhone());
 			newMem.setPhoto(check.getPhoto());
 			newMem.setAddress(member.getAddress());
-			newMem.setRole(member.getRole());
+			newMem.setRole(check.getRole());
 			fileName = mf.getOriginalFilename();
 			if (fileName != null && fileName != "" && fileName.trim().length() > 0) {
 				System.out.println("這有圖?"+fileName);

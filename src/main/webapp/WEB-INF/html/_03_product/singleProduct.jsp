@@ -51,6 +51,21 @@ String basePathimg2 = request.getScheme() + "://" + request.getServerName() + ":
 								onclick="window.location='/MeetBoth/_03_product.searchAllProduct.controller'">
 								<span class="icon-browser">&ensp;回到商品目錄</span>
 							</button>
+<<<<<<< HEAD
+=======
+							&nbsp;
+							<button class="btn btn-primary  btn-circle" type="button"
+								style="height: 43px; font-size: 19px;"
+								onclick="window.location='/MeetBoth/_03_product.catchSingleProductDate.controller?id=${bean.prodID}'">
+								<span class=" icon-gears">&ensp;修改商品</span>
+							</button>
+							&nbsp;
+							<button class="btn btn-danger btn-circle" type="button"
+								id="deleteThisProduct" name="${bean.prodID}"
+								style="height: 43px; font-size: 19px;">
+								<span class="icon-recycle">&ensp;刪除商品</span>
+							</button>
+>>>>>>> origin/_01_Seal
 						</div>
 					</div>
 					<!-- 			按鈕們 -->
@@ -95,8 +110,12 @@ String basePathimg2 = request.getScheme() + "://" + request.getServerName() + ":
 								<div class="row mb-20">
 									<div class="col-sm-12">
 										<div class="description">
+<<<<<<< HEAD
 											<input type="hidden" value="${bean.prodID}"
 												name="prodIdForAjax" />
+=======
+										<input type="hidden" value="${bean.prodID}" name="prodIdForAjax"/>
+>>>>>>> origin/_01_Seal
 											<h4>商品編號 : ${bean.prodID}</h4>
 										</div>
 									</div>
@@ -150,7 +169,11 @@ String basePathimg2 = request.getScheme() + "://" + request.getServerName() + ":
 											<!-- 												<i class="fas fa-shopping-cart text-primary mr-1"></i> 加入購物車 -->
 											<!-- 											</button> -->
 											<button type='submit' id="addToCartBtn"
+<<<<<<< HEAD
 												class="btn btn-d btn-circle" style="font-size:17px;">
+=======
+												class="btn btn-d btn-circle">
+>>>>>>> origin/_01_Seal
 												<i class="fas fa-shopping-cart text-primary mr-1"></i> 加入購物車
 											</button>
 										</div>
@@ -309,6 +332,7 @@ String basePathimg2 = request.getScheme() + "://" + request.getServerName() + ":
 										<div class="shop-item-detail">
 											<a
 												href="/MeetBoth/_03_product.PathToProductDetail.controller?id=${prodLikeBean.prodID}"
+<<<<<<< HEAD
 												class="btn btn-round btn-b"><span class="icon-heart"
 												style="font-size: 18px;">查看商品頁面</span><span
 												class="icon-heart" style="font-size: 18px;"></span></a>
@@ -316,6 +340,14 @@ String basePathimg2 = request.getScheme() + "://" + request.getServerName() + ":
 									</div>
 									<h4 class="shop-item-title font-alt">
 										<a href="#" style="font-size: 22px;">${prodLikeBean.prodName}</a>
+=======
+												class="btn btn-round btn-b"><span class="icon-heart" style="font-size:18px;">查看商品頁面</span><span
+												class="icon-heart" style="font-size:18px;"></span></a>
+										</div>
+									</div>
+									<h4 class="shop-item-title font-alt">
+										<a href="#" style="font-size:22px;">${prodLikeBean.prodName}</a>
+>>>>>>> origin/_01_Seal
 									</h4>
 									<div id="scoreAVGTwo">
 										<c:forEach var="commentBeanTwo"
@@ -325,7 +357,11 @@ String basePathimg2 = request.getScheme() + "://" + request.getServerName() + ":
 										</c:forEach>
 										<div id="starAVGDivTwo" style="font-size: 20px;">123</div>
 									</div>
+<<<<<<< HEAD
 									<p style="font-size: 20px;">NT$${prodLikeBean.prodPrice}</p>
+=======
+									<p style="font-size:20px;">NT$${prodLikeBean.prodPrice}</p>
+>>>>>>> origin/_01_Seal
 								</div>
 							</div>
 						</c:forEach>
@@ -399,8 +435,13 @@ String basePathimg2 = request.getScheme() + "://" + request.getServerName() + ":
 	<script src="html/assets/js/plugins.js"></script>
 	<script src="html/assets/js/main.js"></script>
 	<!-- SweetAlert js -->
+<<<<<<< HEAD
 	<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 	<!-- SweetAlert js -->
+=======
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<!-- SweetAlert js -->
+>>>>>>> origin/_01_Seal
 	<script>
 		const scores = document.querySelectorAll("#score");
 
@@ -498,6 +539,7 @@ String basePathimg2 = request.getScheme() + "://" + request.getServerName() + ":
 		    score.querySelector("#starAVGDivTwo").innerHTML = stars;
 		  }
 		});
+<<<<<<< HEAD
 	</script>
 	
 	<script>
@@ -536,6 +578,84 @@ String basePathimg2 = request.getScheme() + "://" + request.getServerName() + ":
 <!-- //         }) -->
 <!-- //     }); -->
 <!-- 	</script> -->
+=======
+	</script>
+	<script>
+	
+        $(function(){
+        	$('#deleteThisProduct').click(function(){
+                let id=$(this).attr("name");
+                Swal.fire({
+                  title: '你確定要刪除嗎?',
+                  text: "將無法恢復此筆訂單!!!",
+                  icon: 'warning',
+                  //icon:  "success", "error", "warning", "info" or "question" 這幾種選項
+                  showCancelButton: true,
+                  confirmButtonColor: '#f7d966',
+                  cancelButtonColor: '#3d3b39',
+                  cancelButtonText: '取消',
+                  confirmButtonText: '確定刪除'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        $.ajax({
+                          //專案名稱+servlet
+                         url:'/MeetBoth/_03_product.deleteProductById.controller',
+                          method:"post",
+                          dataType:"text",
+                          //對應name設定的名稱 並非value的名稱
+                          data: {"id":id},
+                        })
+                            .done(function () {
+                            	window.location='/MeetBoth/_03_product.searchAllProduct.controller'
+                                console.log("delete")
+                             })//done
+                             .fail(function(error) {
+                                 console.log(error)
+                             })//fail end
+                    }//if
+                  })//then
+
+              })//click end
+        });
+        //function end
+    </script>
+	<script>
+	var prodIdInput = document.querySelector('input[name="prodIdForAjax"]');
+    var prodId = prodIdInput.value;
+    console.log("id="+prodId);
+	window.onload = function() {
+	    var xhr = new XMLHttpRequest();
+	    xhr.open("GET", "/MeetBoth/product.productCheck.controller?id=" + prodId, true);
+	    xhr.send();
+	};
+</script>
+<script>
+    let cartCount = 0;
+    document.getElementById("addToCartBtn").addEventListener("click", function() {
+        cartCount += 1;
+        document.getElementById("cartCount").innerHTML = "購物車：" + cartCount;
+    });
+</script>
+	<script type="text/javascript">
+    $('.addtocart').on('click', function () {
+        let MyValue = $(this).attr("id");
+        console.log(MyValue);
+        $.ajax({
+            url: '/shoppingCartAddOnly.controller/' + MyValue,
+            method: "get",
+            dataType: "text",
+            //這邊的"id"是給controller的變數名
+            data: { "prodID": MyValue },
+        }).done(function () {
+//         	alert("成功")
+            location.reload();
+        }).fail(function () {
+//         	alert("失敗")
+        	location.reload();
+        })
+    });
+	</script>
+>>>>>>> origin/_01_Seal
 	<script>
       let cartCount = 0;
       document

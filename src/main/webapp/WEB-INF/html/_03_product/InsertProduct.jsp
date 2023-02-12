@@ -59,9 +59,15 @@ String basePathimg2 = request.getScheme() + "://" + request.getServerName() + ":
 						<div class="row">
 							<!-- 						圖片BLOCK -->
 							<div class="col-sm-6 mb-sm-40" style="width: 42%;">
+<<<<<<< HEAD
 								<span class="amount">上傳商品照片</span> <input type="file"
 									name="pPic" id="images5278" style="width: 80%"
 									accept=".jpg,.png"> <img id="preImg" style="" src="#" />
+=======
+								<span class="amount">上傳商品照片</span> 
+								<input type="file"name="pPic" id="images5278" style="width: 80%"accept=".jpg,.png"> 
+									<img id="preImg" style="" src="#" />
+>>>>>>> origin/_01_Seal
 							</div>
 							<!-- 							圖片右邊BLOCK -->
 							<div class="col-sm-6" style="margin-top: 68px; width: 58%">

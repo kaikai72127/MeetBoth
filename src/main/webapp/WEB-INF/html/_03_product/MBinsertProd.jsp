@@ -423,5 +423,8 @@ a:hover {
 			}
 		}
 	</script>
+<<<<<<< HEAD
 	</body>
+=======
+>>>>>>> origin/_01_Seal
 </html>

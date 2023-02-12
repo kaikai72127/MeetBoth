@@ -51,6 +51,7 @@ public class DiscountServiceImpl implements DiscountService {
 		discountRepository.deleteById(discountId);
 	}
 
+<<<<<<< HEAD
 	@Override
 	public List<Discount> findDiscountBySearchAllLike(String dateStart, String dateEnd, String search) {
 		return discountRepository.findDiscountBySearchAllLike(dateStart, dateEnd, search);
@@ -58,4 +59,6 @@ public class DiscountServiceImpl implements DiscountService {
 	
 	
 
+=======
+>>>>>>> origin/_01_Seal
 }

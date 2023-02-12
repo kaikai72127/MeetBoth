@@ -83,7 +83,11 @@
 				<div class="card-body">
 					<form action="<c:url value='/discountsUpdateMain.controller'/>"
 						method="post" enctype="multipart/form-data">
+<<<<<<< HEAD
 						<table id="datatablesSimple" ">
+=======
+						<table id="datatablesSimple">
+>>>>>>> origin/_01_Seal
 							<thead>
 								<tr>
 									<th>折扣代碼</th>

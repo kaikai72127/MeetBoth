@@ -21,6 +21,7 @@ public class StudBean {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "STUDNO")
 	private Integer studno;
+<<<<<<< HEAD
 	@Column(name = "UPDATEDATE")
 	private String updateDate;
 	@Column(name = "EDUCALIMIT")
@@ -39,10 +40,21 @@ public class StudBean {
 	private String conMethod;
 	@Column(name = "CONTIME")
 	private String conTime;
+=======
+	@Column(name = "MEMBERID")
+	private Integer memberId;
+	@Column(name = "TITLE")
+	private String title;
+	@Column(name = "POSTDATE")
+	private Date postDate;
+	@Column(name = "DETAIL")
+	private String detail;
+>>>>>>> origin/_01_Seal
 	@Column(name = "PRICE")
 	private Double price;
 	@Column(name = "SUBJECTITEM")
 	private String subjectItem;
+<<<<<<< HEAD
 	@Column(name = "TEXTBOOK")
 	private String textBook;
 	@Column(name = "STARTDATE")
@@ -54,10 +66,17 @@ public class StudBean {
 	@ManyToOne
 	@JoinColumn(name = "MEMBERID")
 	private MemberBean member;
+=======
+	@Column(name = "LEARNLOC")
+	private String learnLoc;
+	@Column(name = "CLASSPICTURE")
+	private Blob classPicture;
+>>>>>>> origin/_01_Seal
 	
 	public StudBean() {
 	}
 
+<<<<<<< HEAD
 	public StudBean(Integer studno, String updateDate, String educaLimit, String studLoc, String object,
 			String classMode, String testTeacMode, String studTime, String conMethod, String conTime, Double price,
 			String subjectItem, String textBook, String startDate, String period, Integer views, MemberBean member) {
@@ -78,6 +97,19 @@ public class StudBean {
 		this.period = period;
 		this.views = views;
 		this.member = member;
+=======
+	public StudBean(Integer studno, Integer memberId, String title, Date postDate, String detail, Double price,
+			String subjectItem, String learnLoc, Blob classPicture) {
+		this.studno = studno;
+		this.memberId = memberId;
+		this.title = title;
+		this.postDate = postDate;
+		this.detail = detail;
+		this.price = price;
+		this.subjectItem = subjectItem;
+		this.learnLoc = learnLoc;
+		this.classPicture = classPicture;
+>>>>>>> origin/_01_Seal
 	}
 
 	public Integer getStudno() {
@@ -88,12 +120,21 @@ public class StudBean {
 		this.studno = studno;
 	}
 
+<<<<<<< HEAD
 	public String getUpdateDate() {
 		return updateDate;
 	}
 
 	public void setUpdateDate(String updateDate) {
 		this.updateDate = updateDate;
+=======
+	public Integer getmemberId() {
+		return memberId;
+	}
+
+	public void setmemberId(Integer memberId) {
+		this.memberId = memberId;
+>>>>>>> origin/_01_Seal
 	}
 
 	public String getEducaLimit() {
@@ -104,12 +145,21 @@ public class StudBean {
 		this.educaLimit = educaLimit;
 	}
 
+<<<<<<< HEAD
 	public String getStudLoc() {
 		return studLoc;
 	}
 
 	public void setStudLoc(String studLoc) {
 		this.studLoc = studLoc;
+=======
+	public Date getpostDate() {
+		return postDate;
+	}
+
+	public void setpostDate(Date postDate) {
+		this.postDate = postDate;
+>>>>>>> origin/_01_Seal
 	}
 
 	public String getObject() {
@@ -168,6 +218,7 @@ public class StudBean {
 		this.price = price;
 	}
 
+<<<<<<< HEAD
 	public String getSubjectItem() {
 		return subjectItem;
 	}
@@ -214,5 +265,29 @@ public class StudBean {
 
 	public void setMember(MemberBean member) {
 		this.member = member;
+=======
+	public String getsubjectItem() {
+		return subjectItem;
+	}
+
+	public void setsubjectItem(String subjectItem) {
+		this.subjectItem = subjectItem;
+	}
+
+	public String getlearnLoc() {
+		return learnLoc;
+	}
+
+	public void setlearnLoc(String learnLoc) {
+		this.learnLoc = learnLoc;
+	}
+
+	public Blob getclassPicture() {
+		return classPicture;
+	}
+
+	public void setclassPicture(Blob classPicture) {
+		this.classPicture = classPicture;
+>>>>>>> origin/_01_Seal
 	}
 }

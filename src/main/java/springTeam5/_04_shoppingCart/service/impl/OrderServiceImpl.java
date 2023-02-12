@@ -67,6 +67,7 @@ public class OrderServiceImpl implements springTeam5._04_shoppingCart.service.Or
 	}
 
 	// 條件搜尋----模糊搜尋用
+<<<<<<< HEAD
 	
 	@Override
 	public List<OrderBean> findOrderBySearchAllLike(String ordStstus, String paymentStstus, String deliveryStstus,
@@ -75,6 +76,8 @@ public class OrderServiceImpl implements springTeam5._04_shoppingCart.service.Or
 	}
 	
 	
+=======
+>>>>>>> origin/_01_Seal
 	@Override
 	public List<OrderBean> findOrderBySearch1(String ordStstus, String paymentStstus, String deliveryStstus,
 			String search) {

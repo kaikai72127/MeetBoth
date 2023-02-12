@@ -28,8 +28,11 @@ public interface OrderService {
 	List<OrderBean> findByOrderNo(Integer orderNo);
 
 	// 條件搜尋
+<<<<<<< HEAD
 	List<OrderBean> findOrderBySearchAllLike(String ordStstus, String paymentStstus, String deliveryStstus, String search);
 	
+=======
+>>>>>>> origin/_01_Seal
 	List<OrderBean> findOrderBySearch1(String ordStstus, String paymentStstus, String deliveryStstus, String search);
 
 	List<OrderBean> findOrderBySearch2(String paymentStstus, String deliveryStstus, String search);

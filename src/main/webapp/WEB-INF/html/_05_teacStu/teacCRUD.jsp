@@ -269,6 +269,7 @@ body {
     -->
 	<!-- 引入共同的js -->
 	<jsp:include page="/WEB-INF/html/fragment/jsPath.jsp" />
+<<<<<<< HEAD
 	<script>
    	document.querySelector('form[action*="_05_teacStu.insertdataMain.controller"] button[type="submit"]').addEventListener('click', function (e) {
      	const user = '${pageContext.request.userPrincipal.name}';
@@ -279,5 +280,8 @@ body {
      	}
    	});
 	</script>
+=======
+
+>>>>>>> origin/_01_Seal
 </body>
 </html>

@@ -17,7 +17,11 @@ public interface TeacServiceInterface {
 //	搜尋全部教師貼文依日期降序排序
 	public List<TeacBean> searchAllTeacOBpDate();
 	
+<<<<<<< HEAD
 //	搜尋全部教師貼文依瀏覽次數排序
+=======
+//	搜尋全部教師貼文依會員編號排序
+>>>>>>> origin/_01_Seal
 	public List<TeacBean> findAllByOrderByViews();
 	
 //	透過貼文編號建立教師貼文查詢

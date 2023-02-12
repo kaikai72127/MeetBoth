@@ -44,6 +44,7 @@ String basePathimg2 = request.getScheme() + "://" + request.getServerName() + ":
 	padding: 5px;
 	font-size: 18px
 }
+<<<<<<< HEAD
 
 .td11 {
 	padding: 5px;
@@ -68,6 +69,27 @@ String basePathimg2 = request.getScheme() + "://" + request.getServerName() + ":
 .td15 {
 	padding: 0;
 	width: 10%;
+=======
+.td11{
+padding: 5px;
+	width:10%;
+}
+.td12{
+padding: 0;
+	width:8%;
+}
+.td13{
+padding: 0;
+	width:40%;
+}
+.td14{
+padding: 0;
+	width:10%;
+}
+.td15{
+padding: 0;
+	width:10%;
+>>>>>>> origin/_01_Seal
 }
 
 .td2 {
@@ -76,6 +98,7 @@ String basePathimg2 = request.getScheme() + "://" + request.getServerName() + ":
 }
 
 input[type="submit"] {
+<<<<<<< HEAD
 	margin: 10px;
 }
 
@@ -104,6 +127,28 @@ input[type="submit"] {
 .titlesize {
 	font-size: 18;
 	color: red
+=======
+  margin: 10px;
+}
+
+.btn-container {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.btn-container button {
+  margin-left: 10px;
+}
+
+.long{
+overflow:hidden;
+ 
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 4;
+  box-sizing:border-box;
+>>>>>>> origin/_01_Seal
 }
 </style>
 
@@ -119,6 +164,7 @@ input[type="submit"] {
 
 
 		<!-- 中間欄位開始 -->
+<<<<<<< HEAD
 
 		<!-- 			<table -->
 		<!-- 				style='border-style: outset; margin-top: 80px; margin-left: 80px'> -->
@@ -307,6 +353,131 @@ input[type="submit"] {
 		</section>
 		<!-- 表格欄位結束 -->
 		<!-- 中間欄位結束 -->
+=======
+		<div class="main">
+			<!-- 搜尋方式開始 -->
+			<section class="module">
+			
+			
+			
+			
+			
+			
+			
+				<div class="container">
+					<div class="row">
+						<div>
+							<div style='width: 40%; text-align: center; margin: 0 auto;'
+								class="widget">
+								<form role="form" method="post"
+									action="<c:url value='/_06_halaAndQa.searchAllLike.controller' />">
+									<div class="search-box">
+										<input name="search" class="form-control" type="text"
+											placeholder="Search..." />
+										<button class="search-btn" type="submit">
+											<i class="fa fa-search"></i>
+										</button>
+									</div>
+								</form>
+							</div>
+						</div>
+						<br>
+						<!-- 搜尋方式結束 -->
+
+						<!-- 表格欄位開始 -->
+						<div class="col-sm-8 col-sm-offset-1" style='width: 80%'>
+							<div class="post">
+								<div class="post-header font-alt">
+									<h2 class="post-title">
+										<a href="#">哈拉區貼文列表</a>
+									</h2>
+									<div class="btn-container">
+  <form action="<c:url value='/_06_halaAndQa.SelectAllHala.controller' />">
+    <button style="float: right" class="btn btn-b btn-circle" type="submit">查詢全部貼文</button>
+  </form>
+  <form action="<c:url value='/_06_halaAndQa.goAddHala.controller' />">
+    <button style="float: right" class="btn btn-b btn-circle" type="submit">發文</button>
+  </form>
+</div>
+								</div>
+								<div>
+  <form method="get" action="<c:url value='/_06_halaAndQa.SelectHalaClass.controller' />">
+    <input type="submit" name="halaclassname" value="公告" style="width: 17%">
+    <input type="submit" name="halaclassname" value="閱讀心得" style="width: 17%">
+    <input type="submit" name="halaclassname" value="資料分享" style="width: 17%">
+    <input type="submit" name="halaclassname" value="圖書推薦" style="width: 17%">
+    <input type="submit" name="halaclassname" value="教學文章" style="width: 17%">
+    <input type="submit" name="halaclassname" value="JAVA" style="width: 17%">
+    <input type="submit" name="halaclassname" value="HTML" style="width: 17%">
+    <input type="submit" name="halaclassname" value="Spring" style="width: 17%">
+    <input type="submit" name="halaclassname" value="SpringBoot" style="width: 17%">
+    <input type="submit" name="halaclassname" value="SpringMVC" style="width: 17%">
+    <input type="submit" name="halaclassname" value="SQL Server" style="width: 17%">
+    <input type="submit" name="halaclassname" value="My SQL" style="width: 17%">
+    <input type="submit" name="halaclassname" value="Hibernate" style="width: 17%">
+    <input type="submit" name="halaclassname" value="VScode" style="width: 17%">
+    <input type="submit" name="halaclassname" value="eclipse" style="width: 17%">
+    <input type="submit" name="halaclassname" value="SpringTool" style="width: 17%">
+    <input type="submit" name="halaclassname" value="JDBC" style="width: 17%">
+    <input type="submit" name="halaclassname" value="Servlet" style="width: 17%">
+    <input type="submit" name="halaclassname" value="JavaScript" style="width: 17%">
+    <input type="submit" name="halaclassname" value="jQuery" style="width: 17%">
+    <input type="submit" name="halaclassname" value="Azure" style="width: 17%">
+    <input type="submit" name="halaclassname" value="RESTful" style="width: 17%">
+    <input type="submit" name="halaclassname" value="c++" style="width: 17%">
+    <input type="submit" name="halaclassname" value="python" style="width: 17%">
+    <input type="submit" name="halaclassname" value="其他" style="width: 17%">
+  </form>
+</div>
+								<div class="post-entry">
+									<table class="tab">
+										<tr class="trr">
+											<td class="td11">圖片</td>
+											<td class="td12">文章分類</td>
+											<td class="td13">標題/內容</td>
+											<td class="td14">讚/瀏覽次數</td>
+											<td class="td15">貼文/修改日期</td>
+										</tr>
+										<c:forEach var="bean" items="${classList}">
+											<tr class="trr">
+												<td><img width='80'
+													src="<c:url value='/_06_halaAndQa.picsave.controller?id=${bean.halaId}' />"></td>
+												<td class="td2"><p>${bean.halaclassname}</p></td>
+												<td class="td2"><a
+													href="<c:url value='/_06_halaAndQa.goHalaPage.controller?halaid=${bean.halaId}'/>">
+														<div class="long">
+															<div >
+																<p>${bean.title}</p>
+															</div>
+															<p >${bean.halacontent}</p>
+														</div>
+												</a></td>
+												<td class="td2"><button id="tumbBtn">讚</button>
+													<p id="tumbhere">讚:${bean.tumb}
+														<input type="hidden" id="tumbid" value="${bean.halaId}">
+													</p>
+                                                    <p id="watch">瀏覽次數:${bean.watch}
+                                                         
+                                                    </p>   												
+													</td>
+												<td class="td2"><p>${bean.postdate}</p></td>
+											</tr>
+										</c:forEach>
+									</table>
+									<div class="pagination font-alt">
+										<a href="#"><i class="fa fa-angle-left"></i></a><a
+											class="active" href="#">1</a><a href="#">2</a><a href="#">3</a><a
+											href="#">4</a><a href="#"><i class="fa fa-angle-right"></i></a>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</section>
+			<!-- 表格欄位結束 -->
+			<!-- 中間欄位結束 -->
+>>>>>>> origin/_01_Seal
 	</main>
 	<jsp:include page="/WEB-INF/html/fragment/footerMVC.jsp" />
 	</div>
@@ -349,6 +520,7 @@ input[type="submit"] {
 	<script src=<%=basePath5%>></script>
 	<script src="https://kit.fontawesome.com/25590258af.js"
 		crossorigin="anonymous"></script>
+<<<<<<< HEAD
 
 	<script>
 		const tumbBtn = document.getElementById("tumbBtn");
@@ -386,5 +558,40 @@ input[type="submit"] {
 	</script>
 
 
+=======
+	
+	<script>
+	const tumbBtn = document.getElementById("tumbBtn");
+	const tumbhere = document.getElementById("tumbhere");
+	var i = 0;
+	tumbBtn.addEventListener("click", function () {
+	    i++;
+	    let currentCount = parseInt(tumbhere.innerHTML);
+	    if (i % 2 == 1) {
+	        tumbhere.innerHTML = currentCount + 1;
+	    } else {
+	        tumbhere.innerHTML = currentCount - 1;
+	    }
+	    console.log(i % 2);
+
+	    const tumbid = document.getElementById("tumbid");
+	    let tumbValue = tumbid.value;
+
+	    fetch(`/MeetBoth/tumbhere.controller/${tumbhere.innerHTML}/${tumbValue}`, {
+	        method: 'POST',
+	        headers: {
+	            'Content-Type': 'application/json'
+	        },
+	    })
+	        .then(function (response) {
+	            if (response.status == 200) {
+
+	            }
+	        });
+	});
+	</script>
+	
+	
+>>>>>>> origin/_01_Seal
 </body>
 </html>

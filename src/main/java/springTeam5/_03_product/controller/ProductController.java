@@ -10,7 +10,10 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.LinkedHashSet;
 import java.util.List;
+<<<<<<< HEAD
 import java.util.Optional;
+=======
+>>>>>>> origin/_01_Seal
 
 import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.http.HttpServletRequest;
@@ -48,14 +51,20 @@ public class ProductController {
 
 	@Autowired
 	private ProductCommentService pcService;
+<<<<<<< HEAD
 	
 	@Autowired
 	private MemberService memberService;
+=======
+>>>>>>> origin/_01_Seal
 //	-----------------------------後台-----------------------
 //	導到後台
 	@GetMapping("/_03_product.index.controller")
 	public String processpathToYTplayerAction(Model mProd) {
+<<<<<<< HEAD
 		
+=======
+>>>>>>> origin/_01_Seal
 		return "_03_product/MBCMS";
 	}
 	
@@ -599,6 +608,7 @@ public class ProductController {
 	}
 //	個人賣場part----------------------------------
 	@GetMapping("/_03_product/pathToMyPDP.controller")
+<<<<<<< HEAD
 	public String processpathToMyPDPAction(Model mProd,HttpServletRequest request) {
 		HttpSession session = request.getSession(false);
 		MemberBean member = (MemberBean) session.getAttribute("Member");
@@ -646,6 +656,13 @@ public class ProductController {
 		pm.addAttribute("prodList", result);
 		
 		return "redirect:_03_product/pathToMyPDP.controller";
+=======
+	public String processpathToMyPDPAction(Model mProd) {
+//		List<Product> result = pService.findRandomProducts();
+//		mProd.addAttribute("bean", result);
+		
+		return "/_03_product/myPDP";
+>>>>>>> origin/_01_Seal
 	}
 
 

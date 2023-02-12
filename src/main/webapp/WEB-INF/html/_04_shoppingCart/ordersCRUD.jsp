@@ -160,7 +160,11 @@ tr:nth-of-type(even) td {
 								<th width=80px>刪除</th>
 							</tr>
 						</thead>
+<<<<<<< HEAD
 						<c:forEach var="bean" items="${orderList}">
+=======
+						<c:forEach var="bean" items="${classList}">
+>>>>>>> origin/_01_Seal
 
 
 							<tbody>

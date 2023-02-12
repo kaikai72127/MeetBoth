@@ -22,6 +22,7 @@ button.removeProduct {
 button.removeProduct:hover {
 	background-color: #ce7777;
 	color: white;
+<<<<<<< HEAD
 	border: 2px solid #ce7777;
 }
 
@@ -44,6 +45,43 @@ button.removeProduct:hover {
 }
 </style>
 
+=======
+	border: 1px solid #ce7777;
+}
+</style>
+
+<script type="text/javascript">
+	function cancelOrder() {
+		if (confirm("確定取消此份訂單 ? ")) {
+			// 接收此資料的Servlet會使用 finalDecision 參數的值
+			console.log = (forms[0].finalDecision.value)
+			document.forms[0].finalDecision.value = "CANCEL";
+			document.forms[0].action = "<c:url value='/orderConfirmCancel.controller' />";
+			document.forms[0].submit();
+			return;
+		} else {
+			return;
+		}
+	}
+	function reconfirmOrder() {
+		var sa = document.getElementById('ShippingAddress').value;
+		if (sa === "") {
+			window.alert('出貨地址不能是空白');
+			return;
+		}
+		if (confirm("確定送出此份訂單 ? ")) {
+			// 接收此資料的Servlet會使用 finalDecision 參數的值
+			document.forms[0].finalDecision.value = "ORDER";
+			document.forms[0].action = "<c:url value='/_04_ShoppingCart/ProcessOrder.do' />";
+			document.forms[0].method = "POST";
+			document.forms[0].submit();
+			return;
+		} else {
+			return;
+		}
+	}
+</script>
+>>>>>>> origin/_01_Seal
 </head>
 
 <!--BOBY-->
@@ -229,6 +267,7 @@ button.removeProduct:hover {
 							</div>
 
 							<!-- 							選擇付款方式 -->
+<<<<<<< HEAD
 							<!-- 							<div> -->
 							<!-- 								<h3>付款方式:</h3> -->
 							<!-- 								<label for="貨到付款">貨到付款</label><input type='radio' -->
@@ -240,10 +279,25 @@ button.removeProduct:hover {
 							<!-- 									style="width: 200px;" /> -->
 							<!-- 							</div> -->
 							<div id="btnArea" align="center">
+=======
+							<div>
+								<h3>付款方式:</h3>
+								<label for="貨到付款">貨到付款</label><input type='radio'
+									name='paymentMethod' value="貨到付款" class="fieldWidth"
+									style="width: 200px;" /> <label for="信用卡">信用卡</label><input
+									type='radio' name='paymentMethod' value="信用卡"
+									class="fieldWidth" style="width: 200px;" /> <label for="轉帳">轉帳</label><input
+									type='radio' name='paymentMethod' value="轉帳" class="fieldWidth"
+									style="width: 200px;" />
+							</div>
+							<div id="btnArea" align="center">
+
+>>>>>>> origin/_01_Seal
 								<input type="submit" name="submit" id="submit" value="送出訂單"
 									style="margin-right: 20px" /> <input type="reset"
 									name="cancel" id="cancel" value="重填訂單">
 							</div>
+<<<<<<< HEAD
 							<div align="center">
 								<a href="<c:url value='/shoppingcart.controller' />"
 									class="btn border"
@@ -253,6 +307,12 @@ button.removeProduct:hover {
 
 							</div>
 
+=======
+							<a href="<c:url value='/shoppingcart.controller' />"
+								class="btn border" style="font-size: 18px"> <i
+								class="fa-solid fa-angles-left"></i>返回
+							</a>
+>>>>>>> origin/_01_Seal
 						</div>
 					</section>
 				</div>
@@ -306,5 +366,9 @@ button.removeProduct:hover {
 		})
 	</script>
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> origin/_01_Seal
 </body>
 </html>

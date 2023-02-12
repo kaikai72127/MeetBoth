@@ -244,8 +244,13 @@ a:hover {
 						<!-- 						右邊欄位開始 -->
 						<div class="col-sm-8 col-sm-offset-1"
 							style="margin-left: 20px; width: 75%; border-left: solid 1px yellow;">
+<<<<<<< HEAD
 							<div  class="col-sm-12">
 								<img style="width:100%" src="html/assets/images/shop/PTT.webp" alt="Title of Image" />
+=======
+							<div class="col-sm-12">
+								<img src="html/assets/images/shop/2023.png" alt="Title of Image" />
+>>>>>>> origin/_01_Seal
 							</div>
 							<div class="post">
 								<!-- 							標題 -->
@@ -526,5 +531,8 @@ a:hover {
 			chart.draw(data, options);
 		}
 	</script>
+<<<<<<< HEAD
 	</body>
+=======
+>>>>>>> origin/_01_Seal
 </html>

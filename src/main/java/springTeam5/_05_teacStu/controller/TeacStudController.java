@@ -1,10 +1,20 @@
 package springTeam5._05_teacStu.controller;
 
+<<<<<<< HEAD
 import java.security.Principal;
+=======
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.security.Principal;
+import java.sql.Blob;
+import java.sql.SQLException;
+>>>>>>> origin/_01_Seal
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 import javax.servlet.annotation.MultipartConfig;
 
@@ -17,13 +27,23 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
+<<<<<<< HEAD
+=======
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
+>>>>>>> origin/_01_Seal
 
 import springTeam5._01_member.model.MemberBean;
 import springTeam5._01_member.model.MemberService;
 import springTeam5._05_teacStu.model.ReplyTeac;
 import springTeam5._05_teacStu.model.StudBean;
 import springTeam5._05_teacStu.model.TeacBean;
+<<<<<<< HEAD
+=======
+import springTeam5._05_teacStu.service.GlobalService;
+>>>>>>> origin/_01_Seal
 import springTeam5._05_teacStu.service.ReplyTeacServiceInterface;
 import springTeam5._05_teacStu.service.StudServiceInterface;
 import springTeam5._05_teacStu.service.TeacServiceInterface;
@@ -58,12 +78,16 @@ public class TeacStudController {
 			return "membersError";
 		}
 		List<TeacBean> teac = tService.searchAllTeacOBpDate();
+<<<<<<< HEAD
 		int page2 = 1;
 		try {
 		    page2 = Integer.parseInt(page);
 		} catch (NumberFormatException e) {
 		    page2 = 1;
 		}
+=======
+		int page2 = Integer.parseInt(page);
+>>>>>>> origin/_01_Seal
 		// 每頁顯示的貼文數量，可以自行修改
 		int pageSize = 5;
 		int totalPages = (int) Math.ceil((double) teac.size() / pageSize);
@@ -75,16 +99,23 @@ public class TeacStudController {
 		if (startIndex >= teac.size()) {
 			startIndex = teac.size() - pageSize;
 		}
+<<<<<<< HEAD
 		if (teac.size() <= pageSize) {
 			startIndex = 0;
 		} else if (startIndex >= teac.size()) {
 			startIndex = teac.size() - pageSize;
 		}
+=======
+>>>>>>> origin/_01_Seal
 		List<TeacBean> pageTeac = teac.subList(startIndex, endIndex);
 
 		m.addAttribute("pageTeac", pageTeac);
 		m.addAttribute("totalPages", totalPages);
+<<<<<<< HEAD
 		m.addAttribute("currentPage", page2);
+=======
+		m.addAttribute("currentPage", page);
+>>>>>>> origin/_01_Seal
 
 		return "_05_teacStu/teacCRUD";
 	}
@@ -142,12 +173,16 @@ public class TeacStudController {
 		Double high = Double.valueOf(highstr);
 		
 		List<TeacBean> teac = tService.searchTeacByPrice(low, high);
+<<<<<<< HEAD
 		int page2 = 1;
 		try {
 		    page2 = Integer.parseInt(page);
 		} catch (NumberFormatException e) {
 		    page2 = 1;
 		}
+=======
+		int page2 = Integer.parseInt(page);
+>>>>>>> origin/_01_Seal
 		// 每頁顯示的貼文數量，可以自行修改
 		int pageSize = 5;
 		int totalPages = (int) Math.ceil((double) teac.size() / pageSize);
@@ -159,16 +194,23 @@ public class TeacStudController {
 		if (startIndex >= teac.size()) {
 			startIndex = teac.size() - pageSize;
 		}
+<<<<<<< HEAD
 		if (teac.size() <= pageSize) {
 			startIndex = 0;
 		} else if (startIndex >= teac.size()) {
 			startIndex = teac.size() - pageSize;
 		}
+=======
+>>>>>>> origin/_01_Seal
 		List<TeacBean> pageTeac = teac.subList(startIndex, endIndex);
 
 		m.addAttribute("pageTeac", pageTeac);
 		m.addAttribute("totalPages", totalPages);
+<<<<<<< HEAD
 		m.addAttribute("currentPage", page2);
+=======
+		m.addAttribute("currentPage", page);
+>>>>>>> origin/_01_Seal
 
 		return "_05_teacStu/teacCRUD";
 	}
@@ -224,12 +266,16 @@ public class TeacStudController {
 	public String processsearchAllLikeAcction(@RequestParam("search") String search, Model m, @PathVariable("page") String page){
 		
 		List<TeacBean> teac = tService.searchAllLike(search);
+<<<<<<< HEAD
 		int page2 = 1;
 		try {
 		    page2 = Integer.parseInt(page);
 		} catch (NumberFormatException e) {
 		    page2 = 1;
 		}
+=======
+		int page2 = Integer.parseInt(page);
+>>>>>>> origin/_01_Seal
 		// 每頁顯示的貼文數量，可以自行修改
 		int pageSize = 5;
 		int totalPages = (int) Math.ceil((double) teac.size() / pageSize);
@@ -241,16 +287,23 @@ public class TeacStudController {
 		if (startIndex >= teac.size()) {
 			startIndex = teac.size() - pageSize;
 		}
+<<<<<<< HEAD
 		if (teac.size() <= pageSize) {
 			startIndex = 0;
 		} else if (startIndex >= teac.size()) {
 			startIndex = teac.size() - pageSize;
 		}
+=======
+>>>>>>> origin/_01_Seal
 		List<TeacBean> pageTeac = teac.subList(startIndex, endIndex);
 
 		m.addAttribute("pageTeac", pageTeac);
 		m.addAttribute("totalPages", totalPages);
+<<<<<<< HEAD
 		m.addAttribute("currentPage", page2);
+=======
+		m.addAttribute("currentPage", page);
+>>>>>>> origin/_01_Seal
 
 		return "_05_teacStu/teacCRUD";
 	}
@@ -310,12 +363,16 @@ public class TeacStudController {
 			teac = tService.searchAllTeac();
 			break;
 		}
+<<<<<<< HEAD
 		int page2 = 1;
 		try {
 		    page2 = Integer.parseInt(page);
 		} catch (NumberFormatException e) {
 		    page2 = 1;
 		}
+=======
+		int page2 = Integer.parseInt(page);
+>>>>>>> origin/_01_Seal
 		// 每頁顯示的貼文數量，可以自行修改
 		int pageSize = 5;
 		int totalPages = (int) Math.ceil((double) teac.size() / pageSize);
@@ -327,16 +384,23 @@ public class TeacStudController {
 		if (startIndex >= teac.size()) {
 			startIndex = teac.size() - pageSize;
 		}
+<<<<<<< HEAD
 		if (teac.size() <= pageSize) {
 			startIndex = 0;
 		} else if (startIndex >= teac.size()) {
 			startIndex = teac.size() - pageSize;
 		}
+=======
+>>>>>>> origin/_01_Seal
 		List<TeacBean> pageTeac = teac.subList(startIndex, endIndex);
 
 		m.addAttribute("pageTeac", pageTeac);
 		m.addAttribute("totalPages", totalPages);
+<<<<<<< HEAD
 		m.addAttribute("currentPage", page2);
+=======
+		m.addAttribute("currentPage", page);
+>>>>>>> origin/_01_Seal
 
 		return "_05_teacStu/teacCRUD";
 	}
@@ -437,6 +501,7 @@ public class TeacStudController {
 			return "membersError";
 		}
 		StudBean stud = sService.searchStudFromStudno(studno);
+<<<<<<< HEAD
 		String account = SecurityContextHolder.getContext().getAuthentication().getName();
 		List<MemberBean> list = mService.searchMemByAccount(account);
 		if (list != null && list.size() > 0) {
@@ -445,6 +510,8 @@ public class TeacStudController {
 			} else {
 			  m.addAttribute("m", null);
 			}
+=======
+>>>>>>> origin/_01_Seal
 		m.addAttribute("bean", stud);
 		return "_05_teacStu/studpostpage";
 	}
@@ -457,9 +524,17 @@ public class TeacStudController {
 			@RequestParam("teacLoc") String teacLoc,@RequestParam("teacObject") String teacObject,
 			@RequestParam("teacTime") String teacTime,@RequestParam("classMode") String classMode,
 			@RequestParam("willTeac") String willTeac,@RequestParam("conMethod") String conMethod,
+<<<<<<< HEAD
 			@RequestParam("conTime") String conTime,@RequestParam("price") Double price,@RequestParam("teacno") Integer teacno){
 		TeacBean t = new TeacBean();
 		t.setTeacno(teacno);
+=======
+			@RequestParam("conTime") String conTime,@RequestParam("price") Double price){
+		TeacBean t = new TeacBean();
+		Optional<MemberBean> m = mService.searchMemByID(4);
+		MemberBean memberBean = m.get();
+		t.setMember(memberBean);
+>>>>>>> origin/_01_Seal
 		t.setUpdateDate(getCurrentDate());
 		t.setHighEdu(highEdu);
 		t.setStudExp(studExp);
@@ -481,6 +556,7 @@ public class TeacStudController {
 	
 //	修改學生貼文
 	@PostMapping("/_05_teacStu.updatedataStud.controller")
+<<<<<<< HEAD
 	public String processupdatedataStudAction(@RequestParam("educaLimit") String educaLimit,@RequestParam("studLoc") String studLoc,
 			@RequestParam("object") String object,@RequestParam("classMode") String classMode,@RequestParam("testTeacMode") String testTeacMode,
 			@RequestParam("studTime") String studTime,@RequestParam("conMethod") String conMethod,@RequestParam("conTime") String conTime,
@@ -504,6 +580,30 @@ public class TeacStudController {
 		s.setPeriod(period);
 		sService.updateStudFromStudno(s);
 		return "redirect:_05_teacStu.searchAllStud.controller/1";
+=======
+	public String processupdatedataStudAction(@RequestParam("studno") Integer studno, @RequestParam("memberId") Integer memberId, @RequestParam("title") String title,
+			@RequestParam("detail") String detail, @RequestParam("price") Double price, @RequestParam("subjectItem") String subjectItem, 
+			@RequestParam("learnLoc") String learnLoc, @RequestParam("images") MultipartFile mf) throws IOException, SQLException {
+		InputStream in = mf.getInputStream();
+		long size = mf.getSize();
+		Blob b = GlobalService.fileToBlob(in, size);
+		Date date = new Date();
+		StudBean stud = sService.searchStudFromStudno(studno);
+		stud.setmemberId(memberId);
+		stud.setTitle(title);
+		stud.setpostDate(date);
+		stud.setDetail(detail);
+		stud.setPrice(price);
+		stud.setsubjectItem(subjectItem);
+		stud.setlearnLoc(learnLoc);
+		if (size != 0) {
+			stud.setclassPicture(b);
+			sService.updateStudFromStudno(stud);
+		}else {
+			sService.updateStudFromStudno(stud);
+		}
+		return "redirect:_05_teacStu.searchAllStud.controller";
+>>>>>>> origin/_01_Seal
 	}
 	
 //	轉跳教師新增頁面
@@ -544,10 +644,16 @@ public class TeacStudController {
 			@RequestParam("willTeac") String willTeac,@RequestParam("conMethod") String conMethod,
 			@RequestParam("conTime") String conTime,@RequestParam("price") Double price){
 		TeacBean t = new TeacBean();
+<<<<<<< HEAD
 		String account = SecurityContextHolder.getContext().getAuthentication().getName();
 		List<MemberBean> list = mService.searchMemByAccount(account);
 		MemberBean member = list.get(0);
 		t.setMember(member);
+=======
+		Optional<MemberBean> m = mService.searchMemByID(4);
+		MemberBean memberBean = m.get();
+		t.setMember(memberBean);
+>>>>>>> origin/_01_Seal
 		t.setUpdateDate(getCurrentDate());
 		t.setHighEdu(highEdu);
 		t.setStudExp(studExp);
@@ -563,7 +669,10 @@ public class TeacStudController {
 		t.setConMethod(conMethod);
 		t.setConTime(conTime);
 		t.setPrice(price);
+<<<<<<< HEAD
 		t.setViews(0);
+=======
+>>>>>>> origin/_01_Seal
 	    tService.addTeac(t);
 		return "redirect:_05_teacStu.searchAllTeac.controller/1";
 	}
@@ -587,6 +696,7 @@ public class TeacStudController {
 	
 //	新增學生貼文
 	@PostMapping("/_05_teacStu.insertdataStud.controller")
+<<<<<<< HEAD
 	public String processinsertdataStudAction(@RequestParam("educaLimit") String educaLimit,@RequestParam("studLoc") String studLoc,
 			@RequestParam("object") String object,@RequestParam("classMode") String classMode,@RequestParam("testTeacMode") String testTeacMode,
 			@RequestParam("studTime") String studTime,@RequestParam("conMethod") String conMethod,@RequestParam("conTime") String conTime,
@@ -614,6 +724,26 @@ public class TeacStudController {
 		s.setViews(0);
 		sService.addStud(s);
 		return "redirect:_05_teacStu.searchAllStud.controller/1";
+=======
+	public String processinsertdataStudAction(@RequestParam("memberId") Integer memberId, @RequestParam("title") String title, @RequestParam("detail") String detail,
+								@RequestParam("price") Double price, @RequestParam("subjectItem") String subjectItem, 
+								@RequestParam("learnLoc") String learnLoc, @RequestParam("images") MultipartFile mf) throws IllegalStateException, IOException, SQLException {
+		InputStream in = mf.getInputStream();
+		long size = mf.getSize();
+		Blob b = GlobalService.fileToBlob(in, size);
+		Date date = new Date();
+		StudBean t = new StudBean();
+		t.setmemberId(memberId);
+		t.setTitle(title);
+		t.setpostDate(date);
+		t.setDetail(detail);
+		t.setPrice(price);
+		t.setsubjectItem(subjectItem);
+		t.setlearnLoc(learnLoc);
+		t.setclassPicture(b);
+		sService.addStud(t);
+		return "redirect:_05_teacStu.searchAllStud.controller";
+>>>>>>> origin/_01_Seal
 	}
 	
 //	刪除教師貼文
@@ -631,6 +761,7 @@ public class TeacStudController {
 		return "redirect:_05_teacStu.searchAllStud.controller/1";
 	}
 	
+<<<<<<< HEAD
 //	匹配度測試1
 	public double calculateSimilarity(String s1, String s2) {
 	    int m = s1.length();
@@ -679,5 +810,31 @@ public class TeacStudController {
 	    similarity += calculateSimilarity(t.getSubjectItem(), s.getSubjectItem());
 
 	    return similarity;
+=======
+	
+//	儲存學生貼文圖片
+	@GetMapping(path = "/_05_teacStu.picsaveStud.controller", produces = "text/plain;charset=UTF-8")
+	public void processByteArrayImageStudAction(HttpServletRequest request, HttpServletResponse response) throws IOException, SQLException {
+		OutputStream os = null;
+		InputStream is = null;
+		Blob blob = null;
+		String id = request.getParameter("id");
+		Integer nId = Integer.parseInt(id);
+		StudBean bean = sService.searchStudFromStudno(nId);
+		if (bean != null) {
+			blob = bean.getclassPicture();
+			if (blob != null) {
+				is = blob.getBinaryStream();
+			}
+		}
+		response.setContentType("jpg/png");
+		os = response.getOutputStream();
+		int len = 0;
+		byte[] bytes = new byte[8192];
+		while ((len = is.read(bytes)) != -1) {
+			os.write(bytes, 0, len);
+		}
+		os.close();
+>>>>>>> origin/_01_Seal
 	}
 }

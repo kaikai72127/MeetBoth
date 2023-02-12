@@ -21,7 +21,10 @@ import javax.persistence.Transient;
 
 import org.springframework.stereotype.Component;
 
+<<<<<<< HEAD
 import springTeam5._01_member.model.MemberBean;
+=======
+>>>>>>> origin/_01_Seal
 import springTeam5._04_shoppingCart.model.OrderItemBean;
 
 @Entity
@@ -74,6 +77,9 @@ public class Product {
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "product", cascade = CascadeType.ALL)
 	private List<ProductComment> productComment = new ArrayList<ProductComment>();
+	
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "prodItem",cascade = CascadeType.ALL)
+	private Set<OrderItemBean> orderItems = new LinkedHashSet<OrderItemBean>(); // itemsList
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "prodItem", cascade = CascadeType.ALL)
 	private Set<OrderItemBean> orderItems = new LinkedHashSet<OrderItemBean>(); // itemsList
@@ -118,6 +124,51 @@ public class Product {
 		this.orderItems = orderItems;
 		this.memberID = memberID;
 		this.memberBean = memberBean;
+	}
+
+	public String getProdState() {
+		return prodState;
+	}
+
+	public void setProdState(String prodState) {
+		this.prodState = prodState;
+	}
+
+	public Integer getProdCheck() {
+		return prodCheck;
+	}
+
+	public void setProdCheck(Integer prodCheck) {
+		this.prodCheck = prodCheck;
+	}
+
+	public Integer getProdSales() {
+		return prodSales;
+	}
+
+	public void setProdSales(Integer prodSales) {
+		this.prodSales = prodSales;
+	}
+
+	public Product(int prodID, String prodName, int prodPrice, int memberID, int inventory, String prodPost,
+			String prodUpdate, String directions, Blob prodImg, Integer prodSales, Integer prodCheck, int prodClass,
+			String prodState, ProdType prodtype, List<ProductComment> productComment) {
+		super();
+		this.prodID = prodID;
+		this.prodName = prodName;
+		this.prodPrice = prodPrice;
+		this.memberID = memberID;
+		this.inventory = inventory;
+		this.prodPost = prodPost;
+		this.prodUpdate = prodUpdate;
+		this.directions = directions;
+		this.prodImg = prodImg;
+		this.prodSales = prodSales;
+		this.prodCheck = prodCheck;
+		this.prodClass = prodClass;
+		this.prodState = prodState;
+		this.prodtype = prodtype;
+		this.productComment = productComment;
 	}
 
 	public String getProdState() {
@@ -240,12 +291,39 @@ public class Product {
 		this.productComment = productComment;
 	}
 
+<<<<<<< HEAD
+=======
+	
+	
+>>>>>>> origin/_01_Seal
 	public Set<OrderItemBean> getOrderItems() {
 		return orderItems;
 	}
 
 	public void setOrderItems(Set<OrderItemBean> orderItems) {
 		this.orderItems = orderItems;
+<<<<<<< HEAD
+=======
+	}
+
+	public Product(int prodID, String prodName, int prodPrice, int memberID, int inventory, String prodPost,
+			String prodUpdate, String directions, Blob prodImg, Integer prodSales, int prodClass, ProdType prodtype,
+			List<ProductComment> productComment) {
+		super();
+		this.prodID = prodID;
+		this.prodName = prodName;
+		this.prodPrice = prodPrice;
+		this.memberID = memberID;
+		this.inventory = inventory;
+		this.prodPost = prodPost;
+		this.prodUpdate = prodUpdate;
+		this.directions = directions;
+		this.prodImg = prodImg;
+		this.prodSales = prodSales;
+		this.prodClass = prodClass;
+		this.prodtype = prodtype;
+		this.productComment = productComment;
+>>>>>>> origin/_01_Seal
 	}
 
 	@Override
@@ -256,6 +334,23 @@ public class Product {
 				+ prodCheck + ", prodClass=" + prodClass + ", prodtype=" + prodtype + ", productComment="
 				+ productComment + "]";
 	}
+	
+//	CREATE TABLE PRODUCT(
+//			prodClass int foreign key references PRODTYPE(prodClass), --產品類別編號
+//			prodID int not null IDENTITY (1,1) primary key, --產品編號
+//			prodName nvarchar(30), --產品名稱
+//			prodPrice decimal(8,2),--商品價格
+//			memberID int not null, --會員編號(賣家)
+//			inventory int not null, --商品庫存
+//			prodPost datetime2(0) not null,--商品上架時間
+//			prodUpdate datetime2(0) not null,--商品資訊最後更新時間
+//			prodImg varbinary(max), --商品圖片
+//			directions nvarchar(max), --商品介紹
+//			prodSales int,-- 商品銷售額
+//			prodCheck int, -- 商品瀏覽次數
+//			prodState nvarchar --商品狀態
+//			);
+
 
 //	CREATE TABLE PRODUCT(
 //			prodClass int foreign key references PRODTYPE(prodClass), --產品類別編號

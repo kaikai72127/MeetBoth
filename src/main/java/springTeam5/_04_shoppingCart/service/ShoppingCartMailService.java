@@ -19,7 +19,11 @@ public class ShoppingCartMailService {
 	public void prepareAndSendForBuy(String recipient, String memberName,String orderMessage) {
 		MimeMessagePreparator messagePreparator = mimeMessage -> {
 			MimeMessageHelper messageHelper = new MimeMessageHelper(mimeMessage,true);
+<<<<<<< HEAD
 			messageHelper.setFrom("meetboth@gmail.com"); //
+=======
+			messageHelper.setFrom("meetboth@gmail.com");
+>>>>>>> origin/_01_Seal
 			messageHelper.setTo(recipient);
 			messageHelper.setSubject(memberName+" 先生/女士 感謝您使用MeetBoth購物");
 			messageHelper.setText("<html><body><h5 style='font-size: 18px'>"+memberName+"先生/女士 感謝您的訂購<br><h5>"

@@ -84,6 +84,7 @@ h1 {
 .cart ul li a {
 	color: #000;
 }
+<<<<<<< HEAD
 
 #ChartData>div>div>div>div>svg>g>text {
 	font-size: 22px;
@@ -91,6 +92,13 @@ h1 {
 
 #ChartData>div>div>div>div>svg>g>g>g>text {
 	font-size: 17px;
+=======
+#ChartData>div>div>div>div>svg>g>text{
+	font-size:22px;
+}
+#ChartData>div>div>div>div>svg>g>g>g>text{
+	font-size:17px;
+>>>>>>> origin/_01_Seal
 }
 </style>
 </head>
@@ -113,8 +121,14 @@ h1 {
 									<li><a href="#">商品管理&ensp;<i
 											class="fa-solid fa-angle-double-down"></i></a>
 										<ul style="">
+<<<<<<< HEAD
 											<li><a href="<c:url value='/_03_product/pathToMyPDP.controller'/>">我的商品</a></li>
 											<li><a href="<c:url value='/_03_product.pathToInsertProduct.controller'/>">新增商品</a></li>
+=======
+											<li><a href="#">我的商品</a></li>
+											<li><a href="#">新增商品</a></li>
+											<li><a href="#">已售完商品</a></li>
+>>>>>>> origin/_01_Seal
 										</ul></li>
 									<li><a href="#" style="">訂單管理&ensp;<i
 											class="fa-solid fa-angle-double-down"></i></a>
@@ -149,9 +163,15 @@ h1 {
 						<div class="col-sm-8 col-sm-offset-1" style="margin-left: 20px;">
 							<div class="post">
 								<div class="post-thumbnail">
+<<<<<<< HEAD
 									<img
 										src="/MeetBoth/html/assets/images/shop/個人賣場.jpg"
 										style="padding-bottom: 10px;">
+=======
+									<a href="#"><img
+										src="/MeetBoth/html/assets/images/shop/個人賣場.jpg"
+										style="padding-bottom: 10px;"> </a>
+>>>>>>> origin/_01_Seal
 								</div>
 								<div class="post-header font-alt" style="display: flex;">
 									<img style="" src="/MeetBoth/html/assets/images/shop/兔年海報.jpg"
@@ -162,7 +182,11 @@ h1 {
 									style="padding-top: 20px; padding-bottom: 0px;">
 									<div class="container" style="">
 										<form class="row"
+<<<<<<< HEAD
 											action="<c:url value='/_03_product.searchProductWithCondition3.controller'/>"
+=======
+											action="<c:url value='/_03_product.searchProductWithCondition.controller'/>"
+>>>>>>> origin/_01_Seal
 											method="post">
 											<div class="col-sm-4 mb-sm-20"
 												style="width: 17%; padding-right: 0;">
@@ -199,8 +223,11 @@ h1 {
 												<input class="form-control" type="text" name="searchName"
 													style="font-size: 17px" placeholder="搜尋名稱" />
 											</div>
+<<<<<<< HEAD
 											<input type="hidden" name="lowprice" value="0" /> <input
 													type="hidden" name="highprice" value="9999999" />
+=======
+>>>>>>> origin/_01_Seal
 											<div class="col-sm-3" style="width: 10%">
 												<button class="btn btn-d btn-round" type="submit"
 													style="font-size: 17px">搜尋</button>
@@ -226,6 +253,7 @@ h1 {
 									style="overflow-y: scroll; overflow-x: hidden; width: 110%; height: 720px;">
 									<div class="widget">
 										<ul class="widget-posts">
+<<<<<<< HEAD
 											<c:forEach var="prodBean" items="${memberBean.product}">
 												<li class="clearfix"
 													style="background-image: url('/MeetBoth/html/assets/images/shop/backgroundimg.jpg'); background-size: cover; padding-left: 10px; height: 322.5px;">
@@ -267,11 +295,113 @@ h1 {
 													</div>
 												</li>
 											</c:forEach>
+=======
+											<li class="clearfix"
+												style="background-image: url('/MeetBoth/html/assets/images/shop/backgroundimg.jpg'); background-size: cover; padding-left: 10px; height: 321px;">
+												<div class="widget-posts-image"
+													style="height: 300px; width: 200px; margin: auto; display: flex; justify-content: center; align-items: center; margin-right: 15px;">
+													<a href="#"
+														style="margin: auto; display: flex; justify-content: center; align-items: center;"><img
+														style="padding: auto;"
+														src="/MeetBoth/html/assets/images/shop/toy.jpg" /></a>
+												</div>
+												<div class="widget-posts-body" style="font-size: 22px;">
+													<div class="widget-posts-title">
+														<a href="#">商品名稱</a>
+													</div>
+													<div class="widget-posts-meta" style="display: flex">
+														商品狀態
+														<div style="position: relative; left: 310; bottom: 30;">
+															<button class="btn btn-b btn-circle"
+																style="font-size: 17px;">修改</button>
+														</div>
+													</div>
+													<div class="widget-posts-meta" style="display: flex">
+														商品價格
+														<div style="position: relative; left: 310; bottom: 20;">
+															<button class="btn btn-b btn-circle"
+																style="font-size: 17px;">刪除</button>
+														</div>
+													</div>
+													<div class="widget-posts-meta">商品庫存</div>
+													<div class="widget-posts-meta">商品瀏覽次數</div>
+													<div class="widget-posts-meta">商品評價</div>
+												</div>
+											</li>
+											<li class="clearfix"
+												style="background-image: url('/MeetBoth/html/assets/images/shop/backgroundimg.jpg'); background-size: cover; padding-left: 10px; height: 321px;">
+												<div class="widget-posts-image"
+													style="height: 300px; width: 200px; margin: auto; display: flex; justify-content: center; align-items: center; margin-right: 15px;">
+													<a href="#"
+														style="margin: auto; display: flex; justify-content: center; align-items: center;"><img
+														style="padding: auto;"
+														src="/MeetBoth/html/assets/images/shop/全新好書.jpg" /></a>
+												</div>
+												<div class="widget-posts-body" style="font-size: 22px;">
+													<div class="widget-posts-title">
+														<a href="#">商品名稱</a>
+													</div>
+													<div class="widget-posts-meta" style="display: flex">
+														商品狀態
+														<div style="position: relative; left: 310; bottom: 30;">
+															<button class="btn btn-b btn-circle"
+																style="font-size: 17px;">修改</button>
+														</div>
+													</div>
+													<div class="widget-posts-meta" style="display: flex">
+														商品價格
+														<div style="position: relative; left: 310; bottom: 20;">
+															<button class="btn btn-b btn-circle"
+																style="font-size: 17px;">刪除</button>
+														</div>
+													</div>
+													<div class="widget-posts-meta">商品庫存</div>
+													<div class="widget-posts-meta">商品瀏覽次數</div>
+													<div class="widget-posts-meta">商品評價</div>
+												</div>
+											</li>
+											<li class="clearfix"
+												style="background-image: url('/MeetBoth/html/assets/images/shop/backgroundimg.jpg'); background-size: cover; padding-left: 10px; height: 321px;">
+												<div class="widget-posts-image"
+													style="height: 300px; width: 200px; margin: auto; display: flex; justify-content: center; align-items: center; margin-right: 15px;">
+													<a href="#"
+														style="margin: auto; display: flex; justify-content: center; align-items: center;"><img
+														style="padding: auto;"
+														src="/MeetBoth/html/assets/images/shop/全新好書.jpg" /></a>
+												</div>
+												<div class="widget-posts-body" style="font-size: 22px;">
+													<div class="widget-posts-title">
+														<a href="#">商品名稱</a>
+													</div>
+													<div class="widget-posts-meta" style="display: flex">
+														商品狀態
+														<div style="position: relative; left: 310; bottom: 30;">
+															<button class="btn btn-b btn-circle"
+																style="font-size: 17px;">修改</button>
+														</div>
+													</div>
+													<div class="widget-posts-meta" style="display: flex">
+														商品價格
+														<div style="position: relative; left: 310; bottom: 20;">
+															<button class="btn btn-b btn-circle"
+																style="font-size: 17px;">刪除</button>
+														</div>
+													</div>
+													<div class="widget-posts-meta">商品庫存</div>
+													<div class="widget-posts-meta">商品瀏覽次數</div>
+													<div class="widget-posts-meta">商品評價</div>
+												</div>
+											</li>
+>>>>>>> origin/_01_Seal
 										</ul>
 									</div>
 								</div>
 							</div>
+<<<<<<< HEAD
 							<!--       商品列 -->
+=======
+								<!--       商品列 -->
+>>>>>>> origin/_01_Seal
 							<!--訂單管理 -->
 							<div class="post-header font-alt" style="display: flex;">
 								<img src="/MeetBoth/html/assets/images/shop/兔年海報2.jpg"
@@ -504,8 +634,13 @@ h1 {
 							<!-- 數據中心 -->
 							<div class="row">
 								<div class="col-sm-12" style="display: flex;" id="ChartData">
+<<<<<<< HEAD
 									<div id="chart_div" style="width: 50%; height: 500px;"></div>
 									<div id="curve_chart" style="width: 50%; height: 500px;"></div>
+=======
+									<div id="chart_div" style="width: 50%;height:500px;"></div>
+									<div id="curve_chart" style="width: 50%;height:500px;"></div>
+>>>>>>> origin/_01_Seal
 								</div>
 							</div>
 
@@ -555,6 +690,7 @@ h1 {
 	<script src=<%=basePath5%>></script>
 	<script src="https://kit.fontawesome.com/25590258af.js"
 		crossorigin="anonymous"></script>
+<<<<<<< HEAD
 			<!-- SweetAlert js -->
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <!-- SweetAlert js -->
@@ -643,6 +779,10 @@ h1 {
 							}
 						});
 	</script>
+=======
+	<script type="text/javascript"
+		src="https://www.gstatic.com/charts/loader.js"></script>
+>>>>>>> origin/_01_Seal
 	<script type="text/javascript">
       google.charts.load('current', {'packages':['corechart']});
       google.charts.setOnLoadCallback(drawChart);

@@ -4,7 +4,6 @@
       request.getServerName() + ":" + request.getServerPort() + path
       + "/html/assets/images/meatball/meatball-96x96-New.png" ; System.out.println(baseMeetboth96x96); %>
       <c:set value="${CartSize}" var="cartsize" />
-      <c:set value="${CartSize}" var="cartsize" />
       <c:set value="${ShoppingCart}" var="ShoppingCart" />
       <c:set value="${Member}" var="Member" />
       <!-- header -->
@@ -47,6 +46,35 @@
                       </li>
                       <li><a href="index_mp_classic_flexslider.html">會員新增</a></li>
                     </ul>
+=======
+
+      <c:set value="${CartSize}" var="cartsize" />
+      <c:set value="${ShoppingCart}" var="ShoppingCart" />
+      <c:set value="${Member}" var="Member" />
+      <!-- header -->
+      <nav class="navbar navbar-custom navbar-fixed-top headershadow" role="navigation">
+        <div class="container-nav">
+          <!--Navbar橫幅 -->
+          <div class="navbar-header">
+            <button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#custom-collapse">
+              <span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span
+                class="icon-bar"></span><span class="icon-bar"></span>
+            </button>
+            <img src="<%=baseMeetboth96x96%>" style="float: left" />
+            <a class="navbar-brand" href="<c:url value='/index.controller' />">
+              肉丸家教網</a>
+            <!-- <a class="navbar-brand" href="index.html">肉丸家教網-MEET BOTH</a> -->
+          </div>
+
+          <div class="collapse navbar-collapse" id="custom-collapse">
+            <ul class="nav navbar-nav navbar-right">
+              <li class="dropdown">
+                <!--Navbar橫幅 搜尋教師 -->
+                <a class="dropdown-toggle" href="#" data-toggle="dropdown">MeetBoth</a>
+                <ul class="dropdown-menu">
+                  <li>
+                    <a href="index_mp_fullscreen_video_background.html">Default</a>
+>>>>>>> origin/_01_Seal
                   </li>
                 </ul>
               </li>
@@ -293,7 +321,8 @@
               <!--Navbar橫幅 Login會員登入 -->
               <li id="loginBtn" class="nav-item dropdown"><a href="<%=request.getContextPath()%>/login/page"
                   class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
-                  <img class="rounded-circle me-lg-2" src="html/assets/images/meatball/meatball-32x32.png" alt=""
+                  <img class="rounded-circle me-lg-2"
+                    src="<%=request.getContextPath()%>/html/assets/images/meatball/meatball-32x32.png" alt=""
                     style="width: 24px; height: 24px" /> <span class="d-none d-lg-inline-flex">登入<i
                       class="fa-solid fa-right-to-bracket"></i>
                   </span>
@@ -308,21 +337,19 @@
                   </span>
                 </a>
                 <ul class="dropdown-menu dropdown-menu-end bg-light border-0 rounded-0 rounded-bottom m-0">
-                  <li><a
-                      href="/MeetBoth/_01_member.membercenter.controller?account=${pageContext.request.userPrincipal.name}"
+                  <li>
+                    <form action="_01_member.membercenter.controller" method="post" id="memberCenter"></form><a href="#"
+                      onclick="document.getElementById('memberCenter').submit();return false"
                       class="dropdown-item">會員資料修改<i class="fa-solid fa-user"></i></a>
                   </li>
-                  <li id="admincontroller"><a href="/MeetBoth/backIndex" class="dropdown-item">管理員控制台
-                      <i class="fa-solid fa-screwdriver-wrench"></i>
-                    </a></li>
                   <li><a href="/MeetBoth/_03_product/pathToMyPDP.controller" class="dropdown-item">我的賣場 <i
                         class="fa-solid fa-right-from-bracket"></i>
                     </a></li>
-                  <li><a href="/MeetBoth/_03_product.index.controller" class="dropdown-item">後臺管理 <i
-                        class="fa-solid fa-right-from-bracket"></i>
+                  <li id="admincontroller"><a href="/MeetBoth/_03_product.index.controller" class="dropdown-item">後臺管理
+                      <i class="fa-solid fa-right-from-bracket"></i>
                     </a></li>
-                  <li><a href="/MeetBoth/logout" class="dropdown-item">Log
-                      Out <i class="fa-solid fa-right-from-bracket"></i> </i>
+                  <li><a href="/MeetBoth/logout" class="dropdown-item">登出<i class="fa-solid fa-right-from-bracket"></i>
+                      </i>
                     </a></li>
                 </ul>
               </li>

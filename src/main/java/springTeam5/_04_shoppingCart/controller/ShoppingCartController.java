@@ -3,6 +3,10 @@ package springTeam5._04_shoppingCart.controller;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
+<<<<<<< HEAD
+=======
+import java.util.Map;
+>>>>>>> origin/_01_Seal
 import java.util.Optional;
 
 import javax.servlet.http.HttpServletRequest;
@@ -77,7 +81,11 @@ public class ShoppingCartController {
 			throws IOException, SQLException {
 		HttpSession session = request.getSession(false);
 		ShoppingCart cart = (ShoppingCart) session.getAttribute("ShoppingCart");
+<<<<<<< HEAD
 //		MemberBean member = (MemberBean) session.getAttribute("Member");
+=======
+		MemberBean member = (MemberBean) session.getAttribute("Member");
+>>>>>>> origin/_01_Seal
 
 		if (cart == null) {
 			// 就新建ShoppingCart物件
@@ -85,17 +93,29 @@ public class ShoppingCartController {
 			log.info("加入購物車之Controller: 新建ShoppingCart物件");
 			// 並將此新建ShoppingCart的物件放到session物件內，成為它的屬性物件
 			session.setAttribute("ShoppingCart", cart); // ${ShoppingCart.subtotal}
+<<<<<<< HEAD
 
 			// 測試用
 //			String account = SecurityContextHolder.getContext().getAuthentication().getName();
 //			List<MemberBean> mem = memberService.searchMemByAccount(account);
 //			Optional<MemberBean> list = memberService.searchMemByID(mem.get(0).getMemberID());
 //			member = list.get();
+=======
+			// 測試用
+			String account = SecurityContextHolder.getContext().getAuthentication().getName();
+			List<MemberBean> mem = memberService.searchMemByAccount(account);
+			Optional<MemberBean> list = memberService.searchMemByID(mem.get(0).getMemberID());
+			member= list.get();
+>>>>>>> origin/_01_Seal
 
 			System.out.println("-------------Session------購物車----------member");
 
 			session.setAttribute("ShoppingCart", cart);
+<<<<<<< HEAD
 //			session.setAttribute("Member", member);
+=======
+			session.setAttribute("Member", member);
+>>>>>>> origin/_01_Seal
 
 		}
 		// 將明細資料(價格，數量，與BookBean)封裝到OrderItemBean物件內
@@ -129,6 +149,7 @@ public class ShoppingCartController {
 	@GetMapping("/shoppingcartCheck.controller")
 	public String processCheckMainAction(HttpServletRequest request) {
 		HttpSession session = request.getSession(false);
+<<<<<<< HEAD
 		MemberBean member = (MemberBean) session.getAttribute("Member");
 		ShoppingCart shoppingCart = (ShoppingCart) session.getAttribute("ShoppingCart");
 
@@ -150,13 +171,24 @@ public class ShoppingCartController {
 		session.setAttribute("Member", member);
 		// 需有兩個判斷才可以
 		if (shoppingCart != null && shoppingCart.getItemQty() != 0) {
+=======
+
+		ShoppingCart shoppingCart = (ShoppingCart) session.getAttribute("ShoppingCart");
+		
+		//需有兩個判斷才可以
+		if (shoppingCart != null && shoppingCart.getItemQty()!=0) {
+>>>>>>> origin/_01_Seal
 			// 跳轉到有購物車的頁面
 			return "_04_shoppingCart/shoppingCartCheck";
 
 		}
 		// 如果沒有商品 則跳轉回搜尋商品的頁面
 		return "redirect:/_03_product.searchAllProduct.controller";
+<<<<<<< HEAD
 
+=======
+		
+>>>>>>> origin/_01_Seal
 	}
 
 	// 移除一個item

@@ -67,7 +67,7 @@ public class ShoppingCartCheck {
 
 		// ----------------------
 		String id = obj.getMerchantTradeNo();
-		id = id.replace("MeetBoth132", "");
+		id = id.replace("MeetBothT", "");
 		int orderNumber = Integer.parseInt(id);
 		System.out.println(orderNumber);
 		OrderBean orderBean = orderService.findByOrderNo(orderNumber).get(0);
@@ -82,7 +82,7 @@ public class ShoppingCartCheck {
 		System.out.println("session----------OK");
 		System.out.println(shoppingCart);
 		System.out.println(cartSize);
-		shoppingCart.deleteAllProduct();
+//		shoppingCart.deleteAllProduct();
 
 		synchronized (session.getId().intern()) {
 			session.removeAttribute("ShoppingCart");
@@ -233,7 +233,7 @@ public class ShoppingCartCheck {
 //		String orderMessageSale = "";
 //		mailService.prepareAndSendForSale(recipientSale,  memberNameSale, orderMessageSale);
 
-		String meetBothNo = "MeetBoth132";
+		String meetBothNo = "MeetBothT";
 		meetBothNo = meetBothNo + String.valueOf(orderBean.getOrderNo());
 
 		// 綠界

@@ -136,15 +136,14 @@ public class ShoppingCartController {
 		String account = SecurityContextHolder.getContext().getAuthentication().getName();
 		List<MemberBean> mem = memberService.searchMemByAccount(account);
 		
-		System.out.println("--------------------MEM"+mem.get(0));
 
 		if (mem.size() == 0) {
 			return "login";
 		}
+		
 		//存資料進session
 		Optional<MemberBean> list = memberService.searchMemByID(mem.get(0).getMemberID());
 		
-		System.out.println("--------------------Optional"+list.get());
 		member = list.get();
 		
 

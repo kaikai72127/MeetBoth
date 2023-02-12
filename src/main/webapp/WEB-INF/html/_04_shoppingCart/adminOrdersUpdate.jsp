@@ -318,7 +318,7 @@ a:hover {
 													<span>付款&ensp;&ensp;狀態 :&ensp;<input type="hidden"
 														id="paymentS" class="MBinput"
 														value="${orderBean.paymentStstus}${param.paymentS}"><select
-														name='ordStstus' class="fieldWidth MBinput"
+														name='paymentStstus' class="fieldWidth MBinput"
 														style="width: 312px; height: 66.1px;">
 															<option class="B1" value="未付款">未付款</option>
 															<option class="B2" value="已付款">已付款</option>
@@ -330,7 +330,7 @@ a:hover {
 													<span>送貨&ensp;&ensp;狀態 :&ensp;<input type="hidden"
 														id="deliveryS" class="MBinput"
 														value="${orderBean.deliveryStstus}${param.deliveryS}"><select
-														name='ordStstus' class="fieldWidth MBinput"
+														name='deliveryStstus' class="fieldWidth MBinput"
 														style="width: 312px; height: 66.1px;">
 															<option class="C1" value="無">無</option>
 															<option class="C2" value="備貨中">備貨中</option>

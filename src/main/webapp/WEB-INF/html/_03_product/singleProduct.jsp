@@ -107,7 +107,8 @@ String basePathimg2 = request.getScheme() + "://" + request.getServerName() + ":
 								<div class="row mb-20">
 									<div class="col-sm-12">
 										<div class="description">
-										<input type="hidden" value="${bean.prodID}" name="prodIdForAjax"/>
+											<input type="hidden" value="${bean.prodID}"
+												name="prodIdForAjax" />
 											<h4>商品編號 : ${bean.prodID}</h4>
 										</div>
 									</div>
@@ -327,12 +328,13 @@ String basePathimg2 = request.getScheme() + "://" + request.getServerName() + ":
 										<div class="shop-item-detail">
 											<a
 												href="/MeetBoth/_03_product.PathToProductDetail.controller?id=${prodLikeBean.prodID}"
-												class="btn btn-round btn-b"><span class="icon-heart" style="font-size:18px;">查看商品頁面</span><span
-												class="icon-heart" style="font-size:18px;"></span></a>
+												class="btn btn-round btn-b"><span class="icon-heart"
+												style="font-size: 18px;">查看商品頁面</span><span
+												class="icon-heart" style="font-size: 18px;"></span></a>
 										</div>
 									</div>
 									<h4 class="shop-item-title font-alt">
-										<a href="#" style="font-size:22px;">${prodLikeBean.prodName}</a>
+										<a href="#" style="font-size: 22px;">${prodLikeBean.prodName}</a>
 									</h4>
 									<div id="scoreAVGTwo">
 										<c:forEach var="commentBeanTwo"
@@ -342,7 +344,7 @@ String basePathimg2 = request.getScheme() + "://" + request.getServerName() + ":
 										</c:forEach>
 										<div id="starAVGDivTwo" style="font-size: 20px;">123</div>
 									</div>
-									<p style="font-size:20px;">NT$${prodLikeBean.prodPrice}</p>
+									<p style="font-size: 20px;">NT$${prodLikeBean.prodPrice}</p>
 								</div>
 							</div>
 						</c:forEach>
@@ -416,8 +418,8 @@ String basePathimg2 = request.getScheme() + "://" + request.getServerName() + ":
 	<script src="html/assets/js/plugins.js"></script>
 	<script src="html/assets/js/main.js"></script>
 	<!-- SweetAlert js -->
-<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-<!-- SweetAlert js -->
+	<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+	<!-- SweetAlert js -->
 	<script>
 		const scores = document.querySelectorAll("#score");
 
@@ -565,32 +567,32 @@ String basePathimg2 = request.getScheme() + "://" + request.getServerName() + ":
 	    xhr.send();
 	};
 </script>
-<script>
+	<script>
     let cartCount = 0;
     document.getElementById("addToCartBtn").addEventListener("click", function() {
         cartCount += 1;
         document.getElementById("cartCount").innerHTML = "購物車：" + cartCount;
     });
 </script>
-	<script type="text/javascript">
-    $('.addtocart').on('click', function () {
-        let MyValue = $(this).attr("id");
-        console.log(MyValue);
-        $.ajax({
-            url: '/shoppingCartAddOnly.controller/' + MyValue,
-            method: "get",
-            dataType: "text",
-            //這邊的"id"是給controller的變數名
-            data: { "prodID": MyValue },
-        }).done(function () {
-//         	alert("成功")
-            location.reload();
-        }).fail(function () {
-//         	alert("失敗")
-        	location.reload();
-        })
-    });
-	</script>
+<!-- 	<script type="text/javascript"> -->
+<!-- //     $('.addtocart').on('click', function () { -->
+<!-- //         let MyValue = $(this).attr("id"); -->
+<!-- //         console.log(MyValue); -->
+<!-- //         $.ajax({ -->
+<!-- //             url: '/shoppingCartAddOnly.controller/' + MyValue, -->
+<!-- //             method: "get", -->
+<!-- //             dataType: "text", -->
+<!-- //             //這邊的"id"是給controller的變數名 -->
+<!-- //             data: { "prodID": MyValue }, -->
+<!-- //         }).done(function () { -->
+<!-- // //         	alert("已加入購物車"); -->
+<!-- //             location.reload(); -->
+<!-- //         }).fail(function () { -->
+<!-- // //         	alert("失敗") -->
+<!-- //         	location.reload(); -->
+<!-- //         }) -->
+<!-- //     }); -->
+<!-- 	</script> -->
 	<script>
       let cartCount = 0;
       document

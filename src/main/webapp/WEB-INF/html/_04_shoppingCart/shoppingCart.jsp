@@ -71,7 +71,7 @@ button.removeProduct:hover {
 		<section>
 			<form>
 				<div class="main">
-					<section class="" style="margin-bottom:120px;margin-top:100px">
+					<section class="" style="margin-bottom: 120px; margin-top: 100px">
 						<div class="container">
 							<div class="row">
 								<div class="col-sm-6 col-sm-offset-3">
@@ -110,7 +110,8 @@ button.removeProduct:hover {
 															id="prodPrice">${shoppingItem.value.prodItem.prodPrice}</h5>
 													</td>
 													<td><input class="form-control prodQtyChange"
-														type="number" name="updateQty" id="${shoppingItem.value.prodItem.prodID}"
+														type="number" name="updateQty"
+														id="${shoppingItem.value.prodItem.prodID}"
 														value='${shoppingItem.value.qty}' max="50" min="1" />
 													<td>
 														<h5 class="product-title font-alt itemTotal"
@@ -129,7 +130,7 @@ button.removeProduct:hover {
 								</div>
 							</div>
 							<div class="row">
-								
+
 								<!-- 								<div class="col-sm-3 col-sm-offset-3"> -->
 								<!-- 									<div class="form-group"> -->
 								<!-- 										<button class="btn btn-block btn-round btn-p pull-right" -->
@@ -158,7 +159,7 @@ button.removeProduct:hover {
 								</div>
 							</div>
 							<div
-								style="display: flex; justify-content: center; margin-bottom: 50px;margin-top: 50px">
+								style="display: flex; justify-content: center; margin-bottom: 50px; margin-top: 50px">
 
 								<table border='1' class="btn-p">
 									<tr>

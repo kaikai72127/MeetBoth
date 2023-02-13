@@ -23,17 +23,10 @@ public interface StudRepository extends JpaRepository<StudBean, Integer> {
 	public List<StudBean> findAllByOrderByPriceDesc();
 	
 //	搜尋全部學生貼文依日期降序排序
-<<<<<<< HEAD
 	public List<StudBean> findAllByOrderByUpdateDateDesc();
 	
 //	搜尋全部學生貼文依瀏覽次數排序
 	public List<StudBean> findAllByOrderByViews();
-=======
-	public List<StudBean> findAllByOrderByPostDateDesc();
-	
-//	搜尋全部學生貼文依會員編號排序
-	public List<StudBean> findAllByOrderByMemberId();
->>>>>>> origin/_01_Seal
 	
 //	透過貼文編號建立學生貼文查詢
 	public StudBean findByStudno(Integer studno);

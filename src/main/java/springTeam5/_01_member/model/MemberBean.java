@@ -21,14 +21,11 @@ import javax.persistence.Table;
 
 import org.springframework.stereotype.Component;
 
-<<<<<<< HEAD
 import springTeam5._05_teacStu.model.StudBean;
 import springTeam5._03_product.model.Product;
 import springTeam5._03_product.model.ProductComment;
-=======
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
->>>>>>> origin/_01_Seal
 import springTeam5._04_shoppingCart.model.OrderBean;
 import springTeam5._04_shoppingCart.model.OrderItemBean;
 import springTeam5._05_teacStu.model.TeacBean;
@@ -89,41 +86,33 @@ public class MemberBean implements Serializable {
 	@Column(name = "role")
 	private String role = "user";
 	
-<<<<<<< HEAD
+	@JsonIgnore
 	@OneToMany(mappedBy = "member")
 	private List<TeacBean> teacBean = new ArrayList<>();
+	
+	@JsonIgnore
 	@OneToMany(mappedBy = "member")
 	private List<StudBean> studBean = new ArrayList<>();
 	
+	@JsonIgnore
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "memberbuy",cascade = CascadeType.ALL)
 	private Set<OrderBean> orderBuy = new LinkedHashSet<OrderBean>(); // itemsList
 	
+	@JsonIgnore
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "membersale",cascade = CascadeType.ALL)
 	private Set<OrderItemBean> orderSale = new LinkedHashSet<OrderItemBean>(); // itemsList
 	
 //	連結商品
+	@JsonIgnore
 	@OneToMany(fetch = FetchType.LAZY,mappedBy = "memberBean",cascade = CascadeType.ALL)
 	private Set<Product> product = new LinkedHashSet<Product>();
 
+	@JsonIgnore
 	@OneToMany(fetch = FetchType.LAZY,mappedBy = "memberBean",cascade = CascadeType.ALL)
 	private Set<ProductComment> productComment = new LinkedHashSet<ProductComment>();
 //	連結商品 結束
 	
 	
-=======
-	@JsonIgnore
-	@OneToMany(mappedBy = "member")
-	private List<TeacBean> teacBean = new ArrayList<>();
-	
-	@JsonIgnore
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "memberbuy",cascade = CascadeType.ALL)
-	private Set<OrderBean> orderBuy = new LinkedHashSet<OrderBean>(); // itemsList
-	
-	@JsonIgnore
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "membersale",cascade = CascadeType.ALL)
-	private Set<OrderItemBean> orderSale = new LinkedHashSet<OrderItemBean>(); // itemsList
-	
->>>>>>> origin/_01_Seal
 	public String getRole() {
 		return role;
 	}

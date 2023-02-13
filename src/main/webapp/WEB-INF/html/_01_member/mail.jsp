@@ -66,7 +66,6 @@
 										method="Post">
 										<div class="form-group">
 											<input class="form-control" style="text-transform: none;" id="mail"
-<<<<<<< HEAD
 												type="text" name="value" value='${value}' placeholder="請輸入電子郵件信箱" />
 										</div>
 

@@ -58,10 +58,6 @@ public class ShoppingCart {
 	// 刪除購物車某筆商品 >>>判斷是否要移除這個item
 	public int deleteProduct(int prodId) {
 
-<<<<<<< HEAD
-=======
-		System.out.println("開始要刪除囉~~~~" + prodId);
->>>>>>> origin/_01_Seal
 		if (cart.get(prodId) != null) {
 			cart.remove(prodId); // Map介面的remove()方法
 			return 1;
@@ -69,7 +65,6 @@ public class ShoppingCart {
 			return 0;
 		}
 	}
-<<<<<<< HEAD
 	
 	// 刪除購物車所有商品內容
 	public void deleteAllProduct() {
@@ -82,8 +77,6 @@ public class ShoppingCart {
 			cart.remove(prodID);
 		}
 	}
-=======
->>>>>>> origin/_01_Seal
 
 	// 取得購物車內商品的總數量(用於顯示總數)
 	public int getItemQty() {

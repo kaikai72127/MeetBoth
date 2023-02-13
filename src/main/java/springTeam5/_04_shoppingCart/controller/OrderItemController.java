@@ -1,14 +1,10 @@
 package springTeam5._04_shoppingCart.controller;
 
-<<<<<<< HEAD
 import java.sql.SQLException;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-=======
-import java.util.List;
->>>>>>> origin/_01_Seal
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -25,10 +21,7 @@ import springTeam5._03_product.model.Product;
 import springTeam5._03_product.service.ProductService;
 import springTeam5._04_shoppingCart.model.OrderBean;
 import springTeam5._04_shoppingCart.model.OrderItemBean;
-<<<<<<< HEAD
 import springTeam5._04_shoppingCart.model.ShoppingCart;
-=======
->>>>>>> origin/_01_Seal
 import springTeam5._04_shoppingCart.service.impl.OrderItemServiceImpl;
 import springTeam5._04_shoppingCart.service.impl.OrderServiceImpl;
 
@@ -40,10 +33,6 @@ public class OrderItemController {
 
 	@Autowired
 	private OrderServiceImpl orderService;
-<<<<<<< HEAD
-=======
-	
->>>>>>> origin/_01_Seal
 	
 	@Autowired
 	private ProductService productService;
@@ -134,12 +123,7 @@ public class OrderItemController {
 // 修改------
 	// 跳轉到修改頁面
 	@PostMapping("/_04_shoppingCart.UpdateOrderItemMain.controller")
-<<<<<<< HEAD
 	public String processUpdateOrderItemMainAction(@RequestParam("seqno") Integer seqno, Model odModel) {
-=======
-	public String processUpdateOrderItemMainAction(@RequestParam("seqno") Integer seqno,
-			 Model odModel) {
->>>>>>> origin/_01_Seal
 		List<OrderItemBean> searchOrderItemBySeq = orderItemService.findBySqeno(seqno);
 		Integer orderNo = searchOrderItemBySeq.get(0).getOrderbean().getOrderNo();
 		List<OrderItemBean> classList = orderItemService.findOrderItem(orderNo, seqno);
@@ -188,11 +172,6 @@ public class OrderItemController {
 	public String processUpdateOrderItemAction(@RequestParam("orderNo") Integer orderNo,
 			@RequestParam("seqno") Integer seqno, @RequestParam("qty") Integer qty,
 			@RequestParam("prodPrice") Integer prodPrice) {
-<<<<<<< HEAD
-
-=======
-		
->>>>>>> origin/_01_Seal
 		List<OrderItemBean> orderItemBeanList = orderItemService.findBySqeno(seqno);
 		OrderItemBean orderItemBean = orderItemBeanList.get(0);
 
@@ -203,24 +182,15 @@ public class OrderItemController {
 			// 原本的資料金額
 			Integer itemTotal = orderItemBean.getItemTotal();
 			Integer totalAmount = orderBean.getTotalAmount();
-<<<<<<< HEAD
 			Integer itemTotal2 = Integer.parseInt(String.valueOf(Math.round(qty * prodPrice)));
-=======
-			Integer itemTotal2 = Integer.parseInt(String.valueOf(Math.round(qty * prodPrice )));
->>>>>>> origin/_01_Seal
 
 			// 更新資料
 			orderItemBean.setQty(qty);
 			orderItemBean.setItemTotal(itemTotal2);
 			orderItemService.updateOrderItem(orderItemBean);
 			// 更新訂單的總金額與時間
-<<<<<<< HEAD
 			orderBean.setTotalAmount(
 					Integer.parseInt(String.valueOf(Math.round(totalAmount - itemTotal + (qty * prodPrice)))));
-=======
-			orderBean.setTotalAmount(Integer
-					.parseInt(String.valueOf(Math.round(totalAmount - itemTotal + (qty * prodPrice)))));
->>>>>>> origin/_01_Seal
 			orderBean.setUporderDate(orderService.getCurrentDate());
 
 			orderService.updateOrder(orderBean);
@@ -239,7 +209,6 @@ public class OrderItemController {
 //		odModel.addAttribute("classList", classList);
 //		return "_04_shoppingCart/ordersItemCRUD";
 //	}
-<<<<<<< HEAD
 
 	// 查詢------
 	// 搜尋某筆訂單全部ITEM-跳轉到CRUD的頁面
@@ -251,19 +220,5 @@ public class OrderItemController {
 		odModel.addAttribute("classList", classList);
 		return "_04_shoppingCart/ordersItemCRUD";
 	}
-=======
-	
-	
-	// 查詢------
-		// 搜尋某筆訂單全部ITEM-跳轉到CRUD的頁面
-		@RequestMapping(path = "/shoppingCart.SelectOrderAllItem.controller/{orderNo}", method = RequestMethod.GET)
-		public String processSelectAllItemAcction(
-				@PathVariable("orderNo") Integer orderNo,Model odModel,@ModelAttribute("OrderBean") OrderBean od) {
-			List<OrderItemBean> classList = orderItemService.findByOrderno(orderNo);
-			System.out.println("開始找");
-			odModel.addAttribute("classList", classList);
-			return "_04_shoppingCart/ordersItemCRUD";
-		}
->>>>>>> origin/_01_Seal
 
 }

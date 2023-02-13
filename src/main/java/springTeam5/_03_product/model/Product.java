@@ -21,10 +21,7 @@ import javax.persistence.Transient;
 
 import org.springframework.stereotype.Component;
 
-<<<<<<< HEAD
 import springTeam5._01_member.model.MemberBean;
-=======
->>>>>>> origin/_01_Seal
 import springTeam5._04_shoppingCart.model.OrderItemBean;
 
 @Entity
@@ -79,9 +76,6 @@ public class Product {
 	private List<ProductComment> productComment = new ArrayList<ProductComment>();
 	
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "prodItem",cascade = CascadeType.ALL)
-	private Set<OrderItemBean> orderItems = new LinkedHashSet<OrderItemBean>(); // itemsList
-
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "prodItem", cascade = CascadeType.ALL)
 	private Set<OrderItemBean> orderItems = new LinkedHashSet<OrderItemBean>(); // itemsList
 
 	@Column(name = "MemberID")
@@ -171,29 +165,6 @@ public class Product {
 		this.productComment = productComment;
 	}
 
-	public String getProdState() {
-		return prodState;
-	}
-
-	public void setProdState(String prodState) {
-		this.prodState = prodState;
-	}
-
-	public Integer getProdCheck() {
-		return prodCheck;
-	}
-
-	public void setProdCheck(Integer prodCheck) {
-		this.prodCheck = prodCheck;
-	}
-
-	public Integer getProdSales() {
-		return prodSales;
-	}
-
-	public void setProdSales(Integer prodSales) {
-		this.prodSales = prodSales;
-	}
 
 	public int getProdID() {
 		return prodID;
@@ -291,39 +262,12 @@ public class Product {
 		this.productComment = productComment;
 	}
 
-<<<<<<< HEAD
-=======
-	
-	
->>>>>>> origin/_01_Seal
 	public Set<OrderItemBean> getOrderItems() {
 		return orderItems;
 	}
 
 	public void setOrderItems(Set<OrderItemBean> orderItems) {
 		this.orderItems = orderItems;
-<<<<<<< HEAD
-=======
-	}
-
-	public Product(int prodID, String prodName, int prodPrice, int memberID, int inventory, String prodPost,
-			String prodUpdate, String directions, Blob prodImg, Integer prodSales, int prodClass, ProdType prodtype,
-			List<ProductComment> productComment) {
-		super();
-		this.prodID = prodID;
-		this.prodName = prodName;
-		this.prodPrice = prodPrice;
-		this.memberID = memberID;
-		this.inventory = inventory;
-		this.prodPost = prodPost;
-		this.prodUpdate = prodUpdate;
-		this.directions = directions;
-		this.prodImg = prodImg;
-		this.prodSales = prodSales;
-		this.prodClass = prodClass;
-		this.prodtype = prodtype;
-		this.productComment = productComment;
->>>>>>> origin/_01_Seal
 	}
 
 	@Override

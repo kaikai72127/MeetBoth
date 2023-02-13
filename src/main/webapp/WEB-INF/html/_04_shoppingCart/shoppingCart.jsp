@@ -114,12 +114,8 @@ button.removeProduct:hover {
 															id="prodPrice">${shoppingItem.value.prodItem.prodPrice}</h5>
 													</td>
 													<td><input class="form-control prodQtyChange"
-<<<<<<< HEAD
 														type="number" name="updateQty"
 														id="${shoppingItem.value.prodItem.prodID}"
-=======
-														type="number" name="updateQty" id="${shoppingItem.value.prodItem.prodID}"
->>>>>>> origin/_01_Seal
 														value='${shoppingItem.value.qty}' max="50" min="1" />
 													<td>
 														<h5 class="product-title font-alt itemTotal"
@@ -171,11 +167,7 @@ button.removeProduct:hover {
 								</div>
 							</div>
 							<div
-<<<<<<< HEAD
 								style="display: flex; justify-content: center; margin-bottom: 50px; margin-top: 50px">
-=======
-								style="display: flex; justify-content: center; margin-bottom: 50px;margin-top: 50px">
->>>>>>> origin/_01_Seal
 
 								<table border='1' class="btn-p">
 									<tr>

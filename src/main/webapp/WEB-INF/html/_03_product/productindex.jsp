@@ -358,11 +358,7 @@ a:hover {
 																<td><input type="button" class="MBbtn" value="修改"
 																	onclick="window.location='/MeetBoth/_03_product.pathToMBinsertProd.controller?id=${prodBean.prodID}'"></td>
 																<td style="border-right: none"><input type="button"
-<<<<<<< HEAD
 																	class="MBbtn deleteThisProduct" value="刪除" id="deleteThisProduct"
-=======
-																	class="MBbtn" value="刪除" id="deleteThisProduct"
->>>>>>> origin/_01_Seal
 																	name="${prodBean.prodID}"></td>
 															</tr>
 														</c:forEach>

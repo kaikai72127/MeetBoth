@@ -29,11 +29,7 @@ public class MailVerification {
 	private MemberService ms;
 	
 	@PostMapping(path = "/mailVerify.controller")
-<<<<<<< HEAD
-	public String mailverify(@RequestParam("value") String email) {
-=======
 	public String mailverify(@RequestParam("email") String email) {
->>>>>>> origin/_01_Seal
 		
 		sendVerificationEmail token = new sendVerificationEmail();
 		String jwtToken = token.getJwtToken();

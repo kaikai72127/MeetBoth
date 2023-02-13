@@ -169,11 +169,7 @@ String basePathimg2 = request.getScheme() + "://" + request.getServerName() + ":
 											<!-- 												<i class="fas fa-shopping-cart text-primary mr-1"></i> 加入購物車 -->
 											<!-- 											</button> -->
 											<button type='submit' id="addToCartBtn"
-<<<<<<< HEAD
 												class="btn btn-d btn-circle" style="font-size:17px;">
-=======
-												class="btn btn-d btn-circle">
->>>>>>> origin/_01_Seal
 												<i class="fas fa-shopping-cart text-primary mr-1"></i> 加入購物車
 											</button>
 										</div>
@@ -332,7 +328,6 @@ String basePathimg2 = request.getScheme() + "://" + request.getServerName() + ":
 										<div class="shop-item-detail">
 											<a
 												href="/MeetBoth/_03_product.PathToProductDetail.controller?id=${prodLikeBean.prodID}"
-<<<<<<< HEAD
 												class="btn btn-round btn-b"><span class="icon-heart"
 												style="font-size: 18px;">查看商品頁面</span><span
 												class="icon-heart" style="font-size: 18px;"></span></a>
@@ -340,14 +335,6 @@ String basePathimg2 = request.getScheme() + "://" + request.getServerName() + ":
 									</div>
 									<h4 class="shop-item-title font-alt">
 										<a href="#" style="font-size: 22px;">${prodLikeBean.prodName}</a>
-=======
-												class="btn btn-round btn-b"><span class="icon-heart" style="font-size:18px;">查看商品頁面</span><span
-												class="icon-heart" style="font-size:18px;"></span></a>
-										</div>
-									</div>
-									<h4 class="shop-item-title font-alt">
-										<a href="#" style="font-size:22px;">${prodLikeBean.prodName}</a>
->>>>>>> origin/_01_Seal
 									</h4>
 									<div id="scoreAVGTwo">
 										<c:forEach var="commentBeanTwo"

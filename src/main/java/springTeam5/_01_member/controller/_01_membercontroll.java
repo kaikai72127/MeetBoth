@@ -114,11 +114,7 @@ public class _01_membercontroll {
 		String role = SecurityContextHolder.getContext().getAuthentication().getAuthorities().toArray()[0].toString();
 //		String role = SecurityContextHolder.getContext().getAuthentication().getAuthorities().toString();
 //		UserDetails details = (UserDetails)SecurityContextHolder.getContext().getAuthentication().getDetails();
-<<<<<<< HEAD
-		
-=======
 //		String role = details.getAuthorities().toString();
->>>>>>> origin/_01_Seal
 //		String role = "";
 //		for (MemberBean member : list) {
 //			role = member.getRole();
@@ -126,8 +122,6 @@ public class _01_membercontroll {
 		System.out.println(role);
 		return role;
 	}	
-<<<<<<< HEAD
-=======
 	
 //	會員資料呼叫
 	@ResponseBody
@@ -159,7 +153,6 @@ public class _01_membercontroll {
 		}
 	}
 	
->>>>>>> origin/_01_Seal
 	
 //	查詢類controll
 	@GetMapping("/_01_member.admin.controller")
@@ -287,18 +280,12 @@ public class _01_membercontroll {
 	}
 	
 //	修改
-<<<<<<< HEAD
-	@GetMapping(path = "/_01_member.membercenter.controller")
-	public String membercenter(@RequestParam("account") String account, Model m) {
-		List<MemberBean> list = ms.searchMemByAccount(account);
-=======
 	@PostMapping(path = "/_01_member.membercenter.controller")
 	public String membercenter(Model m) {
 		String account = SecurityContextHolder.getContext().getAuthentication().getName();
 		List<MemberBean> list = ms.searchMemByAccount(account);
 		
 		list.get(0).getPassword();
->>>>>>> origin/_01_Seal
 		m.addAttribute("Member", list);
 		return "_01_member/frontmemberupdate";
 	}
@@ -369,16 +356,12 @@ public class _01_membercontroll {
 			MemberBean check = list.get(0);
 			newMem.setMemberID(check.getMemberID());
 			newMem.setAccount(member.getAccount());
-<<<<<<< HEAD
-			newMem.setPassword(new BCryptPasswordEncoder().encode(member.getPassword()));
-=======
 			String pwd = new BCryptPasswordEncoder().encode(member.getPassword());
 			if (check.getPassword().equals(pwd)) {
 				newMem.setPassword(pwd);				
 			}else {
 				newMem.setPassword(check.getPassword());
 			}
->>>>>>> origin/_01_Seal
 			newMem.setIdNumber(member.getIdNumber());
 			newMem.setMemName(member.getMemName());
 			newMem.setMemNickName(member.getMemNickName());
@@ -389,10 +372,7 @@ public class _01_membercontroll {
 			newMem.setPhone(member.getPhone());
 			newMem.setPhoto(check.getPhoto());
 			newMem.setAddress(member.getAddress());
-<<<<<<< HEAD
-=======
 			newMem.setRole(check.getRole());
->>>>>>> origin/_01_Seal
 			fileName = mf.getOriginalFilename();
 			if (fileName != null && fileName != "" && fileName.trim().length() > 0) {
 				System.out.println("這有圖?"+fileName);

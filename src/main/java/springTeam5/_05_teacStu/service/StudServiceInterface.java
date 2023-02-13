@@ -35,10 +35,7 @@ public interface StudServiceInterface {
 	
 //	透過ID修改學生貼文
 	public StudBean updateStudFromStudno(StudBean sb);
-<<<<<<< HEAD
 	
 //	搜尋最新更新的前6筆貼文
 	public List<StudBean> findFirst6ByOrderByUpdateDateDesc();
-=======
->>>>>>> origin/_01_Seal
 }

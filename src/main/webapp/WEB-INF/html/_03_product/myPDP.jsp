@@ -163,15 +163,9 @@ h1 {
 						<div class="col-sm-8 col-sm-offset-1" style="margin-left: 20px;">
 							<div class="post">
 								<div class="post-thumbnail">
-<<<<<<< HEAD
 									<img
 										src="/MeetBoth/html/assets/images/shop/個人賣場.jpg"
 										style="padding-bottom: 10px;">
-=======
-									<a href="#"><img
-										src="/MeetBoth/html/assets/images/shop/個人賣場.jpg"
-										style="padding-bottom: 10px;"> </a>
->>>>>>> origin/_01_Seal
 								</div>
 								<div class="post-header font-alt" style="display: flex;">
 									<img style="" src="/MeetBoth/html/assets/images/shop/兔年海報.jpg"
@@ -182,11 +176,7 @@ h1 {
 									style="padding-top: 20px; padding-bottom: 0px;">
 									<div class="container" style="">
 										<form class="row"
-<<<<<<< HEAD
 											action="<c:url value='/_03_product.searchProductWithCondition3.controller'/>"
-=======
-											action="<c:url value='/_03_product.searchProductWithCondition.controller'/>"
->>>>>>> origin/_01_Seal
 											method="post">
 											<div class="col-sm-4 mb-sm-20"
 												style="width: 17%; padding-right: 0;">

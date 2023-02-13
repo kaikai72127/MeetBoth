@@ -44,6 +44,11 @@ public class CourseService {
 	public void insertCourseComment(Course c) {
 		cRepo.save(c);
 	}
+	
+//	新增影片
+	public void insertYtPlayer(Course c) {
+		cRepo.save(c);
+	}
 
 //	模糊搜尋
 	public List<Course> searchWithCondiOrderByCourseID(Integer type, Integer low, Integer high, String name)throws SQLException {
@@ -68,6 +73,11 @@ public class CourseService {
 	
 	public List<Course> findRandomCourses(){
 		return cRepo.findRandomCourses();
+	}
+	
+//	透過 CourseID 搜尋全部的 commentBean
+	public List<Course> searchAllCourseByMemberID(Integer id) throws SQLException {
+		return cRepo.findByMemberID(id);
 	}
 
 }

@@ -64,6 +64,9 @@ public class Course {
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "course", cascade = CascadeType.ALL)
 	private List<CourseComment> courseComment = new ArrayList<CourseComment>();
 
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "course", cascade = CascadeType.ALL)
+	private List<YtPlayer> ytPlayer = new ArrayList<YtPlayer>();
+	
 	public Course() {
 	}
 
@@ -162,10 +165,18 @@ public class Course {
 	public void setCourseComment(List<CourseComment> courseComment) {
 		this.courseComment = courseComment;
 	}
+	
+	public List<YtPlayer> getYtPlayer() {
+		return ytPlayer;
+	}
+
+	public void setYtPlayer(List<YtPlayer> ytPlayer) {
+		this.ytPlayer = ytPlayer;
+	}
 
 	public Course(int courseID, String courseName, int coursePrice, int memberID, String coursePost,
 			String courseUpdate, String courseDirections, Blob courseImg, int courseSales, int courseClass,
-			CourseType coursetype, List<CourseComment> courseComment) {
+			CourseType coursetype, List<CourseComment> courseComment, List<YtPlayer> ytPlayer) {
 		super();
 		this.courseID = courseID;
 		this.courseName = courseName;
@@ -179,5 +190,8 @@ public class Course {
 		this.courseClass = courseClass;
 		this.coursetype = coursetype;
 		this.courseComment = courseComment;
+		this.ytPlayer = ytPlayer;
 	}
+
+	
 }

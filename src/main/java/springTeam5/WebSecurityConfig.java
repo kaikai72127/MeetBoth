@@ -56,7 +56,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
          
          .csrf().disable()
          .formLogin().loginPage("/login/page")
-         .defaultSuccessUrl("/")
+         .defaultSuccessUrl("/index.controller")
          
          .and()  //Google第三方驗證
          .oauth2Login()

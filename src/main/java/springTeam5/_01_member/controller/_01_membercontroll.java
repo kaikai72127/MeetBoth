@@ -155,7 +155,7 @@ public class _01_membercontroll {
 	
 	
 //	查詢類controll
-	@GetMapping("/_01_member.admin.controller")
+	@GetMapping("/admin/_01_member.admin.controller")
 	public String admin(Model m) {
 		List<MemberBean> all = ms.searchAllMember();
 		m.addAttribute("Member", all);

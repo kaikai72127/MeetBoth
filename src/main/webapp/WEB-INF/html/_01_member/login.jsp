@@ -37,7 +37,49 @@
 								<link rel="stylesheet" href="<%=basePathAnimation%>">
 								<link rel="stylesheet" href="<%=basePath%>" />
 								<link href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+								<style>
+									input {
+										display: none;
+									}
 
+									label {
+										display: inline-block;
+										width: 30px;
+										height: 30px;
+										border: 1px solid #333;
+										position: relative;
+									}
+
+									label::after {
+										-webkit-transition: opacity .5s ease;
+										-moz-transition: opacity .5s ease;
+										-o-transition: opacity .5s ease;
+										-ms-transition: opacity .5s ease;
+										transition: opacity .5s ease;
+										cursor: pointer;
+										position: absolute;
+										content: '';
+										opacity: 0;
+									}
+
+									input:checked+label::after {
+										border: 2px solid #d73d32;
+										border-top: none;
+										border-right: none;
+										-webkit-transform: rotate(-45deg);
+										-ms-transform: rotate(-45deg);
+										transform: rotate(-45deg);
+										width: 20px;
+										height: 10px;
+										top: 50%;
+										margin-top: -8px;
+										left: 50%;
+										margin-left: -10px;
+										opacity: 1.0;
+									}
+
+									原文網址：https: //kknews.cc/code/kl5mojv.html
+								</style>
 							</head>
 
 							<body class="is-preload">

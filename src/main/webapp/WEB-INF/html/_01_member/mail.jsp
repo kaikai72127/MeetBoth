@@ -15,7 +15,7 @@
 						if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email)) {
 							$.ajax({
 								type: 'GET',
-								url: 'http://localhost:8080/MeetBoth/mailcheck',
+								url: '/MeetBoth/mailcheck',
 								data: { "email": email },
 								contentType: 'application/json',
 								success: function (check) {

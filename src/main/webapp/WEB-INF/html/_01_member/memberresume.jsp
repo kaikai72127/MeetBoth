@@ -263,10 +263,6 @@
                         border: none;
                     }
 
-
-
-
-
                     #replace {
                         font-size: 25px;
                         height: 25px;
@@ -278,6 +274,7 @@
                         color: lightgrey;
                     }
                 </style>
+
             </head>
 
             <!--BOBY-->
@@ -292,97 +289,80 @@
                 <main>
                     <div class="page-container">
                         <div class="resume-container">
-                            <h1 class="resume-title">履歷表</h1>
-                            <h2 class="resume-last-update">Last updata: ${bean.updateDate}</h2>
+                            <h1 class="resume-title">會員簡歷</h1>
                             <div class="resume-body">
                                 <div class="resume-section">
                                     <h2 class="resume-body-title">PROFILE</h2>
-                                    <div class="resume-no">@${bean.member.account}</div>
-                                    <div class="resume-name">${bean.member.memName} (${bean.member.memNickName})</div>
+                                    <input style="display: none;" value="${member.memberID}" id="idvalue"></input>
+                                    <div class="resume-no">@${member.account}<span
+                                            style="color: #0089ac;">#${member.memberID}</span></div>
+                                    <div class="resume-name">${member.memName}
+                                        (${member.memNickName})
+                                    </div>
                                     <div class="resume-contact">
                                         <div class="resume-contact-item">
-                                            <svg viewbox="0 0 48 48" width="16">
-                                                <path
-                                                    d="M24 44q-4.15 0-7.8-1.575-3.65-1.575-6.35-4.275-2.7-2.7-4.275-6.35Q4 28.15 4 24t1.575-7.8Q7.15 12.55 9.85 9.85q2.7-2.7 6.35-4.275Q19.85 4 24 4t7.8 1.575q3.65 1.575 6.35 4.275 2.7 2.7 4.275 6.35Q44 19.85 44 24v2.65q0 2.8-1.975 4.725Q40.05 33.3 37.2 33.3q-1.8 0-3.4-.875-1.6-.875-2.45-2.475-1.3 1.7-3.25 2.525T24 33.3q-3.9 0-6.625-2.7T14.65 24q0-3.9 2.725-6.65Q20.1 14.6 24 14.6t6.625 2.75Q33.35 20.1 33.35 24v2.65q0 1.55 1.125 2.6T37.2 30.3q1.55 0 2.675-1.05Q41 28.2 41 26.65V24q0-7.1-4.95-12.05Q31.1 7 24 7q-7.1 0-12.05 4.95Q7 16.9 7 24q0 7.1 4.95 12.05Q16.9 41 24 41h10.7v3Zm0-13.7q2.65 0 4.5-1.825T30.35 24q0-2.7-1.85-4.55-1.85-1.85-4.5-1.85t-4.5 1.85Q17.65 21.3 17.65 24q0 2.65 1.85 4.475Q21.35 30.3 24 30.3Z" />
-                                            </svg>
-                                            ${bean.member.eMail}
+                                            <span style="color: #ce7777; font-size: medium;">✉</span><a
+                                                href="mailto:${member.eMail}">${member.eMail}</a>
                                         </div>
                                         <div class="resume-contact-item">
-                                            <svg viewbox="0 0 48 48" width="16">
-                                                <path xmlns="http://www.w3.org/2000/svg"
-                                                    d="M39.75 42q-6.1 0-12.125-3T16.8 31.2Q12 26.4 9 20.375 6 14.35 6 8.25q0-.95.65-1.6Q7.3 6 8.25 6h7q.7 0 1.225.475.525.475.675 1.275l1.35 6.3q.1.7-.025 1.275t-.525.975l-5 5.05q2.8 4.65 6.275 8.1Q22.7 32.9 27.1 35.3l4.75-4.9q.5-.55 1.15-.775.65-.225 1.3-.075l5.95 1.3q.75.15 1.25.75T42 33v6.75q0 .95-.65 1.6-.65.65-1.6.65Zm-28.3-23.4 4.05-4.1L14.35 9H9q0 1.95.6 4.275t1.85 5.325ZM29.9 36.75q2.05.95 4.45 1.55 2.4.6 4.65.7v-5.35l-5.15-1.05ZM11.45 18.6ZM29.9 36.75Z" />
-                                            </svg>
-                                            ${bean.member.phone}
+                                            <span>📞</span>${member.phone}
                                         </div>
                                     </div>
 
-                                    <h2 class="resume-body-title">EXPERIENCE</h2>
-                                    <div class="resume-table">
-                                        <div class="resume-item">
-                                            <div class="resume-item-title">學歷</div>
-                                            <div class="resume-item-content">${bean.highEdu}</div>
-                                        </div>
-                                        <div class="resume-item">
-                                            <div class="resume-item-title">家教經驗</div>
-                                            <div class="resume-item-content">
-                                                ${bean.tutorExp}
+                                    <h2 class="resume-body-title">PRODUCT</h2>
+                                    <div>
+
+                                        <div class="post-entry"
+                                            style="overflow-y: scroll; overflow-x: hidden; width: 110%; height: 720px;">
+                                            <div class="widget">
+                                                <ul class="widget-posts">
+                                                    <c:forEach var="prodBean" items="${member.product}">
+                                                        <li class="clearfix"
+                                                            style="background-image: url('/MeetBoth/html/assets/images/shop/backgroundimg.jpg'); background-size: cover; padding-left: 10px; height: 322.5px;">
+                                                            <div class="widget-posts-image"
+                                                                style="height: 300px; width: 200px; margin: auto; display: flex; justify-content: center; align-items: center; margin-right: 15px;">
+                                                                <a href="<c:url value='/_03_product.PathToProductDetail.controller?id=${prodBean.prodID}' />"
+                                                                    style="margin: auto; display: flex; justify-content: center; align-items: center;"><img
+                                                                        style="padding: auto;"
+                                                                        src="<c:url value='/_03_product.showPicture.controller?id=${prodBean.prodID}' />" /></a>
+                                                            </div>
+                                                            <div style="font-size: 22px; width:auto;">
+                                                                <div class="widget-posts-title">
+                                                                    <a
+                                                                        href="<c:url value='/_03_product.PathToProductDetail.controller?id=${prodBean.prodID}' />">商品名稱
+                                                                        : ${prodBean.prodName}</a>
+                                                                </div>
+                                                                <div class="widget-posts-meta"
+                                                                    style="display: flex;height:38px;">
+                                                                    商品狀態 : ${prodBean.prodState}
+
+                                                                </div>
+                                                                <div class="widget-posts-meta" style="display: flex">
+                                                                    商品價格 : NT$${prodBean.prodPrice}
+                                                                </div>
+                                                                <div class="widget-posts-meta">商品庫存 :
+                                                                    ${prodBean.inventory}</div>
+                                                                <div class="widget-posts-meta">商品瀏覽次數 :
+                                                                    ${prodBean.prodCheck}</div>
+                                                                <div id="scoreAVG" class="widget-posts-meta">
+                                                                    <c:forEach var="commentBean"
+                                                                        items="${prodBean.productComment}">
+                                                                        <input type="hidden" id="starAVG"
+                                                                            value="${commentBean.prodScore}">
+                                                                    </c:forEach>
+                                                                    <div id="starAVGDiv" style="font-size: 17px;">
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </li>
+                                                    </c:forEach>
+                                                </ul>
                                             </div>
                                         </div>
-                                        <div class="resume-item">
-                                            <div class="resume-item-title">留學經驗</div>
-                                            <div class="resume-item-content">${bean.studExp}</div>
-                                        </div>
-                                        <div class="resume-item">
-                                            <div class="resume-item-title">語言能力</div>
-                                            <div class="resume-item-content">${bean.lanAbility}</div>
-                                        </div>
-                                        <div class="resume-item">
-                                            <div class="resume-item-title">證照技能</div>
-                                            <div class="resume-item-content">${bean.skills}</div>
-                                        </div>
+
                                     </div>
 
-                                    <h2 class="resume-body-title">COURSE</h2>
-                                    <div class="resume-table">
-                                        <div class="resume-table">
-                                            <div class="resume-item">
-                                                <div class="resume-item-title">授課科目</div>
-                                                <div class="resume-item-content">${bean.subjectItem}</div>
-                                            </div>
-                                            <div class="resume-item">
-                                                <div class="resume-item-title">授課地區</div>
-                                                <div class="resume-item-content">${bean.teacLoc}</div>
-                                            </div>
-                                            <div class="resume-item">
-                                                <div class="resume-item-title">授課對象</div>
-                                                <div class="resume-item-content">${bean.teacObject}</div>
-                                            </div>
-                                            <div class="resume-item">
-                                                <div class="resume-item-title">授課時段</div>
-                                                <div class="resume-item-content">${bean.teacTime}</div>
-                                            </div>
-                                            <div class="resume-item">
-                                                <div class="resume-item-title">授課模式</div>
-                                                <div class="resume-item-content">${bean.classMode}</div>
-                                            </div>
-                                            <div class="resume-item">
-                                                <div class="resume-item-title">試教意願</div>
-                                                <div class="resume-item-content">${bean.willTeac}</div>
-                                            </div>
-                                            <div class="resume-item">
-                                                <div class="resume-item-title">聯絡方式</div>
-                                                <div class="resume-item-content">${bean.conMethod}</div>
-                                            </div>
-                                            <div class="resume-item">
-                                                <div class="resume-item-title">聯絡時間</div>
-                                                <div class="resume-item-content">${bean.conTime}</div>
-                                            </div>
-                                            <div class="resume-item">
-                                                <div class="resume-item-title">希望待遇</div>
-                                                <div class="resume-item-content">${bean.price}</div>
-                                            </div>
-                                        </div>
-                                    </div>
+
                                     <div style="display:flex">
                                         <button
                                             onclick="window.location='/MeetBoth/_05_teacStu.searchAllTeac.controller/1'"
@@ -392,7 +372,7 @@
                                 </div>
                                 <div class="avatar-section">
                                     <div class="avatar-container">
-                                        <img src="https://fastly.picsum.photos/id/832/200/300.jpg?hmac=6gMt7WeRsS41_901ujRTrOgfwtW9MBZ375g8qXO3LUc"
+                                        <img src="<c:url value='/_01_member.ShowPhoto.controller?account=${Member.account}'/>"
                                             alt="">
                                     </div>
                                     <div id="replacediv" style="padding-top: 530%;">
@@ -409,9 +389,7 @@
                                         <div id="hiddenitem2" style="display:inline-block; height:86.75px"
                                             class="nav-container">
                                         </div>
-                                        <div style="padding-left: 35%;">
-                                            <span id="replace" class="icon-gears" aria-hidden="true"></span>
-                                        </div>
+
                                     </div>
                                 </div>
                             </div>

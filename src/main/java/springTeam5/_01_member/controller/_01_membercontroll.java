@@ -11,6 +11,7 @@ import java.util.stream.Collectors;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import javax.sql.rowset.serial.SerialBlob;
 import javax.sql.rowset.serial.SerialException;
 
@@ -140,11 +141,28 @@ public class _01_membercontroll {
 			return memberdata;			
 		}
 	}
-//	
+//	會員履歷
 	@GetMapping("/memberresume")
-	public String memberresume() {
+	public String memberresume(@RequestParam("id") String id, Model m) {
+		int memID = Integer.parseInt(id);
+		Optional<MemberBean> list = ms.searchMemByID(memID);
+		MemberBean member = list.get();
+		m.addAttribute("member", member);
 		return "_01_member/memberresume";
 	}
+	
+//	會員履歷產品列
+//	@ResponseBody
+//	@PostMapping("memberProd")
+//	public String memberProd(@RequestParam("id") ) {
+//		List<MemberBean> mem = ms.searchMemByID();
+//		if (mem.size() == 0) {
+//			return "login";
+//		}else {
+//			mProd.addAttribute("memberBean", mem.get(0));
+//			return "/_03_product/myPDP";
+//		}		
+//	}
 //	信箱檢查
 	@ResponseBody
 	@GetMapping("/mailcheck")
@@ -403,6 +421,8 @@ public class _01_membercontroll {
 		return "redirect:/admin/_01_member.admin.controller";
 	}
 	
+
 	
+
 	
 }

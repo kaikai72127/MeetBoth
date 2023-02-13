@@ -207,9 +207,9 @@
 
                                                     <!-- Content -->
                                                     <section>
-                                                        <header>
+                                                        <div>
                                                             <h3 style="color: aliceblue;">會員管理列表</h3>
-                                                        </header>
+                                                        </div>
                                                         <form action="#" method="POST" modelAttribute="Member">
                                                             <input type="text" name="value" value="${value}" required>
                                                             <input type="submit" name="selectByAccount" value="以帳號查詢"
@@ -228,7 +228,7 @@
 
                                                         <div>
                                                             <table
-                                                                style="color: rgb(255, 255, 255); text-align: center;"
+                                                                style="color: rgb(255, 255, 255); text-align: center; width: 100%;"
                                                                 class="prodtable">
                                                                 <thead>
                                                                     <tr>

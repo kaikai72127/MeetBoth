@@ -106,4 +106,11 @@ public class OrderItemServiceImpl implements OrderItemService {
 	public List<OrderItemBean> findOrderItem(Integer orderNo, Integer seqno) {
 		return orderItemRepo.findOrderItem(orderNo, seqno);
 	}
+
+	@Override
+	public List<OrderItemBean> findByMembersale(Integer membersale_FK) {
+		return orderItemRepo.findByMembersale(membersale_FK);
+	}
+	
+	
 }

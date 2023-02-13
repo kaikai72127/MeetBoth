@@ -47,7 +47,6 @@ public class OrderServiceImpl implements springTeam5._04_shoppingCart.service.Or
 		orderRepo.deleteById(orderNo);
 	}
 
-	
 // 修改----------
 	// 修改一筆訂單
 	public OrderBean updateOrder(OrderBean obean) {
@@ -67,21 +66,17 @@ public class OrderServiceImpl implements springTeam5._04_shoppingCart.service.Or
 	}
 
 	// 條件搜尋----模糊搜尋用
-<<<<<<< HEAD
-	
+
 	@Override
 	public List<OrderBean> findOrderBySearchAllLike(String ordStstus, String paymentStstus, String deliveryStstus,
 			String search) {
 		return orderRepo.findOrderBySearchAllLike(ordStstus, paymentStstus, deliveryStstus, search);
 	}
-	
-	
-=======
->>>>>>> origin/_01_Seal
+
+	// 訂單流水號生成使用
 	@Override
-	public List<OrderBean> findOrderBySearch1(String ordStstus, String paymentStstus, String deliveryStstus,
-			String search) {
-		return orderRepo.findOrderBySearch1(ordStstus, paymentStstus, deliveryStstus, search);
+	public List<OrderBean> findOrderByUID(String orderUID) {
+		return orderRepo.findOrderByUID(orderUID);
 	}
 
 	@Override
@@ -89,42 +84,16 @@ public class OrderServiceImpl implements springTeam5._04_shoppingCart.service.Or
 		return orderRepo.findByMemberbuy(memberbuy_FK);
 	}
 
-	@Override
-	public List<OrderBean> findByMembersale(Integer membersale_FK) {
-		return orderRepo.findByMembersale(membersale_FK);
-	}
+	// 訂單編號生成小工具
 
-	@Override
-	public List<OrderBean> findOrderBySearch2(String paymentStstus, String deliveryStstus, String search) {
-		return orderRepo.findOrderBySearch2(paymentStstus,deliveryStstus,search);
-	}
+	public String generateOrderNumber() {
+		SimpleDateFormat sdf = new SimpleDateFormat("yyMMdd");
+		String date = sdf.format(new Date());
 
-	@Override
-	public List<OrderBean> findOrderBySearch3(String deliveryStstus, String search) {
-		return orderRepo.findOrderBySearch3(deliveryStstus, search);
+		List<OrderBean> orderList = orderRepo.findOrderByUID(date);
+		int size = orderList.size();
+		return "MeetB" + date + String.format("%04d", (size+1));
 	}
-
-	@Override
-	public List<OrderBean> findOrderBySearch4(String search) {
-		return orderRepo.findOrderBySearch4(search);
-	}
-
-	@Override
-	public List<OrderBean> findOrderByOrdStstus(String ordStstus) {
-		return orderRepo.findOrderByOrdStstus(ordStstus);
-	}
-
-	@Override
-	public List<OrderBean> findOrderByPaymentStstus(String paymentStstus) {
-		return findOrderByPaymentStstus(paymentStstus);
-	}
-
-	@Override
-	public List<OrderBean> findOrderByDeliveryStstus(String deliveryStstus) {
-		return findOrderByDeliveryStstus(deliveryStstus);
-	}
-	
-	
 
 //	// 檢查購物車----
 //	@Override

@@ -26,8 +26,8 @@ public class ShoppingCartMailService {
 >>>>>>> origin/_01_Seal
 			messageHelper.setTo(recipient);
 			messageHelper.setSubject(memberName+" 先生/女士 感謝您使用MeetBoth購物");
-			messageHelper.setText("<html><body><h5 style='font-size: 18px'>"+memberName+"先生/女士 感謝您的訂購<br><h5>"
-	                +"<p>您的訂單明細:<br>"+orderMessage+"<br>"+"感謝您使用商城購物系統</p></body></html>",true);
+			messageHelper.setText("<html><body><h5 style='font-size: 24px'>"+memberName+"先生/女士 感謝您的訂購<br><h5>"
+	                +"<p style='font-size: 20px'>您的訂單明細:</p><br>"+orderMessage+"<br>"+"<img src='https://upload.cc/i1/2023/02/13/Jid0tu.png'><span style='font-size: 20px'>感謝您使用MeetBoth商城</span></body></html>",true);
 		};
 		try {
 			mailSender.send(messagePreparator);
@@ -44,8 +44,8 @@ public class ShoppingCartMailService {
 			messageHelper.setFrom("meetboth@gmail.com");
 			messageHelper.setTo(recipient);
 			messageHelper.setSubject(memberName+" 先生/女士 您有一筆新訂單，請盡速出貨");
-			messageHelper.setText("<html><body><h5 style='font-size: 18px'>"+memberName+"先生/女士 您有一筆新訂單<br><h5>"
-	                +"<p>您的訂單與出貨資訊:<br>"+orderMessage+"<br>"+"感謝您使用商城購物系統販商商品</p></body></html>",true);
+			messageHelper.setText("<html><body><h5 style='font-size: 20px'>"+memberName+"先生/女士 您有一筆新訂單<br><h5>"
+	                +"<p style='font-size: 14px'>您的訂單與出貨資訊:<br>"+orderMessage+"<br>"+"感謝您使用商城購物系統販商商品</p></body></html>",true);
 		};
 		try {
 			mailSender.send(messagePreparator);

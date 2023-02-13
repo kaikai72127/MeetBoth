@@ -201,7 +201,7 @@ a:hover {
 												href="/MeetBoth/_03_product.productindex.controller"
 												style="color: white; font-weight: 600;"
 												class="btn btn-d btn-round">所有商品清單</a></li>
-												<li><a
+											<li><a
 												href="/MeetBoth/_03_product.MBinsertProd.controller"
 												style="color: white; font-weight: 600;"
 												class="btn btn-d btn-round">新增商品</a></li>
@@ -228,11 +228,15 @@ a:hover {
 												class="btn btn-d btn-round">所有貼文清單</a></li>
 										</ul></li>
 									<li><a href="#" style="color: white; font-size: 20px;"
-										class="btn btn-d btn-round">購物車管理&ensp;<i
+										class="btn btn-d btn-round">訂單管理&ensp;<i
 											class="fa-solid fa-angle-double-down"></i></a>
 										<ul style="">
-											<li><a href="#" style="color: white; font-weight: 600;"
-												class="btn btn-d btn-round">所有購物單清單</a></li>
+											<li><a href="/MeetBoth/shoppingCartOrders.controller"
+												style="color: white; font-weight: 600;"
+												class="btn btn-d btn-round">所有訂單清單</a></li>
+											<li><a href="/MeetBoth/discounts.controller"
+												style="color: white; font-weight: 600;"
+												class="btn btn-d btn-round">折扣碼管理</a></li>
 										</ul></li>
 								</ul>
 								<a href="#"><img
@@ -244,13 +248,9 @@ a:hover {
 						<!-- 						右邊欄位開始 -->
 						<div class="col-sm-8 col-sm-offset-1"
 							style="margin-left: 20px; width: 75%; border-left: solid 1px yellow;">
-<<<<<<< HEAD
-							<div  class="col-sm-12">
-								<img style="width:100%" src="html/assets/images/shop/PTT.webp" alt="Title of Image" />
-=======
 							<div class="col-sm-12">
-								<img src="html/assets/images/shop/2023.png" alt="Title of Image" />
->>>>>>> origin/_01_Seal
+								<img style="width: 100%"
+									src="html/assets/images/shop/MeetBoth.gif" alt="Title of Image" />
 							</div>
 							<div class="post">
 								<!-- 							標題 -->
@@ -531,8 +531,5 @@ a:hover {
 			chart.draw(data, options);
 		}
 	</script>
-<<<<<<< HEAD
-	</body>
-=======
->>>>>>> origin/_01_Seal
+</body>
 </html>

@@ -2,6 +2,8 @@ package springTeam5._04_shoppingCart.service;
 
 import java.util.List;
 
+import org.springframework.data.jpa.repository.Query;
+
 import springTeam5._04_shoppingCart.model.OrderItemBean;
 
 public interface OrderItemService {
@@ -22,6 +24,7 @@ public interface OrderItemService {
 	List<OrderItemBean> findByOrderno(Integer orderNo);
 	List<OrderItemBean> findBySqeno(Integer seqno);
 	List<OrderItemBean> findOrderItem(Integer orderNo, Integer seqno);
+	List<OrderItemBean> findByMembersale(Integer membersale_FK);
 	
 	
 }

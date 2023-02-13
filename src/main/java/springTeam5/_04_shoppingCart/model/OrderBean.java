@@ -29,6 +29,9 @@ public class OrderBean {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "ORDERNO")
 	private Integer orderNo; // 訂單編號
+	
+	@Column(name = "orderUID")
+	private String orderUID ;
 
 	@ManyToOne
 	@JoinColumn(name = "MEMBERBUY_FK") // 買家會員編號
@@ -76,10 +79,12 @@ public class OrderBean {
 	}
 
 	// 新增有ID
-	public OrderBean(Integer orderNo, MemberBean memberbuy, String orderDate, String uporderDate, String shippingName,
-			String shippingPhone, String shippingAddress, String ordStstus, String paymentStstus, String deliveryStstus,
-			String paymentMethod, Discount discount, Integer totalAmount, Set<OrderItemBean> items) {
-		this.orderNo = orderNo;
+
+	public OrderBean(Integer orderNo, String orderUID, MemberBean memberbuy, String orderDate, String uporderDate,
+			String shippingName, String shippingPhone, String shippingAddress, String ordStstus, String paymentStstus,
+			String deliveryStstus, String paymentMethod, Discount discount, Integer totalAmount,
+			Set<OrderItemBean> items) {
+		this.orderUID = orderUID;
 		this.memberbuy = memberbuy;
 		this.orderDate = orderDate;
 		this.uporderDate = uporderDate;
@@ -95,10 +100,14 @@ public class OrderBean {
 		this.items = items;
 	}
 
+
 	// 修改
-	public OrderBean(MemberBean memberbuy, String orderDate, String uporderDate, String shippingName,
-			String shippingPhone, String shippingAddress, String ordStstus, String paymentStstus, String deliveryStstus,
-			String paymentMethod, Discount discount, Integer totalAmount, Set<OrderItemBean> items) {
+
+	public OrderBean(String orderUID, MemberBean memberbuy, String orderDate, String uporderDate,
+			String shippingName, String shippingPhone, String shippingAddress, String ordStstus, String paymentStstus,
+			String deliveryStstus, String paymentMethod, Discount discount, Integer totalAmount,
+			Set<OrderItemBean> items) {
+		this.orderUID = orderUID;
 		this.memberbuy = memberbuy;
 		this.orderDate = orderDate;
 		this.uporderDate = uporderDate;
@@ -113,6 +122,7 @@ public class OrderBean {
 		this.totalAmount = totalAmount;
 		this.items = items;
 	}
+
 
 	// Getter Setter
 
@@ -122,6 +132,14 @@ public class OrderBean {
 
 	public void setOrderNo(Integer orderNo) {
 		this.orderNo = orderNo;
+	}
+	
+	public String getOrderUID() {
+		return orderUID;
+	}
+
+	public void setOrderUID(String orderUID) {
+		this.orderUID = orderUID;
 	}
 
 	public MemberBean getMemberbuy() {

@@ -79,6 +79,7 @@ public class OrderServiceImpl implements springTeam5._04_shoppingCart.service.Or
 		return orderRepo.findOrderByUID(orderUID);
 	}
 
+	//找到買了那些訂單
 	@Override
 	public List<OrderBean> findByMemberbuy(Integer memberbuy_FK) {
 		return orderRepo.findByMemberbuy(memberbuy_FK);
@@ -92,7 +93,7 @@ public class OrderServiceImpl implements springTeam5._04_shoppingCart.service.Or
 
 		List<OrderBean> orderList = orderRepo.findOrderByUID(date);
 		int size = orderList.size();
-		return "MeetB" + date + String.format("%04d", (size+1));
+		return "MB" + date + String.format("%04d", (size+1));
 	}
 
 //	// 檢查購物車----

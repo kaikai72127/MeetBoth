@@ -65,107 +65,101 @@
 						<div class="loader">Loading...</div>
 					</div>
 
-					<!-- Checkout Start -->
-					<!-- 內容 1-->
-					<!-- check out-->
-					<section>
-						<form>
-							<div class="main">
-								<section class="" style="margin-bottom: 120px; margin-top: 100px">
-									<div class="container">
-										<div class="row">
-											<div class="col-sm-6 col-sm-offset-3">
-												<h1 class="module-title font-alt">
-													Checkout <i class="fa-solid fa-cart-shopping"></i>
-												</h1>
-											</div>
-										</div>
-										<hr class="divider-w pt-20">
-										<div class="row">
-											<div class="col-sm-12">
-												<table class="table table-striped table-border checkout-table">
-													<tbody>
-														<tr>
-															<!-- <th class=""><input type="checkbox">All</th> -->
-															<th class="hidden-xs">photo</th>
-															<th>商品名稱</th>
-															<th class="hidden-xs">單價</th>
-															<th>數量</th>
-															<th>小計</th>
-															<th>移除</th>
-														</tr>
-														<c:forEach var="shoppingItem"
-															items="${ShoppingCart.getShoppingCart()}">
-															<tr>
-																<!-- <td class=""><input type="checkbox"></td> -->
-																<td class="hidden-xs"><a
-																		href="_03_product.PathToProductDetail.controller?id=${shoppingItem.value.prodItem.prodID}"><img
-																			src="<c:url value='/_03_product.showPicture.controller?id=${shoppingItem.value.prodItem.prodID}' />"
-																			alt=""
-																			style="width: 100px; float: left;"></a></td>
-																<td>
-																	<h5 class="product-title font-alt">
-																		${shoppingItem.value.prodItem.prodName}</h5>
-																</td>
-																<td class="hidden-xs">
-																	<h5 class="product-title font-alt prodPrice"
-																		id="prodPrice">
-																		${shoppingItem.value.prodItem.prodPrice}</h5>
-																</td>
-																<td><input class="form-control prodQtyChange"
-																		type="number" name="updateQty"
-																		id="${shoppingItem.value.prodItem.prodID}"
-																		value='${shoppingItem.value.qty}' max="50"
-																		min="1" />
-																<td>
-																	<h5 class="product-title font-alt itemTotal"
-																		id="itemTotal">${shoppingItem.value.itemTotal}
-																	</h5>
-																</td>
-																<td class="pr-remove"><button
-																		class="removeProduct btn btn-sm btn-primary"
-																		name="prodId"
-																		id="${shoppingItem.value.prodItem.prodID}"
-																		value="${shoppingItem.value.prodItem.prodID}">
-																		<i class="fa-solid fa-trash"></i>
-																	</button></td>
-															</tr>
-														</c:forEach>
-													</tbody>
-												</table>
-											</div>
-										</div>
-										<div class="row">
-											<!-- 								<div class="col-sm-3 col-sm-offset-3"> -->
-											<!-- 									<div class="form-group"> -->
-											<!-- 										<button class="btn btn-block btn-round btn-p pull-right" -->
-											<!-- 											type="submit">Update Cart</button> -->
-											<!-- 									</div> -->
-											<!-- 								</div> -->
-										</div>
-										<hr class="divider-w">
-										<div class="row mt-70">
-											<div class="col-sm-5 col-sm-offset-7">
-												<div class="shop-Cart-totalbox">
-													<h4 class="font-alt">Cart Totals</h4>
-													<table class="table table-striped table-border checkout-table">
-														<tbody>
-															<tr>
-																<th>Item :</th>
-																<td id=ShoopintCartItem>${ShoppingCart.getItemQty()}
-																</td>
-															</tr>
-															<tr class="shop-Cart-totalprice">
-																<th>Total :</th>
-																<td>${ShoppingCart.getItemAmount()}</td>
-															</tr>
-														</tbody>
-													</table>
-												</div>
-											</div>
-										</div>
-										<div
-											style="display: flex; justify-content: center; margin-bottom: 50px; margin-top: 50px">
+		<!-- Checkout Start -->
+		<!-- 內容 1-->
+		<!-- check out-->
+		<section>
+			<form>
+				<div class="main">
+					<section class="" style="margin-bottom: 120px; margin-top: 100px">
+						<div class="container">
+							<div class="row">
+								<div class="col-sm-6 col-sm-offset-3">
+									<h1 class="module-title font-alt">
+										Checkout <i class="fa-solid fa-cart-shopping"></i>
+									</h1>
+								</div>
+							</div>
+							<hr class="divider-w pt-20">
+							<div class="row">
+								<div class="col-sm-12">
+									<table class="table table-striped table-border checkout-table">
+										<tbody>
+											<tr style="font-size:16px">
+												<!-- <th class=""><input type="checkbox">All</th> -->
+												<th class="hidden-xs">照片</th>
+												<th>品名</th>
+												<th class="hidden-xs">單價</th>
+												<th>數量</th>
+												<th>小計</th>
+												<th>移除</th>
+											</tr>
+											<c:forEach var="shoppingItem"
+												items="${ShoppingCart.getShoppingCart()}">
+												<tr style="font-size:16px;" >
+													<!-- <td class=""><input type="checkbox"></td> -->
+													<td class="hidden-xs"><a
+														href="_03_product.PathToProductDetail.controller?id=${shoppingItem.value.prodItem.prodID}"><img
+															src="<c:url value='/_03_product.showPicture.controller?id=${shoppingItem.value.prodItem.prodID}' />"
+															alt="" style="width: 250px; float: left;"></a></td>
+													<td>
+														<h5 class="product-title font-alt">${shoppingItem.value.prodItem.prodName}</h5>
+													</td>
+													<td class="hidden-xs">
+														<h5 class="product-title font-alt prodPrice"
+															id="prodPrice">${shoppingItem.value.prodItem.prodPrice}</h5>
+													</td>
+													<td><input class="form-control prodQtyChange"
+														type="number" name="updateQty"
+														id="${shoppingItem.value.prodItem.prodID}"
+														value='${shoppingItem.value.qty}' max="50" min="1" />
+													<td>
+														<h5 class="product-title font-alt itemTotal"
+															id="itemTotal">${shoppingItem.value.itemTotal}</h5>
+													</td>
+													<td class="pr-remove"><button
+															class="removeProduct btn btn-sm btn-primary"
+															name="prodId" id="${shoppingItem.value.prodItem.prodID}"
+															value="${shoppingItem.value.prodItem.prodID}">
+															<i class="fa-solid fa-trash"></i>
+														</button></td>
+												</tr>
+											</c:forEach>
+										</tbody>
+									</table>
+								</div>
+							</div>
+							<div class="row">
+
+								<!-- 								<div class="col-sm-3 col-sm-offset-3"> -->
+								<!-- 									<div class="form-group"> -->
+								<!-- 										<button class="btn btn-block btn-round btn-p pull-right" -->
+								<!-- 											type="submit">Update Cart</button> -->
+								<!-- 									</div> -->
+								<!-- 								</div> -->
+							</div>
+							<hr class="divider-w">
+							<div class="row mt-70">
+								<div class="col-sm-5 col-sm-offset-7">
+									<div class="shop-Cart-totalbox">
+										<h4 class="font-alt" style="font-size:20px;color:#ce7777;font-weight:800"> 購物車</h4>
+										<table class="table table-striped table-border checkout-table">
+											<tbody style="font-size:18px">
+												<tr>
+													<th>數　　量 :</th>
+													<td id=ShoopintCartItem>${ShoppingCart.getItemQty()}</td>
+												</tr>
+												<tr class="shop-Cart-totalprice">
+													<th>金額總計 :</th>
+													<td>${ShoppingCart.getItemAmount()}</td>
+												</tr>
+											</tbody>
+										</table>
+									</div>
+								</div>
+							</div>
+							<div
+								style="display: flex; justify-content: center; margin-bottom: 50px; margin-top: 50px">
 
 											<table border='1' class="btn-p">
 												<tr>

@@ -37,11 +37,7 @@
 		function checkID() {
 			let check = String(idNumber.value);
 			check = check.toUpperCase();
-<<<<<<< HEAD
-			let firstCheck = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-=======
 			let firstCheck = "ABCDEFGHJKLMNPQRSTUVXYWZIO";
->>>>>>> origin/_01_Seal
 			if (check.length == 10) {
 				if (firstCheck.indexOf(check[0]) != "-1") {
 					if (check[1] == 1 || check[1] == 2) {

@@ -46,35 +46,6 @@
                       </li>
                       <li><a href="index_mp_classic_flexslider.html">會員新增</a></li>
                     </ul>
-=======
-
-      <c:set value="${CartSize}" var="cartsize" />
-      <c:set value="${ShoppingCart}" var="ShoppingCart" />
-      <c:set value="${Member}" var="Member" />
-      <!-- header -->
-      <nav class="navbar navbar-custom navbar-fixed-top headershadow" role="navigation">
-        <div class="container-nav">
-          <!--Navbar橫幅 -->
-          <div class="navbar-header">
-            <button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#custom-collapse">
-              <span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span
-                class="icon-bar"></span><span class="icon-bar"></span>
-            </button>
-            <img src="<%=baseMeetboth96x96%>" style="float: left" />
-            <a class="navbar-brand" href="<c:url value='/index.controller' />">
-              肉丸家教網</a>
-            <!-- <a class="navbar-brand" href="index.html">肉丸家教網-MEET BOTH</a> -->
-          </div>
-
-          <div class="collapse navbar-collapse" id="custom-collapse">
-            <ul class="nav navbar-nav navbar-right">
-              <li class="dropdown">
-                <!--Navbar橫幅 搜尋教師 -->
-                <a class="dropdown-toggle" href="#" data-toggle="dropdown">MeetBoth</a>
-                <ul class="dropdown-menu">
-                  <li>
-                    <a href="index_mp_fullscreen_video_background.html">Default</a>
->>>>>>> origin/_01_Seal
                   </li>
                 </ul>
               </li>

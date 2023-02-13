@@ -107,6 +107,7 @@ public class OrderItemServiceImpl implements OrderItemService {
 		return orderItemRepo.findOrderItem(orderNo, seqno);
 	}
 
+	//找到賣了那些item
 	@Override
 	public List<OrderItemBean> findByMembersale(Integer membersale_FK) {
 		return orderItemRepo.findByMembersale(membersale_FK);

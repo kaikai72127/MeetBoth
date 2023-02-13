@@ -2,6 +2,7 @@ package springTeam5._04_shoppingCart.controller;
 
 import java.sql.SQLException;
 import java.util.LinkedHashSet;
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
@@ -12,6 +13,7 @@ import javax.servlet.http.HttpSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -35,7 +37,7 @@ import springTeam5._04_shoppingCart.service.impl.DiscountServiceImpl;
 import springTeam5._04_shoppingCart.service.impl.OrderServiceImpl;
 
 @Controller
-@SessionAttributes(names = { "ShoppingCart" })
+@SessionAttributes(names = { "ShoppingCart","CartSize" })
 public class ShoppingCartCheck {
 
 	private static Logger log = LoggerFactory.getLogger(ShoppingCartCheck.class);
@@ -58,14 +60,15 @@ public class ShoppingCartCheck {
 	AioCheckOutALL obj = new AioCheckOutALL();
 
 	@PostMapping("/shoppingCartConfirm.controller")
-	public String processConfirmAction(HttpServletRequest request, SessionStatus sessionStatus, Model model)
+	public String processConfirmAction(HttpServletRequest request, SessionStatus sessionStatus,HttpSession session, Model model)
 			throws SQLException {
-		HttpSession session = request.getSession(true);
+//		HttpSession session = request.getSession(true);
+		
 		log.info("處理訂單之Controller: 開始");
 
 		// ----------------------
 		String id = obj.getMerchantTradeNo();
-		id = id.replace("MeetBothT", "");
+		id = id.replace("MeetBothTT", "");
 		int orderNumber = Integer.parseInt(id);
 		System.out.println(orderNumber);
 		OrderBean orderBean = orderService.findByOrderNo(orderNumber).get(0);
@@ -93,22 +96,26 @@ public class ShoppingCartCheck {
 
 		MemberBean member = (MemberBean) session.getAttribute("Member");
 //
-//		String account = SecurityContextHolder.getContext().getAuthentication().getName();
-//		List<MemberBean> mem = memberService.searchMemByAccount(account);
+		String account = SecurityContextHolder.getContext().getAuthentication().getName();
+		List<MemberBean> mem = memberService.searchMemByAccount(account);
 //
 //		System.out.println("------------account-----------------" + mem);
 		// 存資料進session
 //		Optional<MemberBean> list = memberService.searchMemByID(mem.get(0).getMemberID());
-//		System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
-//		member = list.get();
+		System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+		MemberBean memberBean = mem.get(0);
+		
+//		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+//		MemberBean member = (MemberBean)authentication.getPrincipal();
 
 		if (member == null) {
+			System.out.println("------找看看有沒有會員-------");
 			member = memberbuy;
 			session.setAttribute("Member", member);
 		}
 
 		// 加入屬性於跳轉成功訂購的頁面使用
-		model.addAttribute("member", memberbuy);
+		model.addAttribute("member", memberBean);
 		model.addAttribute("order", orderBean);
 
 		return "_04_shoppingCart/shoppingCartSuccess";
@@ -136,9 +143,9 @@ public class ShoppingCartCheck {
 
 		// 取得會員資料
 //		String user = SecurityContextHolder.getContext().getAuthentication().getName();
-//		List<MemberBean> list = memberService.searchMemByAccount(user);
-//		// 登入會員資料
-//		MemberBean memberBean = list.get(0);
+//		List<MemberBean> memberList = memberService.searchMemByAccount(user);
+		// 登入會員資料
+//		MemberBean memberBean = memberList.get(0);
 //		int memberID = memberBean.getMemberID();
 
 		// 會員有登入
@@ -295,7 +302,7 @@ public class ShoppingCartCheck {
 
 		mailService.prepareAndSendForBuy(recipient, memberName, orderMessage);
 
-		String meetBothNo = "MeetBothT";
+		String meetBothNo = "MeetBothTT";
 		meetBothNo = meetBothNo + String.valueOf(orderBean.getOrderNo());
 
 		// 綠界

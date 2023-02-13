@@ -85,10 +85,10 @@ button.removeProduct:hover {
 								<div class="col-sm-12">
 									<table class="table table-striped table-border checkout-table">
 										<tbody>
-											<tr>
+											<tr style="font-size:16px">
 												<!-- <th class=""><input type="checkbox">All</th> -->
-												<th class="hidden-xs">photo</th>
-												<th>商品名稱</th>
+												<th class="hidden-xs">照片</th>
+												<th>品名</th>
 												<th class="hidden-xs">單價</th>
 												<th>數量</th>
 												<th>小計</th>
@@ -96,12 +96,12 @@ button.removeProduct:hover {
 											</tr>
 											<c:forEach var="shoppingItem"
 												items="${ShoppingCart.getShoppingCart()}">
-												<tr>
+												<tr style="font-size:16px;" >
 													<!-- <td class=""><input type="checkbox"></td> -->
 													<td class="hidden-xs"><a
 														href="_03_product.PathToProductDetail.controller?id=${shoppingItem.value.prodItem.prodID}"><img
 															src="<c:url value='/_03_product.showPicture.controller?id=${shoppingItem.value.prodItem.prodID}' />"
-															alt="" style="width: 100px; float: left;"></a></td>
+															alt="" style="width: 250px; float: left;"></a></td>
 													<td>
 														<h5 class="product-title font-alt">${shoppingItem.value.prodItem.prodName}</h5>
 													</td>
@@ -142,15 +142,15 @@ button.removeProduct:hover {
 							<div class="row mt-70">
 								<div class="col-sm-5 col-sm-offset-7">
 									<div class="shop-Cart-totalbox">
-										<h4 class="font-alt">Cart Totals</h4>
+										<h4 class="font-alt" style="font-size:20px;color:#ce7777;font-weight:800"> 購物車</h4>
 										<table class="table table-striped table-border checkout-table">
-											<tbody>
+											<tbody style="font-size:18px">
 												<tr>
-													<th>Item :</th>
+													<th>數　　量 :</th>
 													<td id=ShoopintCartItem>${ShoppingCart.getItemQty()}</td>
 												</tr>
 												<tr class="shop-Cart-totalprice">
-													<th>Total :</th>
+													<th>金額總計 :</th>
 													<td>${ShoppingCart.getItemAmount()}</td>
 												</tr>
 											</tbody>

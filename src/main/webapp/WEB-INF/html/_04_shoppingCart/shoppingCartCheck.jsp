@@ -42,6 +42,17 @@ button.removeProduct:hover {
 	background-color: #ce7777;
 	color: #f4f7f7;
 }
+
+#orderAndSgipping {
+
+font-size:20px;
+width:600px;
+	
+}
+
+#orderDiv, #shippingDiv {
+	margin:auto;
+}
 </style>
 
 </head>
@@ -79,9 +90,9 @@ button.removeProduct:hover {
 								<div class="col-sm-12">
 									<table class="table table-striped table-border checkout-table">
 										<tbody>
-											<tr>
+											<tr style="font-size: 20px">
 												<!-- <th class=""><input type="checkbox">All</th> -->
-												<th class="hidden-xs">photo</th>
+												<th class="hidden-xs">照片</th>
 												<th>商品名稱</th>
 												<th class="hidden-xs">單價</th>
 												<th>數量</th>
@@ -89,22 +100,22 @@ button.removeProduct:hover {
 											</tr>
 											<c:forEach var="shoppingItem"
 												items="${ShoppingCart.getShoppingCart()}">
-												<tr>
+												<tr style="font-size: 20px">
 													<!-- <td class=""><input type="checkbox"></td> -->
 													<td class="hidden-xs"><a
 														href="_03_product.PathToProductDetail.controller?id=${shoppingItem.value.prodItem.prodID}"><img
 															src="<c:url value='/_03_product.showPicture.controller?id=${shoppingItem.value.prodItem.prodID}' />"
 															alt="" style="width: 100px; float: left;"></a></td>
 													<td>
-														<h5 class="product-title font-alt">${shoppingItem.value.prodItem.prodName}</h5>
+														<h5 style="font-size: 20px" class="product-title font-alt">${shoppingItem.value.prodItem.prodName}</h5>
 													</td>
 													<td class="hidden-xs">
-														<h5 class="product-title font-alt" id="prodPrice">${shoppingItem.value.prodItem.prodPrice}</h5>
+														<h5 style="font-size: 20px" class="product-title font-alt" id="prodPrice">${shoppingItem.value.prodItem.prodPrice}</h5>
 													</td>
-													<td><h5 class="product-title font-alt"
+													<td><h5 style="font-size: 20px" class="product-title font-alt"
 															id="${shoppingItem.value.prodItem.prodID}">${shoppingItem.value.prodItem.prodID}</h5>
 													<td>
-														<h5 class="product-title font-alt itemTotal"
+														<h5 style="font-size: 20px" class="product-title font-alt itemTotal"
 															id="itemTotal">${shoppingItem.value.itemTotal}</h5>
 													</td>
 												</tr>
@@ -136,19 +147,20 @@ button.removeProduct:hover {
 							<div class="row mt-70">
 								<div class="col-sm-5 col-sm-offset-7">
 									<div class="shop-Cart-totalbox">
-										<h4 class="font-alt">Cart Totals</h4>
+										<h4 class="font-alt"
+											style="font-size: 22px; color: #ce7777; font-weight: 800">購物車</h4>
 										<table class="table table-striped table-border checkout-table">
-											<tbody>
+											<tbody style="font-size: 20px">
 												<tr>
-													<th>Total :</th>
+													<th>金 額 :</th>
 													<td id="itemAmount">${ShoppingCart.getItemAmount()}</td>
 												</tr>
 												<tr>
-													<th>Discount :</th>
+													<th>折 扣 :</th>
 													<td style="color: red" id="discountPrice"></td>
 												</tr>
 												<tr class="shop-Cart-totalprice">
-													<th>Total Amount:</th>
+													<th>金額總計 :</th>
 													<td><input type="hidden" name="totalAmount"
 														value="${ShoppingCart.getItemAmount()}" id="totalAmount" /><span
 														id="showPrice">${ShoppingCart.getItemAmount()}</span></td>
@@ -159,86 +171,62 @@ button.removeProduct:hover {
 								</div>
 							</div>
 							<!-- ---資料填寫--- -->
-							<div style="width: 500px; text-align: center;">
-								<div style="margin: auto">
-									<h3>---訂購者資料---</h3>
-									<div
-										style="display: flex; justify-content: center; margin-bottom: 50px">
-
-										<table class="table table-striped table-border checkout-table">
-											<tbody>
-												<tr>
-													<th>姓名 :</th>
-													<td>${Member.memName}</td>
-												</tr>
-												<tr>
-													<th>電話 :</th>
-													<td>${Member.phone}</td>
-												</tr>
-												<tr>
-													<th>E-mail :</th>
-													<td>${Member.eMail}</td>
-												</tr>
-												<tr>
-													<th>地址 :</th>
-													<td>${Member.address}</td>
-												</tr>
-											</tbody>
-										</table>
-									</div>
+							<div id="orderAndSgipping">
+								<!--訂購者資料 -->
+								<div id="orderDiv">
+									<h3 style="color: #ce7777; font-weight: 800">---訂購者資料---</h3>
+									<table class="table table-striped table-border">
+										<tbody>
+											<tr>
+												<th  style="width:150px;">姓名 :</th>
+												<td>${Member.memName}</td>
+											</tr>
+											<tr>
+												<th  style="width:150px;">電話 :</th>
+												<td>${Member.phone}</td>
+											</tr>
+											<tr>
+												<th  style="width:150px;">地址 :</th>
+												<td>${Member.address}</td>
+											</tr>
+											<tr>
+												<th  style="width:150px;">E-mail :</th>
+												<td><input type='email' name='email'
+													value="${Member.eMail}" class="fieldWidth"
+													style="width: 400px;" /></td>
+											</tr>
+										</tbody>
+									</table>
 								</div>
-
-								<div>
-									<!-- 收件者資料 -->
-									<h3>---收件者資料---</h3>
-									<div
-										style="display: flex; justify-content: center; margin-bottom: 50px">
-
-										<table class="table table-striped table-border checkout-table">
-											<tbody>
-												<tr>
-													<th>姓名 :</th>
-													<td><input type='text' name='shippingName'
-														value="${Member.memName}" class="fieldWidth"
-														style="width: 200px;" /></td>
-												</tr>
-												<tr>
-													<th>電話 :</th>
-													<td><input type='text' name='shippingPhone'
-														value="${Member.phone}" class="fieldWidth"
-														style="width: 200px;" /></td>
-												</tr>
-												<tr>
-													<th>E-mail :</th>
-													<td><input type='email' name='email'
-														value="${Member.eMail}" class="fieldWidth"
-														style="width: 200px;" /></td>
-												</tr>
-												<tr>
-													<th>地址 :</th>
-													<td><input type='text' name='shippingAddress'
-														value="${Member.address}" class="fieldWidth"
-														style="width: 200px;" /></td>
-												</tr>
-											</tbody>
-										</table>
-									</div>
+								<!--收件者資料 -->
+								<div id="shippingDiv">
+									<h3 style="color: #ce7777; font-weight: 800">---收件者資料---</h3>
+									<table class="table table-striped table-border">
+										<tbody>
+											<tr>
+												<th style="width:150px;">姓名 :</th>
+												<td><input type='text' name='shippingName'
+													value="${Member.memName}" class="fieldWidth"
+													style="width: 400px;" /></td>
+											</tr>
+											<tr>
+												<th style="width:150px;">電話 :</th>
+												<td><input type='text' name='shippingPhone'
+													value="${Member.phone}" class="fieldWidth"
+													style="width: 400px;" /></td>
+											</tr>
+											<tr>
+												<th style="width:150px;">地址 :</th>
+												<td><input type='text' name='shippingAddress'
+													value="${Member.address}" class="fieldWidth"
+													style="width: 400px;" /></td>
+											</tr>
+										</tbody>
+									</table>
 								</div>
-
 
 							</div>
 
-							<!-- 							選擇付款方式 -->
-							<!-- 							<div> -->
-							<!-- 								<h3>付款方式:</h3> -->
-							<!-- 								<label for="貨到付款">貨到付款</label><input type='radio' -->
-							<!-- 									name='paymentMethod' value="貨到付款" class="fieldWidth" -->
-							<!-- 									style="width: 200px;" /> <label for="信用卡">信用卡</label><input -->
-							<!-- 									type='radio' name='paymentMethod' value="信用卡" -->
-							<!-- 									class="fieldWidth" style="width: 200px;" /> <label for="轉帳">轉帳</label><input -->
-							<!-- 									type='radio' name='paymentMethod' value="轉帳" class="fieldWidth" -->
-							<!-- 									style="width: 200px;" /> -->
-							<!-- 							</div> -->
 							<div id="btnArea" align="center">
 								<input type="submit" name="submit" id="submit" value="送出訂單"
 									style="margin-right: 20px" /> <input type="reset"

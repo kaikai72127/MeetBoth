@@ -77,7 +77,7 @@ public class ShoppingCartController {
 			throws IOException, SQLException {
 		HttpSession session = request.getSession(false);
 		ShoppingCart cart = (ShoppingCart) session.getAttribute("ShoppingCart");
-//		MemberBean member = (MemberBean) session.getAttribute("Member");
+		MemberBean member = (MemberBean) session.getAttribute("Member");
 
 		if (cart == null) {
 			// 就新建ShoppingCart物件
@@ -95,7 +95,7 @@ public class ShoppingCartController {
 			System.out.println("-------------Session------購物車----------member");
 
 			session.setAttribute("ShoppingCart", cart);
-//			session.setAttribute("Member", member);
+			session.setAttribute("Member", member);
 
 		}
 		// 將明細資料(價格，數量，與BookBean)封裝到OrderItemBean物件內
@@ -127,9 +127,9 @@ public class ShoppingCartController {
 
 	// 確認訂單購物車頁面
 	@GetMapping("/shoppingcartCheck.controller")
-	public String processCheckMainAction(HttpServletRequest request) {
+	public String processCheckMainAction(HttpServletRequest request,Model model) {
 		HttpSession session = request.getSession(false);
-		MemberBean member = (MemberBean) session.getAttribute("Member");
+//		MemberBean member = (MemberBean) session.getAttribute("Member");
 		ShoppingCart shoppingCart = (ShoppingCart) session.getAttribute("ShoppingCart");
 
 		//查看是否有登入 如果沒有登入則轉跳登入頁面
@@ -142,12 +142,12 @@ public class ShoppingCartController {
 		}
 		
 		//存資料進session
-		Optional<MemberBean> list = memberService.searchMemByID(mem.get(0).getMemberID());
+//		Optional<MemberBean> list = memberService.searchMemByID(mem.get(0).getMemberID());
 		
-		member = list.get();
+		MemberBean member = mem.get(0);
 		
 
-		session.setAttribute("Member", member);
+		model.addAttribute("Member",member);
 		// 需有兩個判斷才可以
 		if (shoppingCart != null && shoppingCart.getItemQty() != 0) {
 			// 跳轉到有購物車的頁面

@@ -6,7 +6,9 @@ import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -27,6 +29,7 @@ import springTeam5._04_shoppingCart.model.Discount;
 import springTeam5._04_shoppingCart.model.OrderBean;
 import springTeam5._04_shoppingCart.model.OrderItemBean;
 import springTeam5._04_shoppingCart.service.impl.DiscountServiceImpl;
+import springTeam5._04_shoppingCart.service.impl.OrderItemServiceImpl;
 import springTeam5._04_shoppingCart.service.impl.OrderServiceImpl;
 
 @Controller
@@ -34,6 +37,8 @@ public class OrderController {
 
 	@Autowired
 	private OrderServiceImpl orderService;
+	@Autowired
+	private OrderItemServiceImpl orderItemService;
 
 	@Autowired
 	private MemberService memberService;
@@ -191,4 +196,33 @@ public class OrderController {
 	}
 
 
+	
+	
+	//前台訂單使用------------
+	@GetMapping(path = "/memberOrdersList.controller")
+	public String fondMemberBuy(Model model,HttpServletRequest request) {
+//		HttpSession session = request.getSession(false);
+//		MemberBean member = (MemberBean) session.getAttribute("Member");
+				
+		String account = SecurityContextHolder.getContext().getAuthentication().getName();
+		List<MemberBean> mem = memberService.searchMemByAccount(account);
+		
+		if (mem.size() == 0) {
+			return "login";
+		}else {
+			MemberBean memberBean = mem.get(0);
+			List<OrderBean> orderList = orderService.findByMemberbuy(memberBean.getMemberID());
+			List<OrderItemBean> orderSaleList = orderItemService.findByMembersale(memberBean.getMemberID());
+			
+			model.addAttribute("memberBean", memberBean);
+			model.addAttribute("orderList", orderList);
+			model.addAttribute("orderSaleList", orderSaleList);
+			return "/_04_shoppingCart/memberOrderList";
+		}
+	}
+//	@PostMapping()
+//	public String fondMemberSale(Model mProd,HttpServletRequest request) {
+//		
+//	}
+	
 }

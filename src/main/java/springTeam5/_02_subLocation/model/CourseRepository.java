@@ -16,6 +16,9 @@ public interface CourseRepository extends JpaRepository<Course, Integer> {
 
 //	透過prodID刪除整筆商品資料
 	public void deleteByCourseID(Integer courseID);
+	
+//	透過 memberID 搜尋全部的 courseBean
+	public List<Course> findByMemberID(Integer memberID);
 
 //	條件搜尋
 	@Query(value = "select * from Course where IIF(?1=0,?1,courseClass)=?1 and coursePrice >= ?2 and coursePrice <= ?3 and (courseName like concat('%',?4,'%') or memberID like concat('%',?4,'%')) order by courseID", nativeQuery = true)
@@ -24,7 +27,7 @@ public interface CourseRepository extends JpaRepository<Course, Integer> {
 	@Query(value = "select * from Course where IIF(?1=0,?1,courseClass)=?1 and coursePrice >= ?2 and coursePrice <= ?3 and (courseName like concat('%',?4,'%') or memberID like concat('%',?4,'%')) order by coursePrice DESC", nativeQuery = true)
 	public List<Course> findAllByOrderByCoursePriceDesc(Integer type, Integer low, Integer high, String name);
 
-	@Query(value = "select * from Course where IIF(?1=0,?1,courseClass)=?1 and coursePrice >= ?2 and coursePrice <= ?3 and (courseName like concat('%',?4,'%') or memberID like concat('%',?4,'%')) order by coursePrice DESC", nativeQuery = true)
+	@Query(value = "select * from Course where IIF(?1=0,?1,courseClass)=?1 and coursePrice >= ?2 and coursePrice <= ?3 and (courseName like concat('%',?4,'%') or memberID like concat('%',?4,'%')) order by coursePrice", nativeQuery = true)
 	public List<Course> findAllByOrderByCoursePrice(Integer type, Integer low, Integer high, String name);
 
 	@Query(value = "select * from Course where IIF(?1=0,?1,courseClass)=?1 and coursePrice >= ?2 and coursePrice <= ?3 and (courseName like concat('%',?4,'%') or memberID like concat('%',?4,'%')) order by coursePost DESC", nativeQuery = true)

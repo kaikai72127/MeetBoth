@@ -440,11 +440,7 @@ a:hover {
 	<script>
 	
         $(function(){
-<<<<<<< HEAD
         	$('.deleteThisProduct').click(function(){
-=======
-        	$('#deleteThisProduct').click(function(){
->>>>>>> origin/_01_Seal
                 let id=$(this).attr("name");
                 Swal.fire({
                   title: '你確定要刪除嗎?',
@@ -504,8 +500,4 @@ a:hover {
   		}
 	}
 </script>
-<<<<<<< HEAD
-</body>
-=======
->>>>>>> origin/_01_Seal
 </html>

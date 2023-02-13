@@ -10,6 +10,34 @@
 				<!-- 引入共同的headMVC -->
 				<jsp:include page="fragment/headMVC.jsp" />
 				<script src="https://apis.google.com/js/platform.js" async defer></script>
+				<style>
+					input[type='checkbox'] {
+						width: 15px;
+						height: 15px;
+						border: 2px solid #ffa0a0;
+						border-radius: 3px;
+
+						-webkit-appearance: none;
+						/*取消預設外觀*/
+						background-color: #fff;
+
+						position: relative;
+					}
+
+					input[type='checkbox']:checked {
+						border: 2px solid #ffa0a0;
+						background-color: #fff;
+					}
+
+					input[type='checkbox']:checked:after {
+						content: "✔";
+						font-size: 15px;
+						font-weight: 900;
+						color: rgb(255, 120, 120);
+						line-height: 10px;
+						position: absolute;
+					}
+				</style>
 			</head>
 
 			<!--BOBY-->
@@ -36,21 +64,28 @@
 									<form class="form" action="<%=request.getContextPath()%>/login/page" method="Post">
 										<div class="form-group">
 											<input style="text-transform: none;" class="form-control" id="username"
-												type="text" name="username" placeholder="Username" />
+												type="text" name="username" placeholder="帳號" />
 										</div>
 										<div class="form-group">
 											<input style="text-transform: none;" class="form-control" id="password"
-												type="password" name="password" placeholder="Password" />
+												type="password" name="password" placeholder="密碼" />
+										</div>
+										<div class="form-group">
+											<label for="checkbox">
+												<input type="checkbox" id="checkbox" name="remember-me" checked>
+												<span style="font-size: medium;" class="btn-p">記住我</span>
+											</label>
 										</div>
 										<div class="form-group">
 											<button class="btn btn-round btn-p">登入</button>
 										</div>
+
 										<div class="form-group">
 											<a href="<%=request.getContextPath()%>/forgetpassword"><i
 													class="fa-solid fa-circle-xmark"></i>忘記密碼?</a>
 										</div>
-										<button class="btn btn-round btn-p"
-											href="<%=request.getContextPath()%>/oauth2/authorization/google">Google登入</button>
+										<!-- <button class="btn btn-round btn-p"
+											href="<%=request.getContextPath()%>/oauth2/authorization/google">Google登入</button> -->
 									</form>
 
 								</div>

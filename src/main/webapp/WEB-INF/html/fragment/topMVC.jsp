@@ -294,7 +294,7 @@
                   class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
                   <img class="rounded-circle me-lg-2"
                     src="<%=request.getContextPath()%>/html/assets/images/meatball/meatball-32x32.png" alt=""
-                    style="width: 24px; height: 24px" /> <span class="d-none d-lg-inline-flex">登入<i
+                    style="width: 24px; height: 24px" /> <span class="d-none d-lg-inline-flex">登入/註冊<i
                       class="fa-solid fa-right-to-bracket"></i>
                   </span>
                 </a>

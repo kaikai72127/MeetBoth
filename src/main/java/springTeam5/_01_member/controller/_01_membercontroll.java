@@ -222,7 +222,7 @@ public class _01_membercontroll {
 	}
 	
 //	新增
-	@RequestMapping("/_01_member.backregister.controller")
+	@RequestMapping("/admin/_01_member.backregister.controller")
 	public String register() {
 		return "_01_member/backregister";
 	}
@@ -250,10 +250,10 @@ public class _01_membercontroll {
 				ms.add(newMember);
 			}
 		}
-		return "redirect:/";
+		return "redirect:/index.controller";
 	}
 	
-	@PostMapping("/_01_member.backadd.controller")
+	@PostMapping("/admin/_01_member.backadd.controller")
 	public String backadd(@ModelAttribute() MemberBean member,@RequestParam("photofile") MultipartFile mf , Model m) throws IOException, SerialException, SQLException {
 		
 		String fileName = "";
@@ -276,7 +276,7 @@ public class _01_membercontroll {
 				ms.add(newMember);
 			}
 		}
-		return "redirect:/_01_member.admin.controller";
+		return "redirect:/admin/_01_member.admin.controller";
 	}
 	
 //	修改
@@ -290,7 +290,7 @@ public class _01_membercontroll {
 		return "_01_member/frontmemberupdate";
 	}
 	
-	@PostMapping(path = "/_01_member.preupdate.controller")
+	@PostMapping(path = "/admin/_01_member.preupdate.controller")
 	public String preupdate(@RequestParam("preupdate") int memberID, Model m) {
 		Optional<MemberBean> data = ms.searchMemByID(memberID);
 		List<MemberBean> list = data.stream().collect(Collectors.toList());
@@ -298,7 +298,7 @@ public class _01_membercontroll {
 		return "_01_member/memberupdate";
 	}
 	
-	@PostMapping(path = "/_01_member.update.controller")
+	@PostMapping(path = "/admin/_01_member.update.controller")
 	public String update(@ModelAttribute() MemberBean member,@RequestParam("photofile") MultipartFile mf) throws IOException, SerialException, SQLException {
 		
 		String fileName ="";
@@ -343,7 +343,7 @@ public class _01_membercontroll {
 				ms.update(newMem);
 			}
 		}
-		return "redirect:/_01_member.admin.controller";
+		return "redirect:/admin/_01_member.admin.controller";
 	}
 	@PostMapping(path = "/_01_member.frontupdate.controller")
 	public String frontupdate(@ModelAttribute() MemberBean member,@RequestParam("photofile") MultipartFile mf) throws IOException, SerialException, SQLException {
@@ -389,14 +389,14 @@ public class _01_membercontroll {
 				ms.update(newMem);
 			}
 		}
-		return "redirect:/";
+		return "redirect:/index.controller";
 	}
 	
 //	刪除
-	@PostMapping(path = "/_01_member.delete.controller")
+	@PostMapping(path = "/admin/_01_member.delete.controller")
 	public String delete(@RequestParam("delete") int memberID) {
 		ms.delete(memberID);
-		return "redirect:/_01_member.admin.controller";
+		return "redirect:/admin/_01_member.admin.controller";
 	}
 	
 	

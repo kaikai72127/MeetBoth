@@ -332,11 +332,7 @@
                                                                             </td>
                                                                         </tr>
 
-                                                                        .navbar.navbar-custom.navbar-fixed-top.headershadow
-                                                                        {
-                                                                        background-color: black;
-                                                                        margin-bottom: 0;
-                                                                        }
+
 
                                                                         <tr height="42">
                                                                             <td colspan='4'>

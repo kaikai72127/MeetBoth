@@ -119,7 +119,8 @@
 													</td>
 													<td colspan="2"><input style="text-transform: none;"
 															class="form-control" type="text" name="eMail" id="mail"
-															onblur="checkmail()" value="${Member.eMail}" required>
+															onblur="checkmail()" value="${Member.eMail}" required
+															readonly>
 													</td>
 												</tr>
 												<tr>

@@ -84,6 +84,8 @@
 											<a href="<%=request.getContextPath()%>/forgetpassword"><i
 													class="fa-solid fa-circle-xmark"></i>忘記密碼?</a>
 										</div>
+										<button id="adminlog" class="btn btn-round btn-p" onclick="">管理員一鍵登入</button>
+										<button id="userlog" class="btn btn-round btn-p" onclick="">使用者一鍵登入</button>
 										<!-- <button class="btn btn-round btn-p"
 											href="<%=request.getContextPath()%>/oauth2/authorization/google">Google登入</button> -->
 									</form>
@@ -110,6 +112,11 @@
     -->
 				<!-- 引入共同的js -->
 				<jsp:include page="fragment/jsPath.jsp" />
+				<script>
+					function adminlog() {
+						$("#username").val('MeetBest')
+					}
+				</script>
 
 
 

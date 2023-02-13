@@ -23,6 +23,21 @@ public class TeacService implements TeacServiceInterface {
 		return ts;
 	}
 	
+//	用陣列模糊搜尋教學地區欄位
+	public List<TeacBean> findByTeacLocIn(List<String> teacLoc){
+		return tRepo.findByTeacLocIn(teacLoc);
+	}
+	
+//	模糊搜尋教學對象欄位
+	public List<TeacBean> findByTeacObjectContaining(String keyword){
+		return tRepo.findByTeacObjectContaining(keyword);
+	}
+	
+//	用陣列模糊搜尋教學時段欄位
+	public List<TeacBean> findByTeacTimeIn(List<String> teacTime){
+		return tRepo.findByTeacTimeIn(teacTime);
+	}
+	
 //  透過時薪區間建立教師貼文查詢
 	@Override
 	public List<TeacBean> searchTeacByPrice(Double low, Double high) {

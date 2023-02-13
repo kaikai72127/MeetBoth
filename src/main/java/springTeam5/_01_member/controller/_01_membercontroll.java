@@ -136,20 +136,7 @@ public class _01_membercontroll {
 		}else {
 			List<MemberBean> list = ms.searchMemByAccount(user);
 			MemberBean memberdata = list.get(0);
-			memberdata.setPhoto(null);
 			return memberdata;			
-		}
-	}
-	
-//	信箱檢查
-	@ResponseBody
-	@GetMapping("/mailcheck")
-	public String mailcheck(@RequestParam("email") String email) {
-		List<MemberBean> list = ms.searchMemByMail(email);
-		if (list.size() == 0) {
-			return "0";
-		}else {
-			return "1";
 		}
 	}
 	
@@ -372,7 +359,7 @@ public class _01_membercontroll {
 			newMem.setPhone(member.getPhone());
 			newMem.setPhoto(check.getPhoto());
 			newMem.setAddress(member.getAddress());
-			newMem.setRole(check.getRole());
+			newMem.setRole(member.getRole());
 			fileName = mf.getOriginalFilename();
 			if (fileName != null && fileName != "" && fileName.trim().length() > 0) {
 				System.out.println("這有圖?"+fileName);

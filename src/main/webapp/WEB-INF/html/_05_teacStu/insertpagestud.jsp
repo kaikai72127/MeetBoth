@@ -443,7 +443,7 @@ color:lightgrey;
 	<script>
   		document.getElementById("cancel-btn").addEventListener("click", function(event) {
     	event.preventDefault();
-    	window.location.href = "/MeetBoth/_05_teacStu.searchAllTeac.controller/1";
+    	window.location.href = "/MeetBoth/_05_teacStu.searchAllStud.controller/1";
   		});
 	</script>
 </body>

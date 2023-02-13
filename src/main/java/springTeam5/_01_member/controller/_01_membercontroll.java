@@ -28,6 +28,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.fasterxml.jackson.core.JsonParser;
+import com.google.gson.Gson;
+
 import springTeam5._01_member.model.MemberBean;
 import springTeam5._01_member.model.MemberService;
 
@@ -111,7 +114,7 @@ public class _01_membercontroll {
 		String role = SecurityContextHolder.getContext().getAuthentication().getAuthorities().toArray()[0].toString();
 //		String role = SecurityContextHolder.getContext().getAuthentication().getAuthorities().toString();
 //		UserDetails details = (UserDetails)SecurityContextHolder.getContext().getAuthentication().getDetails();
-		
+//		String role = details.getAuthorities().toString();
 //		String role = "";
 //		for (MemberBean member : list) {
 //			role = member.getRole();
@@ -119,6 +122,24 @@ public class _01_membercontroll {
 		System.out.println(role);
 		return role;
 	}	
+	
+//	會員資料呼叫
+	@ResponseBody
+	@PostMapping("/memberdata")
+	public MemberBean memberdata() {
+		String user = SecurityContextHolder.getContext().getAuthentication().getName();
+		if (user == "" || user == "anonymousUser") {
+			MemberBean temporary = new MemberBean();
+			temporary.setAccount("anonymousUser");
+			temporary.setRole("newbie");
+			return temporary;
+		}else {
+			List<MemberBean> list = ms.searchMemByAccount(user);
+			MemberBean memberdata = list.get(0);
+			return memberdata;			
+		}
+	}
+	
 	
 //	查詢類controll
 	@GetMapping("/_01_member.admin.controller")
@@ -283,6 +304,8 @@ public class _01_membercontroll {
 			newMem.setPhone(member.getPhone());
 			newMem.setPhoto(check.getPhoto());
 			newMem.setAddress(member.getAddress());
+			newMem.setRole(member.getRole());
+			System.out.println(member.getRole());
 			fileName = mf.getOriginalFilename();
 			if (fileName != null && fileName != "" && fileName.trim().length() > 0) {
 				System.out.println("這有圖?"+fileName);
@@ -323,6 +346,7 @@ public class _01_membercontroll {
 			newMem.setPhone(member.getPhone());
 			newMem.setPhoto(check.getPhoto());
 			newMem.setAddress(member.getAddress());
+			newMem.setRole(member.getRole());
 			fileName = mf.getOriginalFilename();
 			if (fileName != null && fileName != "" && fileName.trim().length() > 0) {
 				System.out.println("這有圖?"+fileName);

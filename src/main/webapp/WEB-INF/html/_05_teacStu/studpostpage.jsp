@@ -326,6 +326,7 @@ color:lightgrey;
             <h1 class="resume-title">需求列表</h1>
             <input type="hidden" name="user" value="${pageContext.request.userPrincipal.name}">
             <input type="hidden" name="owner" value="${bean.member.account}">
+            <input type="hidden" name="teacno" value="${teacBean.teacno}" />
             <h2 class="resume-last-update">Last updata: ${bean.updateDate}</h2>
             <div class="resume-body">
                 <div class="resume-section">
@@ -518,22 +519,46 @@ color:lightgrey;
     	}
 	</script>
 	<script>
+		var memberID;
+		var account;
+		var name;
+		var nickName;
+		var role;
+		var teacBean;
+		var memberdataLoaded = false;
+
+		$(function () {
+    		$.ajax({
+        		type: 'POST',
+        		url: 'http://localhost:8080/MeetBoth/memberdata',
+        		contentType: 'application/json',
+        		success: function (memberdata) {
+            	memberID = memberdata.memberID;
+            	account = memberdata.account;
+            	name = memberdata.memName;
+            	nickName = memberdata.memNickName;
+            	role = memberdata.role;
+            	teacBean = memberdata.teacBean;
+            	memberdataLoaded = true;
+        		}
+    		});
+		});
+
 		function checkUserAndTeacNo() {
-			let isUserLoggedIn = '${pageContext.request.userPrincipal.name}';
-			let isTeacnoExist = '${m.teacno}' && '${m.m}';
+    		let isUserLoggedIn = '${pageContext.request.userPrincipal.name}';
+
     		if (!isUserLoggedIn) {
         		alert('請先登入');
-        		window.location.href = '/MeetBoth/login';
+        		window.location.href = '/MeetBoth/login/page';
         		return;
-    		}
-			
-    		// 還要再給一個判斷teacno是否存在
-			if (!isTeacnoExist) {
+    			}
+
+    		if (teacBean === null) {
         		alert('請先成為教師');
         		window.location='/MeetBoth/_05_teacStu.searchAllTeac.controller/1';
         		return;
-    		}
-    		
+    			}
+    	
     		window.location='/MeetBoth/_05_teacStu.compare.controller';
 		}
 	</script>

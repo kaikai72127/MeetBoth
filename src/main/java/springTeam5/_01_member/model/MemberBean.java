@@ -21,6 +21,8 @@ import javax.persistence.Table;
 
 import org.springframework.stereotype.Component;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import springTeam5._05_teacStu.model.StudBean;
 import springTeam5._04_shoppingCart.model.OrderBean;
 import springTeam5._04_shoppingCart.model.OrderItemBean;
@@ -69,7 +71,8 @@ public class MemberBean implements Serializable {
 		
 	@Column(name = "phone")
 	private String phone;
-		
+	
+	@JsonIgnore
 	@Column(name = "photo")
 	private Blob photo = null;
 		
@@ -81,15 +84,20 @@ public class MemberBean implements Serializable {
 
 	@Column(name = "role")
 	private String role = "user";
-	
+	@JsonIgnore
 	@OneToMany(mappedBy = "member")
 	private List<TeacBean> teacBean = new ArrayList<>();
+	
+	@JsonIgnore
 	@OneToMany(mappedBy = "member")
 	private List<StudBean> studBean = new ArrayList<>();
 	
+	@JsonIgnore
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "memberbuy",cascade = CascadeType.ALL)
 	private Set<OrderBean> orderBuy = new LinkedHashSet<OrderBean>(); // itemsList
 	
+	
+	@JsonIgnore
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "membersale",cascade = CascadeType.ALL)
 	private Set<OrderItemBean> orderSale = new LinkedHashSet<OrderItemBean>(); // itemsList
 	public String getRole() {

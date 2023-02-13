@@ -72,8 +72,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
          .invalidateHttpSession(true) //使HttpSession失效
          .and()
          
-         .sessionManagement()
-         .maximumSessions(1);
+//         .sessionManagement()
+//         .maximumSessions(1)
+         ;
          
        
        

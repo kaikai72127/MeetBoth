@@ -80,60 +80,19 @@ public class OrderServiceImpl implements springTeam5._04_shoppingCart.service.Or
 	}
 
 	@Override
-	public List<OrderBean> findOrderBySearch1(String ordStstus, String paymentStstus, String deliveryStstus,
-			String search) {
-		return orderRepo.findOrderBySearch1(ordStstus, paymentStstus, deliveryStstus, search);
-	}
-
-	@Override
 	public List<OrderBean> findByMemberbuy(Integer memberbuy_FK) {
 		return orderRepo.findByMemberbuy(memberbuy_FK);
-	}
-
-	@Override
-	public List<OrderBean> findByMembersale(Integer membersale_FK) {
-		return orderRepo.findByMembersale(membersale_FK);
-	}
-
-	@Override
-	public List<OrderBean> findOrderBySearch2(String paymentStstus, String deliveryStstus, String search) {
-		return orderRepo.findOrderBySearch2(paymentStstus, deliveryStstus, search);
-	}
-
-	@Override
-	public List<OrderBean> findOrderBySearch3(String deliveryStstus, String search) {
-		return orderRepo.findOrderBySearch3(deliveryStstus, search);
-	}
-
-	@Override
-	public List<OrderBean> findOrderBySearch4(String search) {
-		return orderRepo.findOrderBySearch4(search);
-	}
-
-	@Override
-	public List<OrderBean> findOrderByOrdStstus(String ordStstus) {
-		return orderRepo.findOrderByOrdStstus(ordStstus);
-	}
-
-	@Override
-	public List<OrderBean> findOrderByPaymentStstus(String paymentStstus) {
-		return findOrderByPaymentStstus(paymentStstus);
-	}
-
-	@Override
-	public List<OrderBean> findOrderByDeliveryStstus(String deliveryStstus) {
-		return findOrderByDeliveryStstus(deliveryStstus);
 	}
 
 	// 訂單編號生成小工具
 
 	public String generateOrderNumber() {
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
+		SimpleDateFormat sdf = new SimpleDateFormat("yyMMdd");
 		String date = sdf.format(new Date());
 
 		List<OrderBean> orderList = orderRepo.findOrderByUID(date);
 		int size = orderList.size();
-		return "MeetBoth" + date + "-" + (size+1);
+		return "MeetB" + date + String.format("%04d", (size+1));
 	}
 
 //	// 檢查購物車----

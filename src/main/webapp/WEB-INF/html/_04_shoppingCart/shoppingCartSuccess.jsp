@@ -24,19 +24,17 @@
 	<main>
 
 		<!-- 內容 1-->
-		<section style="margin-bottom:100px">
+		<section style="margin-bottom: 100px">
 			<!-- check out-->
 			<div class="container">
 				<h1 class="animate__animated animate__bounce">訂購完成</h1>
-				<h1> ${member.memName}感謝您的訂購</h1>
+				<h1>${member.memName}感謝您的訂購</h1>
 				<h3>已收到您的訂單，請您檢視訂單，確認您的付款狀態</h3>
-				
-				<a href="<c:url value='/shoppingcart.controller' />">
-  <button class="btn btn-danger btn-circle" type="button">返回首頁</button>
-</a>
-				
-				&nbsp;
-				<button class="btn btn-default btn-circle" type="button">查看我的訂單</button>
+
+				<a href="<c:url value='/index.controller' />">
+					<button class="btn btn-danger btn-circle" type="button">返回首頁</button>
+				</a> &nbsp; <a href="<c:url value='/index.controller' />"><button
+						class="btn btn-default btn-circle" type="button">查看我的訂單</button></a>
 			</div>
 
 		</section>

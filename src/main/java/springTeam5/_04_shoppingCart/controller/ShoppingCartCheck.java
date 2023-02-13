@@ -1,10 +1,7 @@
 package springTeam5._04_shoppingCart.controller;
 
 import java.sql.SQLException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.LinkedHashSet;
-import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
@@ -15,7 +12,6 @@ import javax.servlet.http.HttpSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -85,27 +81,31 @@ public class ShoppingCartCheck {
 		System.out.println("session----------OK");
 		System.out.println(shoppingCart);
 		System.out.println(cartSize);
-//		shoppingCart.deleteAllProduct();
 
-		synchronized (session.getId().intern()) {
-			session.removeAttribute("ShoppingCart");
-			System.out.println("-----------" + shoppingCart);
-			session.removeAttribute("CartSize");
-			System.out.println("-----" + cartSize);
+		if (shoppingCart != null) {
+			shoppingCart.deleteAllProduct();
 		}
 
+		session.removeAttribute("ShoppingCart");
+		System.out.println("-----------" + shoppingCart);
+		session.removeAttribute("CartSize");
+		System.out.println("-----" + cartSize);
+
 		MemberBean member = (MemberBean) session.getAttribute("Member");
-
-		String account = SecurityContextHolder.getContext().getAuthentication().getName();
-		List<MemberBean> mem = memberService.searchMemByAccount(account);
-
-		System.out.println("-----------------------------" + mem);
+//
+//		String account = SecurityContextHolder.getContext().getAuthentication().getName();
+//		List<MemberBean> mem = memberService.searchMemByAccount(account);
+//
+//		System.out.println("------------account-----------------" + mem);
 		// 存資料進session
-		Optional<MemberBean> list = memberService.searchMemByID(mem.get(0).getMemberID());
-		System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
-		member = list.get();
+//		Optional<MemberBean> list = memberService.searchMemByID(mem.get(0).getMemberID());
+//		System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+//		member = list.get();
 
-		session.setAttribute("Member", member);
+		if (member == null) {
+			member = memberbuy;
+			session.setAttribute("Member", member);
+		}
 
 		// 加入屬性於跳轉成功訂購的頁面使用
 		model.addAttribute("member", memberbuy);
@@ -161,18 +161,18 @@ public class ShoppingCartCheck {
 		if (!discount.isEmpty()) {
 			Integer discountPrice = (int) Math.round(discountUse.getDiscountPrice());
 			totalAmount = shoppingCart.getItemAmount() - discountPrice;
-			System.out.println("-------------------"+totalAmount);
-			System.out.println("------------------------自動生成"+orderService.generateOrderNumber());
-			orderBean = new OrderBean(null,orderService.generateOrderNumber(), memberBean, orderService.getCurrentDate(), orderService.getCurrentDate(),
-					shippingName, shippingPhone, shippingAddress, "處理中", "未付款", "無", paymentMethod, discountUse,
-					totalAmount, null);
+			System.out.println("-------------------" + totalAmount);
+			System.out.println("------------------------自動生成" + orderService.generateOrderNumber());
+			orderBean = new OrderBean(null, orderService.generateOrderNumber(), memberBean,
+					orderService.getCurrentDate(), orderService.getCurrentDate(), shippingName, shippingPhone,
+					shippingAddress, "處理中", "未付款", "無", paymentMethod, discountUse, totalAmount, null);
 		} else {
-			
-			System.out.println("-------------------"+totalAmount);
-			System.out.println("------------------------自動生成"+orderService.generateOrderNumber());
-			orderBean = new OrderBean(null,orderService.generateOrderNumber(), memberBean, orderService.getCurrentDate(), orderService.getCurrentDate(),
-					shippingName, shippingPhone, shippingAddress, "處理中", "未付款", "無", paymentMethod, null,
-					shoppingCart.getItemAmount(), null);
+
+			System.out.println("-------------------" + totalAmount);
+			System.out.println("------------------------自動生成" + orderService.generateOrderNumber());
+			orderBean = new OrderBean(null, orderService.generateOrderNumber(), memberBean,
+					orderService.getCurrentDate(), orderService.getCurrentDate(), shippingName, shippingPhone,
+					shippingAddress, "處理中", "未付款", "無", paymentMethod, null, shoppingCart.getItemAmount(), null);
 		}
 
 		orderService.createOrder(orderBean);
@@ -188,7 +188,7 @@ public class ShoppingCartCheck {
 			// 取得賣家資料
 			int meberSaleId = orderItemBean.getProdItem().getMemberBean().getMemberID();
 			Optional<MemberBean> list = memberService.searchMemByID(meberSaleId);
-			System.out.println("------------GET----------"+meberSaleId+"-----------");
+			System.out.println("------------GET----------" + meberSaleId + "-----------");
 			System.out.println(list.get());
 			MemberBean memberSale = list.get();
 			orderItemBean.setMembersale(memberSale);
@@ -228,20 +228,72 @@ public class ShoppingCartCheck {
 			discountService.updateDiscount(discountUse);
 		}
 
+		// 訂單訂購資訊
+		String title = "<table width='100% style='padding-bottom: 20px;' >"
+				+ "<tbody><tr><th colspan='2' style='background:#ce7777;height:34px;color: #fff;font-size:20px;"
+				+ "text-align: left;padding-left: 10px;'>訂購資訊</th></tr>"
+				+ "<tr style='font-size: 18px;'><td style='width: 20%;background: #efefef;border: 1px #dedede solid;padding: 8px;'>"
+				+ "訂購人姓名</td><td style='padding: 8px; border: 1px #dedede solid'>"
+				+ orderBean.getMemberbuy().getMemName() + "</td></tr>"
+				+ "<tr style='font-size: 18px;'><td style='width: 20%;background: #efefef;border: 1px #dedede solid;padding: 8px;'>"
+				+ "訂購編號</td><td style='padding: 8px; border: 1px #dedede solid'>" + orderBean.getOrderUID()
+				+ "</td></tr>"
+				+ "<tr style='font-size: 18px;'><td style='width: 20%;background: #efefef;border: 1px #dedede solid;padding: 8px;'>"
+				+ "訂購日期</td><td style='padding: 8px; border: 1px #dedede solid'>" + orderBean.getOrderDate()
+				+ "</td></tr>"
+				+ "<tr style='font-size: 18px;'><td style='width: 20%;background: #efefef;border: 1px #dedede solid;padding: 8px;'>"
+				+ "收件人姓名</td><td style='padding: 8px; border: 1px #dedede solid'>" + orderBean.getShippingName()
+				+ "</td></tr>"
+				+ "<tr style='font-size: 18px;'><td style='width: 20%;background: #efefef;border: 1px #dedede solid;padding: 8px;'>"
+				+ "收件人電話</td><td style='padding: 8px; border: 1px #dedede solid'>" + orderBean.getShippingPhone()
+				+ "</td></tr>"
+				+ "<tr style='font-size: 18px;'><td style='width: 20%;background: #efefef;border: 1px #dedede solid;padding: 8px;'>"
+				+ "收件人地址</td><td style='padding: 8px; border: 1px #dedede solid'>" + orderBean.getShippingAddress()
+				+ "</td></tr></tbody></table>";
+
+		// 訂單明細title
+		String itemTitle = "<table width='100% style='padding-bottom: 20px;font-size:20px'>"
+				+ "<tbody><tr><th colspan='4' style='background:#ce7777;height:34px;color: #fff;font-size:20px;"
+				+ "text-align: left;padding-left: 10px;'>訂購明細</th></tr>"
+				+ "<tr style='font-size: 18px;'><td style='order: 1px #dedede solid; padding: 8px; background: #efefef'>商品名稱</td>"
+				+ "<td style='border: 1px #dedede solid; padding: 8px; background: #efefef'>金額</td>"
+				+ "<td style='border: 1px #dedede solid; padding: 8px; background: #efefef'>數量</td>"
+				+ "<td style='border: 1px #dedede solid; padding: 8px; background: #efefef'>小計</td></tr>";
+		String itemMail = "";
+		for (OrderItemBean oitem : items) {
+			String mail = "<tr style='font-size: 18px;'><td style='padding: 8px; border: 1px #dedede solid'>" + oitem.getProdItem().getProdName()
+					+ "</td>" + "<td style='padding: 8px; border: 1px #dedede solid'>"
+					+ oitem.getProdItem().getProdPrice() + "</td>"
+					+ "<td style='padding: 8px; border: 1px #dedede solid'>" + oitem.getQty() + "</td>"
+					+ "<td style='padding: 8px; border: 1px #dedede solid'>" + oitem.getItemTotal() + "</td></tr>";
+			itemMail = itemMail + mail;
+		};
+		Discount discountCheck = orderBean.getDiscount();
+		String itemFooter = "";
+		if (discountCheck != null) {
+			itemFooter = " <tr style='font-size: 18px;'><td colspan='3' style='padding: 8px; border: 1px #dedede solid; text-align: center'>"
+					+ "折扣金額</td><td style='padding: 8px;border: 1px #dedede solid'>-" + String.valueOf(Math.round(discountCheck.getDiscountPrice()))
+					+ "</td></tr>"
+					+ "<tr style='font-size: 18px;'><td colspan='3'style='padding: 8px; border: 1px #dedede solid; text-align: center'>"
+					+ "總計金額</td><td style='padding: 8px; border: 1px #dedede solid'>" + orderBean.getTotalAmount()
+					+ "</td></tr></tbody></table>";
+		} else {
+			itemFooter = " <tr style='font-size: 18px;'><td colspan='3' style='padding: 8px; border: 1px #dedede solid; text-align: center'>"
+					+ "折扣金額</td><td style='padding: 8px;border: 1px #dedede solid'>0</td></tr>"
+					+ "<tr style='font-size: 18px;'><td colspan='3'style='padding: 8px; border: 1px #dedede solid; text-align: center'>"
+					+ "總計金額</td><td style='padding: 8px; border: 1px #dedede solid'>" + orderBean.getTotalAmount()
+					+ "</td></tr></tbody></table>";
+		}
+		// 給客人的信件
+		String forMamberMail = title + itemTitle + itemMail + itemFooter;
+
 		// 訂購完成寄信給買家確認訂單明細----Email
 		System.out.println(email);
 		String recipient = email;
 		String memberName = memberBean.getMemName();
-		String orderMessage = "   ";
+		String orderMessage = forMamberMail;
 
 		mailService.prepareAndSendForBuy(recipient, memberName, orderMessage);
-
-		// 訂購完成寄信給賣買家確認訂單明細
-//		System.out.println(email);
-//		String recipientSale = email;
-//		String memberNameSale = "謝謝唷!!";
-//		String orderMessageSale = "";
-//		mailService.prepareAndSendForSale(recipientSale,  memberNameSale, orderMessageSale);
 
 		String meetBothNo = "MeetBothT";
 		meetBothNo = meetBothNo + String.valueOf(orderBean.getOrderNo());

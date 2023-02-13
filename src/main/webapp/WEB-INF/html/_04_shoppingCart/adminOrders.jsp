@@ -351,7 +351,7 @@ a:hover {
 														<c:forEach var="bean" items="${orderList}">
 															<tr>
 																<td id="eachProdBlock" class="mEvent"
-																	onclick="window.location='/MeetBoth/shoppingCart.SelectOrderAllItem.controller/${bean.orderNo}'">${bean.orderNo}</td>
+																	onclick="window.location='/MeetBoth/shoppingCart.SelectOrderAllItem.controller/${bean.orderNo}'">${bean.orderUID}</td>
 																<td style="">${bean.memberbuy.memName}</td>
 																<td>${bean.orderDate}</td>
 																<td>${bean.uporderDate}</td>

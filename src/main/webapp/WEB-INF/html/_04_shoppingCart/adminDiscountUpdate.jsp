@@ -284,12 +284,14 @@ a:hover {
 														class="MBinput" readonly></span>
 												</div>
 												<div>
-													<span>折扣&ensp;&ensp;姓名 :&ensp;<input
+													<span>折扣&ensp;&ensp;編碼 :&ensp;<input
 														value="${orderBean.memberbuy.memName}" type="text"
 														class="MBinput" readonly></span>
 												</div>
 												<div>
-													<span>收件人姓名 :&ensp;<input name='shippingName'
+													<span>折扣&ensp;&ensp;名稱
+													
+													 :&ensp;<input name='shippingName'
 														value="${orderBean.shippingName}" type="text"
 														class="MBinput"></span>
 												</div>

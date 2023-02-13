@@ -26,6 +26,10 @@ public interface OrderItemRepository extends JpaRepository<OrderItemBean, Intege
 	// 查詢該訂單的所有Item
 	@Query(value = "from OrderItemBean where seqno=?1")
 	public List<OrderItemBean> findBySqeno(Integer seqno);
+	
+	// 找賣家訂單的資料
+	@Query(value = "select * from orderitem where membersale_FK=?1 order by seqno", nativeQuery = true)
+	public List<OrderItemBean> findByMembersale(Integer membersale_FK);
 
 	
 

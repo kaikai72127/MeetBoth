@@ -241,10 +241,10 @@ a:hover {
 										class="btn btn-d btn-round">訂單管理&ensp;<i
 											class="fa-solid fa-angle-double-down"></i></a>
 										<ul style="">
-											<li><a href="/MeetBoth/shoppingCartOrders.controller"
+											<li><a href="/MeetBoth/admin/shoppingCartOrders.controller"
 												style="color: white; font-weight: 600;"
 												class="btn btn-d btn-round">所有訂單清單</a></li>
-											<li><a href="/MeetBoth/discounts.controller"
+											<li><a href="/MeetBoth/admin/discounts.controller"
 												style="color: white; font-weight: 600;"
 												class="btn btn-d btn-round">折扣碼管理</a></li>
 										</ul></li>
@@ -334,7 +334,7 @@ a:hover {
 																<td style="padding-left: 15px; padding-right: 15px">${bean.discountStart}</td>
 																<td>${bean.discountEnd}</td>
 																<td><form style="padding-top: 18px" method="post"
-																		action="/MeetBoth/discountsUpdate.controller/${bean.discountId}">
+																		action="/MeetBoth/admin/discountsUpdate.controller/${bean.discountId}">
 																		<input type="hidden" name="discountId"
 																			value="${bean.discountId}"> <input
 																			type="submit" class="MBbtn" value="編輯">
@@ -442,14 +442,14 @@ a:hover {
                     if (result.isConfirmed) {
                         $.ajax({
                           //專案名稱+servlet
-                         url:'/MeetBoth/shoppingCart.DeleteOrder.controller',
+                         url:'/MeetBoth/admin/shoppingCart.DeleteOrder.controller',
                           method:"get",
                           dataType:"text",
                           //對應name設定的名稱 並非value的名稱
                           data: {"orderNo":id},
                         })
                             .done(function () {
-                            	window.location='/MeetBoth/shoppingCartOrders.controller'
+                            	window.location='/MeetBoth/admin/shoppingCartOrders.controller'
                                 console.log("delete")
                              })//done
                              .fail(function(error) {

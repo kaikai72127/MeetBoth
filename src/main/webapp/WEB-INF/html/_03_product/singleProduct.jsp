@@ -29,9 +29,9 @@
 			<body data-spy="scroll" data-target=".onpage-navigation" data-offset="60">
 				<c:set value="${CartSize}" var="cartsize" />
 				<main>
-					<div class="page-loader">
-						<div class="loader">Loading...</div>
-					</div>
+<!-- 					<div class="page-loader"> -->
+<!-- 						<div class="loader">Loading...</div> -->
+<!-- 					</div> -->
 					<div class="main" style="background-color: #F0F0F0;">
 						<section class="module">
 							<!--         forEach -->
@@ -504,7 +504,7 @@
 										let cartCount = 0;
 										document.getElementById("addToCartBtn").addEventListener("click", function () {
 											cartCount += 1;
-											document.getElementById("cartCount").innerHTML = "購物車：" + cartCount;
+// 											document.getElementById("cartCount").innerHTML = "購物車：" + cartCount;
 										});
 									</script>
 									<!-- 	<script type="text/javascript"> -->

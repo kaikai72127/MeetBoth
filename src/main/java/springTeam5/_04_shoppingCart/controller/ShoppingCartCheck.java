@@ -37,7 +37,7 @@ import springTeam5._04_shoppingCart.service.impl.DiscountServiceImpl;
 import springTeam5._04_shoppingCart.service.impl.OrderServiceImpl;
 
 @Controller
-@SessionAttributes(names = { "ShoppingCart","CartSize" })
+@SessionAttributes(names = { "ShoppingCart" })
 public class ShoppingCartCheck {
 
 	private static Logger log = LoggerFactory.getLogger(ShoppingCartCheck.class);
@@ -60,9 +60,9 @@ public class ShoppingCartCheck {
 	AioCheckOutALL obj = new AioCheckOutALL();
 
 	@PostMapping("/shoppingCartConfirm.controller")
-	public String processConfirmAction(HttpServletRequest request, SessionStatus sessionStatus,HttpSession session, Model model)
+	public String processConfirmAction(HttpServletRequest request, SessionStatus sessionStatus, Model model)
 			throws SQLException {
-//		HttpSession session = request.getSession(true);
+		HttpSession session = request.getSession(true);
 		
 		log.info("處理訂單之Controller: 開始");
 
@@ -90,20 +90,22 @@ public class ShoppingCartCheck {
 		}
 
 		session.removeAttribute("ShoppingCart");
-		System.out.println("-----------" + shoppingCart);
 		session.removeAttribute("CartSize");
+		System.out.println("-----------" + shoppingCart);
+		cartSize =0;
+		session.setAttribute("CartSize", cartSize);
 		System.out.println("-----" + cartSize);
 
 		MemberBean member = (MemberBean) session.getAttribute("Member");
 //
-		String account = SecurityContextHolder.getContext().getAuthentication().getName();
-		List<MemberBean> mem = memberService.searchMemByAccount(account);
+//		String account = SecurityContextHolder.getContext().getAuthentication().getName();
+//		List<MemberBean> mem = memberService.searchMemByAccount(account);
 //
 //		System.out.println("------------account-----------------" + mem);
 		// 存資料進session
 //		Optional<MemberBean> list = memberService.searchMemByID(mem.get(0).getMemberID());
 		System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
-		MemberBean memberBean = mem.get(0);
+//		MemberBean memberBean = mem.get(0);
 		
 //		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 //		MemberBean member = (MemberBean)authentication.getPrincipal();
@@ -115,7 +117,7 @@ public class ShoppingCartCheck {
 		}
 
 		// 加入屬性於跳轉成功訂購的頁面使用
-		model.addAttribute("member", memberBean);
+		model.addAttribute("member", memberbuy);
 		model.addAttribute("order", orderBean);
 
 		return "_04_shoppingCart/shoppingCartSuccess";

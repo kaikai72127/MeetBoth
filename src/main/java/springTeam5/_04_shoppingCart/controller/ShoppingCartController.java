@@ -87,10 +87,9 @@ public class ShoppingCartController {
 			session.setAttribute("ShoppingCart", cart); // ${ShoppingCart.subtotal}
 
 			// 測試用
-//			String account = SecurityContextHolder.getContext().getAuthentication().getName();
-//			List<MemberBean> mem = memberService.searchMemByAccount(account);
-//			Optional<MemberBean> list = memberService.searchMemByID(mem.get(0).getMemberID());
-//			member = list.get();
+			String account = SecurityContextHolder.getContext().getAuthentication().getName();
+			List<MemberBean> mem = memberService.searchMemByAccount(account);
+			member = mem.get(0);
 
 			System.out.println("-------------Session------購物車----------member");
 

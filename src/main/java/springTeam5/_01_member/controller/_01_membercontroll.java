@@ -140,7 +140,11 @@ public class _01_membercontroll {
 			return memberdata;			
 		}
 	}
-	
+//	
+	@GetMapping("/memberresume")
+	public String memberresume() {
+		return "_01_member/memberresume";
+	}
 //	信箱檢查
 	@ResponseBody
 	@GetMapping("/mailcheck")

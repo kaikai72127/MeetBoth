@@ -324,11 +324,8 @@ color:lightgrey;
 		<div class="page-container">
         <div class="resume-container">
             <h1 class="resume-title">履歷表</h1>
-<<<<<<< HEAD
             <input type="hidden" name="user" value="${pageContext.request.userPrincipal.name}">
             <input type="hidden" name="owner" value="${bean.member.account}">
-=======
->>>>>>> origin/_01_Seal
             <h2 class="resume-last-update">Last updata: ${bean.updateDate}</h2>
             <div class="resume-body">
                 <div class="resume-section">
@@ -433,11 +430,7 @@ color:lightgrey;
                 			<a href="/MeetBoth/_05_teacStu.updatedataMain.controller?teacno=${bean.teacno}">修改履歷</a>
             			</div>
             			<div class="nav-item">
-<<<<<<< HEAD
                 			<a class="delete" id="${bean.teacno}" href="#">刪除履歷</a>
-=======
-                			<a class="delete" href="#">刪除履歷</a>
->>>>>>> origin/_01_Seal
             			</div>
         			</div>
                     <div id="hiddenitem2" style="display:inline-block; height:86.75px" class="nav-container">
@@ -665,11 +658,7 @@ color:lightgrey;
 	<script>
         $(function(){
             $('.delete').click(function(){
-<<<<<<< HEAD
                 let id=$(this).attr("id");
-=======
-                let id=$(this).attr("${bean.teacno}");
->>>>>>> origin/_01_Seal
                 Swal.fire({
                   title: '你確定要刪除嗎?',
                   text: "將無法恢復此筆貼文!!!",
@@ -691,10 +680,7 @@ color:lightgrey;
                           data: {"teacno":id},
                         })
                             .done(function () {
-<<<<<<< HEAD
                             	window.location='/MeetBoth/_05_teacStu.searchAllTeac.controller/1'
-=======
->>>>>>> origin/_01_Seal
                                 console.log("delete")
                              })//done
                              .fail(function(error) {
@@ -707,7 +693,6 @@ color:lightgrey;
         });
         //function end
     </script>
-<<<<<<< HEAD
     <script>
     	const user = document.querySelector('input[name="user"]').value;
     	const owner = document.querySelector('input[name="owner"]').value;
@@ -715,7 +700,5 @@ color:lightgrey;
         	document.getElementById("replace").style.display = "none";
     	}
 	</script>
-=======
->>>>>>> origin/_01_Seal
 </body>
 </html>

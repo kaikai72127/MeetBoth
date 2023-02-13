@@ -9,9 +9,6 @@
 			<head>
 				<!-- 引入共同的headMVC -->
 				<jsp:include page="../fragment/headMVC.jsp" />
-<<<<<<< HEAD
-
-=======
 				<script>
 					function mailcheck() {
 						var email = $("#mail").val();
@@ -38,7 +35,6 @@
 						}
 					}
 				</script>
->>>>>>> origin/_01_Seal
 			</head>
 
 			<!--BOBY-->
@@ -71,9 +67,9 @@
 
 										<div class="form-group">
 											<button class="btn btn-round btn-p">進行驗證</button>
-=======
-												type="text" name="email" oninput='mailcheck()' value='${value}'
-												placeholder="請輸入正確的電子郵件信箱" />
+											=======
+											type="text" name="email" oninput='mailcheck()' value='${value}'
+											placeholder="請輸入正確的電子郵件信箱" />
 											<label id="errormessage" style="font-size: medium; color: red;">
 											</label>
 
@@ -82,7 +78,7 @@
 										<div class="form-group">
 											<button id="push" class="btn btn-round btn-p"
 												style="display: none;">進行驗證</button>
->>>>>>> origin/_01_Seal
+											>>>>>>> origin/_01_Seal
 										</div>
 
 

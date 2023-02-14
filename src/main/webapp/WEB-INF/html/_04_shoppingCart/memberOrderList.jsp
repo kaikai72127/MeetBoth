@@ -92,6 +92,10 @@ h1 {
 #ChartData>div>div>div>div>svg>g>g>g>text {
 	font-size: 17px;
 }
+
+.aColor:hover{
+color:#ce7777
+}
 </style>
 </head>
 <body data-spy="scroll" data-target=".onpage-navigation"
@@ -162,71 +166,71 @@ h1 {
 										style="padding-bottom: 10px;">
 								</div>
 								<!--       動態搜尋列 -->
-								<section class="module-small"
-									style="padding-top: 20px; padding-bottom: 0px;">
-									<div class="container" style="">
-										<form class="row"
-											action="<c:url value='/_03_product.searchProductWithCondition3.controller'/>"
-											method="post">
-											<div class="col-sm-4 mb-sm-20"
-												style="width: 17%; padding-right: 0;">
-												<select name="case" class="form-control"
-													style="padding-right: 0; font-size: 17px">
-													<option value="1">預設排序</option>
-													<option value="6">依瀏覽次數排序</option>
-													<option value="2">依價格由大到小</option>
-													<option value="3">依價格由小到大</option>
-													<option value="4">依上架日期排序</option>
-													<option value="5">依更新日期排序</option>
-												</select>
-											</div>
-											<div class="col-sm-2 mb-sm-20"
-												style="width: 15%; padding-right: 0;">
-												<select name="typecase" class="form-control"
-													style="font-size: 17px">
-													<option value="0">全部類別</option>
-													<option value="1">文具</option>
-													<option value="2">教具</option>
-													<option value="3">運動用品</option>
-													<option value="4">學生用品</option>
-													<option value="5">全新教科書</option>
-													<option value="6">全新好書</option>
-													<option value="7">二手教科書</option>
-													<option value="8">二手好書</option>
-													<option value="9">桌上小物</option>
-													<option value="10">教室小物</option>
-													<option value="11">3c小物</option>
-													<option value="12">益智小物</option>
-												</select>
-											</div>
-											<div class="col-sm-2 mb-sm-20" style="width: 25%">
-												<input class="form-control" type="text" name="searchName"
-													style="font-size: 17px" placeholder="搜尋名稱" />
-											</div>
-											<input type="hidden" name="lowprice" value="0" /> <input
-												type="hidden" name="highprice" value="9999999" />
-											<div class="col-sm-3" style="width: 10%">
-												<button class="btn btn-d btn-round" type="submit"
-													style="font-size: 17px">搜尋</button>
-											</div>
-										</form>
-									</div>
-								</section>
+<!-- 								<section class="module-small" -->
+<!-- 									style="padding-top: 20px; padding-bottom: 0px;"> -->
+<!-- 									<div class="container" style=""> -->
+<!-- 										<form class="row" -->
+<%-- 											action="<c:url value='/_03_product.searchProductWithCondition3.controller'/>" --%>
+<!-- 											method="post"> -->
+<!-- 											<div class="col-sm-4 mb-sm-20" -->
+<!-- 												style="width: 17%; padding-right: 0;"> -->
+<!-- 												<select name="case" class="form-control" -->
+<!-- 													style="padding-right: 0; font-size: 17px"> -->
+<!-- 													<option value="1">預設排序</option> -->
+<!-- 													<option value="6">依瀏覽次數排序</option> -->
+<!-- 													<option value="2">依價格由大到小</option> -->
+<!-- 													<option value="3">依價格由小到大</option> -->
+<!-- 													<option value="4">依上架日期排序</option> -->
+<!-- 													<option value="5">依更新日期排序</option> -->
+<!-- 												</select> -->
+<!-- 											</div> -->
+<!-- 											<div class="col-sm-2 mb-sm-20" -->
+<!-- 												style="width: 15%; padding-right: 0;"> -->
+<!-- 												<select name="typecase" class="form-control" -->
+<!-- 													style="font-size: 17px"> -->
+<!-- 													<option value="0">全部類別</option> -->
+<!-- 													<option value="1">文具</option> -->
+<!-- 													<option value="2">教具</option> -->
+<!-- 													<option value="3">運動用品</option> -->
+<!-- 													<option value="4">學生用品</option> -->
+<!-- 													<option value="5">全新教科書</option> -->
+<!-- 													<option value="6">全新好書</option> -->
+<!-- 													<option value="7">二手教科書</option> -->
+<!-- 													<option value="8">二手好書</option> -->
+<!-- 													<option value="9">桌上小物</option> -->
+<!-- 													<option value="10">教室小物</option> -->
+<!-- 													<option value="11">3c小物</option> -->
+<!-- 													<option value="12">益智小物</option> -->
+<!-- 												</select> -->
+<!-- 											</div> -->
+<!-- 											<div class="col-sm-2 mb-sm-20" style="width: 25%"> -->
+<!-- 												<input class="form-control" type="text" name="searchName" -->
+<!-- 													style="font-size: 17px" placeholder="搜尋名稱" /> -->
+<!-- 											</div> -->
+<!-- 											<input type="hidden" name="lowprice" value="0" /> <input -->
+<!-- 												type="hidden" name="highprice" value="9999999" /> -->
+<!-- 											<div class="col-sm-3" style="width: 10%"> -->
+<!-- 												<button class="btn btn-d btn-round" type="submit" -->
+<!-- 													style="font-size: 17px">搜尋</button> -->
+<!-- 											</div> -->
+<!-- 										</form> -->
+<!-- 									</div> -->
+<!-- 								</section> -->
 								<!--       動態搜尋列 -->
 								<!--       按鈕列 -->
-								<div class="container" style="padding: 0px 10px 0px 20px;">
-									<input type="button" value="返回首頁"
-										class="btn btn-info btn-circle"
-										style="font-size: 17px; color: black;"
-										onclick="window.location='/MeetBoth/_03_product.searchAllProduct.controller'">
-									&nbsp; <input type="button" value="新增商品"
-										class="btn btn-warning btn-circle"
-										style="font-size: 17px; color: black;"
-										onclick="window.location='/MeetBoth/_03_product.pathToInsertProduct.controller'">
-								</div>
+<!-- 								<div class="container" style="padding: 0px 10px 0px 20px;"> -->
+<!-- 									<input type="button" value="返回首頁" -->
+<!-- 										class="btn btn-info btn-circle" -->
+<!-- 										style="font-size: 17px; color: black;" -->
+<!-- 										onclick="window.location='/MeetBoth/_03_product.searchAllProduct.controller'"> -->
+<!-- 									&nbsp; <input type="button" value="新增商品" -->
+<!-- 										class="btn btn-warning btn-circle" -->
+<!-- 										style="font-size: 17px; color: black;" -->
+<!-- 										onclick="window.location='/MeetBoth/_03_product.pathToInsertProduct.controller'"> -->
+<!-- 								</div> -->
 								<!--       按鈕列 -->
 								<!-- 123 -->
-								<div class="row mt-70">
+								<div class="row ">
 									<div class="col-sm-12">
 										<ul class="nav nav-tabs font-alt" role="tablist">
 											<li class="active"><a href="#description"
@@ -253,7 +257,8 @@ h1 {
 													</tr>
 													<c:forEach var="bean" items="${orderList}">
 														<tr>
-															<td>${bean.orderUID}</td>
+															<td><a class="aColor"
+																href="/MeetBoth/memberOrdersList.controller/${bean.orderNo}">${bean.orderUID}</a></td>
 															<td>${bean.orderDate}</td>
 															<td>${bean.ordStstus}</td>
 															<td>${bean.paymentStstus}</td>

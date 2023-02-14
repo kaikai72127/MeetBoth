@@ -17,7 +17,7 @@ public interface OrderRepository extends JpaRepository<OrderBean, Integer> {
 	public List<OrderBean> findByOrderNo(Integer orderNo);
 
 	// 找買家所有的訂單的資料
-	@Query(value = "select * from memberorder where memberbuy_FK=?1 order by orderNo", nativeQuery = true)
+	@Query(value = "select * from memberorder where memberbuy_FK=?1 order by orderNo DESC", nativeQuery = true)
 	public List<OrderBean> findByMemberbuy(Integer memberbuy_FK);
 
 	// 模糊選擇的條件式訂單資料搜尋

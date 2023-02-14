@@ -2,7 +2,6 @@ package springTeam5._04_shoppingCart.controller;
 
 import java.sql.SQLException;
 import java.util.LinkedHashSet;
-import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
@@ -13,7 +12,6 @@ import javax.servlet.http.HttpSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -181,7 +179,7 @@ public class ShoppingCartCheck {
 			System.out.println("------------------------自動生成" + orderService.generateOrderNumber());
 			orderBean = new OrderBean(null, orderService.generateOrderNumber(), memberBean,
 					orderService.getCurrentDate(), orderService.getCurrentDate(), shippingName, shippingPhone,
-					shippingAddress, "處理中", "未付款", "無", paymentMethod, null, shoppingCart.getItemAmount(), null);
+					shippingAddress, "處理中", "未付款", "處理中", paymentMethod, null, shoppingCart.getItemAmount(), null);
 		}
 
 		orderService.createOrder(orderBean);
@@ -298,9 +296,9 @@ public class ShoppingCartCheck {
 
 		// 訂購完成寄信給買家確認訂單明細----Email
 		System.out.println(email);
-		String recipient = email;
-		String memberName = memberBean.getMemName();
-		String orderMessage = forMamberMail;
+		String recipient = email; //收件者的email
+		String memberName = memberBean.getMemName(); //自己的參數 我這邊是收件者的名字
+		String orderMessage = forMamberMail; //信件的內容
 
 		mailService.prepareAndSendForBuy(recipient, memberName, orderMessage);
 

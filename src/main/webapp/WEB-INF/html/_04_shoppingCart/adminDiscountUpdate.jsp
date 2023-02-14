@@ -293,7 +293,8 @@ a:hover {
 							style="margin-left: 20px; width: 75%; border-left: solid 1px yellow;">
 							<div class="post">
 								<!-- 							標題 -->
-								<div class="post-thumbnail"
+								<div class=
+								"post-thumbnail"
 									style="padding-bottom: 0; margin-bottom: 0;">
 									<h1
 										style="padding-bottom: 0px; margin-bottom: 0; text-align: center; font-size: 50px; color: white;">後臺管理-訂單管理</h1>

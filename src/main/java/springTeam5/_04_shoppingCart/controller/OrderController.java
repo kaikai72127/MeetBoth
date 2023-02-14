@@ -195,34 +195,59 @@ public class OrderController {
 		return "_04_shoppingCart/adminOrders";
 	}
 
-
-	
-	
-	//前台訂單使用------------
+	// 前台訂單使用------------
 	@GetMapping(path = "/memberOrdersList.controller")
-	public String fondMemberBuy(Model model,HttpServletRequest request) {
+	public String fondMemberBuy(Model model, HttpServletRequest request) {
 //		HttpSession session = request.getSession(false);
 //		MemberBean member = (MemberBean) session.getAttribute("Member");
-				
+
 		String account = SecurityContextHolder.getContext().getAuthentication().getName();
 		List<MemberBean> mem = memberService.searchMemByAccount(account);
-		
+
 		if (mem.size() == 0) {
 			return "login";
-		}else {
+		} else {
 			MemberBean memberBean = mem.get(0);
 			List<OrderBean> orderList = orderService.findByMemberbuy(memberBean.getMemberID());
 			List<OrderItemBean> orderSaleList = orderItemService.findByMembersale(memberBean.getMemberID());
-			
+
 			model.addAttribute("memberBean", memberBean);
 			model.addAttribute("orderList", orderList);
 			model.addAttribute("orderSaleList", orderSaleList);
 			return "/_04_shoppingCart/memberOrderList";
 		}
 	}
+
+	@GetMapping(path = "/memberOrdersList.controller/{orderNo}")
+	public String fondMemberBuy(@PathVariable("orderNo") Integer orderNo, Model model, HttpServletRequest request) {
+//		HttpSession session = request.getSession(false);
+//		MemberBean member = (MemberBean) session.getAttribute("Member");
+
+		String account = SecurityContextHolder.getContext().getAuthentication().getName();
+		List<MemberBean> mem = memberService.searchMemByAccount(account);
+		MemberBean loginMember = mem.get(0);
+		List<OrderBean> orderBean = orderService.findByOrderNo(orderNo);
+		MemberBean memberbuy = orderBean.get(0).getMemberbuy();
+		System.out.println("----------"+memberbuy.getMemName()+"-----------"+loginMember.getMemName());
+		if (!loginMember.equals(memberbuy)) {
+			
+			System.out.println("----------回去首頁吧");
+			return "redirect:/index.controller";
+		} else {
+			
+			Set<OrderItemBean> items = orderBean.get(0).getItems();
+			System.out.println("------------------------"+items.size());
+
+			model.addAttribute("memberBean", loginMember);
+			model.addAttribute("orderBean", orderBean.get(0));
+			model.addAttribute("items", items);
+			return "/_04_shoppingCart/orderDetial";
+		}
+	}
+
 //	@PostMapping()
 //	public String fondMemberSale(Model mProd,HttpServletRequest request) {
 //		
 //	}
-	
+
 }

@@ -21,7 +21,7 @@ System.out.println(baseMeetboth96x96);
 				<span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span
 					class="icon-bar"></span><span class="icon-bar"></span>
 			</button>
-			<img src="<%=baseMeetboth96x96%>" style="float: left" /> <a
+			<img src="<%=baseMeetboth96x96%>" style="float: left" /> <a 
 				class="navbar-brand" href="<c:url value='/index.controller' />">
 				肉丸家教網</a>
 			<!-- <a class="navbar-brand" href="index.html">肉丸家教網-MEET BOTH</a> -->

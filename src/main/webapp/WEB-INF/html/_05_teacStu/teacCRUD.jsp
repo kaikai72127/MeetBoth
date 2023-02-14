@@ -72,6 +72,13 @@ body {
 	box-shadow: 0px 2px 6px rgb(0 0 0/ 33%);
 }
 
+.tutor-left-section {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 0.75rem;
+}
+
 .tutor-avatar {
 	display: flex;
 	width: var(--avatar-width);
@@ -203,36 +210,6 @@ body {
 	font-size: 16px;
 }
 
-#formContainer {
-	position: fixed;
-	top: 0;
-	left: 0;
-	right: 0;
-	bottom: 0;
-	z-index: 999;
-	align-items: center;
-	justify-content: center;
-	display: flex;
-}
-
-#formContainer::before {
-	content: "";
-	position: absolute;
-	background: rgba(0, 0, 0, 0.5);
-	width: 100vw;
-	height: 100vh;
-	top: 0;
-	left: 0;
-	opacity: 0;
-	display: flex;
-	transition: opacity 0.5s ease-in-out;
-}
-
-#formContainer.shown::before {
-	content: "";
-	opacity: 1;
-}
-
 #formContainer .form-section {
 	background: #fff;
 	border-radius: 10px;
@@ -257,6 +234,36 @@ body {
 	max-width: 900px;
 }
 
+.dialog-container {
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	z-index: 999;
+	align-items: center;
+	justify-content: center;
+	display: flex;
+}
+
+.dialog-container::before {
+	content: "";
+	position: absolute;
+	background: rgba(0, 0, 0, 0.5);
+	width: 100vw;
+	height: 100vh;
+	top: 0;
+	left: 0;
+	opacity: 0;
+	display: flex;
+	transition: opacity 0.5s ease-in-out;
+}
+
+.dialog-container.shown::before {
+	content: "";
+	opacity: 1;
+}
+
 .card-section {
 	position: fixed;
 	top: 0;
@@ -268,6 +275,12 @@ body {
 	justify-content: center;
 	display: flex;
 	flex-wrap: wrap;
+	transform: scale(0);
+	transition: all 0.5s ease-in-out;
+}
+
+#cardContainer.shown .card-section {
+	transform: scale(1);
 }
 
 .card-section .card-container {
@@ -287,11 +300,12 @@ body {
 	border: #ce7777 0.25rem solid;
 	background: #FFFFFF;
 	border-radius: 10px;
-	width: 80%;
+	width: 100%;
 	height: 120%;
 	box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
 	transition: transform 1s;
 	transform-style: preserve-3d;
+	--avatar-width: 120px;
 }
 
 .card:hover .content {
@@ -304,21 +318,47 @@ body {
 	height: 100%;
 	width: 100%;
 	background-image: url("../html/images/背景渲染.jpg");
-	line-height: 300px;
-	color: white;
-	text-align: center;
-	font-size: 60px;
-	border-radius: 5px;
+	border-radius: 10px;
 	backface-visibility: hidden;
 	display: flex;
 	align-items: center;
 	justify-content: center;
+	overflow: hidden;
 }
 
 .back {
 	background: white;
-	color: #03446A;
+	justify-content: flex-start;
 	transform: rotateY(180deg);
+}
+
+#cardContainer .tutor-avatar {
+	flex: 1 0 var(--avatar-width);
+	max-width: var(--avatar-width);
+}
+
+#cardContainer .tutor-name {
+	font-size: 2.25rem;
+}
+
+#cardContainer .subject-items {
+	font-size: 1.25rem;
+	line-height: 110%;
+}
+
+#cardContainer .match-score {
+	position: absolute;
+	padding: 0.25rem 0;
+	background: #ce7777;
+	top: 20px;
+	right: -3rem;
+	width: 12rem;
+	transform: rotate(45deg);
+	font-size: 1.5rem;
+	font-weight: 600;
+	line-height: 150%;
+	color: #ffffff;
+	text-align: center;
 }
 
 #closeForm {
@@ -342,7 +382,156 @@ body {
 	justify-content: center;
 	display: flex;
 }
+
+.button-container {
+	animation: hue-rotate 10s linear infinite;
+}
+
+.button--bubble__container span {
+	box-sizing: border-box;
+}
+
+.button--bubble__container .button {
+	-webkit-font-smoothing: antialiased;
+	background-color: #222;
+	border: none;
+	border-radius: 2rem;
+	color: #fff;
+	display: inline-block;
+	font-family: "Montserrat", sans-serif;
+	font-size: 11px;
+	font-weight: 100;
+	text-decoration: none;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+	letter-spacing: 1px;
+	color: white;
+	padding: 8px 40px;
+	text-transform: uppercase;
+	transition: all 0.1s ease-out;
+	cursor: pointer;
+}
+
+.button--bubble__container .button:hover {
+	background-color: #90feb5;
+	color: #fff;
+}
+
+.button--bubble__container .button:active {
+	transform: scale(0.95);
+}
+
+.button--bubble__container .button--bubble {
+	position: relative;
+	z-index: 2;
+	color: white;
+	background: none;
+}
+
+.button--bubble:hover {
+	background: none;
+}
+
+.button--bubble:hover+.button--bubble__effect-container .circle {
+	background: #44fd82;
+}
+
+.button--bubble:hover+.button--bubble__effect-container .button {
+	background: #44fd82;
+}
+
+.button--bubble:active+.button--bubble__effect-container {
+	transform: scale(0.95);
+}
+
+.button--bubble__container {
+	position: relative;
+	display: inline-block;
+}
+
+.button--bubble__container .effect-button {
+	position: absolute;
+	width: 50%;
+	height: 25%;
+	top: 50%;
+	left: 25%;
+	z-index: 1;
+	transform: translateY(-50%);
+	background: #222;
+	transition: background 0.1s ease-out;
+}
+
+.button--bubble__effect-container {
+	position: absolute;
+	display: block;
+	width: 200%;
+	height: 400%;
+	top: -150%;
+	left: -50%;
+	filter: url("#goo");
+	transition: all 0.1s ease-out;
+	pointer-events: none;
+}
+
+.button--bubble__effect-container .circle {
+	position: absolute;
+	width: 25px;
+	height: 25px;
+	border-radius: 15px;
+	background: #222;
+	transition: background 0.1s ease-out;
+}
+
+.button--bubble__effect-container .circle.top-left {
+	top: 40%;
+	left: 27%;
+}
+
+.button--bubble__effect-container .circle.bottom-right {
+	bottom: 40%;
+	right: 27%;
+}
+
+.button--bubble__container {
+	top: 50%;
+}
+
+
+@-webkit-keyframes hue-rotate {from { -moz-filter:hue-rotate(0);
+	-ms-filter: hue-rotate(0);
+	filter: hue-rotate(0);
+}
+
+to {
+	-moz-filter: hue-rotate(360deg);
+	-ms-filter: hue-rotate(360deg);
+	filter: hue-rotate(360deg);
+}
+
+}
+
+@keyframes hue-rotate {from { -moz-filter:hue-rotate(0);
+	-ms-filter: hue-rotate(0);
+	filter: hue-rotate(0);
+}
+
+to {
+	-moz-filter: hue-rotate(360deg);
+	-ms-filter: hue-rotate(360deg);
+	filter: hue-rotate(360deg);
+}
+}
 </style>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.17.0/plugins/CSSPlugin.min.js"></script>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.17.0/easing/EasePack.min.js"></script>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.17.0/TweenLite.min.js"></script>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/gsap/latest/TimelineLite.min.js"></script>
 </head>
 
 <!--BOBY-->
@@ -384,18 +573,32 @@ body {
 						<a href="#">教師貼文列表</a>
 					</h2>
 					<hr>
-					<button id="openForm" style="float: left"
-						class="btn btn-b btn-circle">MeetBoth</button>
-					<form
-						action="<c:url value='/_05_teacStu.insertdataMain.controller' />">
-						<button style="float: right" class="btn btn-b btn-circle"
-							type="submit">成為教師</button>
-					</form>
+					<div class="button-container">
+						<span class="button--bubble__container">
+							<div id="openForm" style="float: left"
+								class="button button--bubble">MeetBoth</div>
+								<span class="button--bubble__effect-container">
+								<span class="circle top-left"></span>
+								<span class="circle top-left"></span>
+								<span class="circle top-left"></span>
+								<span class="button effect-button"></span>
+								<span class="circle bottom-right"></span>
+								<span class="circle bottom-right"></span>
+								<span class="circle bottom-right"></span>
+								</span>
+						</span>
+						<form style="float: right"
+							action="<c:url value='/_05_teacStu.insertdataMain.controller' />">
+							<button class="btn btn-b btn-circle" type="submit">成為教師</button>
+						</form>
+					</div>
+
+					<!-- <button id="openForm" style="float: left" class="btn btn-b btn-circle">MeetBoth</button> -->
 				</div>
 				<!-- 標題結束 -->
 
 				<!-- 測試 -->
-				<div id="formContainer" class="hidden">
+				<div id="formContainer" class="dialog-container hidden">
 					<div class="form-section">
 						<span id="closeForm">&times;</span>
 						<form id="test-form">
@@ -439,9 +642,7 @@ body {
 									</div>
 								</div>
 							</div>
-							<!--                 之後要把這個button改成submit -->
-							<div
-								style="display: flex; align-items: center; justify-content: center;">
+							<div style="display: flex; align-items: center; justify-content: center;">
 								<button id="form-submit-button"
 									class="btn btn-danger btn-circle" type="submit">開始匹配</button>
 							</div>
@@ -449,69 +650,81 @@ body {
 					</div>
 				</div>
 
-				<div class="card-section hidden">
-					<div class="card-container">
-						<div class="card">
-							<div class="content">
-								<div class="front"><img src="../html/assets/images/meatball/meatball-144x144.png"></div>
-								<div class="back"
-									style="background-color: white; display: flex;">
-									<div class="tutor-avatar" style="width: 40%; margin: 20px">
-										<img
-											src="<c:url value='/_01_member.ShowPhoto.controller?${bean.member.memberID}' />"
-											alt="">
+				<div id="cardContainer" class="dialog-container hidden">
+					<div class="card-section">
+						<div class="card-container">
+							<div class="card">
+								<div class="content">
+									<div class="front">
+										<img src="../html/assets/images/meatball/meatball-144x144.png">
 									</div>
-									<div class="tutor-detail" style="width: 40%; margin: 20px">
-										<div id="jsonsubjectItem" class="subject-items"></div>
-										<div id="jsonName" class="tutor-name"></div>
-										<div class="detail-table">
-											<div class="detail-item">
-												<div class="detail-item-title">授課對象</div>
-												<div id="jsonteacObject" class="detail-item-content"></div>
-											</div>
-											<div class="detail-item">
-												<div class="detail-item-title">學歷</div>
-												<div id="jsonhighEdu" class="detail-item-content"></div>
-											</div>
-											<div class="detail-item">
-												<div class="detail-item-title">家教經驗</div>
-												<div id="jsontutorExp" class="detail-item-content"></div>
-											</div>
-											<div class="detail-item">
-												<div class="detail-item-title">授課地區</div>
-												<div id="jsonteacLoc" class="detail-item-content"></div>
+									<div class="back"
+										style="background-color: white; display: flex;">
+										<div class="tutor-avatar" style="margin: 20px">
+											<img src="<c:url value='/_01_member.ShowPhoto.controller?${bean.member.memberID}' />">
+										</div>
+										<div class="tutor-detail" style="margin: 20px">
+											<div id="jsonsubjectItem" class="subject-items"></div>
+											<div id="jsonName" class="tutor-name"></div>
+											<div class="detail-table">
+												<div class="detail-item">
+													<div class="detail-item-title">授課對象</div>
+													<div id="jsonteacObject" class="detail-item-content">
+													</div>
+												</div>
+												<!-- 											<div class="detail-item"> -->
+												<!-- 												<div class="detail-item-title">學歷</div> -->
+												<!-- 												<div id="jsonhighEdu" class="detail-item-content"></div> -->
+												<!-- 											</div> -->
+												<div class="detail-item">
+													<div class="detail-item-title">家教經驗</div>
+													<div id="jsontutorExp" class="detail-item-content"></div>
+												</div>
+												<div class="detail-item">
+													<div class="detail-item-title">授課地區</div>
+													<div id="jsonteacLoc" class="detail-item-content"></div>
+												</div>
 											</div>
 										</div>
+										<div class="match-score">97%</div>
 									</div>
 								</div>
 							</div>
 						</div>
-					</div>
-					<div class="card-container">
-						<div class="card">
-							<div class="content">
-								<div class="front"><img src="../html/assets/images/meatball/meatball-144x144.png"></div>
-								<div class="back">Back!</div>
+						<div class="card-container">
+							<div class="card">
+								<div class="content">
+									<div class="front">
+										<img src="../html/assets/images/meatball/meatball-144x144.png">
+									</div>
+									<div class="back">Back!</div>
+								</div>
 							</div>
 						</div>
-					</div>
-					<div class="card-container">
-						<div class="card">
-							<div class="content">
-								<div class="front"><img src="../html/assets/images/meatball/meatball-144x144.png"></div>
-								<div class="back">Back!</div>
+						<div class="card-container">
+							<div class="card">
+								<div class="content">
+									<div class="front">
+										<img src="../html/assets/images/meatball/meatball-144x144.png">
+									</div>
+									<div class="back">Back!</div>
+								</div>
 							</div>
 						</div>
-					</div>
-					<div class="card-container">
-						<div class="card">
-							<div class="content">
-								<div class="front"><img src="../html/assets/images/meatball/meatball-144x144.png"></div>
-								<div class="back">Back!</div>
+						<div class="card-container">
+							<div class="card">
+								<div class="content">
+									<div class="front">
+										<img src="../html/assets/images/meatball/meatball-144x144.png">
+									</div>
+									<div class="back">Back!</div>
+								</div>
 							</div>
 						</div>
 					</div>
 				</div>
+
+
 				<!-- 測試 -->
 
 				<!-- 價格區間搜尋與排列方式 -->
@@ -558,12 +771,15 @@ body {
 					<a
 						href="<c:url value='/_05_teacStu.teacpostpageMain.controller?teacno=${bean.teacno}'/>">
 						<div class="tutor-item">
-							<div class="tutor-avatar">
-								<img
-									src="<c:url value='/_01_member.ShowPhoto.controller?${bean.member.memberID}' />"
-									alt="">
+							<div class="tutor-left-section">
+								<div class="tutor-avatar">
+									<img
+										src="<c:url value='/_01_member.ShowPhoto.controller?${bean.member.memberID}' />"
+										alt="">
+								</div>
+								<div>瀏覽次數:${bean.views}次</div>
 							</div>
-							<div>瀏覽次數:${bean.views}次</div>
+
 							<div class="tutor-detail">
 								<div class="subject-items">${bean.subjectItem}</div>
 								<div class="tutor-name">${bean.member.memName}
@@ -637,94 +853,159 @@ body {
 	<!-- 引入共同的js -->
 	<jsp:include page="/WEB-INF/html/fragment/jsPath.jsp" />
 	<script>
-					document.querySelector('form[action*="_05_teacStu.insertdataMain.controller"] button[type="submit"]').addEventListener('click', function (e) {
-						const user = '${pageContext.request.userPrincipal.name}';
-						if (!user) {
-							e.preventDefault();
-							alert('請先登入');
-							window.location.href = '/MeetBoth/login/page';
-						}
-					});
-				</script>
-				<script>
-					const closeDialog = () => {
-						document.getElementById("formContainer").classList.remove("shown");
-						setTimeout(() => {
-							document.getElementById("formContainer").classList.add("hidden");
-						}, 500)
-					};
+		document.querySelector('form[action*="_05_teacStu.insertdataMain.controller"] button[type="submit"]').addEventListener('click', function (e) {
+		const user = '${pageContext.request.userPrincipal.name}';
+		if (!user) {
+			e.preventDefault();
+			alert('請先登入');
+			window.location.href = '/MeetBoth/login/page';
+		}
+		});
+	</script>
+	<script>
+	const closeDialog = () => {
+		document.getElementById("formContainer").classList.remove("shown");
+			setTimeout(() => {
+				document.getElementById("formContainer").classList.add("hidden");
+			}, 500)
+		};
 
-					document.getElementById("openForm").addEventListener("click", function () {
-						document.getElementById("formContainer").classList.remove("hidden");
-						setTimeout(() => {
-							document.getElementById("formContainer").classList.add("shown");
-						}, 10)
-					});
+		document.getElementById("openForm").addEventListener("click", function () {
+			document.getElementById("formContainer").classList.remove("hidden");
+			setTimeout(() => {
+				document.getElementById("formContainer").classList.add("shown");
+			}, 10)
+		});
 
-					document.getElementById("closeForm").addEventListener("click", function () {
-						closeDialog();
-					});
+		document.getElementById("closeForm").addEventListener("click", function () {
+			closeDialog();
+		});
 
-					const formContainer = $("#formContainer");
-					formContainer.click(() => {
-						closeDialog();
-					})
+		const formContainer = $("#formContainer");
+			formContainer.click(() => {
+				closeDialog();
+			})
 
-					$(".form-section").click((event) => {
-						event.stopPropagation();
-					})
+		$(".form-section").click((event) => {
+			event.stopPropagation();
+		})
 
-					//dialog content switch
-					const button = $("#form-submit-button");
-					const cardSection = $(".card-section");
+		const cardContainer = $("#cardContainer");
+		const closeCardContainer = () => {
+			cardContainer.removeClass("shown");
+			setTimeout(() => {
+				cardContainer.addClass("hidden");
+			}, 500);
+		};
 
+		const showCardContainer = () => {
+			cardContainer.removeClass("hidden");
+			setTimeout(() => {
+				cardContainer.addClass("shown");
+			}, 500);
+		};
 
-					const form = document.getElementById('test-form');
-					button.click(() => {
-						//TODO: ajax call
-						form.addEventListener('submit', function (event) {
-							event.preventDefault();
-							const formData = {
-								location: this.elements.locChoose.value,
-								object: this.elements.objectChoose.value,
-								time: this.elements.timeChoose.value,
-							};
+		cardContainer.click(() => {
+			closeCardContainer();
+		});
 
-							//             const array = JSON.stringify(formData);
+		//dialog content switch
+		const button = $("#form-submit-button");
+		const card = $(".card-container");
+		cardContainer.click((event) => {
+			event.stopPropagation();
+		});
 
-							console.log(formData)
-							fetch("/MeetBoth/_05_teacStu.match.controller", {
-								method: 'POST',
-								headers: {
-									'Content-Type': 'application/json'
-								},
-								body: JSON.stringify(formData)
-							})
-							.then(response=>response.json())
-							.then(data=>
-							{
-								var firstData = data[0];
-								    var jsonsubjectItem = firstData.subjectItem;
-								    $('#jsonsubjectItem').html(jsonsubjectItem);
-								    var jsonName = firstData.member.memName (firstData.member.memNickName);
-								    $('#jsonName').html(jsonName);
-								    var jsonteacObject = firstData.teacObject;
-								    $('#jsonteacObject').html(jsonteacObject);
-								    var jsonhighEdu = firstData.highEdu;
-								    $('#jsonhighEdu').html(jsonhighEdu);
-								    var jsontutorExp = firstData.tutorExp;
-								    $('#jsontutorExp').html(jsontutorExp);
-								    var jsonteacLoc = firstData.teacLoc;
-								    $('#jsonteacLoc').html(jsonteacLoc);
-// 								
-							}
-									)
-						})
-						setTimeout(() => {
-							closeDialog();
-							cardSection.removeClass("hidden");
-						}, 100);
-					});
-				</script>
+		const form = document.getElementById('test-form');
+		button.click(() => {
+		//TODO: ajax call
+		form.addEventListener('submit', function (event) {
+			event.preventDefault();
+			const formData = {
+				location: this.elements.locChoose.value,
+				object: this.elements.objectChoose.value,
+				time: this.elements.timeChoose.value,
+		};
+
+		fetch("/MeetBoth/_05_teacStu.match.controller", {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json'
+			},
+			body: JSON.stringify(formData)
+			})
+			.then(response => response.json())
+			.then(data => {
+				var firstData = data[0];
+				var jsonsubjectItem = firstData.subjectItem;
+				$('#jsonsubjectItem').html(jsonsubjectItem);
+				var jsonName = firstData.member.memName + "(" + firstData.member.memNickName + ")";
+				$('#jsonName').html(jsonName);
+				var jsonteacObject = firstData.teacObject;
+				$('#jsonteacObject').html(jsonteacObject);
+				var jsonhighEdu = firstData.highEdu;
+				$('#jsonhighEdu').html(jsonhighEdu);
+				var jsontutorExp = firstData.tutorExp;
+				$('#jsontutorExp').html(jsontutorExp);
+				var jsonteacLoc = firstData.teacLoc;
+				$('#jsonteacLoc').html(jsonteacLoc);
+			setTimeout(() => {
+				closeDialog();
+				showCardContainer();
+			}, 100);
+		})
+		})
+		});
+	</script>
+	<script>
+	$('.button--bubble').each(function () {
+		console.log($(this).parent())
+		var $circlesTopLeft = $(this).parent().find('.circle.top-left');
+		var $circlesBottomRight = $(this).parent().find('.circle.bottom-right');
+
+		var tl = new TimelineLite();
+		var tl2 = new TimelineLite();
+
+		var btTl = new TimelineLite({ paused: true });
+
+		tl.to($circlesTopLeft, 1.2, { x: -25, y: -25, scaleY: 2, ease: SlowMo.ease.config(0.1, 0.7, false) });
+		tl.to($circlesTopLeft.eq(0), 0.1, { scale: 0.2, x: '+=6', y: '-=2' });
+		tl.to($circlesTopLeft.eq(1), 0.1, { scaleX: 1, scaleY: 0.8, x: '-=10', y: '-=7' }, '-=0.1');
+		tl.to($circlesTopLeft.eq(2), 0.1, { scale: 0.2, x: '-=15', y: '+=6' }, '-=0.1');
+		tl.to($circlesTopLeft.eq(0), 1, { scale: 0, x: '-=5', y: '-=15', opacity: 0 });
+		tl.to($circlesTopLeft.eq(1), 1, { scaleX: 0.4, scaleY: 0.4, x: '-=10', y: '-=10', opacity: 0 }, '-=1');
+		tl.to($circlesTopLeft.eq(2), 1, { scale: 0, x: '-=15', y: '+=5', opacity: 0 }, '-=1');
+
+		var tlBt1 = new TimelineLite();
+		var tlBt2 = new TimelineLite();
+
+		tlBt1.set($circlesTopLeft, { x: 0, y: 0, rotation: -45 });
+		tlBt1.add(tl);
+
+		tl2.set($circlesBottomRight, { x: 0, y: 0 });
+		tl2.to($circlesBottomRight, 1.1, { x: 30, y: 30, ease: SlowMo.ease.config(0.1, 0.7, false) });
+		tl2.to($circlesBottomRight.eq(0), 0.1, { scale: 0.2, x: '-=6', y: '+=3' });
+		tl2.to($circlesBottomRight.eq(1), 0.1, { scale: 0.8, x: '+=7', y: '+=3' }, '-=0.1');
+		tl2.to($circlesBottomRight.eq(2), 0.1, { scale: 0.2, x: '+=15', y: '-=6' }, '-=0.2');
+		tl2.to($circlesBottomRight.eq(0), 1, { scale: 0, x: '+=5', y: '+=15', opacity: 0 });
+		tl2.to($circlesBottomRight.eq(1), 1, { scale: 0.4, x: '+=7', y: '+=7', opacity: 0 }, '-=1');
+		tl2.to($circlesBottomRight.eq(2), 1, { scale: 0, x: '+=15', y: '-=5', opacity: 0 }, '-=1');
+
+		tlBt2.set($circlesBottomRight, { x: 0, y: 0, rotation: 45 });
+		tlBt2.add(tl2);
+
+		btTl.add(tlBt1);
+		btTl.to($(this).parent().find('.button.effect-button'), 0.8, { scaleY: 1.1 }, 0.1);
+		btTl.add(tlBt2, 0.2);
+		btTl.to($(this).parent().find('.button.effect-button'), 1.8, { scale: 1, ease: Elastic.easeOut.config(1.2, 0.4) }, 1.2);
+
+		btTl.timeScale(2.6);
+
+		$(this).on('mouseover', function () {
+			console.log("hover button")
+			btTl.restart();
+		});
+	});
+	</script>
 </body>
 </html>

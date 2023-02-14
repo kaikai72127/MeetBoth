@@ -34,8 +34,7 @@
 									<div class="col-sm-5 col-sm-offset-1 mb-sm-40">
 										<h4 class="font-alt h4-p">重設密碼</h4>
 										<hr class="divider-w mb-10">
-										<form class="form" action="<%=request.getContextPath()%>/resetpass"
-											method="Post">
+										<form class="form" action="resetpass" method="Post">
 
 											<div class="form-group">
 												<input class="form-control" style="text-transform: none;" id="account"

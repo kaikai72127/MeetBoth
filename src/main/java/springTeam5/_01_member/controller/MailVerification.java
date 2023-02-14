@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -46,6 +47,25 @@ public class MailVerification {
 		  return "_01_member/mailsend";
 		}
 	
+	@PostMapping(path = "verifymember")
+	public String verufymember(@RequestParam("idnumber") String idNumber, @RequestParam("account") String account, Model m) {
+		List<MemberBean> list = ms.searchMemByAccount(account);
+		if (list.size()==0) {
+			m.addAttribute("error", "沒有這個人喔！");
+			return "_01_member/forgetpassword";			
+		}else {
+			MemberBean member = list.get(0);			
+			if (member.getIdNumber().equals(idNumber)) {
+				m.addAttribute("member", member);
+				return "_01_member/updatepassword";
+			}else {
+				m.addAttribute("error", "沒有這個人喔！");
+				return "_01_member/forgetpassword";
+			}
+		}
+	}
+	
+	
 	@PostMapping(path = "forgotpassword")
 	public String forgotpass(@RequestParam("mail") String email,@RequestParam("account") String account) {
 		sendVerificationEmail token = new sendVerificationEmail();
@@ -60,7 +80,7 @@ public class MailVerification {
 
 		  // 發送郵件
 		  mailSender.send(message);
-		  return "/";
+		  return "redirect:/index.controller";
 	}
 	
 	@GetMapping(path = "/verify")
@@ -103,14 +123,14 @@ public class MailVerification {
 	
 	@PostMapping(path = "/resetpass")
 	public String restpass(@RequestParam("account") String account, @RequestParam("password") String pass) {
-		MemberBean newMem = new MemberBean();
 		List<MemberBean> list = ms.searchMemByAccount(account);
 		if (list.size() == 0) {
 			return "errorpages/notexist";
 		}else {	
 			MemberBean member = list.get(0);
-			newMem.setMemberID(member.getMemberID());
-			newMem.setPassword(pass);
+			member.setPassword(new BCryptPasswordEncoder().encode(pass));
+			ms.update(member);
+			
 			return "_01_member/resetsuccess";
 		}
 	}

@@ -145,6 +145,7 @@ a {
 	margin: auto 10px;
 	transition: color 0.5s;
 	text-align: center;
+	width:60%;
 }
 
 .MBinput:hover {
@@ -255,70 +256,70 @@ a:hover {
 						<div class="col-sm-8 col-sm-offset-1"
 							style="margin-left: 20px; width: 75%; border-left: solid 1px yellow;">
 							<div class="post">
-								<!-- 							標題 -->
+								<!-- 標題 -->
 								<div class="post-thumbnail"
 									style="padding-bottom: 0; margin-bottom: 0;">
 									<h1
 										style="padding-bottom: 0px; margin-bottom: 0; text-align: center; font-size: 50px; color: white;">後臺管理-新增教師履歷</h1>
 								</div>
 								<hr class="divider-w pt-20">
-								<!-- 							標題 -->
-								<!--       右邊第一部分開始 -->
+								<!-- 標題 -->
+								<!-- 右邊第一部分開始 -->
 								<div class="post">
 								<form action="<c:url value='/admin/_05_teacStu.insertdata.controller' />" method="Post" enctype="multipart/form-data">
 									<div class="post-video embed-responsive embed-responsive-16by9"
 										style="height: auto; padding-bottom: 100px;">
 										<div style="display: flex">
-											<button class="MBbtn"
+											<button class="MBbtn" id="cancel-btn"
 												onclick="window.location='/MeetBoth/admin/_05_teacStu.searchAllTeac.controller/1'">返回</button>
 										</div>
 										<div>
-											<span>會員編號 :&ensp;<input type="text" name="pid" class="MBinput" placeholder="自動產生" readonly></span>
+											<span>會員編號 :&ensp;&ensp;&ensp;&ensp;&ensp;<input value="${bean.memberID}" type="text" class="MBinput" placeholder="自動產生" readonly></span>
 										</div>
 										<div>
-											<span>履歷貼文編號 :&ensp;<input type="text" name="pid" class="MBinput" placeholder="自動產生" readonly></span>
+											<span>履歷貼文編號 :&ensp;<input type="text" class="MBinput" placeholder="自動產生" readonly></span>
 										</div>
 										<div>
-											<span>學歷 :&ensp;<input type="text" name="pna" class="MBinput" placeholder="請輸入您的學歷...Ex:銘傳大學財務金融學系"></span>
+											<span>學歷 :&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;<input name="highEdu" type="text" class="MBinput" placeholder="請輸入您的學歷...Ex:銘傳大學財務金融學系"></span>
 										</div>
 										<div>
-											<span>家教經驗 :&ensp;<input type="text" name="ppr" class="MBinput" placeholder="請輸入您的家教經驗...Ex:國中數學2年"></span>
+											<span>家教經驗 :&ensp;&ensp;&ensp;&ensp;&ensp;<input name="studExp" type="text" class="MBinput" placeholder="請輸入您的家教經驗...Ex:國中數學2年"></span>
 										</div>
 										<div>
-											<span>留學經驗 :&ensp;<input type="text" name="pmid" class="MBinput" placeholder="請輸入您的留學經驗...Ex:美國念MBA2年"></span>
+											<span>留學經驗 :&ensp;&ensp;&ensp;&ensp;&ensp;<input name="tutorExp" type="text" class="MBinput" placeholder="請輸入您的留學經驗...Ex:美國念MBA2年"></span>
 										</div>
 										<div>
-											<span>語言能力 :&ensp;<input type="text" name="pinvt" class="MBinput" placeholder="請輸入您的語言能力...Ex:英文:精通"></span>
+											<span>語言能力 :&ensp;&ensp;&ensp;&ensp;&ensp;<input name="lanAbility" type="text" class="MBinput" placeholder="請輸入您的語言能力...Ex:英文:精通"></span>
 										</div>
 										<div>
-											<span>證照技能 :&ensp;<input type="text" name="ppo" class="MBinput" placeholder="請輸入您的證照技能...Ex:國際專案管理師PMP"></span>
+											<span>證照技能 :&ensp;&ensp;&ensp;&ensp;&ensp;<input name="skills" type="text" class="MBinput" placeholder="請輸入您的證照技能...Ex:國際專案管理師PMP"></span>
 										</div>
 										<div>
-											<span>授課科目 :&ensp;<input type="text" name="pup" class="MBinput" placeholder="請輸入您的授課科目...Ex:英文、數學"></span>
+											<span>授課科目 :&ensp;&ensp;&ensp;&ensp;&ensp;<input name="subjectItem" type="text" class="MBinput" placeholder="請輸入您的授課科目...Ex:英文、數學"></span>
 										</div>
 										<div>
-											<span>授課地區 :&ensp;<input type="text" name="pps" class="MBinput" placeholder="請輸入您的授課地區...Ex:台北市、新北市"></span>
+											<span>授課地區 :&ensp;&ensp;&ensp;&ensp;&ensp;<input name="teacLoc" type="text" class="MBinput" placeholder="請輸入您的授課地區...Ex:台北市、新北市"></span>
 										</div>
 										<div>
-											<span>授課對象 :&ensp;<input type="text" name="pch" class="MBinput" placeholder="請輸入您的授課對象...Ex:國小、國中"></span>
+											<span>授課對象 :&ensp;&ensp;&ensp;&ensp;&ensp;<input name="teacObject" type="text" class="MBinput" placeholder="請輸入您的授課對象...Ex:國小、國中"></span>
 										</div>
 										<div>
-											<span>授課時段 :&ensp;<input type="text" name="pch" class="MBinput" placeholder="請輸入您的授課時段...Ex:平日早上、平日下午"></span>
+											<span>授課時段 :&ensp;&ensp;&ensp;&ensp;&ensp;<input name="teacTime" type="text" class="MBinput" placeholder="請輸入您的授課時段...Ex:平日早上、平日下午"></span>
 										</div>
 										<div>
-											<span>授課模式 :&ensp;<input type="text" name="pch" class="MBinput" placeholder="請輸入您的授課模式...Ex:面授、線上教學"></span>
+											<span>授課模式 :&ensp;&ensp;&ensp;&ensp;&ensp;<input name="classMode" type="text" class="MBinput" placeholder="請輸入您的授課模式...Ex:面授、線上教學"></span>
 										</div>
 										<div>
-											<span>試教意願 :&ensp;<input type="text" name="pch" class="MBinput" placeholder="請輸入您的試教意願...Ex:可試教或不方便試教"></span>
+											<span>試教意願 :&ensp;&ensp;&ensp;&ensp;&ensp;<input name="willTeac" type="text" class="MBinput" placeholder="請輸入您的試教意願...Ex:可試教或不方便試教"></span>
 										</div>
 										<div>
-											<span>聯絡方式 :&ensp;<input type="text" name="pch" class="MBinput" placeholder="請輸入您的連絡方式...Ex:電話、郵件"></span>
+											<span>聯絡方式 :&ensp;&ensp;&ensp;&ensp;&ensp;<input name="conMethod" type="text" class="MBinput" placeholder="請輸入您的連絡方式...Ex:電話、郵件"></span>
 										</div>
 										<div>
-											<span>聯絡時間 :&ensp;<input type="text" name="pch" class="MBinput" placeholder="請輸入您的聯絡時間...Ex:平日早上、平日下午"></span>
+											<span>聯絡時間 :&ensp;&ensp;&ensp;&ensp;&ensp;<input name="conTime" type="text" class="MBinput" placeholder="請輸入您的聯絡時間...Ex:平日早上、平日下午"></span>
 										</div>
 										<div>
-											<span>希望待遇 :&ensp;<input type="text" name="pch" class="MBinput" placeholder="請輸入您的希望待遇...Ex:800"></span>
+											<span>希望待遇 :&ensp;&ensp;&ensp;&ensp;&ensp;<input name="price" type="text" class="MBinput" placeholder="請輸入您的希望待遇...Ex:800"></span>
 										</div>
 										<div>
 											<input type="submit" class="MBbtn" value="確定" style="margin-top:15px;margin-left:900px;font-size:35px;">
@@ -392,5 +393,11 @@ a:hover {
 
 		});
 	</script>
+	<script>
+          document.getElementById("cancel-btn").addEventListener("click", function (event) {
+              event.preventDefault();
+              window.location.href = "/MeetBoth/admin/_05_teacStu.searchAllTeac.controller/1";
+          });
+    </script>
 </body>
 </html>

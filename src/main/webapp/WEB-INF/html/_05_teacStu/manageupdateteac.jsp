@@ -145,6 +145,7 @@ a {
 	margin: auto 10px;
 	transition: color 0.5s;
 	text-align: center;
+	width:60%;
 }
 
 .MBinput:hover {
@@ -265,60 +266,61 @@ a:hover {
 								<!-- 							標題 -->
 								<!--       右邊第一部分開始 -->
 								<div class="post">
-								<form action="<c:url value='/admin/_05_teacStu.insertdata.controller' />" method="Post" enctype="multipart/form-data">
+								<form action="<c:url value='/admin/_05_teacStu.updatedata.controller' />" method="Post" enctype="multipart/form-data">
+								<input name="views" type="hidden" value="${bean.views}">
 									<div class="post-video embed-responsive embed-responsive-16by9"
 										style="height: auto; padding-bottom: 100px;">
 										<div style="display: flex">
-											<button class="MBbtn"
+											<button class="MBbtn" id="cancel-btn"
 												onclick="window.location='/MeetBoth/admin/_05_teacStu.searchAllTeac.controller/1'">返回</button>
 										</div>
 										<div>
-											<span>會員編號 :&ensp;<input value="${bean.member.memberID}" type="text" name="pid" class="MBinput" placeholder="自動產生" readonly></span>
+											<span>會員編號 :&ensp;&ensp;&ensp;&ensp;&ensp;<input value="${bean.member.memberID}" type="text" name="pid" class="MBinput" placeholder="自動產生" readonly></span>
 										</div>
 										<div>
-											<span>履歷貼文編號 :&ensp;<input value="${bean.teacno}" type="text" name="pid" class="MBinput" placeholder="自動產生" readonly></span>
+											<span>履歷貼文編號 :&ensp;<input name="teacno" value="${bean.teacno}" type="text" name="pid" class="MBinput" placeholder="自動產生" readonly></span>
 										</div>
 										<div>
-											<span>學歷 :&ensp;<input value="${bean.highEdu}" type="text" name="pna" class="MBinput" placeholder="請輸入您的學歷...Ex:銘傳大學財務金融學系"></span>
+											<span>學歷 :&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;<input name="highEdu" value="${bean.highEdu}" type="text" name="pna" class="MBinput" placeholder="請輸入您的學歷...Ex:銘傳大學財務金融學系"></span>
 										</div>
 										<div>
-											<span>家教經驗 :&ensp;<input value="${bean.studExp}" type="text" name="ppr" class="MBinput" placeholder="請輸入您的家教經驗...Ex:國中數學2年"></span>
+											<span>家教經驗 :&ensp;&ensp;&ensp;&ensp;&ensp;<input name="studExp" value="${bean.studExp}" type="text" name="ppr" class="MBinput" placeholder="請輸入您的家教經驗...Ex:國中數學2年"></span>
 										</div>
 										<div>
-											<span>留學經驗 :&ensp;<input value="${bean.tutorExp}" type="text" name="pmid" class="MBinput" placeholder="請輸入您的留學經驗...Ex:美國念MBA2年"></span>
+											<span>留學經驗 :&ensp;&ensp;&ensp;&ensp;&ensp;<input name="tutorExp" value="${bean.tutorExp}" type="text" name="pmid" class="MBinput" placeholder="請輸入您的留學經驗...Ex:美國念MBA2年"></span>
 										</div>
 										<div>
-											<span>語言能力 :&ensp;<input value="${bean.lanAbility}" type="text" name="pinvt" class="MBinput" placeholder="請輸入您的語言能力...Ex:英文:精通"></span>
+											<span>語言能力 :&ensp;&ensp;&ensp;&ensp;&ensp;<input name="lanAbility" value="${bean.lanAbility}" type="text" name="pinvt" class="MBinput" placeholder="請輸入您的語言能力...Ex:英文:精通"></span>
 										</div>
 										<div>
-											<span>證照技能 :&ensp;<input value="${bean.skills}" type="text" name="ppo" class="MBinput" placeholder="請輸入您的證照技能...Ex:國際專案管理師PMP"></span>
+											<span>證照技能 :&ensp;&ensp;&ensp;&ensp;&ensp;<input name="skills" value="${bean.skills}" type="text" name="ppo" class="MBinput" placeholder="請輸入您的證照技能...Ex:國際專案管理師PMP"></span>
 										</div>
 										<div>
-											<span>授課科目 :&ensp;<input value="${bean.subjectItem}" type="text" name="pup" class="MBinput" placeholder="請輸入您的授課科目...Ex:英文、數學"></span>
+											<span>授課科目 :&ensp;&ensp;&ensp;&ensp;&ensp;<input name="subjectItem" value="${bean.subjectItem}" type="text" name="pup" class="MBinput" placeholder="請輸入您的授課科目...Ex:英文、數學"></span>
 										</div>
 										<div>
-											<span>授課地區 :&ensp;<input value="${bean.teacLoc}" type="text" name="pps" class="MBinput" placeholder="請輸入您的授課地區...Ex:台北市、新北市"></span>
+											<span>授課地區 :&ensp;&ensp;&ensp;&ensp;&ensp;<input name="teacLoc" value="${bean.teacLoc}" type="text" name="pps" class="MBinput" placeholder="請輸入您的授課地區...Ex:台北市、新北市"></span>
 										</div>
 										<div>
-											<span>授課對象 :&ensp;<input value="${bean.teacObject}" type="text" name="pch" class="MBinput" placeholder="請輸入您的授課對象...Ex:國小、國中"></span>
+											<span>授課對象 :&ensp;&ensp;&ensp;&ensp;&ensp;<input name="teacObject" value="${bean.teacObject}" type="text" name="pch" class="MBinput" placeholder="請輸入您的授課對象...Ex:國小、國中"></span>
 										</div>
 										<div>
-											<span>授課時段 :&ensp;<input value="${bean.teacTime}" type="text" name="pch" class="MBinput" placeholder="請輸入您的授課時段...Ex:平日早上、平日下午"></span>
+											<span>授課時段 :&ensp;&ensp;&ensp;&ensp;&ensp;<input name="teacTime" value="${bean.teacTime}" type="text" name="pch" class="MBinput" placeholder="請輸入您的授課時段...Ex:平日早上、平日下午"></span>
 										</div>
 										<div>
-											<span>授課模式 :&ensp;<input value="${bean.classMode}" type="text" name="pch" class="MBinput" placeholder="請輸入您的授課模式...Ex:面授、線上教學"></span>
+											<span>授課模式 :&ensp;&ensp;&ensp;&ensp;&ensp;<input name="classMode" value="${bean.classMode}" type="text" name="pch" class="MBinput" placeholder="請輸入您的授課模式...Ex:面授、線上教學"></span>
 										</div>
 										<div>
-											<span>試教意願 :&ensp;<input value="${bean.willTeac}" type="text" name="pch" class="MBinput" placeholder="請輸入您的試教意願...Ex:可試教或不方便試教"></span>
+											<span>試教意願 :&ensp;&ensp;&ensp;&ensp;&ensp;<input name="willTeac" value="${bean.willTeac}" type="text" name="pch" class="MBinput" placeholder="請輸入您的試教意願...Ex:可試教或不方便試教"></span>
 										</div>
 										<div>
-											<span>聯絡方式 :&ensp;<input value="${bean.conMethod}" type="text" name="pch" class="MBinput" placeholder="請輸入您的連絡方式...Ex:電話、郵件"></span>
+											<span>聯絡方式 :&ensp;&ensp;&ensp;&ensp;&ensp;<input name="conMethod" value="${bean.conMethod}" type="text" name="pch" class="MBinput" placeholder="請輸入您的連絡方式...Ex:電話、郵件"></span>
 										</div>
 										<div>
-											<span>聯絡時間 :&ensp;<input value="${bean.conTime}" type="text" name="pch" class="MBinput" placeholder="請輸入您的聯絡時間...Ex:平日早上、平日下午"></span>
+											<span>聯絡時間 :&ensp;&ensp;&ensp;&ensp;&ensp;<input name="conTime" value="${bean.conTime}" type="text" name="pch" class="MBinput" placeholder="請輸入您的聯絡時間...Ex:平日早上、平日下午"></span>
 										</div>
 										<div>
-											<span>希望待遇 :&ensp;<input value="${bean.price}" type="text" name="pch" class="MBinput" placeholder="請輸入您的希望待遇...Ex:800"></span>
+											<span>希望待遇 :&ensp;&ensp;&ensp;&ensp;&ensp;<input name="price" value="${bean.price}" type="text" name="pch" class="MBinput" placeholder="請輸入您的希望待遇...Ex:800"></span>
 										</div>
 										<div>
 											<input type="submit" class="MBbtn" value="確定" style="margin-top:15px;margin-left:900px;font-size:35px;">
@@ -392,5 +394,11 @@ a:hover {
 
 		});
 	</script>
+	<script>
+          document.getElementById("cancel-btn").addEventListener("click", function (event) {
+              event.preventDefault();
+              window.location.href = "/MeetBoth/admin/_05_teacStu.searchAllTeac.controller/1";
+          });
+    </script>
 </body>
 </html>

@@ -42,7 +42,6 @@ body {
     padding: 1.5rem 2.5rem;
     border-radius: 0.25rem;
     box-shadow: 0px 2px 6px rgb(0 0 0 / 33%);
-
     --avatar-width: 120px;
     --avatar-height: 180px;
 }
@@ -396,7 +395,7 @@ color:lightgrey;
                         <div class="resume-table">
                             <div class="resume-item">
                                 <div class="resume-item-title">薪資</div>
-                                <div class="resume-item-content"><input name="price" style="width:500%" class="form-control input-sm" type="text" placeholder="請輸入您的希望待遇...Ex:800"></div>
+                                <div class="resume-item-content"><input name="price" style="width:500%" class="form-control input-sm" type="text" placeholder="請輸入您願意給予的待遇...Ex:800"></div>
                             </div>
                             <div class="resume-item">
                                 <div class="resume-item-title">老師試教</div>

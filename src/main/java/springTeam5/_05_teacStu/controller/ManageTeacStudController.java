@@ -456,9 +456,14 @@ public class ManageTeacStudController {
 			@RequestParam("teacLoc") String teacLoc,@RequestParam("teacObject") String teacObject,
 			@RequestParam("teacTime") String teacTime,@RequestParam("classMode") String classMode,
 			@RequestParam("willTeac") String willTeac,@RequestParam("conMethod") String conMethod,
-			@RequestParam("conTime") String conTime,@RequestParam("price") Double price,@RequestParam("teacno") Integer teacno){
+			@RequestParam("conTime") String conTime,@RequestParam("price") Double price,@RequestParam("views") Integer views,
+			@RequestParam("teacno") Integer teacno){
 		TeacBean t = new TeacBean();
+		String account = SecurityContextHolder.getContext().getAuthentication().getName();
+		List<MemberBean> list = mService.searchMemByAccount(account);
+		MemberBean member = list.get(0);
 		t.setTeacno(teacno);
+		t.setMember(member);
 		t.setUpdateDate(getCurrentDate());
 		t.setHighEdu(highEdu);
 		t.setStudExp(studExp);
@@ -474,6 +479,7 @@ public class ManageTeacStudController {
 		t.setConMethod(conMethod);
 		t.setConTime(conTime);
 		t.setPrice(price);
+		t.setViews(views);
 		tService.updateTeacFromTeacno(t);
 		return "redirect:/admin/_05_teacStu.searchAllTeac.controller/1";
 	}
@@ -484,9 +490,14 @@ public class ManageTeacStudController {
 			@RequestParam("object") String object,@RequestParam("classMode") String classMode,@RequestParam("testTeacMode") String testTeacMode,
 			@RequestParam("studTime") String studTime,@RequestParam("conMethod") String conMethod,@RequestParam("conTime") String conTime,
 			@RequestParam("price") Double price,@RequestParam("subjectItem") String subjectItem,@RequestParam("textBook") String textBook,
-			@RequestParam("startDate") String startDate,@RequestParam("period") String period,@RequestParam("studno") Integer studno) {
+			@RequestParam("startDate") String startDate,@RequestParam("period") String period,@RequestParam("views") Integer views,
+			@RequestParam("studno") Integer studno) {
 		StudBean s = new StudBean();
+		String account = SecurityContextHolder.getContext().getAuthentication().getName();
+		List<MemberBean> list = mService.searchMemByAccount(account);
+		MemberBean member = list.get(0);
 		s.setStudno(studno);
+		s.setMember(member);
 		s.setUpdateDate(getCurrentDate());
 		s.setEducaLimit(educaLimit);
 		s.setStudLoc(studLoc);
@@ -501,6 +512,7 @@ public class ManageTeacStudController {
 		s.setTextBook(textBook);
 		s.setStartDate(startDate);
 		s.setPeriod(period);
+		s.setViews(views);
 		sService.updateStudFromStudno(s);
 		return "redirect:/admin/_05_teacStu.searchAllStud.controller/1";
 	}

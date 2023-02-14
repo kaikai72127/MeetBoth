@@ -311,8 +311,43 @@
 
                                     <h2 class="resume-body-title">PRODUCT</h2>
                                     <div>
-
-                                        <div class="post-entry"
+                                        <div class="row multi-columns-row">
+                                            <c:forEach var="prodBean" items="${member.product}">
+                                                <div class="col-sm-6 col-md-3 col-lg-3" style="padding-bottom: 10px;">
+                                                    <div class="shop-item">
+                                                        <div id="shop-item-image"
+                                                            style="height: 282px; width: 210px; margin: auto; display: flex; justify-content: center; align-items: center; margin-right: 15px;">
+                                                            <img style="padding: auto;" alt="${HotBean.prodName}"
+                                                                src="<c:url value='/_03_product.showPicture.controller?id=${prodBean.prodID}' />">
+                                                            <div class="shop-item-detail">
+                                                                <a href="/MeetBoth/_03_product.PathToProductDetail.controller?id=${prodBean.prodID}"
+                                                                    class="btn btn-round btn-b"
+                                                                    style="font-size: 14px;"><span
+                                                                        class="icon-heart">進入商品頁面</span><span
+                                                                        class="icon-heart"></span></a>
+                                                            </div>
+                                                        </div>
+                                                        <div id="prodName" style="padding-top: 30px;">
+                                                            <strong
+                                                                style="font-size: 16px">${prodBean.prodName}</strong>
+                                                        </div>
+                                                        <div id="prodCheck">
+                                                            <strong
+                                                                style="font-size: 16px">瀏覽次數:&ensp;${prodBean.prodCheck}次</strong>
+                                                        </div>
+                                                        <div id="scoreAVG">
+                                                            <c:forEach var="commentBean"
+                                                                items="${prodBean.productComment}">
+                                                                <input type="hidden" id="starAVG"
+                                                                    value="${commentBean.prodScore}">
+                                                            </c:forEach>
+                                                            <div id="starAVGDiv" style="font-size: 17px;"></div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </c:forEach>
+                                        </div>
+                                        <!-- <div class="post-entry"
                                             style="overflow-y: scroll; overflow-x: hidden; width: 110%; height: 720px;">
                                             <div class="widget">
                                                 <ul class="widget-posts">
@@ -358,7 +393,7 @@
                                                     </c:forEach>
                                                 </ul>
                                             </div>
-                                        </div>
+                                        </div> -->
 
                                     </div>
 

@@ -36,7 +36,7 @@
 					<a href="<c:url value='/index.controller' />">
 						<button class="btn btn-danger btn-circle" type="button"
 							style="font-size: 16px; font-weight: 800">返回首頁</button>
-					</a> &nbsp;&nbsp; <a href="<c:url value='/index.controller' />"><button
+					</a> &nbsp;&nbsp; <a href="/MeetBoth/memberOrdersList.controller/${order.orderNo}"><button
 							class="btn btn-default btn-circle" type="button"
 							style="font-size: 16px; border: 2px solid #ce7777; font-weight: 800">我的訂單</button></a>
 				</div>

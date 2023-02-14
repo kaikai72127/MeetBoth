@@ -134,7 +134,7 @@
 														<input class="form-control input-lg" type="number" name="qty"
 															id="qty" value="1" max="${bean.inventory}" min="1"
 															required="required"
-															style="font-size: 25px; letter-spacing: 0px; border: 1px solid black; border-radius: 30px; text-align: center;" />
+															style="font-size: 25px; letter-spacing: 0px; border: 3px solid #ce7777; border-radius: 30px; text-align: center;" />
 													</div>
 													<!-- 隱藏ID -->
 													<Input type='hidden' name='prodID' id="prodID"
@@ -145,7 +145,7 @@
 															<!-- 												<i class="fas fa-shopping-cart text-primary mr-1"></i> 加入購物車 -->
 															<!-- 											</button> -->
 															<button type='submit' id="addToCartBtn"
-																class="btn btn-d btn-circle" style="font-size:17px;">
+																class="btn btn-p btn-circle" style="font-size:17px;">
 																<i class="fas fa-shopping-cart text-primary mr-1"></i>
 																加入購物車
 															</button>

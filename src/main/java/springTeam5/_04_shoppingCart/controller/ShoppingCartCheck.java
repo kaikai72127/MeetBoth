@@ -66,7 +66,7 @@ public class ShoppingCartCheck {
 
 		// ----------------------
 		String id = obj.getMerchantTradeNo();
-		id = id.replace("MeetBothTT", "");
+		id = id.replace("MeetBothTTT", "");
 		int orderNumber = Integer.parseInt(id);
 		System.out.println(orderNumber);
 		OrderBean orderBean = orderService.findByOrderNo(orderNumber).get(0);
@@ -302,7 +302,7 @@ public class ShoppingCartCheck {
 
 		mailService.prepareAndSendForBuy(recipient, memberName, orderMessage);
 
-		String meetBothNo = "MeetBothTT";
+		String meetBothNo = "MeetBothTTT";
 		meetBothNo = meetBothNo + String.valueOf(orderBean.getOrderNo());
 
 		// 綠界

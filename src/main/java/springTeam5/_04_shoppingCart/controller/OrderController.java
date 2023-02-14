@@ -8,7 +8,6 @@ import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -23,7 +22,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import springTeam5._01_member.model.MemberBean;
-import springTeam5._01_member.model.MemberRepository;
 import springTeam5._01_member.model.MemberService;
 import springTeam5._04_shoppingCart.model.Discount;
 import springTeam5._04_shoppingCart.model.OrderBean;
@@ -101,7 +99,7 @@ public class OrderController {
 
 //管理者的介面
 // 刪除------
-	@GetMapping("/shoppingCart.DeleteOrder.controller")
+	@GetMapping("/admin/shoppingCart.DeleteOrder.controller")
 	public String processDeleteOrderAction(@RequestParam("orderNo") Integer orderNo) {
 		orderService.deleteById(orderNo);
 		return "redirect:shoppingCartOrders.controller";
@@ -109,7 +107,7 @@ public class OrderController {
 
 // 修改------
 	// 跳轉到修改頁面
-	@GetMapping("/shoppingCartUpdateOrder.controller/{orderNo}")
+	@GetMapping("/admin/shoppingCartUpdateOrder.controller/{orderNo}")
 	public String processUpdateOrderMainAction(@PathVariable("orderNo") Integer orderNo, Model odModel) {
 
 		List<OrderBean> orderBeanList = orderService.findByOrderNo(orderNo);
@@ -124,7 +122,7 @@ public class OrderController {
 	}
 
 	// 修改頁面
-	@PostMapping("/shoppingCartUpdateOrderMain.controller")
+	@PostMapping("/admin/shoppingCartUpdateOrderMain.controller")
 	public String processUpdateOrderMainAction1(@RequestParam("orderNo") Integer orderNo,
 			@RequestParam("shippingName") String shippingName, @RequestParam("shippingPhone") String shippingPhone,
 			@RequestParam("shippingAddress") String shippingAddress, @RequestParam("ordStstus") String ordStstus,
@@ -169,7 +167,7 @@ public class OrderController {
 // 查詢------
 	// 後台管理使用---------------------------------------------------------------------------
 	// 搜尋全部-跳轉到CRUD的頁面用
-	@RequestMapping(path = "/shoppingCartOrders.controller", method = RequestMethod.GET)
+	@RequestMapping(path = "/admin/shoppingCartOrders.controller", method = RequestMethod.GET)
 	public String processSelectAllAcction(@ModelAttribute("OrderBean") OrderBean od, Model odModel) {
 		List<OrderBean> classList = orderService.selectAll();
 		odModel.addAttribute("orderList", classList);
@@ -177,7 +175,7 @@ public class OrderController {
 	}
 
 	// 模糊搜尋全部
-	@RequestMapping(path = "/shoppingCartSearchOrders.controller", method = RequestMethod.POST)
+	@RequestMapping(path = "/admin/shoppingCartSearchOrders.controller", method = RequestMethod.POST)
 	public String processSearchAllAcction(@RequestParam(value = "ordStstus", required = false) String ordStstus,
 			@RequestParam(value = "paymentStstus", required = false) String paymentStstus,
 			@RequestParam(value = "deliveryStstus", required = false) String deliveryStstus,
@@ -203,14 +201,15 @@ public class OrderController {
 
 		String account = SecurityContextHolder.getContext().getAuthentication().getName();
 		List<MemberBean> mem = memberService.searchMemByAccount(account);
-
+		System.out.println("----------------找資料");
 		if (mem.size() == 0) {
 			return "login";
 		} else {
 			MemberBean memberBean = mem.get(0);
+			System.out.println("----------------找資料");
 			List<OrderBean> orderList = orderService.findByMemberbuy(memberBean.getMemberID());
-			List<OrderItemBean> orderSaleList = orderItemService.findByMembersale(memberBean.getMemberID());
-
+			System.out.println("----------------找資料");
+			List<OrderBean> orderSaleList = orderService.findByMemberSale(memberBean.getMemberID());
 			model.addAttribute("memberBean", memberBean);
 			model.addAttribute("orderList", orderList);
 			model.addAttribute("orderSaleList", orderSaleList);
@@ -228,15 +227,16 @@ public class OrderController {
 		MemberBean loginMember = mem.get(0);
 		List<OrderBean> orderBean = orderService.findByOrderNo(orderNo);
 		MemberBean memberbuy = orderBean.get(0).getMemberbuy();
-		System.out.println("----------"+memberbuy.getMemName()+"-----------"+loginMember.getMemName());
+		System.out.println("----------" + memberbuy.getMemName() + "-----------" + loginMember.getMemName());
+		// 確認查看銷售訂單的人是否為登入者本人 不是則返回首頁
 		if (!loginMember.equals(memberbuy)) {
-			
+
 			System.out.println("----------回去首頁吧");
 			return "redirect:/index.controller";
 		} else {
-			
+
 			Set<OrderItemBean> items = orderBean.get(0).getItems();
-			System.out.println("------------------------"+items.size());
+			System.out.println("------------------------" + items.size());
 
 			model.addAttribute("memberBean", loginMember);
 			model.addAttribute("orderBean", orderBean.get(0));
@@ -245,9 +245,96 @@ public class OrderController {
 		}
 	}
 
-//	@PostMapping()
-//	public String fondMemberSale(Model mProd,HttpServletRequest request) {
-//		
-//	}
+	// 銷售訂單查詢編輯用
+	@GetMapping(path = "/memberOrdersSaleList.controller/{orderNo}")
+	public String fondMemberSale(@PathVariable("orderNo") Integer orderNo, Model model, HttpServletRequest request) {
+		// 取得登入者資料
+		String account = SecurityContextHolder.getContext().getAuthentication().getName();
+		List<MemberBean> mem = memberService.searchMemByAccount(account);
+		MemberBean loginMember = mem.get(0);
+		// 查詢登入者售出訂單
+		List<OrderBean> memberSaleList = orderService.findByMemberSaleAndOrderNo(orderNo, loginMember.getMemberID());
+		System.out.println("---查詢---");
+		// 確認查看銷售訂單如果為空 則不是銷售本人則返回首頁
+		if (memberSaleList.isEmpty()) {
+			System.out.println("非此登入者----------回去首頁吧");
+			return "redirect:/index.controller";
+		}
+
+		List<OrderItemBean> orderSales = orderItemService.findByMemberSale(loginMember.getMemberID(), orderNo);
+
+		model.addAttribute("memberBean", loginMember);
+		model.addAttribute("orderBean", memberSaleList.get(0));
+		model.addAttribute("items", orderSales);
+
+		return "/_04_shoppingCart/orderDetialCRUD";
+
+	}
+
+	// 銷售訂單編輯狀態用
+	@PostMapping(path = "/memberOrdersSaleListUpdate.controller/{orderNo}")
+	public String fondMemberSaleUpdate(@PathVariable("orderNo") Integer orderNo,
+			@RequestParam(value = "ordStstus", required = false) String ordStstus,
+			@RequestParam(value = "paymentStstus", required = false) String paymentStstus,
+			@RequestParam(value = "deliveryStstus", required = false) String deliveryStstus, Model model,
+			HttpServletRequest request) {
+		// 取得登入者資料
+		String account = SecurityContextHolder.getContext().getAuthentication().getName();
+		List<MemberBean> mem = memberService.searchMemByAccount(account);
+		MemberBean loginMember = mem.get(0);
+		// 查詢登入者售出訂單
+		List<OrderBean> memberSaleList = orderService.findByMemberSaleAndOrderNo(orderNo, loginMember.getMemberID());
+		System.out.println("---查詢132---");
+		// 確認查看銷售訂單如果為空 則不是銷售本人則返回首頁
+		if (memberSaleList.isEmpty()) {
+			System.out.println("非此登入者----------回去首頁吧");
+			return "redirect:/index.controller";
+		}
+
+		System.out.println("----改資料");
+		OrderBean orderBean = memberSaleList.get(0);
+		orderBean.setOrdStstus(ordStstus);
+		orderBean.setPaymentStstus(paymentStstus);
+		orderBean.setDeliveryStstus(deliveryStstus);
+		orderService.updateOrder(orderBean);
+
+		List<OrderItemBean> orderSales = orderItemService.findByMemberSale(loginMember.getMemberID(), orderNo);
+
+		model.addAttribute("memberBean", loginMember);
+		model.addAttribute("orderBean", orderBean);
+		model.addAttribute("items", orderSales);
+
+		return "/_04_shoppingCart/orderDetialCRUD";
+
+	}
+
+	// 模糊搜尋全部-----前台使用
+	@RequestMapping(path = "/searchOrdersList.controller", method = RequestMethod.POST)
+	public String memberSearchAllLike(@RequestParam(value = "ordStstus", required = false) String ordStstus,
+			@RequestParam(value = "paymentStstus", required = false) String paymentStstus,
+			@RequestParam(value = "deliveryStstus", required = false) String deliveryStstus,
+			@RequestParam(value = "search", required = false) String search, @ModelAttribute("OrderBean") OrderBean od,
+			Model model) {
+
+		if (search == null) {
+			search = "";
+		}
+		System.out.println(ordStstus + "---" + paymentStstus + "---" + deliveryStstus + "---123" + search + "QQ-----");
+
+		String account = SecurityContextHolder.getContext().getAuthentication().getName();
+		List<MemberBean> mem = memberService.searchMemByAccount(account);
+		MemberBean loginMember = mem.get(0);
+
+		List<OrderBean> orderList = orderService.findByMemberbuyAllLike(ordStstus, paymentStstus, deliveryStstus,
+				search, loginMember.getMemberID());
+		List<OrderBean> orderSaleList = orderService.findByMemberSaleAllLike(loginMember.getMemberID(), ordStstus,
+				paymentStstus, deliveryStstus, search);
+
+		model.addAttribute("memberBean", loginMember);
+		model.addAttribute("orderList", orderList);
+		model.addAttribute("orderSaleList", orderSaleList);
+		return "/_04_shoppingCart/memberOrderList";
+
+	}
 
 }

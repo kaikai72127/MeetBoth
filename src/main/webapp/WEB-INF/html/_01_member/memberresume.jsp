@@ -347,23 +347,185 @@
                     <!-- 內容-教師履歷 -->
                     <div class="page-container">
                         <div class="resume-container">
-                            <h1 class="resume-title"><a href="">教師履歷</a></h1>
+                            <h1 class="resume-title">
+                                教師履歷
+                            </h1>
+                            <div class="case-list-body">
+                                <div class="resume-body">
+                                    <div class="resume-section">
+                                        <div class="comment-table" style="margin:0;">
+                                            <div class="comment-table-row header">
+                                                <div class="comment-table-col">
+                                                    <div class="comment-table-col-content">更新日期</div>
+                                                </div>
+                                                <div class="comment-table-col">
+                                                    <div class="comment-table-col-content">最高學歷</div>
+                                                </div>
+                                                <div class="comment-table-col">
+                                                    <div class="comment-table-col-content">授課科目</div>
+                                                </div>
+                                                <div class="comment-table-col">
+                                                    <div class="comment-table-col-content">授課對象</div>
+                                                </div>
+                                                <div class="comment-table-col">
+                                                    <div class="comment-table-col-content">授課地區</div>
+                                                </div>
+                                                <div class="comment-table-col">
+                                                    <div class="comment-table-col-content">案件薪資</div>
+                                                </div>
+                                                <div class="comment-table-col">
+                                                    <div class="comment-table-col-content">瀏覽次數</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="case-list-body">
+                                <div class="resume-body" style="padding-top: 5px;">
+                                    <div class="resume-section">
+                                        <div class="comment-table">
+                                            <div class="comment-table-row">
+                                                <c:forEach var="teac" items="${teac}">
+                                                    <div class="comment-table-col">
+                                                        <div class="comment-table-col-content">
+                                                            ${teac.updateDate}</div>
+                                                    </div>
+                                                    <div class="comment-table-col">
+                                                        <div class="comment-table-col-content">
+                                                            ${teac.highEdu}</div>
+                                                    </div>
+                                                    <div class="comment-table-col">
+                                                        <div class="comment-table-col-content">
+                                                            ${teac.subjectItem}</div>
+                                                    </div>
+                                                    <div class="comment-table-col">
+                                                        <div class="comment-table-col-content">${teac.teacObject}</div>
+                                                    </div>
+                                                    <div class="comment-table-col">
+                                                        <div class="comment-table-col-content">${teac.teacLoc}</div>
+                                                    </div>
+                                                    <div class="comment-table-col">
+                                                        <div class="comment-table-col-content">${teac.price}</div>
+                                                    </div>
+                                                    <div class="comment-table-col">
+                                                        <div class="comment-table-col-content">${teac.views}</div>
+                                                    </div>
+                                                </c:forEach>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
+
                     <!-- 內容-教師履歷 -->
+
+                    <!-- 內容-學生需求 -->
+                    <div class="page-container">
+                        <div class="resume-container">
+                            <h1 class="resume-title">
+                                學生需求
+                            </h1>
+                            <div class="case-list-body">
+                                <!-- Migrant from Resume to Case list -->
+                                <div class="comment-table">
+                                    <div class="comment-table-row header">
+                                        <div class="comment-table-col">
+                                            <div class="comment-table-col-content">更新日期</div>
+                                        </div>
+                                        <div class="comment-table-col">
+                                            <div class="comment-table-col-content">需求科目</div>
+                                        </div>
+                                        <div class="comment-table-col">
+                                            <div class="comment-table-col-content">需求對象</div>
+                                        </div>
+                                        <div class="comment-table-col">
+                                            <div class="comment-table-col-content">需求地區</div>
+                                        </div>
+                                        <div class="comment-table-col">
+                                            <div class="comment-table-col-content">案件薪資</div>
+                                        </div>
+                                        <div class="comment-table-col">
+                                            <div class="comment-table-col-content">瀏覽次數</div>
+                                        </div>
+                                    </div>
+                                    <div class="comment-table-row">
+                                        <c:forEach var="stud" items="${stud}">
+                                            <div class="comment-table-col">
+                                                <div class="comment-table-col-content">
+                                                    ${stud.updateDate}</div>
+                                            </div>
+                                            <div class="comment-table-col">
+                                                <div class="comment-table-col-content">
+                                                    ${stud.subjectItem}</div>
+                                            </div>
+                                            <div class="comment-table-col">
+                                                <div class="comment-table-col-content">${stud.object}</div>
+                                            </div>
+                                            <div class="comment-table-col">
+                                                <div class="comment-table-col-content">${stud.studLoc}</div>
+                                            </div>
+                                            <div class="comment-table-col">
+                                                <div class="comment-table-col-content">${stud.price}</div>
+                                            </div>
+                                            <div class="comment-table-col">
+                                                <div class="comment-table-col-content">${stud.views}</div>
+                                            </div>
+                                        </c:forEach>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- 內容-學生需求 -->
 
                     <!-- 內容-會員商品 -->
                     <div class="page-container">
                         <div class="resume-container">
                             <h1 class="resume-title">會員商品</h1>
+                            <div style="overflow-x: auto; overflow-y: hidden; display: -webkit-box;">
+                                <c:forEach var="prodBean" items="${prodBean}">
+                                    <div id="eachProd" style="margin: 0 20px;">
+                                        <div id="photo" style="width:200px;height:250px;text-align:center;">
+                                            <a
+                                                href="/MeetBoth/_03_product.PathToProductDetail.controller?id=${prodBean.prodID}">
+                                                <img style="max-width: 100%; max-height: 100%; height: auto; width: auto;"
+                                                    src="<c:url value='/_03_product.showPicture.controller?id=${prodBean.prodID}' />"
+                                                    style="height: 250px; width: 200px;" />
+                                            </a>
+                                        </div>
+                                        <div id="info" style="text-align:center;">
+                                            <div id="prodName">
+                                                <strong style="font-size: 16px">${prodBean.prodName}</strong>
+                                            </div>
+                                            <div id="price">
+                                                <strong style="font-size: 16px">
+                                                    瀏覽次數:&nbsp;${prodBean.prodCheck}&nbsp;次</strong>
+                                            </div>
+                                            <div id="scoreAVG">
+                                                <c:forEach var="commentBean" items="${prodBean.productComment}">
+                                                    <input type="hidden" id="starAVG" value="${commentBean.prodScore}">
+                                                </c:forEach>
+                                                <div id="starAVGDiv" style="font-size: 17px;"></div>
+                                            </div>
+                                            <div id="price">
+                                                <strong style="font-size: 16px">價格 :
+                                                    NT$${prodBean.prodPrice}</strong>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </c:forEach>
+                            </div>
                         </div>
                     </div>
                     <!-- 內容-會員商品 -->
 
                     <!-- Footer -->
                     <!-- 引入共同的footerMVC -->
-                    <jsp:include page="/WEB-INF/html/fragment/footerMVC.jsp" />
                 </main>
+                <jsp:include page="/WEB-INF/html/fragment/footerMVC.jsp" />
 
                 <!--  
     JavaScripts

@@ -327,6 +327,14 @@ public class MemberBean implements Serializable {
 	public void setOrderSale(Set<OrderItemBean> orderSale) {
 		this.orderSale = orderSale;
 	}
+	public List<StudBean> getStudBean() {
+		return studBean;
+	}
+
+	public void setStudBean(List<StudBean> studBean) {
+		this.studBean = studBean;
+	}
+
 	@Override
 	public String toString() {
 		return "MemberBean [memberID=" + memberID + ", account=" + account + ", password=" + password + ", idNumber="

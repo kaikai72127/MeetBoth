@@ -34,6 +34,10 @@ import com.google.gson.Gson;
 
 import springTeam5._01_member.model.MemberBean;
 import springTeam5._01_member.model.MemberService;
+import springTeam5._03_product.model.Product;
+import springTeam5._03_product.service.ProductService;
+import springTeam5._05_teacStu.model.StudBean;
+import springTeam5._05_teacStu.model.TeacBean;
 
 
 @Controller
@@ -41,6 +45,9 @@ public class _01_membercontroll {
 	
 	@Autowired
 	private MemberService ms;
+	
+	@Autowired
+	private ProductService pService;
 	
 	
 	
@@ -141,13 +148,22 @@ public class _01_membercontroll {
 			return memberdata;			
 		}
 	}
+	
 //	會員履歷
 	@GetMapping("/memberresume")
-	public String memberresume(@RequestParam("id") String id, Model m) {
+	public String memberresume(@RequestParam("id") String id, Model m) throws SQLException {
 		int memID = Integer.parseInt(id);
 		Optional<MemberBean> list = ms.searchMemByID(memID);
 		MemberBean member = list.get();
 		m.addAttribute("member", member);
+		
+		List<TeacBean> teacher = member.getTeacBean();
+		m.addAttribute("teac", teacher);
+//		List<StudBean> student = member.getStudBean();
+//		m.addAttribute("stud", student);
+		
+		List<Product> prodBean = pService.searchAllProduct();
+		m.addAttribute("prodBean", prodBean);
 		return "_01_member/memberresume";
 	}
 	

@@ -1,5 +1,7 @@
 package springTeam5._03_product.controller;
 
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -51,6 +53,21 @@ public class ProductController {
 	
 	@Autowired
 	private MemberService memberService;
+	
+//	-----------------------------測試-----------------------
+	@GetMapping("/_03_product.productFontPage.controller")
+	public String processproductFontPageAction(Model m,Model pm,HttpServletRequest request,@RequestParam("id")Integer memID) {
+		
+		Optional<MemberBean> mem = memberService.searchMemByID(memID);
+		m.addAttribute("member", mem.get());
+		
+		List<Product> prodBean = pService.findByMemidAndOnlyOnSales(memID);
+		m.addAttribute("prodBean", prodBean);
+		
+		return "_03_product/productFontPage";
+	}
+	
+//	-----------------------------測試-----------------------
 //	-----------------------------後台-----------------------
 //	導到後台
 	@GetMapping("/_03_product.index.controller")
@@ -77,25 +94,37 @@ public class ProductController {
 			@RequestParam("pPic") MultipartFile file,
 			@RequestParam("pdr")String prodDir
 			) throws IOException, SQLException {
-		Blob image = null;
-		InputStream in = file.getInputStream();
-		long size = file.getSize();
-		image = fileToBlob(in, size);
 
 		ProdType currentProdType = ptService.findByProdclass(prodType);
 		Product newProd = new Product();
+		
+		Optional<MemberBean> mem = memberService.searchMemByID(memID);
+
+		Blob image = null;
+		if(file.getSize() != 0) {
+			InputStream in = file.getInputStream();
+			long size = file.getSize();
+			image = fileToBlob(in, size);
+			newProd.setProdImg(image);
+		}else {
+			File filenoimg = new File("C:\\Hibernate\\WorkSpace\\MeetBoth\\src\\main\\webapp\\WEB-INF\\resources\\assets\\images\\shop\\noimage.jpg");
+			FileInputStream f = new FileInputStream(filenoimg);
+			InputStream in = f;
+			long size = filenoimg.length();
+			image = fileToBlob(in, size);
+			newProd.setProdImg(image);
+		}
 
 		newProd.setProdState(prodState);
 		newProd.setProdName(prodName);
 		newProd.setProdtype(currentProdType);
 		newProd.setProdPrice(prodPrice);
-		newProd.setMemberID(memID);
+		newProd.setMemberBean(mem.get());
 		newProd.setInventory(prodInvt);
 		newProd.setProdPost(getCurrentDate());
 		newProd.setProdUpdate(getCurrentDate());
 		newProd.setProdSales(prodSales);
 		newProd.setProdCheck(prodCheck);
-		newProd.setProdImg(image);
 		newProd.setDirections(prodDir);
 
 		LinkedHashSet<Product> prods = new LinkedHashSet<Product>();
@@ -135,10 +164,12 @@ public class ProductController {
 
 			ProdType pType = ptService.findByProdclass(prodType);
 			Product prod = pService.searchSingleProductFromProdID(prodID);
+			Optional<MemberBean> mem = memberService.searchMemByID(memID);
+			
 			prod.setProdState(prodState);
 			prod.setProdName(prodName);
 			prod.setProdPrice(prodPrice);
-			prod.setMemberID(memID);
+			prod.setMemberBean(mem.get());
 			prod.setInventory(prodInvt);
 			prod.setDirections(prodDir);
 			prod.setProdSales(prodSales);
@@ -208,6 +239,7 @@ public class ProductController {
 			;
 		}
 	}
+//	---------------------------小工具們 ending-----------------------
 //	跳轉到管理者商品後台
 	@GetMapping("/_03_product.productindex.controller")
 	public String processproductIndexAction(Model mProd){
@@ -215,6 +247,10 @@ public class ProductController {
 		try {
 			result = pService.searchAllProduct();
 			mProd.addAttribute("prodList", result);
+			
+			for(Product p : result) {
+				System.out.println(p.getMemberID());
+			}
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -234,41 +270,76 @@ public class ProductController {
 //	跳轉到商品明細
 	@GetMapping("/_03_product.PathToProductDetail.controller")
 	public String processPathToProductDetail2(@RequestParam("id") Integer id,
-			 Model mProd, Model mComm,Model mProdLike) throws SQLException {
+			 Model mProd, Model mComm,Model mProdLike,HttpServletRequest request) throws SQLException {
+		HttpSession session = request.getSession(false);
+		
+		String account = SecurityContextHolder.getContext().getAuthentication().getName();
+		List<MemberBean> mem = memberService.searchMemByAccount(account);
+		
 		Product prod = pService.searchSingleProductFromProdID(id);
-
-		List<ProductComment> list = prod.getProductComment();
-		ArrayList<ProductComment> comms = new ArrayList<ProductComment>();
-		ProductComment comm = new ProductComment();
-
-		mComm.addAttribute("commBean", list);
-
-		if (prod.getDirections() == null) {
-			prod.setDirections("--此商品沒有詳細內容說明--");
+		
+		if(prod.getProdState().equals("下架")) {
+			if(prod.getMemberBean().getMemberID()==mem.get(0).getMemberID()) {
+				List<ProductComment> list = prod.getProductComment();
+				ArrayList<ProductComment> comms = new ArrayList<ProductComment>();
+				ProductComment comm = new ProductComment();
+				
+				mComm.addAttribute("commBean", list);
+				
+				if (prod.getDirections() == null) {
+					prod.setDirections("--此商品沒有詳細內容說明--");
+				}
+				
+				int prodClass = prod.getProdtype().getProdClass();
+				int prodid = prod.getProdID();
+				List<Product> prodLikeTop4 = pService.findTop4ProductLikeByProductLike(prodClass,prodid);
+				mProdLike.addAttribute("prodLikeBean",prodLikeTop4);
+				
+				ArrayList<Product> prods = new ArrayList<Product>();
+				prods.add(prod);
+				mProd.addAttribute("bean", prods);
+				return "_03_product/singleProduct";
+			}else {
+				return "_03_product/like403";
+			}
+		}else {
+			List<ProductComment> list = prod.getProductComment();
+			ArrayList<ProductComment> comms = new ArrayList<ProductComment>();
+			ProductComment comm = new ProductComment();
+			
+			mComm.addAttribute("commBean", list);
+			
+			if (prod.getDirections() == null) {
+				prod.setDirections("--此商品沒有詳細內容說明--");
+			}
+			
+			int prodClass = prod.getProdtype().getProdClass();
+			int prodid = prod.getProdID();
+			List<Product> prodLikeTop4 = pService.findTop4ProductLikeByProductLike(prodClass,prodid);
+			mProdLike.addAttribute("prodLikeBean",prodLikeTop4);
+			
+			ArrayList<Product> prods = new ArrayList<Product>();
+			prods.add(prod);
+			mProd.addAttribute("bean", prods);
+			return "_03_product/singleProduct";
 		}
 		
-		int prodClass = prod.getProdtype().getProdClass();
-		int prodid = prod.getProdID();
-		List<Product> prodLikeTop4 = pService.findTop4ProductLikeByProductLike(prodClass,prodid);
-		mProdLike.addAttribute("prodLikeBean",prodLikeTop4);
 		
-		ArrayList<Product> prods = new ArrayList<Product>();
-		prods.add(prod);
-		mProd.addAttribute("bean", prods);
-		return "_03_product/singleProduct";
+		
+
 	}
 	
 //	隨機搜尋
 	@GetMapping("/_03_product.searchRandomProduct.controller")
 	public String processsearchRandomProductAction(Model mProd) {
-		List<Product> result = pService.findRandomProducts();
+		List<Product> result = pService.findRandomProductsAndOnlyOnSales();
 		mProd.addAttribute("allprodlist", result);
 		return "_03_product/typeShop";
 	}
 //	類別搜尋 回傳prodList
 	@GetMapping("/_03_product.searchProductByType.controller")
 	public String processsearchProductByTypeAction(Model mProd,@RequestParam("type") Integer type) {
-		List<Product> result = pService.findByProdClass(type);
+		List<Product> result = pService.findByProdClassAndOnlyOnSales(type);
 		mProd.addAttribute("allprodlist", result);
 		return "_03_product/typeShop";
 	}
@@ -289,17 +360,25 @@ public class ProductController {
 	}
 	
 //	更新商品狀態 (上架中/下架)
-	@PostMapping("/product.updateProductState.controller")
-	public String processUpdateProductStateAction(@RequestParam("id") Integer id) {
-		try {
-			Product p = pService.searchSingleProductFromProdID(id);
-			p.setProdState("還沒改好");
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
+	@PostMapping("/_03_product.updateProductState.controller")
+	public String processUpdateProductStateAction(@RequestParam("selectForUpdateState") List<String> productID) throws SQLException {
 		
+			Product p;
+			
+			for(int i = 0 ; i < productID.size();i++) {
+				int id =  Integer.parseInt(productID.get(i));
+				p = pService.searchSingleProductFromProdID(id);
+				
+				if(p.getProdState().equals("下架")) {
+					p.setProdState("上架中");
+				}else {
+					p.setProdState("下架");
+				}
+				
+				pService.updateProd(p);
+			}
 		
-		return null;
+		return "redirect:_03_product/pathToMyPDP.controller";
 	}
 //	---------------------------ProductPart-----------------------
 
@@ -308,34 +387,13 @@ public class ProductController {
 	public String processSearchAllAction(Model mProd,Model mProd2) {
 		List<Product> result;
 		List<Product> HotResult;
-		try {
-			result = pService.searchAllProduct();
-			HotResult = pService.findHotestProducts();
-			mProd.addAttribute("allprodlist", result);
-			mProd2.addAttribute("Hotprodlist", HotResult);
-			
-			
-			
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
+		result = pService.findAllAndOnlyOnSales();
+		HotResult = pService.findHotestProductsAndOnlyOnSales();
+		mProd.addAttribute("allprodlist", result);
+		mProd2.addAttribute("Hotprodlist", HotResult);
 		return "_03_product/newShop";
 	}
 
-//	搜單一並導到update.jsp
-	@GetMapping("/_03_product.catchSingleProductDate.controller")
-	public String processCatchSingleProductDateAction(@RequestParam("id") Integer id, Model mProd) {
-		Product prod;
-		try {
-			prod = pService.searchSingleProductFromProdID(id);
-			ArrayList<Product> prods = new ArrayList<Product>();
-			prods.add(prod);
-			mProd.addAttribute("bean", prods);
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		return "_03_product/UpdateProduct";
-	}
 
 //	導到insert.jsp
 	@GetMapping("/_03_product.pathToInsertProduct.controller")
@@ -365,20 +423,29 @@ public class ProductController {
 		Optional<MemberBean> currentMemberList = memberService.searchMemByID(memID);
 		MemberBean currentMember = currentMemberList.get();
 		
-		Blob image = null;
-		InputStream in = file.getInputStream();
-		long size = file.getSize();
-		image = fileToBlob(in, size);
-
 		ProdType currentProdType = ptService.findByProdclass(pClass);
 		Product newProd = new Product();
 
+		Blob image = null;
+
+		if(file.getSize() != 0) {
+			InputStream in = file.getInputStream();
+			long size = file.getSize();
+			image = fileToBlob(in, size);
+			newProd.setProdImg(image);
+		}else {
+			File filenoimg = new File("C:\\Hibernate\\WorkSpace\\MeetBoth\\src\\main\\webapp\\WEB-INF\\resources\\assets\\images\\shop\\noimage.jpg");
+			FileInputStream f = new FileInputStream(filenoimg);
+			InputStream in = f;
+			long size = filenoimg.length();
+			image = fileToBlob(in, size);
+			newProd.setProdImg(image);
+		}
 		newProd.setProdName(pName);
 		newProd.setProdPrice(pPrice);
 		newProd.setInventory(invt);
 		newProd.setProdPost(getCurrentDate());
 		newProd.setProdUpdate(getCurrentDate());
-		newProd.setProdImg(image);
 		newProd.setDirections(directions);
 		newProd.setProdSales(0);
 		newProd.setProdCheck(0);
@@ -386,17 +453,39 @@ public class ProductController {
 		newProd.setProdtype(currentProdType);
 		newProd.setMemberBean(currentMember);
 
-//		LinkedHashSet<Product> prods = new LinkedHashSet<Product>();
-//		prods.add(newProd);
-//		currentProdType.setProduct(prods);
-//		currentMember.setProduct(prods);
-		
-		
 		pService.insertProduct(newProd);
 
 		return "redirect:_03_product.searchAllProduct.controller";
 	}
 
+//	搜單一並導到update.jsp
+	@GetMapping("/_03_product.catchSingleProductDate.controller")
+	public String processCatchSingleProductDateAction(@RequestParam("id") Integer id,HttpServletRequest request, Model mProd) {
+		Product prod;
+		try {
+			HttpSession session = request.getSession(false);
+			
+			String account = SecurityContextHolder.getContext().getAuthentication().getName();
+			List<MemberBean> mem = memberService.searchMemByAccount(account);
+			int memID1 = mem.get(0).getMemberID();
+			
+			prod = pService.searchSingleProductFromProdID(id);
+			int memID2 = prod.getMemberBean().getMemberID();
+			
+			if(memID1!=memID2) {
+				return "_03_product/like403";
+			}else {
+				ArrayList<Product> prods = new ArrayList<Product>();
+				prods.add(prod);
+				mProd.addAttribute("bean", prods);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return "_03_product/UpdateProduct";
+	}
+	
 //	update
 	@PostMapping("/_03_product.updateProductDate.controller")
 	public String processUpdateProductAction(@RequestParam("prodClass") Integer pClass,
@@ -456,21 +545,21 @@ public class ProductController {
 			name = "";
 		}
 		
-		List<Product> HotResult = pService.findHotestProducts();
+		List<Product> HotResult = pService.findHotestProductsAndOnlyOnSales();
 			mProd.addAttribute("Hotprodlist", HotResult);
 
 		if (order == 1) {
-			result = pService.searchWithCondiOrderByProdID(type, low, high, name);
+			result = pService.findAllByOrderByProdIDAndOnlyOnSales(type, low, high, name);
 		} else if (order == 2) {
-			result = pService.searchWithCondiOrderByProdPriceDesc(type, low, high, name);
+			result = pService.findAllByOrderByProdPriceDescAndOnlyOnSales(type, low, high, name);
 		} else if (order == 3) {
-			result = pService.searchWithCondiOrderByProdPrice(type, low, high, name);
+			result = pService.findAllByOrderByProdPriceAndOnlyOnSales(type, low, high, name);
 		} else if (order == 4) {
-			result = pService.searchWithCondiOrderByProdPost(type, low, high, name);
+			result = pService.findAllByOrderByProdPostDescAndOnlyOnSales(type, low, high, name);
 		} else if (order == 5) {
-			result = pService.searchWithCondiOrderByProdUpdate(type, low, high, name);
+			result = pService.findAllByOrderByProdUpdateDescAndOnlyOnSales(type, low, high, name);
 		}else if (order == 6) {
-			result = pService.findAllByOrderByProdCheckDesc(type, low, high, name);
+			result = pService.findAllByOrderByProdCheckDescAndOnlyOnSales(type, low, high, name);
 		}
 
 		pm.addAttribute("allprodlist", result);
@@ -594,7 +683,7 @@ public class ProductController {
 		ArrayList<Product> prods = new ArrayList<Product>();
 		prods.add(prod);
 		mProd.addAttribute("bean", prods);
-		return "_03_product/prodDetail";
+		return null;
 	}
 //	個人賣場part----------------------------------
 	@GetMapping("/_03_product/pathToMyPDP.controller")

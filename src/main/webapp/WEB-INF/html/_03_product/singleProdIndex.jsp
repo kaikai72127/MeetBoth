@@ -162,224 +162,220 @@
 									text-align: center;
 								}
 
-								.prodtable>tbody>tr>td {
-									border-right: solid 1px white;
-									border-top: solid 1px white;
-								}
-							</style>
-			</head>
-
-			<body data-spy="scroll" data-target=".onpage-navigation" data-offset="60">
-				<main>
-					<div class="page-loader">
-						<div class="loader">Loading...</div>
-					</div>
-					<div class="main" style="background-color: black;">
-						<section class="module" style="padding-top: 10px; padding-bottom: 0px;">
-							<div class="container" style="width: 100%; background-color: black;">
-								<!-- 整頁 -->
-								<div class="row">
-									<!-- 整頁 -->
-									<!-- 左邊欄位開始 -->
-									<div class="col-sm-4 col-md-3 sidebar" style="width: 20%; padding-right: 0px;">
-										<div class="widget">
-											<a href="/MeetBoth/_03_product.index.controller"><img
-													src="/MeetBoth/html/assets/images/shop/警告.jpg"
-													style="padding-bottom: 10px;"></a>
-											<ul class="cart">
-												<li><a href="#" style="color: white; font-size: 20px;"
-														class="btn btn-d btn-round">會員管理&ensp;<i
-															class="fa-solid fa-angle-double-down"></i></a>
-													<ul style="">
-														<li><a href="#" style="color: white; font-weight: 600;"
-																class="btn btn-d btn-round">所有會員清單</a></li>
-													</ul>
-												</li>
-												<li><a href="" style="color: white; font-size: 20px;"
-														class="btn btn-d btn-round">商品管理&ensp;<i
-															class="fa-solid fa-angle-double-down"></i></a>
-													<ul style="">
-														<li><a href="/MeetBoth/_03_product.productindex.controller"
-																style="color: white; font-weight: 600;"
-																class="btn btn-d btn-round">所有商品清單</a></li>
-														<li><a href="/MeetBoth/_03_product.MBinsertProd.controller"
-																style="color: white; font-weight: 600;"
-																class="btn btn-d btn-round">新增商品</a></li>
-													</ul>
-												</li>
-												<li><a href="#" style="color: white; font-size: 20px;"
-														class="btn btn-d btn-round">課程管理&ensp;<i
-															class="fa-solid fa-angle-double-down"></i></a>
-													<ul style="">
-														<li><a href="#" style="color: white; font-weight: 600;"
-																class="btn btn-d btn-round">所有課程清單</a></li>
-													</ul>
-												</li>
-												<li><a href="#" style="color: white; font-size: 20px;"
-														class="btn btn-d btn-round">徵才管理&ensp;<i
-															class="fa-solid fa-angle-double-down"></i></a>
-													<ul style="">
-														<li><a href="#" style="color: white; font-weight: 600;"
-																class="btn btn-d btn-round">所有貼文清單</a></li>
-													</ul>
-												</li>
-												<li><a href="#" style="color: white; font-size: 20px;"
-														class="btn btn-d btn-round">討論區管理&ensp;<i
-															class="fa-solid fa-angle-double-down"></i></a>
-													<ul style="">
-														<li><a href="#" style="color: white; font-weight: 600;"
-																class="btn btn-d btn-round">所有貼文清單</a></li>
-													</ul>
-												</li>
-												<li><a href="#" style="color: white; font-size: 20px;"
-														class="btn btn-d btn-round">購物車管理&ensp;<i
-															class="fa-solid fa-angle-double-down"></i></a>
-													<ul style="">
-														<li><a href="#" style="color: white; font-weight: 600;"
-																class="btn btn-d btn-round">所有購物單清單</a></li>
-													</ul>
-												</li>
-											</ul>
-											<a href="#"><img src="/MeetBoth/html/assets/images/shop/警告2.jpg"
-													style="padding-bottom: 10px;"></a>
-										</div>
-									</div>
-									<!-- 左邊欄位結束 -->
-									<!-- 						右邊欄位開始 -->
-									<div class="col-sm-8 col-sm-offset-1"
-										style="margin-left: 20px; width: 75%; border-left: solid 1px yellow;">
-										<div class="post">
-											<!-- 							標題 -->
-											<div class="post-thumbnail" style="padding-bottom: 0; margin-bottom: 0;">
-												<h1
-													style="padding-bottom: 0px; margin-bottom: 0; text-align: center; font-size: 50px; color: white;">
-													單一商品後臺管理</h1>
-											</div>
-											<hr class="divider-w pt-20">
-											<!-- 							標題 -->
-											<!--       右邊第一部分開始 -->
-											<div class="post">
-												<div class="post-video embed-responsive embed-responsive-16by9"
-													style="height: auto; padding-bottom: 100px;">
-													<div style="display: flex">
-														<span>商品資料 :&ensp;</span>
-													</div>
-													<div style="display: flex">
-														<button class="MBbtn"
-															onclick="window.location='/MeetBoth/_03_product.productindex.controller'">返回</button>
-														<button class="MBbtn"
-															onclick="window.location='/MeetBoth/_03_product.pathToMBinsertProd.controller?id=${prod.prodID}'">修改</button>
-														<button class="MBbtn" id="deleteThisProduct"
-															name="${prod.prodID}">刪除</button>
-													</div>
-													<div>
-														<span>商品狀態 :&ensp;${prod.prodState}</span>
-													</div>
-													<div>
-														<span>商品編號 :&ensp;${prod.prodID}</span>
-													</div>
-													<div>
-														<span>商品名稱 :&ensp;${prod.prodName}</span>
-													</div>
-													<div style="display: flex;">
-														<span>商品圖片 :&ensp;</span>
-														<div
-															style="width: 150px; height: 200px; display: flex; justify-content: center; align-items: center; text-align: center;">
-															<img id="preImg"
-																style="max-width: 100%; max-height: 100%; height: auto; width: auto;"
-																src="<c:url value='/_03_product.showPicture.controller?id=${prod.prodID}' />" />
-														</div>
-													</div>
-													<div>
-														<span>商品類別 :&ensp;${prod.prodtype.prodClassName}</span>
-													</div>
-													<div>
-														<span>商品價格 :&ensp;${prod.prodPrice}</span>
-													</div>
-													<div>
-														<span>賣家編號 :&ensp;${prod.memberID}</span>
-													</div>
-													<div>
-														<span>庫存 :&ensp;${prod.inventory}</span>
-													</div>
-													<div>
-														<span>上架時間 :&ensp;${prod.prodPost}</span>
-													</div>
-													<div>
-														<span>更新時間 :&ensp;${prod.prodUpdate}</span>
-													</div>
-													<div>
-														<span>銷售數量 :&ensp;${prod.prodSales}</span>
-													</div>
-													<div>
-														<span>瀏覽次數 :&ensp;${prod.prodCheck}</span>
-													</div>
-													<div>
-														<textarea
-															style="margin-left: 10px; resize: none; height: 325px; width: 975px; overflow-y: auto; overflow-y: auto; font-size: 17px; color: white; background-color: black;"
-															readonly>${prod.directions}</textarea>
-													</div>
-
-													<div>
-														<div id="commentDiv">
-															<span>商品評論 :&ensp;</span>
-														</div>
-														<div id="commentTable">
-															<table style="color: white; text-align: center;"
-																class="prodtable">
-																<thead>
-																	<tr style="">
-																		<th style="width: 5%;">編號</th>
-																		<th style="width: 10%; padding-left: 5px;">留言者
-																		</th>
-																		<th style="width: 5%">評分</th>
-																		<th style="width: 50%">評論</th>
-																		<th style="width: 18%">時間</th>
-																		<th></th>
-																		<th></th>
-																		<th style="border-right: none"></th>
-																	</tr>
-																</thead>
-																<tbody id="commentBody">
-																	<c:forEach var="commBean"
-																		items="${prod.productComment}">
-																		<tr>
-																			<td style="">${commBean.commentID}</td>
-																			<td>${commBean.customID}</td>
-																			<td>${commBean.prodScore}</td>
-																			<td>${commBean.comment}</td>
-																			<td>${commBean.commentDate}</td>
-																			<td><input type="button" class="MBbtn"
-																					value="更多" onclick="#"></td>
-																			<td><input type="button" class="MBbtn"
-																					value="修改" onclick="#"></td>
-																			<td style="border-right: none"><input
-																					type="button" class="MBbtn"
-																					value="刪除" id="deleteThisProduct"
-																					name=""></td>
-																		</tr>
-																	</c:forEach>
-																</tbody>
-															</table>
-														</div>
-													</div>
-												</div>
-											</div>
-											<!--       右邊第一部分結束 -->
-											<hr class="divider-w pt-20">
-										</div>
-									</div>
-									<!-- 		右邊欄位結束 -->
-								</div>
+.prodtable>tbody>tr>td {
+	border-right: solid 1px white;
+	border-top: solid 1px white;
+}
+</style>
+</head>
+<body data-spy="scroll" data-target=".onpage-navigation"
+	data-offset="60">
+	<main>
+		<div class="page-loader">
+			<div class="loader">Loading...</div>
+		</div>
+		<div class="main" style="background-color: black;">
+			<section class="module"
+				style="padding-top: 10px; padding-bottom: 0px;">
+				<div class="container" style="width: 100%; background-color: black;">
+					<!-- 整頁 -->
+					<div class="row">
+						<!-- 整頁 -->
+						<!-- 左邊欄位開始 -->
+						<div class="col-sm-4 col-md-3 sidebar"
+							style="width: 20%; padding-right: 0px;">
+							<div class="widget">
+								<a href="/MeetBoth/_03_product.index.controller"><img
+									src="/MeetBoth/html/assets/images/shop/警告.jpg"
+									style="padding-bottom: 10px;"></a>
+								<ul class="cart">
+									<li><a href="#" style="color: white; font-size: 20px;"
+										class="btn btn-d btn-round">會員管理&ensp;<i
+											class="fa-solid fa-angle-double-down"></i></a>
+										<ul style="">
+											<li><a href="#" style="color: white; font-weight: 600;"
+												class="btn btn-d btn-round">所有會員清單</a></li>
+										</ul></li>
+									<li><a href="" style="color: white; font-size: 20px;"
+										class="btn btn-d btn-round">商品管理&ensp;<i
+											class="fa-solid fa-angle-double-down"></i></a>
+										<ul style="">
+											<li><a
+												href="/MeetBoth/_03_product.productindex.controller"
+												style="color: white; font-weight: 600;"
+												class="btn btn-d btn-round">所有商品清單</a></li>
+												<li><a
+												href="/MeetBoth/_03_product.MBinsertProd.controller"
+												style="color: white; font-weight: 600;"
+												class="btn btn-d btn-round">新增商品</a></li>
+										</ul></li>
+									<li><a href="#" style="color: white; font-size: 20px;"
+										class="btn btn-d btn-round">課程管理&ensp;<i
+											class="fa-solid fa-angle-double-down"></i></a>
+										<ul style="">
+											<li><a href="#" style="color: white; font-weight: 600;"
+												class="btn btn-d btn-round">所有課程清單</a></li>
+										</ul></li>
+									<li><a href="#" style="color: white; font-size: 20px;"
+										class="btn btn-d btn-round">徵才管理&ensp;<i
+											class="fa-solid fa-angle-double-down"></i></a>
+										<ul style="">
+											<li><a href="#" style="color: white; font-weight: 600;"
+												class="btn btn-d btn-round">所有貼文清單</a></li>
+										</ul></li>
+									<li><a href="#" style="color: white; font-size: 20px;"
+										class="btn btn-d btn-round">討論區管理&ensp;<i
+											class="fa-solid fa-angle-double-down"></i></a>
+										<ul style="">
+											<li><a href="#" style="color: white; font-weight: 600;"
+												class="btn btn-d btn-round">所有貼文清單</a></li>
+										</ul></li>
+									<li><a href="#" style="color: white; font-size: 20px;"
+										class="btn btn-d btn-round">購物車管理&ensp;<i
+											class="fa-solid fa-angle-double-down"></i></a>
+										<ul style="">
+											<li><a href="#" style="color: white; font-weight: 600;"
+												class="btn btn-d btn-round">所有購物單清單</a></li>
+										</ul></li>
+								</ul>
+								<a href="#"><img
+									src="/MeetBoth/html/assets/images/shop/警告2.jpg"
+									style="padding-bottom: 10px;"></a>
 							</div>
-						</section>
-						<%-- <jsp:include page="/WEB-INF/html/fragment/footerMVC.jsp" /> --%>
+						</div>
+						<!-- 左邊欄位結束 -->
+						<!-- 						右邊欄位開始 -->
+						<div class="col-sm-8 col-sm-offset-1"
+							style="margin-left: 20px; width: 75%; border-left: solid 1px yellow;">
+							<div class="post">
+								<!-- 							標題 -->
+								<div class="post-thumbnail"
+									style="padding-bottom: 0; margin-bottom: 0;">
+									<h1
+										style="padding-bottom: 0px; margin-bottom: 0; text-align: center; font-size: 50px; color: white;">單一商品後臺管理</h1>
+								</div>
+								<hr class="divider-w pt-20">
+								<!-- 							標題 -->
+								<!--       右邊第一部分開始 -->
+								<div class="post">
+									<div class="post-video embed-responsive embed-responsive-16by9"
+										style="height: auto; padding-bottom: 100px;">
+										<div style="display: flex">
+											<span>商品資料 :&ensp;</span>
+										</div>
+										<div style="display: flex">
+											<button class="MBbtn" onclick="window.location='/MeetBoth/_03_product.productindex.controller'">返回</button>
+											<button class="MBbtn" onclick="window.location='/MeetBoth/_03_product.pathToMBinsertProd.controller?id=${prod.prodID}'">修改</button>
+											<button class="MBbtn" id="deleteThisProduct"
+												name="${prod.prodID}">刪除</button>
+										</div>
+										<div>
+											<span>商品狀態 :&ensp;${prod.prodState}</span>
+										</div>
+										<div>
+											<span>商品編號 :&ensp;${prod.prodID}</span>
+										</div>
+										<div>
+											<span>商品名稱 :&ensp;${prod.prodName}</span>
+										</div>
+										<div style="display: flex;">
+											<span>商品圖片 :&ensp;</span>
+											<div
+												style="width: 150px; height: 200px; display: flex; justify-content: center; align-items: center; text-align: center;">
+												<img id="preImg"
+													style="max-width: 100%; max-height: 100%; height: auto; width: auto;"
+													src="<c:url value='/_03_product.showPicture.controller?id=${prod.prodID}' />" />
+											</div>
+										</div>
+										<div>
+											<span>商品類別編號 :&ensp;${prod.prodtype.prodClass}</span>
+										</div>
+										<div>
+											<span>商品類別名稱 :&ensp;${prod.prodtype.prodClassName}</span>
+										</div>
+										<div>
+											<span>商品價格 :&ensp;${prod.prodPrice}</span>
+										</div>
+										<div>
+											<span>賣家編號 :&ensp;${prod.memberBean.memberID}</span>
+										</div>
+										<div>
+											<span>庫存 :&ensp;${prod.inventory}</span>
+										</div>
+										<div>
+											<span>上架時間 :&ensp;${prod.prodPost}</span>
+										</div>
+										<div>
+											<span>更新時間 :&ensp;${prod.prodUpdate}</span>
+										</div>
+										<div>
+											<span>銷售數量 :&ensp;${prod.prodSales}</span>
+										</div>
+										<div>
+											<span>瀏覽次數 :&ensp;${prod.prodCheck}</span>
+										</div>
+										<div>
+											<textarea
+												style="margin-left: 10px; resize: none; height: 325px; width: 975px; overflow-y: auto; overflow-y: auto; font-size: 17px; color: white; background-color: black;"
+												readonly>${prod.directions}</textarea>
+										</div>
+
+										<div>
+											<div id="commentDiv">
+												<span>商品評論 :&ensp;</span>
+											</div>
+											<div id="commentTable">
+												<table style="color: white; text-align: center;"
+													class="prodtable">
+													<thead>
+														<tr style="">
+															<th style="width: 5%;">編號</th>
+															<th style="width: 10%; padding-left: 5px;">留言者</th>
+															<th style="width: 5%">評分</th>
+															<th style="width: 50%">評論</th>
+															<th style="width: 18%">時間</th>
+															<th></th>
+															<th></th>
+															<th style="border-right: none"></th>
+														</tr>
+													</thead>
+													<tbody id="commentBody">
+														<c:forEach var="commBean" items="${prod.productComment}">
+															<tr>
+																<td style="">${commBean.commentID}</td>
+																<td>${commBean.memberBean.memberID}</td>
+																<td>${commBean.prodScore}</td>
+																<td>${commBean.comment}</td>
+																<td>${commBean.commentDate}</td>
+																<td><input type="button" class="MBbtn" value="更多"
+																	onclick="#"></td>
+																<td><input type="button" class="MBbtn" value="修改"
+																	onclick="#"></td>
+																<td style="border-right: none"><input type="button"
+																	class="MBbtn" value="刪除" id="deleteThisProduct" name=""></td>
+															</tr>
+														</c:forEach>
+													</tbody>
+												</table>
+											</div>
+										</div>
+									</div>
+								</div>
+								<!--       右邊第一部分結束 -->
+								<hr class="divider-w pt-20">
+							</div>
+						</div>
+						<!-- 		右邊欄位結束 -->
 					</div>
-					<div class="scroll-up">
-						<a href="#totop"><i class="fa fa-angle-double-up"></i></a>
-					</div>
-				</main>
-				<!--  
+				</div>
+			</section>
+			<%-- 			<jsp:include page="/WEB-INF/html/fragment/footerMVC.jsp" /> --%>
+		</div>
+		<div class="scroll-up">
+			<a href="#totop"><i class="fa fa-angle-double-up"></i></a>
+		</div>
+	</main>
+	<!--  
     JavaScripts
     =============================================
     -->

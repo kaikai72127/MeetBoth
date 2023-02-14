@@ -193,7 +193,7 @@ public class OrderController {
 		return "_04_shoppingCart/adminOrders";
 	}
 
-	// 前台訂單使用------------
+// 前台訂單使用------------
 	@GetMapping(path = "/memberOrdersList.controller")
 	public String fondMemberBuy(Model model, HttpServletRequest request) {
 //		HttpSession session = request.getSession(false);

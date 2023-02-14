@@ -279,12 +279,14 @@ public class Product {
 				+ productComment + "]";
 	}
 	
+	
+
 //	CREATE TABLE PRODUCT(
 //			prodClass int foreign key references PRODTYPE(prodClass), --產品類別編號
 //			prodID int not null IDENTITY (1,1) primary key, --產品編號
 //			prodName nvarchar(30), --產品名稱
 //			prodPrice decimal(8,2),--商品價格
-//			memberID int not null, --會員編號(賣家)
+//			memberID int foreign key references Member(memberID), --會員編號(賣家)
 //			inventory int not null, --商品庫存
 //			prodPost datetime2(0) not null,--商品上架時間
 //			prodUpdate datetime2(0) not null,--商品資訊最後更新時間
@@ -301,7 +303,7 @@ public class Product {
 //			prodID int not null IDENTITY (1,1) primary key, --產品編號
 //			prodName nvarchar(30), --產品名稱
 //			prodPrice decimal(8,2),--商品價格
-//			memberID int not null, --會員編號(賣家)
+//			memberID int foreign key references Member(memberID), --會員編號(賣家)
 //			inventory int not null, --商品庫存
 //			prodPost datetime2(0) not null,--商品上架時間
 //			prodUpdate datetime2(0) not null,--商品資訊最後更新時間
@@ -311,5 +313,12 @@ public class Product {
 //			prodCheck int, -- 商品瀏覽次數
 //			prodState nvarchar --商品狀態
 //			);
-
+//	Create table productComment(
+//			commentID int not null IDENTITY (1,1) primary key,
+//			prodID int foreign key references PRODUCT(prodID), --留言的商品編號
+//			customID int foreign key references Member(memberID), --留言會員編號
+//			prodScore int not null, --商品評分
+//			comment nvarchar(100), --商品留言(100字元)
+//			commentDate datetime2(0) not null --留言時間
+//			);
 }

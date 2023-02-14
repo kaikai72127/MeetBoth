@@ -347,7 +347,7 @@ a:hover {
 																<td>${prodBean.prodName}</td>
 																<td>${prodBean.prodtype.prodClassName}</td>
 																<td>NT$${prodBean.prodPrice}</td>
-																<td>${prodBean.memberID}</td>
+																<td>${prodBean.memberBean.memberID}</td>
 																<td>${prodBean.prodState}</td>
 																<td id="commentAmount"><input type="hidden" id="commmentList" value="${prodBean.productComment}"></td>
 																<td id="AVGscore"><c:forEach var="commentBean" items="${prodBean.productComment}"><input type="hidden" id="commmentList" value="${commentBean.prodScore}"></c:forEach></td>

@@ -56,9 +56,9 @@ String basePathimg2 = request.getScheme() + "://" + request.getServerName() + ":
 								<div class="col-sm-6 mb-sm-40" style="width: 42%;">
 									<span class="amount">修改商品照片</span> <input type="file"
 										name="images" id="images5278" style="width: 80%"
-										accept=".jpg,.png"> <img id="preImg"
-										style="width: 445px; height: 600px"
-										src="<c:url value='/_03_product.showPicture.controller?id=${bean.prodID}' />" />
+										accept=".jpg,.png"> <div style="width: 445px; height: 600px; margin: auto; display: flex; justify-content: center; align-items: center; margin-right: 15px; text-align: center;"><img id="preImg"
+										style="max-width: 100%; max-height: 100%; height: auto; width: auto;"
+										src="<c:url value='/_03_product.showPicture.controller?id=${bean.prodID}' />" /></div>
 								</div>
 								<!-- 							圖片右邊BLOCK -->
 								<div class="col-sm-6" style="margin-top: 68px; width: 58%">

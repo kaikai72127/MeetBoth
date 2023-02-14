@@ -31,7 +31,8 @@
 								}
 							});
 						} else {
-							$("#errormessage").text("信箱不可使用！")
+							event.preventDefault();
+							$("#errormessage").css({ "font-size": "medium", color: "red" }).text("信箱不可使用！")
 							$("#push").hide();
 						}
 					}

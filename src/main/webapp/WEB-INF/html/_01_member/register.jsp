@@ -27,13 +27,13 @@
 							$(function () {
 								$.ajax({
 									type: 'POST',
-									url: 'http://localhost:8080/MeetBoth/_01_member.checklog.controller',
+									url: '/MeetBoth/_01_member.checklog.controller',
 									contentType: 'application/json',
 
 									success: function (user) {
 
 										if (user != "" && user != "anonymousUser") {
-											location.href = 'justlogin';
+											location.href = '/MeetBoth/justlogin';
 										}
 									}
 								});

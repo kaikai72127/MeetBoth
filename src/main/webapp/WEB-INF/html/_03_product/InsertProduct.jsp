@@ -61,7 +61,9 @@ String basePathimg2 = request.getScheme() + "://" + request.getServerName() + ":
 							<div class="col-sm-6 mb-sm-40" style="width: 42%;">
 								<span class="amount">上傳商品照片</span> <input type="file"
 									name="pPic" id="images5278" style="width: 80%"
-									accept=".jpg,.png"> <img id="preImg" style="" src="#" />
+									accept=".jpg,.png">
+									 <img id="preImg" name="preImg" style="" src="html/assets/images/shop/noimage.jpg"/>
+									 
 							</div>
 							<!-- 							圖片右邊BLOCK -->
 							<div class="col-sm-6" style="margin-top: 68px; width: 58%">

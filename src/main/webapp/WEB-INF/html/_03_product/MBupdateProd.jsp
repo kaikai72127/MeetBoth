@@ -303,7 +303,7 @@ a:hover {
 											<span>商品價格 :&ensp;<input value="${prod.prodPrice}" type="text" name="ppr" class="MBinput" placeholder="只能數字"></span>
 										</div>
 										<div>
-											<span>賣家編號 :&ensp;<input value="${prod.memberID}" type="text" name="pmid" class="MBinput" placeholder="只能編號"></span>
+											<span>賣家編號 :&ensp;<input value="${prod.memberBean.memberID}" type="text" name="pmid" class="MBinput" placeholder="只能編號"></span>
 										</div>
 										<div>
 											<span>商品庫存 :&ensp;<input value="${prod.inventory}" type="text" name="pinvt" class="MBinput" placeholder="只能數字"></span>

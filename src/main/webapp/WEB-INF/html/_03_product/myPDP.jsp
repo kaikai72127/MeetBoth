@@ -428,11 +428,12 @@ h1 {
 								<img src="/MeetBoth/html/assets/images/shop/兔年海報3.jpg"
 									style="padding-bottom: 10px;">
 							</div>
+						<form method="Post" action="<c:url value='/_03_product.updateProductState.controller' />">
 							<div class="container" style="padding: 0px 10px 0px 20px;">
-								<input type="button" value="商品上架"
+								<input type="submit" value="商品上架"
 									class="btn btn-info btn-circle"
 									style="font-size: 17px; color: black;" onclick="#">
-								&nbsp; <input type="button" value="商品下架"
+								&nbsp; <input type="submit" value="商品下架"
 									class="btn btn-warning btn-circle"
 									style="font-size: 17px; color: black;" onclick="#">
 							</div>
@@ -449,52 +450,34 @@ h1 {
 												<th>庫存</th>
 												<th>狀態</th>
 											</tr>
+											<c:forEach var="prodBean" items="${memberBean.product}">
 											<tr>
-												<td class="hidden-xs"
-													style="text-align: center; vertical-align: middle;"><input
-													type="checkbox" id="coding" name="interest" value="coding" />
-													<label for="coding"></label></td>
+												<td class="hidden-xs"style="text-align: center; vertical-align: middle;">
+													<input type="checkbox" name="selectForUpdateState" value="${prodBean.prodID}" />
+													<label for="check"></label>
+													</td>
 												<td>
-													<h5 class="product-title font-alt">書包</h5>
+													<h5 class="product-title font-alt">${prodBean.prodName}</h5>
 												</td>
 												<td class="hidden-xs">
-													<h5 class="product-title font-alt">學生用品</h5>
+													<h5 class="product-title font-alt">${prodBean.prodtype.prodClassName}</h5>
 												</td>
 												<td>
-													<h5 class="product-title font-alt">NT$299</h5>
+													<h5 class="product-title font-alt">NT$${prodBean.prodPrice}</h5>
 												</td>
 												<td>
-													<h5 class="product-title font-alt">10</h5>
+													<h5 class="product-title font-alt">${prodBean.inventory}</h5>
 												</td>
 												<td>
-													<h5 class="product-title font-alt" style="color: Blue;">上架</h5>
+													<h5 class="product-title font-alt" style="color: Blue;">${prodBean.prodState}</h5>
 												</td>
 											</tr>
-											<tr>
-												<td class="hidden-xs"
-													style="text-align: center; vertical-align: middle;"><input
-													type="checkbox" id="coding" name="interest" value="coding" />
-													<label for="coding"></label></td>
-												<td>
-													<h5 class="product-title font-alt">金魚也能懂得css</h5>
-												</td>
-												<td class="hidden-xs">
-													<h5 class="product-title font-alt">二手參考書</h5>
-												</td>
-												<td>
-													<h5 class="product-title font-alt">NT$599</h5>
-												</td>
-												<td>
-													<h5 class="product-title font-alt">10</h5>
-												</td>
-												<td>
-													<h5 class="product-title font-alt" style="color: red;">下架</h5>
-												</td>
-											</tr>
+											</c:forEach>
 										</tbody>
 									</table>
 								</div>
 							</div>
+						</form>
 							<!--       賣場管理列 -->
 							<!--訂單管理 -->
 							<div class="post-header font-alt" style="display: flex;">

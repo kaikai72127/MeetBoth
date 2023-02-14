@@ -295,13 +295,16 @@ a:hover {
 											</div>
 										</div>
 										<div>
-											<span>商品類別 :&ensp;${prod.prodtype.prodClassName}</span>
+											<span>商品類別編號 :&ensp;${prod.prodtype.prodClass}</span>
+										</div>
+										<div>
+											<span>商品類別名稱 :&ensp;${prod.prodtype.prodClassName}</span>
 										</div>
 										<div>
 											<span>商品價格 :&ensp;${prod.prodPrice}</span>
 										</div>
 										<div>
-											<span>賣家編號 :&ensp;${prod.memberID}</span>
+											<span>賣家編號 :&ensp;${prod.memberBean.memberID}</span>
 										</div>
 										<div>
 											<span>庫存 :&ensp;${prod.inventory}</span>
@@ -347,7 +350,7 @@ a:hover {
 														<c:forEach var="commBean" items="${prod.productComment}">
 															<tr>
 																<td style="">${commBean.commentID}</td>
-																<td>${commBean.customID}</td>
+																<td>${commBean.memberBean.memberID}</td>
 																<td>${commBean.prodScore}</td>
 																<td>${commBean.comment}</td>
 																<td>${commBean.commentDate}</td>

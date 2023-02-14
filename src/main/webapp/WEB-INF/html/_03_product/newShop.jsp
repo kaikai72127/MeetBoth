@@ -397,7 +397,7 @@ String basePathimg2 = request.getScheme() + "://" + request.getServerName() + ":
 										<div id="starAVGDiv" style="font-size: 17px;"></div>
 									</div>
 									<div id="price">
-										<strong style="font-size: 16px">價格 :
+										<strong style="font-size: 16px">
 											瀏覽次數:&nbsp;${bean.prodCheck}&nbsp;次</strong>
 									</div>
 									<div id="price">

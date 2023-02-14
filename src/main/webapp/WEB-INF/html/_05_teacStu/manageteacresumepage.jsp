@@ -117,7 +117,7 @@ a {
 	font-width: 550;
 }
 
-.MBbtn {
+.MBbtn, .MBbtn-delete {
 	font-size: 25px;
 	background-color: black;
 	color: white;
@@ -129,6 +129,15 @@ a {
 }
 
 .MBbtn:hover {
+	font-size: 25px;
+	background-color: black;
+	color: yellow;
+	border: solid 1px yellow;
+	margin: auto 10px;
+	border-radius: 50%;
+}
+
+.MBbtn-delete:hover {
 	font-size: 25px;
 	background-color: black;
 	color: yellow;
@@ -271,10 +280,9 @@ a:hover {
 											<span>履歷資料 :&ensp;</span>
 										</div>
 										<div style="display: flex">
-											<button class="MBbtn" onclick="window.location='/MeetBoth/admin/_03_teacStu.searchAllTeac.controller/1'">返回</button>
-											<button class="MBbtn" onclick="window.location='/MeetBoth/admin/_05_teacStu.updateteac.controller?teacno=${bean.teacno}'">修改</button>
-											<button class="MBbtn" id="deleteThisProduct"
-												name="${bean.teacno}">刪除</button>
+											<button class="MBbtn" onclick="window.location='/MeetBoth/admin/_05_teacStu.searchAllTeac.controller/1'">返回</button>
+											<button class="MBbtn" onclick="window.location='/MeetBoth/admin/_05_teacStu.updatedataMain.controller?teacno=${bean.teacno}'">修改</button>
+											<button class="MBbtn-delete" id="${bean.teacno}">刪除</button>
 										</div>
 										<div>
 											<span>學歷 :&ensp;${bean.highEdu}</span>
@@ -292,7 +300,7 @@ a:hover {
 											<span>證照技能 :&ensp;${bean.skills}</span>
 										</div>
 										<div>
-											<span>授課科目 :&ensp;${bean.object}</span>
+											<span>授課科目 :&ensp;${bean.teacObject}</span>
 										</div>
 										<div>
 											<span>授課地區 :&ensp;${bean.teacLoc}</span>
@@ -392,8 +400,8 @@ a:hover {
 	<script>
 	
         $(function(){
-        	$('#deleteThisProduct').click(function(){
-                let id=$(this).attr("name");
+        	$('.MBbtn-delete').click(function(){
+                let id=$(this).attr("id");
                 Swal.fire({
                   title: '你確定要刪除嗎?',
                   text: "將無法恢復此筆訂單!!!",
@@ -409,10 +417,10 @@ a:hover {
                         $.ajax({
                           //專案名稱+servlet
                          url:'/MeetBoth/admin/_05_teacStu.deletedata.controller',
-                          method:"post",
+                          method:"get",
                           dataType:"text",
                           //對應name設定的名稱 並非value的名稱
-                          data: {"id":id},
+                          data: {"teacno":id},
                         })
                             .done(function () {
                             	window.location='/MeetBoth/admin/_05_teacStu.searchAllTeac.controller/1'

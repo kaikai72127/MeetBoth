@@ -259,7 +259,7 @@ a:hover {
 								<div class="post-thumbnail"
 									style="padding-bottom: 0; margin-bottom: 0;">
 									<h1
-										style="padding-bottom: 0px; margin-bottom: 0; text-align: center; font-size: 50px; color: white;">履歷後臺管理</h1>
+										style="padding-bottom: 0px; margin-bottom: 0; text-align: center; font-size: 50px; color: white;">需求後臺管理</h1>
 								</div>
 								<hr class="divider-w pt-20">
 								<!-- 標題 -->
@@ -268,10 +268,10 @@ a:hover {
 									<div class="post-video embed-responsive embed-responsive-16by9"
 										style="height: auto; padding-bottom: 100px;">
 										<div>
-											<span>所有履歷貼文 :&ensp;</span>
+											<span>所有需求貼文 :&ensp;</span>
 										</div>
 										<form class="row"
-											action="<c:url value='/admin/_05_teacStu.searchAllLike.controller/1' />"
+											action="<c:url value='/admin/_05_teacStu.searchAllLikeStud.controller/1' />"
 											method="post">
 											<div style="display: flex; margin-bottom: 15px;">
 												<div class="" style="">
@@ -281,7 +281,7 @@ a:hover {
 												</div>
 												<div style="">
 													<input type="button" class="MBbtn" value="新增"
-														onclick="window.location='/MeetBoth/admin/_05_teacStu.insertdataMain.controller'">
+														onclick="window.location='/MeetBoth/admin/_05_teacStu.insertdataStudMain.controller'">
 												</div>
 											</div>
 										</form>
@@ -294,12 +294,12 @@ a:hover {
 													<thead>
 														<tr style="">
 															<th style="width: 10%;">會員編號</th>
-															<th style="width: 10%;">履歷編號</th>
-															<th style="width: 10%">學歷</th>
-															<th style="width: 10%">語言能力</th>
-															<th style="width: 10%">授課科目</th>
-															<th style="width: 10%">授課地區</th>
-															<th style="width: 10%">授課對象</th>
+															<th style="width: 10%;">需求編號</th>
+															<th style="width: 10%">需求科目</th>
+															<th style="width: 10%">上課地點</th>
+															<th style="width: 10%">教學對象</th>
+															<th style="width: 10%">開始日期</th>
+															<th style="width: 10%">學歷要求</th>
 															<th style="width: 10%">時薪</th>
 															<th style="width: 10%">觀看次數</th>
 															<th style="width: 15%">更新日期</th>
@@ -310,22 +310,22 @@ a:hover {
 														<c:forEach var="bean" items="${pageTeac}">
 															<tr>
 																<td>${bean.member.memberID}</td>
-																<td>${bean.teacno}</td>
-																<td>${bean.highEdu}</td>
-																<td>${bean.lanAbility}</td>
+																<td>${bean.studno}</td>
 																<td>${bean.subjectItem}</td>
-																<td>${bean.teacLoc}</td>
-																<td>${bean.teacObject}</td>
+																<td>${bean.studLoc}</td>
+																<td>${bean.object}</td>
+																<td>${bean.startDate}</td>
+																<td>${bean.educaLimit}</td>
 																<td>NT$${bean.price}</td>
 																<td>${bean.views}次</td>
 																<td>${bean.updateDate}</td>
 																<td><input type="button" class="MBbtn" value="更多"
-																	onclick="window.location='/MeetBoth/admin/_05_teacStu.teacpostpageMain.controller?teacno=${bean.teacno}'"></td>
+																	onclick="window.location='/MeetBoth/admin/_05_teacStu.studpostpageMain.controller?studno=${bean.studno}'"></td>
 																<td><input type="button" class="MBbtn" value="修改"
-																	onclick="window.location='/MeetBoth/admin/_05_teacStu.updatedataMain.controller?teacno=${bean.teacno}'"></td>
+																	onclick="window.location='/MeetBoth/admin/_05_teacStu.updatedataStudMain.controller?studno=${bean.studno}'"></td>
 																<td style="border-right: none"><input type="button"
 																	class="MBbtn deleteThisProduct" value="刪除"
-																	id="${bean.teacno}"></td>
+																	id="${bean.studno}"></td>
 															</tr>
 														</c:forEach>
 													</tbody>
@@ -449,14 +449,14 @@ a:hover {
                     if (result.isConfirmed) {
                         $.ajax({
                           //專案名稱+servlet
-                         url:'/MeetBoth/admin/_05_teacStu.deletedata.controller',
+                         url:'/MeetBoth/admin/_05_teacStu.deletedataStud.controller',
                           method:"get",
                           dataType:"text",
                           //對應name設定的名稱 並非value的名稱
                           data: {"teacno":id},
                         })
                             .done(function () {
-                            	window.location='/MeetBoth/admin/_05_teacStu.searchAllTeac.controller/1'
+                            	window.location='/MeetBoth/admin/_05_teacStu.searchAllStud.controller/1'
                                 console.log("delete")
                              })//done
                              .fail(function(error) {

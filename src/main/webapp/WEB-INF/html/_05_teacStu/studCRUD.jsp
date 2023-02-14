@@ -239,17 +239,17 @@ body {
                         </div>
                         <div class="comment-table-col">
                             <div class="comment-table-col-content">
-                                需求對象
-                            </div>
-                        </div>
-                        <div class="comment-table-col">
-                            <div class="comment-table-col-content">
                                 需求地區
                             </div>
                         </div>
                         <div class="comment-table-col">
                             <div class="comment-table-col-content">
                                 案件薪資
+                            </div>
+                        </div>
+                        <div class="comment-table-col">
+                            <div class="comment-table-col-content">
+                                瀏覽次數
                             </div>
                         </div>
                     </div>
@@ -272,17 +272,17 @@ body {
                         </div>
                         <div class="comment-table-col">
                             <div class="comment-table-col-content">
-                               	${bean.object}
-                            </div>
-                        </div>
-                        <div class="comment-table-col">
-                            <div class="comment-table-col-content">
                                 ${bean.studLoc}
                             </div>
                         </div>
                         <div class="comment-table-col">
                             <div class="comment-table-col-content">
                                 ${bean.price}
+                            </div>
+                        </div>
+                        <div class="comment-table-col">
+                            <div class="comment-table-col-content">
+                                ${bean.views}次
                             </div>
                         </div>
                     </div>
@@ -336,7 +336,7 @@ body {
      	if (!user) {
        	e.preventDefault();
        	alert('請先登入');
-       	window.location.href = '/MeetBoth/login/page.jsp';
+       	window.location.href = '/MeetBoth/login/page';
      	}
    	});
 	</script>

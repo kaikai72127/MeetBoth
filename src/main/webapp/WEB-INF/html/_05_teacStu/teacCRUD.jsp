@@ -1,11 +1,12 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
-    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-        <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 
 
 
-            <!DOCTYPE html>
-            <html lang="zh-hant-TW">
+<!DOCTYPE html>
+<html lang="zh-hant-TW">
 
 <head>
 <!-- 引入共同的headMVC -->
@@ -49,7 +50,7 @@ body {
 	position: relative;
 	gap: 1rem;
 	cursor: pointer;
-	-avatar-width: 120px;
+	--avatar-width: 120px;
 	padding: 1rem 1.5rem;
 	border-radius: 0.25rem;
 	background: #FFFFFF;
@@ -73,9 +74,9 @@ body {
 
 .tutor-avatar {
 	display: flex;
-	width: var(- -avatar-width);
-	height: var(- -avatar-width);
-	border-radius: calc(var(- -avatar-width)/8);
+	width: var(--avatar-width);
+	height: var(--avatar-width);
+	border-radius: calc(var(--avatar-width)/8);
 	border: #ce7777 0.25rem solid;
 	overflow: hidden;
 }
@@ -271,12 +272,12 @@ body {
 
 .card-section .card-container {
 	flex: 1 0 50%;
-	max-width: 50%;
+	max-width: 40%;
 }
 
 .card-section .card-container .card {
 	position: relative;
-	height: 200px;
+	height: 170px;
 	margin: 4rem;
 	margin-left: 15%;
 }
@@ -302,13 +303,16 @@ body {
 	position: absolute;
 	height: 100%;
 	width: 100%;
-	background: #03446A;
+	background-image: url("../html/images/背景渲染.jpg");
 	line-height: 300px;
 	color: white;
 	text-align: center;
 	font-size: 60px;
 	border-radius: 5px;
 	backface-visibility: hidden;
+	display: flex;
+	align-items: center;
+	justify-content: center;
 }
 
 .back {
@@ -346,14 +350,14 @@ body {
 <body data-spy="scroll" data-target=".onpage-navigation"
 	data-offset="60">
 
-                <!-- header -->
-                <!-- 引入共同的topMVC -->
-                <jsp:include page="/WEB-INF/html/fragment/topMVC.jsp" />
+	<!-- header -->
+	<!-- 引入共同的topMVC -->
+	<jsp:include page="/WEB-INF/html/fragment/topMVC.jsp" />
 
-                <main>
-                    <div class="page-loader">
-                        <div class="loader">Loading...</div>
-                    </div>
+	<main>
+		<div class="page-loader">
+			<div class="loader">Loading...</div>
+		</div>
 
 		<!-- 中間內文 -->
 		<div class="page-container">
@@ -379,7 +383,8 @@ body {
 					<h2 class="post-title">
 						<a href="#">教師貼文列表</a>
 					</h2>
-					<button id="openForm" style="float: right"
+					<hr>
+					<button id="openForm" style="float: left"
 						class="btn btn-b btn-circle">MeetBoth</button>
 					<form
 						action="<c:url value='/_05_teacStu.insertdataMain.controller' />">
@@ -448,7 +453,7 @@ body {
 					<div class="card-container">
 						<div class="card">
 							<div class="content">
-								<div class="front">Front</div>
+								<div class="front"><img src="../html/assets/images/meatball/meatball-144x144.png"></div>
 								<div class="back"
 									style="background-color: white; display: flex;">
 									<div class="tutor-avatar" style="width: 40%; margin: 20px">
@@ -485,7 +490,7 @@ body {
 					<div class="card-container">
 						<div class="card">
 							<div class="content">
-								<div class="front">Front</div>
+								<div class="front"><img src="../html/assets/images/meatball/meatball-144x144.png"></div>
 								<div class="back">Back!</div>
 							</div>
 						</div>
@@ -493,7 +498,7 @@ body {
 					<div class="card-container">
 						<div class="card">
 							<div class="content">
-								<div class="front">Front</div>
+								<div class="front"><img src="../html/assets/images/meatball/meatball-144x144.png"></div>
 								<div class="back">Back!</div>
 							</div>
 						</div>
@@ -501,7 +506,7 @@ body {
 					<div class="card-container">
 						<div class="card">
 							<div class="content">
-								<div class="front">Front</div>
+								<div class="front"><img src="../html/assets/images/meatball/meatball-144x144.png"></div>
 								<div class="back">Back!</div>
 							</div>
 						</div>
@@ -625,7 +630,7 @@ body {
 		<jsp:include page="/WEB-INF/html/fragment/footerMVC.jsp" />
 	</main>
 
-                <!--  
+	<!--  
     JavaScripts
     =============================================
     -->
@@ -641,7 +646,7 @@ body {
 						}
 					});
 				</script>
-	<script>
+				<script>
 					const closeDialog = () => {
 						document.getElementById("formContainer").classList.remove("shown");
 						setTimeout(() => {
@@ -714,29 +719,6 @@ body {
 // 								
 							}
 									)
-// 							            .then(function (response) {
-// 							                    if (response.status == 200) {
-// 							                    	console.log('success')
-// 							                    	console.log(response)
-// 							                    }
-// 							                    response.json()
-
-							//                     	response.json().then(function (teacBeans){
-							//                     var firstData = teacBeans[0];
-							//      		    var jsonsubjectItem = firstData.subjectItem;
-							//      		    $('#jsonsubjectItem').html(jsonsubjectItem);
-							//      		    var jsonName = firstData.member.memName (firstData.member.memNickName);
-							//      		    $('#jsonName').html(jsonName);
-							//      		    var jsonteacObject = firstData.teacObject;
-							//      		    $('#jsonteacObject').html(jsonteacObject);
-							//      		    var jsonhighEdu = firstData.highEdu;
-							//      		    $('#jsonhighEdu').html(jsonhighEdu);
-							//      		    var jsontutorExp = firstData.tutorExp;
-							//      		    $('#jsontutorExp').html(jsontutorExp);
-							//      		    var jsonteacLoc = firstData.teacLoc;
-							//      		    $('#jsonteacLoc').html(jsonteacLoc);
-							//                     	});
-							//                 });
 						})
 						setTimeout(() => {
 							closeDialog();
@@ -744,31 +726,5 @@ body {
 						}, 100);
 					});
 				</script>
-	<script>
-// 	$.ajax({
-//  		type: "POST",
-//  		contentType: "application/json",
-//  		url: "/MeetBoth/_05_teacStu.match.controller",
-//  		data: JSON.stringify(options),
-//  		dataType: "json",
-//  		success: function (teacBeans) {
-//    		// 這裡是 success callback function，將回傳的 teacBeans 處理後顯示在 JSP 中
-//  			var firstData = teacBeans[0];
-//  		    var jsonsubjectItem = firstData.subjectItem;
-//  		    $('#jsonsubjectItem').html(jsonsubjectItem);
-//  		    var jsonName = firstData.member.memName (firstData.member.memNickName);
-//  		    $('#jsonName').html(jsonName);
-//  		    var jsonteacObject = firstData.teacObject;
-//  		    $('#jsonteacObject').html(jsonteacObject);
-//  		    var jsonhighEdu = firstData.highEdu;
-//  		    $('#jsonhighEdu').html(jsonhighEdu);
-//  		    var jsontutorExp = firstData.tutorExp;
-//  		    $('#jsontutorExp').html(jsontutorExp);
-//  		    var jsonteacLoc = firstData.teacLoc;
-//  		    $('#jsonteacLoc').html(jsonteacLoc);
-//  		}
-// 	});
-				</script>
 </body>
-
 </html>

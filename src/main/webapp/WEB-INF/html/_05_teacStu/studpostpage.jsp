@@ -42,7 +42,6 @@ body {
     padding: 1.5rem 2.5rem;
     border-radius: 0.25rem;
     box-shadow: 0px 2px 6px rgb(0 0 0 / 33%);
-
     --avatar-width: 120px;
     --avatar-height: 180px;
 }
@@ -324,6 +323,8 @@ color:lightgrey;
 		<div class="page-container">
         <div class="resume-container">
             <h1 class="resume-title">需求列表</h1>
+            <input type="hidden" name="studno" value="${bean.studno}">
+            <input type="hidden" name="views" value="${bean.views}">
             <input type="hidden" name="user" value="${pageContext.request.userPrincipal.name}">
             <input type="hidden" name="owner" value="${bean.member.account}">
             <input type="hidden" name="teacno" value="${teacBean.teacno}" />
@@ -420,7 +421,7 @@ color:lightgrey;
                         </div>
                     </div>
                     	<div style="display:flex">
-                        <button onclick="checkUserAndTeacNo()" style="display:flex; justify-content:center; align-items:center; margin:15px auto 0 auto" class="btn btn-b btn-circle" type="submit">匹配度測試</button>
+                        <button onclick="window.location='/MeetBoth/_05_teacStu.studmail.controller?studno=${bean.studno}'" style="display:flex; justify-content:center; align-items:center; margin:15px auto 0 auto" class="btn btn-b btn-circle mail" id="${bean.studno}">連絡他</button>
                         <button onclick="window.location='/MeetBoth/_05_teacStu.searchAllStud.controller/1'" style="display:flex; justify-content:center; align-items:center; margin:15px auto 0 auto" class="btn btn-b btn-circle" type="submit">返回上一頁</button>
                         </div>
                 </div>
@@ -512,6 +513,44 @@ color:lightgrey;
         //function end
     </script>
     <script>
+        $(function(){
+            $('.mail').click(function(){
+                let id=$(this).attr("id");
+                Swal.fire({
+                  title: '確定要寄出郵件嗎?',
+                  text: "確認後系統將會自動幫您寄送!!!",
+                  icon: 'warning',
+                  //icon:  "success", "error", "warning", "info" or "question" 這幾種選項
+                  showCancelButton: true,
+                  confirmButtonColor: 'lightred',
+                  cancelButtonColor: 'lightgrey',
+                  confirmButtonText: '確定寄出'
+//                   cancelButtonText: '取消',
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        $.ajax({
+                          //專案名稱+servlet
+                          url:'/MeetBoth/_05_teacStu.studmail.controller',
+                          method:"get",
+                          dataType:"text",
+                          //對應name設定的名稱 並非value的名稱
+                          data: {"teacno":id},
+                        })
+                            .done(function () {
+                            	window.location='/MeetBoth/_05_teacStu.searchAllStud.controller/1'
+                                console.log("delete")
+                             })//done
+                             .fail(function(error) {
+                                 console.log(error)
+                             })//fail end
+                    }//if
+                  })//then
+
+              })//click end
+        });
+        //function end
+    </script>
+    <script>
     	const user = document.querySelector('input[name="user"]').value;
     	const owner = document.querySelector('input[name="owner"]').value;
     	if (user !== owner) {
@@ -519,48 +558,16 @@ color:lightgrey;
     	}
 	</script>
 	<script>
-		var memberID;
-		var account;
-		var name;
-		var nickName;
-		var role;
-		var teacBean;
-		var memberdataLoaded = false;
-
-		$(function () {
-    		$.ajax({
-        		type: 'POST',
-        		url: 'http://localhost:8080/MeetBoth/memberdata',
-        		contentType: 'application/json',
-        		success: function (memberdata) {
-            	memberID = memberdata.memberID;
-            	account = memberdata.account;
-            	name = memberdata.memName;
-            	nickName = memberdata.memNickName;
-            	role = memberdata.role;
-            	teacBean = memberdata.teacBean;
-            	memberdataLoaded = true;
-        		}
-    		});
-		});
-
-		function checkUserAndTeacNo() {
-    		let isUserLoggedIn = '${pageContext.request.userPrincipal.name}';
-
-    		if (!isUserLoggedIn) {
-        		alert('請先登入');
-        		window.location.href = '/MeetBoth/login/page';
-        		return;
-    			}
-
-    		if (teacBean === null) {
-        		alert('請先成為教師');
-        		window.location='/MeetBoth/_05_teacStu.searchAllTeac.controller/1';
-        		return;
-    			}
-    	
-    		window.location='/MeetBoth/_05_teacStu.compare.controller';
-		}
-	</script>
+  		var studno = document.querySelector('input[name="studno"]');
+  		var view = studno.value;
+  		console.log("id=" + view);
+  		window.onload = function() {
+   		var xhr = new XMLHttpRequest();
+   		xhr.open("GET",
+     		"/MeetBoth/_05_teacStu.studview.controller?studno="
+       		+ view, true);
+   		xhr.send();
+  		};
+ 	</script>
 </body>
 </html>

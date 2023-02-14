@@ -117,7 +117,7 @@ a {
 	font-width: 550;
 }
 
-.MBbtn {
+.MBbtn, .MBbtn-delete {
 	font-size: 25px;
 	background-color: black;
 	color: white;
@@ -129,6 +129,15 @@ a {
 }
 
 .MBbtn:hover {
+	font-size: 25px;
+	background-color: black;
+	color: yellow;
+	border: solid 1px yellow;
+	margin: auto 10px;
+	border-radius: 50%;
+}
+
+.MBbtn-delete:hover {
 	font-size: 25px;
 	background-color: black;
 	color: yellow;
@@ -211,7 +220,7 @@ a:hover {
 												href="/MeetBoth/_03_product.productindex.controller"
 												style="color: white; font-weight: 600;"
 												class="btn btn-d btn-round">所有商品清單</a></li>
-											<li><a
+												<li><a
 												href="/MeetBoth/_03_product.MBinsertProd.controller"
 												style="color: white; font-weight: 600;"
 												class="btn btn-d btn-round">新增商品</a></li>
@@ -251,114 +260,68 @@ a:hover {
 							</div>
 						</div>
 						<!-- 左邊欄位結束 -->
-						<!-- 右邊欄位開始 -->
+						<!-- 						右邊欄位開始 -->
 						<div class="col-sm-8 col-sm-offset-1"
 							style="margin-left: 20px; width: 75%; border-left: solid 1px yellow;">
 							<div class="post">
-								<!-- 標題 -->
+								<!-- 							標題 -->
 								<div class="post-thumbnail"
 									style="padding-bottom: 0; margin-bottom: 0;">
 									<h1
-										style="padding-bottom: 0px; margin-bottom: 0; text-align: center; font-size: 50px; color: white;">履歷後臺管理</h1>
+										style="padding-bottom: 0px; margin-bottom: 0; text-align: center; font-size: 50px; color: white;">單一需求後臺管理</h1>
 								</div>
 								<hr class="divider-w pt-20">
-								<!-- 標題 -->
-								<!-- 右邊第一部分開始 -->
+								<!-- 							標題 -->
+								<!--       右邊第一部分開始 -->
 								<div class="post">
 									<div class="post-video embed-responsive embed-responsive-16by9"
 										style="height: auto; padding-bottom: 100px;">
-										<div>
-											<span>所有履歷貼文 :&ensp;</span>
+										<div style="display: flex">
+											<span>履歷資料 :&ensp;</span>
 										</div>
-										<form class="row"
-											action="<c:url value='/admin/_05_teacStu.searchAllLike.controller/1' />"
-											method="post">
-											<div style="display: flex; margin-bottom: 15px;">
-												<div class="" style="">
-													<input class="MBinput" type="text" name="search"
-														style="font-size: 17px; color: white; margin: 10px 30px;"
-														placeholder="Search..." />
-												</div>
-												<div style="">
-													<input type="button" class="MBbtn" value="新增"
-														onclick="window.location='/MeetBoth/admin/_05_teacStu.insertdataMain.controller'">
-												</div>
-											</div>
-										</form>
+										<div style="display: flex">
+											<button class="MBbtn" onclick="window.location='/MeetBoth/admin/_05_teacStu.searchAllStud.controller/1'">返回</button>
+											<button class="MBbtn" onclick="window.location='/MeetBoth/admin/_05_teacStu.updatedataStudMain.controller?studno=${bean.studno}'">修改</button>
+											<button class="MBbtn-delete" id="${bean.studno}">刪除</button>
+										</div>
 										<div>
-
-
-											<div>
-												<table style="color: white; text-align: center;"
-													class="prodtable">
-													<thead>
-														<tr style="">
-															<th style="width: 10%;">會員編號</th>
-															<th style="width: 10%;">履歷編號</th>
-															<th style="width: 10%">學歷</th>
-															<th style="width: 10%">語言能力</th>
-															<th style="width: 10%">授課科目</th>
-															<th style="width: 10%">授課地區</th>
-															<th style="width: 10%">授課對象</th>
-															<th style="width: 10%">時薪</th>
-															<th style="width: 10%">觀看次數</th>
-															<th style="width: 15%">更新日期</th>
-															<th style="border-right: none"></th>
-														</tr>
-													</thead>
-													<tbody>
-														<c:forEach var="bean" items="${pageTeac}">
-															<tr>
-																<td>${bean.member.memberID}</td>
-																<td>${bean.teacno}</td>
-																<td>${bean.highEdu}</td>
-																<td>${bean.lanAbility}</td>
-																<td>${bean.subjectItem}</td>
-																<td>${bean.teacLoc}</td>
-																<td>${bean.teacObject}</td>
-																<td>NT$${bean.price}</td>
-																<td>${bean.views}次</td>
-																<td>${bean.updateDate}</td>
-																<td><input type="button" class="MBbtn" value="更多"
-																	onclick="window.location='/MeetBoth/admin/_05_teacStu.teacpostpageMain.controller?teacno=${bean.teacno}'"></td>
-																<td><input type="button" class="MBbtn" value="修改"
-																	onclick="window.location='/MeetBoth/admin/_05_teacStu.updatedataMain.controller?teacno=${bean.teacno}'"></td>
-																<td style="border-right: none"><input type="button"
-																	class="MBbtn deleteThisProduct" value="刪除"
-																	id="${bean.teacno}"></td>
-															</tr>
-														</c:forEach>
-													</tbody>
-												</table>
-												<!-- 分頁按鈕 -->
-												<div class="pagination font-alt"
-													style="display: flex; justify-content: center; align-items: center">
-													<c:if test="${currentPage != 1}">
-														<a
-															href="/MeetBoth/_05_teacStu.searchAllTeac.controller/${currentPage-1}"><i
-															class="fa fa-angle-left"></i></a>
-													</c:if>
-													<!-- 迴圈生成每一頁的按鈕 -->
-													<c:forEach var="i" begin="1" end="${totalPages}">
-														<c:choose>
-															<c:when test="${currentPage == i}">
-																<a class="active"
-																	href="/MeetBoth/_05_teacStu.searchAllTeac.controller/${i}">${i}</a>
-															</c:when>
-															<c:otherwise>
-																<a
-																	href="/MeetBoth/_05_teacStu.searchAllTeac.controller/${i}">${i}</a>
-															</c:otherwise>
-														</c:choose>
-													</c:forEach>
-													<c:if test="${currentPage != totalPages}">
-														<a
-															href="/MeetBoth/_05_teacStu.searchAllTeac.controller/${currentPage+1}"><i
-															class="fa fa-angle-right"></i></a>
-													</c:if>
-												</div>
-												<!-- 分頁按鈕結束 -->
-											</div>
+											<span>需求科目 :&ensp;${bean.subjectItem}</span>
+										</div>
+										<div>
+											<span>上課地點 :&ensp;${bean.studLoc}</span>
+										</div>
+										<div>
+											<span>教學對象 :&ensp;${bean.object}</span>
+										</div>
+										<div>
+											<span>自備教材 :&ensp;${bean.textBook}</span>
+										</div>
+										<div>
+											<span>開始日期 :&ensp;${bean.startDate}</span>
+										</div>
+										<div>
+											<span>課程期間 :&ensp;${bean.period}</span>
+										</div>
+										<div>
+											<span>上課時段 :&ensp;${bean.studTime}</span>
+										</div>
+										<div>
+											<span>上課方式 :&ensp;${bean.classMode}</span>
+										</div>
+										<div>
+											<span>薪資 :&ensp;${bean.price}</span>
+										</div>
+										<div>
+											<span>老師試教 :&ensp;${bean.testTeacMode}</span>
+										</div>
+										<div>
+											<span>學歷要求 :&ensp;${bean.educaLimit}</span>
+										</div>
+										<div>
+											<span>應徵方式 :&ensp;${bean.conMethod}</span>
+										</div>
+										<div>
+											<span>聯絡時間 :&ensp;${bean.conTime}</span>
 										</div>
 									</div>
 								</div>
@@ -409,12 +372,12 @@ a:hover {
 	<script src=<%=basePath3%>></script>
 	<script src=<%=basePath4%>></script>
 	<script src=<%=basePath5%>></script>
-	<script type="text/javascript"
-		src="https://www.gstatic.com/charts/loader.js"></script>
-	<script src="assets/lib/jquery.mb.ytplayer/dist/jquery.mb.YTPlayer.js"></script>
 	<!-- SweetAlert js -->
 	<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 	<!-- SweetAlert js -->
+	<script type="text/javascript"
+		src="https://www.gstatic.com/charts/loader.js"></script>
+	<script src="assets/lib/jquery.mb.ytplayer/dist/jquery.mb.YTPlayer.js"></script>
 	<script>
 		$(document).ready(function() {
 			//以ul li包子選單
@@ -432,8 +395,9 @@ a:hover {
 		});
 	</script>
 	<script>
+	
         $(function(){
-        	$('.deleteThisProduct').click(function(){
+        	$('.MBbtn-delete').click(function(){
                 let id=$(this).attr("id");
                 Swal.fire({
                   title: '你確定要刪除嗎?',
@@ -449,14 +413,14 @@ a:hover {
                     if (result.isConfirmed) {
                         $.ajax({
                           //專案名稱+servlet
-                         url:'/MeetBoth/admin/_05_teacStu.deletedata.controller',
+                         url:'/MeetBoth/admin/_05_teacStu.deletedataStud.controller',
                           method:"get",
                           dataType:"text",
                           //對應name設定的名稱 並非value的名稱
-                          data: {"teacno":id},
+                          data: {"studno":id},
                         })
                             .done(function () {
-                            	window.location='/MeetBoth/admin/_05_teacStu.searchAllTeac.controller/1'
+                            	window.location='/MeetBoth/admin/_05_teacStu.searchAllStud.controller/1'
                                 console.log("delete")
                              })//done
                              .fail(function(error) {

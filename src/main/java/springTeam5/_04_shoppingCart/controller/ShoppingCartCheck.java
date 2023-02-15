@@ -2,7 +2,6 @@ package springTeam5._04_shoppingCart.controller;
 
 import java.sql.SQLException;
 import java.util.LinkedHashSet;
-import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
@@ -13,7 +12,6 @@ import javax.servlet.http.HttpSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -37,7 +35,7 @@ import springTeam5._04_shoppingCart.service.impl.DiscountServiceImpl;
 import springTeam5._04_shoppingCart.service.impl.OrderServiceImpl;
 
 @Controller
-@SessionAttributes(names = { "ShoppingCart","CartSize" })
+@SessionAttributes(names = { "ShoppingCart" })
 public class ShoppingCartCheck {
 
 	private static Logger log = LoggerFactory.getLogger(ShoppingCartCheck.class);
@@ -60,15 +58,15 @@ public class ShoppingCartCheck {
 	AioCheckOutALL obj = new AioCheckOutALL();
 
 	@PostMapping("/shoppingCartConfirm.controller")
-	public String processConfirmAction(HttpServletRequest request, SessionStatus sessionStatus,HttpSession session, Model model)
+	public String processConfirmAction(HttpServletRequest request, SessionStatus sessionStatus, Model model)
 			throws SQLException {
-//		HttpSession session = request.getSession(true);
+		HttpSession session = request.getSession(true);
 		
 		log.info("處理訂單之Controller: 開始");
 
 		// ----------------------
 		String id = obj.getMerchantTradeNo();
-		id = id.replace("MeetBothTT", "");
+		id = id.replace("MeetBothTTT", "");
 		int orderNumber = Integer.parseInt(id);
 		System.out.println(orderNumber);
 		OrderBean orderBean = orderService.findByOrderNo(orderNumber).get(0);
@@ -90,20 +88,22 @@ public class ShoppingCartCheck {
 		}
 
 		session.removeAttribute("ShoppingCart");
-		System.out.println("-----------" + shoppingCart);
 		session.removeAttribute("CartSize");
+		System.out.println("-----------" + shoppingCart);
+		cartSize =0;
+		session.setAttribute("CartSize", cartSize);
 		System.out.println("-----" + cartSize);
 
 		MemberBean member = (MemberBean) session.getAttribute("Member");
 //
-		String account = SecurityContextHolder.getContext().getAuthentication().getName();
-		List<MemberBean> mem = memberService.searchMemByAccount(account);
+//		String account = SecurityContextHolder.getContext().getAuthentication().getName();
+//		List<MemberBean> mem = memberService.searchMemByAccount(account);
 //
 //		System.out.println("------------account-----------------" + mem);
 		// 存資料進session
 //		Optional<MemberBean> list = memberService.searchMemByID(mem.get(0).getMemberID());
 		System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
-		MemberBean memberBean = mem.get(0);
+//		MemberBean memberBean = mem.get(0);
 		
 //		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 //		MemberBean member = (MemberBean)authentication.getPrincipal();
@@ -115,7 +115,7 @@ public class ShoppingCartCheck {
 		}
 
 		// 加入屬性於跳轉成功訂購的頁面使用
-		model.addAttribute("member", memberBean);
+		model.addAttribute("member", memberbuy);
 		model.addAttribute("order", orderBean);
 
 		return "_04_shoppingCart/shoppingCartSuccess";
@@ -179,7 +179,7 @@ public class ShoppingCartCheck {
 			System.out.println("------------------------自動生成" + orderService.generateOrderNumber());
 			orderBean = new OrderBean(null, orderService.generateOrderNumber(), memberBean,
 					orderService.getCurrentDate(), orderService.getCurrentDate(), shippingName, shippingPhone,
-					shippingAddress, "處理中", "未付款", "無", paymentMethod, null, shoppingCart.getItemAmount(), null);
+					shippingAddress, "處理中", "未付款", "處理中", paymentMethod, null, shoppingCart.getItemAmount(), null);
 		}
 
 		orderService.createOrder(orderBean);
@@ -296,27 +296,27 @@ public class ShoppingCartCheck {
 
 		// 訂購完成寄信給買家確認訂單明細----Email
 		System.out.println(email);
-		String recipient = email;
-		String memberName = memberBean.getMemName();
-		String orderMessage = forMamberMail;
+		String recipient = email; //收件者的email
+		String memberName = memberBean.getMemName(); //自己的參數 我這邊是收件者的名字
+		String orderMessage = forMamberMail; //信件的內容
 
 		mailService.prepareAndSendForBuy(recipient, memberName, orderMessage);
 
-		String meetBothNo = "MeetBothTT";
+		String meetBothNo = "MeetBothTTT";
 		meetBothNo = meetBothNo + String.valueOf(orderBean.getOrderNo());
 
 		// 綠界
 		// 參考的網站https://hackmd.io/@leonsnoopy/rJVzy9JuN#java%E4%B8%B2%E6%8E%A5%E6%B5%81%E7%A8%8B
 		obj.setMerchantTradeNo(meetBothNo); // 綠界顯示的訂單編號-存一個String
 		obj.setMerchantTradeDate("2017/01/01 08:05:23"); // 時間
-		obj.setTotalAmount(String.valueOf(shoppingCart.getItemAmount()));
+		obj.setTotalAmount(String.valueOf(shoppingCart.getItemAmount())); //綠界結帳的金額
 		obj.setTradeDesc("這是測試-------------------");
-		obj.setItemName("MeetBoth 購物商城");
+		obj.setItemName("MeetBoth 購物商城"); //要放item的名稱 但我們沒有到他後台那些 所以先隨便放
 		// 錯誤return跳轉的網址
 		obj.setReturnURL("http://localhost:8080/MeetBoth/index.controller");
-		obj.setChooseSubPayment("Credit");
+		obj.setChooseSubPayment("Credit"); //預設選信用卡
 		// 跳轉的Controller網址
-		obj.setOrderResultURL("http://localhost:8080/MeetBoth/shoppingCartConfirm.controller");
+		obj.setOrderResultURL("http://localhost:8080/MeetBoth/shoppingCartConfirm.controller"); //綠界交易成功後要轉跳的網址
 		obj.setNeedExtraPaidInfo("N");
 		String form = all.aioCheckOut(obj, null);
 

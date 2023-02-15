@@ -62,79 +62,82 @@ String basePathimg2 = request.getScheme() + "://" + request.getServerName() + ":
 						</div>
 					</div>
 					<!-- 			按鈕們 -->
+
 					<div class="container">
-						<div class="row">
-							<!-- 						圖片BLOCK -->
-							<div class="col-sm-6 mb-sm-40"
-								style="width: 445px; height: 600px; display: flex; justify-content: center; align-items: center;">
-								<img id="preImg"
-									style="max-width: 100%; max-height: 100%; height: auto; width: auto;"
-									src="<c:url value='/showCoursePicture.controller?id=${bean.courseID}' />" />
-							</div>
-							<!-- 							圖片右邊BLOCK -->
-							<div class="col-sm-6">
-								<div class="row">
-									<div class="col-sm-12">
-										<h1 class="product-title font-alt">${bean.courseName}</h1>
-									</div>
+						<form action="<c:url value='/courseAioPay.controller' />"
+							method="POST">
+							<div class="row">
+								<!-- 						圖片BLOCK -->
+								<div class="col-sm-6 mb-sm-40"
+									style="width: 445px; height: 600px; display: flex; justify-content: center; align-items: center;">
+									<img id="preImg"
+										style="max-width: 100%; max-height: 100%; height: auto; width: auto;"
+										src="<c:url value='/showCoursePicture.controller?id=${bean.courseID}' />" />
 								</div>
-								<!-- 								星級評等 -->
-								<div class="row mb-20">
-									<div class="col-sm-12">
-										<div>
-											<c:forEach var="commbean" items="${commBean}">
-												<input id="starAVG" type="hidden"
-													value="${commbean.courseScore}" />
-											</c:forEach>
-											<div style="display: flex; float: left;">
-												<div style="font-size: 18px;">課程評價:</div>
-												<div id="starAVGDiv" style="font-size: 17px;"></div>
+								<!-- 							圖片右邊BLOCK -->
+								<div class="col-sm-6">
+									<div class="row">
+										<div class="col-sm-12">
+											<h1 class="product-title font-alt">${bean.courseName}</h1>
+										</div>
+									</div>
+									<!-- 								星級評等 -->
+									<div class="row mb-20">
+										<div class="col-sm-12">
+											<div>
+												<c:forEach var="commbean" items="${commBean}">
+													<input id="starAVG" type="hidden"
+														value="${commbean.courseScore}" />
+												</c:forEach>
+												<div style="display: flex; float: left;">
+													<div style="font-size: 18px;">課程評價:</div>
+													<div id="starAVGDiv" style="font-size: 17px;"></div>
+												</div>
 											</div>
 										</div>
 									</div>
-								</div>
-								<!-- 								星級評等end -->
-								<div class="row mb-20">
-									<div class="col-sm-12">
-										<div class="price font-alt">
-											<span class="amount">NT$${bean.coursePrice}</span>
+									<!-- 								星級評等end -->
+									<div class="row mb-20">
+										<div class="col-sm-12">
+											<div class="price font-alt">
+												<span class="amount"> NT$${bean.coursePrice}</span>
+												<input type="hidden" id="paymentS"
+										value="${bean.coursePrice}" name="coursePrice">
+											</div>
 										</div>
 									</div>
-								</div>
-								<!-- 								課程資訊 -->
-								<div class="row mb-20">
-									<div class="col-sm-12">
-										<div class="description">
-											<h4>課程編號 : ${bean.courseID}</h4>
+									<!-- 								課程資訊 -->
+									<div class="row mb-20">
+										<div class="col-sm-12">
+											<div class="description">
+												<h4>課程編號 : ${bean.courseID}</h4>
+											</div>
 										</div>
 									</div>
-								</div>
-								<div class="row mb-20">
-									<div class="col-sm-12">
-										<div class="description">
-											<h4>課程類別名稱 : ${bean.coursetype.courseClassName}</h4>
+									<div class="row mb-20">
+										<div class="col-sm-12">
+											<div class="description">
+												<h4>課程類別名稱 : ${bean.coursetype.courseClassName}</h4>
+											</div>
 										</div>
 									</div>
-								</div>
-								<div class="row mb-20">
-									<div class="col-sm-12">
-										<div class="description">
-											<h4>課程上架日期 : ${bean.coursePost}</h4>
+									<div class="row mb-20">
+										<div class="col-sm-12">
+											<div class="description">
+												<h4>課程上架日期 : ${bean.coursePost}</h4>
+											</div>
 										</div>
 									</div>
-								</div>
-								<div class="row mb-20">
-									<div class="col-sm-12">
-										<div class="description">
-											<h4>課程上次資訊更新日期 : ${bean.courseUpdate}</h4>
+									<div class="row mb-20">
+										<div class="col-sm-12">
+											<div class="description">
+												<h4>課程上次資訊更新日期 : ${bean.courseUpdate}</h4>
+											</div>
 										</div>
 									</div>
-								</div>
-								<!-- 								課程資訊 -->
-								<div class="row mb-20">
-									<form
-										action="<c:url value='/shoppingCartPayAioConfirm.controller' />"
-										method="GET">
+									<!-- 								課程資訊 -->
+									<div class="row mb-20">
+
 										<div class="col-sm-4 mb-sm-20">
 											<input class="form-control input-lg" type="number"
 												name="chooseAmount" id="amount" value="1" max="1" min="1"
@@ -143,14 +146,14 @@ String basePathimg2 = request.getScheme() + "://" + request.getServerName() + ":
 										</div>
 										<div class="col-sm-8">
 											<a class="btn btn-p btn-circle" href="#"
-												style="height: 43px; font-size: 19px;">加入購物車</a>
+												style="height: 43px; font-size: 19px;">直接購買課程</a>
 										</div>
-									</form>
-								</div>
+									</div>
 
-								<!-- 								課程資訊 -->
+									<!-- 								課程資訊 -->
+								</div>
 							</div>
-						</div>
+						</form>
 						<!-- 						中間BLOCK -->
 						<div class="row mt-70">
 							<div class="col-sm-12">

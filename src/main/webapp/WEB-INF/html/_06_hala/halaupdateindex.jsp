@@ -265,12 +265,12 @@ a:hover {
 								<!-- 							標題 -->
 								<!--       右邊第一部分開始 -->
 								<div class="post">
-								<form action="<c:url value='/_06_halaAndQa.updateHalaIndex.controller' />" method="Post" enctype="multipart/form-data">
+								<form action="<c:url value='/admin/_06_halaAndQa.updateHalaIndex.controller' />" method="Post" enctype="multipart/form-data">
 									<div class="post-video embed-responsive embed-responsive-16by9"
 										style="height: auto; padding-bottom: 100px;">
 										<div style="display: flex">
 											<button class="MBbtn"
-												onclick="window.location='/MeetBoth/_06_halaAndQa.GoHalaUpdateIndex.controller'">返回</button>
+												onclick="window.location='/MeetBoth/admin/_06_halaAndQa.GoHalaUpdateIndex.controller'">返回</button>
 										</div>
 										
 										
@@ -311,7 +311,7 @@ a:hover {
 										</div>
 										
 										<div>
-											<span>會員編號 :&ensp;<input value="${bean.memberid}" type="text" name="memberid" class="MBinput" placeholder="只能編號"></span>
+											<span>會員編號 :&ensp;<input value="${Member.memberID}" type="text" name="memberid" class="MBinput"></span>
 										</div>
 										
 										<div>

@@ -1340,6 +1340,9 @@ General Styles - Owlcarousel
 .fa-shopping-cart {
   color: var(--pinkcolor);
 }
+#addToCartBtn:hover i.fa-shopping-cart {
+  color: var(--garycolor);
+}
 
 /* .fa-heart {
   color: var(--pinkcolor);

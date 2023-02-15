@@ -1,11 +1,11 @@
 package springTeam5._05_teacStu.controller;
 
-import java.security.Principal;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
-import java.util.Optional;
+import java.util.stream.Collectors;
 
 import javax.servlet.annotation.MultipartConfig;
 
@@ -20,15 +20,18 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import springTeam5._01_member.model.MemberBean;
 import springTeam5._01_member.model.MemberService;
+import springTeam5._05_teacStu.model.MatchOption;
 import springTeam5._05_teacStu.model.ReplyTeac;
 import springTeam5._05_teacStu.model.StudBean;
 import springTeam5._05_teacStu.model.TeacBean;
 import springTeam5._05_teacStu.service.ReplyTeacServiceInterface;
 import springTeam5._05_teacStu.service.StudServiceInterface;
 import springTeam5._05_teacStu.service.TeacServiceInterface;
+import springTeam5._05_teacStu.service.TeacStudMailService;
 
 @MultipartConfig()
 @Controller
@@ -45,6 +48,9 @@ public class TeacStudController {
 	
 	@Autowired
 	private MemberService mService;
+	
+	@Autowired
+	private TeacStudMailService mailService;
 	
 	public String getCurrentDate() {
 		Date date = new Date();
@@ -443,7 +449,10 @@ public class TeacStudController {
 		List<MemberBean> list = mService.searchMemByAccount(account);
 		if (list != null && list.size() > 0) {
 			  MemberBean member = list.get(0);
-			  m.addAttribute("m", member);
+			  List<TeacBean> teacBean = member.getTeacBean();
+			  if (teacBean != null && !teacBean.isEmpty()) {
+				  m.addAttribute("m", teacBean);
+			}
 			} else {
 			  m.addAttribute("m", null);
 			}
@@ -459,9 +468,14 @@ public class TeacStudController {
 			@RequestParam("teacLoc") String teacLoc,@RequestParam("teacObject") String teacObject,
 			@RequestParam("teacTime") String teacTime,@RequestParam("classMode") String classMode,
 			@RequestParam("willTeac") String willTeac,@RequestParam("conMethod") String conMethod,
-			@RequestParam("conTime") String conTime,@RequestParam("price") Double price,@RequestParam("teacno") Integer teacno){
+			@RequestParam("conTime") String conTime,@RequestParam("price") Double price,@RequestParam("views") Integer views,
+			@RequestParam("teacno") Integer teacno){
 		TeacBean t = new TeacBean();
+		String account = SecurityContextHolder.getContext().getAuthentication().getName();
+		List<MemberBean> list = mService.searchMemByAccount(account);
+		MemberBean member = list.get(0);
 		t.setTeacno(teacno);
+		t.setMember(member);
 		t.setUpdateDate(getCurrentDate());
 		t.setHighEdu(highEdu);
 		t.setStudExp(studExp);
@@ -477,6 +491,7 @@ public class TeacStudController {
 		t.setConMethod(conMethod);
 		t.setConTime(conTime);
 		t.setPrice(price);
+		t.setViews(views);
 		tService.updateTeacFromTeacno(t);
 		return "redirect:_05_teacStu.searchAllTeac.controller/1";
 	}
@@ -487,9 +502,14 @@ public class TeacStudController {
 			@RequestParam("object") String object,@RequestParam("classMode") String classMode,@RequestParam("testTeacMode") String testTeacMode,
 			@RequestParam("studTime") String studTime,@RequestParam("conMethod") String conMethod,@RequestParam("conTime") String conTime,
 			@RequestParam("price") Double price,@RequestParam("subjectItem") String subjectItem,@RequestParam("textBook") String textBook,
-			@RequestParam("startDate") String startDate,@RequestParam("period") String period,@RequestParam("studno") Integer studno) {
+			@RequestParam("startDate") String startDate,@RequestParam("period") String period,@RequestParam("views") Integer views,
+			@RequestParam("studno") Integer studno) {
 		StudBean s = new StudBean();
+		String account = SecurityContextHolder.getContext().getAuthentication().getName();
+		List<MemberBean> list = mService.searchMemByAccount(account);
+		MemberBean member = list.get(0);
 		s.setStudno(studno);
+		s.setMember(member);
 		s.setUpdateDate(getCurrentDate());
 		s.setEducaLimit(educaLimit);
 		s.setStudLoc(studLoc);
@@ -504,6 +524,7 @@ public class TeacStudController {
 		s.setTextBook(textBook);
 		s.setStartDate(startDate);
 		s.setPeriod(period);
+		s.setViews(views);
 		sService.updateStudFromStudno(s);
 		return "redirect:_05_teacStu.searchAllStud.controller/1";
 	}
@@ -526,14 +547,6 @@ public class TeacStudController {
 		MemberBean member = list.get(0);
 		m.addAttribute("bean", member);
 		return "_05_teacStu/insertpagestud";
-	}
-	
-//	測試principle
-	@GetMapping("/_05_teacStu.getxx.controller")
-	public MemberBean getxx(Principal p) {
-		List<MemberBean> userList = mService.searchMemByAccount(p.getName());
-		MemberBean user = userList.get(0);
-		return user;
 	}
 	
 //	新增教師貼文
@@ -633,53 +646,162 @@ public class TeacStudController {
 		return "redirect:_05_teacStu.searchAllStud.controller/1";
 	}
 	
-//	匹配度測試1
-	public double calculateSimilarity(String s1, String s2) {
-	    int m = s1.length();
-	    int n = s2.length();
+//	匹配度功能
+	@PostMapping("/_05_teacStu.match.controller")
+	@ResponseBody
+	public List<TeacBean> processMatchAction(@RequestBody MatchOption options) {
+		Integer goal = 0;
+		List<TeacBean> query1 = new ArrayList<>();
+		List<String> north = Arrays.asList("台北市","臺北市","新北市","基隆市","宜蘭縣","桃園市","新竹縣","新竹市");
+		List<String> middle = Arrays.asList("台中市","臺中市","苗栗縣","彰化縣","南投縣","雲林縣");
+		List<String> south = Arrays.asList("台南市","臺南市","高雄市","嘉義市","嘉義縣","屏東縣","澎湖縣");
+		List<String> east = Arrays.asList("花蓮縣","台東縣","臺東縣");
+		List<String> weekday = Arrays.asList("平日早上","平日下午","平日晚上");
+		List<String> holiday = Arrays.asList("假日早上","假日下午","假日晚上");
+		String location = options.getLocation();
+		String object = options.getObject();
+		String time = options.getTime();
+		switch (location) {
+		case "北部":
+			query1 = tService.findByTeacLocIn(north);
+			break;
+		case "中部":
+			query1 = tService.findByTeacLocIn(middle);
+			break;
+		case "南部":
+			query1 = tService.findByTeacLocIn(south);
+			break;
+		case "東部":
+			query1 = tService.findByTeacLocIn(east);
+			break;
+		}
+		
+		if (query1.size() > 0) {
+			goal = goal + 33;
+		}
+		
+		List<TeacBean> query2 = new ArrayList<>();
+		switch (object) {
+		case "國小":
+			query2 = tService.findByTeacObjectContaining("國小");
+			break;
+		case "國中":
+			query2 = tService.findByTeacObjectContaining("國中");
+			break;
+		case "高中":
+			query2 = tService.findByTeacObjectContaining("高中");
+			break;
+		case "大學":
+			query2 = tService.findByTeacObjectContaining("大學");
+			break;
+		}
+		
+		if (query2.size() > 0) {
+			goal = goal + 33;
+		}
+		
+		List<TeacBean> query3 = new ArrayList<>();
+		switch (time) {
+		case "平日":
+			query3 = tService.findByTeacTimeIn(weekday);
+			break;
+		case "假日":
+			query3 = tService.findByTeacTimeIn(holiday);
+			break;
+		case "皆可":
+			query3 = tService.searchAllTeac();
+			break;
+		}
+		
+		if (query3.size() > 0) {
+			goal = goal + 33;
+		}
+		
+		List<TeacBean> allData = new ArrayList<>();
+		allData.addAll(query1);
+		allData.addAll(query2);
+		allData.addAll(query3);
 
-	    if (m == 0 || n == 0) {
-	        return 0.0;
-	    }
-
-	    int p = 0;
-	    int t = 0;
-	    for (int i = 0; i < m; i++) {
-	        int j = Math.max(0, Math.max(i - (n - m), i) - t);
-	        while (j < n && !(s1.charAt(i) == s2.charAt(j))) {
-	            j++;
-	        }
-	        if (j < n) {
-	            p++;
-	            t = j - i;
-	        }
-	    }
-
-	    if (p == 0) {
-	        return 0.0;
-	    }
-
-	    int s = 0;
-	    int k = 0;
-	    while (k < p && s1.charAt(k + s) == s2.charAt(k)) {
-	        k++;
-	    }
-	    s = k;
-
-	    return (p / (double) m + p / (double) n + (p - s) / (double) p) / 3.0;
+		// 刪除重複資料
+		allData = allData.stream().distinct().collect(Collectors.toList());
+		// 根據條件符合最多的資料從最前面開始排列
+		allData.sort((o1, o2) -> {
+		int count1 = 0, count2 = 0;
+		if (north.contains(o1.getTeacLoc())) {
+		count1++;
+		}
+		if (north.contains(o2.getTeacLoc())) {
+		count2++;
+		}
+		if (o1.getTeacObject().contains(object)) {
+		count1++;
+		}
+		if (o2.getTeacObject().contains(object)) {
+		count2++;
+		}
+		if (weekday.contains(o1.getTeacTime()) || holiday.contains(o1.getTeacTime())) {
+		count1++;
+		}
+		if (weekday.contains(o2.getTeacTime()) || holiday.contains(o2.getTeacTime())) {
+		count2++;
+		}
+		return count2 - count1;
+		});
+		
+		return allData;
 	}
 	
-//	匹配度測試2
-	@GetMapping("/_05_teacStu.compare.controller")
-	public double compareTeacBeanAndStudBean(@RequestParam("teacno") Integer teacno, @RequestParam("studno") Integer studno) {
-	    double similarity = 0.0;
-	    TeacBean t = tService.searchTeacFromTeacno(teacno);
-	    StudBean s = sService.searchStudFromStudno(studno);
-	    similarity += calculateSimilarity(t.getHighEdu(), s.getEducaLimit());
-	    similarity += calculateSimilarity(t.getTeacLoc(), s.getStudLoc());
-	    similarity += calculateSimilarity(t.getClassMode(), s.getClassMode());
-	    similarity += calculateSimilarity(t.getSubjectItem(), s.getSubjectItem());
-
-	    return similarity;
+//  增加教師履歷瀏覽次數
+	@GetMapping("/_05_teacStu.teacview.controller")
+	public String processteacviewAction(@RequestParam("teacno") Integer teacno) {
+		TeacBean t = tService.searchTeacFromTeacno(teacno);
+		Integer views = t.getViews();
+		views += 1;
+		t.setViews(views);
+		tService.updateTeacFromTeacno(t);
+		return null;
+ }
+	
+//  增加學生貼文瀏覽次數
+	@GetMapping("/_05_teacStu.studview.controller")
+	public String processstudviewAction(@RequestParam("studno") Integer studno) {
+		StudBean s = sService.searchStudFromStudno(studno);
+		Integer views = s.getViews();
+		views += 1;
+		s.setViews(views);
+		sService.updateStudFromStudno(s);
+		return null;
+ }
+	
+//	寄送信件給教師
+	@GetMapping("/_05_teacStu.teacmail.controller")
+	public String processteacmailAction(@RequestParam("teacno") Integer teacno) {
+		TeacBean t = tService.searchTeacFromTeacno(teacno);
+		String account = SecurityContextHolder.getContext().getAuthentication().getName();
+		List<MemberBean> list = mService.searchMemByAccount(account);
+		MemberBean member = list.get(0);
+		String memberEmailTeac = t.getMember().geteMail();
+		String memberNameTeac = t.getMember().getMemName();
+		String memberEmail = member.geteMail();
+		String memberName = member.getMemName();
+		mailService.prepareAndSendForTeac(memberEmailTeac, memberEmail, memberName, memberNameTeac);
+		
+		return "redirect:_05_teacStu.searchAllTeac.controller/1";
+	}
+	
+//	寄送信件給學生
+	@GetMapping("/_05_teacStu.studmail.controller")
+	public String processstudmailAction(@RequestParam("studno") Integer studno) {
+		StudBean s = sService.searchStudFromStudno(studno);
+		String account = SecurityContextHolder.getContext().getAuthentication().getName();
+		List<MemberBean> list = mService.searchMemByAccount(account);
+		MemberBean member = list.get(0);
+		String memberEmailStud = s.getMember().geteMail();
+		String memberNameStud = s.getMember().getMemName();
+		String memberEmail = member.geteMail();
+		String memberName = member.getMemName();
+		mailService.prepareAndSendForTeac(memberEmailStud, memberEmail, memberName, memberNameStud);
+		
+		return "redirect:_05_teacStu.searchAllStud.controller/1";
 	}
 }

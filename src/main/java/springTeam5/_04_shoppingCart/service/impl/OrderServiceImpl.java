@@ -3,7 +3,6 @@ package springTeam5._04_shoppingCart.service.impl;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
-import java.util.Set;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -11,9 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import springTeam5._03_product.service.ProductService;
 import springTeam5._04_shoppingCart.model.OrderBean;
-import springTeam5._04_shoppingCart.model.OrderItemBean;
 import springTeam5._04_shoppingCart.model.OrderRepository;
 
 @Service
@@ -24,10 +21,6 @@ public class OrderServiceImpl implements springTeam5._04_shoppingCart.service.Or
 
 	@Autowired
 	private OrderRepository orderRepo;
-	@Autowired
-	private OrderItemServiceImpl orderItemService;
-	@Autowired
-	private ProductService productService;
 
 	public String getCurrentDate() {
 		Date date = new Date();
@@ -79,21 +72,44 @@ public class OrderServiceImpl implements springTeam5._04_shoppingCart.service.Or
 		return orderRepo.findOrderByUID(orderUID);
 	}
 
-	//找到買了那些訂單
+	// 找到買了那些訂單
 	@Override
 	public List<OrderBean> findByMemberbuy(Integer memberbuy_FK) {
 		return orderRepo.findByMemberbuy(memberbuy_FK);
 	}
 
-	// 訂單編號生成小工具
+	@Override
+	public List<OrderBean> findByMemberSale(Integer membersale_FK) {
+		return orderRepo.findByMemberSale(membersale_FK);
+	}
 
+	@Override
+	public List<OrderBean> findByMemberbuyAllLike(String ordStstus, String paymentStstus, String deliveryStstus,
+			String search, Integer memberbuy_FK) {
+		return orderRepo.findByMemberbuyAllLike(ordStstus, paymentStstus, deliveryStstus, search, memberbuy_FK);
+	}
+
+	// 找到賣了那些訂單
+	@Override
+	public List<OrderBean> findByMemberSaleAndOrderNo(Integer orderNo, Integer membersale_FK) {
+		return orderRepo.findByMemberSaleAndOrderNo(orderNo, membersale_FK);
+	}
+
+	@Override
+	public List<OrderBean> findByMemberSaleAllLike(Integer membersale_FK, String ordStstus,
+			String paymentStstus, String deliveryStstus, String search) {
+		return orderRepo.findByMemberSaleAllLike(membersale_FK, ordStstus, paymentStstus, deliveryStstus,
+				search);
+	}
+
+	// 訂單編號生成小工具
 	public String generateOrderNumber() {
 		SimpleDateFormat sdf = new SimpleDateFormat("yyMMdd");
 		String date = sdf.format(new Date());
 
 		List<OrderBean> orderList = orderRepo.findOrderByUID(date);
 		int size = orderList.size();
-		return "MB" + date + String.format("%04d", (size+1));
+		return "MB" + date + String.format("%04d", (size + 1));
 	}
 
 //	// 檢查購物車----

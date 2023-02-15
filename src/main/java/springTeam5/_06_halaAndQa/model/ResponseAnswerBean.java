@@ -15,6 +15,8 @@ import javax.persistence.Transient;
 
 import org.springframework.stereotype.Component;
 
+import springTeam5._01_member.model.MemberBean;
+
 @Entity
 @Table(name = "RESPONSEANSWER")
 @Component
@@ -33,8 +35,13 @@ public class ResponseAnswerBean {
 	@Transient
 	private Integer answerId;
 	
-	@Column(name="MEMBERID")
-	private Integer memberId;
+	@Column(name="memberID")
+	@Transient
+	private Integer memberID;
+	
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name="memberID")
+	private MemberBean memberBean;
 	
 	@Column(name="RESPONSEANSWERDATE")
 	private String responseAnswerDate;
@@ -72,6 +79,53 @@ public class ResponseAnswerBean {
 
 	
 
+	public ResponseAnswerBean(Integer responseAnswerId, AnswerHalaBean answerHala, Integer answerId, Integer memberID,
+			MemberBean memberBean, String responseAnswerDate, String responseAnswerContent, Integer tumb,
+			Integer tumbOff, Blob picture) {
+		super();
+		this.responseAnswerId = responseAnswerId;
+		this.answerHala = answerHala;
+		this.answerId = answerId;
+		this.memberID = memberID;
+		this.memberBean = memberBean;
+		this.responseAnswerDate = responseAnswerDate;
+		this.responseAnswerContent = responseAnswerContent;
+		this.tumb = tumb;
+		this.tumbOff = tumbOff;
+		this.picture = picture;
+	}
+
+
+	public AnswerHalaBean getAnswerHala() {
+		return answerHala;
+	}
+
+
+	public void setAnswerHala(AnswerHalaBean answerHala) {
+		this.answerHala = answerHala;
+	}
+
+
+	public Integer getMemberID() {
+		return memberID;
+	}
+
+
+	public void setMemberID(Integer memberID) {
+		this.memberID = memberID;
+	}
+
+
+	public MemberBean getMemberBean() {
+		return memberBean;
+	}
+
+
+	public void setMemberBean(MemberBean memberBean) {
+		this.memberBean = memberBean;
+	}
+
+
 	public Integer getAnswerId() {
 		return answerId;
 	}
@@ -80,12 +134,12 @@ public class ResponseAnswerBean {
 		this.answerId = answerId;
 	}
 
-	public Integer getMemberId() {
-		return memberId;
+	public Integer getmemberID() {
+		return memberID;
 	}
 
-	public void setMemberId(Integer memberId) {
-		this.memberId = memberId;
+	public void setmemberID(Integer memberID) {
+		this.memberID = memberID;
 	}
 
 	public String getResponseAnswerDate() {
@@ -137,13 +191,13 @@ public class ResponseAnswerBean {
 	}
 
 	public ResponseAnswerBean(Integer responseAnswerId, AnswerHalaBean answerHala, Integer answerId,
-			Integer memberId, String responseAnswerDate, String responseAnswerContent, Integer tumb, Integer tumbOff,
+			Integer memberID, String responseAnswerDate, String responseAnswerContent, Integer tumb, Integer tumbOff,
 			Blob picture) {
 		super();
 		this.responseAnswerId = responseAnswerId;
 		this.answerHala = answerHala;
 		this.answerId = answerId;
-		this.memberId = memberId;
+		this.memberID = memberID;
 		this.responseAnswerDate = responseAnswerDate;
 		this.responseAnswerContent = responseAnswerContent;
 		this.tumb = tumb;

@@ -3,16 +3,22 @@ package springTeam5._06_halaAndQa.controller;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.sql.Blob;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import javax.sql.rowset.serial.SerialBlob;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -25,6 +31,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
+import springTeam5._01_member.model.MemberBean;
+import springTeam5._01_member.model.MemberService;
 import springTeam5._06_halaAndQa.model.AnswerHalaBean;
 import springTeam5._06_halaAndQa.model.HalaBean;
 import springTeam5._06_halaAndQa.model.HalaRepository;
@@ -39,6 +47,9 @@ public class HalaController {
 
 	@Autowired
 	private HalaService halaService;
+	
+	@Autowired
+	private MemberService memberService;
 
 	public String getCurrentDate() {
 		Date date = new Date();
@@ -47,18 +58,43 @@ public class HalaController {
 	}
 
 	// 查詢全部' BindingResult result,@ModelAttribute("HalaBean") HalaBean hb
-	@RequestMapping(path = "/_06_halaAndQa.SelectAllHala.controller", method = RequestMethod.GET)
-	public String processAction(Model haModel,Model topModel) {
-//		if (result.hasErrors()) {
-//			return "Error";
-//		}
-		List<HalaBean> classList = halaRepo.findAllHala();
-		haModel.addAttribute("classList", classList);
+	@RequestMapping(path = "/_06_halaAndQa.SelectAllHala.controller/{page}", method = RequestMethod.GET)
+	public String processAction(Model haModel,Model topModel, @PathVariable("page") String page) {
+		
 		List<HalaBean>topList = halaService.findTopHot();
 		topModel.addAttribute("topList",topList);
+		List<HalaBean> classList = halaRepo.findAllHala();
+		int page2 = 1;
+		  try {
+		      page2 = Integer.parseInt(page);
+		  } catch (NumberFormatException e) {
+		      page2 = 1;
+		  }
+		  // 每頁顯示的貼文數量，可以自行修改
+		  int pageSize = 5;
+		  int totalPages = (int) Math.ceil((double) classList.size() / pageSize);
+		  int startIndex = (page2 - 1) * pageSize;
+		  int endIndex = startIndex + pageSize;
+		  if (endIndex > classList.size()) {
+		  endIndex = classList.size();
+		  }
+		  if (startIndex >= classList.size()) {
+		   startIndex = classList.size() - pageSize;
+		  }
+		  if (classList.size() <= pageSize) {
+		   startIndex = 0;
+		  } else if (startIndex >= classList.size()) {
+		   startIndex = classList.size() - pageSize;
+		  }
+		  List<HalaBean> list = classList.subList(startIndex, endIndex);
+
+		  haModel.addAttribute("classList", list);
+		  haModel.addAttribute("totalPages", totalPages);
+		  haModel.addAttribute("currentPage", page2);
 
 		return "_06_hala/hala";
 	}
+	
 	
 	
 
@@ -77,11 +113,8 @@ public class HalaController {
 	
 	
 
-	// 前往新增畫面
-	@RequestMapping(path = "/_06_halaAndQa.goAddHala.controller", method = RequestMethod.GET)
-	public String processMainAction1() {
-		return "_06_hala/addhala";
-	}
+	
+
 //	//前往貼文畫面
 //	@RequestMapping(path = "/_06_halaAndQa.goHalaPage.controller",method = RequestMethod.GET)
 //	public String proccessMainAction7() {
@@ -91,16 +124,27 @@ public class HalaController {
 	// 新增
 	@PostMapping("/_06_halaAndQa.AddHala.controller")
 	public String processMainAction2(@RequestParam("halaclassname") String halaclassname,
-			@RequestParam("memberid") Integer memberid, @RequestParam("title") String title,
-			@RequestParam("halacontent") String halacontent, @RequestParam("images") MultipartFile mf)
-			throws IllegalStateException, IOException, SQLException {
+	        @RequestParam("memberid") Integer memberid, @RequestParam("title") String title,
+	        @RequestParam("halacontent") String halacontent, @RequestParam(value = "images", required = false) MultipartFile mf)
+	        throws IllegalStateException, IOException, SQLException {
+		Optional<MemberBean> member = memberService.searchMemByID(memberid);
+		InputStream in;
+	    long size;
+	    Blob b;
 
-		InputStream in = mf.getInputStream();
-		long size = mf.getSize();
-		Blob b = PictureService.fileToBlob(in, size);
+	    if (mf != null && !mf.isEmpty()) {
+	        in = mf.getInputStream();
+	        size = mf.getSize();
+	        b = PictureService.fileToBlob(in, size);
+	    } else {
+	        // 設定預設圖片
+	        byte[] defaultImage = Files.readAllBytes(Paths.get("C:\\hibernate\\workspace\\MeetBoth\\src\\main\\webapp\\WEB-INF\\resources\\images\\meatball-200.png"));
+	        b = new SerialBlob(defaultImage);
+	    }
+		
 		HalaBean hb = new HalaBean();
 		hb.setHalaclassname(halaclassname);
-		hb.setMemberid(memberid);
+       hb.setMemberBean(member.get());
 		hb.setTitle(title);
 		hb.setPostdate(getCurrentDate());
 		hb.setHalacontent(halacontent);
@@ -109,18 +153,46 @@ public class HalaController {
 		hb.setWatch(0);
 		halaService.insertHala(hb);
 
-		return "redirect:/_06_halaAndQa.SelectAllHala.controller";
+		return "redirect:/_06_halaAndQa.SelectAllHala.controller/1";
 	}
 
 	// 分類查詢
-	@RequestMapping(path = "/_06_halaAndQa.SelectHalaClass.controller", method = RequestMethod.GET)
+	@RequestMapping(path = "/_06_halaAndQa.SelectHalaClass.controller/{page}", method = RequestMethod.GET)
 	public String processAction3(@RequestParam("halaclassname") String halaclassname,
-			@ModelAttribute("HalaBean") HalaBean hb, BindingResult result, Model haModel) {
+			@ModelAttribute("HalaBean") HalaBean hb, BindingResult result, Model haModel,Model topModel, @PathVariable("page") String page) {
 		if (result.hasErrors()) {
 			return "Error";
 		}
 		List<HalaBean> classList = halaRepo.findByHalaclassname(halaclassname);
-		haModel.addAttribute("classList", classList);
+		int page2 = 1;
+		  try {
+		      page2 = Integer.parseInt(page);
+		  } catch (NumberFormatException e) {
+		      page2 = 1;
+		  }
+		  // 每頁顯示的貼文數量，可以自行修改
+		  int pageSize = 5;
+		  int totalPages = (int) Math.ceil((double) classList.size() / pageSize);
+		  int startIndex = (page2 - 1) * pageSize;
+		  int endIndex = startIndex + pageSize;
+		  if (endIndex > classList.size()) {
+		  endIndex = classList.size();
+		  }
+		  if (startIndex >= classList.size()) {
+		   startIndex = classList.size() - pageSize;
+		  }
+		  if (classList.size() <= pageSize) {
+		   startIndex = 0;
+		  } else if (startIndex >= classList.size()) {
+		   startIndex = classList.size() - pageSize;
+		  }
+		  List<HalaBean> list = classList.subList(startIndex, endIndex);
+
+		  haModel.addAttribute("classList", list);
+		  haModel.addAttribute("totalPages", totalPages);
+		  haModel.addAttribute("currentPage", page2);
+		List<HalaBean>topList = halaService.findTopHot();
+		topModel.addAttribute("topList",topList);
 
 		return "_06_hala/hala";
 	}
@@ -128,41 +200,62 @@ public class HalaController {
 
 	// 前往貼文頁面
 	@RequestMapping(path = "/_06_halaAndQa.goHalaPage.controller", method = RequestMethod.GET)
-	public String processAction11(@RequestParam("halaid") Integer halaid, Model haModel, Model resModel) {
+	public String processAction11(HttpServletRequest request,@RequestParam("halaid") Integer halaid, Model haModel, Model resModel) {
 		HalaBean Bean = halaRepo.findByHalaId(halaid);
 		haModel.addAttribute("bean", Bean);
+		
+		HttpSession session = request.getSession(false);
+		
+		String account = SecurityContextHolder.getContext().getAuthentication().getName();
+		List<MemberBean> mem = memberService.searchMemByAccount(account);
+		if (mem.size() == 0) {
+			return "_06_hala/halapostpage";
+		}else {
+		resModel.addAttribute("member",mem.get(0) );
 
-		for (AnswerHalaBean a : Bean.getAnswerHala()) {
-			System.out.println("媽的給我跑出來出來" + a.getAnswerContent());
+	
+
+		return "_06_hala/halapostpage";
+		}
+	}
+	
+	// 前往修改畫面
+	@RequestMapping(path = "/_06_halaAndQa.GoHalaUpdate.controller", method = RequestMethod.GET)
+	public String processAction4( HttpServletRequest request,@RequestParam("halaId") Integer halaid, Model haModel) {
+		HttpSession session = request.getSession(false);
+		String account = SecurityContextHolder.getContext().getAuthentication().getName();
+		List<MemberBean> mem = memberService.searchMemByAccount(account);
+
+		if (mem.size() == 0) {
+			return "login";
+		}else {
+			session.setAttribute("Member", mem.get(0));
+			HalaBean Bean = halaRepo.findByHalaId(halaid);
+			haModel.addAttribute("bean", Bean);
+			return "_06_hala/updatehala";
+		}
+		
+	}
+	
+	// 前往新增畫面
+		@RequestMapping(path = "/_06_halaAndQa.goAddHala.controller", method = RequestMethod.GET)
+		public String processMainAction1(HttpServletRequest request) {
+			HttpSession session = request.getSession(false);
+			
+			//查看是否有登入 如果沒有登入則轉跳登入頁面
+					String account = SecurityContextHolder.getContext().getAuthentication().getName();
+					List<MemberBean> mem = memberService.searchMemByAccount(account);
+
+					if (mem.size() == 0) {
+						return "login";
+					}else {
+						session.setAttribute("Member", mem.get(0));
+						return "_06_hala/addhala";
+					}
+					
+					
 		}
 
-		return "_06_hala/halapostpage";
-	}
-
-	// 修改
-	@PostMapping("/_06_halaAndQa.updateHala.controller")
-	public String processAction5(@RequestParam("halaId") Integer halaId,
-			@RequestParam("halaclassname") String halaclassname, @RequestParam("title") String title,
-			@RequestParam("images") MultipartFile mf, @RequestParam("halacontent") String halacontent, Model haModel)
-			throws IOException, SQLException {
-
-		HalaBean hb = halaService.selectHalaId(halaId);
-		InputStream in = mf.getInputStream();
-		long size = mf.getSize();
-		Blob b = PictureService.fileToBlob(in, size);
-
-		hb.setHalaclassname(halaclassname);
-		hb.setPicture(b);
-		hb.setTitle(title);
-		hb.setPostdate(getCurrentDate());
-		hb.setHalacontent(halacontent);
-
-		halaService.updateHala(hb);
-		HalaBean Bean = halaRepo.findByHalaId(halaId);
-		haModel.addAttribute("bean", Bean);
-
-		return "_06_hala/halapostpage";
-	}
 
 	// 刪除
 	@GetMapping("/_06_halaAndQa.deleteHala.controller")
@@ -223,26 +316,105 @@ public class HalaController {
 	}
 	
 //	模糊搜尋貼文
-	@PostMapping(path = "/_06_halaAndQa.searchAllLike.controller")
-	public String processAction8(@RequestParam("search") String search, Model m) {
+	@PostMapping(path = "/_06_halaAndQa.searchAllLike.controller/{page}")
+	public String processAction8(@RequestParam("search") String search, Model m, @PathVariable("page") String page,Model topModel) {
 		
 		List<HalaBean> hb = halaService.searchAllLike(search);
-		m.addAttribute("classList", hb);
+		int page2 = 1;
+		  try {
+		      page2 = Integer.parseInt(page);
+		  } catch (NumberFormatException e) {
+		      page2 = 1;
+		  }
+		  // 每頁顯示的貼文數量，可以自行修改
+		  int pageSize = 5;
+		  int totalPages = (int) Math.ceil((double) hb.size() / pageSize);
+		  int startIndex = (page2 - 1) * pageSize;
+		  int endIndex = startIndex + pageSize;
+		  if (endIndex > hb.size()) {
+		  endIndex = hb.size();
+		  }
+		  if (startIndex >= hb.size()) {
+		   startIndex = hb.size() - pageSize;
+		  }
+		  if (hb.size() <= pageSize) {
+		   startIndex = 0;
+		  } else if (startIndex >= hb.size()) {
+		   startIndex = hb.size() - pageSize;
+		  }
+		  List<HalaBean> list = hb.subList(startIndex, endIndex);
+
+		  m.addAttribute("classList", list);
+		  m.addAttribute("totalPages", totalPages);
+		  m.addAttribute("currentPage", page2);
+		  
+		  List<HalaBean>topList = halaService.findTopHot();
+			topModel.addAttribute("topList",topList);
 		
 		return "_06_hala/hala";
 	}
-	// 前往修改畫面
-	@RequestMapping(path = "/_06_halaAndQa.GoHalaUpdate.controller", method = RequestMethod.GET)
-	public String processAction4(@RequestParam("halaId") Integer halaid, Model haModel) {
-		HalaBean Bean = halaRepo.findByHalaId(halaid);
+	// 修改
+	@PostMapping("/_06_halaAndQa.updateHala.controller")
+	public String processAction5(@RequestParam("halaId") Integer halaId,
+			@RequestParam("halaclassname") String halaclassname, @RequestParam("title") String title,
+			@RequestParam("images") MultipartFile mf, @RequestParam("halacontent") String halacontent, Model haModel)
+					throws IOException, SQLException {
+		
+		HalaBean hb = halaService.selectHalaId(halaId);
+		InputStream in;
+		long size;
+		Blob b;
+		
+		if (mf != null && !mf.isEmpty()) {
+			in = mf.getInputStream();
+			size = mf.getSize();
+			b = PictureService.fileToBlob(in, size);
+		} else {
+			// 設定預設圖片
+			byte[] defaultImage = Files.readAllBytes(Paths.get("C:\\hibernate\\workspace\\MeetBoth\\src\\main\\webapp\\WEB-INF\\resources\\images\\meatball-200.png"));
+			b = new SerialBlob(defaultImage);
+		}
+		
+		hb.setHalaclassname(halaclassname);
+		hb.setPicture(b);
+		hb.setTitle(title);
+		hb.setPostdate(getCurrentDate());
+		hb.setHalacontent(halacontent);
+		
+		halaService.updateHala(hb);
+		HalaBean Bean = halaRepo.findByHalaId(halaId);
 		haModel.addAttribute("bean", Bean);
 		
-		return "_06_hala/updatehala";
+		return "_06_hala/halapostpage";
 	}
 //	---------------------------------------後台區-----------------------------------
+	// 後台修改
+	@PostMapping("/admin/_06_halaAndQa.updateHalaIndex.controller")
+	public String processAction24(@RequestParam("halaId") Integer halaId,
+			@RequestParam("halaclassname") String halaclassname, @RequestParam("title") String title,
+			@RequestParam("images") MultipartFile mf, @RequestParam("halacontent") String halacontent, Model haModel)
+					throws IOException, SQLException {
+		
+		HalaBean hb = halaService.selectHalaId(halaId);
+		InputStream in = mf.getInputStream();
+		long size = mf.getSize();
+		Blob b = PictureService.fileToBlob(in, size);
+		
+		hb.setHalaclassname(halaclassname);
+		hb.setPicture(b);
+		hb.setTitle(title);
+		hb.setPostdate(getCurrentDate());
+		hb.setHalacontent(halacontent);
+		
+		halaService.updateHala(hb);
+		HalaBean Bean = halaRepo.findByHalaId(halaId);
+		haModel.addAttribute("bean", Bean);
+		
+		return "redirect:/admin/_06_halaAndQa.SelectAllHalaIndex.controller";
+	}
 	
 	// 前往後台修改畫面
-	@RequestMapping(path = "/_06_halaAndQa.GoHalaUpdateIndex.controller", method = RequestMethod.GET)
+	@RequestMapping(path = "/admin/_06_halaAndQa.GoHalaUpdateIndex.controller", method = RequestMethod.GET)
 	public String processAction23(@RequestParam("halaId") Integer halaid, Model haModel) {
 		HalaBean Bean = halaRepo.findByHalaId(halaid);
 		haModel.addAttribute("bean", Bean);
@@ -251,7 +423,7 @@ public class HalaController {
 	}
 	
 	// 後台查詢全部' BindingResult result,@ModelAttribute("HalaBean") HalaBean hb
-	@RequestMapping(path = "/_06_halaAndQa.SelectAllHalaIndex.controller", method = RequestMethod.GET)
+	@RequestMapping(path = "/admin/_06_halaAndQa.SelectAllHalaIndex.controller", method = RequestMethod.GET)
 	public String processAction20(Model haModel,Model topModel) {
 //		if (result.hasErrors()) {
 //			return "Error";
@@ -269,7 +441,7 @@ public class HalaController {
 	
 	
 	// 後台分類查詢
-	@RequestMapping(path = "/_06_halaAndQa.SelectHalaClassIndex.controller", method = RequestMethod.GET)
+	@RequestMapping(path = "/admin/_06_halaAndQa.SelectHalaClassIndex.controller", method = RequestMethod.GET)
 	public String processAction21(@RequestParam("halaclassname") String halaclassname,
 			@ModelAttribute("HalaBean") HalaBean hb, BindingResult result, Model haModel ) {
 	
@@ -281,58 +453,34 @@ public class HalaController {
 	}
 	
 //	後台模糊搜尋貼文
-	@PostMapping(path = "/_06_halaAndQa.searchAllLike.controller1")
-	public String processAction22(@RequestParam("search1") String search1, Model mm) {
+	@PostMapping(path = "/admin/_06_halaAndQa.searchAllLikeIndex.controller")
+	public String processAction22(@RequestParam("search") String search, Model mm) {
 		
-		List<HalaBean> hab = halaService.searchAllLike(search1);
+		List<HalaBean> hab = halaService.searchAllLike(search);
 		mm.addAttribute("classList", hab);
 		
 		return "_06_hala/halaindex";
 	}
 	
 	
-	// 後台修改
-		@PostMapping("/_06_halaAndQa.updateHalaIndex.controller")
-		public String processAction24(@RequestParam("halaId") Integer halaId,
-				@RequestParam("halaclassname") String halaclassname, @RequestParam("title") String title,
-				@RequestParam("images") MultipartFile mf, @RequestParam("halacontent") String halacontent, Model haModel)
-				throws IOException, SQLException {
-
-			HalaBean hb = halaService.selectHalaId(halaId);
-			InputStream in = mf.getInputStream();
-			long size = mf.getSize();
-			Blob b = PictureService.fileToBlob(in, size);
-
-			hb.setHalaclassname(halaclassname);
-			hb.setPicture(b);
-			hb.setTitle(title);
-			hb.setPostdate(getCurrentDate());
-			hb.setHalacontent(halacontent);
-
-			halaService.updateHala(hb);
-			HalaBean Bean = halaRepo.findByHalaId(halaId);
-			haModel.addAttribute("bean", Bean);
-
-			return "redirect:/_06_halaAndQa.SelectAllHalaIndex.controller";
-		}
 	
 		
 		// 後台刪除
-		@GetMapping("/_06_halaAndQa.deleteHalaIndex.controller")
+		@GetMapping("/admin/_06_halaAndQa.deleteHalaIndex.controller")
 		public String processAction25(@RequestParam("halaId") Integer halaId) {
 			halaService.deleteHala(halaId);
-			return "redirect:/_06_halaAndQa.SelectAllHalaIndex.controller";
+			return "redirect:/admin/_06_halaAndQa.SelectAllHalaIndex.controller";
 
 		}
 		
 		// 前往後台新增畫面
-		@RequestMapping(path = "/_06_halaAndQa.goAddHalaIndex.controller", method = RequestMethod.GET)
+		@RequestMapping(path = "/admin/_06_halaAndQa.goAddHalaIndex.controller", method = RequestMethod.GET)
 		public String processMainActio26() {
 			return "_06_hala/addhalaindex";
 		}
 		
 		// 新增
-		@PostMapping("/_06_halaAndQa.AddHalaIndex.controller")
+		@PostMapping("/admin/_06_halaAndQa.AddHalaIndex.controller")
 		public String processMainAction27(@RequestParam("halaclassname") String halaclassname,
 				@RequestParam("memberid") Integer memberid, @RequestParam("title") String title,
 				@RequestParam("halacontent") String halacontent, @RequestParam("images") MultipartFile mf)
@@ -343,7 +491,7 @@ public class HalaController {
 			Blob b = PictureService.fileToBlob(in, size);
 			HalaBean hb = new HalaBean();
 			hb.setHalaclassname(halaclassname);
-			hb.setMemberid(memberid);
+			hb.setMemberID(memberid);
 			hb.setTitle(title);
 			hb.setPostdate(getCurrentDate());
 			hb.setHalacontent(halacontent);
@@ -352,8 +500,31 @@ public class HalaController {
 			hb.setWatch(0);
 			halaService.insertHala(hb);
 
-			return "redirect:/_06_halaAndQa.SelectAllHalaIndex.controller";
+			return "redirect:/admin/_06_halaAndQa.SelectAllHalaIndex.controller";
 		}
 
 
+		
+		 @GetMapping("/_06_halaAndQa.halaFontPage.controller")
+		 public String halaChangepageAction(Model m,Model pm,HttpServletRequest request,@RequestParam("id")Integer memID) {
+			 Optional<MemberBean> mem = memberService.searchMemByID(memID);
+				m.addAttribute("member", mem.get());
+				
+				List<HalaBean> halaBean = halaService.selectMemberId(memID);
+				pm.addAttribute("classList", halaBean);
+				
+				return "_06_hala/memberresume";
+			}
+		
+		 @RequestMapping(path = "/_06_halaAndQa.memberAllHala.controller", method = RequestMethod.GET)
+			public String processAction100(Model haModel,Model m,@RequestParam("id")Integer memID) {
+			 Optional<MemberBean> mem = memberService.searchMemByID(memID);
+				m.addAttribute("member", mem.get());
+				
+				List<HalaBean> classList = halaRepo.findAllHala();
+				haModel.addAttribute("classList", classList);
+				
+
+				return "redirect:/_06_halaAndQa.halaFontPage.controller";
+			}
 }

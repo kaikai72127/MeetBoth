@@ -14,7 +14,7 @@
 				<li><a href="#" style="color: white; font-size: 20px;" class="btn btn-d btn-round">商品管理&ensp;<i
 							class="fa-solid fa-angle-double-down"></i></a>
 					<ul style="">
-						<li><a href="/MeetBoth/_03_product.productindex.controller"
+						<li><a href="/MeetBoth/_03_product.productindex.controller/1"
 								style="color: white; font-weight: 600;" class="btn btn-d btn-round">所有商品清單</a></li>
 						<li><a href="/MeetBoth/_03_product.MBinsertProd.controller"
 								style="color: white; font-weight: 600;" class="btn btn-d btn-round">新增商品</a></li>
@@ -23,7 +23,7 @@
 				<li><a href="#" style="color: white; font-size: 20px;" class="btn btn-d btn-round">課程管理&ensp;<i
 							class="fa-solid fa-angle-double-down"></i></a>
 					<ul style="">
-						<li><a href="#" style="color: white; font-weight: 600;" class="btn btn-d btn-round">所有課程清單</a>
+						<li><a href="/MeetBoth/_02_subLocation.index.controller" style="color: white; font-weight: 600;" class="btn btn-d btn-round">所有課程清單</a>
 						</li>
 					</ul>
 				</li>
@@ -44,13 +44,13 @@
 				<li><a href="#" style="color: white; font-size: 20px;" class="btn btn-d btn-round">訂單管理&ensp;<i
 							class="fa-solid fa-angle-double-down"></i></a>
 					<ul style="">
-						<li><a href="/MeetBoth/shoppingCartOrders.controller" style="color: white; font-weight: 600;"
+						<li><a href="/MeetBoth/admin/shoppingCartOrders.controller/1" style="color: white; font-weight: 600;"
 								class="btn btn-d btn-round">所有訂單清單</a></li>
-						<li><a href="/MeetBoth/discounts.controller" style="color: white; font-weight: 600;"
+						<li><a href="/MeetBoth/admin/discounts.controller/1" style="color: white; font-weight: 600;"
 								class="btn btn-d btn-round">折扣碼管理</a></li>
 					</ul>
 				</li>
 			</ul>
-			<a href="#"><img src="/MeetBoth/html/assets/images/shop/警告2.jpg" style="padding-bottom: 10px;"></a>
+			<a href="/MeetBoth"><img src="/MeetBoth/html/assets/images/shop/警告2.jpg" style="padding-bottom: 10px;"></a>
 		</div>
 	</div>

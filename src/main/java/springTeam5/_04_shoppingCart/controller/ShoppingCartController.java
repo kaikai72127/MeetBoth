@@ -3,7 +3,6 @@ package springTeam5._04_shoppingCart.controller;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
-import java.util.Optional;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -87,10 +86,9 @@ public class ShoppingCartController {
 			session.setAttribute("ShoppingCart", cart); // ${ShoppingCart.subtotal}
 
 			// 測試用
-//			String account = SecurityContextHolder.getContext().getAuthentication().getName();
-//			List<MemberBean> mem = memberService.searchMemByAccount(account);
-//			Optional<MemberBean> list = memberService.searchMemByID(mem.get(0).getMemberID());
-//			member = list.get();
+			String account = SecurityContextHolder.getContext().getAuthentication().getName();
+			List<MemberBean> mem = memberService.searchMemByAccount(account);
+			member = mem.get(0);
 
 			System.out.println("-------------Session------購物車----------member");
 

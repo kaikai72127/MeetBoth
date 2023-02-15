@@ -28,10 +28,14 @@ public interface OrderItemRepository extends JpaRepository<OrderItemBean, Intege
 	public List<OrderItemBean> findBySqeno(Integer seqno);
 	
 	// 找賣家訂單的資料
-	@Query(value = "select * from orderitem where membersale_FK=?1 order by seqno", nativeQuery = true)
+	@Query(value = "select * from orderitem where membersale_FK=?1 order by seqno DESC", nativeQuery = true)
 	public List<OrderItemBean> findByMembersale(Integer membersale_FK);
-
-	
+	// 找賣家訂單的資料--OrderList用
+	@Query(value = "select * from orderitem oi JOIN memberorder mo ON oi.orderNo_fk = mo.orderno where membersale_FK=?1 and orderNo =?2 order by seqno", nativeQuery = true)
+	public List<OrderItemBean> findByMemberSale(Integer membersale_FK,Integer orderNo);
+	// 找賣家訂單的資料--OrderList模糊搜尋用
+	@Query(value = "select * from orderitem oi JOIN memberorder mo ON oi.orderNo_fk = mo.orderno where membersale_FK=?1 and orderNo =?2 order by seqno", nativeQuery = true)
+	public List<OrderItemBean> findByMemberSaleAllLike(Integer membersale_FK,Integer orderNo);
 
 
 }

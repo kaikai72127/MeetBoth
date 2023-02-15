@@ -15,6 +15,8 @@ import javax.persistence.Table;
 
 import org.springframework.stereotype.Component;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import springTeam5._01_member.model.MemberBean;
 
 @Entity
@@ -57,8 +59,11 @@ public class TeacBean {
 	private String lanAbility;
 	@Column(name = "VIEWS")
 	private Integer views;
+	
+	@JsonIgnore
 	@OneToMany(mappedBy = "teacher")
 	private List<ReplyTeac> replyTeacs = new ArrayList<>();
+	
 	@ManyToOne
 	@JoinColumn(name = "MEMBERID")
 	private MemberBean member;

@@ -92,6 +92,29 @@ h1 {
 #ChartData>div>div>div>div>svg>g>g>g>text {
 	font-size: 17px;
 }
+
+.aColor:hover {
+	color: #ce7777
+}
+
+.btnSearch {
+	display: inline-block;
+	padding: 3px 24px;
+	font-size: 16px;
+	font-weight: 600;
+	text-align: center;
+	color: #ce7777;
+	background-color: white;
+	border-radius: 4px;
+	border: 1px solid #ce7777;
+	cursor: pointer;
+	transition: background-color 0.3s;
+}
+
+.btnSearch:hover {
+	background-color: #ce7777;
+	color: white;
+}
 </style>
 </head>
 <body data-spy="scroll" data-target=".onpage-navigation"
@@ -161,72 +184,58 @@ h1 {
 									<img src="/MeetBoth/html/assets/images/shop/兔年海報2.jpg"
 										style="padding-bottom: 10px;">
 								</div>
-								<!--       動態搜尋列 -->
-								<section class="module-small"
-									style="padding-top: 20px; padding-bottom: 0px;">
-									<div class="container" style="">
-										<form class="row"
-											action="<c:url value='/_03_product.searchProductWithCondition3.controller'/>"
-											method="post">
-											<div class="col-sm-4 mb-sm-20"
-												style="width: 17%; padding-right: 0;">
-												<select name="case" class="form-control"
-													style="padding-right: 0; font-size: 17px">
-													<option value="1">預設排序</option>
-													<option value="6">依瀏覽次數排序</option>
-													<option value="2">依價格由大到小</option>
-													<option value="3">依價格由小到大</option>
-													<option value="4">依上架日期排序</option>
-													<option value="5">依更新日期排序</option>
-												</select>
-											</div>
-											<div class="col-sm-2 mb-sm-20"
-												style="width: 15%; padding-right: 0;">
-												<select name="typecase" class="form-control"
-													style="font-size: 17px">
-													<option value="0">全部類別</option>
-													<option value="1">文具</option>
-													<option value="2">教具</option>
-													<option value="3">運動用品</option>
-													<option value="4">學生用品</option>
-													<option value="5">全新教科書</option>
-													<option value="6">全新好書</option>
-													<option value="7">二手教科書</option>
-													<option value="8">二手好書</option>
-													<option value="9">桌上小物</option>
-													<option value="10">教室小物</option>
-													<option value="11">3c小物</option>
-													<option value="12">益智小物</option>
-												</select>
-											</div>
-											<div class="col-sm-2 mb-sm-20" style="width: 25%">
-												<input class="form-control" type="text" name="searchName"
-													style="font-size: 17px" placeholder="搜尋名稱" />
-											</div>
-											<input type="hidden" name="lowprice" value="0" /> <input
-												type="hidden" name="highprice" value="9999999" />
-											<div class="col-sm-3" style="width: 10%">
-												<button class="btn btn-d btn-round" type="submit"
-													style="font-size: 17px">搜尋</button>
-											</div>
-										</form>
+								<form class="row"
+									action="<c:url value='/searchOrdersList.controller'/>"
+									method="post">
+									<div style="display: flex; margin-bottom: 15px;">
+										<div style="padding-right: 0; margin: auto 10px;">
+											<input type="hidden" id="ordS"
+												value="${bean.ordStstus}${param.ordS}"> <select
+												name="ordStstus" class="form-control"
+												style="padding-right: 0; font-size: 17px; color: black;">
+												<option value="0">訂單狀態</option>
+												<option value="處理中">處理中</option>
+												<option value="備貨中">備貨中</option>
+												<option value="已完成">已完成</option>
+												<option value="取消">取消</option>
+											</select>
+										</div>
+										<div style="padding-right: 0; margin: auto 10px;">
+											<input type="hidden" id="paymentS"
+												value="${bean.paymentStstus}${param.paymentS}"> <select
+												name="paymentStstus" class="form-control"
+												style="font-size: 17px; color: black;">
+												<option value="0">付款狀態</option>
+												<option value="未付款">未付款</option>
+												<option value="已付款">已付款</option>
+												<option value="退款中">退款中</option>
+												<option value="已退款">已退款</option>
+											</select>
+										</div>
+										<div style="padding-right: 0; margin: auto 10px;">
+											<input type="hidden" id="deliveryS"
+												value="${bean.deliveryStstus}${param.deliveryS}"> <select
+												name="deliveryStstus" class="form-control"
+												style="font-size: 17px; color: black;">
+												<option value="0">送貨狀態</option>
+												<option value="備貨中">備貨中</option>
+												<option value="已發貨">已發貨</option>
+												<option value="已取貨">已取貨</option>
+												<option value="退貨中">退貨中</option>
+												<option value="已退貨">已退貨</option>
+											</select>
+										</div>
+										<div class="">
+											<input class="MBinput" type="text" name="search"
+												style="font-size: 17px; color: :#ce7777; margin: 10px 10px;"
+												placeholder="搜尋名稱" />
+											<button class="btnSearch" type="submit">搜尋</button>
+										</div>
+										<div></div>
 									</div>
-								</section>
-								<!--       動態搜尋列 -->
-								<!--       按鈕列 -->
-								<div class="container" style="padding: 0px 10px 0px 20px;">
-									<input type="button" value="返回首頁"
-										class="btn btn-info btn-circle"
-										style="font-size: 17px; color: black;"
-										onclick="window.location='/MeetBoth/_03_product.searchAllProduct.controller'">
-									&nbsp; <input type="button" value="新增商品"
-										class="btn btn-warning btn-circle"
-										style="font-size: 17px; color: black;"
-										onclick="window.location='/MeetBoth/_03_product.pathToInsertProduct.controller'">
-								</div>
-								<!--       按鈕列 -->
-								<!-- 123 -->
-								<div class="row mt-70">
+								</form>
+
+								<div class="row ">
 									<div class="col-sm-12">
 										<ul class="nav nav-tabs font-alt" role="tablist">
 											<li class="active"><a href="#description"
@@ -235,12 +244,11 @@ h1 {
 											<li><a href="#data-sheet" data-toggle="tab"
 												style="font-size: 20px; color: #ce7777"><i
 													class="fa-solid fa-shop"></i>售出訂單 </a></li>
-											<li><a href="#reviews" data-toggle="tab"><span
-													class="icon-tools-2"></span>Reviews (2)</a></li>
 										</ul>
 
 										<!-- 購買訂單 -->
 										<div class="tab-content">
+
 											<div class="tab-pane active" id="description">
 												<table class="table table-striped ds-table table-responsive">
 													<tr>
@@ -253,7 +261,8 @@ h1 {
 													</tr>
 													<c:forEach var="bean" items="${orderList}">
 														<tr>
-															<td>${bean.orderUID}</td>
+															<td><a class="aColor"
+																href="/MeetBoth/memberOrdersList.controller/${bean.orderNo}">${bean.orderUID}</a></td>
 															<td>${bean.orderDate}</td>
 															<td>${bean.ordStstus}</td>
 															<td>${bean.paymentStstus}</td>
@@ -265,100 +274,26 @@ h1 {
 											</div>
 											<div class="tab-pane" id="data-sheet">
 												<table class="table table-striped ds-table table-responsive">
-													<tbody>
+													<tr>
+														<th>訂單編號</th>
+														<th>訂購日期</th>
+														<th>訂單狀態</th>
+														<th>付款狀態</th>
+														<th>送貨狀態</th>
+														<th>總金額</th>
+													</tr>
+													<c:forEach var="bean" items="${orderSaleList}">
 														<tr>
-															<th>Title</th>
-															<th>Info</th>
+															<td><a class="aColor"
+																href="/MeetBoth/memberOrdersSaleList.controller/${bean.orderNo}">${bean.orderUID}</a></td>
+															<td>${bean.orderDate}</td>
+															<td>${bean.ordStstus}</td>
+															<td>${bean.paymentStstus}</td>
+															<td>${bean.deliveryStstus}</td>
+															<td>${bean.totalAmount}</td>
 														</tr>
-														<tr>
-															<td>Compositions</td>
-															<td>Jeans</td>
-														</tr>
-														<tr>
-															<td>Size</td>
-															<td>44, 46, 48</td>
-														</tr>
-														<tr>
-															<td>Color</td>
-															<td>Black</td>
-														</tr>
-														<tr>
-															<td>Brand</td>
-															<td>Somebrand</td>
-														</tr>
-													</tbody>
+													</c:forEach>
 												</table>
-											</div>
-											<div class="tab-pane" id="reviews">
-												<div class="comments reviews">
-													<div class="comment clearfix">
-														<div class="comment-avatar">
-															<img src="" alt="avatar" />
-														</div>
-														<div class="comment-content clearfix">
-															<div class="comment-author font-alt">
-																<a href="#">John Doe</a>
-															</div>
-															<div class="comment-body">
-																<p>The European languages are members of the same
-																	family. Their separate existence is a myth. For
-																	science, music, sport, etc, Europe uses the same
-																	vocabulary. The European languages are members of the
-																	same family. Their separate existence is a myth.</p>
-															</div>
-															<div class="comment-meta font-alt">
-																Today, 14:55 -<span><i class="fa fa-star star"></i></span><span><i
-																	class="fa fa-star star"></i></span><span><i
-																	class="fa fa-star star"></i></span><span><i
-																	class="fa fa-star star"></i></span><span><i
-																	class="fa fa-star star-off"></i></span>
-															</div>
-														</div>
-													</div>
-													<div class="comment clearfix">
-														<div class="comment-avatar">
-															<img src="" alt="avatar" />
-														</div>
-														<div class="comment-content clearfix">
-															<div class="comment-author font-alt">
-																<a href="#">Mark Stone</a>
-															</div>
-															<div class="comment-body">
-																<p>Europe uses the same vocabulary. The European
-																	languages are members of the same family. Their
-																	separate existence is a myth.</p>
-															</div>
-															<div class="comment-meta font-alt">
-																Today, 14:59 -<span><i class="fa fa-star star"></i></span><span><i
-																	class="fa fa-star star"></i></span><span><i
-																	class="fa fa-star star"></i></span><span><i
-																	class="fa fa-star star-off"></i></span><span><i
-																	class="fa fa-star star-off"></i></span>
-															</div>
-														</div>
-													</div>
-												</div>
-												<div class="comment-form mt-30">
-													<h4 class="comment-form-title font-alt">Add review</h4>
-													<form method="post">
-														<div class="row">
-															<div class="col-sm-4">
-																<div class="form-group">
-																	<label class="sr-only" for="name">Name</label> <input
-																		class="form-control" id="name" type="text" name="name"
-																		placeholder="Name" />
-																</div>
-															</div>
-															<div class="col-sm-4">
-																<div class="form-group">
-																	<label class="sr-only" for="email">Name</label> <input
-																		class="form-control" id="email" type="text"
-																		name="email" placeholder="E-mail" />
-																</div>
-															</div>
-														</div>
-													</form>
-												</div>
 											</div>
 										</div>
 									</div>

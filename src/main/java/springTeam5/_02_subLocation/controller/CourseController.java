@@ -617,7 +617,7 @@ public class CourseController {
 		if (mem.size() == 0) {
 			return "login";
 		} else {
-			m.addAttribute("memberBean", mem.get(0));
+			m.addAttribute("memberbuy", mem.get(0));
 			return "/_02_subLocation/newCourseShopMember";
 		}
 	}
@@ -626,8 +626,17 @@ public class CourseController {
 
 //	課程影片明細
 	@GetMapping("/YtDetail.controller")
-	public String processYtDetail(@RequestParam("id") Integer id, @RequestParam("courseID") Integer courseID,
+	public String processYtDetail(HttpServletRequest request,Model m,@RequestParam("id") Integer id, @RequestParam("courseID") Integer courseID,
 			Model mCourse, Model mSingleCourse, Model mYtPlayer, Model mComm) throws SQLException {
+		HttpSession session = request.getSession(false);
+
+		String account = SecurityContextHolder.getContext().getAuthentication().getName();
+		List<MemberBean> mem = memberService.searchMemByAccount(account);
+		
+		if (mem.size() == 0) {
+			return "login";
+		} else {
+		m.addAttribute("memberbuy", mem.get(0));
 		Course course = cService.searchSingleCourseFromCourseID(courseID);
 		YtPlayer yt = ytService.searchYtPlayerByYtPlayerID(id);
 
@@ -653,8 +662,8 @@ public class CourseController {
 		}
 
 //		List<Course> courseList = cService.searchAllCourseByMemberID(course.getMemberID());
-		ArrayList<Course> courses = new ArrayList<Course>();
-		Course c = new Course();
+//		ArrayList<Course> courses = new ArrayList<Course>();
+//		Course c = new Course();
 //
 //		if (list.isEmpty()) {
 //			course.setCourseName("無課程");
@@ -670,6 +679,7 @@ public class CourseController {
 //		}
 
 		return "_02_subLocation/ytPlayer";
+		}
 	}
 
 //	新增商品評論 ??
@@ -846,6 +856,16 @@ public class CourseController {
 			e.printStackTrace();
 		}
 		return "_02_subLocation/map";
+	}
+	
+	@GetMapping("/_02_memberresume.controller")
+	public String processproductFontPageAction(Model m,HttpServletRequest request,@RequestParam("id")Integer memID) {
+		
+		Optional<MemberBean> mem = memberService.searchMemByID(memID);
+		m.addAttribute("memberBean", mem.get());
+
+		
+		return "_02_subLocation/_02_memberresume";
 	}
 
 }

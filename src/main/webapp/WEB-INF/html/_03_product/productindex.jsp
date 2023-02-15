@@ -167,11 +167,13 @@ a:hover {
 .prodtable>thead>tr>th {
 	border-right: solid 1px white;
 	text-align: center;
+	font-size: 20px;
 }
 
 .prodtable>tbody>tr>td {
 	border-right: solid 1px white;
 	border-top: solid 1px white;
+	font-size: 20px;
 }
 </style>
 </head>
@@ -190,7 +192,7 @@ a:hover {
 						<!-- 整頁 -->
 						<!-- 左邊欄位開始 -->
 						<div class="col-sm-4 col-md-3 sidebar"
-							style="width: 20%; padding-right: 0px;">
+							style="width: 20%; padding-right: 0px;height:100%;">
 							<div class="widget">
 								<a href="/MeetBoth/_03_product.index.controller"><img
 									src="/MeetBoth/html/assets/images/shop/警告.jpg"
@@ -208,10 +210,10 @@ a:hover {
 											class="fa-solid fa-angle-double-down"></i></a>
 										<ul style="">
 											<li><a
-												href="/MeetBoth/_03_product.productindex.controller"
+												href="/MeetBoth/_03_product.productindex.controller/1"
 												style="color: white; font-weight: 600;"
 												class="btn btn-d btn-round">所有商品清單</a></li>
-												<li><a
+											<li><a
 												href="/MeetBoth/_03_product.MBinsertProd.controller"
 												style="color: white; font-weight: 600;"
 												class="btn btn-d btn-round">新增商品</a></li>
@@ -266,12 +268,12 @@ a:hover {
 								<!--       右邊第一部分開始 -->
 								<div class="post">
 									<div class="post-video embed-responsive embed-responsive-16by9"
-										style="height: auto; padding-bottom: 100px;">
+										style="height: auto; padding-bottom: 0;">
 										<div>
 											<span>所有商品資料 :&ensp;</span>
 										</div>
 										<form class="row"
-											action="<c:url value='/_03_product.searchProductWithCondition2.controller'/>"
+											action="<c:url value='/_03_product.searchProductWithCondition2.controller/1'/>"
 											method="post">
 											<div style="display: flex; margin-bottom: 15px;">
 												<div style="padding-right: 0; margin: auto 10px;">
@@ -327,14 +329,14 @@ a:hover {
 														<tr style="">
 															<th style="width: 5%;">編號</th>
 															<th style="width: 25%; padding-left: 5px;">名稱</th>
-															<th style="width: 10%">類別</th>
+															<th style="width: 15%">類別</th>
 															<th style="width: 10%">價格</th>
-															<th style="width: 5%">賣家</th>
-															<th style="width: 10%">狀態</th>
-															<th style="width: 10%">留言數</th>
+															<!-- 															<th style="width: 5%">賣家</th> -->
+															<th style="width: 9%">狀態</th>
+															<th style="width: 9%">留言數</th>
 															<th style="width: 5%">評價</th>
-															<th style="width: 10%">觀看次數</th>
-															<th style="width: 15%">上架日期</th>
+															<th style="width: 9%">觀看數</th>
+															<th style="width: 13%">上架日期</th>
 															<th></th>
 															<th></th>
 															<th style="border-right: none"></th>
@@ -347,10 +349,15 @@ a:hover {
 																<td>${prodBean.prodName}</td>
 																<td>${prodBean.prodtype.prodClassName}</td>
 																<td>NT$${prodBean.prodPrice}</td>
-																<td>${prodBean.memberID}</td>
+																<%-- 																<td>${prodBean.memberBean.memberID}</td> --%>
 																<td>${prodBean.prodState}</td>
-																<td id="commentAmount"><input type="hidden" id="commmentList" value="${prodBean.productComment}"></td>
-																<td id="AVGscore"><c:forEach var="commentBean" items="${prodBean.productComment}"><input type="hidden" id="commmentList" value="${commentBean.prodScore}"></c:forEach></td>
+																<td id="commentAmount"><input type="hidden"
+																	id="commmentList" value="${prodBean.productComment}"></td>
+																<td id="AVGscore"><c:forEach var="commentBean"
+																		items="${prodBean.productComment}">
+																		<input type="hidden" id="commmentList"
+																			value="${commentBean.prodScore}">
+																	</c:forEach></td>
 																<td>${prodBean.prodCheck}次</td>
 																<td>${prodBean.prodPost}</td>
 																<td><input type="button" class="MBbtn" value="更多"
@@ -358,8 +365,8 @@ a:hover {
 																<td><input type="button" class="MBbtn" value="修改"
 																	onclick="window.location='/MeetBoth/_03_product.pathToMBinsertProd.controller?id=${prodBean.prodID}'"></td>
 																<td style="border-right: none"><input type="button"
-																	class="MBbtn deleteThisProduct" value="刪除" id="deleteThisProduct"
-																	name="${prodBean.prodID}"></td>
+																	class="MBbtn deleteThisProduct" value="刪除"
+																	id="deleteThisProduct" name="${prodBean.prodID}"></td>
 															</tr>
 														</c:forEach>
 													</tbody>
@@ -370,6 +377,34 @@ a:hover {
 								</div>
 								<!--       右邊第一部分結束 -->
 								<hr class="divider-w pt-20">
+								<!-- 分頁按鈕 -->
+								<div class="pagination font-alt"
+									style="display: flex; justify-content: center; align-items: center">
+									<c:if test="${currentPage != 1}">
+										<a
+											href="/MeetBoth/_03_product.productindex.controller/${currentPage-1}"><i
+											class="fa fa-angle-left"></i></a>
+									</c:if>
+									<!-- 迴圈生成每一頁的按鈕 -->
+									<c:forEach var="i" begin="1" end="${totalPages}">
+										<c:choose>
+											<c:when test="${currentPage == i}">
+												<a class="active"
+													href="/MeetBoth/_03_product.productindex.controller/${i}">${i}</a>
+											</c:when>
+											<c:otherwise>
+												<a
+													href="/MeetBoth/_03_product.productindex.controller/${i}">${i}</a>
+											</c:otherwise>
+										</c:choose>
+									</c:forEach>
+									<c:if test="${currentPage != totalPages}">
+										<a
+											href="/MeetBoth/_03_product.productindex.controller/${currentPage+1}"><i
+											class="fa fa-angle-right"></i></a>
+									</c:if>
+								</div>
+								<!-- 分頁按鈕結束 -->
 							</div>
 						</div>
 						<!-- 		右邊欄位結束 -->
@@ -463,7 +498,7 @@ a:hover {
                           data: {"id":id},
                         })
                             .done(function () {
-                            	window.location='/MeetBoth/_03_product.productindex.controller'
+                            	window.location='/MeetBoth/_03_product.productindex.controller/1'
                                 console.log("delete")
                              })//done
                              .fail(function(error) {
@@ -476,7 +511,7 @@ a:hover {
         });
         //function end
     </script>
-    <script>
+	<script>
 	var commentAmounts = document.querySelectorAll("#commentAmount");
 	var AVGscores = document.querySelectorAll("#AVGscore");
 

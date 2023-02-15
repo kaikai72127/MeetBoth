@@ -84,458 +84,257 @@
 									font-size: 22px;
 								}
 
-								#ChartData>div>div>div>div>svg>g>g>g>text {
-									font-size: 17px;
-								}
-							</style>
-			</head>
-
-			<body data-spy="scroll" data-target=".onpage-navigation" data-offset="60">
-				<main>
-					<div class="page-loader">
-						<div class="loader">Loading...</div>
-					</div>
-					<div class="main">
-						<section class="module" style="padding-top: 10px;">
-							<div class="container">
-								<div class="row">
-									<div class="col-sm-4 col-md-3 sidebar" style="position: sticky; top: 100px;">
-										<div class="widget">
-											<img src="/MeetBoth/html/assets/images/shop/賣家中心.png"
-												style="padding-bottom: 10px;">
-											<ul class="cart">
-												<li><a href="#">商品管理&ensp;<i
-															class="fa-solid fa-angle-double-down"></i></a>
-													<ul style="">
-														<li><a
-																href="<c:url value='/_03_product/pathToMyPDP.controller'/>">我的商品</a>
-														</li>
-														<li><a
-																href="<c:url value='/_03_product.pathToInsertProduct.controller'/>">新增商品</a>
-														</li>
-													</ul>
-												</li>
-												<li><a href="#" style="">訂單管理&ensp;<i
-															class="fa-solid fa-angle-double-down"></i></a>
-													<ul style="">
-														<li><a href="#">我的銷售</a></li>
-														<li><a href="#">待付款訂單</a></li>
-														<li><a href="#">待出貨訂單</a></li>
-														<li><a href="#">已完成訂單</a></li>
-													</ul>
-												</li>
-												<li><a href="#">賣場管理&ensp;<i
-															class="fa-solid fa-angle-double-down"></i></a>
-													<ul style="">
-														<li><a href="#">賣場評價</a></li>
-														<li><a href="#">賣場介紹</a></li>
-													</ul>
-												</li>
-												<li><a href="#">財務管理&ensp;<i
-															class="fa-solid fa-angle-double-down"></i></a>
-													<ul style="">
-														<li><a href="#">子選單3-1</a></li>
-														<li><a href="#">子選單3-2</a></li>
-														<li><a href="#">子選單3-3</a></li>
-													</ul>
-												</li>
-												<li><a href="#">數據中心&ensp;<i
-															class="fa-solid fa-angle-double-down"></i></a>
-													<ul style="">
-														<li><a href="#">賣家數據中心</a></li>
-														<li><a href="#">營運表現</a></li>
-													</ul>
-												</li>
-											</ul>
-										</div>
+#ChartData>div>div>div>div>svg>g>g>g>text {
+	font-size: 17px;
+}
+</style>
+</head>
+<body data-spy="scroll" data-target=".onpage-navigation"
+	data-offset="60">
+	<main>
+		<div class="page-loader">
+			<div class="loader">Loading...</div>
+		</div>
+		<div class="main">
+			<section class="module" style="padding-top: 10px;">
+				<div class="container">
+					<div class="row">
+						<div class="col-sm-4 col-md-3 sidebar"
+							style="position: sticky; top: 100px;">
+							<div class="widget">
+								<img src="/MeetBoth/html/assets/images/shop/賣家中心.png"
+									style="padding-bottom: 10px;">
+								<ul class="cart">
+									<li><a href="#">商品管理&ensp;<i
+											class="fa-solid fa-angle-double-down"></i></a>
+										<ul style="">
+											<li><a href="<c:url value='/_03_product/pathToMyPDP.controller'/>">我的商品</a></li>
+											<li><a href="<c:url value='/_03_product.pathToInsertProduct.controller'/>">新增商品</a></li>
+										</ul></li>
+									<li><a href="#" style="">訂單管理&ensp;<i
+											class="fa-solid fa-angle-double-down"></i></a>
+										<ul style="">
+											<li><a href="#">我的銷售</a></li>
+											<li><a href="#">待付款訂單</a></li>
+											<li><a href="#">待出貨訂單</a></li>
+											<li><a href="#">已完成訂單</a></li>
+										</ul></li>
+									<li><a href="#">賣場管理&ensp;<i
+											class="fa-solid fa-angle-double-down"></i></a>
+										<ul style="">
+											<li><a href="#">賣場評價</a></li>
+											<li><a href="#">賣場介紹</a></li>
+										</ul></li>
+									<li><a href="#">財務管理&ensp;<i
+											class="fa-solid fa-angle-double-down"></i></a>
+										<ul style="">
+											<li><a href="#">子選單3-1</a></li>
+											<li><a href="#">子選單3-2</a></li>
+											<li><a href="#">子選單3-3</a></li>
+										</ul></li>
+									<li><a href="#">數據中心&ensp;<i
+											class="fa-solid fa-angle-double-down"></i></a>
+										<ul style="">
+											<li><a href="#">賣家數據中心</a></li>
+											<li><a href="#">營運表現</a></li>
+										</ul></li>
+								</ul>
+							</div>
+						</div>
+						<div class="col-sm-8 col-sm-offset-1" style="margin-left: 20px;">
+							<div class="post">
+								<div class="post-thumbnail">
+									<img
+										src="/MeetBoth/html/assets/images/shop/個人賣場.jpg"
+										style="padding-bottom: 10px;">
+								</div>
+								<div class="post-header font-alt" style="display: flex;">
+									<img style="" src="/MeetBoth/html/assets/images/shop/兔年海報.jpg"
+										style="padding-bottom: 10px;">
+								</div>
+								<!--       動態搜尋列 -->
+								<section class="module-small"
+									style="padding-top: 20px; padding-bottom: 0px;">
+									<div class="container" style="">
+										<form class="row"
+											action="<c:url value='/_03_product.searchProductWithCondition3.controller'/>"
+											method="post">
+											<div class="col-sm-4 mb-sm-20"
+												style="width: 17%; padding-right: 0;">
+												<select name="case" class="form-control"
+													style="padding-right: 0; font-size: 17px">
+													<option value="1">預設排序</option>
+													<option value="6">依瀏覽次數排序</option>
+													<option value="2">依價格由大到小</option>
+													<option value="3">依價格由小到大</option>
+													<option value="4">依上架日期排序</option>
+													<option value="5">依更新日期排序</option>
+												</select>
+											</div>
+											<div class="col-sm-2 mb-sm-20"
+												style="width: 15%; padding-right: 0;">
+												<select name="typecase" class="form-control"
+													style="font-size: 17px">
+													<option value="0">全部類別</option>
+													<option value="1">文具</option>
+													<option value="2">教具</option>
+													<option value="3">運動用品</option>
+													<option value="4">學生用品</option>
+													<option value="5">全新教科書</option>
+													<option value="6">全新好書</option>
+													<option value="7">二手教科書</option>
+													<option value="8">二手好書</option>
+													<option value="9">桌上小物</option>
+													<option value="10">教室小物</option>
+													<option value="11">3c小物</option>
+													<option value="12">益智小物</option>
+												</select>
+											</div>
+											<div class="col-sm-2 mb-sm-20" style="width: 25%">
+												<input class="form-control" type="text" name="searchName"
+													style="font-size: 17px" placeholder="搜尋名稱" />
+											</div>
+											<input type="hidden" name="lowprice" value="0" /> <input
+													type="hidden" name="highprice" value="9999999" />
+											<div class="col-sm-3" style="width: 10%">
+												<button class="btn btn-d btn-round" type="submit"
+													style="font-size: 17px">搜尋</button>
+											</div>
+										</form>
 									</div>
-									<div class="col-sm-8 col-sm-offset-1" style="margin-left: 20px;">
-										<div class="post">
-											<div class="post-thumbnail">
-												<img src="/MeetBoth/html/assets/images/shop/個人賣場.jpg"
-													style="padding-bottom: 10px;">
-											</div>
-											<div class="post-header font-alt" style="display: flex;">
-												<img style="" src="/MeetBoth/html/assets/images/shop/兔年海報.jpg"
-													style="padding-bottom: 10px;">
-											</div>
-											<!--       動態搜尋列 -->
-											<section class="module-small"
-												style="padding-top: 20px; padding-bottom: 0px;">
-												<div class="container" style="">
-													<form class="row"
-														action="<c:url value='/_03_product.searchProductWithCondition3.controller'/>"
-														method="post">
-														<div class="col-sm-4 mb-sm-20"
-															style="width: 17%; padding-right: 0;">
-															<select name="case" class="form-control"
-																style="padding-right: 0; font-size: 17px">
-																<option value="1">預設排序</option>
-																<option value="6">依瀏覽次數排序</option>
-																<option value="2">依價格由大到小</option>
-																<option value="3">依價格由小到大</option>
-																<option value="4">依上架日期排序</option>
-																<option value="5">依更新日期排序</option>
-															</select>
-														</div>
-														<div class="col-sm-2 mb-sm-20"
-															style="width: 15%; padding-right: 0;">
-															<select name="typecase" class="form-control"
-																style="font-size: 17px">
-																<option value="0">全部類別</option>
-																<option value="1">文具</option>
-																<option value="2">教具</option>
-																<option value="3">運動用品</option>
-																<option value="4">學生用品</option>
-																<option value="5">全新教科書</option>
-																<option value="6">全新好書</option>
-																<option value="7">二手教科書</option>
-																<option value="8">二手好書</option>
-																<option value="9">桌上小物</option>
-																<option value="10">教室小物</option>
-																<option value="11">3c小物</option>
-																<option value="12">益智小物</option>
-															</select>
-														</div>
-														<div class="col-sm-2 mb-sm-20" style="width: 25%">
-															<input class="form-control" type="text" name="searchName"
-																style="font-size: 17px" placeholder="搜尋名稱" />
-														</div>
-														<input type="hidden" name="lowprice" value="0" /> <input
-															type="hidden" name="highprice" value="9999999" />
-														<div class="col-sm-3" style="width: 10%">
-															<button class="btn btn-d btn-round" type="submit"
-																style="font-size: 17px">搜尋</button>
-														</div>
-													</form>
-												</div>
-											</section>
-											<!--       動態搜尋列 -->
-											<!--       按鈕列 -->
-											<div class="container" style="padding: 0px 10px 0px 20px;">
-												<input type="button" value="返回首頁" class="btn btn-info btn-circle"
-													style="font-size: 17px; color: black;"
-													onclick="window.location='/MeetBoth/_03_product.searchAllProduct.controller'">
-												&nbsp; <input type="button" value="新增商品"
-													class="btn btn-warning btn-circle"
-													style="font-size: 17px; color: black;"
-													onclick="window.location='/MeetBoth/_03_product.pathToInsertProduct.controller'">
-											</div>
-											<!--       按鈕列 -->
-											<!--       商品列 -->
-											<div class="post-entry"
-												style="overflow-y: scroll; overflow-x: hidden; width: 110%; height: 720px;">
-												<div class="widget">
-													<ul class="widget-posts">
-														<c:forEach var="prodBean" items="${memberBean.product}">
-															<li class="clearfix"
-																style="background-image: url('/MeetBoth/html/assets/images/shop/backgroundimg.jpg'); background-size: cover; padding-left: 10px; height: 322.5px;">
-																<div class="widget-posts-image"
-																	style="height: 300px; width: 200px; margin: auto; display: flex; justify-content: center; align-items: center; margin-right: 15px;">
-																	<a href="<c:url value='/_03_product.PathToProductDetail.controller?id=${prodBean.prodID}' />"
-																		style="margin: auto; display: flex; justify-content: center; align-items: center;"><img
-																			style="padding: auto;"
-																			src="<c:url value='/_03_product.showPicture.controller?id=${prodBean.prodID}' />" /></a>
-																</div>
-																<div class="widget-posts-body" style="font-size: 22px;">
-																	<div class="widget-posts-title">
-																		<a
-																			href="<c:url value='/_03_product.PathToProductDetail.controller?id=${prodBean.prodID}' />">商品名稱
-																			: ${prodBean.prodName}</a>
-																	</div>
-																	<div class="widget-posts-meta"
-																		style="display: flex;height:38px;">
-																		商品狀態 : ${prodBean.prodState}
-																		<div
-																			style="position: relative; left: 310; bottom: 30;display:grid;">
-																			<button class="btn btn-b btn-circle"
-																				style="font-size: 17px;margin-bottom:10px;"
-																				onclick="window.location='/MeetBoth/_03_product.catchSingleProductDate.controller?id=${prodBean.prodID}'">修改</button>
-																			<button
-																				class="btn btn-b btn-circle deleteThisProduct"
-																				name="${prodBean.prodID}"
-																				style="font-size: 17px;">刪除</button>
-																		</div>
-																	</div>
-																	<div class="widget-posts-meta"
-																		style="display: flex">
-																		商品價格 : NT$${prodBean.prodPrice}
-																	</div>
-																	<div class="widget-posts-meta">商品庫存 :
-																		${prodBean.inventory}</div>
-																	<div class="widget-posts-meta">商品瀏覽次數 :
-																		${prodBean.prodCheck}</div>
-																	<div id="scoreAVG" class="widget-posts-meta">
-																		<c:forEach var="commentBean"
-																			items="${prodBean.productComment}">
-																			<input type="hidden" id="starAVG"
-																				value="${commentBean.prodScore}">
-																		</c:forEach>
-																		<div id="starAVGDiv" style="font-size: 17px;">
-																		</div>
-																	</div>
-																</div>
-															</li>
-														</c:forEach>
-													</ul>
-												</div>
-											</div>
-										</div>
-										<!--       商品列 -->
-										<!--訂單管理 -->
-										<div class="post-header font-alt" style="display: flex;">
-											<img src="/MeetBoth/html/assets/images/shop/兔年海報2.jpg"
-												style="padding-bottom: 10px;">
-										</div>
-										<div class="row mt-70" style="margin-top: 0px !important;">
-											<div class="col-sm-12">
-												<ul class="nav nav-tabs font-alt" role="tablist">
-													<li class="active"><a href="#description" data-toggle="tab"><span
-																class="icon-tools-2"></span>Description</a></li>
-													<li><a href="#data-sheet" data-toggle="tab"><span
-																class="icon-tools-2"></span>Data sheet</a></li>
-													<li><a href="#reviews" data-toggle="tab"><span
-																class="icon-tools-2"></span>Reviews (2)</a></li>
-												</ul>
-												<div class="tab-content">
-													<div class="tab-pane active" id="description">
-														<p>Everyone realizes why a new common language would be
-															desirable: one could refuse to pay expensive translators. To
-															achieve this, it would be necessary to have uniform grammar,
-															pronunciation and more common words. If several languages
-															coalesce, the grammar of the resulting language is more
-															simple and regular than that of the individual languages.
-														</p>
-														<p>The European languages are members of the same family.
-															Their separate existence is a myth. For science, music,
-															sport, etc, Europe uses the same vocabulary. The languages
-															only differ in their grammar, their pronunciation and their
-															most common words.</p>
+								</section>
+								<!--       動態搜尋列 -->
+								<!--       按鈕列 -->
+								<div class="container" style="padding: 0px 10px 0px 20px;">
+									<input type="button" value="返回首頁"
+										class="btn btn-info btn-circle"
+										style="font-size: 17px; color: black;"
+										onclick="window.location='/MeetBoth/_03_product.searchAllProduct.controller/1'">
+									&nbsp; <input type="button" value="新增商品"
+										class="btn btn-warning btn-circle"
+										style="font-size: 17px; color: black;"
+										onclick="window.location='/MeetBoth/_03_product.pathToInsertProduct.controller'">
+								</div>
+								<!--       按鈕列 -->
+								<!--       商品列 -->
+								<div class="post-entry"
+									style="overflow-y: scroll; overflow-x: hidden; width: 110%; height: 720px;">
+									<div class="widget">
+										<ul class="widget-posts">
+											<c:forEach var="prodBean" items="${memberBean.product}">
+												<li class="clearfix"
+													style="background-image: url('/MeetBoth/html/assets/images/shop/backgroundimg.jpg'); background-size: cover; padding-left: 10px; height: 322.5px;">
+													<div class="widget-posts-image"
+														style="height: 300px; width: 200px; margin: auto; display: flex; justify-content: center; align-items: center; margin-right: 15px;">
+														<a href="<c:url value='/_03_product.PathToProductDetail.controller?id=${prodBean.prodID}' />"
+															style="margin: auto; display: flex; justify-content: center; align-items: center;"><img
+															style="padding: auto;"
+															src="<c:url value='/_03_product.showPicture.controller?id=${prodBean.prodID}' />" /></a>
 													</div>
-													<div class="tab-pane" id="data-sheet">
-														<table class="table table-striped ds-table table-responsive">
-															<tbody>
-																<tr>
-																	<th>Title</th>
-																	<th>Info</th>
-																</tr>
-																<tr>
-																	<td>Compositions</td>
-																	<td>Jeans</td>
-																</tr>
-																<tr>
-																	<td>Size</td>
-																	<td>44, 46, 48</td>
-																</tr>
-																<tr>
-																	<td>Color</td>
-																	<td>Black</td>
-																</tr>
-																<tr>
-																	<td>Brand</td>
-																	<td>Somebrand</td>
-																</tr>
-															</tbody>
-														</table>
-													</div>
-													<div class="tab-pane" id="reviews">
-														<div class="comments reviews">
-															<div class="comment clearfix">
-																<div class="comment-avatar">
-																	<img src="" alt="avatar" />
-																</div>
-																<div class="comment-content clearfix">
-																	<div class="comment-author font-alt">
-																		<a href="#">John Doe</a>
-																	</div>
-																	<div class="comment-body">
-																		<p>The European languages are members of the
-																			same
-																			family. Their separate existence is a myth.
-																			For science,
-																			music, sport, etc, Europe uses the same
-																			vocabulary. The
-																			European languages are members of the same
-																			family. Their
-																			separate existence is a myth.</p>
-																	</div>
-																	<div class="comment-meta font-alt">
-																		Today, 14:55 -<span><i
-																				class="fa fa-star star"></i></span><span><i
-																				class="fa fa-star star"></i></span><span><i
-																				class="fa fa-star star"></i></span><span><i
-																				class="fa fa-star star"></i></span><span><i
-																				class="fa fa-star star-off"></i></span>
-																	</div>
-																</div>
-															</div>
-															<div class="comment clearfix">
-																<div class="comment-avatar">
-																	<img src="" alt="avatar" />
-																</div>
-																<div class="comment-content clearfix">
-																	<div class="comment-author font-alt">
-																		<a href="#">Mark Stone</a>
-																	</div>
-																	<div class="comment-body">
-																		<p>Europe uses the same vocabulary. The European
-																			languages are members of the same family.
-																			Their separate
-																			existence is a myth.</p>
-																	</div>
-																	<div class="comment-meta font-alt">
-																		Today, 14:59 -<span><i
-																				class="fa fa-star star"></i></span><span><i
-																				class="fa fa-star star"></i></span><span><i
-																				class="fa fa-star star"></i></span><span><i
-																				class="fa fa-star star-off"></i></span><span><i
-																				class="fa fa-star star-off"></i></span>
-																	</div>
-																</div>
+													<div class="widget-posts-body" style="font-size: 22px;">
+														<div class="widget-posts-title">
+															<a href="<c:url value='/_03_product.PathToProductDetail.controller?id=${prodBean.prodID}' />">商品名稱 : ${prodBean.prodName}</a>
+														</div>
+														<div class="widget-posts-meta" style="display: flex;height:38px;">
+															商品狀態 : ${prodBean.prodState}
+															<div style="position: relative; left: 280; bottom: 30;display:grid;">
+																<button class="btn btn-b btn-circle"
+																	style="font-size: 17px;margin-bottom:10px;"onclick="window.location='/MeetBoth/_03_product.catchSingleProductDate.controller?id=${prodBean.prodID}'">修改</button>
+																<button class="btn btn-b btn-circle deleteThisProduct" name="${prodBean.prodID}"
+																	style="font-size: 17px;">刪除</button>
 															</div>
 														</div>
-														<div class="comment-form mt-30">
-															<h4 class="comment-form-title font-alt">Add review</h4>
-															<form method="post">
-																<div class="row">
-																	<div class="col-sm-4">
-																		<div class="form-group">
-																			<label class="sr-only"
-																				for="name">Name</label> <input
-																				class="form-control" id="name"
-																				type="text" name="name"
-																				placeholder="Name" />
-																		</div>
-																	</div>
-																	<div class="col-sm-4">
-																		<div class="form-group">
-																			<label class="sr-only"
-																				for="email">Name</label> <input
-																				class="form-control" id="email"
-																				type="text" name="email"
-																				placeholder="E-mail" />
-																		</div>
-																	</div>
-																	<div class="col-sm-4">
-																		<div class="form-group">
-																			<select class="form-control">
-																				<option selected>Rating</option>
-																				<option value="1">1</option>
-																				<option value="2">2</option>
-																				<option value="3">3</option>
-																				<option value="4">4</option>
-																				<option value="5">5</option>
-																			</select>
-																		</div>
-																	</div>
-																	<div class="col-sm-12">
-																		<div class="form-group">
-																			<textarea class="form-control" id="" name=""
-																				rows="4"
-																				placeholder="Review"></textarea>
-																		</div>
-																	</div>
-																	<div class="col-sm-12">
-																		<button class="btn btn-round btn-d"
-																			type="submit">Submit
-																			Review</button>
-																	</div>
-																</div>
-															</form>
+														<div class="widget-posts-meta" style="display: flex">
+															商品價格 : NT$${prodBean.prodPrice}
+														</div>
+														<div class="widget-posts-meta">商品庫存 :
+															${prodBean.inventory}</div>
+														<div class="widget-posts-meta">商品瀏覽次數 :
+															${prodBean.prodCheck}</div>
+														<div id="scoreAVG" class="widget-posts-meta">
+															<c:forEach var="commentBean"
+																items="${prodBean.productComment}">
+																<input type="hidden" id="starAVG"
+																	value="${commentBean.prodScore}">
+															</c:forEach>
+															<div id="starAVGDiv" style="font-size: 17px;"></div>
 														</div>
 													</div>
-												</div>
-											</div>
-										</div>
-										<!--       賣場管理列 -->
-										<div class="post-header font-alt" style="display: flex;">
-											<img src="/MeetBoth/html/assets/images/shop/兔年海報3.jpg"
-												style="padding-bottom: 10px;">
-										</div>
-										<div class="container" style="padding: 0px 10px 0px 20px;">
-											<input type="button" value="商品上架" class="btn btn-info btn-circle"
-												style="font-size: 17px; color: black;" onclick="#">
-											&nbsp; <input type="button" value="商品下架" class="btn btn-warning btn-circle"
-												style="font-size: 17px; color: black;" onclick="#">
-										</div>
-										<hr class="divider-w pt-20">
-										<div class="row">
-											<div class="col-sm-12">
-												<table class="table table-striped table-border checkout-table">
-													<tbody>
-														<tr>
-															<th></th>
-															<th>商品名稱</th>
-															<th>商品類別</th>
-															<th class="hidden-xs">價格</th>
-															<th>庫存</th>
-															<th>狀態</th>
-														</tr>
-														<tr>
-															<td class="hidden-xs"
-																style="text-align: center; vertical-align: middle;">
-																<input type="checkbox" id="coding" name="interest"
-																	value="coding" />
-																<label for="coding"></label>
-															</td>
-															<td>
-																<h5 class="product-title font-alt">書包</h5>
-															</td>
-															<td class="hidden-xs">
-																<h5 class="product-title font-alt">學生用品</h5>
-															</td>
-															<td>
-																<h5 class="product-title font-alt">NT$299</h5>
-															</td>
-															<td>
-																<h5 class="product-title font-alt">10</h5>
-															</td>
-															<td>
-																<h5 class="product-title font-alt" style="color: Blue;">
-																	上架</h5>
-															</td>
-														</tr>
-														<tr>
-															<td class="hidden-xs"
-																style="text-align: center; vertical-align: middle;">
-																<input type="checkbox" id="coding" name="interest"
-																	value="coding" />
-																<label for="coding"></label>
-															</td>
-															<td>
-																<h5 class="product-title font-alt">金魚也能懂得css</h5>
-															</td>
-															<td class="hidden-xs">
-																<h5 class="product-title font-alt">二手參考書</h5>
-															</td>
-															<td>
-																<h5 class="product-title font-alt">NT$599</h5>
-															</td>
-															<td>
-																<h5 class="product-title font-alt">10</h5>
-															</td>
-															<td>
-																<h5 class="product-title font-alt" style="color: red;">
-																	下架</h5>
-															</td>
-														</tr>
-													</tbody>
-												</table>
-											</div>
-										</div>
-										<!--       賣場管理列 -->
-										<!--訂單管理 -->
-										<div class="post-header font-alt" style="display: flex;">
-											<img src="/MeetBoth/html/assets/images/shop/兔年海報4.jpg"
-												style="padding-bottom: 10px;">
-										</div>
-										<!-- 數據中心 -->
-										<div class="row">
-											<div class="col-sm-12" style="display: flex;" id="ChartData">
-												<div id="chart_div" style="width: 50%; height: 500px;"></div>
-												<div id="curve_chart" style="width: 50%; height: 500px;"></div>
-											</div>
-										</div>
+												</li>
+											</c:forEach>
+										</ul>
+									</div>
+								</div>
+							</div>
+							<!--       商品列 -->
+							<!--       賣場管理列 -->
+							<div class="post-header font-alt" style="display: flex;">
+								<img src="/MeetBoth/html/assets/images/shop/兔年海報3.jpg"
+									style="padding-bottom: 10px;">
+							</div>
+						<form method="Post" action="<c:url value='/_03_product.updateProductState.controller' />">
+							<div class="container" style="padding: 0px 10px 0px 20px;">
+								<input type="submit" value="商品上架"
+									class="btn btn-info btn-circle"
+									style="font-size: 17px; color: black;" onclick="#">
+								&nbsp; <input type="submit" value="商品下架"
+									class="btn btn-warning btn-circle"
+									style="font-size: 17px; color: black;" onclick="#">
+							</div>
+							<hr class="divider-w pt-20">
+							<div class="row">
+								<div class="col-sm-12">
+									<table class="table table-striped table-border checkout-table">
+										<tbody>
+											<tr>
+												<th></th>
+												<th>商品名稱</th>
+												<th>商品類別</th>
+												<th class="hidden-xs">價格</th>
+												<th>庫存</th>
+												<th>狀態</th>
+											</tr>
+											<c:forEach var="prodBean" items="${memberBean.product}">
+											<tr>
+												<td class="hidden-xs"style="text-align: center; vertical-align: middle;">
+													<input type="checkbox" name="selectForUpdateState" value="${prodBean.prodID}" />
+													<label for="check"></label>
+													</td>
+												<td>
+													<h5 class="product-title font-alt">${prodBean.prodName}</h5>
+												</td>
+												<td class="hidden-xs">
+													<h5 class="product-title font-alt">${prodBean.prodtype.prodClassName}</h5>
+												</td>
+												<td>
+													<h5 class="product-title font-alt">NT$${prodBean.prodPrice}</h5>
+												</td>
+												<td>
+													<h5 class="product-title font-alt">${prodBean.inventory}</h5>
+												</td>
+												<td>
+													<h5 class="product-title font-alt" style="color: Blue;">${prodBean.prodState}</h5>
+												</td>
+											</tr>
+											</c:forEach>
+										</tbody>
+									</table>
+								</div>
+							</div>
+						</form>
+							<!--       賣場管理列 -->
+							<!--訂單管理 -->
+							<div class="post-header font-alt" style="display: flex;">
+								<img src="/MeetBoth/html/assets/images/shop/兔年海報4.jpg"
+									style="padding-bottom: 10px;">
+							</div>
+							<!-- 數據中心 -->
+							<div class="row">
+								<div class="col-sm-12" style="display: flex;" id="ChartData">
+									<div id="chart_div" style="width: 50%; height: 500px;"></div>
+									<div id="curve_chart" style="width: 50%; height: 500px;"></div>
+								</div>
+							</div>
 
 										<!-- 數據中心 -->
 									</div>
@@ -564,54 +363,56 @@
 							<% String basePath4=request.getScheme() + "://" + request.getServerName() + ":" +
 								request.getServerPort() + path + "/html/assets/js/util.js" ; %>
 
-								<% String basePath5=request.getScheme() + "://" + request.getServerName() + ":" +
-									request.getServerPort() + path + "/html/assets/js/main.js" ; %>
-									<script src=<%=basePath1%>></script>
-									<script src=<%=basePath2%>></script>
-									<script src=<%=basePath3%>></script>
-									<script src=<%=basePath4%>></script>
-									<script src=<%=basePath5%>></script>
-									<script src="https://kit.fontawesome.com/25590258af.js"
-										crossorigin="anonymous"></script>
-									<!-- SweetAlert js -->
-									<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-									<!-- SweetAlert js -->
-									<script type="text/javascript"
-										src="https://www.gstatic.com/charts/loader.js"></script>
-									<script>
-
-											$(function () {
-												$('.deleteThisProduct').click(function () {
-													let id = $(this).attr("name");
-													Swal.fire({
-														title: '你確定要刪除嗎?',
-														text: "將無法恢復此筆訂單!!!",
-														icon: 'warning',
-														//icon:  "success", "error", "warning", "info" or "question" 這幾種選項
-														showCancelButton: true,
-														confirmButtonColor: '#f7d966',
-														cancelButtonColor: '#3d3b39',
-														cancelButtonText: '取消',
-														confirmButtonText: '確定刪除'
-													}).then((result) => {
-														if (result.isConfirmed) {
-															$.ajax({
-																//專案名稱+servlet
-																url: '/MeetBoth/_03_product.deleteProductById.controller',
-																method: "post",
-																dataType: "text",
-																//對應name設定的名稱 並非value的名稱
-																data: { "id": id },
-															})
-																.done(function () {
-																	window.location = '/MeetBoth/_03_product.searchAllProduct.controller'
-																	console.log("delete")
-																})//done
-																.fail(function (error) {
-																	console.log(error)
-																})//fail end
-														}//if
-													})//then
+	<%
+	String basePath5 = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path
+			+ "/html/assets/js/main.js";
+	%>
+	<script src=<%=basePath1%>></script>
+	<script src=<%=basePath2%>></script>
+	<script src=<%=basePath3%>></script>
+	<script src=<%=basePath4%>></script>
+	<script src=<%=basePath5%>></script>
+	<script src="https://kit.fontawesome.com/25590258af.js"
+		crossorigin="anonymous"></script>
+			<!-- SweetAlert js -->
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<!-- SweetAlert js -->
+	<script type="text/javascript"
+		src="https://www.gstatic.com/charts/loader.js"></script>
+		<script>
+	
+        $(function(){
+        	$('.deleteThisProduct').click(function(){
+                let id=$(this).attr("name");
+                Swal.fire({
+                  title: '你確定要刪除嗎?',
+                  text: "將無法恢復此筆訂單!!!",
+                  icon: 'warning',
+                  //icon:  "success", "error", "warning", "info" or "question" 這幾種選項
+                  showCancelButton: true,
+                  confirmButtonColor: '#f7d966',
+                  cancelButtonColor: '#3d3b39',
+                  cancelButtonText: '取消',
+                  confirmButtonText: '確定刪除'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        $.ajax({
+                          //專案名稱+servlet
+                         url:'/MeetBoth/_03_product.deleteProductById.controller',
+                          method:"post",
+                          dataType:"text",
+                          //對應name設定的名稱 並非value的名稱
+                          data: {"id":id},
+                        })
+                            .done(function () {
+                            	window.location='/MeetBoth/_03_product.searchAllProduct.controller/1'
+                                console.log("delete")
+                             })//done
+                             .fail(function(error) {
+                                 console.log(error)
+                             })//fail end
+                    }//if
+                  })//then
 
 												})//click end
 											});

@@ -12,7 +12,7 @@ public interface HalaRepository extends JpaRepository<HalaBean, Integer> {
 	public List<HalaBean> findByAllLike(String searchAllLike);
 
 	// 查詢全部
-	@Query(value = "select * from Hala", nativeQuery = true)
+	@Query(value = "select * from Hala order by postdate desc", nativeQuery = true)
 	public List<HalaBean> findAllHala();
 
 	// 分類查詢
@@ -27,5 +27,9 @@ public interface HalaRepository extends JpaRepository<HalaBean, Integer> {
 	//熱門前5
 	@Query(value = "select top 5 * from hala order by watch DESC",nativeQuery = true)
 	public List<HalaBean> findTopfive();
-
+	
+	//會員編號查詢
+	 @Query(value = "select * from Hala where memberid=?", nativeQuery = true)
+	 public List<HalaBean>findByMemberId(Integer memberId);
+	
 }

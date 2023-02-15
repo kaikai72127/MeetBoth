@@ -61,14 +61,15 @@
 								<div class="col-sm-5 col-sm-offset-1 mb-sm-40">
 									<h4 class="font-alt h4-p">登入</h4>
 									<hr class="divider-w mb-10">
-									<form class="form" action="<%=request.getContextPath()%>/login/page" method="Post">
+									<form class="form" action="<%=request.getContextPath()%>/login/page" method="Post"
+										id="loginform">
 										<div class="form-group">
 											<input style="text-transform: none;" class="form-control" id="username"
-												type="text" name="username" placeholder="帳號" />
+												type="text" name="username" placeholder="帳號" value="" />
 										</div>
 										<div class="form-group">
 											<input style="text-transform: none;" class="form-control" id="password"
-												type="password" name="password" placeholder="密碼" />
+												type="password" name="password" placeholder="密碼" value="" />
 										</div>
 										<div class="form-group">
 											<label for="checkbox">
@@ -77,7 +78,8 @@
 											</label>
 										</div>
 										<div class="form-group">
-											<button class="btn btn-round btn-p">登入</button>
+											<button class="btn btn-round btn-p"
+												style="font-size: 20px; font-family: 微軟正黑體 ; padding: 0.7% 3% 0.7% 3%;">登入</button>
 										</div>
 
 										<div class="form-group">
@@ -87,6 +89,10 @@
 										<!-- <button class="btn btn-round btn-p"
 											href="<%=request.getContextPath()%>/oauth2/authorization/google">Google登入</button> -->
 									</form>
+									<button id="adminlog" class="btn btn-round btn-p" onclick='adminlog()'
+										style="font-size: 20px; font-family: 微軟正黑體 ; padding: 0.7% 3% 0.7% 3%;">管理員一鍵登入</button>
+									<button id="userlog" class="btn btn-round btn-p" onclick="userlog()"
+										style="font-size: 20px; font-family: 微軟正黑體 ; padding: 0.7% 3% 0.7% 3%;">使用者一鍵登入</button>
 
 								</div>
 								<div class="col-sm-5">
@@ -110,6 +116,30 @@
     -->
 				<!-- 引入共同的js -->
 				<jsp:include page="fragment/jsPath.jsp" />
+				<script>
+					function adminlog() {
+						$(' #username').val('MeetBest'); $('#password').val('!Aa123456'); $('#loginform').submit();
+					}
+					function userlog() {
+						$(' #username').val('AWCzXmbyi'); $('#password').val('!Aa123456'); $('#loginform').submit();
+					}
+
+					$(function () {
+						$.ajax({
+							type: 'POST',
+							url: '/MeetBoth/_01_member.checklog.controller',
+							contentType: 'application/json',
+
+							success: function (user) {
+
+								if (user != "" && user != "anonymousUser") {
+									location.href = '/MeetBoth/justlogin';
+								}
+							}
+						});
+					});
+
+				</script>
 
 
 

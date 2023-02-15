@@ -31,7 +31,7 @@
 						<div class="container">
 							<div class="row">
 								<div class="col-sm-5 col-sm-offset-1 mb-sm-40">
-									<h5 class="font-alt h5-p">已送出驗證信，請至信箱進行驗證</h5><br>
+									<h5 class="font-alt h5-p">更改完成！</h5><br>
 									<h5 id="timeBox" class="font-alt h5-p">
 									</h5>
 									<hr class="divider-w mb-10">
@@ -50,12 +50,12 @@
 					let count = 5;
 					function countDown() {
 						// 將秒數寫在指定元素中
-						document.getElementById("timeBox").innerHTML = count + "秒後關閉頁面！";
+						document.getElementById("timeBox").innerHTML = count + "秒後回到首頁！";
 						// 每次執行就減1
 						count -= 1;
 						// 當 count = 0 時跳轉頁面
 						if (count == 0) {
-							location.href = "/";
+							location.href = "/MeetBoth";
 						}
 						// 設定每秒執行1次
 						setTimeout("countDown()", 1000);

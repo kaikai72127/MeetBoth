@@ -241,10 +241,10 @@ a:hover {
 										class="btn btn-d btn-round">訂單管理&ensp;<i
 											class="fa-solid fa-angle-double-down"></i></a>
 										<ul style="">
-											<li><a href="/MeetBoth/shoppingCartOrders.controller"
+											<li><a href="/MeetBoth/admin/shoppingCartOrders.controller"
 												style="color: white; font-weight: 600;"
 												class="btn btn-d btn-round">所有訂單清單</a></li>
-											<li><a href="/MeetBoth/discounts.controller"
+											<li><a href="/MeetBoth/admin/discounts.controller"
 												style="color: white; font-weight: 600;"
 												class="btn btn-d btn-round">折扣碼管理</a></li>
 										</ul></li>
@@ -270,9 +270,9 @@ a:hover {
 								<!--       右邊第一部分開始 -->
 								<div class="post">
 									<button class="MBbtn"
-										onclick="window.location='/MeetBoth/shoppingCartOrders.controller'">返回</button>
+										onclick="window.location='/MeetBoth/admin/shoppingCartOrders.controller/1'">返回</button>
 									<form
-										action="<c:url value='/shoppingCartUpdateOrderMain.controller' />"
+										action="<c:url value='/admin/shoppingCartUpdateOrderMain.controller' />"
 										method="Post" enctype="multipart/form-data">
 										<div
 											class="post-video embed-responsive embed-responsive-16by9"
@@ -335,12 +335,11 @@ a:hover {
 														value="${orderBean.deliveryStstus}${param.deliveryS}"><select
 														name='deliveryStstus' class="fieldWidth MBinput"
 														style="width: 312px; height: 66.1px;">
-															<option class="C1" value="無">無</option>
-															<option class="C2" value="備貨中">備貨中</option>
-															<option class="C3" value="已發貨">已發貨</option>
-															<option class="C4" value="已取貨">已取貨</option>
-															<option class="C5" value="退貨中">退貨中</option>
-															<option class="C6" value="已退貨">已退貨</option>
+															<option class="C1" value="備貨中">備貨中</option>
+															<option class="C2" value="已發貨">已發貨</option>
+															<option class="C3" value="已取貨">已取貨</option>
+															<option class="C4" value="退貨中">退貨中</option>
+															<option class="C5" value="已退貨">已退貨</option>
 													</select></span>
 												</div>
 												<div>
@@ -502,23 +501,20 @@ a:hover {
 		var v = $('#deliveryS').val();
 		console.log(v)
 		switch (v) {
-		case '無':
+		case '備貨中':
 			$(".C1").attr('selected', true)
 			break;
-		case '備貨中':
+		case '已發貨':
 			$(".C2").attr('selected', true)
 			break;
-		case '已發貨':
+		case '已取貨':
 			$(".C3").attr('selected', true)
 			break;
-		case '已取貨':
+		case '退貨中':
 			$(".C4").attr('selected', true)
 			break;
-		case '退貨中':
-			$(".C5").attr('selected', true)
-			break;
 		case '已退貨':
-			$(".C6").attr('selected', true)
+			$(".C5").attr('selected', true)
 			break;
 		}
 

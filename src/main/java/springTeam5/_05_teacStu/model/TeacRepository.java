@@ -17,6 +17,15 @@ public interface TeacRepository extends JpaRepository<TeacBean, Integer>{
 			+ "or m.memNickName like concat('%', ?1, '%')")
 	public List<TeacBean> findByAllLike(String searchAllLike);
 	
+//	用陣列模糊搜尋教學地區欄位
+	public List<TeacBean> findByTeacLocIn(List<String> teacLoc);
+	
+//	模糊搜尋教學對象欄位
+	public List<TeacBean> findByTeacObjectContaining(String keyword);
+	
+//	用陣列模糊搜尋教學時段欄位
+	public List<TeacBean> findByTeacTimeIn(List<String> teacTime);
+	
 //  透過時薪區間建立教師貼文查詢
 	public List<TeacBean> findByPriceBetween(Double low, Double high);
 

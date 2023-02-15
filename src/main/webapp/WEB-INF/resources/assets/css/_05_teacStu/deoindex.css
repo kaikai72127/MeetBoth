@@ -16,12 +16,7 @@ body {
 
 .page-container {
     width: 80%;
-<<<<<<< HEAD
     margin: 5rem auto;
-=======
-    height: 100vh;
-    margin: auto;
->>>>>>> origin/_01_Seal
     display: flex;
     justify-content: center;
     align-items: center;
@@ -101,7 +96,6 @@ body {
 .teacher-detail > a {
     color: #0089ac;
     text-decoration: none;
-<<<<<<< HEAD
 }
 
 .case-list {
@@ -197,6 +191,3 @@ body {
 }
 
 /* #endregion */
-=======
-}
->>>>>>> origin/_01_Seal

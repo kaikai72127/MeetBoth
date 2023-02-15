@@ -109,9 +109,15 @@ public class OrderItemServiceImpl implements OrderItemService {
 
 	//找到賣了那些item
 	@Override
+	public List<OrderItemBean> findByMemberSale(Integer membersale_FK, Integer orderNo) {
+		return orderItemRepo.findByMemberSale(membersale_FK, orderNo);
+	}
+
+	@Override
 	public List<OrderItemBean> findByMembersale(Integer membersale_FK) {
 		return orderItemRepo.findByMembersale(membersale_FK);
 	}
+	
 	
 	
 }

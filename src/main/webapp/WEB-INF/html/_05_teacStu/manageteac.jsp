@@ -211,7 +211,7 @@ a:hover {
 												href="/MeetBoth/_03_product.productindex.controller"
 												style="color: white; font-weight: 600;"
 												class="btn btn-d btn-round">所有商品清單</a></li>
-												<li><a
+											<li><a
 												href="/MeetBoth/_03_product.MBinsertProd.controller"
 												style="color: white; font-weight: 600;"
 												class="btn btn-d btn-round">新增商品</a></li>
@@ -251,24 +251,24 @@ a:hover {
 							</div>
 						</div>
 						<!-- 左邊欄位結束 -->
-						<!-- 						右邊欄位開始 -->
+						<!-- 右邊欄位開始 -->
 						<div class="col-sm-8 col-sm-offset-1"
 							style="margin-left: 20px; width: 75%; border-left: solid 1px yellow;">
 							<div class="post">
-								<!-- 							標題 -->
+								<!-- 標題 -->
 								<div class="post-thumbnail"
 									style="padding-bottom: 0; margin-bottom: 0;">
 									<h1
-										style="padding-bottom: 0px; margin-bottom: 0; text-align: center; font-size: 50px; color: white;">商品後臺管理</h1>
+										style="padding-bottom: 0px; margin-bottom: 0; text-align: center; font-size: 50px; color: white;">履歷後臺管理</h1>
 								</div>
 								<hr class="divider-w pt-20">
-								<!-- 							標題 -->
-								<!--       右邊第一部分開始 -->
+								<!-- 標題 -->
+								<!-- 右邊第一部分開始 -->
 								<div class="post">
 									<div class="post-video embed-responsive embed-responsive-16by9"
 										style="height: auto; padding-bottom: 100px;">
 										<div>
-											<span>所有商品資料 :&ensp;</span>
+											<span>所有履歷貼文 :&ensp;</span>
 										</div>
 										<form class="row"
 											action="<c:url value='/admin/_05_teacStu.searchAllLike.controller/1' />"
@@ -276,7 +276,7 @@ a:hover {
 											<div style="display: flex; margin-bottom: 15px;">
 												<div class="" style="">
 													<input class="MBinput" type="text" name="search"
-														style="font-size: 17px; color: white; margin: 10px 10px;"
+														style="font-size: 17px; color: white; margin: 10px 30px;"
 														placeholder="Search..." />
 												</div>
 												<div style="">
@@ -293,25 +293,23 @@ a:hover {
 													class="prodtable">
 													<thead>
 														<tr style="">
-															<th style="width: 5%;">會員編號</th>
-															<th style="width: 25%; padding-left: 5px;">履歷編號</th>
+															<th style="width: 10%;">會員編號</th>
+															<th style="width: 10%;">履歷編號</th>
 															<th style="width: 10%">學歷</th>
 															<th style="width: 10%">語言能力</th>
-															<th style="width: 5%">授課科目</th>
+															<th style="width: 10%">授課科目</th>
 															<th style="width: 10%">授課地區</th>
 															<th style="width: 10%">授課對象</th>
-															<th style="width: 5%">時薪</th>
+															<th style="width: 10%">時薪</th>
 															<th style="width: 10%">觀看次數</th>
 															<th style="width: 15%">更新日期</th>
-															<th></th>
-															<th></th>
 															<th style="border-right: none"></th>
 														</tr>
 													</thead>
 													<tbody>
 														<c:forEach var="bean" items="${pageTeac}">
 															<tr>
-																<td style="">${bean.member.memberID}</td>
+																<td>${bean.member.memberID}</td>
 																<td>${bean.teacno}</td>
 																<td>${bean.highEdu}</td>
 																<td>${bean.lanAbility}</td>
@@ -324,14 +322,42 @@ a:hover {
 																<td><input type="button" class="MBbtn" value="更多"
 																	onclick="window.location='/MeetBoth/admin/_05_teacStu.teacpostpageMain.controller?teacno=${bean.teacno}'"></td>
 																<td><input type="button" class="MBbtn" value="修改"
-																	onclick="window.location='/MeetBoth/admin/_05_teacStu.updateteac.controller?teacno=${bean.teacno}'"></td>
+																	onclick="window.location='/MeetBoth/admin/_05_teacStu.updatedataMain.controller?teacno=${bean.teacno}'"></td>
 																<td style="border-right: none"><input type="button"
-																	class="MBbtn deleteThisProduct" value="刪除" id="deleteThisProduct"
-																	name="${bean.teacno}"></td>
+																	class="MBbtn deleteThisProduct" value="刪除"
+																	id="${bean.teacno}"></td>
 															</tr>
 														</c:forEach>
 													</tbody>
 												</table>
+												<!-- 分頁按鈕 -->
+												<div class="pagination font-alt"
+													style="display: flex; justify-content: center; align-items: center">
+													<c:if test="${currentPage != 1}">
+														<a
+															href="/MeetBoth/_05_teacStu.searchAllTeac.controller/${currentPage-1}"><i
+															class="fa fa-angle-left"></i></a>
+													</c:if>
+													<!-- 迴圈生成每一頁的按鈕 -->
+													<c:forEach var="i" begin="1" end="${totalPages}">
+														<c:choose>
+															<c:when test="${currentPage == i}">
+																<a class="active"
+																	href="/MeetBoth/_05_teacStu.searchAllTeac.controller/${i}">${i}</a>
+															</c:when>
+															<c:otherwise>
+																<a
+																	href="/MeetBoth/_05_teacStu.searchAllTeac.controller/${i}">${i}</a>
+															</c:otherwise>
+														</c:choose>
+													</c:forEach>
+													<c:if test="${currentPage != totalPages}">
+														<a
+															href="/MeetBoth/_05_teacStu.searchAllTeac.controller/${currentPage+1}"><i
+															class="fa fa-angle-right"></i></a>
+													</c:if>
+												</div>
+												<!-- 分頁按鈕結束 -->
 											</div>
 										</div>
 									</div>
@@ -408,7 +434,7 @@ a:hover {
 	<script>
         $(function(){
         	$('.deleteThisProduct').click(function(){
-                let id=$(this).attr("name");
+                let id=$(this).attr("id");
                 Swal.fire({
                   title: '你確定要刪除嗎?',
                   text: "將無法恢復此筆訂單!!!",
@@ -424,10 +450,10 @@ a:hover {
                         $.ajax({
                           //專案名稱+servlet
                          url:'/MeetBoth/admin/_05_teacStu.deletedata.controller',
-                          method:"post",
+                          method:"get",
                           dataType:"text",
                           //對應name設定的名稱 並非value的名稱
-                          data: {"id":id},
+                          data: {"teacno":id},
                         })
                             .done(function () {
                             	window.location='/MeetBoth/admin/_05_teacStu.searchAllTeac.controller/1'

@@ -241,10 +241,11 @@ a:hover {
 										class="btn btn-d btn-round">訂單管理&ensp;<i
 											class="fa-solid fa-angle-double-down"></i></a>
 										<ul style="">
-											<li><a href="/MeetBoth/shoppingCartOrders.controller"
+											<li><a
+												href="/MeetBoth/admin/shoppingCartOrders.controller/1"
 												style="color: white; font-weight: 600;"
 												class="btn btn-d btn-round">所有訂單清單</a></li>
-											<li><a href="/MeetBoth/discounts.controller"
+											<li><a href="/MeetBoth/admin/discounts.controller/1"
 												style="color: white; font-weight: 600;"
 												class="btn btn-d btn-round">折扣碼管理</a></li>
 										</ul></li>
@@ -275,7 +276,7 @@ a:hover {
 											<span>所有訂單資料 :&ensp;</span>
 										</div>
 										<form class="row"
-											action="<c:url value='/shoppingCartSearchOrders.controller'/>"
+											action="<c:url value='/admin/shoppingCartSearchOrders.controller/1'/>"
 											method="post">
 											<div style="display: flex; margin-bottom: 15px;">
 												<div style="padding-right: 0; margin: auto 10px;">
@@ -316,8 +317,6 @@ a:hover {
 														<option value="已退貨">已退貨</option>
 													</select>
 												</div>
-												<input type="hidden" name="lowprice" value="0" /> <input
-													type="hidden" name="highprice" value="9999999" />
 												<div class="" style="">
 													<input class="MBinput" type="text" name="search"
 														style="font-size: 17px; color: white; margin: 10px 10px;"
@@ -332,14 +331,15 @@ a:hover {
 
 
 											<div>
-												<table style="color: white; text-align: center;font-size: 20px"
+												<table
+													style="color: white; text-align: center; font-size: 20px"
 													class="prodtable">
 													<thead>
 														<tr style="">
 															<th style="width: 5%;">編號</th>
 															<th style="width: 10%; padding-left: 5px;">訂購會員</th>
-															<th style="width: 15%;padding-left:10px">訂單日期</th>
-															<th style="width: 15%;padding-left:10px">更新日期</th>
+															<th style="width: 15%; padding-left: 10px">訂單日期</th>
+															<th style="width: 15%; padding-left: 10px">更新日期</th>
 															<th style="width: 10%">訂單狀態</th>
 															<th style="width: 10%">付款狀態</th>
 															<th style="width: 10%">送貨狀態</th>
@@ -350,8 +350,7 @@ a:hover {
 													<tbody>
 														<c:forEach var="bean" items="${orderList}">
 															<tr>
-																<td id="eachProdBlock" class="mEvent"
-																	onclick="window.location='/MeetBoth/shoppingCart.SelectOrderAllItem.controller/${bean.orderNo}'">${bean.orderUID}</td>
+																<td id="eachProdBlock" class="mEvent">${bean.orderUID}</td>
 																<td style="">${bean.memberbuy.memName}</td>
 																<td>${bean.orderDate}</td>
 																<td>${bean.uporderDate}</td>
@@ -359,7 +358,7 @@ a:hover {
 																<td>${bean.paymentStstus}</td>
 																<td>${bean.deliveryStstus}</td>
 																<td><input type="button" class="MBbtn" value="更多"
-																	onclick="window.location='/MeetBoth/shoppingCartUpdateOrder.controller/${bean.orderNo}'"></td>
+																	onclick="window.location='/MeetBoth/admin/shoppingCartUpdateOrder.controller/${bean.orderNo}'"></td>
 																<td style="border-right: none"><input type="button"
 																	class="MBbtn deleteThisOrder" value="刪除" id=""
 																	name="${bean.orderNo}"></td>
@@ -367,6 +366,34 @@ a:hover {
 														</c:forEach>
 													</tbody>
 												</table>
+												<!-- 分頁按鈕 -->
+												<div class="pagination font-alt"
+													style="display: flex; justify-content: center; align-items: center">
+													<c:if test="${currentPage != 1}">
+														<a
+															href="/MeetBoth/admin/shoppingCartOrders.controller/${currentPage-1}"><i
+															class="fa fa-angle-left"></i></a>
+													</c:if>
+													<!-- 迴圈生成每一頁的按鈕 -->
+													<c:forEach var="i" begin="1" end="${totalPages}">
+														<c:choose>
+															<c:when test="${currentPage == i}">
+																<a class="active"
+																	href="/MeetBoth/admin/shoppingCartOrders.controller/${i}">${i}</a>
+															</c:when>
+															<c:otherwise>
+																<a
+																	href="/MeetBoth/admin/shoppingCartOrders.controller/${i}">${i}</a>
+															</c:otherwise>
+														</c:choose>
+													</c:forEach>
+													<c:if test="${currentPage != totalPages}">
+														<a
+															href="/MeetBoth/admin/shoppingCartOrders.controller/${currentPage+1}"><i
+															class="fa fa-angle-right"></i></a>
+													</c:if>
+												</div>
+												<!-- 分頁按鈕結束 -->
 											</div>
 										</div>
 									</div>
@@ -463,14 +490,14 @@ a:hover {
                     if (result.isConfirmed) {
                         $.ajax({
                           //專案名稱+servlet
-                         url:'/MeetBoth/shoppingCart.DeleteOrder.controller',
+                         url:'/MeetBoth/admin/shoppingCart.DeleteOrder.controller',
                           method:"get",
                           dataType:"text",
                           //對應name設定的名稱 並非value的名稱
                           data: {"orderNo":id},
                         })
                             .done(function () {
-                            	window.location='/MeetBoth/shoppingCartOrders.controller'
+                            	window.location='/MeetBoth/admin/shoppingCartOrders.controller'
                                 console.log("delete")
                              })//done
                              .fail(function(error) {

@@ -23,7 +23,11 @@ String basePathimg2 = request.getScheme() + "://" + request.getServerName() + ":
 <jsp:include page="/WEB-INF/html/fragment/headMVC.jsp" />
 <%-- <jsp:include page="/WEB-INF/html/fragment/topMVC.jsp" /> --%>
 <jsp:include page="/WEB-INF/html/fragment/jsPath.jsp" />
-
+<link rel="stylesheet"
+	href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
+<link rel="stylesheet" href="/resources/demos/style.css">
+<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+<script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
 <style>
 .star-off {
 	color: black;
@@ -174,6 +178,34 @@ a:hover {
 	border-top: solid 1px white;
 }
 </style>
+<script>
+	$(function() {
+		var dateFormat = "mm/dd/yy", from = $("#from").datepicker({
+			defaultDate : "+1w",
+			changeMonth : true,
+			numberOfMonths : 1
+		}).on("change", function() {
+			to.datepicker("option", "minDate", getDate(this));
+		}), to = $("#to").datepicker({
+			defaultDate : "+1w",
+			changeMonth : true,
+			numberOfMonths : 1
+		}).on("change", function() {
+			from.datepicker("option", "maxDate", getDate(this));
+		});
+
+		function getDate(element) {
+			var date;
+			try {
+				date = $.datepicker.parseDate(dateFormat, element.value);
+			} catch (error) {
+				date = null;
+			}
+
+			return date;
+		}
+	});
+</script>
 </head>
 <body data-spy="scroll" data-target=".onpage-navigation"
 	data-offset="60">
@@ -241,10 +273,11 @@ a:hover {
 										class="btn btn-d btn-round">訂單管理&ensp;<i
 											class="fa-solid fa-angle-double-down"></i></a>
 										<ul style="">
-											<li><a href="/MeetBoth/shoppingCartOrders.controller"
+											<li><a
+												href="/MeetBoth/admin/shoppingCartOrders.controller"
 												style="color: white; font-weight: 600;"
 												class="btn btn-d btn-round">所有訂單清單</a></li>
-											<li><a href="/MeetBoth/discounts.controller"
+											<li><a href="/MeetBoth/admin/discounts.controller"
 												style="color: white; font-weight: 600;"
 												class="btn btn-d btn-round">折扣碼管理</a></li>
 										</ul></li>
@@ -260,7 +293,8 @@ a:hover {
 							style="margin-left: 20px; width: 75%; border-left: solid 1px yellow;">
 							<div class="post">
 								<!-- 							標題 -->
-								<div class="post-thumbnail"
+								<div class=
+								"post-thumbnail"
 									style="padding-bottom: 0; margin-bottom: 0;">
 									<h1
 										style="padding-bottom: 0px; margin-bottom: 0; text-align: center; font-size: 50px; color: white;">後臺管理-訂單管理</h1>
@@ -270,133 +304,51 @@ a:hover {
 								<!--       右邊第一部分開始 -->
 								<div class="post">
 									<button class="MBbtn"
-										onclick="window.location='/MeetBoth/shoppingCartOrders.controller'">返回</button>
+										onclick="window.location='/MeetBoth/admin/discounts.controller/1'">返回</button>
 									<form
-										action="<c:url value='/shoppingCartUpdateOrderMain.controller' />"
+										action="<c:url value='/admin/discountsUpdateMain.controller' />"
 										method="Post" enctype="multipart/form-data">
 										<div
 											class="post-video embed-responsive embed-responsive-16by9"
 											style="height: auto; padding-bottom: 100px; display: flex;">
 											<div style="width: 50%;">
 												<div>
-													<span>折扣&ensp;&ensp;編號 :&ensp;<input
-														value="${orderBean.orderNo}" type="text" name="orderNo"
-														class="MBinput" readonly></span>
+													<span>折扣&ensp;編碼 :&ensp;<input name='discountNo'
+														value="${bean.discountNo}" type="text" class="MBinput"
+														readonly></span>
 												</div>
 												<div>
-													<span>折扣&ensp;&ensp;編碼 :&ensp;<input
-														value="${orderBean.memberbuy.memName}" type="text"
-														class="MBinput" readonly></span>
+													<span>折扣&ensp;名稱 :&ensp;<input name='discountName'
+														value="${bean.discountName}" type="text" class="MBinput"></span>
 												</div>
 												<div>
-													<span>折扣&ensp;&ensp;名稱
-													
-													 :&ensp;<input name='shippingName'
-														value="${orderBean.shippingName}" type="text"
-														class="MBinput"></span>
+													<span>折扣&ensp;金額 :&ensp;<input name='discountPrice'
+														value="${bean.discountPrice}" type="text" class="MBinput"></span>
 												</div>
 												<div>
-													<span>收件人電話 :&ensp;<input name='shippingPhone'
-														value="${orderBean.shippingPhone}" type="text"
-														class="MBinput"></span>
+													<span>折扣&ensp;敘述 :&ensp;<input name='discountDesc'
+														value="${bean.discountDesc}" type="text" class="MBinput"></span>
 												</div>
 												<div>
-													<span>收件人地址 :&ensp;<input name='shippingAddress'
-														value="${orderBean.shippingAddress}" type="text"
-														class="MBinput"></span>
+													<span>開始&ensp;日期 :&ensp;<input name='discountStart'
+														value="${bean.discountStart}" type="text" class="MBinput">
+														</span>
 												</div>
-
+												<div>
+													<span>到期&ensp;日期 :&ensp;<input name='discountEnd'
+														value="${bean.discountEnd}" type="text" class="MBinput">
+														</span>
+												</div>
 											</div>
 											<div style="width: 50%;">
-												<div>
-													<span>訂單&ensp;&ensp;狀態 :&ensp;<input type="hidden"
-														id="ordS" class="MBinput"
-														value="${orderBean.ordStstus}${param.ordS}"><select
-														name='ordStstus' class="fieldWidth MBinput"
-														style="width: 312px; height: 66.1px;">
-															<option class="A1" value="處理中">處理中</option>
-															<option class="A2" value="備貨中">備貨中</option>
-															<option class="A3" value="已完成">已完成</option>
-													</select></span>
-												</div>
-												<div>
-													<span>付款&ensp;&ensp;狀態 :&ensp;<input type="hidden"
-														id="paymentS" class="MBinput"
-														value="${orderBean.paymentStstus}${param.paymentS}"><select
-														name='paymentStstus' class="fieldWidth MBinput"
-														style="width: 312px; height: 66.1px;">
-															<option class="B1" value="未付款">未付款</option>
-															<option class="B2" value="已付款">已付款</option>
-															<option class="B3" value="退款中">退款中</option>
-															<option class="B4" value="已退款">已退款</option>
-													</select></span>
-												</div>
-												<div>
-													<span>送貨&ensp;&ensp;狀態 :&ensp;<input type="hidden"
-														id="deliveryS" class="MBinput"
-														value="${orderBean.deliveryStstus}${param.deliveryS}"><select
-														name='deliveryStstus' class="fieldWidth MBinput"
-														style="width: 312px; height: 66.1px;">
-															<option class="C1" value="無">無</option>
-															<option class="C2" value="備貨中">備貨中</option>
-															<option class="C3" value="已發貨">已發貨</option>
-															<option class="C4" value="已取貨">已取貨</option>
-															<option class="C5" value="退貨中">退貨中</option>
-															<option class="C6" value="已退貨">已退貨</option>
-													</select></span>
-												</div>
-												<div>
-													<span>折扣碼使用 :&ensp;<input name='discountNo'
-														value="${orderBean.discount.discountNo}" type="text"
-														class="MBinput" readonly></span>
-												</div>
-												<div>
-													<span>總&ensp;&ensp;金&ensp;&ensp;額 :&ensp;<input
-														name='totalAmount' value="${orderBean.totalAmount}"
-														type="text" class="MBinput" readonly></span>
-												</div>
 												<div>
 													<input type="submit" class="MBbtn" value="確定"
 														style="margin-top: 15px; margin-left: 400px; font-size: 35px;">
 												</div>
 											</div>
-
-
-
 										</div>
 									</form>
-									<div class="table-wrapper">
-										<table
-											style="color: white; text-align: center; font-size: 20px"
-											class="prodtable">
-											<thead>
-												<tr>
-													<th style="width: 10%; font-size: 25px">item</th>
-													<th style="width: 10%; font-size: 25px">商品名稱</th>
-													<th style="width: 10%; font-size: 25px">單價</th>
-													<th style="width: 10%; font-size: 25px">數量</th>
-													<th style="width: 10%; border-right: none; font-size: 25px">總計</th>
-												</tr>
-											</thead>
-											<c:forEach var="bean" items="${orderItems}">
-												<tbody>
-													<tr>
-														<td><div id="photo">
-																<img id="preImg" style="width: 100px; height: 100px"
-																	src="<c:url value='/_03_product.showPicture.controller?id=${bean.prodItem.prodID}' />" />
-															</div></td>
-														<td style="font-size: 25px">${bean.prodItem.prodName}</td>
-														<td style="font-size: 25px" class="prodPrice">${bean.prodItem.prodPrice}</td>
-														<td style="font-size: 25px">${bean.qty}</td>
-														<td class="itemTotal"
-															style="border-right: none; font-size: 25px">${bean.itemTotal}</td>
-													</tr>
-												</tbody>
-											</c:forEach>
-										</table>
-									</div>
 									<!--       右邊第一部分結束 -->
-									<!-- 									<hr class="divider-w pt-20"> -->
 								</div>
 							</div>
 							<!-- 		右邊欄位結束 -->

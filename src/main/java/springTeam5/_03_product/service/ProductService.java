@@ -6,6 +6,7 @@ import java.util.List;
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Service;
 
 import springTeam5._03_product.model.ProductRepository;
@@ -98,5 +99,57 @@ public class ProductService {
 //	熱門檢索
 	public List<Product> findHotestProducts() {
 		return pRepo.findHotestProducts();
+	}
+	
+//	-------------------上下架的搜尋------------------------
+	public List<Product> findAllAndOnlyOnSales(){
+		return pRepo.findAllAndOnlyOnSales();
+	}
+	
+//	透過產品類別搜尋
+	public List<Product> findByProdClassAndOnlyOnSales(Integer prodClass){
+		return pRepo.findByProdClassAndOnlyOnSales(prodClass);
+	}
+	
+//	條件搜尋
+	public List<Product> findAllByOrderByProdIDAndOnlyOnSales(Integer type, Integer low, Integer high, String name){
+		return pRepo.findAllByOrderByProdIDAndOnlyOnSales(type, low, high, name);
+	}
+
+	public List<Product> findAllByOrderByProdPriceDescAndOnlyOnSales(Integer type, Integer low, Integer high,String name){
+		return pRepo.findAllByOrderByProdPriceDescAndOnlyOnSales(type, low, high, name);
+	}
+
+	public List<Product> findAllByOrderByProdPriceAndOnlyOnSales(Integer type, Integer low, Integer high, String name){
+		return pRepo.findAllByOrderByProdPriceAndOnlyOnSales(type, low, high, name);
+	}
+	
+	public List<Product> findAllByOrderByProdPostDescAndOnlyOnSales(Integer type, Integer low, Integer high, String name){
+		return pRepo.findAllByOrderByProdPostDescAndOnlyOnSales(type, low, high, name);
+	}
+
+	public List<Product> findAllByOrderByProdUpdateDescAndOnlyOnSales(Integer type, Integer low, Integer high, String name){
+		return pRepo.findAllByOrderByProdUpdateDescAndOnlyOnSales(type, low, high, name);
+	}
+	
+	public List<Product> findAllByOrderByProdCheckDescAndOnlyOnSales(Integer type, Integer low, Integer high, String name){
+		return pRepo.findAllByOrderByProdCheckDescAndOnlyOnSales(type, low, high, name);
+	}
+
+	public List<Product> findTop4ProductLikeByProductLikeAndOnlyOnSales(Integer prodClass,Integer prodID){
+		return pRepo.findTop4ProductLikeByProductLikeAndOnlyOnSales(prodClass, prodID);
+	}
+
+	public List<Product> findRandomProductsAndOnlyOnSales(){
+		return pRepo.findRandomProductsAndOnlyOnSales();
+	}
+	
+	public List<Product> findHotestProductsAndOnlyOnSales(){
+		return pRepo.findHotestProductsAndOnlyOnSales();
+	}
+	
+//	---------------------------透過memID找prod但不顯示 下架產品-------------------------------
+	public List<Product> findByMemidAndOnlyOnSales(Integer memId){
+		return pRepo.findByMemidAndOnlyOnSales(memId);
 	}
 }

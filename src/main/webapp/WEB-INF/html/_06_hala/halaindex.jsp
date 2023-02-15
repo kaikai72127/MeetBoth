@@ -272,7 +272,7 @@ a:hover {
 										</div>
 										
 										<form class="row"
-											action="<c:url value='/_06_halaAndQa.SelectHalaClassIndex.controller'/>"
+											action="<c:url value='/admin/_06_halaAndQa.SelectHalaClassIndex.controller'/>"
 											method="get">
 											<div style="display: flex; margin-bottom: 15px;">
 
@@ -317,7 +317,7 @@ a:hover {
 													
 													
 													<input type="button" class="MBbtn" value="新增"
-														onclick="window.location='/MeetBoth/_06_halaAndQa.goAddHalaIndex.controller'">
+														onclick="window.location='/MeetBoth/admin/_06_halaAndQa.goAddHalaIndex.controller'">
 														
 												</div>
 												
@@ -325,9 +325,9 @@ a:hover {
 											
 										</form>
 										<div>
-											<form action="_06_halaAndQa.searchAllLike.controller1"
-												method="post">
-												<input class="MBinput" type="text" name="search1"
+											<form method="post" action="<c:url value='/admin/_06_halaAndQa.searchAllLikeIndex.controller' />">
+												
+												<input class="MBinput" type="text" name="search"
 													style="font-size: 17px; color: white; margin: 10px 10px;"
 													placeholder="搜尋名稱" />
 
@@ -361,10 +361,10 @@ a:hover {
 																<td>${bean.title}</td>
 																<td>${bean.halaclassname}</td>
 																<td>&#129321;${bean.watch}</td>
-																<td>${bean.memberid}</td>
+																<td>${bean.memberBean.memberID}</td>
 																<td>${bean.postdate}</td>
 																<td><input type="button" class="MBbtn" value="修改"
-																	onclick="window.location='/MeetBoth/_06_halaAndQa.GoHalaUpdateIndex.controller?halaId=${bean.halaId}'"></td>
+																	onclick="window.location='/MeetBoth/admin/_06_halaAndQa.GoHalaUpdateIndex.controller?halaId=${bean.halaId}'"></td>
 																<td style="border-right: none"><input type="button"
 																	class="MBbtn deleteThisProduct" value="刪除"
 																	name="${bean.halaId}"></td>
@@ -464,14 +464,14 @@ a:hover {
                     if (result.isConfirmed) {
                         $.ajax({
                           //專案名稱+servlet
-                         url:'/MeetBoth/_06_halaAndQa.deleteHalaIndex.controller',
+                         url:'/MeetBoth/admin/_06_halaAndQa.deleteHalaIndex.controller',
                           method:"get",
                           dataType:"text",
                           //對應name設定的名稱 並非value的名稱
                           data: {"halaId":id},
                         })
                             .done(function () {
-                            	window.location='/MeetBoth/_06_halaAndQa.SelectAllHalaIndex.controller'
+                            	window.location='/MeetBoth/admin/_06_halaAndQa.SelectAllHalaIndex.controller'
                                 console.log("delete")
                              })//done
                              .fail(function(error) {

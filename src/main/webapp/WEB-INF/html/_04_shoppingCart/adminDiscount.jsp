@@ -241,15 +241,16 @@ a:hover {
 										class="btn btn-d btn-round">訂單管理&ensp;<i
 											class="fa-solid fa-angle-double-down"></i></a>
 										<ul style="">
-											<li><a href="/MeetBoth/shoppingCartOrders.controller"
+											<li><a
+												href="/MeetBoth/admin/shoppingCartOrders.controller"
 												style="color: white; font-weight: 600;"
 												class="btn btn-d btn-round">所有訂單清單</a></li>
-											<li><a href="/MeetBoth/discounts.controller"
+											<li><a href="/MeetBoth/admin/discounts.controller"
 												style="color: white; font-weight: 600;"
 												class="btn btn-d btn-round">折扣碼管理</a></li>
 										</ul></li>
 								</ul>
-								<a href="#"><img
+								<a href="/MeetBoth/index.controller"><img
 									src="/MeetBoth/html/assets/images/shop/警告2.jpg"
 									style="padding-bottom: 10px;"></a>
 							</div>
@@ -274,39 +275,30 @@ a:hover {
 										<div>
 											<span>所有折扣碼資料 :&ensp;</span>
 										</div>
-										<form class="row"
-											action="<c:url value='/discountsSearch.controller'/>"
-											method="post">
-											<div style="display: flex; margin-bottom: 15px;">
-												<div style="padding-right: 0; margin: auto 10px;">
-													<input type="hidden" id="paymentS"
-														value="${bean.paymentStstus}${param.paymentS}"> <select
-														name="paymentStstus" class="form-control"
-														style="font-size: 17px; color: black;">
-														<option value="0">折扣種類</option>
-														<option value="未付款">未付款</option>
-														<option value="已付款">已付款</option>
-														<option value="退款中">退款中</option>
-														<option value="已退款">已退款</option>
-													</select>
+										<div style="display: flex">
+											<form class="row"
+												action="<c:url value='/discountsSearch.controller'/>"
+												method="post">
+												<div style="display: flex; margin-bottom: 15px;">
+													<div class="" style="">
+														<input class="MBinput" type="text" name="search"
+															style="font-size: 17px; color: white; margin: 20px 20px;"
+															placeholder="搜尋名稱" />
+													</div>
+													<div style="">
+														<button class="MBbtn" type="submit" style="">搜尋</button>
+													</div>
 												</div>
-												<div style="padding-right: 0; margin: auto 10px;">
-													<input class="form-control" type="date" name="dateStart">
-												</div>
-												<div style="padding-right: 0; margin: auto 10px;">至</div>
-												<div style="padding-right: 0; margin: auto 10px;">
-													<input class="form-control" type="date" name="dateEnd">
-												</div>
-												<div class="" style="">
-													<input class="MBinput" type="text" name="search"
-														style="font-size: 17px; color: white; margin: 10px 10px;"
-														placeholder="搜尋名稱" />
-												</div>
-												<div style="">
-													<button class="MBbtn" type="submit" style="">搜尋</button>
-												</div>
+											</form>
+											<div style="margin-left: 10px">
+												<form method="post"
+													action="<c:url value='/admin/discountsCreate.controller' />">
+													<button class="MBbtn">新增</button>
+												</form>
 											</div>
-										</form>
+
+										</div>
+
 										<div>
 
 
@@ -334,7 +326,7 @@ a:hover {
 																<td style="padding-left: 15px; padding-right: 15px">${bean.discountStart}</td>
 																<td>${bean.discountEnd}</td>
 																<td><form style="padding-top: 18px" method="post"
-																		action="/MeetBoth/discountsUpdate.controller/${bean.discountId}">
+																		action="/MeetBoth/admin/discountsUpdate.controller/${bean.discountId}">
 																		<input type="hidden" name="discountId"
 																			value="${bean.discountId}"> <input
 																			type="submit" class="MBbtn" value="編輯">
@@ -442,14 +434,14 @@ a:hover {
                     if (result.isConfirmed) {
                         $.ajax({
                           //專案名稱+servlet
-                         url:'/MeetBoth/shoppingCart.DeleteOrder.controller',
+                         url:'/MeetBoth/admin/discountsDelete.controller',
                           method:"get",
                           dataType:"text",
                           //對應name設定的名稱 並非value的名稱
                           data: {"orderNo":id},
                         })
                             .done(function () {
-                            	window.location='/MeetBoth/shoppingCartOrders.controller'
+                            	window.location='/MeetBoth/admin/discountsDelete.controller.controller'
                                 console.log("delete")
                              })//done
                              .fail(function(error) {

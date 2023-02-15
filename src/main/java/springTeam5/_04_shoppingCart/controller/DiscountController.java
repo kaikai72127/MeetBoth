@@ -1,9 +1,7 @@
 package springTeam5._04_shoppingCart.controller;
 
-import java.io.IOException;
 import java.util.List;
 
-import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -31,25 +29,53 @@ public class DiscountController {
 
 //管理者才可以對折扣碼增刪改查
 	// 跳轉到全部折扣碼的地方
-	@GetMapping("/discounts.controller")
-	public String getAllDiscounts(Model odModel) {
+	@GetMapping("/admin/discounts.controller/{page}")
+	public String getAllDiscounts(Model odModel,@PathVariable("page") String page) {
 		List<Discount> discountList = discountService.getDiscount();
-		odModel.addAttribute("discountList", discountList);
+		int page2 = 1;
+		try {
+			page2 = Integer.parseInt(page);
+		} catch (NumberFormatException e) {
+			page2 = 1;
+		}
+		// 每頁顯示的貼文數量，可以自行修改
+		int pageSize = 10;
+		int totalPages = (int) Math.ceil((double) discountList.size() / pageSize);
+		int startIndex = (page2 - 1) * pageSize;
+		int endIndex = startIndex + pageSize;
+		if (endIndex > discountList.size()) {
+			endIndex = discountList.size();
+		}
+		if (startIndex >= discountList.size()) {
+			startIndex = discountList.size() - pageSize;
+		}
+		if (discountList.size() <= pageSize) {
+			startIndex = 0;
+		} else if (startIndex >= discountList.size()) {
+			startIndex = discountList.size() - pageSize;
+		}
+		List<Discount> discountListPage = discountList.subList(startIndex, endIndex);
+		
+
+		odModel.addAttribute("discountList", discountListPage);
+		odModel.addAttribute("totalPages", totalPages);
+		odModel.addAttribute("currentPage", page2);
+		
 		return "_04_shoppingCart/adminDiscount";
 		}
 
 	// 新增------
 	// 跳轉到新增頁面
-	@PostMapping("/discountsCreate.controller")
+	@PostMapping("/admin/discountsCreate.controller")
 	public String processInsertOrderMainAction() {
-		return "_04_shoppingCart/discountCreate";
+		return "_04_shoppingCart/adminDiscountCreate";
 	}
 
-	@PostMapping("/discountsCreateMain.controller")
+	@PostMapping("/admin/discountsCreateMain.controller")
 	public String createDiscount(@RequestParam("discountNo") String discountNo,
 			@RequestParam("discountName") String discountName, @RequestParam("discountPrice") Double discountPrice,
 			@RequestParam("discountDesc") String discountDesc, @RequestParam("discountStart") String discountStart,
-			@RequestParam("discountEnd") String discountEnd, HttpServletResponse response) throws IOException {
+			@RequestParam("discountEnd") String discountEnd){
 
 		Discount discount = new Discount();
 		discount.setDiscountNo(discountNo);
@@ -61,23 +87,22 @@ public class DiscountController {
 
 		discountService.createDiscount(discount);
 
-		response.sendRedirect("discounts.controller");
-		return null;
+		return "redirect:/admin/discounts.controller";
 
 	}
 
 	// 刪除------
-	@GetMapping("/discounts.controller/{discountId}")
+	@GetMapping("/admin/discountsDelete.controller/{discountId}")
 	public String processDeleteOrderAction(@PathVariable("discountId") int discountId) {
 
 		discountService.deleteDiscountByDiscountId(discountId);
 
-		return "redirect:/discounts.controller";
+		return "redirect:/admin/discounts.controller";
 	}
 
 	// 修改------
 	// 跳轉到修改頁面
-	@PostMapping("/discountsUpdate.controller/{discountId}")
+	@PostMapping("/admin/discountsUpdate.controller/{discountId}")
 	public String processUpdateOrderMainAction(@PathVariable("discountId") int discountId, Model model) {
 
 		Discount discount = discountService.getDiscountByDiscountId(discountId);
@@ -88,7 +113,7 @@ public class DiscountController {
 	}
 
 //	// 修改頁面
-	@PostMapping("/discountsUpdateMain.controller")
+	@PostMapping("/admin/discountsUpdateMain.controller")
 	public String processUpdateOrderMainAction(@RequestParam("discountNo") String discountNo,
 			@RequestParam("discountName") String discountName, @RequestParam("discountPrice") Double discountPrice,
 			@RequestParam("discountDesc") String discountDesc, @RequestParam("discountStart") String discountStart,
@@ -102,11 +127,11 @@ public class DiscountController {
 		discount.setDiscountEnd(discountEnd);
 
 		discountService.updateDiscount(discount);
-		return "redirect:/discounts.controller";
+		return "redirect:/admin/discounts.controller";
 	}
 	
 	// 模糊搜尋全部
-	@RequestMapping(path = "/discountsSearch.controller", method = RequestMethod.POST)
+	@RequestMapping(path = "/admin/discountsSearch.controller", method = RequestMethod.POST)
 	public String processSearchAllAcction(@RequestParam(value = "dateStart", required = false) String dateStart,
 			@RequestParam(value = "dateEnd", required = false) String dateEnd,
 			@RequestParam(value = "search", required = false) String search, @ModelAttribute("OrderBean") OrderBean od,
@@ -119,10 +144,10 @@ public class DiscountController {
 
 		List<Discount> classList = discountService.findDiscountBySearchAllLike(dateStart, dateEnd, search);
 		odModel.addAttribute("orderList", classList);
-		return "redirect:/discounts.controller";
+		return "redirect:/admin/discounts.controller";
 	}
 
-//判斷折扣碼是否可以使用
+//判斷折扣碼是否可以使用-----結帳用
 	@GetMapping("/discountCheck.controller")
 	@ResponseBody
 	public String processCheckDiscountAction(@RequestParam("discountNo") String discountNo) {

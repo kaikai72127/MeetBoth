@@ -96,37 +96,36 @@
 																<option value="python">python</option>
 																<option value="其他">其他</option>
 
-															</select>
-														</div>
-														<div style="float: right; width: 30%">
-															<input type="text" class="form-control" name="memberid"
-																value="" placeholder="id">
-														</div>
-														<input type="text" class="form-control" name="title" value=""
-															placeholder="請輸入文章標題⋯">
-														<textarea id="editor" name="halacontent" class="form-control"
-															rows="30" placeholder="請輸入文章內容"></textarea>
-														<input name="images" id="images5278" type="file"
-															style="width: 80%" accept=".jpg, .png"> <br> <img
-															id="preImg" style="width: 150px; height: 200px"
-															src="<c:url value='html/images/meatball-200.png'/>" />
-
-														<div>
-															<button class="btn btn-primary btn-circle"
-																type="submit">確定送出</button>
-															<button class="btn btn-danger btn-circle" type="button"
-																onclick="window.location.href='http://localhost:8080/SpringBoot_Team5/_06_halaAndQa.SelectAllHala.controller'">取消</button>
-														</div>
-													</form>
-												</div>
+												</select>
 											</div>
-										</div>
+											<div style="float: right; width: 30%">
+												<input type="text" class="form-control" name="memberid"
+													value="${Member.memberID}" placeholder="id">
+											</div>
+											<input type="text" class="form-control" name="title" value=""
+												placeholder="請輸入文章標題⋯">
+											<textarea id="editor" name="halacontent" class="form-control"
+												rows="30" placeholder="請輸入文章內容"></textarea>
+											<input name="images" id="images5278" type="file"
+												style="width: 80%" accept=".jpg, .png"> <br> <img
+												id="preImg" style="width: 150px; height: 200px"
+												src="<c:url value='html/images/meatball-200.png'/>" />
+
+											<div>
+												<button class="btn btn-primary btn-circle" type="submit">確定送出</button>
+												<button class="btn btn-danger btn-circle" type="button"
+													onclick="window.location.href='http://localhost:8080/MeetBoth/_06_halaAndQa.SelectAllHala.controller/{page}'">取消</button>
+											</div>
+										</form>
 									</div>
 								</div>
 							</div>
-						</section>
-						<!-- 表格欄位結束 -->
-						<!-- 中間欄位結束 -->
+						</div>
+					</div>
+				</div>
+			</section>
+			<!-- 表格欄位結束 -->
+			<!-- 中間欄位結束 -->
 
 						<jsp:include page="/WEB-INF/html/fragment/footerMVC.jsp" />
 				</main>

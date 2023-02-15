@@ -96,7 +96,7 @@ public class ShoppingCartController {
 			session.setAttribute("Member", member);
 
 		}
-		// 將明細資料(價格，數量，與BookBean)封裝到OrderItemBean物件內
+		// 將明細資料(價格，數量，與Product)封裝到OrderItemBean物件內
 		Product product = productService.searchSingleProductFromProdID(prodID);
 
 		OrderItemBean ordetItemBean = new OrderItemBean(null, null, null, product, qty, qty * product.getProdPrice());

@@ -165,7 +165,7 @@
 												<tr>
 													<td width="265" align='center' class="btn-p"><a
 															style="display: block;" class="ap"
-															href="<c:url value='/_03_product.searchAllProduct.controller' />">繼續購物</a>
+															href="<c:url value='/_03_product.searchAllProduct.controller/1' />">繼續購物</a>
 													</td>
 													<td width="265" align='center'><a style="display: block" class="ap"
 															href="<c:url value='/shoppingcartCheck.controller' />"

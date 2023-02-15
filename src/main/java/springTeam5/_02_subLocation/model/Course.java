@@ -20,7 +20,6 @@ import javax.persistence.Table;
 import javax.persistence.Transient;
 
 import org.springframework.stereotype.Component;
-
 import springTeam5._01_member.model.MemberBean;
 
 @Entity
@@ -68,17 +67,18 @@ public class Course {
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "course", cascade = CascadeType.ALL)
 	private List<YtPlayer> ytPlayer = new ArrayList<YtPlayer>();
 	
-	@Column(name = "MEMBERID")
+	@Column(name = "MemberID")
 	@Transient
 	private int memberID;
 	
 	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "MemberID")
+	@JoinColumn(name = "MEMBERID")
 	private MemberBean memberBean;
 	
 	//與課程訂單的關係是一對多
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "courseBean", cascade = CascadeType.ALL)
 	private Set<CourseOrderBean> courseOrder = new LinkedHashSet<CourseOrderBean>(); // itemsList
+	
 	
 	public Course() {
 	}

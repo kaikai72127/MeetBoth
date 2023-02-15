@@ -64,7 +64,7 @@ String basePathimg2 = request.getScheme() + "://" + request.getServerName() + ":
 					<!-- 			按鈕們 -->
 
 					<div class="container">
-						<form action="<c:url value='/courseAioPay.controller' />"
+						<form action="<c:url value='/courseOrderCheck.controller' />"
 							method="POST">
 							<div class="row">
 								<!-- 						圖片BLOCK -->
@@ -100,9 +100,9 @@ String basePathimg2 = request.getScheme() + "://" + request.getServerName() + ":
 									<div class="row mb-20">
 										<div class="col-sm-12">
 											<div class="price font-alt">
-												<span class="amount"> NT$${bean.coursePrice}</span>
-												<input type="hidden" id="paymentS"
-										value="${bean.coursePrice}" name="coursePrice">
+												<span class="amount"> NT$${bean.coursePrice}</span> <input
+													type="hidden" id="paymentS" value="${bean.coursePrice}"
+													name="coursePrice">
 											</div>
 										</div>
 									</div>
@@ -111,6 +111,8 @@ String basePathimg2 = request.getScheme() + "://" + request.getServerName() + ":
 										<div class="col-sm-12">
 											<div class="description">
 												<h4>課程編號 : ${bean.courseID}</h4>
+												<input type="hidden" id="paymentS" value=" ${bean.courseID}"
+													name="courseID">
 											</div>
 										</div>
 									</div>
@@ -142,11 +144,12 @@ String basePathimg2 = request.getScheme() + "://" + request.getServerName() + ":
 											<input class="form-control input-lg" type="number"
 												name="chooseAmount" id="amount" value="1" max="1" min="1"
 												required="required"
-												style="font-size: 25px; letter-spacing: 0px; border: 1px solid black; border-radius: 30px; text-align: center;" />
+												style="font-size: 25px; letter-spacing: 0px; border: 3px solid #ce7777; border-radius: 30px; text-align: center;" />
 										</div>
 										<div class="col-sm-8">
-											<a class="btn btn-p btn-circle" href="#"
-												style="height: 43px; font-size: 19px;">直接購買課程</a>
+											<input class="btn btn-p btn-circle" type="submit"
+												value="直接購買課程"
+												style="height: 43px; font-size: 19px;">
 										</div>
 									</div>
 

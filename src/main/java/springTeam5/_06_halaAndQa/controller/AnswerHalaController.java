@@ -4,6 +4,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -14,6 +15,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import springTeam5._01_member.model.MemberBean;
+import springTeam5._01_member.model.MemberService;
 import springTeam5._06_halaAndQa.model.AnswerHalaBean;
 import springTeam5._06_halaAndQa.model.AnswerHalaRepository;
 import springTeam5._06_halaAndQa.model.AnswerHalaService;
@@ -32,6 +35,8 @@ public class AnswerHalaController {
 	private HalaService halaService;
 	@Autowired
 	private HalaRepository halaRepo;
+	@Autowired
+	private MemberService memberService;
 
 	public String getCurrentDate() {
 		Date date = new Date();
@@ -41,29 +46,21 @@ public class AnswerHalaController {
 	
 	//新增貼文ㄉ回復
 	@PostMapping("/_06_halaAndQa.addAnswerHala.controller")
-	public String addAnswerHalaAction(@RequestParam("hieId")Integer halaId,
+	public String addAnswerHalaAction(@RequestParam("hieId")Integer halaId,@RequestParam("memberid") Integer memberid,
 			@RequestParam("answerHalaContent")String answerHalaContent, Model haModel) {
 		
 		HalaBean currentHala = halaService.selectHalaId(halaId);
 		AnswerHalaBean newAhBean=new AnswerHalaBean();
+		Optional<MemberBean> member = memberService.searchMemByID(memberid);
 		
-		newAhBean.setMemberId(1006);
+		newAhBean.setMemberBean(member.get());
 		newAhBean.setAnswerDate(getCurrentDate());
 		newAhBean.setAnswerContent(answerHalaContent);
 		newAhBean.setHala(currentHala);
 		
-		List<AnswerHalaBean> ahb = new ArrayList<AnswerHalaBean>();
-		ahb.add(newAhBean);
-		currentHala.setAnswerHala(ahb);
+		ahService.insertAnswerHala(newAhBean);
 		halaService.insertHala(currentHala);
-		
-//		
-//		HalaBean Bean = halaRepo.findByHalaId(halaId);
-//		List<AnswerHalaBean> ah = Bean.getAnswerHala();
-//		for(AnswerHalaBean a : ah) {
-//			System.out.println("媽的給我跑出來出來"+a.getAnswerContent());
-//		}
-//		haModel.addAttribute("bean", Bean);
+
 		
 		return "redirect:/_06_halaAndQa.goHalaPage.controller?halaid="+halaId ;
 	}

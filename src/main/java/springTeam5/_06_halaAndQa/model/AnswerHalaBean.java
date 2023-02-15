@@ -18,6 +18,8 @@ import javax.persistence.Transient;
 
 import org.springframework.stereotype.Component;
 
+import springTeam5._01_member.model.MemberBean;
+
 @Entity
 @Table(name="ANSWERHALA")
 @Component
@@ -36,8 +38,13 @@ public class AnswerHalaBean {
 	@Transient
 	private Integer halaId;
 	
-	@Column(name="MEMBERID")
-	private Integer memberId;
+	@Column(name="memberID")
+	@Transient
+	private Integer memberID;
+	
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name="memberID")
+	private MemberBean memberBean;
 	
 	@Column(name="ANSWERDATE")
 	private String answerDate;
@@ -60,6 +67,49 @@ public class AnswerHalaBean {
 	
 	
 	
+	public AnswerHalaBean(Integer answerId, HalaBean hala, Integer halaId, Integer memberID, MemberBean memberBean,
+			String answerDate, String answerContent, Integer tumb, Integer tumbOff, Blob picture,
+			List<ResponseAnswerBean> responseAnswerBean) {
+		super();
+		this.answerId = answerId;
+		this.hala = hala;
+		this.halaId = halaId;
+		this.memberID = memberID;
+		this.memberBean = memberBean;
+		this.answerDate = answerDate;
+		this.answerContent = answerContent;
+		this.tumb = tumb;
+		this.tumbOff = tumbOff;
+		this.picture = picture;
+		this.responseAnswerBean = responseAnswerBean;
+	}
+
+
+
+	public Integer getMemberID() {
+		return memberID;
+	}
+
+
+
+	public void setMemberID(Integer memberID) {
+		this.memberID = memberID;
+	}
+
+
+
+	public MemberBean getMemberBean() {
+		return memberBean;
+	}
+
+
+
+	public void setMemberBean(MemberBean memberBean) {
+		this.memberBean = memberBean;
+	}
+
+
+
 	public AnswerHalaBean() {
 		
 	}
@@ -90,14 +140,14 @@ public class AnswerHalaBean {
 
 
 
-	public AnswerHalaBean(Integer answerId, HalaBean hala, Integer halaId, Integer memberId, String answerDate,
+	public AnswerHalaBean(Integer answerId, HalaBean hala, Integer halaId, Integer memberID, String answerDate,
 			String answerContent, Integer tumb, Integer tumbOff, Blob picture,
 			List<ResponseAnswerBean> responseAnswerBean) {
 		super();
 		this.answerId = answerId;
 		this.hala = hala;
 		this.halaId = halaId;
-		this.memberId = memberId;
+		this.memberID = memberID;
 		this.answerDate = answerDate;
 		this.answerContent = answerContent;
 		this.tumb = tumb;
@@ -125,12 +175,12 @@ public class AnswerHalaBean {
 		this.halaId = halaId;
 	}
 
-	public Integer getMemberId() {
-		return memberId;
+	public Integer getmemberID() {
+		return memberID;
 	}
 
-	public void setMemberId(Integer memberId) {
-		this.memberId = memberId;
+	public void setmemberID(Integer memberID) {
+		this.memberID = memberID;
 	}
 
 	public String getAnswerDate() {

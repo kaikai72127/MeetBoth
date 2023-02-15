@@ -75,84 +75,78 @@
           font-size: 18px
         }
 
-        .td2 {
-          padding: 5px;
-          font-size: 14px;
-        }
-      </style>
-    </head>
-
-    <body data-spy="scroll" data-target=".onpage-navigation" data-offset="60">
-      <main>
-        <div class="page-loader">
-          <div class="loader">Loading...</div>
-        </div>
-
-
-        <!-- 中間欄位開始 -->
-        <div class="main">
-          <section class="module">
-            <div class="container">
-              <div class="row">
-
-                <!-- 表格欄位開始 -->
-                <div class="col-sm-8 col-sm-offset-1" style='width:80%'>
-                  <div class="post">
-                    <div class="post-header font-alt">
-                      <h2 class="post-title"><a href="#">修改貼文</a></h2>
-                    </div>
-                    <div class="post-entry">
-                      <div>
-                        <form action='<c:url value="/_06_halaAndQa.updateHala.controller?halaId=${bean.halaId}" />'
-                          enctype='multipart/form-data' method='post'>
-                          <div style="float:left; width:50%">
-                            <select name="halaclassname" style="width: 40%">
-                              <option value="">--請選擇您的分類--</option>
-                              <option value="公告">公告</option>
-                              <option value="閱讀心得">閱讀心得</option>
-                              <option value="資料分享">資料分享</option>
-                              <option value="圖書推薦">圖書推薦</option>
-                              <option value="教學文章">教學文章</option>
-                              <option value="JAVA">JAVA</option>
-                              <option value="HTML">HTML</option>
-                              <option value="Spring">Spring</option>
-                              <option value="SpringBoot">SpringBoot</option>
-                              <option value="SQL Server">SQL Server</option>
-                              <option value="SpringMVC">SpringMVC</option>
-                              <option value="My SQL">My SQL</option>
-                              <option value="Hibernate">Hibernate</option>
-                              <option value="VScode">VScode</option>
-                              <option value="eclipse">eclipse</option>
-                              <option value="SpringTool">SpringTool</option>
-                              <option value="JDBC">JDBC</option>
-                              <option value="Servlet">Servlet</option>
-                              <option value="JavaScript">JavaScript</option>
-                              <option value="jQuery">jQuery</option>
-                              <option value="Azure">Azure</option>
-                              <option value="RESTful">RESTful</option>
-                              <option value="c++">c++</option>
-                              <option value="python">python</option>
-                              <option value="其他">其他</option>
-
-                            </select>
-                          </div>
-
-                          <input type="text" class="form-control" name="title" value="${bean.title}"
-                            placeholder="請輸入文章標題⋯">
-                          <textarea name="halacontent" class="form-control" rows="7"
-                            placeholder="${bean.title}"></textarea>
-                          <input name="images" id="images5278" type="file" style="width:80%" accept=".jpg, .png">
-                          <br>
-                          <img id="preImg" style="width:150px; height:200px"
-                            src="<c:url value='/_06_halaAndQa.picsave.controller?id=${bean.halaId}'/>" />
-                          <div>
-                            <button class="btn btn-primary btn-circle" type="submit">確定送出</button>
-                            <button class="btn btn-danger btn-circle" type="button"
-                              onclick="window.location.href='http://localhost:8080/MeetBoth/_06_halaAndQa.SelectAllHala.controller'">取消</button>
-                          </div>
-                        </form>
-                      </div>
-                    </div>
+.td2 {
+	padding:5px;
+	font-size:14px;
+}
+</style>
+  </head>
+  <body data-spy="scroll" data-target=".onpage-navigation" data-offset="60">
+    <main>
+      <div class="page-loader">
+        <div class="loader">Loading...</div>
+      </div>
+      
+      
+      <!-- 中間欄位開始 -->
+      <div class="main">
+        <section class="module">
+          <div class="container">
+            <div class="row">
+              
+       <!-- 表格欄位開始 -->
+              <div class="col-sm-8 col-sm-offset-1" style='width:80%'>
+                <div class="post">
+                  <div class="post-header font-alt">
+                    <h2 class="post-title"><a href="#">修改貼文</a></h2>
+                  </div>
+                  <div class="post-entry">
+                  	<div>
+                  		<form action='<c:url value="/_06_halaAndQa.updateHala.controller?halaId=${bean.halaId}" />' enctype='multipart/form-data' method='post'>
+                  		<div style="float:left; width:50%">
+                  		<select name="halaclassname" style="width: 40%">
+													<option value="">--請選擇您的分類--</option>
+													<option value="公告">公告</option>
+													<option value="閱讀心得">閱讀心得</option>
+													<option value="資料分享">資料分享</option>
+													<option value="圖書推薦">圖書推薦</option>
+													<option value="教學文章">教學文章</option>
+													<option value="JAVA">JAVA</option>
+													<option value="HTML">HTML</option>
+													<option value="Spring">Spring</option>
+													<option value="SpringBoot">SpringBoot</option>
+													<option value="SQL Server">SQL Server</option>
+													<option value="SpringMVC">SpringMVC</option>
+													<option value="My SQL">My SQL</option>
+													<option value="Hibernate">Hibernate</option>
+													<option value="VScode">VScode</option>
+													<option value="eclipse">eclipse</option>
+													<option value="SpringTool">SpringTool</option>
+													<option value="JDBC">JDBC</option>
+													<option value="Servlet">Servlet</option>
+													<option value="JavaScript">JavaScript</option>
+													<option value="jQuery">jQuery</option>
+													<option value="Azure">Azure</option>
+													<option value="RESTful">RESTful</option>
+													<option value="c++">c++</option>
+													<option value="python">python</option>
+													<option value="其他">其他</option>
+													
+												</select>
+						</div>
+						
+                  		<input type="text" class="form-control" name="title" value="${bean.title}" placeholder="請輸入文章標題⋯">
+                  		<textarea name="halacontent" class="form-control" rows="7" placeholder="">${bean.halacontent}</textarea>
+                  		<input name="images" id="images5278" type="file" style="width:80%" accept=".jpg, .png">
+						<br>
+						<img id="preImg" style="width:150px; height:200px" src="<c:url value='/_06_halaAndQa.picsave.controller?id=${bean.halaId}'/>" />
+						<div>
+						<button class="btn btn-primary btn-circle" type="submit">確定送出</button>
+						<button class="btn btn-danger btn-circle" type="button"onclick="window.location.href='http://localhost:8080/MeetBoth/_06_halaAndQa.SelectAllHala.controller/{page}'">取消</button>
+						</div>
+                  		</form>
+                  	</div>
+                  </div>
                   </div>
                 </div>
               </div>

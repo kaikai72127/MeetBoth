@@ -167,7 +167,25 @@ public class _01_membercontroll {
 		m.addAttribute("stud", student);
 		List<HalaBean> halaBean = halaService.selectMemberId(memID);
 		m.addAttribute("classList", halaBean);
-		List<Product> prodBean = pService.searchAllProduct();
+		List<Product> prodBean = pService.findByMemidAndOnlyOnSales(memID);
+		m.addAttribute("prodBean", prodBean);
+		return "_01_member/memberresume";
+	}
+	@GetMapping("/myMemberResume")
+	public String myMemberResume(Model m) throws SQLException {
+		String account = SecurityContextHolder.getContext().getAuthentication().getName();
+		List<MemberBean> mem = ms.searchMemByAccount(account);
+		int memID = mem.get(0).getMemberID();
+		Optional<MemberBean> list = ms.searchMemByID(memID);
+		MemberBean member = list.get();
+		m.addAttribute("member", member);
+		List<TeacBean> teacher = member.getTeacBean();
+		m.addAttribute("teac", teacher);
+		List<StudBean> student = member.getStudBean();
+		m.addAttribute("stud", student);
+		List<HalaBean> halaBean = halaService.selectMemberId(memID);
+		m.addAttribute("classList", halaBean);
+		List<Product> prodBean = pService.findByMemidAndOnlyOnSales(memID);
 		m.addAttribute("prodBean", prodBean);
 		return "_01_member/memberresume";
 	}

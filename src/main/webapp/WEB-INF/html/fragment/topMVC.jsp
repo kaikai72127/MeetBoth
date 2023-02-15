@@ -190,6 +190,9 @@ System.out.println(baseMeetboth96x96);
                   </span>
                 </a>
                 <ul class="dropdown-menu dropdown-menu-end bg-light border-0 rounded-0 rounded-bottom m-0">
+                  <li><a href="/MeetBoth/myMemberResume" class="dropdown-item">我的會員頁面<i
+                        class="fa-solid fa-right-from-bracket"></i>
+                    </a></li>  
                   <li>
                     <form action="/MeetBoth/_01_member.membercenter.controller" method="post" id="memberCenter"></form>
                     <a href="#" onclick="document.getElementById('memberCenter').submit();return false"
@@ -200,7 +203,7 @@ System.out.println(baseMeetboth96x96);
                     </a></li>
                   <li><a href="/MeetBoth/pathToMemberCourse.controller" class="dropdown-item">我的課程 <i
                         class="fa-solid fa-right-from-bracket"></i>
-                    </a></li>  
+                    </a></li> 
                   <li id="admincontroller"><a href="/MeetBoth/_03_product.index.controller" class="dropdown-item">後臺管理
                       <i class="fa-solid fa-right-from-bracket"></i>
                     </a></li>

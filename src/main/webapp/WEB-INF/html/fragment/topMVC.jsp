@@ -104,97 +104,15 @@ System.out.println(baseMeetboth96x96);
 				<li class="dropdown"><a class="dropdown-toggle" href="#"
 					data-toggle="dropdown">買賣專區</a>
 					<ul class="dropdown-menu" role="menu">
+						<li class="dropdown">
+						<a href="/MeetBoth/_03_product.searchAllProduct.controller/1">商品目錄</a>
+							</li>
 						<li class="dropdown"><a class="dropdown-toggle" href="#"
-							data-toggle="dropdown">Boxed</a>
+							data-toggle="dropdown">熱門商品類別</a>
 							<ul class="dropdown-menu">
-								<li><a href="portfolio_boxed_col_2.html">2 Columns</a></li>
-								<li><a href="portfolio_boxed_col_3.html">3 Columns</a></li>
-								<li><a href="portfolio_boxed_col_4.html">4 Columns</a></li>
-							</ul></li>
-						<li class="dropdown"><a class="dropdown-toggle" href="#"
-							data-toggle="dropdown">Boxed - Gutter</a>
-							<ul class="dropdown-menu">
-								<li><a href="portfolio_boxed_gutter_col_2.html">2
-										Columns</a></li>
-								<li><a href="portfolio_boxed_gutter_col_3.html">3
-										Columns</a></li>
-								<li><a href="portfolio_boxed_gutter_col_4.html">4
-										Columns</a></li>
-							</ul></li>
-						<li class="dropdown"><a class="dropdown-toggle" href="#"
-							data-toggle="dropdown">Full Width</a>
-							<ul class="dropdown-menu">
-								<li><a href="portfolio_full_width_col_2.html">2 Columns</a></li>
-								<li><a href="portfolio_full_width_col_3.html">3 Columns</a></li>
-								<li><a href="portfolio_full_width_col_4.html">4 Columns</a></li>
-							</ul></li>
-						<li class="dropdown"><a class="dropdown-toggle" href="#"
-							data-toggle="dropdown">Full Width - Gutter</a>
-							<ul class="dropdown-menu">
-								<li><a href="portfolio_full_width_gutter_col_2.html">2
-										Columns</a></li>
-								<li><a href="portfolio_full_width_gutter_col_3.html">3
-										Columns</a></li>
-								<li><a href="portfolio_full_width_gutter_col_4.html">4
-										Columns</a></li>
-							</ul></li>
-						<li class="dropdown"><a class="dropdown-toggle" href="#"
-							data-toggle="dropdown">Masonry</a>
-							<ul class="dropdown-menu">
-								<li class="dropdown"><a class="dropdown-toggle" href="#"
-									data-toggle="dropdown">Boxed</a>
-									<ul class="dropdown-menu">
-										<li><a href="portfolio_masonry_boxed_col_2.html">2
-												Columns</a></li>
-										<li><a href="portfolio_masonry_boxed_col_3.html">3
-												Columns</a></li>
-										<li><a href="portfolio_masonry_boxed_col_4.html">4
-												Columns</a></li>
-									</ul></li>
-								<li class="dropdown"><a class="dropdown-toggle" href="#"
-									data-toggle="dropdown">Full Width</a>
-									<ul class="dropdown-menu">
-										<li><a href="portfolio_masonry_full_width_col_2.html">2
-												Columns</a></li>
-										<li><a href="portfolio_masonry_full_width_col_3.html">3
-												Columns</a></li>
-										<li><a href="portfolio_masonry_full_width_col_4.html">4
-												Columns</a></li>
-									</ul></li>
-							</ul></li>
-						<li class="dropdown"><a class="dropdown-toggle" href="#"
-							data-toggle="dropdown">Hover Style</a>
-							<ul class="dropdown-menu">
-								<li><a href="portfolio_hover_black.html">Black</a></li>
-								<li><a href="portfolio_hover_gradient.html">Gradient</a></li>
-							</ul></li>
-						<li class="dropdown"><a class="dropdown-toggle" href="#"
-							data-toggle="dropdown">Single</a>
-							<ul class="dropdown-menu">
-								<li class="dropdown"><a class="dropdown-toggle" href="#"
-									data-toggle="dropdown">Featured Image</a>
-									<ul class="dropdown-menu">
-										<li><a href="portfolio_single_featured_image1.html">Style
-												1</a></li>
-										<li><a href="portfolio_single_featured_image2.html">Style
-												2</a></li>
-									</ul></li>
-								<li class="dropdown"><a class="dropdown-toggle" href="#"
-									data-toggle="dropdown">Featured Slider</a>
-									<ul class="dropdown-menu">
-										<li><a href="portfolio_single_featured_slider1.html">Style
-												1</a></li>
-										<li><a href="portfolio_single_featured_slider2.html">Style
-												2</a></li>
-									</ul></li>
-								<li class="dropdown"><a class="dropdown-toggle" href="#"
-									data-toggle="dropdown">Featured Video</a>
-									<ul class="dropdown-menu">
-										<li><a href="portfolio_single_featured_video1.html">Style
-												1</a></li>
-										<li><a href="portfolio_single_featured_video2.html">Style
-												2</a></li>
-									</ul></li>
+								<li><a href="/MeetBoth/_03_product.searchProductByType.controller/1/1">學生用品</a></li>
+								<li><a href="/MeetBoth/_03_product.searchProductByType.controller/1/2">教學用品</a></li>
+								<li><a href="/MeetBoth/_03_product.searchProductByType.controller/1/6">好書推薦</a></li>
 							</ul></li>
 					</ul></li>
 
@@ -277,7 +195,7 @@ System.out.println(baseMeetboth96x96);
                     <a href="#" onclick="document.getElementById('memberCenter').submit();return false"
                       class="dropdown-item">會員資料修改<i class="fa-solid fa-user"></i></a>
                   </li>
-                  <li><a href="/MeetBoth/_03_product/pathToMyPDP.controller" class="dropdown-item">我的賣場 <i
+                  <li><a href="/MeetBoth/_03_product/pathToMyPDP.controller" class="dropdown-item">我的平台<i
                         class="fa-solid fa-right-from-bracket"></i>
                     </a></li>
                   <li><a href="/MeetBoth/pathToMemberCourse.controller" class="dropdown-item">我的課程 <i
@@ -287,7 +205,6 @@ System.out.println(baseMeetboth96x96);
                       <i class="fa-solid fa-right-from-bracket"></i>
                     </a></li>
                   <li><a href="/MeetBoth/logout" class="dropdown-item">登出<i class="fa-solid fa-right-from-bracket"></i>
-                      </i>
                     </a></li>
                 </ul>
               </li>

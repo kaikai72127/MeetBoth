@@ -78,12 +78,12 @@ public class ProductController {
 	}
 
 //	導到後台insert
-	@GetMapping("/_03_product.MBinsertProd.controller")
+	@GetMapping("/admin/_03_product.MBinsertProd.controller")
 	public String processpathToMBinsertPordAction() {
 		return "_03_product/MBinsertProd";
 	}
 
-	@PostMapping("/_03_product.MBinsertProdAction.controller")
+	@PostMapping("/admin/_03_product.MBinsertProdAction.controller")
 	public String processMBinsertPordAction(@RequestParam("pst") String prodState, @RequestParam("pna") String prodName,
 			@RequestParam("pty") Integer prodType, @RequestParam("ppr") Integer prodPrice,
 			@RequestParam("pmid") Integer memID, @RequestParam("pinvt") Integer prodInvt,
@@ -134,19 +134,18 @@ public class ProductController {
 	}
 	
 //	導到後台修改
-	@GetMapping("/_03_product.pathToMBinsertProd.controller")
+	@GetMapping("/admin/_03_product.pathToMBinsertProd.controller")
 	public String processpathToMBinsertProdAction(Model m, @RequestParam("id") Integer prodid) throws SQLException {
 		Product p = pService.searchSingleProductFromProdID(prodid);
 		m.addAttribute("prod", p);
 		return "_03_product/MBupdateProd";
 	}
 
-	@PostMapping("/_03_product.MBupdateProdAction.controller")
+	@PostMapping("/admin/_03_product.MBupdateProdAction.controller")
 	public String processMBupdatePordAction(@RequestParam("pst") String prodState, @RequestParam("pna") String prodName,
 			@RequestParam("pid") Integer prodID, @RequestParam("pty") Integer prodType,
 			@RequestParam("ppr") Integer prodPrice, @RequestParam("pmid") Integer memID,
-			@RequestParam("pinvt") Integer prodInvt, @RequestParam("pps") Integer prodSales,
-			@RequestParam("pch") Integer prodCheck, @RequestParam("pPic") MultipartFile file,
+			@RequestParam("pinvt") Integer prodInvt,@RequestParam("pPic") MultipartFile file,
 			@RequestParam("pdr") String prodDir) throws IOException, SQLException {
 		Blob image = null;
 
@@ -164,8 +163,8 @@ public class ProductController {
 		prod.setMemberBean(mem.get());
 		prod.setInventory(prodInvt);
 		prod.setDirections(prodDir);
-		prod.setProdSales(prodSales);
-		prod.setProdCheck(prodCheck);
+		prod.setProdSales(0);
+		prod.setProdCheck(0);
 		prod.setProdUpdate(getCurrentDate());
 		prod.setProdtype(pType);
 		if (size != 0) {
@@ -235,7 +234,7 @@ public class ProductController {
 
 //	---------------------------小工具們 ending-----------------------
 //	跳轉到管理者商品後台
-	@GetMapping("/_03_product.productindex.controller/{page}")
+	@GetMapping("/admin/_03_product.productindex.controller/{page}")
 	public String processproductIndexAction(Model m, @PathVariable("page") String page) throws SQLException {
 		List<Product> result = pService.searchAllProduct();
 		int page2 = 1;
@@ -270,7 +269,7 @@ public class ProductController {
 	}
 
 //	調轉到單一的管理者商品後台
-	@GetMapping("/_03_product.singleProductIndex.controller")
+	@GetMapping("/admin/_03_product.singleProductIndex.controller")
 	public String processSingleProductIndexAction(@RequestParam("id") Integer prodID, Model mProd) throws SQLException {
 
 		Product result = pService.searchSingleProductFromProdID(prodID);
@@ -679,11 +678,11 @@ public class ProductController {
 		m.addAttribute("totalPages", totalPages);
 		m.addAttribute("currentPage", page2);
 		
-		return "_03_product/newShop";
+		return "_03_product/typeShop";
 	}
 
 //	模糊搜尋(後台)
-	@PostMapping("/_03_product.searchProductWithCondition2.controller/{page}")
+	@PostMapping("/admin/_03_product.searchProductWithCondition2.controller/{page}")
 	public String processSearchProductWithCondi2(@RequestParam("case") int order,
 			@RequestParam("typecase") Integer type, @RequestParam("lowprice") int low,
 			@RequestParam("highprice") int high, @RequestParam("searchName") String name, Model m,

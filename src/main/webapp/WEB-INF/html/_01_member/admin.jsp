@@ -96,10 +96,121 @@
                                     color: white !important;
                                 }
 
-                                p {
+                                span {
+                                    color: white;
+                                    font-size: 25px;
+                                    font-weight: 550;
+                                    margin: auto 10;
+                                    line-height: 2.5;
+                                }
+
+                                a {
                                     color: white;
                                     font-size: 25px;
                                     font-width: 550;
+                                }
+
+                                .MBbtn {
+                                    font-size: 25px;
+                                    background-color: black;
+                                    color: white;
+                                    border: solid 1px white;
+                                    border-radius: 50%;
+                                    margin: auto 10px;
+                                    transition: color 0.5s;
+                                    text-align: center;
+                                }
+
+                                .MBbtn:hover {
+                                    font-size: 25px;
+                                    background-color: black;
+                                    color: yellow;
+                                    border: solid 1px yellow;
+                                    margin: auto 10px;
+                                    border-radius: 50%;
+                                }
+
+                                .MBinput {
+                                    font-size: 25px;
+                                    background-color: black;
+                                    color: white;
+                                    border: solid 1px white;
+                                    margin: auto 10px;
+                                    transition: color 0.5s;
+                                    text-align: center;
+                                }
+
+                                .MBinput:hover {
+                                    font-size: 25px;
+                                    background-color: black;
+                                    color: yellow;
+                                    border: solid 1px yellow;
+                                    margin: auto 10px;
+                                }
+
+                                #columnchart_values>div>div>div>svg>g>text {
+                                    font-size: 25px;
+                                }
+
+                                a:hover {
+                                    color: yellow;
+                                    border-bottom: solid 1px yellow;
+                                }
+
+                                .prodtable>thead>tr>th {
+                                    border-right: solid 1px white;
+                                    text-align: center;
+                                }
+
+                                .prodtable>tbody>tr>td {
+                                    border-right: solid 1px white;
+                                    border-top: solid 1px white;
+                                }
+
+                                .btn1 {
+                                    /* 文字颜色 */
+                                    color: rgb(255, 179, 179);
+                                    /* 清除背景色 */
+                                    background: transparent;
+                                    /* 边框样式、颜色、宽度 */
+                                    border: 2px solid rgb(255, 179, 179);
+                                    /* 给边框添加圆角 */
+                                    border-radius: 6px;
+                                    /* 字母转大写 */
+                                    border: none;
+                                    color: white;
+                                    padding: 0;
+                                    text-align: center;
+                                    display: inline-block;
+                                    font-size: 15px;
+                                    margin: 4px 2px;
+                                    border-radius: 30px;
+                                    -webkit-transition-duration: 0.4s;
+                                    /* Safari */
+                                    transition-duration: 0.4s;
+                                    cursor: pointer;
+                                    text-decoration: none;
+                                    text-transform: uppercase;
+                                }
+
+                                .btn1:hover {
+                                    background-color: rgb(255, 255, 255);
+                                    color: rgb(0, 0, 0);
+                                }
+
+                                input {
+                                    width: 150px;
+                                    border-color: azure;
+                                    background-color: #000;
+                                    color: azure;
+                                    caret-color: auto;
+                                    /* 預設 */
+                                    caret-color: transparent;
+                                    /* 透明 */
+                                    caret-color: #FF1744;
+                                    /* 指定色 */
+                                    outline: none;
+                                    /* 外框效果 */
                                 }
                             </style>
                             <!-- CSS -->
@@ -122,65 +233,7 @@
                                 <div class="row">
                                     <!-- 整頁 -->
                                     <!-- 左邊欄位開始 -->
-                                    <div class="col-sm-4 col-md-3 sidebar" style="width:20%;padding-right:0px;">
-                                        <div class="widget">
-                                            <a href="#"><img src="/MeetBoth/html/assets/images/shop/警告.jpg"
-                                                    style="padding-bottom: 10px;"></a>
-                                            <ul class="cart">
-                                                <li><a href="#" style="color: white;font-size:20px;"
-                                                        class="btn btn-d btn-round">會員管理&ensp;<i
-                                                            class="fa-solid fa-angle-double-down"></i></a>
-                                                    <ul style="">
-                                                        <li><a href="_01_member.admin.controller"
-                                                                style="color: white;font-weight:600;"
-                                                                class="btn btn-d btn-round">所有會員清單</a></li>
-                                                    </ul>
-                                                </li>
-                                                <li><a href="#" style="color: white;font-size:20px;"
-                                                        class="btn btn-d btn-round">商品管理&ensp;<i
-                                                            class="fa-solid fa-angle-double-down"></i></a>
-                                                    <ul style="">
-                                                        <li><a href="#" style="color: white;font-weight:600;"
-                                                                class="btn btn-d btn-round">所有商品清單</a></li>
-                                                    </ul>
-                                                </li>
-                                                <li><a href="#" style="color: white;font-size:20px;"
-                                                        class="btn btn-d btn-round">課程管理&ensp;<i
-                                                            class="fa-solid fa-angle-double-down"></i></a>
-                                                    <ul style="">
-                                                        <li><a href="#" style="color: white;font-weight:600;"
-                                                                class="btn btn-d btn-round">所有課程清單</a></li>
-                                                    </ul>
-                                                </li>
-                                                <li><a href="#" style="color: white;font-size:20px;"
-                                                        class="btn btn-d btn-round">徵才管理&ensp;<i
-                                                            class="fa-solid fa-angle-double-down"></i></a>
-                                                    <ul style="">
-                                                        <li><a href="#" style="color: white;font-weight:600;"
-                                                                class="btn btn-d btn-round">所有貼文清單</a></li>
-                                                    </ul>
-                                                </li>
-                                                <li><a href="#" style="color: white;font-size:20px;"
-                                                        class="btn btn-d btn-round">討論區管理&ensp;<i
-                                                            class="fa-solid fa-angle-double-down"></i></a>
-                                                    <ul style="">
-                                                        <li><a href="#" style="color: white;font-weight:600;"
-                                                                class="btn btn-d btn-round">所有貼文清單</a></li>
-                                                    </ul>
-                                                </li>
-                                                <li><a href="#" style="color: white;font-size:20px;"
-                                                        class="btn btn-d btn-round">購物車管理&ensp;<i
-                                                            class="fa-solid fa-angle-double-down"></i></a>
-                                                    <ul style="">
-                                                        <li><a href="#" style="color: white;font-weight:600;"
-                                                                class="btn btn-d btn-round">所有購物單清單</a></li>
-                                                    </ul>
-                                                </li>
-                                            </ul>
-                                            <a href="#"><img src="/MeetBoth/html/assets/images/shop/警告2.jpg"
-                                                    style="padding-bottom: 10px;"></a>
-                                        </div>
-                                    </div>
+                                    <jsp:include page="/WEB-INF/html/fragment/AdminIndexSideBar.jsp" />
                                     <!-- 左邊欄位結束 -->
                                     <!-- 						右邊欄位開始 -->
                                     <div class="col-sm-8 col-sm-offset-1"
@@ -200,28 +253,40 @@
 
                                                     <!-- Content -->
                                                     <section>
-                                                        <header class="main">
-                                                            <h3>會員管理列表</h3>
-                                                        </header>
+                                                        <div>
+                                                            <h3 style="color: aliceblue;text-align: center;">會員管理列表</h3>
+                                                        </div>
+                                                        <div style="text-align: center;">
+                                                            <form action="#" method="POST" modelAttribute="Member">
+                                                                <input type="text" name="value" value="${value}"
+                                                                    style="text-align: center;" placeholder="請輸入查詢文字"
+                                                                    required>
+                                                                <input class="btn1" type="submit" name="selectByAccount"
+                                                                    value="以帳號查詢"
+                                                                    onclick="this.form.action='_01_member.selectByAccount.controller'" />
+                                                                <input class="btn1" type="submit" name="selectByName"
+                                                                    value="以姓名查詢"
+                                                                    onclick="this.form.action='_01_member.selectByName.controller'" />
+                                                            </form>
+                                                            <form action="#" method="POST" modelAttribute="Member">
+
+                                                                <button class="btn1" name="register"
+                                                                    style="padding: 0% 30px;"
+                                                                    onclick="this.form.action='_01_member.backregister.controller'">新增會員</button>
+                                                                <button class="btn1" name="selectAll"
+                                                                    style="padding: 0% 30px;"
+                                                                    onclick="this.form.action='_01_member.selectAll.controller'">取得所有會員</button>
+                                                            </form>
+                                                        </div>
+
+                                                        <!-- 
                                                         <form action="#" method="POST" modelAttribute="Member">
-                                                            <input type="text" name="value" value="${value}" required>
-                                                            <input type="submit" name="selectByAccount" value="以帳號查詢"
-                                                                onclick="this.form.action='_01_member.selectByAccount.controller'" />
-                                                            <input type="submit" name="selectByName" value="以姓名查詢"
-                                                                onclick="this.form.action='_01_member.selectByName.controller'" />
-                                                        </form>
+                                                        </form> -->
 
-
-                                                        <form action="#" method="POST" modelAttribute="Member">
-                                                            <button name="register"
-                                                                onclick="this.form.action='_01_member.backregister.controller'">新增會員</button>
-                                                            <button name="selectAll"
-                                                                onclick="this.form.action='_01_member.selectAll.controller'">取得所有會員</button>
-                                                        </form>
-
-                                                        <div class="table-wrapper">
-                                                            <table class="alt"
-                                                                style="table-layout: fixed; word-wrap: break-word;">
+                                                        <div>
+                                                            <table
+                                                                style="color: rgb(255, 255, 255); text-align: center; width: 100%;"
+                                                                class="prodtable">
                                                                 <thead>
                                                                     <tr>
                                                                         <th>會員編號</th>
@@ -260,7 +325,8 @@
                                                                                     action="_01_member.preupdate.controller">
                                                                                     <button name="preupdate"
                                                                                         value="${Member.memberID}">
-                                                                                        <i class="fa-solid fa-user"></i>
+                                                                                        <i style="color: #000;"
+                                                                                            class="fa-solid fa-user"></i>
                                                                                     </button>
                                                                                 </form>
                                                                             </td>
@@ -269,8 +335,9 @@
                                                                                     action="_01_member.delete.controller">
                                                                                     <button name="delete"
                                                                                         value="${Member.memberID}">
-                                                                                        <i
-                                                                                            class="fa-solid fa-xmark"></i>
+                                                                                        <i style="color: #ff0000;"
+                                                                                            class=" fa-solid
+                                                                                            fa-xmark"></i>
                                                                                     </button>
                                                                                 </form>
                                                                             </td>

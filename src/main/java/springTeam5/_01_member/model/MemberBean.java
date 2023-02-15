@@ -26,7 +26,6 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import springTeam5._05_teacStu.model.StudBean;
 import springTeam5._03_product.model.Product;
 import springTeam5._03_product.model.ProductComment;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import springTeam5._04_shoppingCart.model.OrderBean;
 import springTeam5._04_shoppingCart.model.OrderItemBean;
@@ -110,8 +109,6 @@ public class MemberBean implements Serializable {
 	private Set<OrderItemBean> orderSale = new LinkedHashSet<OrderItemBean>(); // itemsList
 	
 	
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "memberBean",cascade = CascadeType.ALL)
-	private Set<HalaBean> halaBean = new LinkedHashSet<HalaBean>(); // itemsList
 	
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "memberBean",cascade = CascadeType.ALL)
 	private Set<ResponseHalaBean> responseHalaBean = new LinkedHashSet<ResponseHalaBean>(); // itemsList
@@ -131,6 +128,24 @@ public class MemberBean implements Serializable {
 	@OneToMany(fetch = FetchType.LAZY,mappedBy = "memberBean",cascade = CascadeType.ALL)
 	private Set<ProductComment> productComment = new LinkedHashSet<ProductComment>();
 //	連結商品 結束
+	
+//	討論區
+	@JsonIgnore
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "memberBean",cascade = CascadeType.ALL)
+	private Set<HalaBean> halaBean = new LinkedHashSet<HalaBean>(); // itemsList
+	
+//	@JsonIgnore
+//	@OneToMany(fetch = FetchType.LAZY, mappedBy = "memberBean",cascade = CascadeType.ALL)
+//	private Set<ResponseHalaBean> responseHalaBean = new LinkedHashSet<ResponseHalaBean>(); // itemsList
+	
+//	@JsonIgnore
+//	@OneToMany(fetch = FetchType.LAZY, mappedBy = "memberBean",cascade = CascadeType.ALL)
+//	private Set<AnswerHalaBean> answerHalaBean = new LinkedHashSet<AnswerHalaBean>(); // itemsList
+//	
+//	@JsonIgnore
+//	@OneToMany(fetch = FetchType.LAZY, mappedBy = "memberBean",cascade = CascadeType.ALL)
+//	private Set<ResponseAnswerBean> responseAnswerBean = new LinkedHashSet<ResponseAnswerBean>(); // itemsList
+//	討論區結束
 	
 	
 	public String getRole() {
@@ -355,6 +370,8 @@ public class MemberBean implements Serializable {
 	public void setOrderSale(Set<OrderItemBean> orderSale) {
 		this.orderSale = orderSale;
 	}
+
+
 	@Override
 	public String toString() {
 		return "MemberBean [memberID=" + memberID + ", account=" + account + ", password=" + password + ", idNumber="

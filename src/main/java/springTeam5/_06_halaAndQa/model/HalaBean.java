@@ -20,6 +20,7 @@ import org.springframework.stereotype.Component;
 
 import springTeam5._01_member.model.MemberBean;
 
+
 @Entity
 @Table(name="HALA")
 @Component
@@ -67,6 +68,8 @@ public class HalaBean {
     
     @OneToMany(fetch = FetchType.LAZY,mappedBy = "hala",cascade = CascadeType.ALL)
     private List<AnswerHalaBean> answerHala;
+    
+
 	
 
 	public HalaBean() {

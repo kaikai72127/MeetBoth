@@ -15,12 +15,13 @@
 						if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email)) {
 							$.ajax({
 								type: 'GET',
-								url: 'http://localhost:8080/MeetBoth/mailcheck',
+								url: '/MeetBoth/mailcheck',
 								data: { "email": email },
 								contentType: 'application/json',
 								success: function (check) {
 									if (check == "1") {
-										$("#errormessage").text("信箱已被註冊！")
+										event.preventDefault();
+										$("#errormessage").css({ "font-size": "medium", color: "red" }).text("信箱已被註冊！")
 										$("#push").hide();
 									} else {
 										event.preventDefault();
@@ -30,7 +31,8 @@
 								}
 							});
 						} else {
-							$("#errormessage").text("信箱不可使用！")
+							event.preventDefault();
+							$("#errormessage").css({ "font-size": "medium", color: "red" }).text("信箱不可使用！")
 							$("#push").hide();
 						}
 					}
@@ -46,9 +48,7 @@
 				<jsp:include page="../fragment/topMVC.jsp" />
 
 				<main>
-					<div class="page-loader">
-						<div class="loader">Loading...</div>
-					</div>
+
 
 					<!-- LoginRegister-->
 
@@ -62,14 +62,13 @@
 										method="Post">
 										<div class="form-group">
 											<input class="form-control" style="text-transform: none;" id="mail"
-												type="text" name="value" value='${value}' placeholder="請輸入電子郵件信箱" />
+												type="text" name="email" oninput='mailcheck()' value='${value}'
+												placeholder="請輸入正確的電子郵件信箱" />
 										</div>
 
 										<div class="form-group">
-											<button class="btn btn-round btn-p">進行驗證</button>
-											=======
-											type="text" name="email" oninput='mailcheck()' value='${value}'
-											placeholder="請輸入正確的電子郵件信箱" />
+											<button class="btn btn-round btn-p" id="push"
+												style="display: none;">進行驗證</button>
 											<label id="errormessage" style="font-size: medium; color: red;">
 											</label>
 
@@ -78,7 +77,7 @@
 										<div class="form-group">
 											<button id="push" class="btn btn-round btn-p"
 												style="display: none;">進行驗證</button>
-											>>>>>>> origin/_01_Seal
+
 										</div>
 
 

@@ -11,6 +11,7 @@ import java.util.stream.Collectors;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import javax.sql.rowset.serial.SerialBlob;
 import javax.sql.rowset.serial.SerialException;
 
@@ -33,6 +34,12 @@ import com.google.gson.Gson;
 
 import springTeam5._01_member.model.MemberBean;
 import springTeam5._01_member.model.MemberService;
+import springTeam5._03_product.model.Product;
+import springTeam5._03_product.service.ProductService;
+import springTeam5._05_teacStu.model.StudBean;
+import springTeam5._05_teacStu.model.TeacBean;
+import springTeam5._06_halaAndQa.model.HalaBean;
+import springTeam5._06_halaAndQa.model.HalaService;
 
 
 @Controller
@@ -40,6 +47,12 @@ public class _01_membercontroll {
 	
 	@Autowired
 	private MemberService ms;
+	
+	@Autowired
+	private ProductService pService;
+	
+	@Autowired
+	private HalaService halaService;
 	
 	
 	
@@ -140,6 +153,49 @@ public class _01_membercontroll {
 		}
 	}
 	
+//	會員履歷
+	@GetMapping("/memberresume")
+	public String memberresume(@RequestParam("id") Integer id, Model m) throws SQLException {
+		int memID = id;
+		Optional<MemberBean> list = ms.searchMemByID(memID);
+		MemberBean member = list.get();
+		m.addAttribute("member", member);
+		
+		List<TeacBean> teacher = member.getTeacBean();
+		m.addAttribute("teac", teacher);
+		List<StudBean> student = member.getStudBean();
+		m.addAttribute("stud", student);
+		List<HalaBean> halaBean = halaService.selectMemberId(memID);
+		m.addAttribute("classList", halaBean);
+		List<Product> prodBean = pService.searchAllProduct();
+		m.addAttribute("prodBean", prodBean);
+		return "_01_member/memberresume";
+	}
+	
+//	會員履歷產品列
+//	@ResponseBody
+//	@PostMapping("memberProd")
+//	public String memberProd(@RequestParam("id") ) {
+//		List<MemberBean> mem = ms.searchMemByID();
+//		if (mem.size() == 0) {
+//			return "login";
+//		}else {
+//			mProd.addAttribute("memberBean", mem.get(0));
+//			return "/_03_product/myPDP";
+//		}		
+//	}
+//	信箱檢查
+	@ResponseBody
+	@GetMapping("/mailcheck")
+	public String mailcheck(@RequestParam("email") String email) {
+		List<MemberBean> list = ms.searchMemByMail(email);
+		if (list.size() == 0) {
+			return "0";
+		}else {
+			return "1";
+		}
+	}
+	
 	
 //	查詢類controll
 	@GetMapping("/admin/_01_member.admin.controller")
@@ -149,14 +205,14 @@ public class _01_membercontroll {
 		return "_01_member/admin";
 	}
 	
-	@PostMapping("/_01_member.selectAll.controller")
+	@PostMapping("/admin/_01_member.selectAll.controller")
 	public String selectAll(Model m) {
 		List<MemberBean> all = ms.searchAllMember();
 		m.addAttribute("Member", all);
 		return "_01_member/admin";
 	}
 	
-	@PostMapping(path = "/_01_member.selectByAccount.controller")
+	@PostMapping(path = "/admin/_01_member.selectByAccount.controller")
 	public String selectByAccountLike(@RequestParam("selectByAccount") String account, @RequestParam("value") String value, Model m) {
 		
 		List<MemberBean> mal = ms.searchMemByAccountLike(value);
@@ -165,7 +221,7 @@ public class _01_membercontroll {
 		
 	}
 	
-	@PostMapping(path = "/_01_member.selectByName.controller")
+	@PostMapping(path = "/admin/_01_member.selectByName.controller")
 	public String selectByNameLike(@RequestParam("value") String value, Model m) {
 			List<MemberBean> mnl = ms.searchMemByNameLike(value);
 			m.addAttribute("Member",mnl);
@@ -209,7 +265,7 @@ public class _01_membercontroll {
 	}
 	
 //	新增
-	@RequestMapping("/_01_member.backregister.controller")
+	@RequestMapping("/admin/_01_member.backregister.controller")
 	public String register() {
 		return "_01_member/backregister";
 	}
@@ -237,10 +293,10 @@ public class _01_membercontroll {
 				ms.add(newMember);
 			}
 		}
-		return "redirect:/";
+		return "redirect:/index.controller";
 	}
 	
-	@PostMapping("/_01_member.backadd.controller")
+	@PostMapping("/admin/_01_member.backadd.controller")
 	public String backadd(@ModelAttribute() MemberBean member,@RequestParam("photofile") MultipartFile mf , Model m) throws IOException, SerialException, SQLException {
 		
 		String fileName = "";
@@ -263,7 +319,7 @@ public class _01_membercontroll {
 				ms.add(newMember);
 			}
 		}
-		return "redirect:/_01_member.admin.controller";
+		return "redirect:/admin/_01_member.admin.controller";
 	}
 	
 //	修改
@@ -277,7 +333,7 @@ public class _01_membercontroll {
 		return "_01_member/frontmemberupdate";
 	}
 	
-	@PostMapping(path = "/_01_member.preupdate.controller")
+	@PostMapping(path = "/admin/_01_member.preupdate.controller")
 	public String preupdate(@RequestParam("preupdate") int memberID, Model m) {
 		Optional<MemberBean> data = ms.searchMemByID(memberID);
 		List<MemberBean> list = data.stream().collect(Collectors.toList());
@@ -285,7 +341,7 @@ public class _01_membercontroll {
 		return "_01_member/memberupdate";
 	}
 	
-	@PostMapping(path = "/_01_member.update.controller")
+	@PostMapping(path = "/admin/_01_member.update.controller")
 	public String update(@ModelAttribute() MemberBean member,@RequestParam("photofile") MultipartFile mf) throws IOException, SerialException, SQLException {
 		
 		String fileName ="";
@@ -330,7 +386,7 @@ public class _01_membercontroll {
 				ms.update(newMem);
 			}
 		}
-		return "redirect:/_01_member.admin.controller";
+		return "redirect:/admin/_01_member.admin.controller";
 	}
 	@PostMapping(path = "/_01_member.frontupdate.controller")
 	public String frontupdate(@ModelAttribute() MemberBean member,@RequestParam("photofile") MultipartFile mf) throws IOException, SerialException, SQLException {
@@ -344,7 +400,7 @@ public class _01_membercontroll {
 			newMem.setMemberID(check.getMemberID());
 			newMem.setAccount(member.getAccount());
 			String pwd = new BCryptPasswordEncoder().encode(member.getPassword());
-			if (check.getPassword().equals(pwd)) {
+			if (check.getPassword() != pwd) {
 				newMem.setPassword(pwd);				
 			}else {
 				newMem.setPassword(check.getPassword());
@@ -376,16 +432,18 @@ public class _01_membercontroll {
 				ms.update(newMem);
 			}
 		}
-		return "redirect:/";
+		return "redirect:/index.controller";
 	}
 	
 //	刪除
-	@PostMapping(path = "/_01_member.delete.controller")
+	@PostMapping(path = "/admin/_01_member.delete.controller")
 	public String delete(@RequestParam("delete") int memberID) {
 		ms.delete(memberID);
-		return "redirect:/_01_member.admin.controller";
+		return "redirect:/admin/_01_member.admin.controller";
 	}
 	
+
 	
+
 	
 }

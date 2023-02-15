@@ -253,48 +253,42 @@ System.out.println(baseMeetboth96x96);
 							</c:if></a>
 				</li>
 
-				<!--Navbar橫幅 Login會員登入 -->
-				<li id="loginBtn" class="nav-item dropdown"><a
-					href="<%=request.getContextPath()%>/login/page"
-					class="nav-link dropdown-toggle" data-bs-toggle="dropdown"> <img
-						class="rounded-circle me-lg-2"
-						src="<%=request.getContextPath()%>/html/assets/images/meatball/meatball-32x32.png"
-						alt="" style="width: 24px; height: 24px" /> <span
-						class="d-none d-lg-inline-flex">登入/註冊<i
-							class="fa-solid fa-right-to-bracket"></i>
-					</span>
-				</a>
-				<li id="logoutBtn" class="nav-item dropdown"><a href="#"
-					class="nav-link dropdown-toggle" data-bs-toggle="dropdown"> <img
-						class="rounded-circle me-lg-2"
-						src="/MeetBoth/_01_member.ShowPhoto.controller?account=${pageContext.request.userPrincipal.name}"
-						alt="" style="width: 24px; height: 24px" /> <span id="username"
-						class="d-none d-lg-inline-flex" style="border-radius: 200px;"><i
-							class="fa-solid fa-right-to-bracket"></i> </span>
-				</a>
-					<ul
-						class="dropdown-menu dropdown-menu-end bg-light border-0 rounded-0 rounded-bottom m-0">
-						<li>
-							<form action="_01_member.membercenter.controller" method="post"
-								id="memberCenter"></form>
-							<a href="#"
-							onclick="document.getElementById('memberCenter').submit();return false"
-							class="dropdown-item">會員資料修改<i class="fa-solid fa-user"></i></a>
-						</li>
-						<li><a href="/MeetBoth/_03_product/pathToMyPDP.controller"
-							class="dropdown-item">我的賣場 <i
-								class="fa-solid fa-right-from-bracket"></i>
-						</a></li>
-						<li id="admincontroller"><a
-							href="/MeetBoth/_03_product.index.controller"
-							class="dropdown-item">後臺管理 <i
-								class="fa-solid fa-right-from-bracket"></i>
-						</a></li>
-						<li><a href="/MeetBoth/logout" class="dropdown-item">登出<i
-								class="fa-solid fa-right-from-bracket"></i> </i>
-						</a></li>
-					</ul></li>
-			</ul>
-		</div>
-	</div>
-</nav>
+              <!--Navbar橫幅 Login會員登入 -->
+              <li id="loginBtn" class="nav-item dropdown"><a href="<%=request.getContextPath()%>/login/page"
+                  class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
+                  <img class="rounded-circle me-lg-2"
+                    src="<%=request.getContextPath()%>/html/assets/images/meatball/meatball-32x32.png" alt=""
+                    style="width: 24px; height: 24px" /> <span class="d-none d-lg-inline-flex">登入/註冊<i
+                      class="fa-solid fa-right-to-bracket"></i>
+                  </span>
+                </a>
+              <li id="logoutBtn" class="nav-item dropdown"><a href="#" class="nav-link dropdown-toggle"
+                  data-bs-toggle="dropdown">
+                  <img class="rounded-circle me-lg-2"
+                    src="/MeetBoth/_01_member.ShowPhoto.controller?account=${pageContext.request.userPrincipal.name}"
+                    alt="" style="width: 24px; height: 24px" /> <span id="username" class="d-none d-lg-inline-flex"
+                    style="border-radius: 200px
+                  ;"><i class="fa-solid fa-right-to-bracket"></i>
+                  </span>
+                </a>
+                <ul class="dropdown-menu dropdown-menu-end bg-light border-0 rounded-0 rounded-bottom m-0">
+                  <li>
+                    <form action="/MeetBoth/_01_member.membercenter.controller" method="post" id="memberCenter"></form>
+                    <a href="#" onclick="document.getElementById('memberCenter').submit();return false"
+                      class="dropdown-item">會員資料修改<i class="fa-solid fa-user"></i></a>
+                  </li>
+                  <li><a href="/MeetBoth/_03_product/pathToMyPDP.controller" class="dropdown-item">我的賣場 <i
+                        class="fa-solid fa-right-from-bracket"></i>
+                    </a></li>
+                  <li id="admincontroller"><a href="/MeetBoth/_03_product.index.controller" class="dropdown-item">後臺管理
+                      <i class="fa-solid fa-right-from-bracket"></i>
+                    </a></li>
+                  <li><a href="/MeetBoth/logout" class="dropdown-item">登出<i class="fa-solid fa-right-from-bracket"></i>
+                      </i>
+                    </a></li>
+                </ul>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>

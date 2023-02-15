@@ -203,9 +203,12 @@ String basePathimg2 = request.getScheme() + "://" + request.getServerName() + ":
 												</div>
 											</div>
 											<div style="margin-top: 170px;">
-												<input class="btn btn-d btn-circle" type="button"
+												<a
+													href="<c:url value='/memberresume?id=${bean.memberBean.memberID}'/>">
+													<input class="btn btn-p btn-circle" type="button"
 													value="前往賣家個人頁面"
 													style="height: 43px; font-size: 19px; float: right;">
+												</a>
 											</div>
 										</div>
 									</div>

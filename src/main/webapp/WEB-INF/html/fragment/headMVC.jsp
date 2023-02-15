@@ -163,12 +163,12 @@
 																					console.log(account + "登入");
 																					$("#loginBtn").show();
 																					$("#logoutBtn").hide();
-																					$("#animation").show();
+																					$(".animation").show();
 																				} else {
 																					console.log(account + "登出");
 																					$("#loginBtn").hide();
 																					$("#logoutBtn").show();
-																					$("#animation").hide();
+																					$(".animation").hide();
 																					if (nickName != "") {
 																						$("#username").text("你好，" + nickName)
 																					} else {

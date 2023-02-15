@@ -13,7 +13,57 @@
 					<head>
 						<!-- 引入共同的headMVC -->
 						<jsp:include page="../fragment/headMVC.jsp" />
+						<style>
+							.member {
+								table-layout: auto;
+								outline: 1px dotted rgb(255, 179, 179);
 
+								border-radius: 3px;
+							}
+
+							.member>tr {
+								height: 60px;
+
+								overflow: hidden;
+							}
+
+							.btn1 {
+								/* 文字颜色 */
+								color: rgb(255, 179, 179);
+								/* 清除背景色 */
+								background: transparent;
+								/* 边框样式、颜色、宽度 */
+								border: 2px solid rgb(255, 179, 179);
+								/* 给边框添加圆角 */
+								border-radius: 6px;
+								/* 字母转大写 */
+								border: none;
+								color: white;
+								padding: 16px 32px;
+								text-align: center;
+								display: inline-block;
+								font-size: 10px;
+								margin: 4px 2px;
+								-webkit-transition-duration: 0.4s;
+								/* Safari */
+								transition-duration: 0.4s;
+								cursor: pointer;
+								text-decoration: none;
+								text-transform: uppercase;
+							}
+
+							.btn1 {
+								background-color: white;
+								color: black;
+								border: 2px solid rgb(255, 179, 179);
+							}
+
+							/* 悬停样式 */
+							.btn1:hover {
+								background-color: rgb(255, 179, 179);
+								color: white;
+							}
+						</style>
 					</head>
 
 					<!--BOBY-->

@@ -25,6 +25,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import springTeam5._02_subLocation.model.Course;
 import springTeam5._02_subLocation.model.CourseComment;
+import springTeam5._02_subLocation.model.YtPlayer;
 import springTeam5._03_product.model.Product;
 import springTeam5._03_product.model.ProductComment;
 import springTeam5._04_shoppingCart.model.OrderBean;
@@ -114,15 +115,23 @@ public class MemberBean implements Serializable {
 	private Set<ProductComment> productComment = new LinkedHashSet<ProductComment>();
 //	連結商品 結束
 	
-//	連結商品
+//	連結課程
 	@JsonIgnore
 	@OneToMany(fetch = FetchType.LAZY,mappedBy = "memberBean",cascade = CascadeType.ALL)
 	private Set<Course> course = new LinkedHashSet<Course>();
+	
+	@JsonIgnore
+	@OneToMany(fetch = FetchType.LAZY,mappedBy = "memberBuyBean",cascade = CascadeType.ALL)
+	private Set<Course> courseBuy = new LinkedHashSet<Course>();
 
 	@JsonIgnore
 	@OneToMany(fetch = FetchType.LAZY,mappedBy = "memberBean",cascade = CascadeType.ALL)
 	private Set<CourseComment> courseComment = new LinkedHashSet<CourseComment>();
-//	連結商品 結束
+	
+	@JsonIgnore
+	@OneToMany(fetch = FetchType.LAZY,mappedBy = "memberBean",cascade = CascadeType.ALL)
+	private Set<YtPlayer> ytPlayer = new LinkedHashSet<YtPlayer>();
+//	連結課程 結束
 	
 	
 	public String getRole() {

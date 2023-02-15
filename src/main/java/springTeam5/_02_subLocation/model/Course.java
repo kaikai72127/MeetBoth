@@ -70,9 +70,17 @@ public class Course {
 	@Transient
 	private int memberID;
 	
+	@Column(name = "MEMBERBUYID")
+	@Transient
+	private int memberBuyID;
+	
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "MemberID")
 	private MemberBean memberBean;
+	
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "MemberBuyID")
+	private MemberBean memberBuyBean;
 	
 	public Course() {
 	}
@@ -85,13 +93,14 @@ public class Course {
 		this.memberBean = memberBean;
 	}
 	
-	public Course(int courseID, String courseName, int coursePrice, int memberID, String coursePost,
+	public Course(int courseID, String courseName, int coursePrice, int memberID, int memberBuyID, String coursePost,
 			String courseUpdate, String courseDirections, Blob courseImg, int courseSales, int courseClass,
 			CourseType coursetype, List<CourseComment> courseComment, List<YtPlayer> ytPlayer,MemberBean memberBean) {
 		super();
 		this.courseID = courseID;
 		this.courseName = courseName;
 		this.coursePrice = coursePrice;
+		this.memberBuyID = memberID;
 		this.memberID = memberID;
 		this.coursePost = coursePost;
 		this.courseUpdate = courseUpdate;
@@ -104,6 +113,8 @@ public class Course {
 		this.ytPlayer = ytPlayer;
 		this.memberBean = memberBean;
 	}
+	
+	
 
 	public int getCourseID() {
 		return courseID;
@@ -135,6 +146,13 @@ public class Course {
 
 	public void setMemberID(int memberID) {
 		this.memberID = memberID;
+	}
+	
+	public int getMemberBuyID() {
+		return memberBuyID;
+	}
+	public void setMemberBuyID(int memberBuyID) {
+		this.memberBuyID = memberBuyID;
 	}
 
 	public String getCoursePost() {

@@ -293,8 +293,7 @@ a:hover {
 							style="margin-left: 20px; width: 75%; border-left: solid 1px yellow;">
 							<div class="post">
 								<!-- 							標題 -->
-								<div class=
-								"post-thumbnail"
+								<div class="post-thumbnail"
 									style="padding-bottom: 0; margin-bottom: 0;">
 									<h1
 										style="padding-bottom: 0px; margin-bottom: 0; text-align: center; font-size: 50px; color: white;">後臺管理-訂單管理</h1>
@@ -304,48 +303,52 @@ a:hover {
 								<!--       右邊第一部分開始 -->
 								<div class="post">
 									<button class="MBbtn"
-										onclick="window.location='/MeetBoth/admin/discounts.controller/1'">返回</button>
+										onclick="window.location='/MeetBoth/admin/discounts.controller'">返回</button>
 									<form
-										action="<c:url value='/admin/discountsUpdateMain.controller' />"
+										action="<c:url value='/admin/discountsCreateMain.controller' />"
 										method="Post" enctype="multipart/form-data">
 										<div
 											class="post-video embed-responsive embed-responsive-16by9"
 											style="height: auto; padding-bottom: 100px; display: flex;">
 											<div style="width: 50%;">
-												<div>
+												<div style="margin-top: 20px">
 													<span>折扣&ensp;編碼 :&ensp;<input name='discountNo'
-														value="${bean.discountNo}" type="text" class="MBinput"
-														readonly></span>
+														type="text" class="MBinput"
+														placeholder="英文+數字" required></span>
 												</div>
 												<div>
 													<span>折扣&ensp;名稱 :&ensp;<input name='discountName'
-														value="${bean.discountName}" type="text" class="MBinput"></span>
+														 type="text" class="MBinput"
+														placeholder="折扣碼名稱" required></span>
 												</div>
 												<div>
 													<span>折扣&ensp;金額 :&ensp;<input name='discountPrice'
-														value="${bean.discountPrice}" type="text" class="MBinput"></span>
+														type="text" class="MBinput"
+														placeholder="只能是數字" required></span>
 												</div>
 												<div>
 													<span>折扣&ensp;敘述 :&ensp;<input name='discountDesc'
-														value="${bean.discountDesc}" type="text" class="MBinput"></span>
+														 type="text" class="MBinput"
+														placeholder="折扣碼敘述"></span>
 												</div>
 												<div>
 													<span>開始&ensp;日期 :&ensp;<input name='discountStart'
-														value="${bean.discountStart}" type="text" class="MBinput">
-														</span>
+														type="text" class="MBinput"
+														placeholder="yyyy-MM-dd hh:mm:ss" required>
+													</span>
 												</div>
 												<div>
 													<span>到期&ensp;日期 :&ensp;<input name='discountEnd'
-														value="${bean.discountEnd}" type="text" class="MBinput">
-														</span>
+													 type="text" class="MBinput"
+														placeholder="yyyy-MM-dd hh:mm:ss" required>
+													</span>
 												</div>
-											</div>
-											<div style="width: 50%;">
 												<div>
 													<input type="submit" class="MBbtn" value="確定"
 														style="margin-top: 15px; margin-left: 400px; font-size: 35px;">
 												</div>
 											</div>
+											<div style="width: 50%;"></div>
 										</div>
 									</form>
 									<!--       右邊第一部分結束 -->

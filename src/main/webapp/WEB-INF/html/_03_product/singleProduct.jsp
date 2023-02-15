@@ -153,7 +153,7 @@ String basePathimg2 = request.getScheme() + "://" + request.getServerName() + ":
 											<!-- 												class="btn btn-sm text-dark p-0 addtocart"> -->
 											<!-- 												<i class="fas fa-shopping-cart text-primary mr-1"></i> 加入購物車 -->
 											<!-- 											</button> -->
-											<button onclick="submitFormWithDelay(2000)" type='button'
+											<button onclick="submitFormWithDelay(700)" type='button'
 												id="addToCartBtn" class="btn btn-p btn-circle mybutton"
 												style="font-size: 17px;">
 												<i class="fas fa-shopping-cart text-primary mr-1"></i> 加入購物車
@@ -553,7 +553,7 @@ String basePathimg2 = request.getScheme() + "://" + request.getServerName() + ":
 		// 設定定時器，在3秒後隱藏訊息框
 		setTimeout(function() {
 			messageBox.style.display = "none";
-		}, 1500);
+		}, 700);
 		
 		// 取得表單元素
 		  const form = document.getElementById('addCartForm');

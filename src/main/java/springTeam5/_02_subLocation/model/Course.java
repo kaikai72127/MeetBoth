@@ -79,7 +79,7 @@ public class Course {
 	private MemberBean memberBean;
 	
 	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "MemberBuyID")
+	@JoinColumn(name = "MEMBERBUYID")
 	private MemberBean memberBuyBean;
 	
 	public Course() {

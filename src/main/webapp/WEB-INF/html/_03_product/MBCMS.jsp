@@ -173,7 +173,7 @@
 									<!-- 左邊欄位開始 -->
 									<jsp:include page="/WEB-INF/html/fragment/AdminIndexSideBar.jsp" />
 									<!-- 左邊欄位結束 -->
-									<!-- 						右邊欄位開始 -->
+									<!-- 右邊欄位開始 -->
 									<div class="col-sm-8 col-sm-offset-1"
 										style="margin-left: 20px; width: 75%; border-left: solid 1px yellow;">
 										<div class="col-sm-12">

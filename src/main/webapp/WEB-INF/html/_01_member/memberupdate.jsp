@@ -170,9 +170,7 @@
 
             <body data-spy="scroll" data-target=".onpage-navigation" data-offset="60">
                 <main>
-                    <div class="page-loader">
-                        <div class="loader">Loading...</div>
-                    </div>
+
                     <div class="main" style="background-color: black;">
                         <section class="module" style="padding-top: 10px;padding-bottom:0px;">
                             <div class="container" style="width: 100%; background-color: black;">

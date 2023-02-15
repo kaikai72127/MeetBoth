@@ -354,6 +354,8 @@ public class CourseController {
 		}
 		return "_02_subLocation/newCourseShop";
 	}
+	
+
 
 //	搜單一並導到update.jsp
 	@GetMapping("/catchSingleCourse.controller")
@@ -604,29 +606,23 @@ public class CourseController {
 
 //	---------------------------YtPlayerPart-----------------------
 
-//	搜會員全部課程影片
-	@GetMapping("/PathToCourseWithYt.controller")
-	public String processPathToCourseWithYt(@RequestParam("id") Integer id, Model mCourse, Model m)
-			throws SQLException {
-//		List<Course> list = cService.searchAllCourseByMemberID(id);
-		ArrayList<Course> courses = new ArrayList<Course>();
-		Course course = new Course();
+//	跳轉個人課程
+	@GetMapping("/pathToSearchAllCourseMember.controller")
+	public String processPathToSearchAllCourseMemberAction(HttpServletRequest request,Model m) {
+		HttpSession session = request.getSession(false);
 
-//		if (list.isEmpty()) {
-//			course.setCourseName("無課程");
-//			course.setMemberID(id);
-//			courses.add(course);
-//			mCourse.addAttribute("courseBean", courses);
-//		} else {
-//			mCourse.addAttribute("courseBean", list);
-//		}
+		String account = SecurityContextHolder.getContext().getAuthentication().getName();
+		List<MemberBean> mem = memberService.searchMemByAccount(account);
 
-		if (course.getCourseDirections() == null) {
-			course.setCourseDirections("--此商品沒有詳細內容說明--");
+		if (mem.size() == 0) {
+			return "login";
+		} else {
+			m.addAttribute("memberBean", mem.get(0));
+			return "/_02_subLocation/newCourseShopMember";
 		}
-
-		return "_02_subLocation/ytPlayer";
 	}
+	
+
 
 //	課程影片明細
 	@GetMapping("/YtDetail.controller")
@@ -669,9 +665,9 @@ public class CourseController {
 //			mCourse.addAttribute("courseBean", courseList);
 //		}
 
-		if (course.getCourseDirections() == null) {
-			course.setCourseDirections("--此商品沒有詳細內容說明--");
-		}
+//		if (course.getCourseDirections() == null) {
+//			course.setCourseDirections("--此商品沒有詳細內容說明--");
+//		}
 
 		return "_02_subLocation/ytPlayer";
 	}
@@ -701,8 +697,8 @@ public class CourseController {
 		}
 		return "redirect:YtDetail.controller?id=" + ytPlayerID + "&courseID=" + courseID;
 	}
-//	---------------------------個人課程Part-----------------------
-//	進入個人全部課程
+//	---------------------------個人課程賣場Part-----------------------
+//	進入個人賣場全部課程
 	@GetMapping("/pathToMemberCourse.controller")
 	public String processPathToMemberCourseWithYt(Model mCourse, HttpServletRequest request) {
 		HttpSession session = request.getSession(false);
@@ -719,30 +715,30 @@ public class CourseController {
 		}
 	}
 
-//	進入個人會員全部課程明細 ??
-	@GetMapping("/pathToMemberCourseDetail.controller")
-	public String processPathToMemberYtDetail(@RequestParam("id") Integer id, Model mCourse, Model mYtPlayer)
-			throws SQLException {
-		Course course = cService.searchSingleCourseFromCourseID(id);
-		List<YtPlayer> list = course.getYtPlayer();
-		ArrayList<YtPlayer> yts = new ArrayList<YtPlayer>();
-		YtPlayer yt = new YtPlayer();
-
-		if (list.isEmpty()) {
-			yt.setYtPlayerName("no video");
-			yt.setYtPlayerURL("no URL");
-			yts.add(yt);
-			mYtPlayer.addAttribute("ytBean", yts);
-		} else {
-			mYtPlayer.addAttribute("ytBean", list);
-		}
-
-		ArrayList<Course> courses = new ArrayList<Course>();
-		courses.add(course);
-		mCourse.addAttribute("bean", courses);
-
-		return "_02_subLocation/memberSingleCourseAddYt";
-	}
+//	進入個人會員全部課程明細
+//	@GetMapping("/pathToMemberCourseDetail.controller")
+//	public String processPathToMemberYtDetail(@RequestParam("id") Integer id, Model mCourse, Model mYtPlayer)
+//			throws SQLException {
+//		Course course = cService.searchSingleCourseFromCourseID(id);
+//		List<YtPlayer> list = course.getYtPlayer();
+//		ArrayList<YtPlayer> yts = new ArrayList<YtPlayer>();
+//		YtPlayer yt = new YtPlayer();
+//
+//		if (list.isEmpty()) {
+//			yt.setYtPlayerName("no video");
+//			yt.setYtPlayerURL("no URL");
+//			yts.add(yt);
+//			mYtPlayer.addAttribute("ytBean", yts);
+//		} else {
+//			mYtPlayer.addAttribute("ytBean", list);
+//		}
+//
+//		ArrayList<Course> courses = new ArrayList<Course>();
+//		courses.add(course);
+//		mCourse.addAttribute("bean", courses);
+//
+//		return "_02_subLocation/memberSingleCourseAddYt";
+//	}
 
 //	模糊搜尋(個人賣場)
 	@PostMapping("/searchCourseWithCondition2.controller")

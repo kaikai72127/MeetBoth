@@ -322,25 +322,55 @@
                         </div>
                     </div>
                     <!-- 內容-會員結束 -->
-                    <!-- 內容-討論區貼文 -->
-                    <div class="page-container cart">
-                        <div class="resume-container">
-                            <ul class="">
-                                <h1 class="resume-title">討論區貼文</h1>
-
-                            </ul>
-                        </div>
-                    </div>
-                    <!-- 內容-討論區貼文 -->
 
                     <!-- 內容-哈拉區貼文 -->
                     <div class="page-container cart">
                         <div class="resume-container">
-                            <ul class="">
-                                <h1 class="resume-title">哈拉區貼文</h1>
+                            <h1 class="resume-title">
+                                哈拉區貼文
+                            </h1>
+                            <div class="case-list-body">
+                                <!-- Migrant from Resume to Case list -->
+                                <div class="comment-table">
+                                    <div class="comment-table-row header">
+                                        <div class="comment-table-col">
+                                            <div class="comment-table-col-content">貼文編號</div>
+                                        </div>
+                                        <div class="comment-table-col">
+                                            <div class="comment-table-col-content">標題</div>
+                                        </div>
+                                        <div class="comment-table-col">
+                                            <div class="comment-table-col-content">瀏覽次數</div>
+                                        </div>
+                                        <div class="comment-table-col">
+                                            <div class="comment-table-col-content">發文日期</div>
+                                        </div>
 
-                            </ul>
+                                    </div>
+                                    <div class="comment-table-row">
+                                        <c:forEach var="bean" items="${classList}">
+                                            <div class="comment-table-col">
+                                                <div class="comment-table-col-content">
+                                                    ${bean.halaId}</div>
+                                            </div>
+                                            <div class="comment-table-col">
+                                                <div class="comment-table-col-content">
+                                                    ${bean.title}</div>
+                                            </div>
+                                            <div class="comment-table-col">
+                                                <div class="comment-table-col-content">
+                                                    ${bean.watch}</div>
+                                            </div>
+                                            <div class="comment-table-col">
+                                                <div class="comment-table-col-content">
+                                                    ${bean.postdate}</div>
+                                            </div>
+                                        </c:forEach>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
+                    </div>
                     </div>
                     <!-- 內容-哈拉區貼文 -->
 
@@ -351,69 +381,63 @@
                                 教師履歷
                             </h1>
                             <div class="case-list-body">
-                                <div class="resume-body">
-                                    <div class="resume-section">
-                                        <div class="comment-table" style="margin:0;">
-                                            <div class="comment-table-row header">
-                                                <div class="comment-table-col">
-                                                    <div class="comment-table-col-content">更新日期</div>
-                                                </div>
-                                                <div class="comment-table-col">
-                                                    <div class="comment-table-col-content">最高學歷</div>
-                                                </div>
-                                                <div class="comment-table-col">
-                                                    <div class="comment-table-col-content">授課科目</div>
-                                                </div>
-                                                <div class="comment-table-col">
-                                                    <div class="comment-table-col-content">授課對象</div>
-                                                </div>
-                                                <div class="comment-table-col">
-                                                    <div class="comment-table-col-content">授課地區</div>
-                                                </div>
-                                                <div class="comment-table-col">
-                                                    <div class="comment-table-col-content">案件薪資</div>
-                                                </div>
-                                                <div class="comment-table-col">
-                                                    <div class="comment-table-col-content">瀏覽次數</div>
-                                                </div>
-                                            </div>
+
+                                <div class="comment-table">
+                                    <div class="comment-table-row header">
+                                        <div class="comment-table-col">
+                                            <div class="comment-table-col-content">更新日期</div>
+                                        </div>
+                                        <div class="comment-table-col">
+                                            <div class="comment-table-col-content">最高學歷</div>
+                                        </div>
+                                        <div class="comment-table-col">
+                                            <div class="comment-table-col-content">授課科目</div>
+                                        </div>
+                                        <div class="comment-table-col">
+                                            <div class="comment-table-col-content">授課對象</div>
+                                        </div>
+                                        <div class="comment-table-col">
+                                            <div class="comment-table-col-content">授課地區</div>
+                                        </div>
+                                        <div class="comment-table-col">
+                                            <div class="comment-table-col-content">案件薪資</div>
+                                        </div>
+                                        <div class="comment-table-col">
+                                            <div class="comment-table-col-content">瀏覽次數</div>
                                         </div>
                                     </div>
                                 </div>
+
                             </div>
                             <div class="case-list-body">
-                                <div class="resume-body" style="padding-top: 5px;">
-                                    <div class="resume-section">
-                                        <div class="comment-table">
-                                            <div class="comment-table-row">
-                                                <c:forEach var="teac" items="${teac}">
-                                                    <div class="comment-table-col">
-                                                        <div class="comment-table-col-content">
-                                                            ${teac.updateDate}</div>
-                                                    </div>
-                                                    <div class="comment-table-col">
-                                                        <div class="comment-table-col-content">
-                                                            ${teac.highEdu}</div>
-                                                    </div>
-                                                    <div class="comment-table-col">
-                                                        <div class="comment-table-col-content">
-                                                            ${teac.subjectItem}</div>
-                                                    </div>
-                                                    <div class="comment-table-col">
-                                                        <div class="comment-table-col-content">${teac.teacObject}</div>
-                                                    </div>
-                                                    <div class="comment-table-col">
-                                                        <div class="comment-table-col-content">${teac.teacLoc}</div>
-                                                    </div>
-                                                    <div class="comment-table-col">
-                                                        <div class="comment-table-col-content">${teac.price}</div>
-                                                    </div>
-                                                    <div class="comment-table-col">
-                                                        <div class="comment-table-col-content">${teac.views}</div>
-                                                    </div>
-                                                </c:forEach>
+                                <div class="comment-table">
+                                    <div class="comment-table-row">
+                                        <c:forEach var="teac" items="${teac}">
+                                            <div class="comment-table-col">
+                                                <div class="comment-table-col-content">
+                                                    ${teac.updateDate}</div>
                                             </div>
-                                        </div>
+                                            <div class="comment-table-col">
+                                                <div class="comment-table-col-content">
+                                                    ${teac.highEdu}</div>
+                                            </div>
+                                            <div class="comment-table-col">
+                                                <div class="comment-table-col-content">
+                                                    ${teac.subjectItem}</div>
+                                            </div>
+                                            <div class="comment-table-col">
+                                                <div class="comment-table-col-content">${teac.teacObject}</div>
+                                            </div>
+                                            <div class="comment-table-col">
+                                                <div class="comment-table-col-content">${teac.teacLoc}</div>
+                                            </div>
+                                            <div class="comment-table-col">
+                                                <div class="comment-table-col-content">${teac.price}</div>
+                                            </div>
+                                            <div class="comment-table-col">
+                                                <div class="comment-table-col-content">${teac.views}</div>
+                                            </div>
+                                        </c:forEach>
                                     </div>
                                 </div>
                             </div>
@@ -551,6 +575,50 @@
                         });
 
                     });
+                </script>
+                <script>
+                    function roundToTwo(num) {
+                        return +(Math.round(num + "e+2") + "e-2");
+                    }
+
+                    const score = document.querySelectorAll("#starAVG");
+
+                    document
+                        .addEventListener(
+                            "DOMContentLoaded",
+                            function () {
+                                const scores = document
+                                    .querySelectorAll("#scoreAVG");
+                                for (let i = 0; i < scores.length; i++) {
+                                    const score = scores[i];
+                                    const starAVGs = score
+                                        .querySelectorAll("#starAVG");
+                                    let totalScore = 0;
+                                    for (let j = 0; j < starAVGs.length; j++) {
+                                        const starNum = starAVGs[j].value;
+                                        totalScore += Number(starNum);
+                                    }
+                                    let avgScore = roundToTwo(totalScore
+                                        / starAVGs.length);
+                                    let stars = '';
+                                    if (isNaN(avgScore)) {
+                                        stars = '&nbsp;(0)';
+                                    } else {
+                                        stars = '&nbsp;(' + avgScore + ')';
+                                    }
+                                    let onstar = '<span><i class="fa fa-star star"></i></span>';
+                                    let offstar = '<span><i class="fa fa-star star-off"></i></span>';
+                                    for (var k = 0; k < 5; k++) {
+                                        if (k < avgScore) {
+                                            stars += onstar;
+                                        } else {
+                                            stars += offstar;
+                                        }
+                                    }
+                                    stars += '&nbsp;(' + starAVGs.length + '則評論)'
+                                    score.querySelector("#starAVGDiv").innerHTML = stars;
+                                }
+                            });
                 </script>
             </body>
 

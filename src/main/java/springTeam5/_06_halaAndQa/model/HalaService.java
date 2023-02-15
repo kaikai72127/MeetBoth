@@ -58,5 +58,9 @@ public class HalaService {
 	public List<HalaBean> findTopHot(){
 		return halaRepo.findTopfive();
 	}
+	//會員編號查詢
+	 public List<HalaBean> selectMemberId(Integer memberId) {
+		 return halaRepo.findByMemberId(memberId);
+	 }
 
 }

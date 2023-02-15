@@ -51,6 +51,6 @@
 					</ul>
 				</li>
 			</ul>
-			<a href="#"><img src="/MeetBoth/html/assets/images/shop/警告2.jpg" style="padding-bottom: 10px;"></a>
+			<a href="/MeetBoth"><img src="/MeetBoth/html/assets/images/shop/警告2.jpg" style="padding-bottom: 10px;"></a>
 		</div>
 	</div>

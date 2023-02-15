@@ -101,6 +101,64 @@
                                     font-size: 25px;
                                     font-width: 550;
                                 }
+
+                                input {
+                                    border-color: azure;
+                                    background-color: #000;
+                                    color: azure;
+                                    caret-color: auto;
+                                    /* 預設 */
+                                    caret-color: transparent;
+                                    /* 透明 */
+                                    caret-color: #FF1744;
+                                    /* 指定色 */
+                                    outline: none;
+                                    /* 外框效果 */
+                                }
+
+                                .member {
+                                    table-layout: auto;
+                                    outline: 1px dotted rgb(255, 179, 179);
+
+                                    border-radius: 3px;
+                                }
+
+                                .member>tbody>tr {
+                                    height: 60px;
+
+                                    overflow: hidden;
+                                }
+
+                                .btn1 {
+                                    /* 文字颜色 */
+                                    color: rgb(255, 179, 179);
+                                    /* 清除背景色 */
+                                    background: transparent;
+                                    /* 边框样式、颜色、宽度 */
+                                    border: 2px solid rgb(255, 179, 179);
+                                    /* 给边框添加圆角 */
+                                    border-radius: 6px;
+                                    /* 字母转大写 */
+                                    border: none;
+                                    color: white;
+                                    padding: 8px 20px;
+                                    text-align: center;
+                                    display: inline-block;
+                                    font-size: 15px;
+                                    margin: 4px 2px;
+                                    border-radius: 30px;
+                                    -webkit-transition-duration: 0.4s;
+                                    /* Safari */
+                                    transition-duration: 0.4s;
+                                    cursor: pointer;
+                                    text-decoration: none;
+                                    text-transform: uppercase;
+                                }
+
+                                .btn1:hover {
+                                    background-color: rgb(255, 255, 255);
+                                    color: rgb(0, 0, 0);
+                                }
                             </style>
                             <!-- CSS -->
                             <link rel="stylesheet"
@@ -122,65 +180,7 @@
                                 <div class="row">
                                     <!-- 整頁 -->
                                     <!-- 左邊欄位開始 -->
-                                    <div class="col-sm-4 col-md-3 sidebar" style="width:20%;padding-right:0px;">
-                                        <div class="widget">
-                                            <a href="#"><img src="/MeetBoth/html/assets/images/shop/警告.jpg"
-                                                    style="padding-bottom: 10px;"></a>
-                                            <ul class="cart">
-                                                <li><a href="#" style="color: white;font-size:20px;"
-                                                        class="btn btn-d btn-round">會員管理&ensp;<i
-                                                            class="fa-solid fa-angle-double-down"></i></a>
-                                                    <ul style="">
-                                                        <li><a href="_01_member.admin.controller"
-                                                                style="color: white;font-weight:600;"
-                                                                class="btn btn-d btn-round">所有會員清單</a></li>
-                                                    </ul>
-                                                </li>
-                                                <li><a href="#" style="color: white;font-size:20px;"
-                                                        class="btn btn-d btn-round">商品管理&ensp;<i
-                                                            class="fa-solid fa-angle-double-down"></i></a>
-                                                    <ul style="">
-                                                        <li><a href="#" style="color: white;font-weight:600;"
-                                                                class="btn btn-d btn-round">所有商品清單</a></li>
-                                                    </ul>
-                                                </li>
-                                                <li><a href="#" style="color: white;font-size:20px;"
-                                                        class="btn btn-d btn-round">課程管理&ensp;<i
-                                                            class="fa-solid fa-angle-double-down"></i></a>
-                                                    <ul style="">
-                                                        <li><a href="#" style="color: white;font-weight:600;"
-                                                                class="btn btn-d btn-round">所有課程清單</a></li>
-                                                    </ul>
-                                                </li>
-                                                <li><a href="#" style="color: white;font-size:20px;"
-                                                        class="btn btn-d btn-round">徵才管理&ensp;<i
-                                                            class="fa-solid fa-angle-double-down"></i></a>
-                                                    <ul style="">
-                                                        <li><a href="#" style="color: white;font-weight:600;"
-                                                                class="btn btn-d btn-round">所有貼文清單</a></li>
-                                                    </ul>
-                                                </li>
-                                                <li><a href="#" style="color: white;font-size:20px;"
-                                                        class="btn btn-d btn-round">討論區管理&ensp;<i
-                                                            class="fa-solid fa-angle-double-down"></i></a>
-                                                    <ul style="">
-                                                        <li><a href="#" style="color: white;font-weight:600;"
-                                                                class="btn btn-d btn-round">所有貼文清單</a></li>
-                                                    </ul>
-                                                </li>
-                                                <li><a href="#" style="color: white;font-size:20px;"
-                                                        class="btn btn-d btn-round">購物車管理&ensp;<i
-                                                            class="fa-solid fa-angle-double-down"></i></a>
-                                                    <ul style="">
-                                                        <li><a href="#" style="color: white;font-weight:600;"
-                                                                class="btn btn-d btn-round">所有購物單清單</a></li>
-                                                    </ul>
-                                                </li>
-                                            </ul>
-                                            <a href="#"><img src="/MeetBoth/html/assets/images/shop/警告2.jpg"
-                                                    style="padding-bottom: 10px;"></a>
-                                        </div>
-                                    </div>
+                                    <jsp:include page="/WEB-INF/html/fragment/AdminIndexSideBar.jsp" />
                                     <!-- 左邊欄位結束 -->
                                     <!-- 						右邊欄位開始 -->
                                     <div class="col-sm-8 col-sm-offset-1"
@@ -200,23 +200,23 @@
 
                                                     <!-- Content -->
                                                     <section>
-                                                        <header class="main">
-                                                            <h3>會員管理列表</h3>
+                                                        <header style="color: aliceblue; text-align: center;">
+                                                            <h3>會員資料修改</h3>
                                                         </header>
                                                         <form method="POST" action="_01_member.update.controller"
                                                             enctype='multipart/form-data'>
 
-                                                            <div class="table-wrapper">
-                                                                <table class="alt">
+                                                            <div style="text-align: center;">
+                                                                <table
+                                                                    style="color: rgb(255, 255, 255); width: 80%;margin: auto;"
+                                                                    class="">
                                                                     <c:forEach var="Member" items="${Member}">
                                                                         <tr>
                                                                             <td style="width: 150px;"><label>帳號：</label>
                                                                             </td>
-                                                                            <td><input type="text"
-                                                                                    style="background-color: #D0D0D0"
-                                                                                    name="account"
-                                                                                    value="${Member.account}"
-                                                                                    readonly="readonly" required></td>
+                                                                            <td><input type="text" name="account"
+                                                                                    value="${Member.account}" required>
+                                                                            </td>
                                                                             <td rowspan="4" align="center"
                                                                                 style="width: 250px; height: 250px">
                                                                                 <!-- 												<div style="float:right;"> -->
@@ -246,11 +246,9 @@
                                                                             <td style="width: 150px;">
                                                                                 <label>身分證字號：</label>
                                                                             </td>
-                                                                            <td><input type="text"
-                                                                                    style="background-color: #D0D0D0"
-                                                                                    name="idNumber"
-                                                                                    value="${Member.idNumber}"
-                                                                                    readonly="readonly" required></td>
+                                                                            <td><input type="text" name="idNumber"
+                                                                                    value="${Member.idNumber}" required>
+                                                                            </td>
                                                                         </tr>
                                                                         <tr>
                                                                             <td style="width: 150px;"><label>姓名：</label>
@@ -278,20 +276,17 @@
                                                                             <td style="width: 150px;"><label>生日：</label>
                                                                             </td>
                                                                             <td colspan="2"><input type="Date"
-                                                                                    style="background-color: #D0D0D0"
                                                                                     name="memBirth"
-                                                                                    value="${Member.memBirth}"
-                                                                                    readonly="readonly" required>
+                                                                                    value="${Member.memBirth}" required>
                                                                             </td>
                                                                         </tr>
                                                                         <tr>
                                                                             <td style="width: 150px;"><label>性別：</label>
                                                                             </td>
                                                                             <td colspan="2"><input type="text"
-                                                                                    style="background-color: #D0D0D0"
                                                                                     name="memGender"
                                                                                     value="${Member.memGender}"
-                                                                                    readonly="readonly" required>
+                                                                                    required>
                                                                             </td>
                                                                         </tr>
                                                                         <tr>
@@ -324,10 +319,15 @@
                                                                         <tr>
                                                                             <td style="width: 150px;"><label>權限：</label>
                                                                             </td>
-                                                                            <td colspan="2"><select name="role">
-                                                                                    <option value="user" selected>使用者
+                                                                            <td colspan="2"><select name="role"
+                                                                                    style="background-color: black;">
+                                                                                    <option
+                                                                                        style="background-color: black;"
+                                                                                        value="user" selected>使用者
                                                                                     </option>
-                                                                                    <option value="admin">管理員</option>
+                                                                                    <option value="admin"
+                                                                                        style="background-color: black;">
+                                                                                        管理員</option>
                                                                                 </select>
                                                                             </td>
                                                                         </tr>
@@ -337,10 +337,12 @@
                                                                         <tr height="42">
                                                                             <td colspan='4'>
                                                                                 <div align="center">
-                                                                                    <input type="submit" name="submit"
-                                                                                        id="submit" value="儲存" />
-                                                                                    <input type="reset" name="cancel"
-                                                                                        id="cancel" value="重填">
+                                                                                    <input class="btn1" type="submit"
+                                                                                        name="submit" id="submit"
+                                                                                        value="儲存" />
+                                                                                    <input class="btn1" type="reset"
+                                                                                        name="cancel" id="cancel"
+                                                                                        value="重填">
                                                                                 </div>
                                                                             </td>
                                                                         </tr>

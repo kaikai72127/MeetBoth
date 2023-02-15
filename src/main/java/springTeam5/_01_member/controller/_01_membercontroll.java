@@ -38,6 +38,8 @@ import springTeam5._03_product.model.Product;
 import springTeam5._03_product.service.ProductService;
 import springTeam5._05_teacStu.model.StudBean;
 import springTeam5._05_teacStu.model.TeacBean;
+import springTeam5._06_halaAndQa.model.HalaBean;
+import springTeam5._06_halaAndQa.model.HalaService;
 
 
 @Controller
@@ -48,6 +50,9 @@ public class _01_membercontroll {
 	
 	@Autowired
 	private ProductService pService;
+	
+	@Autowired
+	private HalaService halaService;
 	
 	
 	
@@ -151,17 +156,18 @@ public class _01_membercontroll {
 	
 //	會員履歷
 	@GetMapping("/memberresume")
-	public String memberresume(@RequestParam("id") String id, Model m) throws SQLException {
-		int memID = Integer.parseInt(id);
+	public String memberresume(@RequestParam("id") Integer id, Model m) throws SQLException {
+		int memID = id;
 		Optional<MemberBean> list = ms.searchMemByID(memID);
 		MemberBean member = list.get();
 		m.addAttribute("member", member);
 		
 		List<TeacBean> teacher = member.getTeacBean();
 		m.addAttribute("teac", teacher);
-//		List<StudBean> student = member.getStudBean();
-//		m.addAttribute("stud", student);
-		
+		List<StudBean> student = member.getStudBean();
+		m.addAttribute("stud", student);
+		List<HalaBean> halaBean = halaService.selectMemberId(memID);
+		m.addAttribute("classList", halaBean);
 		List<Product> prodBean = pService.searchAllProduct();
 		m.addAttribute("prodBean", prodBean);
 		return "_01_member/memberresume";
@@ -200,14 +206,14 @@ public class _01_membercontroll {
 		return "_01_member/admin";
 	}
 	
-	@PostMapping("/_01_member.selectAll.controller")
+	@PostMapping("/admin/_01_member.selectAll.controller")
 	public String selectAll(Model m) {
 		List<MemberBean> all = ms.searchAllMember();
 		m.addAttribute("Member", all);
 		return "_01_member/admin";
 	}
 	
-	@PostMapping(path = "/_01_member.selectByAccount.controller")
+	@PostMapping(path = "/admin/_01_member.selectByAccount.controller")
 	public String selectByAccountLike(@RequestParam("selectByAccount") String account, @RequestParam("value") String value, Model m) {
 		
 		List<MemberBean> mal = ms.searchMemByAccountLike(value);
@@ -216,7 +222,7 @@ public class _01_membercontroll {
 		
 	}
 	
-	@PostMapping(path = "/_01_member.selectByName.controller")
+	@PostMapping(path = "/admin/_01_member.selectByName.controller")
 	public String selectByNameLike(@RequestParam("value") String value, Model m) {
 			List<MemberBean> mnl = ms.searchMemByNameLike(value);
 			m.addAttribute("Member",mnl);
@@ -395,7 +401,7 @@ public class _01_membercontroll {
 			newMem.setMemberID(check.getMemberID());
 			newMem.setAccount(member.getAccount());
 			String pwd = new BCryptPasswordEncoder().encode(member.getPassword());
-			if (check.getPassword().equals(pwd)) {
+			if (check.getPassword() != pwd) {
 				newMem.setPassword(pwd);				
 			}else {
 				newMem.setPassword(check.getPassword());

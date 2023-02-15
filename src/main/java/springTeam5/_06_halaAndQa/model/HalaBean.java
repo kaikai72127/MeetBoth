@@ -10,10 +10,15 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import org.springframework.stereotype.Component;
+
+import springTeam5._01_member.model.MemberBean;
 
 @Entity
 @Table(name="HALA")
@@ -28,8 +33,8 @@ public class HalaBean {
 	@Column(name = "HALACLASSNAME")
 	private String halaclassname;
 	
-	@Column(name = "MEMBERID")
-	private Integer memberid;
+//	@Column(name = "MEMBERID")
+//	private Integer memberid;
 	
 	@Column(name = "TITLE")
 	private String title;
@@ -57,6 +62,14 @@ public class HalaBean {
     
     @OneToMany(fetch = FetchType.LAZY,mappedBy = "hala",cascade = CascadeType.ALL)
     private List<AnswerHalaBean> answerHala;
+    
+    @Column(name = "memberID")
+    @Transient
+    private Integer memberID;
+    
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name="memberID")
+    private MemberBean memberBean;
 	
 
 	public HalaBean() {
@@ -66,7 +79,7 @@ public class HalaBean {
 	public HalaBean(String halaclassname, Integer memberid, String title, String postdate, String halacontent) {
 		super();
 		this.halaclassname = halaclassname;
-		this.memberid = memberid;
+		this.memberID = memberid;
 		this.title = title;
 		this.postdate = postdate;
 		this.halacontent = halacontent;
@@ -78,7 +91,7 @@ public class HalaBean {
 		super();
 		this.halaId = halaid;
 		this.halaclassname = halaclassname;
-		this.memberid = memberid;
+		this.memberID = memberid;
 		this.title = title;
 		this.postdate = postdate;
 		this.halacontent = halacontent;
@@ -95,7 +108,7 @@ public class HalaBean {
 		super();
 		this.halaId = halaId;
 		this.halaclassname = halaclassname;
-		this.memberid = memberid;
+		this.memberID = memberid;
 		this.title = title;
 		this.postdate = postdate;
 		this.halacontent = halacontent;
@@ -123,7 +136,7 @@ public class HalaBean {
 			List<AnswerHalaBean> answerHala) {
 		super();
 		this.halaclassname = halaclassname;
-		this.memberid = memberid;
+		this.memberID = memberid;
 		this.title = title;
 		this.postdate = postdate;
 		this.halacontent = halacontent;
@@ -142,7 +155,7 @@ public class HalaBean {
 		super();
 		this.halaId = halaId;
 		this.halaclassname = halaclassname;
-		this.memberid = memberid;
+		this.memberID = memberid;
 		this.title = title;
 		this.postdate = postdate;
 		this.halacontent = halacontent;
@@ -171,7 +184,7 @@ public class HalaBean {
 		super();
 		this.halaId = halaId;
 		this.halaclassname = halaclassname;
-		this.memberid = memberid;
+		this.memberID = memberid;
 		this.title = title;
 		this.postdate = postdate;
 		this.halacontent = halacontent;
@@ -188,7 +201,7 @@ public class HalaBean {
 			List<AnswerHalaBean> answerHala) {
 		super();
 		this.halaclassname = halaclassname;
-		this.memberid = memberid;
+		this.memberID = memberid;
 		this.title = title;
 		this.postdate = postdate;
 		this.halacontent = halacontent;
@@ -268,12 +281,12 @@ public class HalaBean {
 
 
 	public Integer getMemberid() {
-		return memberid;
+		return memberID;
 	}
 
 
 	public void setMemberid(Integer memberid) {
-		this.memberid = memberid;
+		this.memberID = memberid;
 	}
 
 

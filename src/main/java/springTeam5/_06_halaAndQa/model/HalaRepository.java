@@ -27,5 +27,10 @@ public interface HalaRepository extends JpaRepository<HalaBean, Integer> {
 	//熱門前5
 	@Query(value = "select top 5 * from hala order by watch DESC",nativeQuery = true)
 	public List<HalaBean> findTopfive();
+	
+	//會員編號查詢
+	 @Query(value = "select * from Hala where memberid=?", nativeQuery = true)
+	 public List<HalaBean>findByMemberId(Integer memberId);
+	
 
 }

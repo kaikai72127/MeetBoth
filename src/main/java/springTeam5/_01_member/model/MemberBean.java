@@ -29,6 +29,10 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import springTeam5._04_shoppingCart.model.OrderBean;
 import springTeam5._04_shoppingCart.model.OrderItemBean;
 import springTeam5._05_teacStu.model.TeacBean;
+import springTeam5._06_halaAndQa.model.AnswerHalaBean;
+import springTeam5._06_halaAndQa.model.HalaBean;
+import springTeam5._06_halaAndQa.model.ResponseAnswerBean;
+import springTeam5._06_halaAndQa.model.ResponseHalaBean;
 
 
 
@@ -111,6 +115,24 @@ public class MemberBean implements Serializable {
 	@OneToMany(fetch = FetchType.LAZY,mappedBy = "memberBean",cascade = CascadeType.ALL)
 	private Set<ProductComment> productComment = new LinkedHashSet<ProductComment>();
 //	連結商品 結束
+	
+//	討論區
+	@JsonIgnore
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "memberBean",cascade = CascadeType.ALL)
+	private Set<HalaBean> halaBean = new LinkedHashSet<HalaBean>(); // itemsList
+	
+//	@JsonIgnore
+//	@OneToMany(fetch = FetchType.LAZY, mappedBy = "memberBean",cascade = CascadeType.ALL)
+//	private Set<ResponseHalaBean> responseHalaBean = new LinkedHashSet<ResponseHalaBean>(); // itemsList
+	
+//	@JsonIgnore
+//	@OneToMany(fetch = FetchType.LAZY, mappedBy = "memberBean",cascade = CascadeType.ALL)
+//	private Set<AnswerHalaBean> answerHalaBean = new LinkedHashSet<AnswerHalaBean>(); // itemsList
+//	
+//	@JsonIgnore
+//	@OneToMany(fetch = FetchType.LAZY, mappedBy = "memberBean",cascade = CascadeType.ALL)
+//	private Set<ResponseAnswerBean> responseAnswerBean = new LinkedHashSet<ResponseAnswerBean>(); // itemsList
+//	討論區結束
 	
 	
 	public String getRole() {

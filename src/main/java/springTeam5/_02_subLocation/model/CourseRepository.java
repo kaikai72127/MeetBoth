@@ -12,13 +12,11 @@ public interface CourseRepository extends JpaRepository<Course, Integer> {
 
 //	給ProdPicSave使用 來找尋單一的Product 並顯示圖片
 //	或是 單純用來搜尋單一Product
-	public Course findByCourseID(Integer courseID);
+	public Course findByCourseID(int courseID);
 
 //	透過prodID刪除整筆商品資料
 	public void deleteByCourseID(Integer courseID);
 	
-//	透過 memberID 搜尋全部的 courseBean
-	public List<Course> findByMemberID(Integer memberID);
 
 //	條件搜尋
 	@Query(value = "select * from Course where IIF(?1=0,?1,courseClass)=?1 and coursePrice >= ?2 and coursePrice <= ?3 and (courseName like concat('%',?4,'%') or memberID like concat('%',?4,'%')) order by courseID", nativeQuery = true)

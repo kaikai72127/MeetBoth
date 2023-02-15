@@ -270,11 +270,11 @@
 
 								<% String basePath5=request.getScheme() + "://" + request.getServerName() + ":" +
 									request.getServerPort() + path + "/html/assets/js/main.js" ; %>
-									<script src=<%=basePath1%>></script>
-									<script src=<%=basePath2%>></script>
-									<script src=<%=basePath3%>></script>
-									<script src=<%=basePath4%>></script>
-									<script src=<%=basePath5%>></script>
+									<script src=<%=basePath1%></script>
+									<script src=<%=basePath2%></script>
+									<script src=<%=basePath3%></script>
+									<script src=<%=basePath4%></script>
+									<script src=<%=basePath5%></script>
 									<script type="text/javascript"
 										src="https://www.gstatic.com/charts/loader.js"></script>
 									<script src="assets/lib/jquery.mb.ytplayer/dist/jquery.mb.YTPlayer.js"></script>

@@ -8,15 +8,17 @@ import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Optional;
 
 import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import javax.sql.rowset.serial.SerialBlob;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -24,6 +26,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
+import ecpay.payment.integration.AllInOne;
+import ecpay.payment.integration.domain.AioCheckOutALL;
+import springTeam5._01_member.model.MemberBean;
 import springTeam5._01_member.model.MemberService;
 import springTeam5._02_subLocation.model.Course;
 import springTeam5._02_subLocation.model.CourseComment;
@@ -52,7 +57,11 @@ public class CourseController {
 
 	@Autowired
 	private MemberService memberService;
-	
+
+	// 綠界使用
+	AllInOne all = new AllInOne("");
+	AioCheckOutALL obj = new AioCheckOutALL();
+
 //	-----------------------------後台-----------------------
 //  後台查詢全部
 	@GetMapping("/_02_subLocation.index.controller")
@@ -65,15 +74,16 @@ public class CourseController {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+
 		return "_02_subLocation/courseIndex";
 	}
-	
+
 //	後台模糊搜尋
 	@PostMapping("/searchCourseWithCondition1.controller")
-	public String processSearchCourseWithCondtion1(@RequestParam("case") int order, @RequestParam("typecase") Integer type,
-			@RequestParam("lowprice") int low, @RequestParam("highprice") int high,
-			@RequestParam("searchName") String name, Model pm) throws SQLException {
+	public String processSearchCourseWithCondtion1(@RequestParam("case") int order,
+			@RequestParam("typecase") Integer type, @RequestParam("lowprice") int low,
+			@RequestParam("highprice") int high, @RequestParam("searchName") String name, Model pm)
+			throws SQLException {
 		String orderBy = "";
 		String hasDESC = null;
 		List<Course> result = null;
@@ -97,21 +107,35 @@ public class CourseController {
 
 		return "_02_subLocation/courseIndex";
 	}
-	
+
 //	導到後台新增
 	@GetMapping("/_02_subLocation.MBinsertCourse.controller")
-	public String processpathToMBinsertPordAction() {
-		return "_02_subLocation/MBinsertCourse";
+	public String processpathToMBinsertPordAction(HttpServletRequest request, Model m) {
+		HttpSession session = request.getSession(false);
+
+		String account = SecurityContextHolder.getContext().getAuthentication().getName();
+		List<MemberBean> mem = memberService.searchMemByAccount(account);
+
+		if (mem.size() == 0) {
+			return "login";
+		} else {
+			m.addAttribute("memberBean", mem.get(0));
+			return "_02_subLocation/MBinsertCourse";
+		}
+
 	}
+
 //	後台新增	
 	@PostMapping("/_02_subLocation.MBinsertCourseAction.controller")
 	public String processMBinsertCourseAction(@RequestParam("cName") String cName,
-			@RequestParam("cClass") Integer cClass,
-			@RequestParam("cPrice") Integer cPrice, 
-			@RequestParam("memID") Integer memID,
-			@RequestParam("directions") String directions, 
-			@RequestParam("cPic") MultipartFile file)
-			throws IOException, SQLException {
+			@RequestParam("cClass") Integer cClass, @RequestParam("cPrice") Integer cPrice,
+			@RequestParam("memID") Integer memID, @RequestParam("directions") String directions,
+			@RequestParam("cPic") MultipartFile file, HttpServletRequest request) throws IOException, SQLException {
+		HttpSession session = request.getSession(false);
+
+		Optional<MemberBean> currentMemberList = memberService.searchMemByID(memID);
+		MemberBean currentMember = currentMemberList.get();
+
 		Blob image = null;
 		InputStream in = file.getInputStream();
 		long size = file.getSize();
@@ -122,74 +146,94 @@ public class CourseController {
 
 		newCourse.setCourseName(cName);
 		newCourse.setCoursePrice(cPrice);
-		newCourse.setMemberID(memID);
 		newCourse.setCoursePost(getCurrentDate());
 		newCourse.setCourseUpdate(getCurrentDate());
 		newCourse.setCourseImg(image);
 		newCourse.setCourseDirections(directions);
 		newCourse.setCourseSales(0);
 		newCourse.setCoursetype(currentCourseType);
+		newCourse.setMemberBean(currentMember);
 
-		LinkedHashSet<Course> courses = new LinkedHashSet<Course>();
-		courses.add(newCourse);
-		currentCourseType.setCourse(courses);
+//		LinkedHashSet<Course> courses = new LinkedHashSet<Course>();
+//		courses.add(newCourse);
+//		currentCourseType.setCourse(courses);
 
-		ctService.insertCourse(currentCourseType);
-		
+		cService.insertCourse(newCourse);
+
 		return "redirect:_02_subLocation.index.controller";
 	}
-	
+
 //  前往後台修改畫面	
 	@GetMapping("/_02_subLocation.pathToMBupdateCourse.controller")
-	public String processpathToMBinsertCourseAction(Model m,@RequestParam("id")Integer courseid) throws SQLException {
-		Course c = cService.searchSingleCourseFromCourseID(courseid);
-		m.addAttribute("course",c);
-		return "_02_subLocation/MBupdateCourse";
+	public String processpathToMBupdateCourseAction(HttpServletRequest request, Model m, Model mCourse,
+			@RequestParam("id") Integer courseid) throws SQLException {
+
+		HttpSession session = request.getSession(false);
+
+		String account = SecurityContextHolder.getContext().getAuthentication().getName();
+		List<MemberBean> mem = memberService.searchMemByAccount(account);
+
+		if (mem.size() == 0) {
+			return "login";
+		} else {
+			m.addAttribute("memberBean", mem.get(0));
+			Course course = cService.searchSingleCourseFromCourseID(courseid);
+
+			mCourse.addAttribute("course", course);
+
+			return "_02_subLocation/MBupdateCourse";
+		}
+
 	}
+
 //  後台修改	
 	@PostMapping("/_02_subLocation.MBupdateCourseAction.controller")
-	public String processMBupdateCourseAction(
-			@RequestParam("courseClass") Integer cClass,
+	public String processMBupdateCourseAction(@RequestParam("courseClass") Integer cClass,
 			@RequestParam("courseName") String cName, @RequestParam("courseID") Integer courseID,
 			@RequestParam("coursePrice") Integer cPrice, @RequestParam("memberID") Integer memID,
-			@RequestParam("courseDirections") String directions, @RequestParam("images") MultipartFile file) {
+			@RequestParam("courseDirections") String directions, @RequestParam("images") MultipartFile file,
+			HttpServletRequest request) throws IOException, SQLException {
+		HttpSession session = request.getSession(false);
+
+		Optional<MemberBean> currentMemberList = memberService.searchMemByID(memID);
+		MemberBean currentMember = currentMemberList.get();
+
 		Blob image = null;
 
-		try {
-			InputStream in = file.getInputStream();
-			long size = file.getSize();
-			image = fileToBlob(in, size);
+		InputStream in = file.getInputStream();
+		long size = file.getSize();
+		image = fileToBlob(in, size);
 
-			CourseType cType = ctService.findByCourseClass(cClass);
-			Course course = cService.searchSingleCourseFromCourseID(courseID);
-			course.setCourseName(cName);
-			course.setCoursePrice(cPrice);
-			course.setMemberID(memID);
-			course.setCourseDirections(directions);
-			course.setCourseUpdate(getCurrentDate());
-			course.setCoursetype(cType);
-			if (size != 0) {
-				course.setCourseImg(image);
-				cService.updateCourse(course);
-			} else {
-				cService.updateCourse(course);
-			}
-		} catch (IOException | SQLException e) {
-			e.printStackTrace();
+		CourseType cType = ctService.findByCourseClass(cClass);
+		Course course = cService.searchSingleCourseFromCourseID(courseID);
+		course.setCourseName(cName);
+		course.setCoursePrice(cPrice);
+		course.setMemberID(memID);
+		course.setCourseDirections(directions);
+		course.setCourseUpdate(getCurrentDate());
+		course.setCoursetype(cType);
+		if (size != 0) {
+			course.setCourseImg(image);
+			cService.updateCourse(course);
+		} else {
+			cService.updateCourse(course);
 		}
+
 		return "redirect:_02_subLocation.index.controller";
 	}
-	
+
 //	後台delete
 	@PostMapping("/_02_subLocation.MBdeleteCourseById.controller")
 	public String processMBDeleteMBCourseByIdAction(@RequestParam("id") Integer id) {
 		cService.deleteCourseFromCourseID(id);
 		return "redirect:_02_subLocation.index.controller";
 	}
+
 //	調轉到單一的管理者課程後台
 	@GetMapping("/_02_subLocation.singleCourseIndex.controller")
-	public String processSingleCourseIndexAction(@RequestParam("id") Integer courseID, Model mCourse) throws SQLException{
-		
+	public String processSingleCourseIndexAction(@RequestParam("id") Integer courseID, Model mCourse)
+			throws SQLException {
+
 		Course result = cService.searchSingleCourseFromCourseID(courseID);
 		mCourse.addAttribute("course", result);
 		return "_02_subLocation/singleCourseIndex";
@@ -262,7 +306,7 @@ public class CourseController {
 
 		if (list.isEmpty()) {
 			comm.setCourseScore(0);
-			comm.setCourseCustomID(404);
+//			comm.setCourseCustomID(404);
 			comm.setCourseComment("no comment");
 			comms.add(comm);
 			mComm.addAttribute("commBean", comms);
@@ -313,31 +357,59 @@ public class CourseController {
 
 //	搜單一並導到update.jsp
 	@GetMapping("/catchSingleCourse.controller")
-	public String processCatchSingleCourseAction(@RequestParam("id") Integer id, Model mCourse) {
-		Course course;
-		try {
-			course = cService.searchSingleCourseFromCourseID(id);
-			ArrayList<Course> courses = new ArrayList<Course>();
-			courses.add(course);
-			mCourse.addAttribute("bean", courses);
-		} catch (SQLException e) {
-			e.printStackTrace();
+	public String processCatchSingleCourseAction(HttpServletRequest request, @RequestParam("id") Integer id,
+			Model mCourse, Model m) {
+		HttpSession session = request.getSession(false);
+
+		String account = SecurityContextHolder.getContext().getAuthentication().getName();
+		List<MemberBean> mem = memberService.searchMemByAccount(account);
+
+		if (mem.size() == 0) {
+			return "login";
+		} else {
+			m.addAttribute("memberBean", mem.get(0));
+			Course course;
+			try {
+				course = cService.searchSingleCourseFromCourseID(id);
+				ArrayList<Course> courses = new ArrayList<Course>();
+				courses.add(course);
+				mCourse.addAttribute("bean", courses);
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+			return "_02_subLocation/UpdateCourse";
 		}
-		return "_02_subLocation/UpdateCourse";
+
 	}
 
 //	導到insert.jsp
 	@GetMapping("/pathToInsertCourse.controller")
-	public String processPathToInsertCourseAction() {
-		return "/_02_subLocation/InsertCourse";
+	public String processPathToInsertCourseAction(HttpServletRequest request, Model m) {
+		HttpSession session = request.getSession(false);
+
+		String account = SecurityContextHolder.getContext().getAuthentication().getName();
+		List<MemberBean> mem = memberService.searchMemByAccount(account);
+
+		if (mem.size() == 0) {
+			return "login";
+		} else {
+			m.addAttribute("memberBean", mem.get(0));
+			return "/_02_subLocation/InsertCourse";
+		}
+
 	}
 
 //	insert
 	@PostMapping("/insertCourse.controller")
 	public String processInsertCourseAction(@RequestParam("cClass") Integer cClass, @RequestParam("cName") String cName,
 			@RequestParam("cPrice") Integer cPrice, @RequestParam("memID") Integer memID,
-			@RequestParam("directions") String directions, @RequestParam("cPic") MultipartFile file)
-			throws IOException, SQLException {
+			@RequestParam("directions") String directions, @RequestParam("cPic") MultipartFile file,
+			HttpServletRequest request) throws IOException, SQLException {
+		HttpSession session = request.getSession(false);
+
+		Optional<MemberBean> currentMemberList = memberService.searchMemByID(memID);
+		MemberBean currentMember = currentMemberList.get();
+
 		Blob image = null;
 		InputStream in = file.getInputStream();
 		long size = file.getSize();
@@ -348,21 +420,21 @@ public class CourseController {
 
 		newCourse.setCourseName(cName);
 		newCourse.setCoursePrice(cPrice);
-		newCourse.setMemberID(memID);
 		newCourse.setCoursePost(getCurrentDate());
 		newCourse.setCourseUpdate(getCurrentDate());
 		newCourse.setCourseImg(image);
 		newCourse.setCourseDirections(directions);
 		newCourse.setCourseSales(0);
 		newCourse.setCoursetype(currentCourseType);
+		newCourse.setMemberBean(currentMember);
 
-		LinkedHashSet<Course> courses = new LinkedHashSet<Course>();
-		courses.add(newCourse);
-		currentCourseType.setCourse(courses);
+//		LinkedHashSet<Course> courses = new LinkedHashSet<Course>();
+//		courses.add(newCourse);
+//		currentCourseType.setCourse(courses);
 
-		ctService.insertCourse(currentCourseType);
+		cService.insertCourse(newCourse);
 
-		return "redirect:searchAllCourse.controller";
+		return "redirect:pathToMemberCourse.controller";
 	}
 
 //	update
@@ -395,7 +467,7 @@ public class CourseController {
 		} catch (IOException | SQLException e) {
 			e.printStackTrace();
 		}
-		return "redirect:searchAllCourse.controller";
+		return "redirect:pathToMemberCourse.controller";
 	}
 
 //	前台delete
@@ -404,8 +476,6 @@ public class CourseController {
 		cService.deleteCourseFromCourseID(id);
 		return "redirect:searchAllCourse.controller";
 	}
-	
-
 
 //	隨機搜尋
 
@@ -450,22 +520,32 @@ public class CourseController {
 //	新增商品評論
 	@PostMapping("/InsertCourseComment.controller")
 	public String processInsertCourseCommentAction(@RequestParam(value = "id", required = false) Integer courseID,
-			@RequestParam("comm") String comment, @RequestParam("score") Integer score) {
+			@RequestParam("comm") String comment, @RequestParam("score") Integer score, HttpServletRequest request) {
 		try {
-			Course Course = cService.searchSingleCourseFromCourseID(courseID);
-			CourseComment comm = new CourseComment();
 
-			comm.setCourseCustomID(1001);
-			comm.setCourseScore(score);
-			comm.setCourseComment(comment);
-			comm.setCourseCommentDate(getCurrentDate());
-			comm.setCourse(Course);
+			HttpSession session = request.getSession(false);
 
-			List<CourseComment> courseCommment = new ArrayList<CourseComment>();
-			courseCommment.add(comm);
-			Course.setCourseComment(courseCommment);
+			String account = SecurityContextHolder.getContext().getAuthentication().getName();
+			List<MemberBean> mem = memberService.searchMemByAccount(account);
 
-			cService.insertCourseComment(Course);
+			if (mem.size() == 0) {
+				return "login";
+			} else {
+
+				MemberBean member = mem.get(0);
+
+				Course Course = cService.searchSingleCourseFromCourseID(courseID);
+				CourseComment comm = new CourseComment();
+
+				comm.setMemberBean(member);
+				comm.setCourseScore(score);
+				comm.setCourseComment(comment);
+				comm.setCourseCommentDate(getCurrentDate());
+				comm.setCourse(Course);
+
+				ccService.insertCourseComment(comm);
+			}
+
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -484,7 +564,7 @@ public class CourseController {
 
 		if (list.isEmpty()) {
 			comm.setCourseScore(0);
-			comm.setCourseCustomID(404);
+//			comm.setCourseCustomID(404);
 			comm.setCourseComment("no comment");
 			comms.add(comm);
 			mComm.addAttribute("commBean", comms);
@@ -528,24 +608,22 @@ public class CourseController {
 	@GetMapping("/PathToCourseWithYt.controller")
 	public String processPathToCourseWithYt(@RequestParam("id") Integer id, Model mCourse, Model m)
 			throws SQLException {
-		List<Course> list = cService.searchAllCourseByMemberID(id);
+//		List<Course> list = cService.searchAllCourseByMemberID(id);
 		ArrayList<Course> courses = new ArrayList<Course>();
 		Course course = new Course();
 
-		if (list.isEmpty()) {
-			course.setCourseName("無課程");
-			course.setMemberID(id);
-			courses.add(course);
-			mCourse.addAttribute("courseBean", courses);
-		} else {
-			mCourse.addAttribute("courseBean", list);
-		}
+//		if (list.isEmpty()) {
+//			course.setCourseName("無課程");
+//			course.setMemberID(id);
+//			courses.add(course);
+//			mCourse.addAttribute("courseBean", courses);
+//		} else {
+//			mCourse.addAttribute("courseBean", list);
+//		}
 
 		if (course.getCourseDirections() == null) {
 			course.setCourseDirections("--此商品沒有詳細內容說明--");
 		}
-		
-		
 
 		return "_02_subLocation/ytPlayer";
 	}
@@ -553,21 +631,20 @@ public class CourseController {
 //	課程影片明細
 	@GetMapping("/YtDetail.controller")
 	public String processYtDetail(@RequestParam("id") Integer id, @RequestParam("courseID") Integer courseID,
-			Model mCourse,Model mSingleCourse, Model mYtPlayer, Model mComm) throws SQLException {
+			Model mCourse, Model mSingleCourse, Model mYtPlayer, Model mComm) throws SQLException {
 		Course course = cService.searchSingleCourseFromCourseID(courseID);
 		YtPlayer yt = ytService.searchYtPlayerByYtPlayerID(id);
 
 		mSingleCourse.addAttribute("singleCourseBean", course);
 		mYtPlayer.addAttribute("bean", yt);
-		
-		
+
 		List<CourseComment> list = course.getCourseComment();
 		ArrayList<CourseComment> comms = new ArrayList<CourseComment>();
 		CourseComment comm = new CourseComment();
 
 		if (list.isEmpty()) {
 			comm.setCourseScore(0);
-			comm.setCourseCustomID(404);
+//			comm.setCourseCustomID(404);
 			comm.setCourseComment("no comment");
 			comms.add(comm);
 			mComm.addAttribute("commBean", comms);
@@ -578,21 +655,19 @@ public class CourseController {
 		if (course.getCourseDirections() == null) {
 			course.setCourseDirections("--此商品沒有詳細內容說明--");
 		}
-		
-		
-		
-		List<Course> courseList = cService.searchAllCourseByMemberID(course.getMemberID());
+
+//		List<Course> courseList = cService.searchAllCourseByMemberID(course.getMemberID());
 		ArrayList<Course> courses = new ArrayList<Course>();
 		Course c = new Course();
-
-		if (list.isEmpty()) {
-			course.setCourseName("無課程");
-			course.setMemberID(id);
-			courses.add(c);
-			mCourse.addAttribute("courseBean", courses);
-		} else {
-			mCourse.addAttribute("courseBean", courseList);
-		}
+//
+//		if (list.isEmpty()) {
+//			course.setCourseName("無課程");
+//			course.setMemberID(id);
+//			courses.add(c);
+//			mCourse.addAttribute("courseBean", courses);
+//		} else {
+//			mCourse.addAttribute("courseBean", courseList);
+//		}
 
 		if (course.getCourseDirections() == null) {
 			course.setCourseDirections("--此商品沒有詳細內容說明--");
@@ -600,136 +675,17 @@ public class CourseController {
 
 		return "_02_subLocation/ytPlayer";
 	}
-//	---------------------------memberPart-----------------------
-//	進入個人會員全部課程
-	@GetMapping("/PathToMemberCourse.controller")
-	public String processPathToMemberCourseWithYt(@RequestParam("id") Integer id, Model mCourse, Model m)
-			throws SQLException {
-		List<Course> list = cService.searchAllCourseByMemberID(id);
-		ArrayList<Course> courses = new ArrayList<Course>();
-		Course course = new Course();
 
-		if (list.isEmpty()) {
-			course.setCourseName("");
-			course.setMemberID(id);
-			courses.add(course);
-			mCourse.addAttribute("courseBean", courses);
-		} else {
-			mCourse.addAttribute("courseBean", list);
-		}
-
-		if (course.getCourseDirections() == null) {
-			course.setCourseDirections("--此商品沒有詳細內容說明--");
-		}
-
-		return "_02_subLocation/memberCourse";
-	}
-
-//	進入個人會員全部課程明細
-	@GetMapping("/PathToMemberCourseDetail.controller")
-	public String processPathToMemberYtDetail(@RequestParam("id") Integer id,
-			Model mCourse,Model mYtPlayer) throws SQLException {
-		Course course = cService.searchSingleCourseFromCourseID(id);
-		List<YtPlayer> list = course.getYtPlayer();
-		ArrayList<YtPlayer> yts = new ArrayList<YtPlayer>();
-		YtPlayer yt = new YtPlayer();
-
-		if (list.isEmpty()) {
-			yt.setYtPlayerName("no video");
-			yt.setYtPlayerURL("no URL");
-			yts.add(yt);
-			mYtPlayer.addAttribute("ytBean", yts);
-		} else {
-			mYtPlayer.addAttribute("ytBean", list);
-		}
-		
-		ArrayList<Course> courses = new ArrayList<Course>();
-		courses.add(course);
-		mCourse.addAttribute("bean", courses);
-		
-		
-		return "_02_subLocation/memberSingleCourse";
-	}
-	
-
-
-////	導到insert.jsp
-//	@GetMapping("/pathToInsertYt.controller")
-//	public String processPathToInsertYtAction() {
-//		return "/_02_subLocation/InsertYt";
-//	}
-
-//	insert
-	@PostMapping("/insertYtPlayer.controller")
-	public String processInsertYtPlayerAction(@RequestParam("id") Integer id,
-			@RequestParam("ytPlayerName") String ytPlayerName, @RequestParam("ytPlayerURL") String ytPlayerURL)
-			throws IOException, SQLException {
-
-		Course currentCourse = cService.searchSingleCourseFromCourseID(id);
-		YtPlayer newYtPlayer = new YtPlayer();
-
-		newYtPlayer.setYtPlayerName(ytPlayerName);
-		newYtPlayer.setYtPlayerURL(ytPlayerURL);
-		newYtPlayer.setCourse(currentCourse);
-
-		List<YtPlayer> ytPlayers = new ArrayList<YtPlayer>();
-		ytPlayers.add(newYtPlayer);
-		currentCourse.setYtPlayer(ytPlayers);
-
-		cService.insertYtPlayer(currentCourse);
-
-		return "redirect:PathToMemberYtDetail.controller?id=" + id;
-	}
-
-//	update
-	@PostMapping("/updateCourse.controller")
-	public String processUpdateCourseAction(@RequestParam("courseClass") Integer cClass,
-			@RequestParam("courseName") String cName, @RequestParam("courseID") Integer courseID,
-			@RequestParam("coursePrice") Integer cPrice, @RequestParam("memberID") Integer memID,
-			@RequestParam("directions") String directions, @RequestParam("images") MultipartFile file) {
-		Blob image = null;
-
-		try {
-			InputStream in = file.getInputStream();
-			long size = file.getSize();
-			image = fileToBlob(in, size);
-
-			CourseType cType = ctService.findByCourseClass(cClass);
-			Course course = cService.searchSingleCourseFromCourseID(courseID);
-			course.setCourseName(cName);
-			course.setCoursePrice(cPrice);
-			course.setMemberID(memID);
-			course.setCourseDirections(directions);
-			course.setCourseUpdate(getCurrentDate());
-			course.setCoursetype(cType);
-			if (size != 0) {
-				course.setCourseImg(image);
-				cService.updateCourse(course);
-			} else {
-				cService.updateCourse(course);
-			}
-		} catch (IOException | SQLException e) {
-			e.printStackTrace();
-		}
-		return "redirect:PathToMemberCourse.controller?id="+memID;
-	}
-
-//	delete
-	@PostMapping("/deleteCourseById2.controller")
-	public String processDeleteCourseById2Action(@RequestParam("id") Integer id) {
-		cService.deleteCourseFromCourseID(id);
-		return "redirect:searchAllCourse.controller";
-	}
-	
-//	新增商品評論
+//	新增商品評論 ??
 	@PostMapping("/InsertCourseCommentUnderYt.controller")
-	public String processInsertCourseCommentUnderYtAction(@RequestParam(value = "id", required = false) Integer courseID,
-			@RequestParam("comm") String comment, @RequestParam("score") Integer score,@RequestParam("ytPlayerID") Integer ytPlayerID) {
+	public String processInsertCourseCommentUnderYtAction(
+			@RequestParam(value = "id", required = false) Integer courseID, @RequestParam("comm") String comment,
+			@RequestParam("score") Integer score, @RequestParam("ytPlayerID") Integer ytPlayerID) {
 		try {
 			Course Course = cService.searchSingleCourseFromCourseID(courseID);
 			CourseComment comm = new CourseComment();
 
-			comm.setCourseCustomID(1001);
+//			comm.setCourseCustomID(1001);
 			comm.setCourseScore(score);
 			comm.setCourseComment(comment);
 			comm.setCourseCommentDate(getCurrentDate());
@@ -744,6 +700,142 @@ public class CourseController {
 			e.printStackTrace();
 		}
 		return "redirect:YtDetail.controller?id=" + ytPlayerID + "&courseID=" + courseID;
+	}
+//	---------------------------個人課程Part-----------------------
+//	進入個人全部課程
+	@GetMapping("/pathToMemberCourse.controller")
+	public String processPathToMemberCourseWithYt(Model mCourse, HttpServletRequest request) {
+		HttpSession session = request.getSession(false);
+		MemberBean member = (MemberBean) session.getAttribute("Member");
+
+		String account = SecurityContextHolder.getContext().getAuthentication().getName();
+		List<MemberBean> mem = memberService.searchMemByAccount(account);
+
+		if (mem.size() == 0) {
+			return "login";
+		} else {
+			mCourse.addAttribute("memberBean", mem.get(0));
+			return "/_02_subLocation/memberCourse";
+		}
+	}
+
+//	進入個人會員全部課程明細 ??
+	@GetMapping("/pathToMemberCourseDetail.controller")
+	public String processPathToMemberYtDetail(@RequestParam("id") Integer id, Model mCourse, Model mYtPlayer)
+			throws SQLException {
+		Course course = cService.searchSingleCourseFromCourseID(id);
+		List<YtPlayer> list = course.getYtPlayer();
+		ArrayList<YtPlayer> yts = new ArrayList<YtPlayer>();
+		YtPlayer yt = new YtPlayer();
+
+		if (list.isEmpty()) {
+			yt.setYtPlayerName("no video");
+			yt.setYtPlayerURL("no URL");
+			yts.add(yt);
+			mYtPlayer.addAttribute("ytBean", yts);
+		} else {
+			mYtPlayer.addAttribute("ytBean", list);
+		}
+
+		ArrayList<Course> courses = new ArrayList<Course>();
+		courses.add(course);
+		mCourse.addAttribute("bean", courses);
+
+		return "_02_subLocation/memberSingleCourseAddYt";
+	}
+
+//	模糊搜尋(個人賣場)
+	@PostMapping("/searchCourseWithCondition2.controller")
+	public String processSearchProductWithCondi3(@RequestParam("case") int order,
+			@RequestParam("typecase") Integer type, @RequestParam("lowprice") int low,
+			@RequestParam("highprice") int high, @RequestParam("searchName") String name, Model cm, Model mCourse)
+			throws SQLException {
+		String orderBy = "";
+		String hasDESC = null;
+		List<Course> result = null;
+		if (name == null) {
+			name = "";
+		}
+
+		if (order == 1) {
+			result = cService.searchWithCondiOrderByCourseID(type, low, high, name);
+		} else if (order == 2) {
+			result = cService.searchWithCondiOrderByCoursePriceDesc(type, low, high, name);
+		} else if (order == 3) {
+			result = cService.searchWithCondiOrderByCoursePrice(type, low, high, name);
+		} else if (order == 4) {
+			result = cService.searchWithCondiOrderByCoursePost(type, low, high, name);
+		} else if (order == 5) {
+			result = cService.searchWithCondiOrderByCourseUpdate(type, low, high, name);
+		}
+
+		cm.addAttribute("prodList", result);
+
+		return "redirect:pathToMemberCourse.controller";
+	}
+
+	
+//	導到新增影片.jsp
+	@GetMapping("/pathToInsertYtPlayer.controller")
+	public String processPathToInsertYtPlayerAction(HttpServletRequest request, @RequestParam("id") Integer id,
+			Model mCourse, Model m) {
+		HttpSession session = request.getSession(false);
+
+		String account = SecurityContextHolder.getContext().getAuthentication().getName();
+		List<MemberBean> mem = memberService.searchMemByAccount(account);
+
+		if (mem.size() == 0) {
+			return "login";
+		} else {
+			m.addAttribute("memberBean", mem.get(0));
+			Course course;
+			try {
+				course = cService.searchSingleCourseFromCourseID(id);
+				ArrayList<Course> courses = new ArrayList<Course>();
+				courses.add(course);
+				mCourse.addAttribute("bean", courses);
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+			return "_02_subLocation/memberSingleCourseAddYt";
+		}
+
+	}
+
+	
+
+//	新增影片
+	@PostMapping("/insertYtPlayer.controller")
+	public String processinsertYtPlayerAction(@RequestParam(value = "id", required = false) Integer courseID,
+			@RequestParam("ytPlayerName") String ytPlayerName, @RequestParam("ytPlayerURL") String ytPlayerURL, HttpServletRequest request) {
+		try {
+
+			HttpSession session = request.getSession(false);
+
+			String account = SecurityContextHolder.getContext().getAuthentication().getName();
+			List<MemberBean> mem = memberService.searchMemByAccount(account);
+
+			if (mem.size() == 0) {
+				return "login";
+			} else {
+
+				MemberBean member = mem.get(0);
+
+				Course Course = cService.searchSingleCourseFromCourseID(courseID);
+				YtPlayer yt = new YtPlayer();
+
+				yt.setMemberBean(member);
+				yt.setYtPlayerName(ytPlayerName);
+				yt.setYtPlayerURL(ytPlayerURL);
+				yt.setCourse(Course);
+
+				ytService.insertYtPlayer(yt);
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return "redirect:pathToMemberCourse.controller";
 	}
 
 //	---------------------------MapPart-----------------------	

@@ -30,7 +30,7 @@ String basePathimg2 = request.getScheme() + "://" + request.getServerName() + ":
 		<div class="page-loader">
 			<div class="loader">Loading...</div>
 		</div>
-		
+
 		<div class="main" style="background-color: #F0F0F0;">
 
 			<form action="<c:url value='/insertCourse.controller' />"
@@ -41,7 +41,7 @@ String basePathimg2 = request.getScheme() + "://" + request.getServerName() + ":
 						<div class="row">
 							<button class="btn btn-warning btn-circle" type="button"
 								style="height: 43px; font-size: 19px;"
-								onclick="window.location='/MeetBoth/searchAllCourse.controller'">
+								onclick="window.location='/MeetBoth/pathToMemberCourse.controller'">
 								<span class="icon-browser">&ensp;回到課程目錄</span>
 							</button>
 							&nbsp;
@@ -105,13 +105,11 @@ String basePathimg2 = request.getScheme() + "://" + request.getServerName() + ":
 								<!-- 							會員資料 -->
 								<div class="row mb-20">
 									<div class="col-sm-12">
-										<div class="price font-alt" style="display: flex;">
-											<span class="amount"
-												style="font-size: 25px; text-align: center;">賣家編號:&ensp;</span>
-											<input class="form-control input-lg" type="text" name="memID"
-												required="required"
-												style="width: 80%; font-size: 20px; letter-spacing: 0px; border: 1px solid black; border-radius: 15px; text-align: center;" />
-										</div>
+										<!-- 							會員資料 -->
+										<input class="form-control input-lg" type="hidden"
+											name="memID" required="required"
+											value="${memberBean.memberID}"
+											style="width: 80%; font-size: 20px; letter-spacing: 0px; border: 1px solid black; border-radius: 15px; text-align: center;" />
 									</div>
 								</div>
 
@@ -148,7 +146,7 @@ String basePathimg2 = request.getScheme() + "://" + request.getServerName() + ":
 			<!-- Footer -->
 			<!-- 引入共同的footerMVC -->
 			<jsp:include page="/WEB-INF/html/fragment/footerMVC.jsp" />
-			</div>
+		</div>
 	</main>
 	<!--  
     JavaScripts

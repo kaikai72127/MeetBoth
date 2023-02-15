@@ -23,19 +23,20 @@ import org.springframework.stereotype.Component;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-import springTeam5._05_teacStu.model.StudBean;
+import springTeam5._02_subLocation.model.Course;
+import springTeam5._02_subLocation.model.CourseComment;
+import springTeam5._02_subLocation.model.YtPlayer;
 import springTeam5._03_product.model.Product;
 import springTeam5._03_product.model.ProductComment;
 
 import springTeam5._04_shoppingCart.model.OrderBean;
 import springTeam5._04_shoppingCart.model.OrderItemBean;
+import springTeam5._05_teacStu.model.StudBean;
 import springTeam5._05_teacStu.model.TeacBean;
 import springTeam5._06_halaAndQa.model.AnswerHalaBean;
 import springTeam5._06_halaAndQa.model.HalaBean;
 import springTeam5._06_halaAndQa.model.ResponseAnswerBean;
 import springTeam5._06_halaAndQa.model.ResponseHalaBean;
-
-
 
 @Entity
 @Table(name = "Member")
@@ -48,106 +49,107 @@ public class MemberBean implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "memberID")
 	private int memberID;
-	
+
 	@Column(name = "account")
 	private String account = "";
-		
+
 	@Column(name = "password")
 	private String password = "";
-		
+
 	@Column(name = "idnumber")
 	private String idNumber = "";
-		
+
 	@Column(name = "memname")
 	private String memName = "";
-		
+
 	@Column(name = "memnickname")
 	private String memNickName = "";
-		
+
 	@Column(name = "memold")
 	private int memOld;
-		
+
 	@Column(name = "membirth")
-	private String memBirth  = "";
-	
+	private String memBirth = "";
+
 	@Column(name = "memgender")
 	private String memGender = "";
-		
+
 	@Column(name = "email")
 	private String eMail = "";
-		
+
 	@Column(name = "phone")
 	private String phone;
-	
+
 	@JsonIgnore
 	@Column(name = "photo")
 	private Blob photo = null;
-		
+
 	@Column(name = "address")
 	private String address = "";
-		
+
 	@Column(name = "registime")
 	private Date registime = new Date();
 
 	@Column(name = "role")
 	private String role = "user";
+
+//老師學生使用	
 	@JsonIgnore
 	@OneToMany(mappedBy = "member")
 	private List<TeacBean> teacBean = new ArrayList<>();
-	
 	@JsonIgnore
 	@OneToMany(mappedBy = "member")
 	private List<StudBean> studBean = new ArrayList<>();
+//老師學生使用結束	
 	
+//訂單使用
 	@JsonIgnore
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "memberbuy",cascade = CascadeType.ALL)
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "memberbuy", cascade = CascadeType.ALL)
 	private Set<OrderBean> orderBuy = new LinkedHashSet<OrderBean>(); // itemsList
-	
-	
 	@JsonIgnore
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "membersale",cascade = CascadeType.ALL)
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "membersale", cascade = CascadeType.ALL)
 	private Set<OrderItemBean> orderSale = new LinkedHashSet<OrderItemBean>(); // itemsList
-	
-	
-	
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "memberBean",cascade = CascadeType.ALL)
-	private Set<ResponseHalaBean> responseHalaBean = new LinkedHashSet<ResponseHalaBean>(); // itemsList
-	
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "memberBean",cascade = CascadeType.ALL)
-	private Set<AnswerHalaBean> answerHalaBean = new LinkedHashSet<AnswerHalaBean>(); // itemsList
-	
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "memberBean",cascade = CascadeType.ALL)
-	private Set<ResponseAnswerBean> responseAnswerBean = new LinkedHashSet<ResponseAnswerBean>(); // itemsList
-	
-//	連結商品
-	@JsonIgnore
-	@OneToMany(fetch = FetchType.LAZY,mappedBy = "memberBean",cascade = CascadeType.ALL)
-	private Set<Product> product = new LinkedHashSet<Product>();
+//訂單使用結束
 
+//連結商品
 	@JsonIgnore
-	@OneToMany(fetch = FetchType.LAZY,mappedBy = "memberBean",cascade = CascadeType.ALL)
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "memberBean", cascade = CascadeType.ALL)
+	private Set<Product> product = new LinkedHashSet<Product>();
+	@JsonIgnore
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "memberBean", cascade = CascadeType.ALL)
 	private Set<ProductComment> productComment = new LinkedHashSet<ProductComment>();
-//	連結商品 結束
-	
+//連結商品 結束
+
+//連結課程
+	@JsonIgnore
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "memberBean", cascade = CascadeType.ALL)
+	private Set<Course> course = new LinkedHashSet<Course>();
+	@JsonIgnore
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "memberBuyBean", cascade = CascadeType.ALL)
+	private Set<Course> courseBuy = new LinkedHashSet<Course>();
+	@JsonIgnore
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "memberBean", cascade = CascadeType.ALL)
+	private Set<CourseComment> courseComment = new LinkedHashSet<CourseComment>();
+	@JsonIgnore
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "memberBean", cascade = CascadeType.ALL)
+	private Set<YtPlayer> ytPlayer = new LinkedHashSet<YtPlayer>();
+//連結課程 結束
+
 //	討論區
 	@JsonIgnore
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "memberBean",cascade = CascadeType.ALL)
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "memberBean", cascade = CascadeType.ALL)
 	private Set<HalaBean> halaBean = new LinkedHashSet<HalaBean>(); // itemsList
-	
-//	@JsonIgnore
-//	@OneToMany(fetch = FetchType.LAZY, mappedBy = "memberBean",cascade = CascadeType.ALL)
-//	private Set<ResponseHalaBean> responseHalaBean = new LinkedHashSet<ResponseHalaBean>(); // itemsList
-	
-//	@JsonIgnore
-//	@OneToMany(fetch = FetchType.LAZY, mappedBy = "memberBean",cascade = CascadeType.ALL)
-//	private Set<AnswerHalaBean> answerHalaBean = new LinkedHashSet<AnswerHalaBean>(); // itemsList
-//	
-//	@JsonIgnore
-//	@OneToMany(fetch = FetchType.LAZY, mappedBy = "memberBean",cascade = CascadeType.ALL)
-//	private Set<ResponseAnswerBean> responseAnswerBean = new LinkedHashSet<ResponseAnswerBean>(); // itemsList
-//	討論區結束
-	
-	
+	@JsonIgnore
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "memberBean", cascade = CascadeType.ALL)
+	private Set<ResponseHalaBean> responseHalaBean = new LinkedHashSet<ResponseHalaBean>(); // itemsList
+	@JsonIgnore
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "memberBean", cascade = CascadeType.ALL)
+	private Set<AnswerHalaBean> answerHalaBean = new LinkedHashSet<AnswerHalaBean>(); // itemsList
+	@JsonIgnore
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "memberBean", cascade = CascadeType.ALL)
+	private Set<ResponseAnswerBean> responseAnswerBean = new LinkedHashSet<ResponseAnswerBean>(); // itemsList
+//討論區 結束
+
 	public String getRole() {
 		return role;
 	}
@@ -155,10 +157,10 @@ public class MemberBean implements Serializable {
 	public void setRole(String role) {
 		this.role = role;
 	}
-	
+
 	public MemberBean() {
 	}
-	
+
 //	public MemberBean(MemberBean member) {
 //		this.memberID = member.getMemberID();
 //		this.account = member.getAccount();
@@ -225,6 +227,22 @@ public class MemberBean implements Serializable {
 
 	public void setProductComment(Set<ProductComment> productComment) {
 		this.productComment = productComment;
+	}
+
+	public Set<Course> getCourse() {
+		return course;
+	}
+
+	public void setCourse(Set<Course> course) {
+		this.course = course;
+	}
+
+	public Set<CourseComment> getCourseComment() {
+		return courseComment;
+	}
+
+	public void setCourseComment(Set<CourseComment> courseComment) {
+		this.courseComment = courseComment;
 	}
 
 	public int getMemberID() {
@@ -338,7 +356,7 @@ public class MemberBean implements Serializable {
 	public void setRegistime(Date date) {
 		this.registime = date;
 	}
-	
+
 	public List<TeacBean> getTeacBean() {
 		return teacBean;
 	}
@@ -346,11 +364,11 @@ public class MemberBean implements Serializable {
 	public void setTeacBean(List<TeacBean> teacBean) {
 		this.teacBean = teacBean;
 	}
-	
+
 	public List<StudBean> getStudBean() {
 		return studBean;
 	}
-	
+
 	public void setStudBean(List<StudBean> studBean) {
 		this.studBean = studBean;
 	}
@@ -370,7 +388,6 @@ public class MemberBean implements Serializable {
 	public void setOrderSale(Set<OrderItemBean> orderSale) {
 		this.orderSale = orderSale;
 	}
-
 
 	@Override
 	public String toString() {

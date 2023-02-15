@@ -17,6 +17,12 @@ public class CourseCommentService {
 
 	@Autowired
 	private CourseCommentRepository ccRepo;
+	
+	
+	
+	public void insertCourseComment(CourseComment cc) {
+		ccRepo.save(cc);
+	}
 
 //	透過 CourseID 搜尋全部的 commentBean
 	public List<CourseComment> searchAllCommentByCourseID(Integer id) throws SQLException {

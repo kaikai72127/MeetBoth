@@ -150,9 +150,9 @@
 										<div class="comments reviews">
 											<!-- 										課程 forEach -->
 											<div style="height: 300px; width: 100%; overflow-y: scroll;">
-												<c:forEach var="ytBean" items="${bean.YtPlayer}">
+												<c:forEach var="ytBean" items="${bean.ytPlayer}">
 													<div class="col-sm-6 col-md-3 col-lg-3"
-														style="padding-bottom: 10px; width: 445px; height: 600px; display: flex; justify-content: center; align-items: center;">
+														style="padding-bottom: 10px; width: 445px; height: 600px; display: flex; justify-content: center;">
 														<div class="comment-content clearfix">
 															<div class="comment-author font-alt" style="margin: 0;">
 																<a href="#" style="font-size: 15px;">${ytBean.ytPlayerName}</a>

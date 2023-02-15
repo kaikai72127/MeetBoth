@@ -157,14 +157,16 @@
 									border-bottom: solid 1px yellow;
 								}
 
-								.prodtable>thead>tr>th {
-									border-right: solid 1px white;
-									text-align: center;
-								}
+.prodtable>thead>tr>th {
+	border-right: solid 1px white;
+	text-align: center;
+	font-size: 25px;
+}
 
 .prodtable>tbody>tr>td {
 	border-right: solid 1px white;
 	border-top: solid 1px white;
+	font-size: 25px;
 }
 </style>
 </head>
@@ -201,7 +203,7 @@
 											class="fa-solid fa-angle-double-down"></i></a>
 										<ul style="">
 											<li><a
-												href="/MeetBoth/_03_product.productindex.controller"
+												href="/MeetBoth/_03_product.productindex.controller/1"
 												style="color: white; font-weight: 600;"
 												class="btn btn-d btn-round">所有商品清單</a></li>
 												<li><a
@@ -264,7 +266,7 @@
 											<span>商品資料 :&ensp;</span>
 										</div>
 										<div style="display: flex">
-											<button class="MBbtn" onclick="window.location='/MeetBoth/_03_product.productindex.controller'">返回</button>
+											<button class="MBbtn" onclick="window.location='/MeetBoth/_03_product.productindex.controller/1'">返回</button>
 											<button class="MBbtn" onclick="window.location='/MeetBoth/_03_product.pathToMBinsertProd.controller?id=${prod.prodID}'">修改</button>
 											<button class="MBbtn" id="deleteThisProduct"
 												name="${prod.prodID}">刪除</button>
@@ -316,7 +318,7 @@
 										</div>
 										<div>
 											<textarea
-												style="margin-left: 10px; resize: none; height: 325px; width: 975px; overflow-y: auto; overflow-y: auto; font-size: 17px; color: white; background-color: black;"
+												style="margin-left: 10px; resize: none; height: 325px; width: 975px; overflow-y: auto; overflow-y: auto; font-size: 25px; color: white; background-color: black;padding:10px;font-weight:800;"
 												readonly>${prod.directions}</textarea>
 										</div>
 
@@ -332,11 +334,8 @@
 															<th style="width: 5%;">編號</th>
 															<th style="width: 10%; padding-left: 5px;">留言者</th>
 															<th style="width: 5%">評分</th>
-															<th style="width: 50%">評論</th>
-															<th style="width: 18%">時間</th>
-															<th></th>
-															<th></th>
-															<th style="border-right: none"></th>
+															<th style="width: 55%">評論</th>
+															<th style="width: 25%;border-right: none">時間</th>
 														</tr>
 													</thead>
 													<tbody id="commentBody">
@@ -346,13 +345,7 @@
 																<td>${commBean.memberBean.memberID}</td>
 																<td>${commBean.prodScore}</td>
 																<td>${commBean.comment}</td>
-																<td>${commBean.commentDate}</td>
-																<td><input type="button" class="MBbtn" value="更多"
-																	onclick="#"></td>
-																<td><input type="button" class="MBbtn" value="修改"
-																	onclick="#"></td>
-																<td style="border-right: none"><input type="button"
-																	class="MBbtn" value="刪除" id="deleteThisProduct" name=""></td>
+																<td style="border-right: none;">${commBean.commentDate}</td>
 															</tr>
 														</c:forEach>
 													</tbody>
@@ -418,42 +411,42 @@
 													$(this).siblings('h5').slideToggle(500);
 												});
 
-											});
-									</script>
-									<script>
-
-										$(function () {
-											$('#deleteThisProduct').click(function () {
-												let id = $(this).attr("name");
-												Swal.fire({
-													title: '你確定要刪除嗎?',
-													text: "將無法恢復此筆訂單!!!",
-													icon: 'warning',
-													//icon:  "success", "error", "warning", "info" or "question" 這幾種選項
-													showCancelButton: true,
-													confirmButtonColor: '#f7d966',
-													cancelButtonColor: '#3d3b39',
-													cancelButtonText: '取消',
-													confirmButtonText: '確定刪除'
-												}).then((result) => {
-													if (result.isConfirmed) {
-														$.ajax({
-															//專案名稱+servlet
-															url: '/MeetBoth/_03_product.MBdeleteProductById.controller',
-															method: "post",
-															dataType: "text",
-															//對應name設定的名稱 並非value的名稱
-															data: { "id": id },
-														})
-															.done(function () {
-																window.location = '/MeetBoth/_03_product.productindex.controller'
-																console.log("delete")
-															})//done
-															.fail(function (error) {
-																console.log(error)
-															})//fail end
-													}//if
-												})//then
+		});
+	</script>
+	<script>
+	
+        $(function(){
+        	$('#deleteThisProduct').click(function(){
+                let id=$(this).attr("name");
+                Swal.fire({
+                  title: '你確定要刪除嗎?',
+                  text: "將無法恢復此筆訂單!!!",
+                  icon: 'warning',
+                  //icon:  "success", "error", "warning", "info" or "question" 這幾種選項
+                  showCancelButton: true,
+                  confirmButtonColor: '#f7d966',
+                  cancelButtonColor: '#3d3b39',
+                  cancelButtonText: '取消',
+                  confirmButtonText: '確定刪除'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        $.ajax({
+                          //專案名稱+servlet
+                         url:'/MeetBoth/_03_product.MBdeleteProductById.controller',
+                          method:"post",
+                          dataType:"text",
+                          //對應name設定的名稱 並非value的名稱
+                          data: {"id":id},
+                        })
+                            .done(function () {
+                            	window.location='/MeetBoth/_03_product.productindex.controller/1'
+                                console.log("delete")
+                             })//done
+                             .fail(function(error) {
+                                 console.log(error)
+                             })//fail end
+                    }//if
+                  })//then
 
 											})//click end
 										});

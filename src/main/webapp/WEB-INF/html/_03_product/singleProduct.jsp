@@ -50,7 +50,7 @@ String basePathimg2 = request.getScheme() + "://" + request.getServerName() + ":
 						<div class="row">
 							<button class="btn btn-warning btn-circle" type="button"
 								style="height: 43px; font-size: 19px;"
-								onclick="window.location='/MeetBoth/_03_product.searchAllProduct.controller'">
+								onclick="window.location='/MeetBoth/_03_product.searchAllProduct.controller/1'">
 								<span class="icon-browser">&ensp;回到商品目錄</span>
 							</button>
 						</div>
@@ -175,8 +175,8 @@ String basePathimg2 = request.getScheme() + "://" + request.getServerName() + ":
 											class="icon-tools-2"></span>賣家訊息</a></li>
 									<li><a href="#data-sheet" data-toggle="tab"
 										style="font-size: 17px;"><span class="icon-tools-2"></span>商品簡介</a></li>
-									<li><a href="#reviews" data-toggle="tab"
-										style="font-size: 17px;"><span class="icon-tools-2"></span>商品頻論(commentAmount)</a></li>
+									<li><a href="#reviews" data-toggle="tab" id="commentBlock"
+										style="font-size: 17px;"><span class="icon-tools-2"></span>商品頻論</a></li>
 								</ul>
 								<div class="tab-content">
 									<!-- 	賣家資訊 -->
@@ -192,14 +192,11 @@ String basePathimg2 = request.getScheme() + "://" + request.getServerName() + ":
 												style="margin-left: 10px; width: 70%;">
 												<div class="comment-author font-alt">
 													<h3>
-														<a href="#">${bean.memberBean.memNickName}</a><span
-															style="font-size: 17px">(${bean.memberBean.account})</span>
+														<a href="#" style="text-transform: none;">${bean.memberBean.memNickName}</a><span style="font-size:17px;text-transform: none;">(${bean.memberBean.account})</span>
 													</h3>
-													<p style="font-size: 20px;"></p>
-													<p style="font-size: 20px;">E-mail :
-														${bean.memberBean.eMail}</p>
-													<p style="font-size: 20px;">Phone :
-														${bean.memberBean.phone}</p>
+													<p style="font-size: 20px;text-transform: none;"></p>
+													<p style="font-size: 20px;text-transform: none;">E-mail : ${bean.memberBean.eMail}</p>
+													<p style="font-size: 20px;">Phone : ${bean.memberBean.phone}</p>
 												</div>
 											</div>
 											<div style="margin-top: 170px;">
@@ -452,39 +449,39 @@ String basePathimg2 = request.getScheme() + "://" + request.getServerName() + ":
 
 		const score = document.querySelectorAll("#starAVG");
 		console.log(score.length)
-
-		document
-				.addEventListener(
-						"DOMContentLoaded",
-						function() {
-							var totalScore = 0;
-							for (let i = 0; i < score.length; i++) {
-								const starNum = score[i].value;
-								totalScore += Number(starNum);
-							}
-							let avgScore = roundToTwo(totalScore / score.length);
-							if (isNaN(avgScore)) {
-								stars = '&nbsp;(0)';
-							} else {
-								stars = '&nbsp;(' + avgScore + ')';
-							}
-							let onstar = '<span><i class="fa fa-star star"></i></span>';
-							let offstar = '<span><i class="fa fa-star star-off"></i></span>';
-							for (var j = 0; j < 5; j++) {
-								if (j < avgScore) {
-									stars += onstar;
-								} else {
-									stars += offstar;
-								}
-							}
-							if (score.length != 0) {
-								stars += '&nbsp;(' + score.length + '則評論)'
-							} else {
-								stars += '&nbsp;(0則評論)'
-								document.getElementById("commentForEach").innerHTML = "<p style='font-size: 30px; text-align: center;'>沒有評論</p>";
-							}
-							document.getElementById("starAVGDiv").innerHTML = stars;
-						});
+		var commentBlock = document.getElementById("commentBlock");
+		
+		document.addEventListener("DOMContentLoaded", function() {
+			var totalScore = 0;
+			for (let i = 0; i < score.length; i++) {
+				const starNum = score[i].value;
+				totalScore += Number(starNum);
+			}
+			let avgScore = roundToTwo(totalScore / score.length);
+			if(isNaN(avgScore)){
+				stars = '&nbsp;(0)';
+			}else{
+				stars = '&nbsp;(' + avgScore + ')';
+			}
+			let onstar = '<span><i class="fa fa-star star"></i></span>';
+			let offstar = '<span><i class="fa fa-star star-off"></i></span>';
+			for (var j = 0; j < 5; j++) {
+				if (j < avgScore) {
+					stars += onstar;
+				} else {
+					stars += offstar;
+				}
+			}
+			if(score.length!=0){
+				stars += '&nbsp;('+ score.length +'則評論)'
+				commentBlock.innerHTML += '('+ score.length +'則評論)'
+			}else{
+				stars += '&nbsp;(0則評論)'
+				commentBlock.innerHTML += '(0則評論)'
+				document.getElementById("commentForEach").innerHTML = "<p style='font-size: 30px; text-align: center;'>沒有評論</p>";
+			}
+			document.getElementById("starAVGDiv").innerHTML = stars;
+		});
 	</script>
 	<script>
 		document.addEventListener("DOMContentLoaded", function() {

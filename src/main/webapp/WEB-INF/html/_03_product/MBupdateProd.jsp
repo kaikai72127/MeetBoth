@@ -208,7 +208,7 @@ a:hover {
 											class="fa-solid fa-angle-double-down"></i></a>
 										<ul style="">
 											<li><a
-												href="/MeetBoth/_03_product.productindex.controller"
+												href="/MeetBoth/_03_product.productindex.controller/1"
 												style="color: white; font-weight: 600;"
 												class="btn btn-d btn-round">所有商品清單</a></li>
 											<li><a
@@ -269,8 +269,7 @@ a:hover {
 									<div class="post-video embed-responsive embed-responsive-16by9"
 										style="height: auto; padding-bottom: 100px;">
 										<div style="display: flex">
-											<button class="MBbtn"
-												onclick="window.location='/MeetBoth/_03_product.productindex.controller'">返回</button>
+											<input type="button" class="MBbtn" onclick="window.location='/MeetBoth/_03_product.productindex.controller/1'" value="返回">
 										</div>
 										<div>
 											<span>商品狀態 :&ensp;<input value="${prod.prodState}" type="text" name="pst" class="MBinput" placeholder="上架或下架"></span>
@@ -284,7 +283,7 @@ a:hover {
 										<div>
 											<input type="hidden" value="${prod.prodtype.prodClass}" name="pClass">
 											<span>商品類別 :&ensp;<select name="pty"
-												style="" class="MBinput">
+												style="width: 312px; height: 66.1px;" class="MBinput">
 												<option value="1">文具</option>
 												<option value="2">教具</option>
 												<option value="3">運動用品</option>
@@ -315,10 +314,7 @@ a:hover {
 											<span>更新時間 :&ensp;<input value="${prod.prodUpdate}" type="text" name="pup" class="MBinput" placeholder="自動產生" readonly></span>
 										</div>
 										<div>
-											<span>銷售數量 :&ensp;<input value="${prod.prodSales}" type="text" name="pps" class="MBinput" placeholder="只能數字"></span>
-										</div>
-										<div>
-											<span>瀏覽次數 :&ensp;<input value="${prod.prodCheck}" type="text" name="pch" class="MBinput" placeholder="只能數字"></span>
+											<span>瀏覽次數 :&ensp;<input value="${prod.prodCheck}" type="text" name="pch" class="MBinput" readonly></span>
 										</div>
 										<div style="display: flex;">
 											<span>上傳商品照片</span> 

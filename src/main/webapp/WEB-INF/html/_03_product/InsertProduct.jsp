@@ -43,13 +43,13 @@ String basePathimg2 = request.getScheme() + "://" + request.getServerName() + ":
 						<div class="row">
 							<button class="btn btn-warning btn-circle" type="button"
 								style="height: 43px; font-size: 19px;"
-								onclick="window.location='/MeetBoth/_03_product.searchAllProduct.controller'">
+								onclick="window.location='/MeetBoth/_03_product.searchAllProduct.controller/1'">
 								<span class="icon-browser">&ensp;回到商品目錄</span>
 							</button>
 							&nbsp;
-							<button class="btn btn-primary  btn-circle" type="button"
-								style="height: 43px; font-size: 19px;" onclick="#">
-								<span class=" icon-gears">&ensp;一件輸入</span>
+							<button class="btn btn-primary  btn-circle" type="button" id="speedInsert"
+								style="height: 43px; font-size: 19px;">
+								<span class=" icon-gears">&ensp;一鍵輸入</span>
 							</button>
 
 						</div>
@@ -214,6 +214,14 @@ String basePathimg2 = request.getScheme() + "://" + request.getServerName() + ":
 				reader.readAsDataURL(input.files[0]);
 			}
 		}
+	</script>
+	<script>
+		var si = document.getElementById('speedInsert');
+		si.addEventListener('click', function () { 
+			console.log("speedInsert")
+		})
+		
+	
 	</script>
 </body>
 </html>

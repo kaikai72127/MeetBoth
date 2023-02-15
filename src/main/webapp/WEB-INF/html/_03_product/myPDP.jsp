@@ -105,50 +105,9 @@ h1 {
 			<section class="module" style="padding-top: 10px;">
 				<div class="container">
 					<div class="row">
-						<div class="col-sm-4 col-md-3 sidebar"
-							style="position: sticky; top: 100px;">
-							<div class="widget">
-								<img src="/MeetBoth/html/assets/images/shop/賣家中心.png"
-									style="padding-bottom: 10px;">
-								<ul class="cart">
-									<li><a href="#">商品管理&ensp;<i
-											class="fa-solid fa-angle-double-down"></i></a>
-										<ul style="">
-											<li><a
-												href="<c:url value='/_03_product/pathToMyPDP.controller'/>">我的商品</a></li>
-											<li><a
-												href="<c:url value='/_03_product.pathToInsertProduct.controller'/>">新增商品</a></li>
-										</ul></li>
-									<li><a href="#" style="">訂單管理&ensp;<i
-											class="fa-solid fa-angle-double-down"></i></a>
-										<ul style="">
-											<li><a href="#">我的銷售</a></li>
-											<li><a href="#">待付款訂單</a></li>
-											<li><a href="#">待出貨訂單</a></li>
-											<li><a href="#">已完成訂單</a></li>
-										</ul></li>
-									<li><a href="#">賣場管理&ensp;<i
-											class="fa-solid fa-angle-double-down"></i></a>
-										<ul style="">
-											<li><a href="#">賣場評價</a></li>
-											<li><a href="#">賣場介紹</a></li>
-										</ul></li>
-									<li><a href="#">財務管理&ensp;<i
-											class="fa-solid fa-angle-double-down"></i></a>
-										<ul style="">
-											<li><a href="#">子選單3-1</a></li>
-											<li><a href="#">子選單3-2</a></li>
-											<li><a href="#">子選單3-3</a></li>
-										</ul></li>
-									<li><a href="#">數據中心&ensp;<i
-											class="fa-solid fa-angle-double-down"></i></a>
-										<ul style="">
-											<li><a href="#">賣家數據中心</a></li>
-											<li><a href="#">營運表現</a></li>
-										</ul></li>
-								</ul>
-							</div>
-						</div>
+						<!-- 						左邊欄位開始 -->
+						<jsp:include page="/WEB-INF/html/fragment/memCenterSideBar.jsp" />
+						<!-- 						左邊欄位結束 -->
 						<div class="col-sm-8 col-sm-offset-1" style="margin-left: 20px;">
 							<div class="post">
 								<div class="post-thumbnail">
@@ -300,14 +259,14 @@ h1 {
 										<table class="table table-striped table-border checkout-table">
 											<tbody>
 												<tr>
-													<th style="text-align:center;"></th>
-													<th style="text-align:center;">商品名稱</th>
-													<th style="text-align:center;">商品類別</th>
-													<th style="text-align:center;" class="hidden-xs">價格</th>
-													<th style="text-align:center;">庫存</th>
-													<th style="text-align:center;">狀態</th>
+													<th style="text-align: center;"></th>
+													<th style="text-align: center;">商品名稱</th>
+													<th style="text-align: center;">商品類別</th>
+													<th style="text-align: center;" class="hidden-xs">價格</th>
+													<th style="text-align: center;">庫存</th>
+													<th style="text-align: center;">狀態</th>
 												</tr>
-												<tr id="tr1" style="text-align:center;"></tr>
+												<tr id="tr1" style="text-align: center;"></tr>
 												<c:forEach var="prodBean" items="${memberBean.product}">
 													<tr>
 														<td class="hidden-xs"
@@ -402,7 +361,7 @@ h1 {
 	<!-- SweetAlert js -->
 	<script type="text/javascript"
 		src="https://www.gstatic.com/charts/loader.js"></script>
-		<script>
+	<script>
 		window.onload = function () {
 			var body = document.getElementById("prodList")
 			var body2 = document.getElementById("tr1")

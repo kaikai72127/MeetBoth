@@ -17,13 +17,14 @@
 							.member {
 								table-layout: auto;
 								outline: 1px dotted rgb(255, 179, 179);
-
+								margin: auto;
+								width: 40%;
 								border-radius: 3px;
 							}
 
 							.member>tr {
 								height: 60px;
-
+								padding: 10px;
 								overflow: hidden;
 							}
 
@@ -97,7 +98,7 @@
 							<section class="register">
 								<form class="form-controll" action="_01_member.add.controller" method="POST"
 									enctype="multipart/form-data">
-
+									<h1 style="color: darksalmon; text-align: center;">會員註冊</h1>
 									<div class="form-group">
 										<table class="member">
 											<tr>

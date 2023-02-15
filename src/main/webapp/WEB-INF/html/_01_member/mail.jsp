@@ -9,6 +9,7 @@
 			<head>
 				<!-- 引入共同的headMVC -->
 				<jsp:include page="../fragment/headMVC.jsp" />
+				<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 				<script>
 					function mailcheck() {
 						var email = $("#mail").val();
@@ -92,6 +93,25 @@
 					<!-- Footer -->
 					<!-- 引入共同的footerMVC -->
 					<jsp:include page="../fragment/footerMVC.jsp" />
+					<script>
+						Swal.fire({
+							title: 'Are you sure?',
+							text: "You won't be able to revert this!",
+							icon: 'warning',
+							showCancelButton: true,
+							confirmButtonColor: '#3085d6',
+							cancelButtonColor: '#d33',
+							confirmButtonText: 'Yes, delete it!'
+						}).then((result) => {
+							if (result.isConfirmed) {
+								Swal.fire(
+									'Deleted!',
+									'Your file has been deleted.',
+									'success'
+								)
+							}
+						})
+					</script>
 				</main>
 
 				<!--  

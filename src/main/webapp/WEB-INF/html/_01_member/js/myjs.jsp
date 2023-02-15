@@ -14,7 +14,11 @@
 			var now = new Date().getTime();
 			console.log(now);
 			var old = Math.ceil((now - birthdate) / 31536000000);
-			memold.value = old;
+			if (old - 1 <= 0) {
+				memold.value = 0;
+			} else {
+				memold.value = old - 1;
+			}
 		}
 	</script>
 	<script type="text/javascript">

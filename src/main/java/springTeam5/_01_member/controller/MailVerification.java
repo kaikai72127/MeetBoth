@@ -4,8 +4,11 @@ import java.nio.charset.StandardCharsets;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.MailException;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.MimeMessageHelper;
+import org.springframework.mail.javamail.MimeMessagePreparator;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -36,15 +39,31 @@ public class MailVerification {
 		String jwtToken = token.getJwtToken();
 		
 		// 建立一封簡單的郵件
-		  SimpleMailMessage message = new SimpleMailMessage();
-		  message.setFrom("meetboth@gmail.com");
-		  message.setTo(email);
-		  message.setSubject("Meet Both Email verification");
-		  message.setText("請在15分鐘內點擊以下網址以驗證您的email: http://localhost:8080/MeetBoth/verify?email="+email+"&token=" + jwtToken);
-
+//		  SimpleMailMessage message = new SimpleMailMessage();
+//		  message.setFrom("meetboth@gmail.com");
+//		  message.setTo(email);
+//		  message.setSubject("Meet Both Email verification");
+//		  message.setText("請在15分鐘內點擊以下網址以驗證您的email: http://localhost:8080/MeetBoth/verify?email="+email+"&token=" + jwtToken);
+		  MimeMessagePreparator messagePreparator = mimeMessage -> {
+				MimeMessageHelper messageHelper = new MimeMessageHelper(mimeMessage,true); //true是指可以使用html語法
+				messageHelper.setFrom("meetboth@gmail.com"); //寄出信件的mail
+				messageHelper.setTo(email); //收件者的email
+				messageHelper.setSubject("感謝您註冊MeetBoth家教網！"); //信件的抬頭
+				//信件的內容
+				messageHelper.setText("<html><body><h5 style='font-size: 24px'>請在15分鐘以內點擊連結前往註冊頁面<br><h5>"
+		                +"<p style='font-size: 20px'>您的註冊連結:</p><br>"
+		                + "<a style='color: red;' href=\""+"http://localhost:8080/MeetBoth/verify?email="+email+"&token="+jwtToken+"\">點我前往</a>"
+		                + "<br><img src='https://upload.cc/i1/2023/02/13/Jid0tu.png'><span style='font-size: 20px'>感謝您使用MeetBoth，讓我們遇見彼此</span></body></html>",true);
+			};
 		  // 發送郵件
-		  mailSender.send(message);
-		  return "_01_member/mailsend";
+			try {
+				mailSender.send(messagePreparator);
+				 System.out.println("sent");
+			} catch (MailException e) {
+				 System.out.println(e);
+//				 runtime exception; compiler will not force you to handle it
+			}
+			return "_01_member/mailsend";
 		}
 	
 	@PostMapping(path = "verifymember")

@@ -29,5 +29,14 @@ public class IndexController {
 		m.addAttribute("stud", stud);
 		return "index";
 	}
+	
+	@GetMapping("/")
+	public String processHomePageAction(Model m) {
+		List<TeacBean> teac = tService.findFirst6ByOrderByUpdateDateDesc();
+		List<StudBean> stud = sService.findFirst6ByOrderByUpdateDateDesc();
+		m.addAttribute("teac", teac);
+		m.addAttribute("stud", stud);
+		return "index";
+	}
 
 }

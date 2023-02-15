@@ -446,6 +446,43 @@
 
                     <!-- 內容-教師履歷 -->
 
+                    <!-- 內容-課程訊息 -->
+                    <div class="page-container">
+                        <div class="resume-container">
+                            <h1 class="resume-title">
+                                教師履歷
+                            </h1>
+                            <div class="case-list-body">
+
+                                <div class="comment-table">
+                                    <div class="comment-table-row header">
+                                        <div class="comment-table-col">
+                                            <div class="comment-table-col-content">更新日期</div>
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="case-list-body">
+                                <div class="comment-table">
+                                    <div class="comment-table-row">
+                                        <c:forEach var="" items="${teac}">
+                                            <div class="comment-table-col">
+                                                <div class="comment-table-col-content">
+                                                    ${teac.updateDate}
+                                                </div>
+                                            </div>
+
+                                        </c:forEach>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 內容-課程訊息 -->
+
                     <!-- 內容-學生需求 -->
                     <div class="page-container">
                         <div class="resume-container">

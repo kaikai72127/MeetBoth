@@ -38,8 +38,6 @@ String basePathimg2 = request.getScheme() + "://" + request.getServerName() + ":
 
 .trr {
 	border: 1px dashed gray
-	
-	
 }
 
 .td1 {
@@ -50,7 +48,6 @@ String basePathimg2 = request.getScheme() + "://" + request.getServerName() + ":
 .td11 {
 	padding: 5px;
 	width: 20%;
-
 }
 
 .td12 {
@@ -109,31 +106,33 @@ input[type="submit"] {
 	color: red
 }
 
-  .btn5 {
-    width: 180px;
-    line-height: 40px;
-    font-size: 20px;
-    color: PapayaWhip;
-    text-align: center;
-    background-color: Chocolate;
-    border: 5px solid SaddleBrown;
-    border-radius: 15px;
-    cursor: pointer;
-  }
-  .btn5:hover {
-    /* :hover 代表滑鼠移到元素上時的狀態 */ 
-    transform: scale(1.05);
-  }
+.btn5 {
+	width: 180px;
+	line-height: 40px;
+	font-size: 20px;
+	color: PapayaWhip;
+	text-align: center;
+	background-color: Chocolate;
+	border: 5px solid SaddleBrown;
+	border-radius: 15px;
+	cursor: pointer;
+}
 
-  .btn5:active {
-    /* :active是滑鼠點擊元素的狀態 */
-    transform: scale(1);
-    box-shadow: inset 0 0 10px 1px rgba(0, 0, 0, .2);
-  }
-  .btn5 {
-    transition: .1s;
-  }
-  
+.btn5:hover {
+	/* :hover 代表滑鼠移到元素上時的狀態 */
+	transform: scale(1.05);
+}
+
+.btn5:active {
+	/* :active是滑鼠點擊元素的狀態 */
+	transform: scale(1);
+	box-shadow: inset 0 0 10px 1px rgba(0, 0, 0, .2);
+}
+
+.btn5 {
+	transition: .1s;
+}
+
 .btn-21,
 .btn-21 *,
 .btn-21 :after,
@@ -183,7 +182,6 @@ input[type="submit"] {
 }
 .btn-21 span {
   mix-blend-mode: difference;
-  
 }
 .btn-21:before {
   -webkit-animation: move-out 0.3s;
@@ -233,7 +231,6 @@ input[type="submit"] {
     transform: translateX(200%);
   }
 }
-
 
 </style>
 
@@ -314,7 +311,7 @@ input[type="submit"] {
 						<div style='width: 40%; text-align: center; margin: 0 auto;'
 							class="widget">
 							<form role="form" method="post"
-								action="<c:url value='/_06_halaAndQa.searchAllLike.controller' />">
+								action="<c:url value='/_06_halaAndQa.searchAllLike.controller/1' />">
 								<div class="search-box">
 									<input name="search" class="form-control" type="text"
 										placeholder="Search..." />
@@ -337,57 +334,73 @@ input[type="submit"] {
 								</h2>
 								<div class="btn-container">
 									<form
-										action="<c:url value='/_06_halaAndQa.SelectAllHala.controller' />">
-										<button style="float: right; font-size:25px" class="btn-21"
-											type="submit"><span>查詢全部貼文</span></button>
+										action="<c:url value='/_06_halaAndQa.SelectAllHala.controller/1' />">
+										<button style="float: right; font-size: 25px" class="btn-21"
+											type="submit">
+											<span>查詢全部貼文</span>
+										</button>
 									</form>
 									<form
 										action="<c:url value='/_06_halaAndQa.goAddHala.controller' />">
-										<button style="float: right; font-size:25px" class="btn-21"
-											type="submit"><span>發文</span></button>
+										<button style="float: right; font-size: 25px" class="btn-21"
+											type="submit">
+											<span>發文</span>
+										</button>
 									</form>
 								</div>
 							</div>
 							<div>
 								<form method="get"
-									action="<c:url value='/_06_halaAndQa.SelectHalaClass.controller' />">
-									<input type="submit" name="halaclassname" value="公告" class="btn5"
+									action="<c:url value='/_06_halaAndQa.SelectHalaClass.controller/1' />">
+									<input type="submit" name="halaclassname" value="公告"
+										class="btn5" style="width: 17%"> <input type="submit"
+										name="halaclassname" value="閱讀心得" style="width: 17%"
+										class="btn5"> <input type="submit"
+										name="halaclassname" value="資料分享" class="btn5"
 										style="width: 17%"> <input type="submit"
-										name="halaclassname" value="閱讀心得" style="width: 17%"class="btn5">
-									<input type="submit" name="halaclassname" value="資料分享"class="btn5"
+										name="halaclassname" value="圖書推薦" style="width: 17%"
+										class="btn5"> <input type="submit"
+										name="halaclassname" value="教學文章" class="btn5"
 										style="width: 17%"> <input type="submit"
-										name="halaclassname" value="圖書推薦" style="width: 17%"class="btn5">
-									<input type="submit" name="halaclassname" value="教學文章"class="btn5"
+										name="halaclassname" value="JAVA" style="width: 17%"
+										class="btn5"> <input type="submit"
+										name="halaclassname" value="HTML" class="btn5"
 										style="width: 17%"> <input type="submit"
-										name="halaclassname" value="JAVA" style="width: 17%"class="btn5">
-									<input type="submit" name="halaclassname" value="HTML"class="btn5"
+										name="halaclassname" value="Spring" style="width: 17%"
+										class="btn5"> <input type="submit"
+										name="halaclassname" value="SpringBoot" class="btn5"
 										style="width: 17%"> <input type="submit"
-										name="halaclassname" value="Spring" style="width: 17%"class="btn5">
-									<input type="submit" name="halaclassname" value="SpringBoot"class="btn5"
+										name="halaclassname" value="SpringMVC" style="width: 17%"
+										class="btn5"> <input type="submit"
+										name="halaclassname" value="SQL Server" class="btn5"
 										style="width: 17%"> <input type="submit"
-										name="halaclassname" value="SpringMVC" style="width: 17%"class="btn5">
-									<input type="submit" name="halaclassname" value="SQL Server"class="btn5"
+										name="halaclassname" value="My SQL" style="width: 17%"
+										class="btn5"> <input type="submit"
+										name="halaclassname" value="Hibernate" class="btn5"
 										style="width: 17%"> <input type="submit"
-										name="halaclassname" value="My SQL" style="width: 17%"class="btn5">
-									<input type="submit" name="halaclassname" value="Hibernate"class="btn5"
+										name="halaclassname" value="VScode" style="width: 17%"
+										class="btn5"> <input type="submit"
+										name="halaclassname" value="eclipse" class="btn5"
 										style="width: 17%"> <input type="submit"
-										name="halaclassname" value="VScode" style="width: 17%"class="btn5">
-									<input type="submit" name="halaclassname" value="eclipse"class="btn5"
+										name="halaclassname" value="SpringTool" style="width: 17%"
+										class="btn5"> <input type="submit"
+										name="halaclassname" value="JDBC" class="btn5"
 										style="width: 17%"> <input type="submit"
-										name="halaclassname" value="SpringTool" style="width: 17%"class="btn5">
-									<input type="submit" name="halaclassname" value="JDBC"class="btn5"
+										name="halaclassname" value="Servlet" style="width: 17%"
+										class="btn5"> <input type="submit"
+										name="halaclassname" value="JavaScript" class="btn5"
 										style="width: 17%"> <input type="submit"
-										name="halaclassname" value="Servlet" style="width: 17%"class="btn5">
-									<input type="submit" name="halaclassname" value="JavaScript"class="btn5"
+										name="halaclassname" value="jQuery" style="width: 17%"
+										class="btn5"> <input type="submit"
+										name="halaclassname" value="Azure" class="btn5"
 										style="width: 17%"> <input type="submit"
-										name="halaclassname" value="jQuery" style="width: 17%"class="btn5">
-									<input type="submit" name="halaclassname" value="Azure"class="btn5"
+										name="halaclassname" value="RESTful" style="width: 17%"
+										class="btn5"> <input type="submit"
+										name="halaclassname" value="c++" class="btn5"
 										style="width: 17%"> <input type="submit"
-										name="halaclassname" value="RESTful" style="width: 17%"class="btn5">
-									<input type="submit" name="halaclassname" value="c++"class="btn5"
-										style="width: 17%"> <input type="submit"
-										name="halaclassname" value="python" style="width: 17%"class="btn5">
-									<input type="submit" name="halaclassname" value="其他"class="btn5"
+										name="halaclassname" value="python" style="width: 17%"
+										class="btn5"> <input type="submit"
+										name="halaclassname" value="其他" class="btn5"
 										style="width: 17%">
 								</form>
 							</div>
@@ -415,16 +428,40 @@ input[type="submit"] {
 													</div>
 											</a></td>
 											<td class="td2">
-												<p id="watch">瀏覽次數:${bean.watch}</p></td>
+												<p id="watch">瀏覽次數:${bean.watch}</p>
+											</td>
 											<td class="td2"><p>${bean.postdate}</p></td>
 										</tr>
 									</c:forEach>
 								</table>
-								<div class="pagination font-alt">
-									<a href="#"><i class="fa fa-angle-left"></i></a><a
-										class="active" href="#">1</a><a href="#">2</a><a href="#">3</a><a
-										href="#">4</a><a href="#"><i class="fa fa-angle-right"></i></a>
+								<!-- 分頁按鈕 -->
+								<div class="pagination font-alt"
+									style="display: flex; justify-content: center; align-items: center">
+									<c:if test="${currentPage != 1}">
+										<a
+											href="/MeetBoth/_06_halaAndQa.SelectAllHala.controller/${currentPage-1}"><i
+											class="fa fa-angle-left"></i></a>
+									</c:if>
+									<!-- 迴圈生成每一頁的按鈕 -->
+									<c:forEach var="i" begin="1" end="${totalPages}">
+										<c:choose>
+											<c:when test="${currentPage == i}">
+												<a class="active"
+													href="/MeetBoth/_06_halaAndQa.SelectAllHala.controller/${i}">${i}</a>
+											</c:when>
+											<c:otherwise>
+												<a
+													href="/MeetBoth/_06_halaAndQa.SelectAllHala.controller/${i}">${i}</a>
+											</c:otherwise>
+										</c:choose>
+									</c:forEach>
+									<c:if test="${currentPage != totalPages}">
+										<a
+											href="/MeetBoth/_06_halaAndQa.SelectAllHala.controller/${currentPage+1}"><i
+											class="fa fa-angle-right"></i></a>
+									</c:if>
 								</div>
+								<!-- 分頁按鈕結束 -->
 							</div>
 						</div>
 					</div>

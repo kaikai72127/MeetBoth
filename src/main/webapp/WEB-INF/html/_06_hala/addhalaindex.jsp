@@ -265,12 +265,12 @@ a:hover {
 								<!-- 							標題 -->
 								<!--       右邊第一部分開始 -->
 								<div class="post">
-								<form action="<c:url value='/_06_halaAndQa.AddHalaIndex.controller' />" method="Post" enctype="multipart/form-data">
+								<form action="<c:url value='/admin/_06_halaAndQa.AddHalaIndex.controller' />" method="Post" enctype="multipart/form-data">
 									<div class="post-video embed-responsive embed-responsive-16by9"
 										style="height: auto; padding-bottom: 100px;">
 										<div style="display: flex">
 											<button class="MBbtn"
-												onclick="window.location='/MeetBoth/_06_halaAndQa.SelectAllHalaIndex.controller'">返回</button>
+												onclick="window.location='/MeetBoth/admin/_06_halaAndQa.SelectAllHalaIndex.controller'">返回</button>
 										</div>
 										
 										<div>

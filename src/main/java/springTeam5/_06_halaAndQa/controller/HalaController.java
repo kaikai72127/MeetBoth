@@ -58,13 +58,39 @@ public class HalaController {
 	}
 
 	// 查詢全部' BindingResult result,@ModelAttribute("HalaBean") HalaBean hb
-	@RequestMapping(path = "/_06_halaAndQa.SelectAllHala.controller", method = RequestMethod.GET)
-	public String processAction(Model haModel,Model topModel) {
+	@RequestMapping(path = "/_06_halaAndQa.SelectAllHala.controller/{page}", method = RequestMethod.GET)
+	public String processAction(Model haModel,Model topModel, @PathVariable("page") String page) {
 		
-		List<HalaBean> classList = halaRepo.findAllHala();
-		haModel.addAttribute("classList", classList);
 		List<HalaBean>topList = halaService.findTopHot();
 		topModel.addAttribute("topList",topList);
+		List<HalaBean> classList = halaRepo.findAllHala();
+		int page2 = 1;
+		  try {
+		      page2 = Integer.parseInt(page);
+		  } catch (NumberFormatException e) {
+		      page2 = 1;
+		  }
+		  // 每頁顯示的貼文數量，可以自行修改
+		  int pageSize = 5;
+		  int totalPages = (int) Math.ceil((double) classList.size() / pageSize);
+		  int startIndex = (page2 - 1) * pageSize;
+		  int endIndex = startIndex + pageSize;
+		  if (endIndex > classList.size()) {
+		  endIndex = classList.size();
+		  }
+		  if (startIndex >= classList.size()) {
+		   startIndex = classList.size() - pageSize;
+		  }
+		  if (classList.size() <= pageSize) {
+		   startIndex = 0;
+		  } else if (startIndex >= classList.size()) {
+		   startIndex = classList.size() - pageSize;
+		  }
+		  List<HalaBean> list = classList.subList(startIndex, endIndex);
+
+		  haModel.addAttribute("classList", list);
+		  haModel.addAttribute("totalPages", totalPages);
+		  haModel.addAttribute("currentPage", page2);
 
 		return "_06_hala/hala";
 	}
@@ -127,18 +153,44 @@ public class HalaController {
 		hb.setWatch(0);
 		halaService.insertHala(hb);
 
-		return "redirect:/_06_halaAndQa.SelectAllHala.controller";
+		return "redirect:/_06_halaAndQa.SelectAllHala.controller/1";
 	}
 
 	// 分類查詢
-	@RequestMapping(path = "/_06_halaAndQa.SelectHalaClass.controller", method = RequestMethod.GET)
+	@RequestMapping(path = "/_06_halaAndQa.SelectHalaClass.controller/{page}", method = RequestMethod.GET)
 	public String processAction3(@RequestParam("halaclassname") String halaclassname,
-			@ModelAttribute("HalaBean") HalaBean hb, BindingResult result, Model haModel,Model topModel) {
+			@ModelAttribute("HalaBean") HalaBean hb, BindingResult result, Model haModel,Model topModel, @PathVariable("page") String page) {
 		if (result.hasErrors()) {
 			return "Error";
 		}
 		List<HalaBean> classList = halaRepo.findByHalaclassname(halaclassname);
-		haModel.addAttribute("classList", classList);
+		int page2 = 1;
+		  try {
+		      page2 = Integer.parseInt(page);
+		  } catch (NumberFormatException e) {
+		      page2 = 1;
+		  }
+		  // 每頁顯示的貼文數量，可以自行修改
+		  int pageSize = 5;
+		  int totalPages = (int) Math.ceil((double) classList.size() / pageSize);
+		  int startIndex = (page2 - 1) * pageSize;
+		  int endIndex = startIndex + pageSize;
+		  if (endIndex > classList.size()) {
+		  endIndex = classList.size();
+		  }
+		  if (startIndex >= classList.size()) {
+		   startIndex = classList.size() - pageSize;
+		  }
+		  if (classList.size() <= pageSize) {
+		   startIndex = 0;
+		  } else if (startIndex >= classList.size()) {
+		   startIndex = classList.size() - pageSize;
+		  }
+		  List<HalaBean> list = classList.subList(startIndex, endIndex);
+
+		  haModel.addAttribute("classList", list);
+		  haModel.addAttribute("totalPages", totalPages);
+		  haModel.addAttribute("currentPage", page2);
 		List<HalaBean>topList = halaService.findTopHot();
 		topModel.addAttribute("topList",topList);
 
@@ -264,11 +316,40 @@ public class HalaController {
 	}
 	
 //	模糊搜尋貼文
-	@PostMapping(path = "/_06_halaAndQa.searchAllLike.controller")
-	public String processAction8(@RequestParam("search") String search, Model m) {
+	@PostMapping(path = "/_06_halaAndQa.searchAllLike.controller/{page}")
+	public String processAction8(@RequestParam("search") String search, Model m, @PathVariable("page") String page,Model topModel) {
 		
 		List<HalaBean> hb = halaService.searchAllLike(search);
-		m.addAttribute("classList", hb);
+		int page2 = 1;
+		  try {
+		      page2 = Integer.parseInt(page);
+		  } catch (NumberFormatException e) {
+		      page2 = 1;
+		  }
+		  // 每頁顯示的貼文數量，可以自行修改
+		  int pageSize = 5;
+		  int totalPages = (int) Math.ceil((double) hb.size() / pageSize);
+		  int startIndex = (page2 - 1) * pageSize;
+		  int endIndex = startIndex + pageSize;
+		  if (endIndex > hb.size()) {
+		  endIndex = hb.size();
+		  }
+		  if (startIndex >= hb.size()) {
+		   startIndex = hb.size() - pageSize;
+		  }
+		  if (hb.size() <= pageSize) {
+		   startIndex = 0;
+		  } else if (startIndex >= hb.size()) {
+		   startIndex = hb.size() - pageSize;
+		  }
+		  List<HalaBean> list = hb.subList(startIndex, endIndex);
+
+		  m.addAttribute("classList", list);
+		  m.addAttribute("totalPages", totalPages);
+		  m.addAttribute("currentPage", page2);
+		  
+		  List<HalaBean>topList = halaService.findTopHot();
+			topModel.addAttribute("topList",topList);
 		
 		return "_06_hala/hala";
 	}
@@ -308,7 +389,7 @@ public class HalaController {
 	}
 //	---------------------------------------後台區-----------------------------------
 	// 後台修改
-	@PostMapping("/_06_halaAndQa.updateHalaIndex.controller")
+	@PostMapping("/admin/_06_halaAndQa.updateHalaIndex.controller")
 	public String processAction24(@RequestParam("halaId") Integer halaId,
 			@RequestParam("halaclassname") String halaclassname, @RequestParam("title") String title,
 			@RequestParam("images") MultipartFile mf, @RequestParam("halacontent") String halacontent, Model haModel)
@@ -329,11 +410,11 @@ public class HalaController {
 		HalaBean Bean = halaRepo.findByHalaId(halaId);
 		haModel.addAttribute("bean", Bean);
 		
-		return "redirect:/_06_halaAndQa.SelectAllHalaIndex.controller";
+		return "redirect:/admin/_06_halaAndQa.SelectAllHalaIndex.controller";
 	}
 	
 	// 前往後台修改畫面
-	@RequestMapping(path = "/_06_halaAndQa.GoHalaUpdateIndex.controller", method = RequestMethod.GET)
+	@RequestMapping(path = "/admin/_06_halaAndQa.GoHalaUpdateIndex.controller", method = RequestMethod.GET)
 	public String processAction23(@RequestParam("halaId") Integer halaid, Model haModel) {
 		HalaBean Bean = halaRepo.findByHalaId(halaid);
 		haModel.addAttribute("bean", Bean);
@@ -342,7 +423,7 @@ public class HalaController {
 	}
 	
 	// 後台查詢全部' BindingResult result,@ModelAttribute("HalaBean") HalaBean hb
-	@RequestMapping(path = "/_06_halaAndQa.SelectAllHalaIndex.controller", method = RequestMethod.GET)
+	@RequestMapping(path = "/admin/_06_halaAndQa.SelectAllHalaIndex.controller", method = RequestMethod.GET)
 	public String processAction20(Model haModel,Model topModel) {
 //		if (result.hasErrors()) {
 //			return "Error";
@@ -360,7 +441,7 @@ public class HalaController {
 	
 	
 	// 後台分類查詢
-	@RequestMapping(path = "/_06_halaAndQa.SelectHalaClassIndex.controller", method = RequestMethod.GET)
+	@RequestMapping(path = "/admin/_06_halaAndQa.SelectHalaClassIndex.controller", method = RequestMethod.GET)
 	public String processAction21(@RequestParam("halaclassname") String halaclassname,
 			@ModelAttribute("HalaBean") HalaBean hb, BindingResult result, Model haModel ) {
 	
@@ -372,10 +453,10 @@ public class HalaController {
 	}
 	
 //	後台模糊搜尋貼文
-	@PostMapping(path = "/_06_halaAndQa.searchAllLike.controller1")
-	public String processAction22(@RequestParam("search1") String search1, Model mm) {
+	@PostMapping(path = "/admin/_06_halaAndQa.searchAllLikeIndex.controller")
+	public String processAction22(@RequestParam("search") String search, Model mm) {
 		
-		List<HalaBean> hab = halaService.searchAllLike(search1);
+		List<HalaBean> hab = halaService.searchAllLike(search);
 		mm.addAttribute("classList", hab);
 		
 		return "_06_hala/halaindex";
@@ -385,21 +466,21 @@ public class HalaController {
 	
 		
 		// 後台刪除
-		@GetMapping("/_06_halaAndQa.deleteHalaIndex.controller")
+		@GetMapping("/admin/_06_halaAndQa.deleteHalaIndex.controller")
 		public String processAction25(@RequestParam("halaId") Integer halaId) {
 			halaService.deleteHala(halaId);
-			return "redirect:/_06_halaAndQa.SelectAllHalaIndex.controller";
+			return "redirect:/admin/_06_halaAndQa.SelectAllHalaIndex.controller";
 
 		}
 		
 		// 前往後台新增畫面
-		@RequestMapping(path = "/_06_halaAndQa.goAddHalaIndex.controller", method = RequestMethod.GET)
+		@RequestMapping(path = "/admin/_06_halaAndQa.goAddHalaIndex.controller", method = RequestMethod.GET)
 		public String processMainActio26() {
 			return "_06_hala/addhalaindex";
 		}
 		
 		// 新增
-		@PostMapping("/_06_halaAndQa.AddHalaIndex.controller")
+		@PostMapping("/admin/_06_halaAndQa.AddHalaIndex.controller")
 		public String processMainAction27(@RequestParam("halaclassname") String halaclassname,
 				@RequestParam("memberid") Integer memberid, @RequestParam("title") String title,
 				@RequestParam("halacontent") String halacontent, @RequestParam("images") MultipartFile mf)
@@ -419,7 +500,7 @@ public class HalaController {
 			hb.setWatch(0);
 			halaService.insertHala(hb);
 
-			return "redirect:/_06_halaAndQa.SelectAllHalaIndex.controller";
+			return "redirect:/admin/_06_halaAndQa.SelectAllHalaIndex.controller";
 		}
 
 

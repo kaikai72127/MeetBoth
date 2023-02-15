@@ -122,7 +122,7 @@ String basePathimg2 = request.getScheme() + "://" + request.getServerName() + ":
 											<div>
 												<button class="btn btn-primary btn-circle" type="submit">確定送出</button>
 												<button class="btn btn-danger btn-circle" type="button"
-													onclick="window.location.href='http://localhost:8080/MeetBoth/_06_halaAndQa.SelectAllHala.controller'">取消</button>
+													onclick="window.location.href='http://localhost:8080/MeetBoth/_06_halaAndQa.SelectAllHala.controller/{page}'">取消</button>
 											</div>
 										</form>
 									</div>

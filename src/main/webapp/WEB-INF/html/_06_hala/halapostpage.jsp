@@ -208,7 +208,7 @@
 										<div class="post-index" style="color: #FFFFFF;">樓主</div>
 										<div class="post-user">
 											<a href="" class="user-name" style="color: #FFFFFF;">${bean.memberBean.memNickName}</a>
-											<a href="" class="user-id" style="color: #FFFFFF;">@${bean.memberBean.memberID}</a>
+											<a href="" class="user-id" style="color: #FFFFFF;">@${bean.memberBean.account}</a>
 										</div>
 									</div>
 									<div class="post-detail" style="color: #FFFFFF;">${bean.postdate}</div>
@@ -291,7 +291,7 @@
 
 				<!-- 					------------------------------------------- -->
 
-				<c:forEach var="answer" items="${bean.answerHala}">
+				<c:forEach var="answer" items="${bean.answerHala}" varStatus="count">
 					<input class="answerHalaIdHidden" type="hidden"
 						value="${answer.answerId}" />
 					<!-- 							<input id="answerHalaIdHidden" type="hidden" -->
@@ -309,7 +309,7 @@
 						<div class="post-section">
 							<div class="post-header">
 								<div class="post-author">
-									<div class="post-index">2樓</div>
+									<div class="post-index">${count.index + 2}樓</div>
 									<div class="post-user">
 										<a href="" class="user-name">${answer.memberBean.memNickName}</a>
 										<a href="" class="user-id">@${answer.memberBean.memberID}</a>

@@ -196,7 +196,7 @@ marquee a:hover {
 									href="<c:url value='/_05_teacStu.teacpostpageMain.controller?teacno=${bean.teacno}'/>">
 									<div class="teacher-profile">
 										<img
-											src="<c:url value='/_01_member.ShowPhoto.controller?${bean.member.memberID}' />"
+											src="<c:url value='/_01_member.ShowPhoto.controller?account=${bean.member.account}' />"
 											alt="">
 									</div>
 								</a>

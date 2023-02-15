@@ -356,7 +356,7 @@ body {
 									<div class="resume-item-content">
 										<input name="highEdu" style="width: 500%"
 											class="form-control input-sm" type="text"
-											placeholder="請輸入您的學歷...Ex:銘傳大學財務金融學系">
+											placeholder="請輸入您的學歷...Ex:銘傳大學財務金融學系" required>
 									</div>
 								</div>
 								<div class="resume-item">
@@ -364,7 +364,7 @@ body {
 									<div class="resume-item-content">
 										<input name="studExp" style="width: 500%"
 											class="form-control input-sm" type="text"
-											placeholder="請輸入您的家教經驗...Ex:國中數學2年">
+											placeholder="請輸入您的家教經驗...Ex:國中數學2年" required>
 									</div>
 								</div>
 								<div class="resume-item">
@@ -372,7 +372,7 @@ body {
 									<div class="resume-item-content">
 										<input name="tutorExp" style="width: 500%"
 											class="form-control input-sm" type="text"
-											placeholder="請輸入您的留學經驗...Ex:美國念MBA2年">
+											placeholder="請輸入您的留學經驗...Ex:美國念MBA2年" required>
 									</div>
 								</div>
 								<div class="resume-item">
@@ -380,7 +380,7 @@ body {
 									<div class="resume-item-content">
 										<input name="lanAbility" style="width: 500%"
 											class="form-control input-sm" type="text"
-											placeholder="請輸入您的語言能力...Ex:英文:精通">
+											placeholder="請輸入您的語言能力...Ex:英文:精通" required>
 									</div>
 								</div>
 								<div class="resume-item">
@@ -388,7 +388,7 @@ body {
 									<div class="resume-item-content">
 										<input name="skills" style="width: 500%"
 											class="form-control input-sm" type="text"
-											placeholder="請輸入您的證照技能...Ex:國際專案管理師PMP">
+											placeholder="請輸入您的證照技能...Ex:國際專案管理師PMP" required>
 									</div>
 								</div>
 							</div>
@@ -401,7 +401,7 @@ body {
 										<div class="resume-item-content">
 											<input name="subjectItem" style="width: 500%"
 												class="form-control input-sm" type="text"
-												placeholder="請輸入您的授課科目...Ex:英文、數學">
+												placeholder="請輸入您的授課科目...Ex:英文、數學" required>
 										</div>
 									</div>
 									<div class="resume-item">
@@ -409,7 +409,7 @@ body {
 										<div class="resume-item-content">
 											<input name="teacLoc" style="width: 500%"
 												class="form-control input-sm" type="text"
-												placeholder="請輸入您的授課地區...Ex:台北市、新北市">
+												placeholder="請輸入您的授課地區...Ex:台北市、新北市" required>
 										</div>
 									</div>
 									<div class="resume-item">
@@ -417,7 +417,7 @@ body {
 										<div class="resume-item-content">
 											<input name="teacObject" style="width: 500%"
 												class="form-control input-sm" type="text"
-												placeholder="請輸入您的授課對象...Ex:國小、國中">
+												placeholder="請輸入您的授課對象...Ex:國小、國中" required>
 										</div>
 									</div>
 									<div class="resume-item">
@@ -425,7 +425,7 @@ body {
 										<div class="resume-item-content">
 											<input name="teacTime" style="width: 500%"
 												class="form-control input-sm" type="text"
-												placeholder="請輸入您的授課時段...Ex:平日早上、平日下午">
+												placeholder="請輸入您的授課時段...Ex:平日早上、平日下午" required>
 										</div>
 									</div>
 									<div class="resume-item">
@@ -433,7 +433,7 @@ body {
 										<div class="resume-item-content">
 											<input name="classMode" style="width: 500%"
 												class="form-control input-sm" type="text"
-												placeholder="請輸入您的授課模式...Ex:面授、線上教學">
+												placeholder="請輸入您的授課模式...Ex:面授、線上教學" required>
 										</div>
 									</div>
 									<div class="resume-item">
@@ -441,7 +441,7 @@ body {
 										<div class="resume-item-content">
 											<input name="willTeac" style="width: 500%"
 												class="form-control input-sm" type="text"
-												placeholder="請輸入您的試教意願...Ex:可試教或不方便試教">
+												placeholder="請輸入您的試教意願...Ex:可試教或不方便試教" required>
 										</div>
 									</div>
 									<div class="resume-item">
@@ -449,7 +449,7 @@ body {
 										<div class="resume-item-content">
 											<input name="conMethod" style="width: 500%"
 												class="form-control input-sm" type="text"
-												placeholder="請輸入您的連絡方式...Ex:電話、郵件">
+												placeholder="請輸入您的連絡方式...Ex:電話、郵件" required>
 										</div>
 									</div>
 									<div class="resume-item">
@@ -457,7 +457,7 @@ body {
 										<div class="resume-item-content">
 											<input name="conTime" style="width: 500%"
 												class="form-control input-sm" type="text"
-												placeholder="請輸入您的聯絡時間...Ex:平日早上、平日下午">
+												placeholder="請輸入您的聯絡時間...Ex:平日早上、平日下午" required>
 										</div>
 									</div>
 									<div class="resume-item">
@@ -465,7 +465,7 @@ body {
 										<div class="resume-item-content">
 											<input name="price" style="width: 500%"
 												class="form-control input-sm" type="text"
-												placeholder="請輸入您的希望待遇...Ex:800">
+												placeholder="請輸入您的希望待遇...Ex:800" required>
 										</div>
 									</div>
 								</div>
@@ -482,7 +482,7 @@ body {
 						<div class="avatar-section">
 							<div class="avatar-container">
 								<img
-									src="https://fastly.picsum.photos/id/832/200/300.jpg?hmac=6gMt7WeRsS41_901ujRTrOgfwtW9MBZ375g8qXO3LUc"
+									src="<c:url value='/_01_member.ShowPhoto.controller?account=${bean.account}' />"
 									alt="">
 							</div>
 						</div>
@@ -504,15 +504,12 @@ body {
 	<!-- 引入共同的js -->
 	<jsp:include page="/WEB-INF/html/fragment/jsPath.jsp" />
 	<script>
-		document
-				.getElementById("cancel-btn")
-				.addEventListener(
-						"click",
-						function(event) {
-							event.preventDefault();
-							window.location.href = "/MeetBoth/_05_teacStu.searchAllTeac.controller/1";
-						});
+		document.getElementById("cancel-btn").addEventListener(
+			"click",
+		function(event) {
+			event.preventDefault();
+			window.location.href = "/MeetBoth/_05_teacStu.searchAllTeac.controller/1";
+		});
 	</script>
 </body>
-
 </html>

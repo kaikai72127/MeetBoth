@@ -281,43 +281,43 @@ a:hover {
 											<span>履歷貼文編號 :&ensp;<input name="studno" value="${bean.studno}" type="text" name="pid" class="MBinput" placeholder="自動產生" readonly></span>
 										</div>
 										<div>
-											<span>需求科目 :&ensp;&ensp;&ensp;&ensp;&ensp;<input name="subjectItem" value="${bean.subjectItem}" type="text" name="pna" class="MBinput" placeholder="請輸入您的需求科目...Ex:國小數學"></span>
+											<span>需求科目 :&ensp;&ensp;&ensp;&ensp;&ensp;<input name="subjectItem" value="${bean.subjectItem}" type="text" name="pna" class="MBinput" placeholder="請輸入您的需求科目...Ex:國小數學" required></span>
 										</div>
 										<div>
-											<span>上課地點 :&ensp;&ensp;&ensp;&ensp;&ensp;<input name="studLoc" value="${bean.studLoc}" type="text" name="ppr" class="MBinput" placeholder="請輸入您的上課地點...Ex:新北市"></span>
+											<span>上課地點 :&ensp;&ensp;&ensp;&ensp;&ensp;<input name="studLoc" value="${bean.studLoc}" type="text" name="ppr" class="MBinput" placeholder="請輸入您的上課地點...Ex:新北市" required></span>
 										</div>
 										<div>
-											<span>教學對象 :&ensp;&ensp;&ensp;&ensp;&ensp;<input name="object" value="${bean.object}" type="text" name="pmid" class="MBinput" placeholder="請輸入您的教學對象...Ex:國小"></span>
+											<span>教學對象 :&ensp;&ensp;&ensp;&ensp;&ensp;<input name="object" value="${bean.object}" type="text" name="pmid" class="MBinput" placeholder="請輸入您的教學對象...Ex:國小" required></span>
 										</div>
 										<div>
-											<span>自備教材 :&ensp;&ensp;&ensp;&ensp;&ensp;<input name="textBook" value="${bean.textBook}" type="text" name="pinvt" class="MBinput" placeholder="請輸入您的自備教材...Ex:希望有其他課內教材"></span>
+											<span>自備教材 :&ensp;&ensp;&ensp;&ensp;&ensp;<input name="textBook" value="${bean.textBook}" type="text" name="pinvt" class="MBinput" placeholder="請輸入您的自備教材...Ex:希望有其他課內教材" required></span>
 										</div>
 										<div>
-											<span>開始日期 :&ensp;&ensp;&ensp;&ensp;&ensp;<input name="startDate" value="${bean.startDate}" type="text" name="ppo" class="MBinput" placeholder="請輸入您的開始日期...Ex:隨時"></span>
+											<span>開始日期 :&ensp;&ensp;&ensp;&ensp;&ensp;<input name="startDate" value="${bean.startDate}" type="text" name="ppo" class="MBinput" placeholder="請輸入您的開始日期...Ex:隨時" required></span>
 										</div>
 										<div>
-											<span>課程期間 :&ensp;&ensp;&ensp;&ensp;&ensp;<input name="period" value="${bean.period}" type="text" name="pup" class="MBinput" placeholder="請輸入您的課程期間...Ex:兩個月以上，每周上課兩次"></span>
+											<span>課程期間 :&ensp;&ensp;&ensp;&ensp;&ensp;<input name="period" value="${bean.period}" type="text" name="pup" class="MBinput" placeholder="請輸入您的課程期間...Ex:兩個月以上，每周上課兩次" required></span>
 										</div>
 										<div>
-											<span>上課時段 :&ensp;&ensp;&ensp;&ensp;&ensp;<input name="studTime" value="${bean.studTime}" type="text" name="pps" class="MBinput" placeholder="請輸入您的上課時段...Ex:平日下午"></span>
+											<span>上課時段 :&ensp;&ensp;&ensp;&ensp;&ensp;<input name="studTime" value="${bean.studTime}" type="text" name="pps" class="MBinput" placeholder="請輸入您的上課時段...Ex:平日下午" required></span>
 										</div>
 										<div>
-											<span>上課方式 :&ensp;&ensp;&ensp;&ensp;&ensp;<input name="classMode" value="${bean.classMode}" type="text" name="pch" class="MBinput" placeholder="請輸入您的上課模式...Ex:面授"></span>
+											<span>上課方式 :&ensp;&ensp;&ensp;&ensp;&ensp;<input name="classMode" value="${bean.classMode}" type="text" name="pch" class="MBinput" placeholder="請輸入您的上課模式...Ex:面授" required></span>
 										</div>
 										<div>
-											<span>薪資 :&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;<input name="price" value="${bean.price}" type="text" name="pch" class="MBinput" placeholder="請輸入您的希望待遇...Ex:800"></span>
+											<span>薪資 :&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;<input name="price" value="${bean.price}" type="text" name="pch" class="MBinput" placeholder="請輸入您的希望待遇...Ex:800" required></span>
 										</div>
 										<div>
-											<span>老師試教 :&ensp;&ensp;&ensp;&ensp;&ensp;<input name="testTeacMode" value="${bean.testTeacMode}" type="text" name="pch" class="MBinput" placeholder="請輸入您的老師試教...Ex:需試教，面授"></span>
+											<span>老師試教 :&ensp;&ensp;&ensp;&ensp;&ensp;<input name="testTeacMode" value="${bean.testTeacMode}" type="text" name="pch" class="MBinput" placeholder="請輸入您的老師試教...Ex:需試教，面授" required></span>
 										</div>
 										<div>
-											<span>學歷要求 :&ensp;&ensp;&ensp;&ensp;&ensp;<input name="educaLimit" value="${bean.educaLimit}" type="text" name="pch" class="MBinput" placeholder="請輸入您的學歷要求...Ex:大學以上"></span>
+											<span>學歷要求 :&ensp;&ensp;&ensp;&ensp;&ensp;<input name="educaLimit" value="${bean.educaLimit}" type="text" name="pch" class="MBinput" placeholder="請輸入您的學歷要求...Ex:大學以上" required></span>
 										</div>
 										<div>
-											<span>應徵方式 :&ensp;&ensp;&ensp;&ensp;&ensp;<input name="conMethod" value="${bean.conMethod}" type="text" name="pch" class="MBinput" placeholder="請輸入您的應徵方式...Ex:電話聯絡"></span>
+											<span>應徵方式 :&ensp;&ensp;&ensp;&ensp;&ensp;<input name="conMethod" value="${bean.conMethod}" type="text" name="pch" class="MBinput" placeholder="請輸入您的應徵方式...Ex:電話聯絡" required></span>
 										</div>
 										<div>
-											<span>聯絡時間 :&ensp;&ensp;&ensp;&ensp;&ensp;<input name="conTime" value="${bean.conTime}" type="text" name="pch" class="MBinput" placeholder="請輸入您的聯絡時間...Ex:平日早上、平日下午"></span>
+											<span>聯絡時間 :&ensp;&ensp;&ensp;&ensp;&ensp;<input name="conTime" value="${bean.conTime}" type="text" name="pch" class="MBinput" placeholder="請輸入您的聯絡時間...Ex:平日早上、平日下午" required></span>
 										</div>
 										<div>
 											<input type="submit" class="MBbtn" value="確定" style="margin-top:15px;margin-left:900px;font-size:35px;">

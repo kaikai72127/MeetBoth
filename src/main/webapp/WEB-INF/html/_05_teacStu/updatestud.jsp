@@ -357,7 +357,7 @@ body {
 									<div class="resume-item-content">
 										<input name="subjectItem" value="${bean.subjectItem}"
 											style="width: 500%" class="form-control input-sm" type="text"
-											placeholder="請輸入您的需求科目...Ex:國小數學">
+											placeholder="請輸入您的需求科目...Ex:國小數學" required>
 									</div>
 								</div>
 								<div class="resume-item">
@@ -365,7 +365,7 @@ body {
 									<div class="resume-item-content">
 										<input name="studLoc" value="${bean.studLoc}"
 											style="width: 500%" class="form-control input-sm" type="text"
-											placeholder="請輸入您的上課地點...Ex:新北市">
+											placeholder="請輸入您的上課地點...Ex:新北市" required>
 									</div>
 								</div>
 								<div class="resume-item">
@@ -373,7 +373,7 @@ body {
 									<div class="resume-item-content">
 										<input name="object" value="${bean.object}"
 											style="width: 500%" class="form-control input-sm" type="text"
-											placeholder="請輸入您的教學對象...Ex:國小">
+											placeholder="請輸入您的教學對象...Ex:國小" required>
 									</div>
 								</div>
 								<div class="resume-item">
@@ -381,7 +381,7 @@ body {
 									<div class="resume-item-content">
 										<input name="textBook" value="${bean.textBook}"
 											style="width: 500%" class="form-control input-sm" type="text"
-											placeholder="請輸入您的自備教材...Ex:希望有其他課內教材">
+											placeholder="請輸入您的自備教材...Ex:希望有其他課內教材" required>
 									</div>
 								</div>
 							</div>
@@ -394,7 +394,7 @@ body {
 										<div class="resume-item-content">
 											<input name="startDate" value="${bean.startDate}"
 												style="width: 500%" class="form-control input-sm"
-												type="text" placeholder="請輸入您的開始日期...Ex:隨時">
+												type="text" placeholder="請輸入您的開始日期...Ex:隨時" required>
 										</div>
 									</div>
 									<div class="resume-item">
@@ -402,7 +402,7 @@ body {
 										<div class="resume-item-content">
 											<input name="period" value="${bean.period}"
 												style="width: 500%" class="form-control input-sm"
-												type="text" placeholder="請輸入您的課程期間...Ex:兩個月以上，每周上課兩次">
+												type="text" placeholder="請輸入您的課程期間...Ex:兩個月以上，每周上課兩次" required>
 										</div>
 									</div>
 									<div class="resume-item">
@@ -410,7 +410,7 @@ body {
 										<div class="resume-item-content">
 											<input name="studTime" value="${bean.studTime}"
 												style="width: 500%" class="form-control input-sm"
-												type="text" placeholder="請輸入您的上課時段...Ex:平日下午">
+												type="text" placeholder="請輸入您的上課時段...Ex:平日下午" required>
 										</div>
 									</div>
 									<div class="resume-item">
@@ -418,7 +418,7 @@ body {
 										<div class="resume-item-content">
 											<input name="classMode" value="${bean.classMode}"
 												style="width: 500%" class="form-control input-sm"
-												type="text" placeholder="請輸入您的上課模式...Ex:面授">
+												type="text" placeholder="請輸入您的上課模式...Ex:面授" required>
 										</div>
 									</div>
 								</div>
@@ -432,7 +432,7 @@ body {
 										<div class="resume-item-content">
 											<input name="price" value="${bean.price}" style="width: 500%"
 												class="form-control input-sm" type="text"
-												placeholder="請輸入您的希望待遇...Ex:800">
+												placeholder="請輸入您的希望待遇...Ex:800" required>
 										</div>
 									</div>
 									<div class="resume-item">
@@ -440,7 +440,7 @@ body {
 										<div class="resume-item-content">
 											<input name="testTeacMode" value="${bean.testTeacMode}"
 												style="width: 500%" class="form-control input-sm"
-												type="text" placeholder="請輸入您的老師試教...Ex:需試教，面授">
+												type="text" placeholder="請輸入您的老師試教...Ex:需試教，面授" required>
 										</div>
 									</div>
 									<div class="resume-item">
@@ -448,7 +448,7 @@ body {
 										<div class="resume-item-content">
 											<input name="educaLimit" value="${bean.educaLimit}"
 												style="width: 500%" class="form-control input-sm"
-												type="text" placeholder="請輸入您的學歷要求...Ex:大學以上">
+												type="text" placeholder="請輸入您的學歷要求...Ex:大學以上" required>
 										</div>
 									</div>
 									<div class="resume-item">
@@ -456,7 +456,7 @@ body {
 										<div class="resume-item-content">
 											<input name="conMethod" value="${bean.conMethod}"
 												style="width: 500%" class="form-control input-sm"
-												type="text" placeholder="請輸入您的應徵方式...Ex:電話聯絡">
+												type="text" placeholder="請輸入您的應徵方式...Ex:電話聯絡" required>
 										</div>
 									</div>
 									<div class="resume-item">
@@ -464,7 +464,7 @@ body {
 										<div class="resume-item-content">
 											<input name="conTime" value="${bean.conTime}"
 												style="width: 500%" class="form-control input-sm"
-												type="text" placeholder="請輸入您的聯絡時間...Ex:平日早上">
+												type="text" placeholder="請輸入您的聯絡時間...Ex:平日早上" required>
 										</div>
 									</div>
 								</div>
@@ -497,14 +497,12 @@ body {
 	<!-- 引入共同的js -->
 	<jsp:include page="/WEB-INF/html/fragment/jsPath.jsp" />
 	<script>
-		document
-				.getElementById("cancel-btn")
-				.addEventListener(
-						"click",
-						function(event) {
-							event.preventDefault();
-							window.location.href = "/MeetBoth/_05_teacStu.searchAllStud.controller/1";
-						});
+		document.getElementById("cancel-btn").addEventListener(
+			"click",
+			function(event) {
+				event.preventDefault();
+				window.location.href = "/MeetBoth/_05_teacStu.searchAllStud.controller/1";
+			});
 	</script>
 </body>
 </html>

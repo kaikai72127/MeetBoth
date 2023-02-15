@@ -661,7 +661,7 @@ to {
 									<div class="back"
 										style="background-color: white; display: flex;">
 										<div class="tutor-avatar" style="margin: 20px">
-											<img src="<c:url value='/_01_member.ShowPhoto.controller?${bean.member.memberID}' />">
+											<img src="<c:url value='/_01_member.ShowPhoto.controller?account=${bean.member.account}' />">
 										</div>
 										<div class="tutor-detail" style="margin: 20px">
 											<div id="jsonsubjectItem" class="subject-items"></div>
@@ -672,10 +672,6 @@ to {
 													<div id="jsonteacObject" class="detail-item-content">
 													</div>
 												</div>
-												<!-- 											<div class="detail-item"> -->
-												<!-- 												<div class="detail-item-title">學歷</div> -->
-												<!-- 												<div id="jsonhighEdu" class="detail-item-content"></div> -->
-												<!-- 											</div> -->
 												<div class="detail-item">
 													<div class="detail-item-title">家教經驗</div>
 													<div id="jsontutorExp" class="detail-item-content"></div>
@@ -697,7 +693,32 @@ to {
 									<div class="front">
 										<img src="../html/assets/images/meatball/meatball-144x144.png">
 									</div>
-									<div class="back">Back!</div>
+									<div class="back"
+										style="background-color: white; display: flex;">
+										<div class="tutor-avatar" style="margin: 20px">
+											<img src="<c:url value='/_01_member.ShowPhoto.controller?account=${bean.member.account}' />">
+										</div>
+										<div class="tutor-detail" style="margin: 20px">
+											<div id="jsonsubjectItem2" class="subject-items"></div>
+											<div id="jsonName2" class="tutor-name"></div>
+											<div class="detail-table">
+												<div class="detail-item">
+													<div class="detail-item-title">授課對象</div>
+													<div id="jsonteacObject2" class="detail-item-content">
+													</div>
+												</div>
+												<div class="detail-item">
+													<div class="detail-item-title">家教經驗</div>
+													<div id="jsontutorExp2" class="detail-item-content"></div>
+												</div>
+												<div class="detail-item">
+													<div class="detail-item-title">授課地區</div>
+													<div id="jsonteacLoc2" class="detail-item-content"></div>
+												</div>
+											</div>
+										</div>
+										<div class="match-score">86%</div>
+									</div>
 								</div>
 							</div>
 						</div>
@@ -707,7 +728,32 @@ to {
 									<div class="front">
 										<img src="../html/assets/images/meatball/meatball-144x144.png">
 									</div>
-									<div class="back">Back!</div>
+									<div class="back"
+										style="background-color: white; display: flex;">
+										<div class="tutor-avatar" style="margin: 20px">
+											<img src="<c:url value='/_01_member.ShowPhoto.controller?account=${bean.member.account}' />">
+										</div>
+										<div class="tutor-detail" style="margin: 20px">
+											<div id="jsonsubjectItem3" class="subject-items"></div>
+											<div id="jsonName3" class="tutor-name"></div>
+											<div class="detail-table">
+												<div class="detail-item">
+													<div class="detail-item-title">授課對象</div>
+													<div id="jsonteacObject3" class="detail-item-content">
+													</div>
+												</div>
+												<div class="detail-item">
+													<div class="detail-item-title">家教經驗</div>
+													<div id="jsontutorExp3" class="detail-item-content"></div>
+												</div>
+												<div class="detail-item">
+													<div class="detail-item-title">授課地區</div>
+													<div id="jsonteacLoc3" class="detail-item-content"></div>
+												</div>
+											</div>
+										</div>
+										<div class="match-score">77%</div>
+									</div>
 								</div>
 							</div>
 						</div>
@@ -717,7 +763,32 @@ to {
 									<div class="front">
 										<img src="../html/assets/images/meatball/meatball-144x144.png">
 									</div>
-									<div class="back">Back!</div>
+									<div class="back"
+										style="background-color: white; display: flex;">
+										<div class="tutor-avatar" style="margin: 20px">
+											<img src="<c:url value='/_01_member.ShowPhoto.controller?account=${bean.member.account}' />">
+										</div>
+										<div class="tutor-detail" style="margin: 20px">
+											<div id="jsonsubjectItem4" class="subject-items"></div>
+											<div id="jsonName4" class="tutor-name"></div>
+											<div class="detail-table">
+												<div class="detail-item">
+													<div class="detail-item-title">授課對象</div>
+													<div id="jsonteacObject4" class="detail-item-content">
+													</div>
+												</div>
+												<div class="detail-item">
+													<div class="detail-item-title">家教經驗</div>
+													<div id="jsontutorExp4" class="detail-item-content"></div>
+												</div>
+												<div class="detail-item">
+													<div class="detail-item-title">授課地區</div>
+													<div id="jsonteacLoc4" class="detail-item-content"></div>
+												</div>
+											</div>
+										</div>
+										<div class="match-score">69%</div>
+									</div>
 								</div>
 							</div>
 						</div>
@@ -774,7 +845,7 @@ to {
 							<div class="tutor-left-section">
 								<div class="tutor-avatar">
 									<img
-										src="<c:url value='/_01_member.ShowPhoto.controller?${bean.member.memberID}' />"
+										src="<c:url value='/_01_member.ShowPhoto.controller?account=${bean.member.account}' />"
 										alt="">
 								</div>
 								<div>瀏覽次數:${bean.views}次</div>
@@ -943,12 +1014,46 @@ to {
 				$('#jsonName').html(jsonName);
 				var jsonteacObject = firstData.teacObject;
 				$('#jsonteacObject').html(jsonteacObject);
-				var jsonhighEdu = firstData.highEdu;
-				$('#jsonhighEdu').html(jsonhighEdu);
 				var jsontutorExp = firstData.tutorExp;
 				$('#jsontutorExp').html(jsontutorExp);
 				var jsonteacLoc = firstData.teacLoc;
 				$('#jsonteacLoc').html(jsonteacLoc);
+				
+				var secondData = data[1];
+				var jsonsubjectItem2 = secondData.subjectItem;
+				$('#jsonsubjectItem2').html(jsonsubjectItem2);
+				var jsonName2 = secondData.member.memName + "(" + secondData.member.memNickName + ")";
+				$('#jsonName2').html(jsonName2);
+				var jsonteacObject2 = secondData.teacObject;
+				$('#jsonteacObject2').html(jsonteacObject2);
+				var jsontutorExp2 = secondData.tutorExp;
+				$('#jsontutorExp2').html(jsontutorExp2);
+				var jsonteacLoc2 = secondData.teacLoc;
+				$('#jsonteacLoc2').html(jsonteacLoc2);
+				
+				var thirdData = data[2];
+				var jsonsubjectItem3 = thirdData.subjectItem;
+				$('#jsonsubjectItem3').html(jsonsubjectItem3);
+				var jsonName3 = thirdData.member.memName + "(" + thirdData.member.memNickName + ")";
+				$('#jsonName3').html(jsonName3);
+				var jsonteacObject3 = thirdData.teacObject;
+				$('#jsonteacObject3').html(jsonteacObject3);
+				var jsontutorExp3 = thirdData.tutorExp;
+				$('#jsontutorExp3').html(jsontutorExp3);
+				var jsonteacLoc3 = thirdData.teacLoc;
+				$('#jsonteacLoc3').html(jsonteacLoc3);
+				
+				var forthData = data[3];
+				var jsonsubjectItem4 = forthData.subjectItem;
+				$('#jsonsubjectItem4').html(jsonsubjectItem4);
+				var jsonName4 = forthData.member.memName + "(" + forthData.member.memNickName + ")";
+				$('#jsonName4').html(jsonName4);
+				var jsonteacObject4 = forthData.teacObject;
+				$('#jsonteacObject4').html(jsonteacObject4);
+				var jsontutorExp4 = forthData.tutorExp;
+				$('#jsontutorExp4').html(jsontutorExp4);
+				var jsonteacLoc4 = forthData.teacLoc;
+				$('#jsonteacLoc4').html(jsonteacLoc4);
 			setTimeout(() => {
 				closeDialog();
 				showCardContainer();

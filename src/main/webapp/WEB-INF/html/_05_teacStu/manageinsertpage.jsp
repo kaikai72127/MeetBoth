@@ -280,46 +280,46 @@ a:hover {
 											<span>履歷貼文編號 :&ensp;<input type="text" class="MBinput" placeholder="自動產生" readonly></span>
 										</div>
 										<div>
-											<span>學歷 :&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;<input name="highEdu" type="text" class="MBinput" placeholder="請輸入您的學歷...Ex:銘傳大學財務金融學系"></span>
+											<span>學歷 :&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;<input name="highEdu" type="text" class="MBinput" placeholder="請輸入您的學歷...Ex:銘傳大學財務金融學系" required></span>
 										</div>
 										<div>
-											<span>家教經驗 :&ensp;&ensp;&ensp;&ensp;&ensp;<input name="studExp" type="text" class="MBinput" placeholder="請輸入您的家教經驗...Ex:國中數學2年"></span>
+											<span>家教經驗 :&ensp;&ensp;&ensp;&ensp;&ensp;<input name="studExp" type="text" class="MBinput" placeholder="請輸入您的家教經驗...Ex:國中數學2年" required></span>
 										</div>
 										<div>
-											<span>留學經驗 :&ensp;&ensp;&ensp;&ensp;&ensp;<input name="tutorExp" type="text" class="MBinput" placeholder="請輸入您的留學經驗...Ex:美國念MBA2年"></span>
+											<span>留學經驗 :&ensp;&ensp;&ensp;&ensp;&ensp;<input name="tutorExp" type="text" class="MBinput" placeholder="請輸入您的留學經驗...Ex:美國念MBA2年" required></span>
 										</div>
 										<div>
-											<span>語言能力 :&ensp;&ensp;&ensp;&ensp;&ensp;<input name="lanAbility" type="text" class="MBinput" placeholder="請輸入您的語言能力...Ex:英文:精通"></span>
+											<span>語言能力 :&ensp;&ensp;&ensp;&ensp;&ensp;<input name="lanAbility" type="text" class="MBinput" placeholder="請輸入您的語言能力...Ex:英文:精通" required></span>
 										</div>
 										<div>
-											<span>證照技能 :&ensp;&ensp;&ensp;&ensp;&ensp;<input name="skills" type="text" class="MBinput" placeholder="請輸入您的證照技能...Ex:國際專案管理師PMP"></span>
+											<span>證照技能 :&ensp;&ensp;&ensp;&ensp;&ensp;<input name="skills" type="text" class="MBinput" placeholder="請輸入您的證照技能...Ex:國際專案管理師PMP" required></span>
 										</div>
 										<div>
-											<span>授課科目 :&ensp;&ensp;&ensp;&ensp;&ensp;<input name="subjectItem" type="text" class="MBinput" placeholder="請輸入您的授課科目...Ex:英文、數學"></span>
+											<span>授課科目 :&ensp;&ensp;&ensp;&ensp;&ensp;<input name="subjectItem" type="text" class="MBinput" placeholder="請輸入您的授課科目...Ex:英文、數學" required></span>
 										</div>
 										<div>
-											<span>授課地區 :&ensp;&ensp;&ensp;&ensp;&ensp;<input name="teacLoc" type="text" class="MBinput" placeholder="請輸入您的授課地區...Ex:台北市、新北市"></span>
+											<span>授課地區 :&ensp;&ensp;&ensp;&ensp;&ensp;<input name="teacLoc" type="text" class="MBinput" placeholder="請輸入您的授課地區...Ex:台北市、新北市" required></span>
 										</div>
 										<div>
-											<span>授課對象 :&ensp;&ensp;&ensp;&ensp;&ensp;<input name="teacObject" type="text" class="MBinput" placeholder="請輸入您的授課對象...Ex:國小、國中"></span>
+											<span>授課對象 :&ensp;&ensp;&ensp;&ensp;&ensp;<input name="teacObject" type="text" class="MBinput" placeholder="請輸入您的授課對象...Ex:國小、國中" required></span>
 										</div>
 										<div>
-											<span>授課時段 :&ensp;&ensp;&ensp;&ensp;&ensp;<input name="teacTime" type="text" class="MBinput" placeholder="請輸入您的授課時段...Ex:平日早上、平日下午"></span>
+											<span>授課時段 :&ensp;&ensp;&ensp;&ensp;&ensp;<input name="teacTime" type="text" class="MBinput" placeholder="請輸入您的授課時段...Ex:平日早上、平日下午" required></span>
 										</div>
 										<div>
-											<span>授課模式 :&ensp;&ensp;&ensp;&ensp;&ensp;<input name="classMode" type="text" class="MBinput" placeholder="請輸入您的授課模式...Ex:面授、線上教學"></span>
+											<span>授課模式 :&ensp;&ensp;&ensp;&ensp;&ensp;<input name="classMode" type="text" class="MBinput" placeholder="請輸入您的授課模式...Ex:面授、線上教學" required></span>
 										</div>
 										<div>
-											<span>試教意願 :&ensp;&ensp;&ensp;&ensp;&ensp;<input name="willTeac" type="text" class="MBinput" placeholder="請輸入您的試教意願...Ex:可試教或不方便試教"></span>
+											<span>試教意願 :&ensp;&ensp;&ensp;&ensp;&ensp;<input name="willTeac" type="text" class="MBinput" placeholder="請輸入您的試教意願...Ex:可試教或不方便試教" required></span>
 										</div>
 										<div>
-											<span>聯絡方式 :&ensp;&ensp;&ensp;&ensp;&ensp;<input name="conMethod" type="text" class="MBinput" placeholder="請輸入您的連絡方式...Ex:電話、郵件"></span>
+											<span>聯絡方式 :&ensp;&ensp;&ensp;&ensp;&ensp;<input name="conMethod" type="text" class="MBinput" placeholder="請輸入您的連絡方式...Ex:電話、郵件" required></span>
 										</div>
 										<div>
-											<span>聯絡時間 :&ensp;&ensp;&ensp;&ensp;&ensp;<input name="conTime" type="text" class="MBinput" placeholder="請輸入您的聯絡時間...Ex:平日早上、平日下午"></span>
+											<span>聯絡時間 :&ensp;&ensp;&ensp;&ensp;&ensp;<input name="conTime" type="text" class="MBinput" placeholder="請輸入您的聯絡時間...Ex:平日早上、平日下午" required></span>
 										</div>
 										<div>
-											<span>希望待遇 :&ensp;&ensp;&ensp;&ensp;&ensp;<input name="price" type="text" class="MBinput" placeholder="請輸入您的希望待遇...Ex:800"></span>
+											<span>希望待遇 :&ensp;&ensp;&ensp;&ensp;&ensp;<input name="price" type="text" class="MBinput" placeholder="請輸入您的希望待遇...Ex:800" required></span>
 										</div>
 										<div>
 											<input type="submit" class="MBbtn" value="確定" style="margin-top:15px;margin-left:900px;font-size:35px;">

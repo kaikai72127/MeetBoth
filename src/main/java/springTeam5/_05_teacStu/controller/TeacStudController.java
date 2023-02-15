@@ -651,13 +651,15 @@ public class TeacStudController {
 	@ResponseBody
 	public List<TeacBean> processMatchAction(@RequestBody MatchOption options) {
 		Integer goal = 0;
-		List<TeacBean> query1 = new ArrayList<>();
 		List<String> north = Arrays.asList("台北市","臺北市","新北市","基隆市","宜蘭縣","桃園市","新竹縣","新竹市");
 		List<String> middle = Arrays.asList("台中市","臺中市","苗栗縣","彰化縣","南投縣","雲林縣");
 		List<String> south = Arrays.asList("台南市","臺南市","高雄市","嘉義市","嘉義縣","屏東縣","澎湖縣");
 		List<String> east = Arrays.asList("花蓮縣","台東縣","臺東縣");
 		List<String> weekday = Arrays.asList("平日早上","平日下午","平日晚上");
 		List<String> holiday = Arrays.asList("假日早上","假日下午","假日晚上");
+		List<String> chinese = Arrays.asList("國文","中文");
+		List<String> english = Arrays.asList("英文","美語");
+		List<TeacBean> query1 = new ArrayList<>();
 		String location = options.getLocation();
 		String object = options.getObject();
 		String time = options.getTime();
@@ -716,6 +718,19 @@ public class TeacStudController {
 		if (query3.size() > 0) {
 			goal = goal + 33;
 		}
+		
+//		以下功能測試中
+		/*
+		List<TeacBean> query4 = new ArrayList<>();
+		switch (sub) {
+		case "國文":
+			query4 = tService.findBySubjectItemIn(chinese);
+			break;
+		case "英文":
+			query4 = tService.findBySubjectItemIn(english);
+			break;
+		}
+		*/
 		
 		List<TeacBean> allData = new ArrayList<>();
 		allData.addAll(query1);

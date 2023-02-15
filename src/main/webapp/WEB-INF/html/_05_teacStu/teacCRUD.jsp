@@ -217,15 +217,15 @@ body {
 		rgba(0, 0, 0, 0.23);
 	border: #ce7777 0.25rem solid;
 	position: relative;
-	padding: 40px;
+	padding: 0 40px 50px;
 	width: 50%;
-	height: 45%;
-	transform: scale(0);
+	height: 63%;
+	transform: scale(0) translateY(0);
 	transition: all 0.5s ease-in-out;
 }
 
 #formContainer.shown .form-section {
-	transform: scale(1);
+	transform: scale(1) translateY(50px);
 }
 
 #formContainer form {
@@ -609,7 +609,7 @@ to {
 								<div class="resume-item">
 									<div class="resume-item-title">請選擇您希望教師的上課地區</div>
 									<div class="resume-item-content">
-										<select name="locChoose" style="width: 100%">
+										<select name="locChoose" style="width: 100%" required>
 											<option value="">--請選擇您希望教師的上課地區--</option>
 											<option value="北部">北部</option>
 											<option value="中部">中部</option>
@@ -621,7 +621,7 @@ to {
 								<div class="resume-item">
 									<div class="resume-item-title">請選擇您希望教師的上課對象</div>
 									<div class="resume-item-content">
-										<select name="objectChoose" style="width: 100%">
+										<select name="objectChoose" style="width: 100%" required>
 											<option value="">--請選擇您希望教師的上課對象--</option>
 											<option value="國小">國小</option>
 											<option value="國中">國中</option>
@@ -633,7 +633,7 @@ to {
 								<div class="resume-item">
 									<div class="resume-item-title">請選擇您希望教師的上課時段</div>
 									<div class="resume-item-content">
-										<select name="timeChoose" style="width: 100%">
+										<select name="timeChoose" style="width: 100%" required>
 											<option value="">--請選擇您希望教師的上課時段--</option>
 											<option value="平日">平日</option>
 											<option value="假日">假日</option>
@@ -644,7 +644,7 @@ to {
 								<div class="resume-item">
 									<div class="resume-item-title">請選擇您希望教師的擅長科目</div>
 									<div class="resume-item-content">
-										<select name="timeChoose" style="width: 100%">
+										<select name="subChoose" style="width: 100%" required>
 											<option value="">--請選擇您希望教師的擅長科目--</option>
 											<option value="國文">國文</option>
 											<option value="英文">英文</option>
@@ -658,7 +658,7 @@ to {
 								<div class="resume-item">
 									<div class="resume-item-title">請選擇您希望教師擅長的語言能力</div>
 									<div class="resume-item-content">
-										<select name="timeChoose" style="width: 100%">
+										<select name="lanChoose" style="width: 100%" required>
 											<option value="">--請選擇您希望教師擅長的語言能力--</option>
 											<option value="英文">英文</option>
 											<option value="日文">日文</option>
@@ -673,7 +673,7 @@ to {
 								<div class="resume-item">
 									<div class="resume-item-title">請選擇您希望給教師的時薪</div>
 									<div class="resume-item-content">
-										<select name="timeChoose" style="width: 100%">
+										<select name="priceChoose" style="width: 100%" required>
 											<option value="">--請選擇您希望給教師的時薪--</option>
 											<option value="500以下">500以下</option>
 											<option value="501~1000">501~1000</option>

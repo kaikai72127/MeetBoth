@@ -3,8 +3,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 
-
-
 <!DOCTYPE html>
 <html lang="zh-hant-TW">
 
@@ -241,6 +239,7 @@ body {
 	padding: 0.75rem 1rem;
 	border-top: 1px #777 solid;
 	border-bottom: 1px #777 solid;
+	margin: 0.1rem 0;
 }
 
 .comment-table-col:first-child>.comment-table-col-content {
@@ -307,6 +306,7 @@ body {
 </head>
 
 <!--BOBY-->
+
 <body data-spy="scroll" data-target=".onpage-navigation"
 	data-offset="60">
 
@@ -336,16 +336,16 @@ body {
 						<div class="resume-contact">
 							<div class="resume-contact-item">
 								<svg viewbox="0 0 48 48" width="16">
-                                <path
+												<path
 										d="M24 44q-4.15 0-7.8-1.575-3.65-1.575-6.35-4.275-2.7-2.7-4.275-6.35Q4 28.15 4 24t1.575-7.8Q7.15 12.55 9.85 9.85q2.7-2.7 6.35-4.275Q19.85 4 24 4t7.8 1.575q3.65 1.575 6.35 4.275 2.7 2.7 4.275 6.35Q44 19.85 44 24v2.65q0 2.8-1.975 4.725Q40.05 33.3 37.2 33.3q-1.8 0-3.4-.875-1.6-.875-2.45-2.475-1.3 1.7-3.25 2.525T24 33.3q-3.9 0-6.625-2.7T14.65 24q0-3.9 2.725-6.65Q20.1 14.6 24 14.6t6.625 2.75Q33.35 20.1 33.35 24v2.65q0 1.55 1.125 2.6T37.2 30.3q1.55 0 2.675-1.05Q41 28.2 41 26.65V24q0-7.1-4.95-12.05Q31.1 7 24 7q-7.1 0-12.05 4.95Q7 16.9 7 24q0 7.1 4.95 12.05Q16.9 41 24 41h10.7v3Zm0-13.7q2.65 0 4.5-1.825T30.35 24q0-2.7-1.85-4.55-1.85-1.85-4.5-1.85t-4.5 1.85Q17.65 21.3 17.65 24q0 2.65 1.85 4.475Q21.35 30.3 24 30.3Z" />
-                            </svg>
+											</svg>
 								${bean.member.eMail}
 							</div>
 							<div class="resume-contact-item">
 								<svg viewbox="0 0 48 48" width="16">
-                                <path xmlns="http://www.w3.org/2000/svg"
+												<path xmlns="http://www.w3.org/2000/svg"
 										d="M39.75 42q-6.1 0-12.125-3T16.8 31.2Q12 26.4 9 20.375 6 14.35 6 8.25q0-.95.65-1.6Q7.3 6 8.25 6h7q.7 0 1.225.475.525.475.675 1.275l1.35 6.3q.1.7-.025 1.275t-.525.975l-5 5.05q2.8 4.65 6.275 8.1Q22.7 32.9 27.1 35.3l4.75-4.9q.5-.55 1.15-.775.65-.225 1.3-.075l5.95 1.3q.75.15 1.25.75T42 33v6.75q0 .95-.65 1.6-.65.65-1.6.65Zm-28.3-23.4 4.05-4.1L14.35 9H9q0 1.95.6 4.275t1.85 5.325ZM29.9 36.75q2.05.95 4.45 1.55 2.4.6 4.65.7v-5.35l-5.15-1.05ZM11.45 18.6ZM29.9 36.75Z" />
-                            </svg>
+											</svg>
 								${bean.member.phone}
 							</div>
 						</div>
@@ -417,7 +417,6 @@ body {
 						</div>
 						<div style="display: flex">
 							<button
-								onclick="window.location='/MeetBoth/_05_teacStu.teacmail.controller?teacno=${bean.teacno}'"
 								style="display: flex; justify-content: center; align-items: center; margin: 15px auto 0 auto"
 								class="btn btn-b btn-circle mail" id="${bean.teacno}">聯絡教師</button>
 							<button
@@ -429,7 +428,7 @@ body {
 					<div class="avatar-section">
 						<div class="avatar-container">
 							<img
-								src="https://fastly.picsum.photos/id/832/200/300.jpg?hmac=6gMt7WeRsS41_901ujRTrOgfwtW9MBZ375g8qXO3LUc"
+								src="<c:url value='/_01_member.ShowPhoto.controller?account=${bean.member.account}' />"
 								alt="">
 						</div>
 						<div id="replacediv" style="padding-top: 530%;">
@@ -463,9 +462,9 @@ body {
 				<div class="case-list-header">
 					<div class="case-list-header-icon">
 						<svg viewbox="0 0 48 48">
-                        <path
+										<path
 								d="m23.95 42-14.5-7.95v-12L2 18 23.95 6 46 18v15.85h-3v-14.1l-4.55 2.3v12Zm0-15.4L39.7 18 23.95 9.55 8.3 18Zm0 12 11.5-6.35v-8.4L23.95 30l-11.5-6.25v8.5Zm.05-12Zm-.05 3.7Zm0 0Z" />
-                    </svg>
+									</svg>
 					</div>
 					<h1>評價</h1>
 				</div>
@@ -535,9 +534,9 @@ body {
 				<div class="case-list-header">
 					<div class="case-list-header-icon">
 						<svg viewbox="0 0 48 48">
-                        <path
+										<path
 								d="m23.95 42-14.5-7.95v-12L2 18 23.95 6 46 18v15.85h-3v-14.1l-4.55 2.3v12Zm0-15.4L39.7 18 23.95 9.55 8.3 18Zm0 12 11.5-6.35v-8.4L23.95 30l-11.5-6.25v8.5Zm.05-12Zm-.05 3.7Zm0 0Z" />
-                    </svg>
+									</svg>
 					</div>
 					<h1>新增評價</h1>
 				</div>
@@ -591,163 +590,163 @@ body {
 	const ratingInput = document.querySelector('#rating-input');
 
 	for (let i = 0; i < ratingElements.length; i++) {
-  		ratingElements[i].addEventListener('mouseenter', function() {
-    	for (let j = 0; j <= i; j++) {
-      		ratingElements[j].classList.remove('star-off');
-     		ratingElements[j].classList.add('star');
-    	}
-    	for (let j = i+1; j < ratingInput.value; j++) {
-        	ratingElements[j].classList.remove('star');
-        	ratingElements[j].classList.add('star-off');
-      	}
-  	});
+		ratingElements[i].addEventListener('mouseenter', function () {
+		for (let j = 0; j <= i; j++) {
+			ratingElements[j].classList.remove('star-off');
+			ratingElements[j].classList.add('star');
+		}
+		for (let j = i + 1; j < ratingInput.value; j++) {
+			ratingElements[j].classList.remove('star');
+			ratingElements[j].classList.add('star-off');
+		}
+	});
 
-  		ratingElements[i].addEventListener('mouseleave', function() {
-    	for (let j = 0; j < ratingElements.length; j++) {
-      		if (ratingElements[j].classList.contains('star')) {
-        		ratingElements[j].classList.remove('star');
-        		ratingElements[j].classList.add('star-off');
-      		}
-    	}
-  	});
+	ratingElements[i].addEventListener('mouseleave', function () {
+		for (let j = 0; j < ratingElements.length; j++) {
+			if (ratingElements[j].classList.contains('star')) {
+				ratingElements[j].classList.remove('star');
+				ratingElements[j].classList.add('star-off');
+			}
+		}
+	});
 
-  		ratingElements[i].addEventListener('click', function() {
-    	ratingInput.value = i + 1;
-    	for (let j = 0; j < ratingElements.length; j++) {
-      		ratingElements[j].classList.remove('star');
-    	}
-  	});
+	ratingElements[i].addEventListener('click', function () {
+		ratingInput.value = i + 1;
+		for (let j = 0; j < ratingElements.length; j++) {
+			ratingElements[j].classList.remove('star');
+		}
+	});
 	}
 	</script>
 	<script>
-		const scores = document.querySelectorAll("#score");
-		document.addEventListener(
+	const scores = document.querySelectorAll("#score");
+	document.addEventListener(
 		"DOMContentLoaded",
-		function() {
-			for (let i = 0; i < scores.length; i++) {
+		function () {
+		for (let i = 0; i < scores.length; i++) {
 			const starNum = scores[i].value;
 			const starDiv = scores[i].closest("#star-show");
 			let onstar = '<span><i class="fa fa-star star"></i></span>';
 			let offstar = '<span><i class="fa fa-star star-off"></i></span>';
 			let stars = '';
 			for (var j = 0; j < 5; j++) {
-			if (j < starNum) {
-			stars += onstar;
-			} else {
-			 stars += offstar;
-			}
+				if (j < starNum) {
+					stars += onstar;
+				} else {
+					stars += offstar;
+				}
 			}
 			starDiv.innerHTML = stars;
 			}
-		});
+	});
 	</script>
 	<script>
-		document.getElementById("replace").onclick = function(){
-			var item = document.getElementById("hiddenitem");
-			var item2 = document.getElementById("hiddenitem2");
-			if(item.style.display === "none"){
-				item.style.display = "inline-block";
-				item2.style.display = "none";
-			} else{
-				item2.style.display = "inline-block";
-				item.style.display = "none";
-			}
+	document.getElementById("replace").onclick = function () {
+		var item = document.getElementById("hiddenitem");
+		var item2 = document.getElementById("hiddenitem2");
+		if (item.style.display === "none") {
+			item.style.display = "inline-block";
+			item2.style.display = "none";
+		} else {
+			item2.style.display = "inline-block";
+			item.style.display = "none";
 		}
+	}
 	</script>
 	<script>
-        $(function(){
-            $('.delete').click(function(){
-                let id=$(this).attr("id");
-                Swal.fire({
-                  title: '你確定要刪除嗎?',
-                  text: "將無法恢復此筆貼文!!!",
-                  icon: 'warning',
-                  //icon:  "success", "error", "warning", "info" or "question" 這幾種選項
-                  showCancelButton: true,
-                  confirmButtonColor: 'lightred',
-                  cancelButtonColor: 'lightgrey',
-                  confirmButtonText: '確定刪除'
-//                   cancelButtonText: '取消',
-                }).then((result) => {
-                    if (result.isConfirmed) {
-                        $.ajax({
-                          //專案名稱+servlet
-                          url:'/MeetBoth/_05_teacStu.deletedata.controller',
-                          method:"get",
-                          dataType:"text",
-                          //對應name設定的名稱 並非value的名稱
-                          data: {"teacno":id},
-                        })
-                            .done(function () {
-                            	window.location='/MeetBoth/_05_teacStu.searchAllTeac.controller/1'
-                                console.log("delete")
-                             })//done
-                             .fail(function(error) {
-                                 console.log(error)
-                             })//fail end
-                    }//if
-                  })//then
+	$(function () {
+		$('.delete').click(function () {
+		let id = $(this).attr("id");
+			Swal.fire({
+				title: '你確定要刪除嗎?',
+				text: "將無法恢復此筆貼文!!!",
+				icon: 'warning',
+				//icon:  "success", "error", "warning", "info" or "question" 這幾種選項
+				showCancelButton: true,
+				confirmButtonColor: 'lightred',
+				cancelButtonColor: 'lightgrey',
+				confirmButtonText: '確定刪除'
+				//cancelButtonText: '取消',
+			}).then((result) => {
+		if (result.isConfirmed) {
+			$.ajax({
+		//專案名稱+servlet
+			url: '/MeetBoth/_05_teacStu.deletedata.controller',
+				method: "get",
+				dataType: "text",
+		//對應name設定的名稱 並非value的名稱
+				data: { "teacno": id },
+			})
+			.done(function () {
+				window.location = '/MeetBoth/_05_teacStu.searchAllTeac.controller/1'
+				console.log("delete")
+			})//done
+			.fail(function (error) {
+				console.log(error)
+			})//fail end
+			}//if
+			})//then
 
-              })//click end
-        });
+			})//click end
+		});
         //function end
-    </script>
-    <script>
-        $(function(){
-            $('.mail').click(function(){
-                let id=$(this).attr("id");
-                Swal.fire({
-                  title: '確定要寄出郵件嗎?',
-                  text: "確認後系統將會自動幫您寄送!!!",
-                  icon: 'warning',
-                  //icon:  "success", "error", "warning", "info" or "question" 這幾種選項
-                  showCancelButton: true,
-                  confirmButtonColor: 'lightred',
-                  cancelButtonColor: 'lightgrey',
-                  confirmButtonText: '確定寄出'
-//                   cancelButtonText: '取消',
-                }).then((result) => {
-                    if (result.isConfirmed) {
-                        $.ajax({
-                          //專案名稱+servlet
-                          url:'/MeetBoth/_05_teacStu.teacmail.controller',
-                          method:"get",
-                          dataType:"text",
-                          //對應name設定的名稱 並非value的名稱
-                          data: {"teacno":id},
-                        })
-                            .done(function () {
-                            	window.location='/MeetBoth/_05_teacStu.searchAllTeac.controller/1'
-                                console.log("delete")
-                             })//done
-                             .fail(function(error) {
-                                 console.log(error)
-                             })//fail end
-                    }//if
-                  })//then
-
-              })//click end
-        });
-        //function end
-    </script>
-	<script>
-    	const user = document.querySelector('input[name="user"]').value;
-    	const owner = document.querySelector('input[name="owner"]').value;
-    	if (user !== owner) {
-        	document.getElementById("replace").style.display = "none";
-    	}
 	</script>
 	<script>
-  		var teacno = document.querySelector('input[name="teacno"]');
-  		var view = teacno.value;
-  		console.log("id=" + view);
-  		window.onload = function() {
-   		var xhr = new XMLHttpRequest();
-   		xhr.open("GET",
-     		"/MeetBoth/_05_teacStu.teacview.controller?teacno="
-       		+ view, true);
-   		xhr.send();
-  		};
- 	</script>
+	$(function () {
+		$('.mail').click(function () {
+			let id = $(this).attr("id");
+			Swal.fire({
+				title: '確定要寄出郵件嗎?',
+				text: "確認後系統將會自動幫您寄送!!!",
+				icon: 'warning',
+				//icon:  "success", "error", "warning", "info" or "question" 這幾種選項
+				showCancelButton: true,
+				confirmButtonColor: 'lightred',
+				cancelButtonColor: 'lightgrey',
+				confirmButtonText: '確定寄出'
+			//cancelButtonText: '取消',
+			}).then((result) => {
+				if (result.isConfirmed) {
+					$.ajax({
+					//專案名稱+servlet
+					url: '/MeetBoth/_05_teacStu.teacmail.controller',
+					method: "get",
+					dataType: "text",
+					//對應name設定的名稱 並非value的名稱
+					data: { "teacno": id },
+				})
+				.done(function () {
+					window.location = '/MeetBoth/_05_teacStu.searchAllTeac.controller/1'
+						console.log("delete")
+				})//done
+				.fail(function (error) {
+					console.log(error)
+				})//fail end
+				}//if
+				})//then
+
+			})//click end
+	});
+    //function end
+	</script>
+	<script>
+	const user = document.querySelector('input[name="user"]').value;
+	const owner = document.querySelector('input[name="owner"]').value;
+	if (user !== owner) {
+		document.getElementById("replace").style.display = "none";
+	}
+	</script>
+	<script>
+	var teacno = document.querySelector('input[name="teacno"]');
+	var view = teacno.value;
+		console.log("id=" + view);
+		window.onload = function () {
+			var xhr = new XMLHttpRequest();
+			xhr.open("GET",
+				"/MeetBoth/_05_teacStu.teacview.controller?teacno="
+				+ view, true);
+				xhr.send();
+			};
+	</script>
 </body>
 </html>

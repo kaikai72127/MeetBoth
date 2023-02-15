@@ -331,6 +331,14 @@ public class MemberBean implements Serializable {
 	public void setTeacBean(List<TeacBean> teacBean) {
 		this.teacBean = teacBean;
 	}
+	
+	public List<StudBean> getStudBean() {
+		return studBean;
+	}
+	
+	public void setStudBean(List<StudBean> studBean) {
+		this.studBean = studBean;
+	}
 
 	public Set<OrderBean> getOrderBuy() {
 		return orderBuy;

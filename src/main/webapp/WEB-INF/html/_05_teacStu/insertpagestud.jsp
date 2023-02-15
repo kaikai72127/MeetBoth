@@ -350,21 +350,21 @@ color:lightgrey;
                     <div class="resume-table">
                         <div class="resume-item">
                             <div class="resume-item-title">需求科目</div>
-                            <div class="resume-item-content"><input name="subjectItem" style="width:500%" class="form-control input-sm" type="text" placeholder="請輸入您的需求科目...Ex:國小數學"></div>
+                            <div class="resume-item-content"><input name="subjectItem" style="width:500%" class="form-control input-sm" type="text" placeholder="請輸入您的需求科目...Ex:國小數學" required></div>
                         </div>
                         <div class="resume-item">
                             <div class="resume-item-title">上課地點</div>
                             <div class="resume-item-content">
-                                <input name="studLoc" style="width:500%" class="form-control input-sm" type="text" placeholder="請輸入您的上課地點...Ex:新北市">
+                                <input name="studLoc" style="width:500%" class="form-control input-sm" type="text" placeholder="請輸入您的上課地點...Ex:新北市" required>
                             </div>
                         </div>
                         <div class="resume-item">
                             <div class="resume-item-title">教學對象</div>
-                            <div class="resume-item-content"><input name="object" style="width:500%" class="form-control input-sm" type="text" placeholder="請輸入您的教學對象...Ex:國小"></div>
+                            <div class="resume-item-content"><input name="object" style="width:500%" class="form-control input-sm" type="text" placeholder="請輸入您的教學對象...Ex:國小" required></div>
                         </div>
                         <div class="resume-item">
                             <div class="resume-item-title">自備教材</div>
-                            <div class="resume-item-content"><input name="textBook" style="width:500%" class="form-control input-sm" type="text" placeholder="請輸入您的自備教材...Ex:希望有其他課內教材"></div>
+                            <div class="resume-item-content"><input name="textBook" style="width:500%" class="form-control input-sm" type="text" placeholder="請輸入您的自備教材...Ex:希望有其他課內教材" required></div>
                         </div>
                     </div>
 
@@ -373,19 +373,19 @@ color:lightgrey;
                         <div class="resume-table">
                             <div class="resume-item">
                                 <div class="resume-item-title">開始日期</div>
-                                <div class="resume-item-content"><input name="startDate" style="width:500%" class="form-control input-sm" type="text" placeholder="請輸入您的開始日期...Ex:隨時"></div>
+                                <div class="resume-item-content"><input name="startDate" style="width:500%" class="form-control input-sm" type="text" placeholder="請輸入您的開始日期...Ex:隨時" required></div>
                             </div>
                             <div class="resume-item">
                                 <div class="resume-item-title">課程期間</div>
-                                <div class="resume-item-content"><input name="period" style="width:500%" class="form-control input-sm" type="text" placeholder="請輸入您的課程期間...Ex:兩個月以上，每周上課兩次"></div>
+                                <div class="resume-item-content"><input name="period" style="width:500%" class="form-control input-sm" type="text" placeholder="請輸入您的課程期間...Ex:兩個月以上，每周上課兩次" required></div>
                             </div>
                             <div class="resume-item">
                                 <div class="resume-item-title">上課時段</div>
-                                <div class="resume-item-content"><input name="studTime" style="width:500%" class="form-control input-sm" type="text" placeholder="請輸入您的上課時段...Ex:平日下午"></div>
+                                <div class="resume-item-content"><input name="studTime" style="width:500%" class="form-control input-sm" type="text" placeholder="請輸入您的上課時段...Ex:平日下午" required></div>
                             </div>
                             <div class="resume-item">
                                 <div class="resume-item-title">上課方式</div>
-                                <div class="resume-item-content"><input name="classMode" style="width:500%" class="form-control input-sm" type="text" placeholder="請輸入您的上課模式...Ex:面授"></div>
+                                <div class="resume-item-content"><input name="classMode" style="width:500%" class="form-control input-sm" type="text" placeholder="請輸入您的上課模式...Ex:面授" required></div>
                             </div>
                         </div>
                     </div>
@@ -395,23 +395,23 @@ color:lightgrey;
                         <div class="resume-table">
                             <div class="resume-item">
                                 <div class="resume-item-title">薪資</div>
-                                <div class="resume-item-content"><input name="price" style="width:500%" class="form-control input-sm" type="text" placeholder="請輸入您願意給予的待遇...Ex:800"></div>
+                                <div class="resume-item-content"><input name="price" style="width:500%" class="form-control input-sm" type="text" placeholder="請輸入您願意給予的待遇...Ex:800" required></div>
                             </div>
                             <div class="resume-item">
                                 <div class="resume-item-title">老師試教</div>
-                                <div class="resume-item-content"><input name="testTeacMode" style="width:500%" class="form-control input-sm" type="text" placeholder="請輸入您的老師試教...Ex:需試教，面授"></div>
+                                <div class="resume-item-content"><input name="testTeacMode" style="width:500%" class="form-control input-sm" type="text" placeholder="請輸入您的老師試教...Ex:需試教，面授" required></div>
                             </div>
                             <div class="resume-item">
                                 <div class="resume-item-title">學歷要求</div>
-                                <div class="resume-item-content"><input name="educaLimit" style="width:500%" class="form-control input-sm" type="text" placeholder="請輸入您的學歷要求...Ex:大學以上"></div>
+                                <div class="resume-item-content"><input name="educaLimit" style="width:500%" class="form-control input-sm" type="text" placeholder="請輸入您的學歷要求...Ex:大學以上" required></div>
                             </div>
                             <div class="resume-item">
                                 <div class="resume-item-title">應徵方式</div>
-                                <div class="resume-item-content"><input name="conMethod" style="width:500%" class="form-control input-sm" type="text" placeholder="請輸入您的應徵方式...Ex:電話聯絡"></div>
+                                <div class="resume-item-content"><input name="conMethod" style="width:500%" class="form-control input-sm" type="text" placeholder="請輸入您的應徵方式...Ex:電話聯絡" required></div>
                             </div>
                             <div class="resume-item">
                                 <div class="resume-item-title">聯絡時間</div>
-                                <div class="resume-item-content"><input name="conTime" style="width:500%" class="form-control input-sm" type="text" placeholder="請輸入您的聯絡時間...Ex:平日早上"></div>
+                                <div class="resume-item-content"><input name="conTime" style="width:500%" class="form-control input-sm" type="text" placeholder="請輸入您的聯絡時間...Ex:平日早上" required></div>
                             </div>
                         </div>
                     </div>

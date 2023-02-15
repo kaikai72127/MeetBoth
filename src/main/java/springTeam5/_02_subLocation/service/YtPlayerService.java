@@ -19,6 +19,10 @@ public class YtPlayerService {
 	
 	@Autowired
 	private YtPlayerRepository ytRepo;
+	
+	public void insertYtPlayer(YtPlayer yt) {
+		ytRepo.save(yt);
+	}
 
 //	搜尋全部
 //	@Override

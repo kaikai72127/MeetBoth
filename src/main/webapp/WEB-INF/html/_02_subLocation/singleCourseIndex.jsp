@@ -263,60 +263,53 @@ a:hover {
 								<div class="post">
 									<div class="post-video embed-responsive embed-responsive-16by9"
 										style="height: auto; padding-bottom: 100px;">
-										<div style="display:flex">
-											<span>商品資料 :&ensp;</span>
+										<div style="display: flex">
+											<span>課程資料 :&ensp;</span>
 										</div>
-										<div style="display:flex">
-											<button class="MBbtn">修改</button>
-											<button class="MBbtn">刪除</button>
-										</div>
-										<div>
-											<span>商品狀態 :&ensp;${prod.prodState}</span>
-										</div>
-										<div>
-											<span>商品編號 :&ensp;${prod.prodID}</span>
+										<div style="display: flex">
+											<button class="MBbtn"
+												onclick="window.location='/MeetBoth/_02_subLocation.index.controller'">返回</button>
+											<button class="MBbtn"
+												onclick="window.location='/MeetBoth/_02_subLocation.pathToMBupdateCourse.controller?id=${course.courseID}'">修改</button>
+											<button class="MBbtn" id="deleteThisProduct"
+												name="${course.courseID}">刪除</button>
 										</div>
 										<div>
-											<span>商品名稱 :&ensp;${prod.prodName}</span>
+											<span>商品編號 :&ensp;${course.courseID}</span>
 										</div>
-										<div style="display:flex;">
+										<div>
+											<span>商品名稱 :&ensp;${course.courseName}</span>
+										</div>
+										<div style="display: flex;">
 											<span>商品圖片 :&ensp;</span>
 											<div
 												style="width: 150px; height: 200px; display: flex; justify-content: center; align-items: center; text-align: center;">
 												<img id="preImg"
 													style="max-width: 100%; max-height: 100%; height: auto; width: auto;"
-													src="<c:url value='/_03_product.showPicture.controller?id=${prod.prodID}' />" />
+													src="<c:url value='/showCoursePicture.controller?id=${course.courseID}' />" />
 											</div>
 										</div>
 										<div>
-											<span>商品類別 :&ensp;${prod.prodtype.prodClassName}</span>
+											<span>商品類別 :&ensp;${course.coursetype.courseClassName}</span>
 										</div>
 										<div>
-											<span>商品價格 :&ensp;${prod.prodPrice}</span>
+											<span>商品價格 :&ensp;${course.coursePrice}</span>
 										</div>
 										<div>
-											<span>賣家編號 :&ensp;${prod.memberID}</span>
+											<span>賣家編號 :&ensp;${course.memberBean.memberID}</span>
 										</div>
 										<div>
-											<span>庫存 :&ensp;${prod.inventory}</span>
+											<span>上架時間 :&ensp;${course.coursePost}</span>
 										</div>
 										<div>
-											<span>上架時間 :&ensp;${prod.prodPost}</span>
+											<span>更新時間 :&ensp;${course.courseUpdate}</span>
 										</div>
 										<div>
-											<span>更新時間 :&ensp;${prod.prodUpdate}</span>
+											<textarea
+												style="margin-left: 10px; resize: none; height: 325px; width: 975px; overflow-y: auto; overflow-y: auto; font-size: 17px; color: white; background-color: black;"
+												readonly>${course.courseDirections}</textarea>
 										</div>
-										<div>
-											<span>銷售數量 :&ensp;${prod.prodSales}</span>
-										</div>
-										<div>
-											<span>瀏覽次數 :&ensp;${prod.prodCheck}</span>
-										</div>
-										<div>
-											<textarea style="margin-left:10px;resize: none; height: 325px; width: 975px; overflow-y: auto; overflow-y: auto; font-size: 17px; color: white;background-color:black;"
-												readonly>${prod.directions}</textarea>
-										</div>
-										
+
 										<div>
 											<div>
 												<span>商品評論 :&ensp;</span>
@@ -337,13 +330,13 @@ a:hover {
 														</tr>
 													</thead>
 													<tbody>
-														<c:forEach var="commBean" items="${prod.productComment}">
+														<c:forEach var="commBean" items="${course.courseComment}">
 															<tr>
-																<td style="">${commBean.commentID}</td>
-																<td>${commBean.customID}</td>
-																<td>${commBean.prodScore}</td>
-																<td>${commBean.comment}</td>
-																<td>${commBean.commentDate}</td>
+																<td style="">${commBean.courseCommentID}</td>
+																<td>${commBean.memberBean.memberID}</td>
+																<td>${commBean.courseScore}</td>
+																<td>${commBean.courseComment}</td>
+																<td>${commBean.courseCommentDate}</td>
 																<td><input type="button" class="MBbtn" value="更多"
 																	onclick="#"></td>
 																<td><input type="button" class="MBbtn" value="修改"
@@ -408,6 +401,9 @@ a:hover {
 	<script type="text/javascript"
 		src="https://www.gstatic.com/charts/loader.js"></script>
 	<script src="assets/lib/jquery.mb.ytplayer/dist/jquery.mb.YTPlayer.js"></script>
+	<!-- SweetAlert js -->
+	<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+	<!-- SweetAlert js -->
 	<script>
 		$(document).ready(function() {
 			//以ul li包子選單
@@ -443,14 +439,14 @@ a:hover {
                     if (result.isConfirmed) {
                         $.ajax({
                           //專案名稱+servlet
-                         url:'/MeetBoth/_03_product.deleteProductById.controller',
+                         url:'/MeetBoth/_02_subLocation.MBdeleteCourseById.controller',
                           method:"post",
                           dataType:"text",
                           //對應name設定的名稱 並非value的名稱
                           data: {"id":id},
                         })
                             .done(function () {
-                            	window.location='/MeetBoth/_03_product.searchAllProduct.controller'
+                            	window.location='/MeetBoth/_02_subLocation.index.controller'
                                 console.log("delete")
                              })//done
                              .fail(function(error) {

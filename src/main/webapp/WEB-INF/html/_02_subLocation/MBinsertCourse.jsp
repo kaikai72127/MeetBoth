@@ -295,7 +295,7 @@ a:hover {
 											<span>課程價格 :&ensp;<input type="number" value="1" min="0" name="cPrice" class="MBinput" placeholder="只能數字"></span>
 										</div>
 										<div>
-											<span>賣家編號 :&ensp;<input type="text" name="memID" class="MBinput" placeholder="只能編號" required="required"></span>
+											<span>賣家編號 :&ensp;<input type="text" name="memID" class="MBinput" placeholder="只能編號" required="required" value="${memberBean.memberID}"></span>
 										</div>
 										<div>
 											<span>上架時間 :&ensp;<input type="text" name="ppo" class="MBinput" placeholder="自動產生" readonly></span>

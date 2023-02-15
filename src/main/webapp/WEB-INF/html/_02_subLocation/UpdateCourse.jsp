@@ -31,7 +31,7 @@ String basePathimg2 = request.getScheme() + "://" + request.getServerName() + ":
 			<div class="loader">Loading...</div>
 		</div>
 		<div class="main" style="background-color: #F0F0F0;">
-			<form action='<c:url value="/updateCourse.controller" />'
+			<form action='<c:url value="/updateCourseDate.controller" />'
 				enctype='multipart/form-data' method='post' id="form1">
 				<c:forEach var="bean" items="${bean}">
 					<section class="module" style="padding-bottom: 20px">
@@ -41,8 +41,8 @@ String basePathimg2 = request.getScheme() + "://" + request.getServerName() + ":
 							<div class="row">
 								<button class="btn btn-warning btn-circle" type="button"
 									style="height: 43px; font-size: 19px;"
-									onclick="window.location='/MeetBoth/searchAllCourse.controller'">
-									<span class="icon-browser">&ensp;回到商品目錄</span>
+									onclick="window.location='/MeetBoth/pathToMemberCourse.controller'">
+									<span class="icon-browser">&ensp;回到課程目錄</span>
 								</button>
 							</div>
 						</div>
@@ -51,11 +51,11 @@ String basePathimg2 = request.getScheme() + "://" + request.getServerName() + ":
 						<div class="container">
 							<div class="row">
 								<!-- 						圖片BLOCK -->
-								<div class="col-sm-6 mb-sm-40" style="width: 42%;">
-									<span class="amount">修改商品照片</span> <input type="file"
+								<div class="col-sm-6 mb-sm-40">
+									<span class="amount">修改課程照片</span> <input type="file"
 										name="images" id="images5278" style="width: 80%"
 										accept=".jpg,.png"> <img id="preImg"
-										style="width: 445px; height: 600px"
+										style="display: flex; justify-content: center; align-items: center; max-width: 50%; max-height: 50%; height: auto; width: auto;"
 										src="<c:url value='/showCoursePicture.controller?id=${bean.courseID}' />" />
 								</div>
 								<!-- 							圖片右邊BLOCK -->
@@ -64,7 +64,7 @@ String basePathimg2 = request.getScheme() + "://" + request.getServerName() + ":
 										<div class="col-sm-12">
 											<div class="price font-alt" style="display: flex;">
 												<span class="amount"
-													style="font-size: 25px; text-align: center;">商品名稱:&ensp;</span>
+													style="font-size: 25px; text-align: center;">課程名稱:&ensp;</span>
 												<input class="form-control input-lg" type="text"
 													name="courseName" required="required"
 													value="${bean.courseName}"
@@ -76,7 +76,7 @@ String basePathimg2 = request.getScheme() + "://" + request.getServerName() + ":
 										<div class="col-sm-12">
 											<div class="price font-alt" style="display: flex;">
 												<span class="amount"
-													style="font-size: 25px; text-align: center;">商品編號:&ensp;</span>
+													style="font-size: 25px; text-align: center;">課程編號:&ensp;</span>
 												<input class="form-control input-lg" type="text"
 													name="courseID" required="required" readonly
 													value="${bean.courseID}"
@@ -88,7 +88,7 @@ String basePathimg2 = request.getScheme() + "://" + request.getServerName() + ":
 										<div class="col-sm-12">
 											<div class="price font-alt" style="display: flex;">
 												<span class="amount"
-													style="font-size: 25px; text-align: center;">商品類別:&ensp;</span>
+													style="font-size: 25px; text-align: center;">課程類別:&ensp;</span>
 												<input type="hidden" name="typeClassNum"
 													value="${bean.coursetype.courseClass}"> <select
 													name="courseClass"
@@ -106,7 +106,7 @@ String basePathimg2 = request.getScheme() + "://" + request.getServerName() + ":
 										<div class="col-sm-12">
 											<div class="price font-alt" style="display: flex;">
 												<span class="amount"
-													style="font-size: 25px; text-align: center;">商品價格:&ensp;</span>
+													style="font-size: 25px; text-align: center;">課程價格:&ensp;</span>
 												<input class="form-control input-lg" type="number"
 													name="coursePrice" id="amount" required="required" min="0"
 													value="${bean.coursePrice}"
@@ -122,7 +122,7 @@ String basePathimg2 = request.getScheme() + "://" + request.getServerName() + ":
 													style="font-size: 25px; text-align: center;">賣家編號:&ensp;</span>
 												<input class="form-control input-lg" type="text"
 													name="memberID" required="required"
-													value="${bean.memberID}" readonly
+													value="${memberBean.memberID}" readonly
 													style="width: 80%; font-size: 20px; letter-spacing: 0px; border: 1px solid black; border-radius: 15px; text-align: center;" />
 											</div>
 										</div>
@@ -130,6 +130,8 @@ String basePathimg2 = request.getScheme() + "://" + request.getServerName() + ":
 								</div>
 							</div>
 							<!-- 						中間BLOCK -->
+
+
 						</div>
 					</section>
 					<section class="module" style="padding: 20px">
@@ -140,7 +142,7 @@ String basePathimg2 = request.getScheme() + "://" + request.getServerName() + ":
 									<div class="col-sm-12">
 										<div class="price font-alt" style="">
 											<span class="amount"
-												style="font-size: 25px; text-align: center; margin-left: 10px">商品介紹:&ensp;</span>
+												style="font-size: 25px; text-align: center; margin-left: 10px">課程介紹:&ensp;</span>
 											<textarea class="form-control" id="directions"
 												name="directions"
 												style="text-transform: none; resize: none; height: 425px; width: 100%; overflow-y: auto; font-size: 17px; color: black; border: 1px solid black; border-radius: 15px;">${bean.courseDirections}</textarea>
@@ -154,6 +156,90 @@ String basePathimg2 = request.getScheme() + "://" + request.getServerName() + ":
 							</div>
 						</div>
 					</section>
+
+					<section class="module" style="padding: 20px">
+					<div class="container">
+<!-- 												BLOCK -->
+<!-- 						<div class="row mt-70"> -->
+<!-- 							<div class="col-sm-12"> -->
+<!-- 								<ul class="nav nav-tabs font-alt" role="tablist"> -->
+<!-- 									<li class="active"><a href="#description" -->
+<!-- 										data-toggle="tab" style="font-size: 17px;"><span -->
+<!-- 											class="icon-tools-2"></span>課程影片</a></li> -->
+<!-- 																		<li><a href="#data-sheet" data-toggle="tab" -->
+<!-- 																			style="font-size: 17px;"><span class="icon-tools-2"></span>課程簡介</a></li> -->
+<!-- 																		<li><a href="#reviews" data-toggle="tab" -->
+<!-- 																			style="font-size: 17px;"><span class="icon-tools-2"></span>課程頻論(commentAmount)</a></li> -->
+<!-- 								</ul> -->
+<!-- 								<div class="tab-content"> -->
+<!-- 										影片資訊 -->
+<!-- 									<div class="tab-pane active" id="yt"> -->
+<!-- 										<div class="comments reviews"> -->
+<!-- 																					課程 forEach -->
+<!-- 											<div style="height: 500px; width: 100%; overflow-y: scroll;"> -->
+<%-- 												<c:forEach var="ytBean" items="${ytBean}"> --%>
+<!-- 													<div class="col-sm-6 col-md-3 col-lg-3" -->
+<!-- 														style="padding-bottom: 10px; width: 445px; height: 600px; display: flex; justify-content: center; align-items: center;"> -->
+<!-- 														<div class="comment-content clearfix"> -->
+<!-- 															<div class="comment-author font-alt" style="margin: 0;"> -->
+<%-- 																<a href="#" style="font-size: 15px;">${ytBean.ytPlayerName}</a> --%>
+<!-- 															</div> -->
+<!-- 															<div> -->
+<!-- 																<iframe -->
+<!-- 																	style="max-width: 100%; max-height: 100%; height: auto; width: auto;" -->
+<!-- 																	class="embed-responsive-item" -->
+<%-- 																	src="//www.youtube.com/embed/${ytBean.ytPlayerURL}" --%>
+<!-- 																	frameborder="0" allowfullscreen="allowfullscreen"></iframe> -->
+<!-- 															</div> -->
+<!-- 														</div> -->
+<!-- 													</div> -->
+<%-- 												</c:forEach> --%>
+<!-- 											</div> -->
+<!-- 																					課程 forEach end -->
+<!-- 										</div> -->
+<!-- 										<hr> -->
+<!-- 																				新增評論 -->
+<!-- 										<div class="comment-form mt-30"> -->
+<!-- 											<h2 style="font-size: 23px;" -->
+<!-- 												class="comment-form-title font-alt">新增課程影片</h2> -->
+<%-- 											<form method='post' action='<c:url value="/insertYtPlayer.controller?id=${bean.courseID}" />'> --%>
+<%-- 												<input type="hidden" name="id" value="${bean.courseID}" /> --%>
+<!-- 												<div class="row"> -->
+<!-- 													<div class="col-sm-4"> -->
+<!-- 														<div class="form-group"> -->
+<!-- 															<label class="sr-only" for="name">Name</label> <input -->
+<!-- 																class="form-control" id="ytPlayerName" type="text" -->
+<!-- 																name="ytPlayerName" placeholder="Name" -->
+<!-- 																style="text-transform: none; font-size: 17px; height: 35px;" /> -->
+<!-- 														</div> -->
+<!-- 													</div> -->
+<!-- 													<div class="col-sm-12"> -->
+<!-- 														<div class="form-group"> -->
+<!-- 															<label class="sr-only" for="name">URL</label> <input -->
+<!-- 																class="form-control" id="ytPlayerURL" type="text" -->
+<!-- 																name="ytPlayerURL" placeholder="URL" -->
+<!-- 																style="text-transform: none; font-size: 17px; height: 35px;" /> -->
+<!-- 														</div> -->
+<!-- 													</div> -->
+<!-- 													<div class="col-sm-12"> -->
+<!-- 														<button class="btn btn-round btn-d" type="submit" -->
+<!-- 															style="height: 50px; font-size: 22px; float: right;">新增課程影片</button> -->
+<!-- 													</div> -->
+<!-- 												</div> -->
+<!-- 											</form> -->
+<!-- 										</div> -->
+<!-- 																				課程評論 end -->
+<!-- 									</div> -->
+<!-- 										影片資訊 end -->
+<!-- 								</div> -->
+<!-- 							</div> -->
+<!-- 						</div> -->
+<!-- 						</div> -->
+<!-- 					</section> -->
+<!-- 											BLOCK -->
+
+
+
 				</c:forEach>
 			</form>
 
@@ -162,7 +248,7 @@ String basePathimg2 = request.getScheme() + "://" + request.getServerName() + ":
 			<!-- 引入共同的footerMVC -->
 			<jsp:include page="/WEB-INF/html/fragment/footerMVC.jsp" />
 		</div>
-		
+
 	</main>
 	<!--  
     JavaScripts

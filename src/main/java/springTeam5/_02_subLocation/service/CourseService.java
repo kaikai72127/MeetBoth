@@ -19,6 +19,11 @@ public class CourseService {
 	@Autowired
 	private CourseRepository cRepo;
 
+//	新增課程	
+	public void insertCourse(Course c) {
+		cRepo.save(c);
+	}
+	
 //	搜尋全部
 //	@Override
 	public List<Course> searchAllCourse() throws SQLException {
@@ -74,10 +79,8 @@ public class CourseService {
 	public List<Course> findRandomCourses(){
 		return cRepo.findRandomCourses();
 	}
+
 	
-//	透過 CourseID 搜尋全部的 commentBean
-	public List<Course> searchAllCourseByMemberID(Integer id) throws SQLException {
-		return cRepo.findByMemberID(id);
-	}
+
 
 }

@@ -13,6 +13,8 @@ import javax.persistence.Transient;
 
 import org.springframework.stereotype.Component;
 
+import springTeam5._01_member.model.MemberBean;
+
 
 @Entity
 @Table(name = "COURSECOMMENT")
@@ -24,8 +26,7 @@ public class CourseComment {
 	@Column(name = "COURSECOMMENTID")
 	private int courseCommentID;
 
-	@Column(name = "COURSECUSTOMID")
-	private int courseCustomID;
+	
 
 	@Column(name = "COURSESCORE")
 	private int courseScore;
@@ -43,6 +44,10 @@ public class CourseComment {
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "COURSEID")
 	private Course course;
+	
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "COURSECUSTOMID")
+	private MemberBean memberBean;
 
 	public CourseComment() {
 	}
@@ -55,13 +60,7 @@ public class CourseComment {
 		this.courseCommentID = courseCommentID;
 	}
 
-	public int getCourseCustomID() {
-		return courseCustomID;
-	}
 
-	public void setCourseCustomID(int courseCustomID) {
-		this.courseCustomID = courseCustomID;
-	}
 
 	public int getCourseScore() {
 		return courseScore;
@@ -102,16 +101,25 @@ public class CourseComment {
 	public void setCourse(Course course) {
 		this.course = course;
 	}
+	
+	public MemberBean getMemberBean() {
+		return memberBean;
+	}
 
-	public CourseComment(int courseCommentID, int courseCustomID, int courseScore, String courseComment,
-			String courseCommentDate, int courseID, Course course) {
+	public void setMemberBean(MemberBean memberBean) {
+		this.memberBean = memberBean;
+	}
+
+	public CourseComment(int courseCommentID, int courseScore, String courseComment,
+			String courseCommentDate, int courseID, Course course, MemberBean memberBean) {
 		super();
 		this.courseCommentID = courseCommentID;
-		this.courseCustomID = courseCustomID;
+
 		this.courseScore = courseScore;
 		this.courseComment = courseComment;
 		this.courseCommentDate = courseCommentDate;
 		this.courseID = courseID;
 		this.course = course;
+		this.memberBean = memberBean;
 	}
 }

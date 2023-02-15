@@ -304,7 +304,7 @@ a:hover {
 													type="text" name="coursePrice" class="MBinput" placeholder="只能數字"></span>
 											</div>
 											<div>
-												<span>賣家編號 :&ensp;<input value="${course.memberID}"
+												<span>賣家編號 :&ensp;<input value="${memberBean.memberID}"
 													type="text" name="memberID" class="MBinput" placeholder="只能編號"></span>
 											</div>
 											<div>

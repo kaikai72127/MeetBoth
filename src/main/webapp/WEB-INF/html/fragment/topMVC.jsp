@@ -316,6 +316,9 @@
                   <li><a href="/MeetBoth/_03_product/pathToMyPDP.controller" class="dropdown-item">我的賣場 <i
                         class="fa-solid fa-right-from-bracket"></i>
                     </a></li>
+                  <li><a href="/MeetBoth/pathToMemberCourse.controller" class="dropdown-item">我的課程 <i
+                        class="fa-solid fa-right-from-bracket"></i>
+                    </a></li>  
                   <li id="admincontroller"><a href="/MeetBoth/_03_product.index.controller" class="dropdown-item">後臺管理
                       <i class="fa-solid fa-right-from-bracket"></i>
                     </a></li>

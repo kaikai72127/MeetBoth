@@ -45,19 +45,19 @@ String basePathimg2 = request.getScheme() + "://" + request.getServerName() + ":
 							<button class="btn btn-warning btn-circle" type="button"
 								style="height: 43px; font-size: 19px;"
 								onclick="window.location='/MeetBoth/searchAllCourse.controller'">
-								<span class="icon-browser">&ensp;回到商品目錄</span>
+								<span class="icon-browser">&ensp;回到課程目錄</span>
 							</button>
-<!-- 							&nbsp; -->
-<!-- 							<button class="btn btn-primary  btn-circle" type="button" -->
-<!-- 								style="height: 43px; font-size: 19px;" -->
-<%-- 								onclick="window.location='/MeetBoth/catchSingleCourseDate.controller?id=${bean.courseID}'"> --%>
-<!-- 								<span class=" icon-gears">&ensp;修改商品</span> -->
-<!-- 							</button> -->
-<!-- 							&nbsp; -->
-<!-- 							<button class="btn btn-danger btn-circle" type="button" -->
-<%-- 								id="deleteThisProduct" name="${bean.courseID}" --%>
-<!-- 								style="height: 43px; font-size: 19px;"> -->
-<!-- 								<span class="icon-recycle">&ensp;刪除商品</span> -->
+							<!-- 							&nbsp; -->
+							<!-- 							<button class="btn btn-primary  btn-circle" type="button" -->
+							<!-- 								style="height: 43px; font-size: 19px;" -->
+							<%-- 								onclick="window.location='/MeetBoth/catchSingleCourseDate.controller?id=${bean.courseID}'"> --%>
+							<!-- 								<span class=" icon-gears">&ensp;修改課程</span> -->
+							<!-- 							</button> -->
+							<!-- 							&nbsp; -->
+							<!-- 							<button class="btn btn-danger btn-circle" type="button" -->
+							<%-- 								id="deleteThisProduct" name="${bean.courseID}" --%>
+							<!-- 								style="height: 43px; font-size: 19px;"> -->
+							<!-- 								<span class="icon-recycle">&ensp;刪除課程</span> -->
 							</button>
 						</div>
 					</div>
@@ -65,8 +65,10 @@ String basePathimg2 = request.getScheme() + "://" + request.getServerName() + ":
 					<div class="container">
 						<div class="row">
 							<!-- 						圖片BLOCK -->
-							<div class="col-sm-6 mb-sm-40"  style="width: 445px; height: 600px; display: flex; justify-content: center; align-items: center;">
-								<img id="preImg" style="max-width: 100%; max-height: 100%; height: auto; width: auto;"
+							<div class="col-sm-6 mb-sm-40"
+								style="width: 445px; height: 600px; display: flex; justify-content: center; align-items: center;">
+								<img id="preImg"
+									style="max-width: 100%; max-height: 100%; height: auto; width: auto;"
 									src="<c:url value='/showCoursePicture.controller?id=${bean.courseID}' />" />
 							</div>
 							<!-- 							圖片右邊BLOCK -->
@@ -85,7 +87,7 @@ String basePathimg2 = request.getScheme() + "://" + request.getServerName() + ":
 													value="${commbean.courseScore}" />
 											</c:forEach>
 											<div style="display: flex; float: left;">
-												<div style="font-size: 18px;">商品評價:</div>
+												<div style="font-size: 18px;">課程評價:</div>
 												<div id="starAVGDiv" style="font-size: 17px;"></div>
 											</div>
 										</div>
@@ -99,49 +101,54 @@ String basePathimg2 = request.getScheme() + "://" + request.getServerName() + ":
 										</div>
 									</div>
 								</div>
-								<!-- 								商品資訊 -->
+								<!-- 								課程資訊 -->
 								<div class="row mb-20">
 									<div class="col-sm-12">
 										<div class="description">
-											<h4>商品編號 : ${bean.courseID}</h4>
+											<h4>課程編號 : ${bean.courseID}</h4>
 										</div>
 									</div>
 								</div>
 								<div class="row mb-20">
 									<div class="col-sm-12">
 										<div class="description">
-											<h4>商品類別名稱 : ${bean.coursetype.courseClassName}</h4>
+											<h4>課程類別名稱 : ${bean.coursetype.courseClassName}</h4>
 										</div>
 									</div>
 								</div>
 								<div class="row mb-20">
 									<div class="col-sm-12">
 										<div class="description">
-											<h4>商品上架日期 : ${bean.coursePost}</h4>
+											<h4>課程上架日期 : ${bean.coursePost}</h4>
 										</div>
 									</div>
 								</div>
 								<div class="row mb-20">
 									<div class="col-sm-12">
 										<div class="description">
-											<h4>商品上次資訊更新日期 : ${bean.courseUpdate}</h4>
+											<h4>課程上次資訊更新日期 : ${bean.courseUpdate}</h4>
 										</div>
 									</div>
 								</div>
-								<!-- 								商品資訊 -->
+								<!-- 								課程資訊 -->
 								<div class="row mb-20">
-									<div class="col-sm-4 mb-sm-20">
-										<input class="form-control input-lg" type="number"
-											name="chooseAmount" id="amount" value="1" max="1" min="1"
-											required="required"
-											style="font-size: 25px; letter-spacing: 0px; border: 1px solid black; border-radius: 30px; text-align: center;" />
-									</div>
-									<div class="col-sm-8">
-										<a class="btn btn-p btn-circle" href="#"
-											style="height: 43px; font-size: 19px;">加入購物車</a>
-									</div>
+									<form
+										action="<c:url value='/shoppingCartPayAioConfirm.controller' />"
+										method="GET">
+										<div class="col-sm-4 mb-sm-20">
+											<input class="form-control input-lg" type="number"
+												name="chooseAmount" id="amount" value="1" max="1" min="1"
+												required="required"
+												style="font-size: 25px; letter-spacing: 0px; border: 1px solid black; border-radius: 30px; text-align: center;" />
+										</div>
+										<div class="col-sm-8">
+											<a class="btn btn-p btn-circle" href="#"
+												style="height: 43px; font-size: 19px;">加入購物車</a>
+										</div>
+									</form>
 								</div>
-								<!-- 								商品資訊 -->
+
+								<!-- 								課程資訊 -->
 							</div>
 						</div>
 						<!-- 						中間BLOCK -->
@@ -152,9 +159,9 @@ String basePathimg2 = request.getScheme() + "://" + request.getServerName() + ":
 										data-toggle="tab" style="font-size: 17px;"><span
 											class="icon-tools-2"></span>賣家訊息</a></li>
 									<li><a href="#data-sheet" data-toggle="tab"
-										style="font-size: 17px;"><span class="icon-tools-2"></span>商品簡介</a></li>
+										style="font-size: 17px;"><span class="icon-tools-2"></span>課程簡介</a></li>
 									<li><a href="#reviews" data-toggle="tab"
-										style="font-size: 17px;"><span class="icon-tools-2"></span>商品評論(${bean.courseComment.size()})</a></li>
+										style="font-size: 17px;"><span class="icon-tools-2"></span>課程評論(${bean.courseComment.size()})</a></li>
 								</ul>
 								<div class="tab-content">
 									<!-- 	賣家資訊 -->
@@ -184,7 +191,7 @@ String basePathimg2 = request.getScheme() + "://" + request.getServerName() + ":
 										</div>
 									</div>
 									<!-- 	賣家資訊 end-->
-									<!-- 											商品簡介 -->
+									<!-- 											課程簡介 -->
 									<div class="tab-pane" id="data-sheet">
 										<div>
 											<textarea id="prod_articel_body_directions"
@@ -192,11 +199,11 @@ String basePathimg2 = request.getScheme() + "://" + request.getServerName() + ":
 												readonly>${bean.courseDirections}</textarea>
 										</div>
 									</div>
-									<!-- 										商品簡介 end -->
-									<!-- 										商品評論 -->
+									<!-- 										課程簡介 end -->
+									<!-- 										課程評論 -->
 									<div class="tab-pane" id="reviews">
 										<div class="comments reviews">
-											<!-- 										商品評論 forEach -->
+											<!-- 										課程評論 forEach -->
 											<div style="height: 650px; width: 100%; overflow-y: scroll;">
 												<c:forEach var="commbean" items="${commBean}">
 													<div class="comment clearfix">
@@ -223,7 +230,7 @@ String basePathimg2 = request.getScheme() + "://" + request.getServerName() + ":
 													</div>
 												</c:forEach>
 											</div>
-											<!-- 										商品評論 forEach end-->
+											<!-- 										課程評論 forEach end-->
 										</div>
 										<hr>
 										<!-- 										新增評論 -->
@@ -269,7 +276,7 @@ String basePathimg2 = request.getScheme() + "://" + request.getServerName() + ":
 												</div>
 											</form>
 										</div>
-										<!-- 										商品評論 end -->
+										<!-- 										課程評論 end -->
 									</div>
 								</div>
 							</div>
@@ -284,7 +291,7 @@ String basePathimg2 = request.getScheme() + "://" + request.getServerName() + ":
 				<div class="container">
 					<div class="row">
 						<div class="col-sm-6 col-sm-offset-3">
-							<h2 class="module-title font-alt">相似熱門商品</h2>
+							<h2 class="module-title font-alt">相似熱門課程</h2>
 						</div>
 					</div>
 					<div class="row multi-columns-row">
@@ -299,7 +306,7 @@ String basePathimg2 = request.getScheme() + "://" + request.getServerName() + ":
 										<div class="shop-item-detail">
 											<a
 												href="/MeetBoth/PathToCourseDetail.controller?id=${prodLikeBean.courseID}"
-												class="btn btn-round btn-p"><span class="icon-heart">查看商品頁面</span><span
+												class="btn btn-round btn-p"><span class="icon-heart">查看課程頁面</span><span
 												class="icon-heart"></span></a>
 										</div>
 									</div>

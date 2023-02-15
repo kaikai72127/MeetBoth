@@ -21,13 +21,15 @@ import javax.persistence.Table;
 
 import org.springframework.stereotype.Component;
 
-import springTeam5._05_teacStu.model.StudBean;
-import springTeam5._03_product.model.Product;
-import springTeam5._03_product.model.ProductComment;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import springTeam5._02_subLocation.model.Course;
+import springTeam5._02_subLocation.model.CourseComment;
+import springTeam5._03_product.model.Product;
+import springTeam5._03_product.model.ProductComment;
 import springTeam5._04_shoppingCart.model.OrderBean;
 import springTeam5._04_shoppingCart.model.OrderItemBean;
+import springTeam5._05_teacStu.model.StudBean;
 import springTeam5._05_teacStu.model.TeacBean;
 
 
@@ -112,6 +114,16 @@ public class MemberBean implements Serializable {
 	private Set<ProductComment> productComment = new LinkedHashSet<ProductComment>();
 //	連結商品 結束
 	
+//	連結商品
+	@JsonIgnore
+	@OneToMany(fetch = FetchType.LAZY,mappedBy = "memberBean",cascade = CascadeType.ALL)
+	private Set<Course> course = new LinkedHashSet<Course>();
+
+	@JsonIgnore
+	@OneToMany(fetch = FetchType.LAZY,mappedBy = "memberBean",cascade = CascadeType.ALL)
+	private Set<CourseComment> courseComment = new LinkedHashSet<CourseComment>();
+//	連結商品 結束
+	
 	
 	public String getRole() {
 		return role;
@@ -190,6 +202,22 @@ public class MemberBean implements Serializable {
 
 	public void setProductComment(Set<ProductComment> productComment) {
 		this.productComment = productComment;
+	}
+	
+	public Set<Course> getCourse() {
+		return course;
+	}
+
+	public void setCourse(Set<Course> course) {
+		this.course = course;
+	}
+
+	public Set<CourseComment> getCourseComment() {
+		return courseComment;
+	}
+
+	public void setCourseComment(Set<CourseComment> courseComment) {
+		this.courseComment = courseComment;
 	}
 
 	public int getMemberID() {

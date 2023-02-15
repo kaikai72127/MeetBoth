@@ -332,14 +332,14 @@ a:hover {
 																<td>${bean.courseName}</td>
 																<td>${bean.coursetype.courseClassName}</td>
 																<td>NT$${bean.coursePrice}</td>
-																<td>${bean.memberID}</td>
+																<td>${bean.memberBean.memberID}</td>
 																<td>${bean.coursePost}</td>
 																<td><input type="button" class="MBbtn" value="更多"
 																	onclick="window.location='/MeetBoth/_02_subLocation.singleCourseIndex.controller?id=${bean.courseID}'"></td>
 																<td><input type="button" class="MBbtn" value="修改"
 																	onclick="window.location='/MeetBoth/_02_subLocation.pathToMBupdateCourse.controller?id=${bean.courseID}'"></td>
 																<td style="border-right: none"><input type="button"
-																	class="MBbtn" value="刪除" id="deleteThisProduct"
+																	class="MBbtn deleteThisProduct"  value="刪除" id=""
 																	name="${bean.courseID}"></td>
 															</tr>
 														</c:forEach>
@@ -421,7 +421,7 @@ a:hover {
 	<script>
 	
         $(function(){
-        	$('#deleteThisProduct').click(function(){
+        	$('.deleteThisProduct').click(function(){
                 let id=$(this).attr("name");
                 Swal.fire({
                   title: '你確定要刪除嗎?',

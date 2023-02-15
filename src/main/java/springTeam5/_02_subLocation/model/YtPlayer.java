@@ -13,6 +13,8 @@ import javax.persistence.Transient;
 
 import org.springframework.stereotype.Component;
 
+import springTeam5._01_member.model.MemberBean;
+
 @Entity
 @Table(name = "YTPLAYER")
 @Component
@@ -36,10 +38,22 @@ public class YtPlayer {
 	
 	@Column(name = "YTPLAYERURL")
 	private String ytPlayerURL;
+	
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "YTPLAYERCUSTOMID")
+	private MemberBean memberBean;
 
 	public YtPlayer() {
 	}
 
+	public MemberBean getMemberBean() {
+		return memberBean;
+	}
+
+	public void setMemberBean(MemberBean memberBean) {
+		this.memberBean = memberBean;
+	}
+	
 	public int getYtPlayerID() {
 		return ytPlayerID;
 	}
@@ -80,13 +94,14 @@ public class YtPlayer {
 		this.ytPlayerURL = ytPlayerURL;
 	}
 
-	public YtPlayer(int ytPlayerID, int courseID, Course course, String ytPlayerName, String ytPlayerURL) {
+	public YtPlayer(int ytPlayerID, int courseID, Course course, String ytPlayerName, String ytPlayerURL, MemberBean memberBean) {
 		super();
 		this.ytPlayerID = ytPlayerID;
 		this.courseID = courseID;
 		this.course = course;
 		this.ytPlayerName = ytPlayerName;
 		this.ytPlayerURL = ytPlayerURL;
+		this.memberBean = memberBean;
 	}
 
 	

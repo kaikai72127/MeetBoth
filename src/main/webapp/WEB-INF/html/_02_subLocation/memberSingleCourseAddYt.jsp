@@ -30,7 +30,7 @@
 						<div class="row">
 							<button class="btn btn-warning btn-circle" type="button"
 								style="height: 43px; font-size: 19px;"
-								onclick="window.location='/MeetBoth/PathToMemberCourse.controller?id=${bean.memberID}'">
+								onclick="window.location='/MeetBoth/pathToMemberCourse.controller'">
 								<span class="icon-browser">&ensp;回到課程目錄</span>
 							</button>
 							&nbsp;
@@ -52,7 +52,7 @@
 						<div class="row">
 							<!-- 						圖片BLOCK -->
 							<div class="col-sm-6 mb-sm-40"
-								style="width: 445px; height: 600px; display: flex; justify-content: center; align-items: center;">
+								style="width: 445px; height: 250px; display: flex; justify-content: center; align-items: center;">
 								<img id="preImg"
 									style="max-width: 100%; max-height: 100%; height: auto; width: auto;"
 									src="<c:url value='/showCoursePicture.controller?id=${bean.courseID}' />" />
@@ -101,7 +101,7 @@
 											<h4>課程類別名稱 : ${bean.coursetype.courseClassName}</h4>
 										</div>
 									</div>
-								</div>
+								</div> 
 								<div class="row mb-20">
 									<div class="col-sm-12">
 										<div class="description">
@@ -149,8 +149,8 @@
 									<div class="tab-pane active" id="yt">
 										<div class="comments reviews">
 											<!-- 										課程 forEach -->
-											<div style="height: 650px; width: 100%; overflow-y: scroll;">
-												<c:forEach var="ytBean" items="${ytBean}">
+											<div style="height: 300px; width: 100%; overflow-y: scroll;">
+												<c:forEach var="ytBean" items="${bean.YtPlayer}">
 													<div class="col-sm-6 col-md-3 col-lg-3"
 														style="padding-bottom: 10px; width: 445px; height: 600px; display: flex; justify-content: center; align-items: center;">
 														<div class="comment-content clearfix">

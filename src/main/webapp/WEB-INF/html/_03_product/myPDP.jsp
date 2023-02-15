@@ -214,7 +214,7 @@ h1 {
 									<input type="button" value="返回首頁"
 										class="btn btn-info btn-circle"
 										style="font-size: 17px; color: black;"
-										onclick="window.location='/MeetBoth/_03_product.searchAllProduct.controller'">
+										onclick="window.location='/MeetBoth/_03_product.searchAllProduct.controller/1'">
 									&nbsp; <input type="button" value="新增商品"
 										class="btn btn-warning btn-circle"
 										style="font-size: 17px; color: black;"
@@ -242,7 +242,7 @@ h1 {
 														</div>
 														<div class="widget-posts-meta" style="display: flex;height:38px;">
 															商品狀態 : ${prodBean.prodState}
-															<div style="position: relative; left: 310; bottom: 30;display:grid;">
+															<div style="position: relative; left: 280; bottom: 30;display:grid;">
 																<button class="btn btn-b btn-circle"
 																	style="font-size: 17px;margin-bottom:10px;"onclick="window.location='/MeetBoth/_03_product.catchSingleProductDate.controller?id=${prodBean.prodID}'">修改</button>
 																<button class="btn btn-b btn-circle deleteThisProduct" name="${prodBean.prodID}"
@@ -272,157 +272,6 @@ h1 {
 								</div>
 							</div>
 							<!--       商品列 -->
-							<!--訂單管理 -->
-							<div class="post-header font-alt" style="display: flex;">
-								<img src="/MeetBoth/html/assets/images/shop/兔年海報2.jpg"
-									style="padding-bottom: 10px;">
-							</div>
-							<div class="row mt-70" style="margin-top: 0px !important;">
-								<div class="col-sm-12">
-									<ul class="nav nav-tabs font-alt" role="tablist">
-										<li class="active"><a href="#description"
-											data-toggle="tab"><span class="icon-tools-2"></span>Description</a></li>
-										<li><a href="#data-sheet" data-toggle="tab"><span
-												class="icon-tools-2"></span>Data sheet</a></li>
-										<li><a href="#reviews" data-toggle="tab"><span
-												class="icon-tools-2"></span>Reviews (2)</a></li>
-									</ul>
-									<div class="tab-content">
-										<div class="tab-pane active" id="description">
-											<p>Everyone realizes why a new common language would be
-												desirable: one could refuse to pay expensive translators. To
-												achieve this, it would be necessary to have uniform grammar,
-												pronunciation and more common words. If several languages
-												coalesce, the grammar of the resulting language is more
-												simple and regular than that of the individual languages.</p>
-											<p>The European languages are members of the same family.
-												Their separate existence is a myth. For science, music,
-												sport, etc, Europe uses the same vocabulary. The languages
-												only differ in their grammar, their pronunciation and their
-												most common words.</p>
-										</div>
-										<div class="tab-pane" id="data-sheet">
-											<table class="table table-striped ds-table table-responsive">
-												<tbody>
-													<tr>
-														<th>Title</th>
-														<th>Info</th>
-													</tr>
-													<tr>
-														<td>Compositions</td>
-														<td>Jeans</td>
-													</tr>
-													<tr>
-														<td>Size</td>
-														<td>44, 46, 48</td>
-													</tr>
-													<tr>
-														<td>Color</td>
-														<td>Black</td>
-													</tr>
-													<tr>
-														<td>Brand</td>
-														<td>Somebrand</td>
-													</tr>
-												</tbody>
-											</table>
-										</div>
-										<div class="tab-pane" id="reviews">
-											<div class="comments reviews">
-												<div class="comment clearfix">
-													<div class="comment-avatar">
-														<img src="" alt="avatar" />
-													</div>
-													<div class="comment-content clearfix">
-														<div class="comment-author font-alt">
-															<a href="#">John Doe</a>
-														</div>
-														<div class="comment-body">
-															<p>The European languages are members of the same
-																family. Their separate existence is a myth. For science,
-																music, sport, etc, Europe uses the same vocabulary. The
-																European languages are members of the same family. Their
-																separate existence is a myth.</p>
-														</div>
-														<div class="comment-meta font-alt">
-															Today, 14:55 -<span><i class="fa fa-star star"></i></span><span><i
-																class="fa fa-star star"></i></span><span><i
-																class="fa fa-star star"></i></span><span><i
-																class="fa fa-star star"></i></span><span><i
-																class="fa fa-star star-off"></i></span>
-														</div>
-													</div>
-												</div>
-												<div class="comment clearfix">
-													<div class="comment-avatar">
-														<img src="" alt="avatar" />
-													</div>
-													<div class="comment-content clearfix">
-														<div class="comment-author font-alt">
-															<a href="#">Mark Stone</a>
-														</div>
-														<div class="comment-body">
-															<p>Europe uses the same vocabulary. The European
-																languages are members of the same family. Their separate
-																existence is a myth.</p>
-														</div>
-														<div class="comment-meta font-alt">
-															Today, 14:59 -<span><i class="fa fa-star star"></i></span><span><i
-																class="fa fa-star star"></i></span><span><i
-																class="fa fa-star star"></i></span><span><i
-																class="fa fa-star star-off"></i></span><span><i
-																class="fa fa-star star-off"></i></span>
-														</div>
-													</div>
-												</div>
-											</div>
-											<div class="comment-form mt-30">
-												<h4 class="comment-form-title font-alt">Add review</h4>
-												<form method="post">
-													<div class="row">
-														<div class="col-sm-4">
-															<div class="form-group">
-																<label class="sr-only" for="name">Name</label> <input
-																	class="form-control" id="name" type="text" name="name"
-																	placeholder="Name" />
-															</div>
-														</div>
-														<div class="col-sm-4">
-															<div class="form-group">
-																<label class="sr-only" for="email">Name</label> <input
-																	class="form-control" id="email" type="text"
-																	name="email" placeholder="E-mail" />
-															</div>
-														</div>
-														<div class="col-sm-4">
-															<div class="form-group">
-																<select class="form-control">
-																	<option selected>Rating</option>
-																	<option value="1">1</option>
-																	<option value="2">2</option>
-																	<option value="3">3</option>
-																	<option value="4">4</option>
-																	<option value="5">5</option>
-																</select>
-															</div>
-														</div>
-														<div class="col-sm-12">
-															<div class="form-group">
-																<textarea class="form-control" id="" name="" rows="4"
-																	placeholder="Review"></textarea>
-															</div>
-														</div>
-														<div class="col-sm-12">
-															<button class="btn btn-round btn-d" type="submit">Submit
-																Review</button>
-														</div>
-													</div>
-												</form>
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
 							<!--       賣場管理列 -->
 							<div class="post-header font-alt" style="display: flex;">
 								<img src="/MeetBoth/html/assets/images/shop/兔年海報3.jpg"
@@ -569,7 +418,7 @@ h1 {
                           data: {"id":id},
                         })
                             .done(function () {
-                            	window.location='/MeetBoth/_03_product.searchAllProduct.controller'
+                            	window.location='/MeetBoth/_03_product.searchAllProduct.controller/1'
                                 console.log("delete")
                              })//done
                              .fail(function(error) {

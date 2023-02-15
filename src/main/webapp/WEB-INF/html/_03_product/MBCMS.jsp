@@ -198,7 +198,7 @@ a:hover {
 											class="fa-solid fa-angle-double-down"></i></a>
 										<ul style="">
 											<li><a
-												href="/MeetBoth/_03_product.productindex.controller"
+												href="/MeetBoth/_03_product.productindex.controller/1"
 												style="color: white; font-weight: 600;"
 												class="btn btn-d btn-round">所有商品清單</a></li>
 												<li><a

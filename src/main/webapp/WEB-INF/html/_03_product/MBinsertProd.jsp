@@ -208,7 +208,7 @@ a:hover {
 											class="fa-solid fa-angle-double-down"></i></a>
 										<ul style="">
 											<li><a
-												href="/MeetBoth/_03_product.productindex.controller"
+												href="/MeetBoth/_03_product.productindex.controller/1"
 												style="color: white; font-weight: 600;"
 												class="btn btn-d btn-round">所有商品清單</a></li>
 											<li><a
@@ -265,81 +265,100 @@ a:hover {
 								<!-- 							標題 -->
 								<!--       右邊第一部分開始 -->
 								<div class="post">
-								<form action="<c:url value='/_03_product.MBinsertProdAction.controller' />" method="Post" enctype="multipart/form-data">
-									<div class="post-video embed-responsive embed-responsive-16by9"
-										style="height: auto; padding-bottom: 100px;">
-										<div style="display: flex">
-											<button class="MBbtn"
-												onclick="window.location='/MeetBoth/_03_product.productindex.controller'">返回</button>
-										</div>
-										<div>
-											<span>商品狀態 :&ensp;<input type="text" name="pst" class="MBinput" placeholder="上架或下架"></span>
-										</div>
-										<div>
-											<span>商品編號 :&ensp;<input type="text" name="pid" class="MBinput" placeholder="自動產生" readonly></span>
-										</div>
-										<div>
-											<span>商品名稱 :&ensp;<input type="text" name="pna" class="MBinput" placeholder="不能為空"></span>
-										</div>
-										<div>
-											<span>商品類別 :&ensp;<select name="pty"
-												style="" class="MBinput">
-												<option value="1">文具</option>
-												<option value="2">教具</option>
-												<option value="3">運動用品</option>
-												<option value="4">辦公用品</option>
-												<option value="5">全新教科書</option>
-												<option value="6">全新好書</option>
-												<option value="7">二手教科書</option>
-												<option value="8">二手好書</option>
-												<option value="9">桌上小物</option>
-												<option value="10">教室小物</option>
-												<option value="11">3c小物</option>
-												<option value="12">益智小物</option>
-											</select></span>
-										</div>
-										<div>
-											<span>商品價格 :&ensp;<input type="text" name="ppr" class="MBinput" placeholder="只能數字"></span>
-										</div>
-										<div>
-											<span>賣家編號 :&ensp;<input type="text" name="pmid" class="MBinput" placeholder="只能編號"></span>
-										</div>
-										<div>
-											<span>商品庫存 :&ensp;<input type="text" name="pinvt" class="MBinput" placeholder="只能數字"></span>
-										</div>
-										<div>
-											<span>上架時間 :&ensp;<input type="text" name="ppo" class="MBinput" placeholder="自動產生" readonly></span>
-										</div>
-										<div>
-											<span>更新時間 :&ensp;<input type="text" name="pup" class="MBinput" placeholder="自動產生" readonly></span>
-										</div>
-										<div>
-											<span>銷售數量 :&ensp;<input type="text" name="pps" class="MBinput" placeholder="只能數字"></span>
-										</div>
-										<div>
-											<span>瀏覽次數 :&ensp;<input type="text" name="pch" class="MBinput" placeholder="只能數字"></span>
-										</div>
-										<div style="display: flex;">
-											<span>上傳商品照片</span> 
-											<div style="height:200px;width:200px;background-color:#272727;text-align:center;margin:15px;">
-											<img id="preImg" style="max-width: 100%; max-height: 100%; height: auto; width: auto;" src="#" />
+									<form
+										action="<c:url value='/_03_product.MBinsertProdAction.controller' />"
+										method="Post" enctype="multipart/form-data">
+										<div
+											class="post-video embed-responsive embed-responsive-16by9"
+											style="height: auto; padding-bottom: 100px;">
+											<div style="display: flex">
+												<input type="button" class="MBbtn"
+													onclick="window.location='/MeetBoth/_03_product.productindex.controller/1'"
+													value="返回">
 											</div>
-											<input class="MBinput" type="file" name="pPic" id="images5278" accept=".jpg,.png"> 
-										</div>
-										<div>
-											<div id="commentDiv">
-												<span>商品評論 :&ensp;</span>
+											<div>
+												<span>商品狀態 :&ensp;<input type="text" name="pst"
+													class="MBinput" placeholder="上架或下架"></span>
+											</div>
+											<div>
+												<span>商品編號 :&ensp;<input type="text" name="pid"
+													class="MBinput" placeholder="自動產生" readonly></span>
+											</div>
+											<div>
+												<span>商品名稱 :&ensp;<input type="text" name="pna"
+													class="MBinput" placeholder="不能為空"></span>
+											</div>
+											<div>
+												<span>商品類別 :&ensp;<select name="pty"
+													style="width: 312px; height: 66.1px;" class="MBinput">
+														<option value="1">文具</option>
+														<option value="2">教具</option>
+														<option value="3">運動用品</option>
+														<option value="4">辦公用品</option>
+														<option value="5">全新教科書</option>
+														<option value="6">全新好書</option>
+														<option value="7">二手教科書</option>
+														<option value="8">二手好書</option>
+														<option value="9">桌上小物</option>
+														<option value="10">教室小物</option>
+														<option value="11">3c小物</option>
+														<option value="12">益智小物</option>
+												</select></span>
+											</div>
+											<div>
+												<span>商品價格 :&ensp;<input type="text" name="ppr"
+													class="MBinput" placeholder="只能數字"></span>
+											</div>
+											<div>
+												<span>賣家編號 :&ensp;<input type="text" name="pmid"
+													class="MBinput" placeholder="只能編號"></span>
+											</div>
+											<div>
+												<span>商品庫存 :&ensp;<input type="text" name="pinvt"
+													class="MBinput" placeholder="只能數字"></span>
+											</div>
+											<div>
+												<span>上架時間 :&ensp;<input type="text" name="ppo"
+													class="MBinput" placeholder="自動產生" readonly></span>
+											</div>
+											<div>
+												<span>更新時間 :&ensp;<input type="text" name="pup"
+													class="MBinput" placeholder="自動產生" readonly></span>
+											</div>
+											<div>
+												<span>銷售數量 :&ensp;<input type="text" name="pps"
+													class="MBinput" placeholder="只能數字"></span>
+											</div>
+											<div>
+												<span>瀏覽次數 :&ensp;<input type="text" name="pch"
+													class="MBinput" placeholder="只能數字"></span>
+											</div>
+											<div style="display: flex;">
+												<span>上傳商品照片</span>
+												<div
+													style="height: 200px; width: 200px; background-color: #272727; text-align: center; margin: 15px;">
+													<img id="preImg"
+														style="max-width: 100%; max-height: 100%; height: auto; width: auto;"
+														src="#" />
+												</div>
+												<input class="MBinput" type="file" name="pPic"
+													id="images5278" accept=".jpg,.png">
+											</div>
+											<div>
+												<div id="commentDiv">
+													<span>商品評論 :&ensp;</span>
+												</div>
+											</div>
+											<div>
+												<textarea name="pdr"
+													style="margin-left: 10px; resize: none; height: 325px; width: 975px; overflow-y: auto; overflow-y: auto; font-size: 25px; color: white; background-color: black;"
+													placeholder="商品評論 可以不填"></textarea>
+											</div>
+											<div>
+												<input type="submit" class="MBbtn" value="確定"
+													style="margin-top: 15px; margin-left: 900px; font-size: 35px;">
 											</div>
 										</div>
-										<div>
-											<textarea name="pdr"
-												style="margin-left: 10px; resize: none; height: 325px; width: 975px; overflow-y: auto; overflow-y: auto; font-size: 25px; color: white; background-color: black;" placeholder="商品評論 可以不填"
-												></textarea>
-										</div>
-										<div>
-											<input type="submit" class="MBbtn" value="確定" style="margin-top:15px;margin-left:900px;font-size:35px;">
-										</div>
-									</div>
 									</form>
 								</div>
 								<!--       右邊第一部分結束 -->
@@ -423,5 +442,5 @@ a:hover {
 			}
 		}
 	</script>
-	</body>
+</body>
 </html>

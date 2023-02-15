@@ -43,7 +43,7 @@ String basePathimg2 = request.getScheme() + "://" + request.getServerName() + ":
 							<div class="row">
 								<button class="btn btn-warning btn-circle" type="button"
 									style="height: 43px; font-size: 19px;"
-									onclick="window.location='/MeetBoth/_03_product.searchAllProduct.controller'">
+									onclick="window.location='/MeetBoth/_03_product.searchAllProduct.controller/1'">
 									<span class="icon-browser">&ensp;回到商品目錄</span>
 								</button>
 							</div>
@@ -131,7 +131,7 @@ String basePathimg2 = request.getScheme() + "://" + request.getServerName() + ":
 													style="font-size: 25px; text-align: center;">賣家編號:&ensp;</span>
 												<input class="form-control input-lg" type="text"
 													name="memberID" required="required"
-													value="${bean.memberID}" readonly
+													value="${bean.memberBean.memberID}" readonly
 													style="width: 80%; font-size: 20px; letter-spacing: 0px; border: 1px solid black; border-radius: 15px; text-align: center;" />
 											</div>
 										</div>

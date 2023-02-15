@@ -58,7 +58,7 @@ String basePathimg2 = request.getScheme() + "://" + request.getServerName() + ":
 					<div class="row multi-columns-row" style="padding-bottom: 35px;">
 						<div class="row">
 							<div class="col-sm-12" style="">
-								<img src="html/assets/images/shop/熱門商品橫幅.jpg"
+								<img src="/MeetBoth/html/assets/images/shop/熱門商品橫幅.jpg"
 									alt="Title of Image" />
 							</div>
 						</div>
@@ -105,7 +105,7 @@ String basePathimg2 = request.getScheme() + "://" + request.getServerName() + ":
 				<div class="row multi-columns-row" style="padding-bottom: 20px;">
 					<div class="row">
 						<div class="col-sm-12">
-							<img src="html/assets/images/shop/類別導覽橫幅.jpg"
+							<img src="/MeetBoth/html/assets/images/shop/類別導覽橫幅.jpg"
 								alt="Title of Image" />
 						</div>
 					</div>
@@ -113,144 +113,144 @@ String basePathimg2 = request.getScheme() + "://" + request.getServerName() + ":
 				<ul class="works-grid works-grid-4 works-hover-w" id="works-grid">
 					<li class="work-item illustration webdesign" id="typeBlock"><a
 						href="#"> <span class="work-image"
-							onclick="window.location='/MeetBoth/_03_product.searchProductByType.controller?type=1'"
+							onclick="window.location='/MeetBoth/_03_product.searchProductByType.controller/1/1'"
 							style="width: 100%; height: 100%;"> <img
-								style="height: 100%" src="html/assets/images/shop/文具.jpg"
+								style="height: 100%" src="/MeetBoth/html/assets/images/shop/文具.jpg"
 								alt="Portfolio Item" /> <span class="work-caption font-alt">
 									<span class="work-title"><img style=""
-										src="html/assets/images/shop/seesee.png" alt="Portfolio Item" /></span>
+										src="/MeetBoth/html/assets/images/shop/seesee.png" alt="Portfolio Item" /></span>
 							</span>
 						</span>
 					</a></li>
 					<li class="work-item illustration webdesign" id="typeBlock"><a
 						href="/MeetBoth/_03_product.searchProductByType.controller?type=2">
 							<span class="work-image"
-							onclick="window.location='/MeetBoth/_03_product.searchProductByType.controller?type=2'"
+							onclick="window.location='/MeetBoth/_03_product.searchProductByType.controller/1/2'"
 							style="width: 100%; height: 100%;"> <img
-								style="height: 100%;" src="html/assets/images/shop/教具.png"
+								style="height: 100%;" src="/MeetBoth/html/assets/images/shop/教具.png"
 								alt="Portfolio Item" /> <span class="work-caption font-alt">
 									<span class="work-title"><img style=""
-										src="html/assets/images/shop/seesee.png" alt="Portfolio Item" /></span>
+										src="/MeetBoth/html/assets/images/shop/seesee.png" alt="Portfolio Item" /></span>
 							</span>
 						</span>
 					</a></li>
 					<li class="work-item illustration webdesign" id="typeBlock"><a
 						href="/MeetBoth/_03_product.searchProductByType.controller?type=3">
 							<span class="work-image"
-							onclick="window.location='/MeetBoth/_03_product.searchProductByType.controller?type=3'"
+							onclick="window.location='/MeetBoth/_03_product.searchProductByType.controller/1/3'"
 							style="width: 100%; height: 100%;"> <img
-								style="height: 100%;" src="html/assets/images/shop/運動用品.jpg"
+								style="height: 100%;" src="/MeetBoth/html/assets/images/shop/運動用品.jpg"
 								alt="Portfolio Item" /> <span class="work-caption font-alt">
 									<span class="work-title"><img style=""
-										src="html/assets/images/shop/seesee.png" alt="Portfolio Item" /></span>
+										src="/MeetBoth/html/assets/images/shop/seesee.png" alt="Portfolio Item" /></span>
 							</span>
 						</span>
 					</a></li>
 					<li class="work-item illustration webdesign" id="typeBlock"><a
 						href="/MeetBoth/_03_product.searchProductByType.controller?type=4">
 							<span class="work-image"
-							onclick="window.location='/MeetBoth/_03_product.searchProductByType.controller?type=4'"
+							onclick="window.location='/MeetBoth/_03_product.searchProductByType.controller/1/4'"
 							style="width: 100%; height: 100%;"> <img
-								style="height: 100%;" src="html/assets/images/shop/學生用品.jpg"
+								style="height: 100%;" src="/MeetBoth/html/assets/images/shop/學生用品.jpg"
 								alt="Portfolio Item" /> <span class="work-caption font-alt">
 									<span class="work-title"><img style=""
-										src="html/assets/images/shop/seesee.png" alt="Portfolio Item" /></span>
+										src="/MeetBoth/html/assets/images/shop/seesee.png" alt="Portfolio Item" /></span>
 							</span>
 						</span>
 					</a></li>
 					<li class="work-item illustration webdesign" id="typeBlock"><a
 						href="/MeetBoth/_03_product.searchProductByType.controller?type=5">
 							<span class="work-image"
-							onclick="window.location='/MeetBoth/_03_product.searchProductByType.controller?type=5'"
+							onclick="window.location='/MeetBoth/_03_product.searchProductByType.controller/1/5'"
 							style="width: 100%; height: 100%;"> <img
-								style="height: 100%;" src="html/assets/images/shop/全新教科書.jpg"
+								style="height: 100%;" src="/MeetBoth/html/assets/images/shop/全新教科書.jpg"
 								alt="Portfolio Item" /> <span class="work-caption font-alt">
 									<span class="work-title"><img style=""
-										src="html/assets/images/shop/seesee.png" alt="Portfolio Item" /></span>
+										src="/MeetBoth/html/assets/images/shop/seesee.png" alt="Portfolio Item" /></span>
 							</span>
 						</span>
 					</a></li>
 					<li class="work-item illustration webdesign" id="typeBlock"><a
 						href="/MeetBoth/_03_product.searchProductByType.controller?type=6">
 							<span class="work-image"
-							onclick="window.location='/MeetBoth/_03_product.searchProductByType.controller?type=6'"
+							onclick="window.location='/MeetBoth/_03_product.searchProductByType.controller/1/6'"
 							style="width: 100%; height: 100%;"> <img
-								style="height: 100%;" src="html/assets/images/shop/全新好書.jpg"
+								style="height: 100%;" src="/MeetBoth/html/assets/images/shop/全新好書.jpg"
 								alt="Portfolio Item" /> <span class="work-caption font-alt">
 									<span class="work-title"><img style=""
-										src="html/assets/images/shop/seesee.png" alt="Portfolio Item" /></span>
+										src="/MeetBoth/html/assets/images/shop/seesee.png" alt="Portfolio Item" /></span>
 							</span>
 						</span>
 					</a></li>
 					<li class="work-item illustration webdesign" id="typeBlock"><a
 						href="/MeetBoth/_03_product.searchProductByType.controller?type=7">
 							<span class="work-image"
-							onclick="window.location='/MeetBoth/_03_product.searchProductByType.controller?type=7'"
+							onclick="window.location='/MeetBoth/_03_product.searchProductByType.controller/1/7'"
 							style="width: 100%; height: 100%;"> <img
-								style="height: 100%;" src="html/assets/images/shop/二手教科書.jpg"
+								style="height: 100%;" src="/MeetBoth/html/assets/images/shop/二手教科書.jpg"
 								alt="Portfolio Item" /> <span class="work-caption font-alt">
 									<span class="work-title"><img style=""
-										src="html/assets/images/shop/seesee.png" alt="Portfolio Item" /></span>
+										src="/MeetBoth/html/assets/images/shop/seesee.png" alt="Portfolio Item" /></span>
 							</span>
 						</span>
 					</a></li>
 					<li class="work-item illustration webdesign" id="typeBlock"><a
 						href="/MeetBoth/_03_product.searchProductByType.controller?type=8">
 							<span class="work-image"
-							onclick="window.location='/MeetBoth/_03_product.searchProductByType.controller?type=8'"
+							onclick="window.location='/MeetBoth/_03_product.searchProductByType.controller/1/8'"
 							style="width: 100%; height: 100%;"> <img
-								style="height: 100%;" src="html/assets/images/shop/二手好書.jpg"
+								style="height: 100%;" src="/MeetBoth/html/assets/images/shop/二手好書.jpg"
 								alt="Portfolio Item" /> <span class="work-caption font-alt">
 									<span class="work-title"><img style=""
-										src="html/assets/images/shop/seesee.png" alt="Portfolio Item" /></span>
+										src="/MeetBoth/html/assets/images/shop/seesee.png" alt="Portfolio Item" /></span>
 							</span>
 						</span>
 					</a></li>
 					<li class="work-item illustration webdesign" id="typeBlock"><a
 						href="/MeetBoth/_03_product.searchProductByType.controller?type=9">
 							<span class="work-image"
-							onclick="window.location='/MeetBoth/_03_product.searchProductByType.controller?type=9'"
+							onclick="window.location='/MeetBoth/_03_product.searchProductByType.controller/1/9'"
 							style="width: 100%; height: 100%;"> <img
-								style="height: 100%;" src="html/assets/images/shop/桌上小物.jpg"
+								style="height: 100%;" src="/MeetBoth/html/assets/images/shop/桌上小物.jpg"
 								alt="Portfolio Item" /> <span class="work-caption font-alt">
 									<span class="work-title"><img style=""
-										src="html/assets/images/shop/seesee.png" alt="Portfolio Item" /></span>
+										src="/MeetBoth/html/assets/images/shop/seesee.png" alt="Portfolio Item" /></span>
 							</span>
 						</span>
 					</a></li>
 					<li class="work-item illustration webdesign" id="typeBlock"><a
 						href="/MeetBoth/_03_product.searchProductByType.controller?type=10">
 							<span class="work-image"
-							onclick="window.location='/MeetBoth/_03_product.searchProductByType.controller?type=10'"
+							onclick="window.location='/MeetBoth/_03_product.searchProductByType.controller/1/10'"
 							style="width: 100%; height: 100%;"> <img
-								style="height: 100%;" src="html/assets/images/shop/教室用品.jpg"
+								style="height: 100%;" src="/MeetBoth/html/assets/images/shop/教室用品.jpg"
 								alt="Portfolio Item" /> <span class="work-caption font-alt">
 									<span class="work-title"><img style=""
-										src="html/assets/images/shop/seesee.png" alt="Portfolio Item" /></span>
+										src="/MeetBoth/html/assets/images/shop/seesee.png" alt="Portfolio Item" /></span>
 							</span>
 						</span>
 					</a></li>
 					<li class="work-item illustration webdesign" id="typeBlock"><a
 						href="/MeetBoth/_03_product.searchProductByType.controller?type=11">
 							<span class="work-image"
-							onclick="window.location='/MeetBoth/_03_product.searchProductByType.controller?type=11'"
+							onclick="window.location='/MeetBoth/_03_product.searchProductByType.controller/1/11'"
 							style="width: 100%; height: 100%;"> <img
-								style="height: 100%;" src="html/assets/images/shop/3c.png"
+								style="height: 100%;" src="/MeetBoth/html/assets/images/shop/3c.png"
 								alt="Portfolio Item" /> <span class="work-caption font-alt">
 									<span class="work-title"><img style=""
-										src="html/assets/images/shop/seesee.png" alt="Portfolio Item" /></span>
+										src="/MeetBoth/html/assets/images/shop/seesee.png" alt="Portfolio Item" /></span>
 							</span>
 						</span>
 					</a></li>
 					<li class="work-item illustration webdesign" id="typeBlock"><a
 						href="/MeetBoth/_03_product.searchProductByType.controller?type=12">
 							<span class="work-image"
-							onclick="window.location='/MeetBoth/_03_product.searchProductByType.controller?type=12'"
+							onclick="window.location='/MeetBoth/_03_product.searchProductByType.controller/1/12'"
 							style="width: 100%; height: 100%;"> <img
-								style="height: 100%;" src="html/assets/images/shop/益智小物.jpg"
+								style="height: 100%;" src="/MeetBoth/html/assets/images/shop/益智小物.jpg"
 								alt="Portfolio Item" /> <span class="work-caption font-alt">
 									<span class="work-title"><img style=""
-										src="html/assets/images/shop/seesee.png" alt="Portfolio Item" /></span>
+										src="/MeetBoth/html/assets/images/shop/seesee.png" alt="Portfolio Item" /></span>
 							</span>
 						</span>
 					</a></li>
@@ -262,7 +262,7 @@ String basePathimg2 = request.getScheme() + "://" + request.getServerName() + ":
 				<div class="row multi-columns-row">
 					<div class="row">
 						<div class="col-sm-12">
-							<img src="html/assets/images/shop/全部商品橫幅.jpg"
+							<img src="/MeetBoth/html/assets/images/shop/全部商品橫幅.jpg"
 								alt="Title of Image" />
 						</div>
 					</div>
@@ -282,7 +282,7 @@ String basePathimg2 = request.getScheme() + "://" + request.getServerName() + ":
 				style="padding-top: 20px; padding-bottom: 0px;">
 				<div class="container" style="">
 					<form class="row"
-						action="<c:url value='/_03_product.searchProductWithCondition.controller'/>"
+						action="<c:url value='/_03_product.searchProductWithCondition.controller/1'/>"
 						method="post">
 						<div class="col-sm-4 mb-sm-20"
 							style="width: 17%; padding-right: 0;">
@@ -350,11 +350,11 @@ String basePathimg2 = request.getScheme() + "://" + request.getServerName() + ":
 			<div class="container" style="padding: 0px 10px 50px 20px;">
 				<input type="button" value="返回首頁" class="btn btn-info btn-circle"
 					style="font-size: 17px; color: black;"
-					onclick="window.location='/MeetBoth/_03_product.searchAllProduct.controller'">
+					onclick="window.location='/MeetBoth/_03_product.searchAllProduct.controller/1'">
 				&nbsp; <input type="button" value="隨便看看"
 					class="btn btn-success btn-circle"
 					style="font-size: 17px; color: black;"
-					onclick="window.location='/MeetBoth/_03_product.searchRandomProduct.controller'">
+					onclick="window.location='/MeetBoth/_03_product.searchRandomProduct.controller/1'">
 				<!-- 				&nbsp; <input type="button" value="新增商品" -->
 				<!-- 					class="btn btn-warning btn-circle" -->
 				<!-- 					style="font-size: 17px; color: black;" -->
@@ -380,7 +380,7 @@ String basePathimg2 = request.getScheme() + "://" + request.getServerName() + ":
 												src="<c:url value='/_03_product.showPicture.controller?id=${bean.prodID}' />"
 												alt="Portfolio Item" /> <span class="work-caption font-alt">
 													<span class="work-title"><img style=""
-														src="html/assets/images/shop/seesee.png"
+														src="/MeetBoth/html/assets/images/shop/seesee.png"
 														alt="Portfolio Item" /></span>
 											</span>
 										</span>
@@ -415,16 +415,33 @@ String basePathimg2 = request.getScheme() + "://" + request.getServerName() + ":
 							</div>
 						</c:forEach>
 					</div>
-					<div class="row">
-						<div class="col-sm-12">
-							<div class="pagination font-alt"
-								style="margin: auto; display: flex; justify-content: center;">
-								<a href="#"><i class="fa fa-angle-left"></i></a><a
-									class="active" href="#">1</a><a href="#">2</a><a href="#">3</a><a
-									href="#">4</a><a href="#"><i class="fa fa-angle-right"></i></a>
-							</div>
-						</div>
+					<!-- 分頁按鈕 -->
+					<div class="pagination font-alt"
+						style="display: flex; justify-content: center; align-items: center">
+						<c:if test="${currentPage != 1}">
+							<a
+								href="/MeetBoth/_03_product.searchAllProduct.controller/${currentPage-1}"><i
+								class="fa fa-angle-left"></i></a>
+						</c:if>
+						<!-- 迴圈生成每一頁的按鈕 -->
+						<c:forEach var="i" begin="1" end="${totalPages}">
+							<c:choose>
+								<c:when test="${currentPage == i}">
+									<a class="active"
+										href="/MeetBoth/_03_product.searchAllProduct.controller/${i}">${i}</a>
+								</c:when>
+								<c:otherwise>
+									<a href="/MeetBoth/_03_product.searchAllProduct.controller/${i}">${i}</a>
+								</c:otherwise>
+							</c:choose>
+						</c:forEach>
+						<c:if test="${currentPage != totalPages}">
+							<a
+								href="/MeetBoth/_03_product.searchAllProduct.controller/${currentPage+1}"><i
+								class="fa fa-angle-right"></i></a>
+						</c:if>
 					</div>
+					<!-- 分頁按鈕結束 -->
 				</div>
 			</section>
 			<jsp:include page="/WEB-INF/html/fragment/footerMVC.jsp" />

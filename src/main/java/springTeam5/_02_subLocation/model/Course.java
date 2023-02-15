@@ -2,7 +2,9 @@ package springTeam5._02_subLocation.model;
 
 import java.sql.Blob;
 import java.util.ArrayList;
+import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -70,38 +72,24 @@ public class Course {
 	@Transient
 	private int memberID;
 	
-	@Column(name = "MEMBERBUYID")
-	@Transient
-	private int memberBuyID;
-	
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "MemberID")
 	private MemberBean memberBean;
 	
-	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "MEMBERBUYID")
-	private MemberBean memberBuyBean;
+	//與課程訂單的關係是一對多
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "courseBean", cascade = CascadeType.ALL)
+	private Set<CourseOrderBean> courseOrder = new LinkedHashSet<CourseOrderBean>(); // itemsList
 	
 	public Course() {
 	}
-	
-	public MemberBean getMemberBean() {
-		return memberBean;
-	}
 
-	public void setMemberBean(MemberBean memberBean) {
-		this.memberBean = memberBean;
-	}
-	
-	public Course(int courseID, String courseName, int coursePrice, int memberID, int memberBuyID, String coursePost,
-			String courseUpdate, String courseDirections, Blob courseImg, int courseSales, int courseClass,
-			CourseType coursetype, List<CourseComment> courseComment, List<YtPlayer> ytPlayer,MemberBean memberBean) {
-		super();
+	public Course(int courseID, String courseName, int coursePrice, String coursePost, String courseUpdate,
+			String courseDirections, Blob courseImg, int courseSales, int courseClass, CourseType coursetype,
+			List<CourseComment> courseComment, List<YtPlayer> ytPlayer, int memberID, MemberBean memberBean,
+			Set<CourseOrderBean> courseOrder) {
 		this.courseID = courseID;
 		this.courseName = courseName;
 		this.coursePrice = coursePrice;
-		this.memberBuyID = memberID;
-		this.memberID = memberID;
 		this.coursePost = coursePost;
 		this.courseUpdate = courseUpdate;
 		this.courseDirections = courseDirections;
@@ -111,10 +99,30 @@ public class Course {
 		this.coursetype = coursetype;
 		this.courseComment = courseComment;
 		this.ytPlayer = ytPlayer;
+		this.memberID = memberID;
 		this.memberBean = memberBean;
+		this.courseOrder = courseOrder;
 	}
-	
-	
+
+	public Course(String courseName, int coursePrice, String coursePost, String courseUpdate, String courseDirections,
+			Blob courseImg, int courseSales, int courseClass, CourseType coursetype, List<CourseComment> courseComment,
+			List<YtPlayer> ytPlayer, int memberID, MemberBean memberBean, Set<CourseOrderBean> courseOrder) {
+		super();
+		this.courseName = courseName;
+		this.coursePrice = coursePrice;
+		this.coursePost = coursePost;
+		this.courseUpdate = courseUpdate;
+		this.courseDirections = courseDirections;
+		this.courseImg = courseImg;
+		this.courseSales = courseSales;
+		this.courseClass = courseClass;
+		this.coursetype = coursetype;
+		this.courseComment = courseComment;
+		this.ytPlayer = ytPlayer;
+		this.memberID = memberID;
+		this.memberBean = memberBean;
+		this.courseOrder = courseOrder;
+	}
 
 	public int getCourseID() {
 		return courseID;
@@ -138,21 +146,6 @@ public class Course {
 
 	public void setCoursePrice(int coursePrice) {
 		this.coursePrice = coursePrice;
-	}
-
-	public int getMemberID() {
-		return memberID;
-	}
-
-	public void setMemberID(int memberID) {
-		this.memberID = memberID;
-	}
-	
-	public int getMemberBuyID() {
-		return memberBuyID;
-	}
-	public void setMemberBuyID(int memberBuyID) {
-		this.memberBuyID = memberBuyID;
 	}
 
 	public String getCoursePost() {
@@ -218,7 +211,7 @@ public class Course {
 	public void setCourseComment(List<CourseComment> courseComment) {
 		this.courseComment = courseComment;
 	}
-	
+
 	public List<YtPlayer> getYtPlayer() {
 		return ytPlayer;
 	}
@@ -227,7 +220,29 @@ public class Course {
 		this.ytPlayer = ytPlayer;
 	}
 
-	
+	public int getMemberID() {
+		return memberID;
+	}
 
+	public void setMemberID(int memberID) {
+		this.memberID = memberID;
+	}
+
+	public MemberBean getMemberBean() {
+		return memberBean;
+	}
+
+	public void setMemberBean(MemberBean memberBean) {
+		this.memberBean = memberBean;
+	}
+
+	public Set<CourseOrderBean> getCourseOrder() {
+		return courseOrder;
+	}
+
+	public void setCourseOrder(Set<CourseOrderBean> courseOrder) {
+		this.courseOrder = courseOrder;
+	}
+	
 	
 }

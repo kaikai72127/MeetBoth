@@ -25,6 +25,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import springTeam5._02_subLocation.model.Course;
 import springTeam5._02_subLocation.model.CourseComment;
+import springTeam5._02_subLocation.model.CourseOrderBean;
 import springTeam5._02_subLocation.model.YtPlayer;
 import springTeam5._03_product.model.Product;
 import springTeam5._03_product.model.ProductComment;
@@ -125,8 +126,8 @@ public class MemberBean implements Serializable {
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "memberBean", cascade = CascadeType.ALL)
 	private Set<Course> course = new LinkedHashSet<Course>();
 	@JsonIgnore
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "memberBuyBean", cascade = CascadeType.ALL)
-	private Set<Course> courseBuy = new LinkedHashSet<Course>();
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "memberbuy", cascade = CascadeType.ALL)
+	private Set<CourseOrderBean> coureOrder = new LinkedHashSet<CourseOrderBean>();
 	@JsonIgnore
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "memberBean", cascade = CascadeType.ALL)
 	private Set<CourseComment> courseComment = new LinkedHashSet<CourseComment>();
@@ -387,6 +388,14 @@ public class MemberBean implements Serializable {
 
 	public void setOrderSale(Set<OrderItemBean> orderSale) {
 		this.orderSale = orderSale;
+	}
+
+	public Set<CourseOrderBean> getCoureOrder() {
+		return coureOrder;
+	}
+
+	public void setCoureOrder(Set<CourseOrderBean> coureOrder) {
+		this.coureOrder = coureOrder;
 	}
 
 	@Override

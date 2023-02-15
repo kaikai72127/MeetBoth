@@ -270,7 +270,7 @@ a:hover {
 								<!--       右邊第一部分開始 -->
 								<div class="post">
 									<button class="MBbtn"
-										onclick="window.location='/MeetBoth/admin/shoppingCartOrders.controller'">返回</button>
+										onclick="window.location='/MeetBoth/admin/shoppingCartOrders.controller/1'">返回</button>
 									<form
 										action="<c:url value='/admin/shoppingCartUpdateOrderMain.controller' />"
 										method="Post" enctype="multipart/form-data">

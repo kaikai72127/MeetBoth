@@ -167,20 +167,47 @@ public class OrderController {
 // 查詢------
 	// 後台管理使用---------------------------------------------------------------------------
 	// 搜尋全部-跳轉到CRUD的頁面用
-	@RequestMapping(path = "/admin/shoppingCartOrders.controller", method = RequestMethod.GET)
-	public String processSelectAllAcction(@ModelAttribute("OrderBean") OrderBean od, Model odModel) {
+	@RequestMapping(path = "/admin/shoppingCartOrders.controller/{page}", method = RequestMethod.GET)
+	public String processSelectAllAcction(@ModelAttribute("OrderBean") OrderBean od, Model odModel,
+			@PathVariable("page") String page) {
 		List<OrderBean> classList = orderService.selectAll();
-		odModel.addAttribute("orderList", classList);
+		int page2 = 1;
+		try {
+			page2 = Integer.parseInt(page);
+		} catch (NumberFormatException e) {
+			page2 = 1;
+		}
+		// 每頁顯示的貼文數量，可以自行修改
+		int pageSize = 10;
+		int totalPages = (int) Math.ceil((double) classList.size() / pageSize);
+		int startIndex = (page2 - 1) * pageSize;
+		int endIndex = startIndex + pageSize;
+		if (endIndex > classList.size()) {
+			endIndex = classList.size();
+		}
+		if (startIndex >= classList.size()) {
+			startIndex = classList.size() - pageSize;
+		}
+		if (classList.size() <= pageSize) {
+			startIndex = 0;
+		} else if (startIndex >= classList.size()) {
+			startIndex = classList.size() - pageSize;
+		}
+		List<OrderBean> orderList = classList.subList(startIndex, endIndex);
+
+		odModel.addAttribute("orderList", orderList);
+		odModel.addAttribute("totalPages", totalPages);
+		odModel.addAttribute("currentPage", page2);
 		return "_04_shoppingCart/adminOrders";
 	}
 
 	// 模糊搜尋全部
-	@RequestMapping(path = "/admin/shoppingCartSearchOrders.controller", method = RequestMethod.POST)
+	@RequestMapping(path = "/admin/shoppingCartSearchOrders.controller/{page}", method = RequestMethod.POST)
 	public String processSearchAllAcction(@RequestParam(value = "ordStstus", required = false) String ordStstus,
 			@RequestParam(value = "paymentStstus", required = false) String paymentStstus,
 			@RequestParam(value = "deliveryStstus", required = false) String deliveryStstus,
 			@RequestParam(value = "search", required = false) String search, @ModelAttribute("OrderBean") OrderBean od,
-			Model odModel) {
+			Model odModel,@PathVariable("page") String page) {
 
 		if (search == null) {
 			search = "";
@@ -189,7 +216,34 @@ public class OrderController {
 
 		List<OrderBean> classList = orderService.findOrderBySearchAllLike(ordStstus, paymentStstus, deliveryStstus,
 				search);
-		odModel.addAttribute("orderList", classList);
+		int page2 = 1;
+		try {
+			page2 = Integer.parseInt(page);
+		} catch (NumberFormatException e) {
+			page2 = 1;
+		}
+		// 每頁顯示的貼文數量，可以自行修改
+		int pageSize = 10;
+		int totalPages = (int) Math.ceil((double) classList.size() / pageSize);
+		int startIndex = (page2 - 1) * pageSize;
+		int endIndex = startIndex + pageSize;
+		if (endIndex > classList.size()) {
+			endIndex = classList.size();
+		}
+		if (startIndex >= classList.size()) {
+			startIndex = classList.size() - pageSize;
+		}
+		if (classList.size() <= pageSize) {
+			startIndex = 0;
+		} else if (startIndex >= classList.size()) {
+			startIndex = classList.size() - pageSize;
+		}
+		List<OrderBean> orderList = classList.subList(startIndex, endIndex);
+
+		odModel.addAttribute("orderList", orderList);
+		odModel.addAttribute("totalPages", totalPages);
+		odModel.addAttribute("currentPage", page2);
+		
 		return "_04_shoppingCart/adminOrders";
 	}
 

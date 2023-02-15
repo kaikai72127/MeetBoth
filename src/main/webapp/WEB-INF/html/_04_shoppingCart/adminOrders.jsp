@@ -242,10 +242,10 @@ a:hover {
 											class="fa-solid fa-angle-double-down"></i></a>
 										<ul style="">
 											<li><a
-												href="/MeetBoth/admin/shoppingCartOrders.controller"
+												href="/MeetBoth/admin/shoppingCartOrders.controller/1"
 												style="color: white; font-weight: 600;"
 												class="btn btn-d btn-round">所有訂單清單</a></li>
-											<li><a href="/MeetBoth/admin/discounts.controller"
+											<li><a href="/MeetBoth/admin/discounts.controller/1"
 												style="color: white; font-weight: 600;"
 												class="btn btn-d btn-round">折扣碼管理</a></li>
 										</ul></li>
@@ -276,7 +276,7 @@ a:hover {
 											<span>所有訂單資料 :&ensp;</span>
 										</div>
 										<form class="row"
-											action="<c:url value='/admin/shoppingCartSearchOrders.controller'/>"
+											action="<c:url value='/admin/shoppingCartSearchOrders.controller/1'/>"
 											method="post">
 											<div style="display: flex; margin-bottom: 15px;">
 												<div style="padding-right: 0; margin: auto 10px;">
@@ -366,6 +366,34 @@ a:hover {
 														</c:forEach>
 													</tbody>
 												</table>
+												<!-- 分頁按鈕 -->
+												<div class="pagination font-alt"
+													style="display: flex; justify-content: center; align-items: center">
+													<c:if test="${currentPage != 1}">
+														<a
+															href="/MeetBoth/admin/shoppingCartOrders.controller/${currentPage-1}"><i
+															class="fa fa-angle-left"></i></a>
+													</c:if>
+													<!-- 迴圈生成每一頁的按鈕 -->
+													<c:forEach var="i" begin="1" end="${totalPages}">
+														<c:choose>
+															<c:when test="${currentPage == i}">
+																<a class="active"
+																	href="/MeetBoth/admin/shoppingCartOrders.controller/${i}">${i}</a>
+															</c:when>
+															<c:otherwise>
+																<a
+																	href="/MeetBoth/admin/shoppingCartOrders.controller/${i}">${i}</a>
+															</c:otherwise>
+														</c:choose>
+													</c:forEach>
+													<c:if test="${currentPage != totalPages}">
+														<a
+															href="/MeetBoth/admin/shoppingCartOrders.controller/${currentPage+1}"><i
+															class="fa fa-angle-right"></i></a>
+													</c:if>
+												</div>
+												<!-- 分頁按鈕結束 -->
 											</div>
 										</div>
 									</div>

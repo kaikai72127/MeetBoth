@@ -28,84 +28,6 @@ marquee a:hover {
 	color: white;
 	background-color: #ce7777;
 }
-
-//
-/* div樣式 框框 */
-.wrapPhoto {
-	width: 800px;
-	height: 400px;
-	background-color: black;
-	margin: 0 auto;
-	position: relative;
-	/* 溢出內容 */
-	overflow: hidden;
-}
-/* ul樣式 */
-.slide-imgs {
-	position: absolute;
-	margin: 0;
-	padding: 0;
-	left: 0;
-	list-style: none;
-	width: 4000px;
-	/* 彈性 並排 */
-	display: flex;
-	/* left: -1600px; */
-}
-
-.slide-imgs li {
-	width: 800px;
-	height: 400px;
-}
-
-.slide-imgs li img {
-	width: 100%;
-	height: 100%;
-	/* 控制元素內容大小 調整圖片比例 */
-	object-fit: cover;
-}
-
-.pages {
-	position: absolute;
-	list-style: none;
-	display: flex;
-	margin: 0;
-	padding: 0;
-	bottom: 10px;
-	width: 100%;
-	/* 主軸置中 */
-	justify-content: center;
-}
-
-.pages li {
-	border: 2px solid gray;
-	width: 20px;
-	height: 20px;
-	border-radius: 50%;
-	margin: 0 5px;
-}
-
-.slide-arrow {
-	position: absolute;
-	/* background-color: red; */
-	z-index: 1;
-	width: 30px;
-	height: 100%;
-	font-size: 36px;
-	display: flex;
-	align-items: center;
-	color: gray;
-	opacity: 0.5;
-	cursor: pointer;
-}
-
-.right {
-	right: 0;
-}
-
-.slide-arrow:hover {
-	opacity: 1;
-}
 </style>
 </head>
 
@@ -130,14 +52,11 @@ marquee a:hover {
 			肉丸家教網歡迎您的加入 點擊<a href="/MeetBoth/login/page">註冊</a> ꉂꉂ꒰•̤▿•̤*ૢ꒱
 		</marquee>
 		<!-- 內容 1-->
-
-
-		<section class="bg-dark-30 showcase-page-header module parallax-bg"
-			data-background="assets/images/showcase_bg.jpg">
-			<div class="titan-caption"></div>
-		</section>
-
-
+		<div class="col-sm-12"
+			style="margin-bottom: 30px; display: flex; justify-content: center; align-items: center;">
+			<img style="width: 50%" src="html/assets/images/shop/team5.gif"
+				alt="Title of Image" />
+		</div>
 
 
 		<!-- 內容3 -->
@@ -161,8 +80,7 @@ marquee a:hover {
 							<a
 								href="<c:url value='/_05_teacStu.teacpostpageMain.controller?teacno=${bean.teacno}'/>">
 								<div class="teacher-profile">
-									<img
-										src="<c:url value='/_01_member.ShowPhoto.controller?${bean.member.memberID}' />"
+									<img src="<c:url value='/_01_member.ShowPhoto.controller?${bean.member.memberID}' />"
 										alt="">
 								</div>
 							</a>
@@ -242,26 +160,54 @@ marquee a:hover {
 				</div>
 			</div>
 		</div>
-		<div class="container">
-			<div class="wrapPhoto">
-				<a class="slide-arrow" id="slidePrev"><i
-					class="fa-solid fa-arrow-left"></i></a> <a class="slide-arrow right"
-					id="slideNext"><i class="fa-solid fa-arrow-right"></i></a>
-				<ul class="slide-imgs" id="slideImg">
-					<li><img src="html/assets/images/shop/MeetBoth.gif" alt="" /></li>
-					<li><img src="html/assets/images/shop/MeetBoth.gif" alt="" /></li>
-					<li><img src="html/assets/images/shop/MeetBoth.gif" alt="" /></li>
-					<li><img src="html/assets/images/shop/MeetBoth.gif" alt="" /></li>
-					<li><img src="html/assets/images/shop/MeetBoth.gif" alt="" /></li>
-				</ul>
-				<ul class="pages">
-					<li></li>
-					<li></li>
-					<li></li>
-					<li></li>
-					<li></li>
-				</ul>
+
+		<div id="carouselExampleCaptions" class="carousel slide"
+			data-bs-ride="carousel">
+			<div class="carousel-indicators">
+				<button type="button" data-bs-target="#carouselExampleCaptions"
+					data-bs-slide-to="0" class="active" aria-current="true"
+					aria-label="Slide 1"></button>
+				<button type="button" data-bs-target="#carouselExampleCaptions"
+					data-bs-slide-to="1" aria-label="Slide 2"></button>
+				<button type="button" data-bs-target="#carouselExampleCaptions"
+					data-bs-slide-to="2" aria-label="Slide 3"></button>
 			</div>
+			<div class="carousel-inner">
+				<div class="carousel-item active">
+					<img src="html/assets/images/shop/team5.gif" class="d-block w-100" alt="...">
+					<div class="carousel-caption d-none d-md-block">
+						<h5>First slide label</h5>
+						<p>Some representative placeholder content for the first
+							slide.</p>
+					</div>
+				</div>
+				<div class="carousel-item">
+					<img src="html/assets/images/shop/team5.gif" class="d-block w-100" alt="...">
+					<div class="carousel-caption d-none d-md-block">
+						<h5>Second slide label</h5>
+						<p>Some representative placeholder content for the second
+							slide.</p>
+					</div>
+				</div>
+				<div class="carousel-item">
+					<img src="html/assets/images/shop/team5.gif" class="d-block w-100" alt="...">
+					<div class="carousel-caption d-none d-md-block">
+						<h5>Third slide label</h5>
+						<p>Some representative placeholder content for the third
+							slide.</p>
+					</div>
+				</div>
+			</div>
+			<button class="carousel-control-prev" type="button"
+				data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
+				<span class="carousel-control-prev-icon" aria-hidden="true"></span>
+				<span class="visually-hidden">Previous</span>
+			</button>
+			<button class="carousel-control-next" type="button"
+				data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
+				<span class="carousel-control-next-icon" aria-hidden="true"></span>
+				<span class="visually-hidden">Next</span>
+			</button>
 		</div>
 
 		<!-- Footer -->

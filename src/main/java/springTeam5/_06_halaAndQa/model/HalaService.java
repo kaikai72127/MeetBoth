@@ -44,10 +44,16 @@ public class HalaService {
 		return halaRepo.findByHalaclassname(halaclassname);
 	}
 
+	//會員編號查詢
+	public List<HalaBean> selectMemberId(Integer memberId) {
+		return halaRepo.findByMemberId(memberId);
+	} 
+	
 	// id查詢
 	public HalaBean selectHalaId(Integer halaId) {
 		return halaRepo.findByHalaId(halaId);
 	}
+	
 
 	// 更新讚數
 	public void updatetumb(HalaBean halaBean) {

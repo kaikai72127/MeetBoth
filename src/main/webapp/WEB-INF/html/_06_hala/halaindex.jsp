@@ -361,7 +361,7 @@ a:hover {
 																<td>${bean.title}</td>
 																<td>${bean.halaclassname}</td>
 																<td>&#129321;${bean.watch}</td>
-																<td>${bean.memberid}</td>
+																<td>${bean.memberBean.memberID}</td>
 																<td>${bean.postdate}</td>
 																<td><input type="button" class="MBbtn" value="修改"
 																	onclick="window.location='/MeetBoth/_06_halaAndQa.GoHalaUpdateIndex.controller?halaId=${bean.halaId}'"></td>

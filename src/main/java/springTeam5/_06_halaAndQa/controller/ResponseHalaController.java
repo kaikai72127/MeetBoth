@@ -63,8 +63,6 @@ public class ResponseHalaController {
 		
 		//查看是否有登入 如果沒有登入則轉跳登入頁面
 		String account = SecurityContextHolder.getContext().getAuthentication().getName();
-		System.out.println("account : "+account);
-		System.out.println("-----------------------------------------------------------------");
 //		用Securityˊ找到目前的登入者的資料 mem (是一個LIST)
 		List<MemberBean> mem = memberService.searchMemByAccount(account);
 //		假如LIST沒有東西 就請他去登入

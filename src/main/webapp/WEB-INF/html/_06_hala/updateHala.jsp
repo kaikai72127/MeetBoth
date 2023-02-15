@@ -137,7 +137,7 @@
 						</div>
 						
                   		<input type="text" class="form-control" name="title" value="${bean.title}" placeholder="請輸入文章標題⋯">
-                  		<textarea name="halacontent" class="form-control" rows="7" placeholder="${bean.title}"></textarea>
+                  		<textarea name="halacontent" class="form-control" rows="7" placeholder="">${bean.halacontent}</textarea>
                   		<input name="images" id="images5278" type="file" style="width:80%" accept=".jpg, .png">
 						<br>
 						<img id="preImg" style="width:150px; height:200px" src="<c:url value='/_06_halaAndQa.picsave.controller?id=${bean.halaId}'/>" />

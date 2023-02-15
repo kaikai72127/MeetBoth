@@ -3,6 +3,8 @@ package springTeam5._06_halaAndQa.controller;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.sql.Blob;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
@@ -13,6 +15,7 @@ import java.util.Optional;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.sql.rowset.serial.SerialBlob;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -57,13 +60,6 @@ public class HalaController {
 	// 查詢全部' BindingResult result,@ModelAttribute("HalaBean") HalaBean hb
 	@RequestMapping(path = "/_06_halaAndQa.SelectAllHala.controller", method = RequestMethod.GET)
 	public String processAction(Model haModel,Model topModel) {
-//		if (result.hasErrors()) {
-//			return "Error";
-//		}
-//		String account = SecurityContextHolder.getContext().getAuthentication().getName();
-//		List<MemberBean> mem = memberService.searchMemByAccount(account);
-//		HttpSession session = request.getSession(false);
-//		session.setAttribute("Member", mem.get(0));
 		
 		List<HalaBean> classList = halaRepo.findAllHala();
 		haModel.addAttribute("classList", classList);
@@ -72,6 +68,7 @@ public class HalaController {
 
 		return "_06_hala/hala";
 	}
+	
 	
 	
 
@@ -101,20 +98,24 @@ public class HalaController {
 	// 新增
 	@PostMapping("/_06_halaAndQa.AddHala.controller")
 	public String processMainAction2(@RequestParam("halaclassname") String halaclassname,
-			@RequestParam("memberid") Integer memberid, @RequestParam("title") String title,
-			@RequestParam("halacontent") String halacontent, @RequestParam("images") MultipartFile mf)
-			throws IllegalStateException, IOException, SQLException {
-
-//		String user = SecurityContextHolder.getContext().getAuthentication().getName();
-//		List<MemberBean> list = memberService.searchMemByAccount(user);
-//		int ID = list.get(0).getMemberID();
+	        @RequestParam("memberid") Integer memberid, @RequestParam("title") String title,
+	        @RequestParam("halacontent") String halacontent, @RequestParam(value = "images", required = false) MultipartFile mf)
+	        throws IllegalStateException, IOException, SQLException {
 		Optional<MemberBean> member = memberService.searchMemByID(memberid);
+		InputStream in;
+	    long size;
+	    Blob b;
+
+	    if (mf != null && !mf.isEmpty()) {
+	        in = mf.getInputStream();
+	        size = mf.getSize();
+	        b = PictureService.fileToBlob(in, size);
+	    } else {
+	        // 設定預設圖片
+	        byte[] defaultImage = Files.readAllBytes(Paths.get("C:\\hibernate\\workspace\\MeetBoth\\src\\main\\webapp\\WEB-INF\\resources\\images\\meatball-200.png"));
+	        b = new SerialBlob(defaultImage);
+	    }
 		
-		
-		
-		InputStream in = mf.getInputStream();
-		long size = mf.getSize();
-		Blob b = PictureService.fileToBlob(in, size);
 		HalaBean hb = new HalaBean();
 		hb.setHalaclassname(halaclassname);
        hb.setMemberBean(member.get());
@@ -132,12 +133,14 @@ public class HalaController {
 	// 分類查詢
 	@RequestMapping(path = "/_06_halaAndQa.SelectHalaClass.controller", method = RequestMethod.GET)
 	public String processAction3(@RequestParam("halaclassname") String halaclassname,
-			@ModelAttribute("HalaBean") HalaBean hb, BindingResult result, Model haModel) {
+			@ModelAttribute("HalaBean") HalaBean hb, BindingResult result, Model haModel,Model topModel) {
 		if (result.hasErrors()) {
 			return "Error";
 		}
 		List<HalaBean> classList = halaRepo.findByHalaclassname(halaclassname);
 		haModel.addAttribute("classList", classList);
+		List<HalaBean>topList = halaService.findTopHot();
+		topModel.addAttribute("topList",topList);
 
 		return "_06_hala/hala";
 	}
@@ -148,15 +151,39 @@ public class HalaController {
 	public String processAction11(HttpServletRequest request,@RequestParam("halaid") Integer halaid, Model haModel, Model resModel) {
 		HalaBean Bean = halaRepo.findByHalaId(halaid);
 		haModel.addAttribute("bean", Bean);
+		
+		HttpSession session = request.getSession(false);
+		
 		String account = SecurityContextHolder.getContext().getAuthentication().getName();
 		List<MemberBean> mem = memberService.searchMemByAccount(account);
+		if (mem.size() == 0) {
+			return "_06_hala/halapostpage";
+		}else {
 		resModel.addAttribute("member",mem.get(0) );
 
 	
 
 		return "_06_hala/halapostpage";
+		}
 	}
 	
+	// 前往修改畫面
+	@RequestMapping(path = "/_06_halaAndQa.GoHalaUpdate.controller", method = RequestMethod.GET)
+	public String processAction4( HttpServletRequest request,@RequestParam("halaId") Integer halaid, Model haModel) {
+		HttpSession session = request.getSession(false);
+		String account = SecurityContextHolder.getContext().getAuthentication().getName();
+		List<MemberBean> mem = memberService.searchMemByAccount(account);
+
+		if (mem.size() == 0) {
+			return "login";
+		}else {
+			session.setAttribute("Member", mem.get(0));
+			HalaBean Bean = halaRepo.findByHalaId(halaid);
+			haModel.addAttribute("bean", Bean);
+			return "_06_hala/updatehala";
+		}
+		
+	}
 	
 	// 前往新增畫面
 		@RequestMapping(path = "/_06_halaAndQa.goAddHala.controller", method = RequestMethod.GET)
@@ -177,30 +204,6 @@ public class HalaController {
 					
 		}
 
-	// 修改
-	@PostMapping("/_06_halaAndQa.updateHala.controller")
-	public String processAction5(@RequestParam("halaId") Integer halaId,
-			@RequestParam("halaclassname") String halaclassname, @RequestParam("title") String title,
-			@RequestParam("images") MultipartFile mf, @RequestParam("halacontent") String halacontent, Model haModel)
-			throws IOException, SQLException {
-
-		HalaBean hb = halaService.selectHalaId(halaId);
-		InputStream in = mf.getInputStream();
-		long size = mf.getSize();
-		Blob b = PictureService.fileToBlob(in, size);
-
-		hb.setHalaclassname(halaclassname);
-		hb.setPicture(b);
-		hb.setTitle(title);
-		hb.setPostdate(getCurrentDate());
-		hb.setHalacontent(halacontent);
-
-		halaService.updateHala(hb);
-		HalaBean Bean = halaRepo.findByHalaId(halaId);
-		haModel.addAttribute("bean", Bean);
-
-		return "_06_hala/halapostpage";
-	}
 
 	// 刪除
 	@GetMapping("/_06_halaAndQa.deleteHala.controller")
@@ -269,15 +272,65 @@ public class HalaController {
 		
 		return "_06_hala/hala";
 	}
-	// 前往修改畫面
-	@RequestMapping(path = "/_06_halaAndQa.GoHalaUpdate.controller", method = RequestMethod.GET)
-	public String processAction4(@RequestParam("halaId") Integer halaid, Model haModel) {
-		HalaBean Bean = halaRepo.findByHalaId(halaid);
+	// 修改
+	@PostMapping("/_06_halaAndQa.updateHala.controller")
+	public String processAction5(@RequestParam("halaId") Integer halaId,
+			@RequestParam("halaclassname") String halaclassname, @RequestParam("title") String title,
+			@RequestParam("images") MultipartFile mf, @RequestParam("halacontent") String halacontent, Model haModel)
+					throws IOException, SQLException {
+		
+		HalaBean hb = halaService.selectHalaId(halaId);
+		InputStream in;
+		long size;
+		Blob b;
+		
+		if (mf != null && !mf.isEmpty()) {
+			in = mf.getInputStream();
+			size = mf.getSize();
+			b = PictureService.fileToBlob(in, size);
+		} else {
+			// 設定預設圖片
+			byte[] defaultImage = Files.readAllBytes(Paths.get("C:\\hibernate\\workspace\\MeetBoth\\src\\main\\webapp\\WEB-INF\\resources\\images\\meatball-200.png"));
+			b = new SerialBlob(defaultImage);
+		}
+		
+		hb.setHalaclassname(halaclassname);
+		hb.setPicture(b);
+		hb.setTitle(title);
+		hb.setPostdate(getCurrentDate());
+		hb.setHalacontent(halacontent);
+		
+		halaService.updateHala(hb);
+		HalaBean Bean = halaRepo.findByHalaId(halaId);
 		haModel.addAttribute("bean", Bean);
 		
-		return "_06_hala/updatehala";
+		return "_06_hala/halapostpage";
 	}
 //	---------------------------------------後台區-----------------------------------
+	// 後台修改
+	@PostMapping("/_06_halaAndQa.updateHalaIndex.controller")
+	public String processAction24(@RequestParam("halaId") Integer halaId,
+			@RequestParam("halaclassname") String halaclassname, @RequestParam("title") String title,
+			@RequestParam("images") MultipartFile mf, @RequestParam("halacontent") String halacontent, Model haModel)
+					throws IOException, SQLException {
+		
+		HalaBean hb = halaService.selectHalaId(halaId);
+		InputStream in = mf.getInputStream();
+		long size = mf.getSize();
+		Blob b = PictureService.fileToBlob(in, size);
+		
+		hb.setHalaclassname(halaclassname);
+		hb.setPicture(b);
+		hb.setTitle(title);
+		hb.setPostdate(getCurrentDate());
+		hb.setHalacontent(halacontent);
+		
+		halaService.updateHala(hb);
+		HalaBean Bean = halaRepo.findByHalaId(halaId);
+		haModel.addAttribute("bean", Bean);
+		
+		return "redirect:/_06_halaAndQa.SelectAllHalaIndex.controller";
+	}
 	
 	// 前往後台修改畫面
 	@RequestMapping(path = "/_06_halaAndQa.GoHalaUpdateIndex.controller", method = RequestMethod.GET)
@@ -329,30 +382,6 @@ public class HalaController {
 	}
 	
 	
-	// 後台修改
-		@PostMapping("/_06_halaAndQa.updateHalaIndex.controller")
-		public String processAction24(@RequestParam("halaId") Integer halaId,
-				@RequestParam("halaclassname") String halaclassname, @RequestParam("title") String title,
-				@RequestParam("images") MultipartFile mf, @RequestParam("halacontent") String halacontent, Model haModel)
-				throws IOException, SQLException {
-
-			HalaBean hb = halaService.selectHalaId(halaId);
-			InputStream in = mf.getInputStream();
-			long size = mf.getSize();
-			Blob b = PictureService.fileToBlob(in, size);
-
-			hb.setHalaclassname(halaclassname);
-			hb.setPicture(b);
-			hb.setTitle(title);
-			hb.setPostdate(getCurrentDate());
-			hb.setHalacontent(halacontent);
-
-			halaService.updateHala(hb);
-			HalaBean Bean = halaRepo.findByHalaId(halaId);
-			haModel.addAttribute("bean", Bean);
-
-			return "redirect:/_06_halaAndQa.SelectAllHalaIndex.controller";
-		}
 	
 		
 		// 後台刪除
@@ -394,4 +423,27 @@ public class HalaController {
 		}
 
 
+		
+		 @GetMapping("/_06_halaAndQa.halaFontPage.controller")
+		 public String halaChangepageAction(Model m,Model pm,HttpServletRequest request,@RequestParam("id")Integer memID) {
+			 Optional<MemberBean> mem = memberService.searchMemByID(memID);
+				m.addAttribute("member", mem.get());
+				
+				List<HalaBean> halaBean = halaService.selectMemberId(memID);
+				pm.addAttribute("classList", halaBean);
+				
+				return "_06_hala/memberresume";
+			}
+		
+		 @RequestMapping(path = "/_06_halaAndQa.memberAllHala.controller", method = RequestMethod.GET)
+			public String processAction100(Model haModel,Model m,@RequestParam("id")Integer memID) {
+			 Optional<MemberBean> mem = memberService.searchMemByID(memID);
+				m.addAttribute("member", mem.get());
+				
+				List<HalaBean> classList = halaRepo.findAllHala();
+				haModel.addAttribute("classList", classList);
+				
+
+				return "redirect:/_06_halaAndQa.halaFontPage.controller";
+			}
 }

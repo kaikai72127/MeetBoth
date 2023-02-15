@@ -311,7 +311,7 @@ a:hover {
 										</div>
 										
 										<div>
-											<span>會員編號 :&ensp;<input type="text" name="memberid" class="MBinput" placeholder="只能編號"></span>
+											<span>會員編號 :&ensp;<input type="text" name="memberid" class="MBinput" value="${Member.memberID}"></span>
 										</div>
 										
 										<div style="display: flex;">

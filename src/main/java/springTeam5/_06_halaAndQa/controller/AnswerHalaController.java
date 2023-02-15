@@ -60,17 +60,7 @@ public class AnswerHalaController {
 		
 		ahService.insertAnswerHala(newAhBean);
 		halaService.insertHala(currentHala);
-//		List<AnswerHalaBean> ahb = new ArrayList<AnswerHalaBean>();
-//		ahb.add(newAhBean);
-//		currentHala.setAnswerHala(ahb);
-		
-//		
-//		HalaBean Bean = halaRepo.findByHalaId(halaId);
-//		List<AnswerHalaBean> ah = Bean.getAnswerHala();
-//		for(AnswerHalaBean a : ah) {
-//			System.out.println("媽的給我跑出來出來"+a.getAnswerContent());
-//		}
-//		haModel.addAttribute("bean", Bean);
+
 		
 		return "redirect:/_06_halaAndQa.goHalaPage.controller?halaid="+halaId ;
 	}

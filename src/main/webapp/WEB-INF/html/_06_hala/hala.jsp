@@ -31,13 +31,15 @@ String basePathimg2 = request.getScheme() + "://" + request.getServerName() + ":
 }
 
 .tab {
-	width: 110%;
+	width: 120%;
 	border: 5px double gray;
 	border-radius: 10px;
 }
 
 .trr {
 	border: 1px dashed gray
+	
+	
 }
 
 .td1 {
@@ -47,7 +49,8 @@ String basePathimg2 = request.getScheme() + "://" + request.getServerName() + ":
 
 .td11 {
 	padding: 5px;
-	width: 10%;
+	width: 20%;
+
 }
 
 .td12 {
@@ -57,17 +60,17 @@ String basePathimg2 = request.getScheme() + "://" + request.getServerName() + ":
 
 .td13 {
 	padding: 0;
-	width: 40%;
+	width: 34%;
 }
 
 .td14 {
 	padding: 0;
-	width: 10%;
+	width: 16%;
 }
 
 .td15 {
 	padding: 0;
-	width: 10%;
+	width: 15%;
 }
 
 .td2 {
@@ -105,6 +108,133 @@ input[type="submit"] {
 	font-size: 18;
 	color: red
 }
+
+  .btn5 {
+    width: 180px;
+    line-height: 40px;
+    font-size: 20px;
+    color: PapayaWhip;
+    text-align: center;
+    background-color: Chocolate;
+    border: 5px solid SaddleBrown;
+    border-radius: 15px;
+    cursor: pointer;
+  }
+  .btn5:hover {
+    /* :hover 代表滑鼠移到元素上時的狀態 */ 
+    transform: scale(1.05);
+  }
+
+  .btn5:active {
+    /* :active是滑鼠點擊元素的狀態 */
+    transform: scale(1);
+    box-shadow: inset 0 0 10px 1px rgba(0, 0, 0, .2);
+  }
+  .btn5 {
+    transition: .1s;
+  }
+  
+.btn-21,
+.btn-21 *,
+.btn-21 :after,
+.btn-21 :before,
+.btn-21:after,
+.btn-21:before {
+  border: 0 solid;
+  box-sizing: border-box;
+}
+.btn-21 {
+  -webkit-tap-highlight-color: transparent;
+  -webkit-appearance: button;
+  background-color: #000;
+  background-image: none;
+  color: #fff;
+  cursor: pointer;
+  font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
+    Segoe UI, Roboto, Helvetica Neue, Arial, Noto Sans, sans-serif,
+    Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji;
+  font-size: 100%;
+  font-weight: 900;
+  line-height: 1.5;
+  margin: 0;
+  -webkit-mask-image: -webkit-radial-gradient(#000, #fff);
+  padding: 0;
+  text-transform: uppercase;
+}
+.btn-21:disabled {
+  cursor: default;
+}
+.btn-21:-moz-focusring {
+  outline: auto;
+}
+.btn-21 svg {
+  display: block;
+  vertical-align: middle;
+}
+.btn-21 [hidden] {
+  display: none;
+}
+.btn-21 {
+  border-radius: 99rem;
+  border-width: 2px;
+  overflow: hidden;
+  padding: 0.8rem 3rem;
+  position: relative;
+}
+.btn-21 span {
+  mix-blend-mode: difference;
+  
+}
+.btn-21:before {
+  -webkit-animation: move-out 0.3s;
+  animation: move-out 0.3s;
+  background: #FFDC35;
+  content: "";
+  height: 100%;
+  left: -100%;
+  position: absolute;
+  top: 0;
+  width: 100%;
+  will-change: transform;
+}
+.btn-21:hover:before {
+  -webkit-animation: move-in 0.3s forwards;
+  animation: move-in 0.3s forwards;
+}
+@-webkit-keyframes move-in {
+  0% {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(100%);
+  }
+}
+@keyframes move-in {
+  0% {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(100%);
+  }
+}
+@-webkit-keyframes move-out {
+  0% {
+    transform: translateX(100%);
+  }
+  to {
+    transform: translateX(200%);
+  }
+}
+@keyframes move-out {
+  0% {
+    transform: translateX(100%);
+  }
+  to {
+    transform: translateX(200%);
+  }
+}
+
+
 </style>
 
 
@@ -170,9 +300,9 @@ input[type="submit"] {
 							<tr style='border-style: outset; background-color: #FFFFCE;'>
 								<td style="border-left: outset black"><a
 									href="<c:url value='/_06_halaAndQa.goHalaPage.controller?halaid=${topList.halaId}'/>">
-										&#128293;${topList.title} </a></td>
-								<td style="border-left: outset black">&#129321;${topList.watch}</td>
-								<td style="border-left: outset black">&#128585;${topList.memberBean.memberID}</td>
+										&#128293;&nbsp;&nbsp; ${topList.title} </a></td>
+								<td style="border-left: outset black">&#129321;&nbsp;&nbsp;${topList.watch}</td>
+								<td style="border-left: outset black">&#128585;&nbsp;&nbsp;${topList.memberBean.memberID}</td>
 							</tr>
 						</c:forEach>
 					</table>
@@ -208,56 +338,56 @@ input[type="submit"] {
 								<div class="btn-container">
 									<form
 										action="<c:url value='/_06_halaAndQa.SelectAllHala.controller' />">
-										<button style="float: right" class="btn btn-b btn-circle"
-											type="submit">查詢全部貼文</button>
+										<button style="float: right; font-size:25px" class="btn-21"
+											type="submit"><span>查詢全部貼文</span></button>
 									</form>
 									<form
 										action="<c:url value='/_06_halaAndQa.goAddHala.controller' />">
-										<button style="float: right" class="btn btn-b btn-circle"
-											type="submit">發文</button>
+										<button style="float: right; font-size:25px" class="btn-21"
+											type="submit"><span>發文</span></button>
 									</form>
 								</div>
 							</div>
 							<div>
 								<form method="get"
 									action="<c:url value='/_06_halaAndQa.SelectHalaClass.controller' />">
-									<input type="submit" name="halaclassname" value="公告"
+									<input type="submit" name="halaclassname" value="公告" class="btn5"
 										style="width: 17%"> <input type="submit"
-										name="halaclassname" value="閱讀心得" style="width: 17%">
-									<input type="submit" name="halaclassname" value="資料分享"
+										name="halaclassname" value="閱讀心得" style="width: 17%"class="btn5">
+									<input type="submit" name="halaclassname" value="資料分享"class="btn5"
 										style="width: 17%"> <input type="submit"
-										name="halaclassname" value="圖書推薦" style="width: 17%">
-									<input type="submit" name="halaclassname" value="教學文章"
+										name="halaclassname" value="圖書推薦" style="width: 17%"class="btn5">
+									<input type="submit" name="halaclassname" value="教學文章"class="btn5"
 										style="width: 17%"> <input type="submit"
-										name="halaclassname" value="JAVA" style="width: 17%">
-									<input type="submit" name="halaclassname" value="HTML"
+										name="halaclassname" value="JAVA" style="width: 17%"class="btn5">
+									<input type="submit" name="halaclassname" value="HTML"class="btn5"
 										style="width: 17%"> <input type="submit"
-										name="halaclassname" value="Spring" style="width: 17%">
-									<input type="submit" name="halaclassname" value="SpringBoot"
+										name="halaclassname" value="Spring" style="width: 17%"class="btn5">
+									<input type="submit" name="halaclassname" value="SpringBoot"class="btn5"
 										style="width: 17%"> <input type="submit"
-										name="halaclassname" value="SpringMVC" style="width: 17%">
-									<input type="submit" name="halaclassname" value="SQL Server"
+										name="halaclassname" value="SpringMVC" style="width: 17%"class="btn5">
+									<input type="submit" name="halaclassname" value="SQL Server"class="btn5"
 										style="width: 17%"> <input type="submit"
-										name="halaclassname" value="My SQL" style="width: 17%">
-									<input type="submit" name="halaclassname" value="Hibernate"
+										name="halaclassname" value="My SQL" style="width: 17%"class="btn5">
+									<input type="submit" name="halaclassname" value="Hibernate"class="btn5"
 										style="width: 17%"> <input type="submit"
-										name="halaclassname" value="VScode" style="width: 17%">
-									<input type="submit" name="halaclassname" value="eclipse"
+										name="halaclassname" value="VScode" style="width: 17%"class="btn5">
+									<input type="submit" name="halaclassname" value="eclipse"class="btn5"
 										style="width: 17%"> <input type="submit"
-										name="halaclassname" value="SpringTool" style="width: 17%">
-									<input type="submit" name="halaclassname" value="JDBC"
+										name="halaclassname" value="SpringTool" style="width: 17%"class="btn5">
+									<input type="submit" name="halaclassname" value="JDBC"class="btn5"
 										style="width: 17%"> <input type="submit"
-										name="halaclassname" value="Servlet" style="width: 17%">
-									<input type="submit" name="halaclassname" value="JavaScript"
+										name="halaclassname" value="Servlet" style="width: 17%"class="btn5">
+									<input type="submit" name="halaclassname" value="JavaScript"class="btn5"
 										style="width: 17%"> <input type="submit"
-										name="halaclassname" value="jQuery" style="width: 17%">
-									<input type="submit" name="halaclassname" value="Azure"
+										name="halaclassname" value="jQuery" style="width: 17%"class="btn5">
+									<input type="submit" name="halaclassname" value="Azure"class="btn5"
 										style="width: 17%"> <input type="submit"
-										name="halaclassname" value="RESTful" style="width: 17%">
-									<input type="submit" name="halaclassname" value="c++"
+										name="halaclassname" value="RESTful" style="width: 17%"class="btn5">
+									<input type="submit" name="halaclassname" value="c++"class="btn5"
 										style="width: 17%"> <input type="submit"
-										name="halaclassname" value="python" style="width: 17%">
-									<input type="submit" name="halaclassname" value="其他"
+										name="halaclassname" value="python" style="width: 17%"class="btn5">
+									<input type="submit" name="halaclassname" value="其他"class="btn5"
 										style="width: 17%">
 								</form>
 							</div>
@@ -267,12 +397,12 @@ input[type="submit"] {
 										<td class="td11">圖片</td>
 										<td class="td12">文章分類</td>
 										<td class="td13">標題/內容</td>
-										<td class="td14">讚/瀏覽次數</td>
+										<td class="td14">瀏覽次數</td>
 										<td class="td15">貼文/修改日期</td>
 									</tr>
 									<c:forEach var="bean" items="${classList}">
 										<tr class="trr">
-											<td><img width='80'
+											<td class="td2"><img width='150'
 												src="<c:url value='/_06_halaAndQa.picsave.controller?id=${bean.halaId}' />"></td>
 											<td class="td2"><p>${bean.halaclassname}</p></td>
 											<td class="td2"><a
@@ -284,11 +414,7 @@ input[type="submit"] {
 														<p>${bean.halacontent}</p>
 													</div>
 											</a></td>
-											<td class="td2"><button id="tumbBtn">讚</button>
-												<p id="tumbhere">
-													讚:${bean.tumb} <input type="hidden" id="tumbid"
-														value="${bean.halaId}">
-												</p>
+											<td class="td2">
 												<p id="watch">瀏覽次數:${bean.watch}</p></td>
 											<td class="td2"><p>${bean.postdate}</p></td>
 										</tr>

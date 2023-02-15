@@ -641,6 +641,46 @@ to {
 										</select>
 									</div>
 								</div>
+								<div class="resume-item">
+									<div class="resume-item-title">請選擇您希望教師的擅長科目</div>
+									<div class="resume-item-content">
+										<select name="timeChoose" style="width: 100%">
+											<option value="">--請選擇您希望教師的擅長科目--</option>
+											<option value="國文">國文</option>
+											<option value="英文">英文</option>
+											<option value="數學">數學</option>
+											<option value="自然">自然</option>
+											<option value="社會">社會</option>
+											<option value="其他">其他</option>
+										</select>
+									</div>
+								</div>
+								<div class="resume-item">
+									<div class="resume-item-title">請選擇您希望教師擅長的語言能力</div>
+									<div class="resume-item-content">
+										<select name="timeChoose" style="width: 100%">
+											<option value="">--請選擇您希望教師擅長的語言能力--</option>
+											<option value="英文">英文</option>
+											<option value="日文">日文</option>
+											<option value="韓文">韓文</option>
+											<option value="法文">法文</option>
+											<option value="德文">德文</option>
+											<option value="希伯來文">希伯來文</option>
+											<option value="其他">其他</option>
+										</select>
+									</div>
+								</div>
+								<div class="resume-item">
+									<div class="resume-item-title">請選擇您希望給教師的時薪</div>
+									<div class="resume-item-content">
+										<select name="timeChoose" style="width: 100%">
+											<option value="">--請選擇您希望給教師的時薪--</option>
+											<option value="500以下">500以下</option>
+											<option value="501~1000">501~1000</option>
+											<option value="1000以上">1000以上</option>
+										</select>
+									</div>
+								</div>
 							</div>
 							<div style="display: flex; align-items: center; justify-content: center;">
 								<button id="form-submit-button"

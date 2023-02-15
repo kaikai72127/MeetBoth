@@ -236,8 +236,10 @@ a:hover {
 										class="btn btn-d btn-round">徵才管理&ensp;<i
 											class="fa-solid fa-angle-double-down"></i></a>
 										<ul style="">
-											<li><a href="#" style="color: white; font-weight: 600;"
-												class="btn btn-d btn-round">所有貼文清單</a></li>
+											<li><a href="/MeetBoth/admin/_05_teacStu.searchAllTeac.controller/1" style="color: white; font-weight: 600;"
+												class="btn btn-d btn-round">所有履歷清單</a></li>
+											<li><a href="/MeetBoth/admin/_05_teacStu.searchAllStud.controller/1" style="color: white; font-weight: 600;"
+												class="btn btn-d btn-round">所有需求清單</a></li>
 										</ul></li>
 									<li><a href="#" style="color: white; font-size: 20px;"
 										class="btn btn-d btn-round">討論區管理&ensp;<i

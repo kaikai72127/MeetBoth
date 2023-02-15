@@ -658,10 +658,9 @@ to {
 									<div class="front">
 										<img src="../html/assets/images/meatball/meatball-144x144.png">
 									</div>
-									<div class="back"
+									<div class="back" id="connect1"
 										style="background-color: white; display: flex;">
-										<div class="tutor-avatar" style="margin: 20px">
-											<img src="<c:url value='/_01_member.ShowPhoto.controller?account=${bean.member.account}' />">
+										<div id="img1" class="tutor-avatar" style="margin: 20px">
 										</div>
 										<div class="tutor-detail" style="margin: 20px">
 											<div id="jsonsubjectItem" class="subject-items"></div>
@@ -693,10 +692,9 @@ to {
 									<div class="front">
 										<img src="../html/assets/images/meatball/meatball-144x144.png">
 									</div>
-									<div class="back"
+									<div class="back" id="connect2"
 										style="background-color: white; display: flex;">
-										<div class="tutor-avatar" style="margin: 20px">
-											<img src="<c:url value='/_01_member.ShowPhoto.controller?account=${bean.member.account}' />">
+										<div id="img2" class="tutor-avatar" style="margin: 20px">
 										</div>
 										<div class="tutor-detail" style="margin: 20px">
 											<div id="jsonsubjectItem2" class="subject-items"></div>
@@ -728,10 +726,9 @@ to {
 									<div class="front">
 										<img src="../html/assets/images/meatball/meatball-144x144.png">
 									</div>
-									<div class="back"
+									<div class="back" id="connect3"
 										style="background-color: white; display: flex;">
-										<div class="tutor-avatar" style="margin: 20px">
-											<img src="<c:url value='/_01_member.ShowPhoto.controller?account=${bean.member.account}' />">
+										<div id="img3" class="tutor-avatar" style="margin: 20px">
 										</div>
 										<div class="tutor-detail" style="margin: 20px">
 											<div id="jsonsubjectItem3" class="subject-items"></div>
@@ -763,10 +760,9 @@ to {
 									<div class="front">
 										<img src="../html/assets/images/meatball/meatball-144x144.png">
 									</div>
-									<div class="back"
+									<div class="back" id="connect4"
 										style="background-color: white; display: flex;">
-										<div class="tutor-avatar" style="margin: 20px">
-											<img src="<c:url value='/_01_member.ShowPhoto.controller?account=${bean.member.account}' />">
+										<div id="img4" class="tutor-avatar" style="margin: 20px">
 										</div>
 										<div class="tutor-detail" style="margin: 20px">
 											<div id="jsonsubjectItem4" class="subject-items"></div>
@@ -839,8 +835,7 @@ to {
 				<!-- 貼文開始 -->
 
 				<c:forEach var="bean" items="${pageTeac}">
-					<a
-						href="<c:url value='/_05_teacStu.teacpostpageMain.controller?teacno=${bean.teacno}'/>">
+					<a href="<c:url value='/_05_teacStu.teacpostpageMain.controller?teacno=${bean.teacno}'/>">
 						<div class="tutor-item">
 							<div class="tutor-left-section">
 								<div class="tutor-avatar">
@@ -1008,6 +1003,13 @@ to {
 			.then(response => response.json())
 			.then(data => {
 				var firstData = data[0];
+				var teacno1 = firstData.teacno;
+				var account1 = firstData.member.account;
+				var i1 = document.createElement('img');
+				i1.src = "<c:url value='/_01_member.ShowPhoto.controller?account=" + account1 + "' />";
+				var img1 = document.getElementById('img1');
+				img1.innerHTML = '';
+				img1.appendChild(i1);
 				var jsonsubjectItem = firstData.subjectItem;
 				$('#jsonsubjectItem').html(jsonsubjectItem);
 				var jsonName = firstData.member.memName + "(" + firstData.member.memNickName + ")";
@@ -1018,8 +1020,18 @@ to {
 				$('#jsontutorExp').html(jsontutorExp);
 				var jsonteacLoc = firstData.teacLoc;
 				$('#jsonteacLoc').html(jsonteacLoc);
+				document.querySelector('#connect1').addEventListener("click", function () {
+					window.location.href = "/MeetBoth/_05_teacStu.teacpostpageMain.controller?teacno=" + teacno1;
+				});
 				
 				var secondData = data[1];
+				var teacno2 = secondData.teacno;
+				var account2 = secondData.member.account;
+				var i2 = document.createElement('img');
+				i2.src = "<c:url value='/_01_member.ShowPhoto.controller?account=" + account2 + "' />";
+				var img2 = document.getElementById('img2');
+				img2.innerHTML = '';
+				img2.appendChild(i2);
 				var jsonsubjectItem2 = secondData.subjectItem;
 				$('#jsonsubjectItem2').html(jsonsubjectItem2);
 				var jsonName2 = secondData.member.memName + "(" + secondData.member.memNickName + ")";
@@ -1030,8 +1042,18 @@ to {
 				$('#jsontutorExp2').html(jsontutorExp2);
 				var jsonteacLoc2 = secondData.teacLoc;
 				$('#jsonteacLoc2').html(jsonteacLoc2);
+				document.querySelector('#connect2').addEventListener("click", function () {
+					window.location.href = "/MeetBoth/_05_teacStu.teacpostpageMain.controller?teacno=" + teacno2;
+				});
 				
 				var thirdData = data[2];
+				var teacno3 = thirdData.teacno;
+				var account3 = thirdData.member.account;
+				var i3 = document.createElement('img');
+				i3.src = "<c:url value='/_01_member.ShowPhoto.controller?account=" + account3 + "' />";
+				var img3 = document.getElementById('img3');
+				img3.innerHTML = '';
+				img3.appendChild(i3);
 				var jsonsubjectItem3 = thirdData.subjectItem;
 				$('#jsonsubjectItem3').html(jsonsubjectItem3);
 				var jsonName3 = thirdData.member.memName + "(" + thirdData.member.memNickName + ")";
@@ -1042,8 +1064,18 @@ to {
 				$('#jsontutorExp3').html(jsontutorExp3);
 				var jsonteacLoc3 = thirdData.teacLoc;
 				$('#jsonteacLoc3').html(jsonteacLoc3);
+				document.querySelector('#connect3').addEventListener("click", function () {
+					window.location.href = "/MeetBoth/_05_teacStu.teacpostpageMain.controller?teacno=" + teacno3;
+				});
 				
 				var forthData = data[3];
+				var teacno4 = forthData.teacno;
+				var account4 = forthData.member.account;
+				var i4 = document.createElement('img');
+				i4.src = "<c:url value='/_01_member.ShowPhoto.controller?account=" + account4 + "' />";
+				var img4 = document.getElementById('img4');
+				img4.innerHTML = '';
+				img4.appendChild(i4);
 				var jsonsubjectItem4 = forthData.subjectItem;
 				$('#jsonsubjectItem4').html(jsonsubjectItem4);
 				var jsonName4 = forthData.member.memName + "(" + forthData.member.memNickName + ")";
@@ -1054,6 +1086,10 @@ to {
 				$('#jsontutorExp4').html(jsontutorExp4);
 				var jsonteacLoc4 = forthData.teacLoc;
 				$('#jsonteacLoc4').html(jsonteacLoc4);
+				document.querySelector('#connect4').addEventListener("click", function () {
+					window.location.href = "/MeetBoth/_05_teacStu.teacpostpageMain.controller?teacno=" + teacno4;
+				});
+				
 			setTimeout(() => {
 				closeDialog();
 				showCardContainer();

@@ -201,9 +201,18 @@ public class _01_membercontroll {
 //	查詢類controll
 	@GetMapping("/admin/_01_member.admin.controller")
 	public String admin(Model m) {
-		List<MemberBean> all = ms.searchAllMember();
-		m.addAttribute("Member", all);
+//		List<MemberBean> all = ms.searchAllMember();
+//		m.addAttribute("Member", all);
 		return "_01_member/admin";
+	}
+	
+	@ResponseBody
+	@GetMapping("/admin/ajaxdata")
+	public List<MemberBean> adminajax() {
+		System.out.println("============================================================================================================================");
+		List<MemberBean> all = ms.searchAllMember();
+//		m.addAttribute("Member", all);
+		return all;
 	}
 	
 	@GetMapping("/admin/_01_member.selectAll.controller")
@@ -217,6 +226,15 @@ public class _01_membercontroll {
 	public String selectByAccountLike(@RequestParam("selectByAccount") String account, @RequestParam("value") String value, Model m) {
 		
 		List<MemberBean> mal = ms.searchMemByAccountLike(value);
+		m.addAttribute("Member",mal);
+		return "_01_member/admin";			
+		
+	}
+	
+	@PostMapping("/admin/_01_member.selectByKeyword.controller")
+public String selectByAccountLike(@RequestParam("value") String key, Model m) {
+		
+		List<MemberBean> mal = ms.searchMemBykeyword(key);
 		m.addAttribute("Member",mal);
 		return "_01_member/admin";			
 		

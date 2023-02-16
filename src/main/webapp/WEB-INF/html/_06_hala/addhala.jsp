@@ -193,10 +193,10 @@ String basePathimg2 = request.getScheme() + "://" + request.getServerName() + ":
                 <script>
                 document.getElementById('fill-form-btn').addEventListener('click', function() {
                     // 範例標題文字
-                    var title = '花花的原味內褲';
+                    var title = 'MEETBOTH的老師有推薦的嗎';
                     
                     // 範例內容文字
-                    var content = '台中花老師原味內褲真香\n666666666666666666';
+                    var content = '我最近想學JAVA，不知道有沒有推薦的老師';
 
                     // 將範例文字填入標題與內容欄位
                     document.getElementsByName('title')[0].value = title;

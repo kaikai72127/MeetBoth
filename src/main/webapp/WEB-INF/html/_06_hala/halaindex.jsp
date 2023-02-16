@@ -167,11 +167,13 @@ a:hover {
 .prodtable>thead>tr>th {
 	border-right: solid 1px white;
 	text-align: center;
+	font-size:20px;
 }
 
 .prodtable>tbody>tr>td {
 	border-right: solid 1px white;
 	border-top: solid 1px white;
+	font-size:20px;
 }
 </style>
 </head>
@@ -359,7 +361,7 @@ a:hover {
 															<th style="width: 25%; padding-left: 5px;">標題</th>
 															<th style="width: 10%">類別</th>
 															<th style="width: 10%">瀏覽次數</th>
-															<th style="width: 5%">發文者</th>
+															<th style="width: 8%">發文者</th>
 															<th style="width: 15%">發文日期</th>
 															<th></th>
 															<th></th>

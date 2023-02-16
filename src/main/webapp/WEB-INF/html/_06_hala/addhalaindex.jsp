@@ -281,7 +281,7 @@ a:hover {
 													class="MBinput" placeholder="自動產生" readonly></span>
 											</div>
 											<div>
-												<span>標題 :&ensp;<input type="text" name="title"
+												<span>貼文標題 :&ensp;<input type="text" name="title"
 													class="MBinput" placeholder="不能為空"></span>
 											</div>
 											<div>
@@ -449,5 +449,6 @@ a:hover {
 							document.getElementsByName('halacontent')[0].value = content;
 						});
 	</script>
+	
 </body>
 </html>

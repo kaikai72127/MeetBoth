@@ -1,0 +1,33 @@
+<!-- <c:forEach var="Member" items="${Member}">
+                                                                    <tbody>
+                                                                        <tr>
+                                                                            <td>${Member.memberID}</td>
+                                                                            <td>${Member.account}</td>
+                                                                            <!-- <td>${Member.password}</td> -->
+<!-- <td>${Member.idNumber}</td> -->
+<td>${Member.memName}</td>
+<!-- <td>${Member.memOld}</td> -->
+<!-- <td>${Member.memBirth}</td> -->
+<td>${Member.memGender}</td>
+<td>${Member.eMail}</td>
+<td>${Member.phone}</td>
+<!-- <td>${Member.address}</td> -->
+<td>${Member.registime}</td>
+<td>
+    <form method="post" action="_01_member.preupdate.controller">
+        <button name="preupdate" value="${Member.memberID}">
+            <i style="color: #000;" class="fa-solid fa-user"></i>
+        </button>
+    </form>
+</td>
+<td>
+    <form method="post" action="_01_member.delete.controller">
+        <button name="delete" value="${Member.memberID}">
+            <i style="color: #ff0000;" class=" fa-solid
+                                                                                            fa-xmark"></i>
+        </button>
+    </form>
+</td>
+</tr>
+</tbody>
+</c:forEach> -->

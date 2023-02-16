@@ -53,22 +53,27 @@ public class MemberBean implements Serializable {
 
 	@Column(name = "account")
 	private String account = "";
-
+		
+	@JsonIgnore
 	@Column(name = "password")
 	private String password = "";
-
+		
+	@JsonIgnore
 	@Column(name = "idnumber")
 	private String idNumber = "";
 
 	@Column(name = "memname")
 	private String memName = "";
-
+		
+	@JsonIgnore
 	@Column(name = "memnickname")
 	private String memNickName = "";
-
+		
+	@JsonIgnore
 	@Column(name = "memold")
 	private int memOld;
-
+		
+	@JsonIgnore
 	@Column(name = "membirth")
 	private String memBirth = "";
 
@@ -80,17 +85,19 @@ public class MemberBean implements Serializable {
 
 	@Column(name = "phone")
 	private String phone;
-
+		
 	@JsonIgnore
 	@Column(name = "photo")
 	private Blob photo = null;
-
+		
+	@JsonIgnore
 	@Column(name = "address")
 	private String address = "";
 
 	@Column(name = "registime")
 	private Date registime = new Date();
 
+	
 	@Column(name = "role")
 	private String role = "user";
 

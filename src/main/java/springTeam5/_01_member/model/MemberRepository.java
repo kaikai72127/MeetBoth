@@ -20,7 +20,8 @@ public interface MemberRepository extends JpaRepository<MemberBean, Integer> {
 	@Query(value = "from MemberBean where eMail = :email")
 	public List<MemberBean> searchMemByMail(String email);
 
-
+	@Query(value = "SELECT m FROM MemberBean m WHERE memName LIKE %:keyword% OR account LIKE %:keyword%")
+	public List<MemberBean> searchMemBykey(String keyword);
 
 
 

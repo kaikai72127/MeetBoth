@@ -205,7 +205,7 @@ public class _01_membercontroll {
 		return "_01_member/admin";
 	}
 	
-	@PostMapping("/admin/_01_member.selectAll.controller")
+	@GetMapping("/admin/_01_member.selectAll.controller")
 	public String selectAll(Model m) {
 		List<MemberBean> all = ms.searchAllMember();
 		m.addAttribute("Member", all);
@@ -352,12 +352,12 @@ public class _01_membercontroll {
 			MemberBean check = list.get(0);
 			newMem.setMemberID(check.getMemberID());
 			newMem.setAccount(member.getAccount());
-			String pwd = new BCryptPasswordEncoder().encode(member.getPassword());
-			if (check.getPassword().equals(pwd)) {
-				newMem.setPassword(pwd);				
-			}else {
-				newMem.setPassword(check.getPassword());
-			}
+//			String pwd = new BCryptPasswordEncoder().encode(member.getPassword());
+//			if (check.getPassword() != pwd) {
+//				newMem.setPassword(pwd);				
+//			}else {
+//			}
+			newMem.setPassword(check.getPassword());
 			newMem.setIdNumber(member.getIdNumber());
 			newMem.setMemName(member.getMemName());
 			newMem.setMemNickName(member.getMemNickName());
@@ -399,12 +399,12 @@ public class _01_membercontroll {
 			MemberBean check = list.get(0);
 			newMem.setMemberID(check.getMemberID());
 			newMem.setAccount(member.getAccount());
-			String pwd = new BCryptPasswordEncoder().encode(member.getPassword());
-			if (check.getPassword() != pwd) {
-				newMem.setPassword(pwd);				
-			}else {
-				newMem.setPassword(check.getPassword());
-			}
+//			String pwd = new BCryptPasswordEncoder().encode(member.getPassword());
+//			if (check.getPassword() != pwd) {
+//				newMem.setPassword(pwd);				
+//			}else {
+//			}
+			newMem.setPassword(check.getPassword());
 			newMem.setIdNumber(member.getIdNumber());
 			newMem.setMemName(member.getMemName());
 			newMem.setMemNickName(member.getMemNickName());

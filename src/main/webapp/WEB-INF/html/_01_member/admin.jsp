@@ -16,6 +16,8 @@
                             <jsp:include page="/WEB-INF/html/fragment/headMVC.jsp" />
                             <%-- <jsp:include page="/WEB-INF/html/fragment/topMVC.jsp" /> --%>
                             <jsp:include page="/WEB-INF/html/fragment/jsPath.jsp" />
+                            <!-- <link rel="stylecheet" href="//cdn.datatables.net/1.13.2/css/jquery.dataTables.min.css">
+                            <link rel="script" href="//cdn.datatables.net/1.13.2/js/jquery.dataTables.min.js"> -->
 
                             <style>
                                 .star-off {
@@ -160,11 +162,13 @@
                                 .prodtable>thead>tr>th {
                                     border-right: solid 1px white;
                                     text-align: center;
+                                    font-size: 25px;
                                 }
 
                                 .prodtable>tbody>tr>td {
                                     border-right: solid 1px white;
                                     border-top: solid 1px white;
+                                    font-size: 25px;
                                 }
 
                                 .btn1 {
@@ -177,6 +181,7 @@
                                     /* 给边框添加圆角 */
                                     border-radius: 6px;
                                     /* 字母转大写 */
+
                                     border: none;
                                     color: white;
                                     padding: 0;
@@ -193,6 +198,10 @@
                                     text-transform: uppercase;
                                 }
 
+                                .btn1 {
+                                    border: 1px ridge white;
+                                }
+
                                 .btn1:hover {
                                     background-color: rgb(255, 255, 255);
                                     color: rgb(0, 0, 0);
@@ -203,6 +212,8 @@
                                     border-color: azure;
                                     background-color: #000;
                                     color: azure;
+                                    width: 300px;
+
                                     caret-color: auto;
                                     /* 預設 */
                                     caret-color: transparent;
@@ -212,13 +223,31 @@
                                     outline: none;
                                     /* 外框效果 */
                                 }
+
+                                ::placeholder {
+                                    font-size: 18px;
+                                    color: aliceblue;
+                                }
                             </style>
                             <!-- CSS -->
-                            <link rel="stylesheet"
-                                href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.min.css">
+                            <!-- <link rel="stylesheet"
+                                href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.min.css"> -->
                             <!-- jq -->
                             <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
                             <script src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
+                            <script>
+                                $(document).ready(function () {
+                                    $('#member').DataTable();
+                                });
+
+                                function registery() {
+                                    location.href = "_01_member.backregister.controller";
+                                }
+
+                                function allMember() {
+                                    location.href = "_01_member.selectAll.controller";
+                                }
+                            </script>
             </head>
 
             <body data-spy="scroll" data-target=".onpage-navigation" data-offset="60">
@@ -267,15 +296,15 @@
                                                                 <input class="btn1" type="submit" name="selectByName"
                                                                     value="以姓名查詢"
                                                                     onclick="this.form.action='_01_member.selectByName.controller'" />
+                                                                <button class="btn1" name="register"
+                                                                    style="padding: 0% 30px;"
+                                                                    onclick="event.preventDefault(); registery()">新增會員</button>
+                                                                <button class="btn1" name="selectAll"
+                                                                    style="padding: 0% 30px;"
+                                                                    onclick="event.preventDefault(); allMember()">取得所有會員</button>
                                                             </form>
                                                             <form action="#" method="POST" modelAttribute="Member">
 
-                                                                <button class="btn1" name="register"
-                                                                    style="padding: 0% 30px;"
-                                                                    onclick="this.form.action='_01_member.backregister.controller'">新增會員</button>
-                                                                <button class="btn1" name="selectAll"
-                                                                    style="padding: 0% 30px;"
-                                                                    onclick="this.form.action='_01_member.selectAll.controller'">取得所有會員</button>
                                                             </form>
                                                         </div>
 
@@ -284,7 +313,7 @@
                                                         </form> -->
 
                                                         <div>
-                                                            <table
+                                                            <table id="member"
                                                                 style="color: rgb(255, 255, 255); text-align: center; width: 100%;"
                                                                 class="prodtable">
                                                                 <thead>

@@ -10,7 +10,7 @@
 				<head>
 					<!-- 引入共同的headMVC -->
 					<jsp:include page="../fragment/headMVC.jsp" />
-
+					<jsp:include page="js/myjs.jsp" />
 				</head>
 
 				<!--BOBY-->
@@ -22,9 +22,7 @@
 					<jsp:include page="../fragment/topMVC.jsp" />
 
 					<main>
-						<div class="page-loader">
-							<div class="loader">Loading...</div>
-						</div>
+
 
 						<!-- LoginRegister-->
 
@@ -65,24 +63,7 @@
 						<!-- 引入共同的footerMVC -->
 						<jsp:include page="../fragment/footerMVC.jsp" />
 					</main>
-					<script type="text/javascript">
-						//設定秒數
-						let count = 5;
-						function countDown() {
-							// 將秒數寫在指定元素中
-							document.getElementById("timeBox").innerHTML = count + "秒後關閉頁面！";
-							// 每次執行就減1
-							count -= 1;
-							// 當 count = 0 時跳轉頁面
-							if (count == 0) {
-								window.close();
-							}
-							// 設定每秒執行1次
-							setTimeout("countDown()", 1000);
-						}
-						// 執行 countDown
-						countDown();
-					</script>
+
 					<!--  
     JavaScripts
     =============================================

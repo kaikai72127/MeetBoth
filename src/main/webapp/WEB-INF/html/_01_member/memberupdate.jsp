@@ -118,15 +118,32 @@
 
                                 .member {
                                     table-layout: auto;
-                                    outline: 1px dotted rgb(255, 179, 179);
+                                    outline: 3px solid rgb(255, 255, 255);
+                                    width: 60%;
 
-                                    border-radius: 3px;
+                                    border-radius: 6px;
+                                }
+
+                                .member>tbody {
+
+                                    border-radius: 6px;
                                 }
 
                                 .member>tbody>tr {
                                     height: 60px;
-
                                     overflow: hidden;
+                                    margin: 10px;
+                                    padding: 10px;
+                                    font-size: 18.5px;
+                                }
+
+                                .member>tbody>tr>td {
+                                    padding: 1.5%;
+                                    border: 2px dotted rgb(255, 255, 255);
+                                }
+
+                                .member>tbody>tr>td>input {
+                                    font-size: 18px;
                                 }
 
                                 .btn1 {
@@ -207,7 +224,7 @@
                                                             <div style="text-align: center;">
                                                                 <table
                                                                     style="color: rgb(255, 255, 255); width: 80%;margin: auto;"
-                                                                    class="">
+                                                                    class="member">
                                                                     <c:forEach var="Member" items="${Member}">
                                                                         <tr>
                                                                             <td style="width: 150px;"><label>帳號：</label>
@@ -215,7 +232,7 @@
                                                                             <td><input type="text" name="account"
                                                                                     value="${Member.account}" required>
                                                                             </td>
-                                                                            <td rowspan="4" align="center"
+                                                                            <td rowspan="7" align="center"
                                                                                 style="width: 250px; height: 250px">
                                                                                 <!-- 												<div style="float:right;"> -->
                                                                                 <input style="padding-left: 35px"
@@ -232,7 +249,8 @@
                                                                             </td>
                                                                             <td><input type="password" id="pas1check"
                                                                                     name="password" onblur="pasvalid()"
-                                                                                    value="${Member.password}" required>
+                                                                                    value="${Member.password}" required
+                                                                                    readonly>
                                                                             </td>
                                                                         </tr>
                                                                         <!-- 										<tr> -->

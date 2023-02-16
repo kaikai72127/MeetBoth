@@ -29,6 +29,12 @@ marquee a:hover {
 	background-color: #ce7777;
 }
 </style>
+
+<!-- 愛心特效使用 -->
+
+
+
+<!-- 愛心特效使用 -->
 </head>
 
 <!--BOBY-->

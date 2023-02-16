@@ -111,10 +111,10 @@
 											<li><a href="<c:url value='/_03_product/pathToMyPDP.controller'/>">我的商品</a></li>
 											<li><a href="<c:url value='/_03_product.pathToInsertProduct.controller'/>">新增商品</a></li>
 										</ul></li>
-									<li><a href="#" style="">訂單管理&ensp;<i
+									<li><a href="/MeetBoth/memberOrdersList.controller" style="">訂單管理&ensp;<i
 											class="fa-solid fa-angle-double-down"></i></a>
 										<ul style="">
-											<li><a href="#">我的銷售</a></li>
+											<li><a href="/MeetBoth/memberOrdersList.controller">我的銷售</a></li>
 											<li><a href="#">待付款訂單</a></li>
 											<li><a href="#">待出貨訂單</a></li>
 											<li><a href="#">已完成訂單</a></li>

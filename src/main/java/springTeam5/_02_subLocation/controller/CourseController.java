@@ -848,14 +848,27 @@ public class CourseController {
 //	搜全部
 	@GetMapping("/searchAllMap.controller")
 	public String processSearchAllMapAction(Model mCourse) {
-		List<Course> result;
-		try {
-			result = cService.searchAllCourse();
-			mCourse.addAttribute("allcourselist", result);
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
+//		List<Course> result;
+//		try {
+//			result = cService.searchAllCourse();
+//			mCourse.addAttribute("allcourselist", result);
+//		} catch (SQLException e) {
+//			e.printStackTrace();
+//		}
 		return "_02_subLocation/map";
+	}
+	
+//	搜全部
+	@GetMapping("/searchAllMap3.controller")
+	public String processSearchAllMap3Action(Model mCourse) {
+//		List<Course> result;
+//		try {
+//			result = cService.searchAllCourse();
+//			mCourse.addAttribute("allcourselist", result);
+//		} catch (SQLException e) {
+//			e.printStackTrace();
+//		}
+		return "_02_subLocation/map3";
 	}
 	
 	@GetMapping("/_02_memberresume.controller")

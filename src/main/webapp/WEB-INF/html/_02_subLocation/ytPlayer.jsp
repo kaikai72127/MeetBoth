@@ -200,11 +200,11 @@ h1 {
 														style="margin-left: 10px; width: 70%;">
 														<div class="comment-author font-alt">
 															<h3>
-																<a href="#">賣家暱稱</a>
+																<a href="#">${singleCourseBean.memberBean.memName}</a>
 															</h3>
-															<p style="font-size: 20px;">賣家訊息1</p>
-															<p style="font-size: 20px;">賣家訊息2</p>
-															<p style="font-size: 20px;">賣家訊息3</p>
+															<p style="font-size: 20px;">${singleCourseBean.memberBean.memName}</p>
+															<p style="font-size: 20px;">${singleCourseBean.memberBean.memNickName}</p>
+															<p style="font-size: 20px;">${singleCourseBean.memberBean.eMail}</p>
 														</div>
 													</div>
 													<div style="margin-top: 170px;">

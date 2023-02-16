@@ -449,34 +449,35 @@
                     <!-- 內容-課程訊息 -->
                     <div class="page-container">
                         <div class="resume-container">
-                            <h1 class="resume-title">
-                                教師履歷
-                            </h1>
-                            <div class="case-list-body">
-
-                                <div class="comment-table">
-                                    <div class="comment-table-row header">
-                                        <div class="comment-table-col">
-                                            <div class="comment-table-col-content">更新日期</div>
+                            <h1 class="resume-title">會員課程</h1>
+                            <div style="overflow-x: auto; overflow-y: hidden; display: -webkit-box;">
+                                <c:forEach var="courseBean" items="${memberBean.course}">
+                                    <div id="eachProd" style="margin: 0 20px;">
+                                        <div id="photo" style="width: 200px; height: 200px; text-align: center;">
+                                            <a href="/MeetBoth/PathToCourseDetail.controller?id=${courseBean.courseID}">
+                                                <img style="max-width: 100%; max-height: 100%; height: auto; width: auto;"
+                                                    src="<c:url value='/showCoursePicture.controller?id=${courseBean.courseID}' />"
+                                                    style="height: 250px; width: 200px;" />
+                                            </a>
                                         </div>
-
-                                    </div>
-                                </div>
-
-                            </div>
-                            <div class="case-list-body">
-                                <div class="comment-table">
-                                    <div class="comment-table-row">
-                                        <c:forEach var="" items="${teac}">
-                                            <div class="comment-table-col">
-                                                <div class="comment-table-col-content">
-                                                    ${teac.updateDate}
-                                                </div>
+                                        <div id="info" style="text-align: center;">
+                                            <div id="prodName">
+                                                <strong style="font-size: 16px">${courseBean.courseName}</strong>
                                             </div>
-
-                                        </c:forEach>
+                                            <div id="scoreAVG">
+                                                <c:forEach var="commentBean" items="${courseBean.courseComment}">
+                                                    <input type="hidden" id="starAVG"
+                                                        value="${commentBean.courseScore}">
+                                                </c:forEach>
+                                                <div id="starAVGDiv" style="font-size: 17px;"></div>
+                                            </div>
+                                            <div id="price">
+                                                <strong style="font-size: 16px">價格 :
+                                                    NT$${courseBean.coursePrice}</strong>
+                                            </div>
+                                        </div>
                                     </div>
-                                </div>
+                                </c:forEach>
                             </div>
                         </div>
                     </div>

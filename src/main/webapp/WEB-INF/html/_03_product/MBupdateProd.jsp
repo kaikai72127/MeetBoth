@@ -229,7 +229,7 @@ a:hover {
 												<option value="1">文具</option>
 												<option value="2">教具</option>
 												<option value="3">運動用品</option>
-												<option value="4">辦公用品</option>
+												<option value="4">學生用品</option>
 												<option value="5">全新教科書</option>
 												<option value="6">全新好書</option>
 												<option value="7">二手教科書</option>

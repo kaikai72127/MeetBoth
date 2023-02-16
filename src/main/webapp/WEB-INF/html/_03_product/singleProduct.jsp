@@ -192,7 +192,7 @@ String basePathimg2 = request.getScheme() + "://" + request.getServerName() + ":
 												style="margin-left: 10px; width: 70%;">
 												<div class="comment-author font-alt">
 													<h3>
-														<a href="#" style="text-transform: none;">${bean.memberBean.memNickName}</a><span style="font-size:17px;text-transform: none;">(${bean.memberBean.account})</span>
+														<a href="<c:url value='/memberresume?id=${bean.memberBean.memberID}'/>" style="text-transform: none;">${bean.memberBean.memNickName}</a><span style="font-size:17px;text-transform: none;">(${bean.memberBean.account})</span>
 													</h3>
 													<p style="font-size: 20px;text-transform: none;"></p>
 													<p style="font-size: 20px;text-transform: none;">E-mail : ${bean.memberBean.eMail}</p>

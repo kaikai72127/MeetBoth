@@ -56,17 +56,11 @@ public class ProductController {
 	private MemberService memberService;
 
 //	-----------------------------測試-----------------------
-	@GetMapping("/_03_product.productFontPage.controller")
-	public String processproductFontPageAction(Model m, Model pm, HttpServletRequest request,
-			@RequestParam("id") Integer memID) {
-
-		Optional<MemberBean> mem = memberService.searchMemByID(memID);
-		m.addAttribute("member", mem.get());
-
-		List<Product> prodBean = pService.findByMemidAndOnlyOnSales(memID);
-		m.addAttribute("prodBean", prodBean);
-
-		return "_03_product/productFontPage";
+	@GetMapping("/test")
+	public String processproductFontPageAction(Model m) throws SQLException {
+		List<Product> List = pService.searchAllProduct();
+		m.addAttribute("Bean", List);
+		return "_03_product/test";
 	}
 
 //	-----------------------------測試-----------------------
@@ -244,7 +238,7 @@ public class ProductController {
 			page2 = 1;
 		}
 		// 每頁顯示的貼文數量，可以自行修改
-		int pageSize = 5;
+		int pageSize = 15;
 		int totalPages = (int) Math.ceil((double) result.size() / pageSize);
 		int startIndex = (page2 - 1) * pageSize;
 		int endIndex = startIndex + pageSize;
@@ -382,7 +376,7 @@ public class ProductController {
 			page2 = 1;
 		}
 		// 每頁顯示的貼文數量，可以自行修改
-		int pageSize = 5;
+		int pageSize = 20;
 		int totalPages = (int) Math.ceil((double) result.size() / pageSize);
 		int startIndex = (page2 - 1) * pageSize;
 		int endIndex = startIndex + pageSize;
@@ -458,7 +452,7 @@ public class ProductController {
 			page2 = 1;
 		}
 		// 每頁顯示的貼文數量，可以自行修改
-		int pageSize = 5;
+		int pageSize = 12;
 		int totalPages = (int) Math.ceil((double) result.size() / pageSize);
 		int startIndex = (page2 - 1) * pageSize;
 		int endIndex = startIndex + pageSize;
@@ -499,7 +493,7 @@ public class ProductController {
 
 //	insert
 	@PostMapping("/_03_product.insertProduct.controller")
-	public String processInsertProductAction(@RequestParam("pClass") Integer pClass,
+	public String processInsertProductAction(@RequestParam("pClass") Integer pClass,@RequestParam("pState") String pState,
 			@RequestParam("pName") String pName, @RequestParam("pPrice") Integer pPrice,
 			@RequestParam("memID") Integer memID, @RequestParam("invt") Integer invt, HttpServletRequest request,
 			@RequestParam("directions") String directions, @RequestParam("pPic") MultipartFile file)
@@ -536,7 +530,7 @@ public class ProductController {
 		newProd.setDirections(directions);
 		newProd.setProdSales(0);
 		newProd.setProdCheck(0);
-		newProd.setProdState("下架");
+		newProd.setProdState(pState);
 		newProd.setProdtype(currentProdType);
 		newProd.setMemberBean(currentMember);
 
@@ -657,7 +651,7 @@ public class ProductController {
 			page2 = 1;
 		}
 		// 每頁顯示的貼文數量，可以自行修改
-		int pageSize = 5;
+		int pageSize = 20;
 		int totalPages = (int) Math.ceil((double) result.size() / pageSize);
 		int startIndex = (page2 - 1) * pageSize;
 		int endIndex = startIndex + pageSize;
@@ -715,7 +709,7 @@ public class ProductController {
 			page2 = 1;
 		}
 		// 每頁顯示的貼文數量，可以自行修改
-		int pageSize = 5;
+		int pageSize = 20;
 		int totalPages = (int) Math.ceil((double) result.size() / pageSize);
 		int startIndex = (page2 - 1) * pageSize;
 		int endIndex = startIndex + pageSize;

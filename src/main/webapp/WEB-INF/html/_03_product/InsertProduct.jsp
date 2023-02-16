@@ -129,6 +129,19 @@ String basePathimg2 = request.getScheme() + "://" + request.getServerName() + ":
 										</div>
 									</div>
 								</div>
+								<div class="row mb-20">
+									<div class="col-sm-12">
+										<div class="price font-alt" style="display: flex;">
+											<span class="amount"
+												style="font-size: 25px; text-align: center;">商品狀態:&ensp;</span>
+											<select name="pState"
+												style="width: 80%; font-size: 20px; letter-spacing: 0px; border: 1px solid black; border-radius: 15px; text-align: center;">
+												<option value="上架中">上架中</option>
+												<option value="下架">下架</option>
+											</select>
+										</div>
+									</div>
+								</div>
 							</div>
 						</div>
 						<!-- 						中間BLOCK -->

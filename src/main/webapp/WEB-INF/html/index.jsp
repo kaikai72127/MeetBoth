@@ -11,7 +11,6 @@
 <!-- 引入共同的headMVC -->
 <jsp:include page="fragment/headMVC.jsp" />
 <link rel="stylesheet" href="html/assets/css/_05_teacStu/deoindex.css" />
-
 <style type="text/css">
 marquee {
 	font-size: 28px;
@@ -37,13 +36,30 @@ marquee a:hover {
 .work-title {
 	font-size: 25px;
 }
+
+.col-lg-3 {
+	width: 22%;
+}
+
+#wrapperPhoto {
+	width: 50%;
+}
+/* 放大圖片使用 */
+.image-modal {
+	display: none;
+	position: fixed;
+	z-index: 999;
+	top: 15%;
+	left: 15%;
+	width: 80%;
+	height: 80%;
+	background-color: rgba(0, 0, 0, 0.0);
+}
+/* 放大圖片使用 */
+</style>
+<style>
 </style>
 
-<!-- 愛心特效使用 -->
-
-
-
-<!-- 愛心特效使用 -->
 </head>
 
 <!--BOBY-->
@@ -67,70 +83,51 @@ marquee a:hover {
 			肉丸家教網歡迎您的加入 點擊<a href="/MeetBoth/login/page">註冊</a> ꉂꉂ꒰•̤▿•̤*ૢ꒱
 		</marquee>
 		<!-- 內容 1-->
-		<div id="team5" class="col-sm-12"
-			style="margin-bottom: 30px; display: flex; justify-content: center; align-items: center;">
-			<img style="width: 50%" src="html/assets/images/shop/team5.gif"
-				alt="Title of Image" />
+		<div style="display: flex; justify-content: center">
+			<div id="team5"
+				style="width: 80%; margin-bottom: 30px; display: flex; justify-content: space-between; align-items: center;">
+				<div
+					style="width: 20%; height: 100%; display: flex; flex-direction: column; justify-content: space-between;">
+					<a class="image-link" href="html/assets/images/shop/sport.gif"><img
+						style="box-shadow: 4px 4px 5px rgba(0, 0, 0, 0.5); border-radius: 10px; padding: 3px;"
+						src="html/assets/images/shop/sport.gif" alt="Title of Image" /> </a>
+					<a class="image-link" href="html/assets/images/shop/lulu.jpg"><img
+						class="image-link"
+						style="box-shadow: 4px 4px 5px rgba(0, 0, 0, 0.5); border-radius: 10px; padding: 3px;"
+						src="html/assets/images/shop/lulu.jpg" alt="Title of Image" /></a>
+				</div>
+				<div>
+					<img
+						style="width: 160%; box-shadow: 4px 4px 5px rgba(0, 0, 0, 0.5); border-radius: 10px; padding: 3px;"
+						src="html/assets/images/shop/team5.gif" alt="Title of Image" />
+				</div>
+				<div
+					style="width: 20%; height: 100%; display: flex; flex-direction: column; justify-content: space-between;">
+					<a class="image-link" href="html/assets/images/shop/wewe.jpg"><img
+						class="image-link"
+						style="box-shadow: 4px 4px 5px rgba(0, 0, 0, 0.5); border-radius: 10px; padding: 3px;"
+						src="html/assets/images/shop/wewe.jpg" alt="Title of Image" /></a> <a
+						class="image-link" href="html/assets/images/shop/birthday.gif"><img
+						class="image-link"
+						style="box-shadow: 4px 4px 5px rgba(0, 0, 0, 0.5); border-radius: 10px; padding: 3px;"
+						src="html/assets/images/shop/birthday.gif" alt="Title of Image" /></a>
+				</div>
+
+			</div>
+
 		</div>
 
+		<!-- 		折扣碼 ----跑馬燈 -->
+		<marquee onMouseOver="this.stop()" onMouseOut="this.start()">
+			<img src="https://i.imgur.com/53AabEX.png" width="48px" height="48px">
+			肉丸家教網歡迎您的加入 點擊<a href="/MeetBoth/login/page">註冊</a> ꉂꉂ꒰•̤▿•̤*ૢ꒱
+		</marquee>
+		<!-- 		折扣碼 ----跑馬燈 -->
 
 
 		<!-- 內容 2-->
-		<!-- 			熱門商品 -->
-		<section class="module-small"
-			style="padding-top: 0px; padding-bottom: 0px;">
-			<div class="container">
 
-				<div class="row multi-columns-row" style="padding-bottom: 35px;">
-					<div class="row">
-						<div class="col-sm-12" style="">
-							<img src="/MeetBoth/html/assets/images/shop/熱門商品橫幅.jpg"
-								alt="Title of Image" />
-						</div>
-					</div>
-				</div>
-				<div class="row multi-columns-row">
-					<c:forEach var="HotBean" items="${Hotprodlist}">
-						<div class="col-sm-6 col-md-3 col-lg-3"
-							style="padding-bottom: 30px; display: flex;">
-							<div class="works-grid works-grid-4 works-hover-w" id=""
-								style="text-align: center;">
-								<div class="work-item illustration webdesign" id="typeBlock"
-									style="height: 250px; width: 100%;">
-									<a
-										href="/MeetBoth/_03_product.PathToProductDetail.controller?id=${HotBean.prodID}">
-										<span class="work-image"
-										style="width: 100%; height: 100%; margin: auto; display: flex; justify-content: center; align-items: center; margin-right: 15px; text-align: center;">
-											<img
-											style="max-width: 100%; max-height: 100%; height: auto; width: auto;"
-											src="<c:url value='/_03_product.showPicture.controller?id=${HotBean.prodID}' />"
-											alt="Portfolio Item" /> <span class="work-caption font-alt">
-												<span class="work-title"><img style=""
-													src="/MeetBoth/html/assets/images/shop/seesee.png"
-													alt="Portfolio Item" /></span>
-										</span>
-									</span>
-									</a>
-								</div>
-								<div id="prodName" style="padding-top: 30px;">
-									<strong style="font-size: 16px">${HotBean.prodName}</strong>
-								</div>
-								<div id="prodCheck">
-									<strong style="font-size: 16px">瀏覽次數:&ensp;${HotBean.prodCheck}次</strong>
-								</div>
-								<div id="scoreAVG">
-									<c:forEach var="commentBean" items="${HotBean.productComment}">
-										<input type="hidden" id="starAVG"
-											value="${commentBean.prodScore}">
-									</c:forEach>
-									<div id="starAVGDiv" style="font-size: 17px;"></div>
-								</div>
-							</div>
-						</div>
-					</c:forEach>
-				</div>
-			</div>
-		</section>
+
 		<!-- 			熱門商品 -->
 		<!-- 內容3 -->
 		<div class="page-container">
@@ -234,7 +231,64 @@ marquee a:hover {
 				</div>
 			</div>
 		</div>
-		</div>
+		<!-- 內容5 -->
+		<!-- 			熱門商品 -->
+		<section class="module-small"
+			style="padding-top: 0px; padding-bottom: 0px;">
+			<div class="container">
+
+				<div class="row multi-columns-row" style="padding-bottom: 35px;">
+					<div class="row">
+						<div class="col-sm-12" style="">
+							<img src="/MeetBoth/html/assets/images/shop/熱門商品橫幅.jpg"
+								alt="Title of Image" />
+						</div>
+					</div>
+				</div>
+				<div class="row multi-columns-row">
+					<c:forEach var="HotBean" items="${Hotprodlist}">
+						<div class="col-sm-6 col-md-3 col-lg-3"
+							style="padding-bottom: 30px; display: flex;">
+							<div class="works-grid works-grid-4 works-hover-w" id=""
+								style="text-align: center;">
+								<div class="work-item illustration webdesign" id="typeBlock"
+									style="height: 30rem; width: 100%;">
+									<a
+										href="/MeetBoth/_03_product.PathToProductDetail.controller?id=${HotBean.prodID}">
+										<span class="work-image"
+										style="width: 100%; height: 100%; margin: auto; display: flex; justify-content: center; align-items: center; margin-right: 15px; text-align: center;">
+											<img
+											style="max-width: 100%; max-height: 100%; height: auto; width: auto;"
+											src="<c:url value='/_03_product.showPicture.controller?id=${HotBean.prodID}' />"
+											alt="Portfolio Item" /> <span class="work-caption font-alt">
+												<span class="work-title"><img style=""
+													src="/MeetBoth/html/assets/images/shop/seesee.png"
+													alt="Portfolio Item" /></span>
+										</span>
+									</span>
+									</a>
+								</div>
+								<div id="prodName" style="padding-top: 30px;">
+									<strong style="font-size: 16px">${HotBean.prodName}</strong>
+								</div>
+								<div id="prodCheck">
+									<strong style="font-size: 16px">瀏覽次數:&ensp;${HotBean.prodCheck}次</strong>
+								</div>
+								<div id="scoreAVG">
+									<c:forEach var="commentBean" items="${HotBean.productComment}">
+										<input type="hidden" id="starAVG"
+											value="${commentBean.prodScore}">
+									</c:forEach>
+									<div id="starAVGDiv" style="font-size: 17px;"></div>
+								</div>
+							</div>
+						</div>
+					</c:forEach>
+				</div>
+			</div>
+		</section>
+
+		<!-- 內容5 -->
 		<!-- Footer -->
 		<!-- 引入共同的footerMVC -->
 		<jsp:include page="/WEB-INF/html/fragment/footerMVC.jsp" />
@@ -246,8 +300,6 @@ marquee a:hover {
     -->
 	<!-- 引入共同的js -->
 	<jsp:include page="/WEB-INF/html/fragment/jsPath.jsp" />
-
-
 	<!-- jQuery animateCss Extend -->
 	<script>
 					$.fn
@@ -272,6 +324,72 @@ marquee a:hover {
 						$("#example").css("color", "red");
 					});
 				</script>
+	<script>
+		function roundToTwo(num) {
+			return +(Math.round(num + "e+2") + "e-2");
+		}
+
+		const score = document.querySelectorAll("#starAVG");
+
+		document
+				.addEventListener(
+						"DOMContentLoaded",
+						function() {
+							const scores = document
+									.querySelectorAll("#scoreAVG");
+							for (let i = 0; i < scores.length; i++) {
+								const score = scores[i];
+								const starAVGs = score
+										.querySelectorAll("#starAVG");
+								let totalScore = 0;
+								for (let j = 0; j < starAVGs.length; j++) {
+									const starNum = starAVGs[j].value;
+									totalScore += Number(starNum);
+								}
+								let avgScore = roundToTwo(totalScore
+										/ starAVGs.length);
+								let stars = '';
+								if (isNaN(avgScore)) {
+									stars = '&nbsp;(0)';
+								} else {
+									stars = '&nbsp;(' + avgScore + ')';
+								}
+								let onstar = '<span><i class="fa fa-star star"></i></span>';
+								let offstar = '<span><i class="fa fa-star star-off"></i></span>';
+								for (var k = 0; k < 5; k++) {
+									if (k < avgScore) {
+										stars += onstar;
+									} else {
+										stars += offstar;
+									}
+								}
+								stars += '&nbsp;(' + starAVGs.length + '則評論)'
+								score.querySelector("#starAVGDiv").innerHTML = stars;
+							}
+						});
+	</script>
+	<script>
+        var links = document.querySelectorAll('.image-link');
+        for (var i = 0; i < links.length; i++) {
+            links[i].addEventListener('click', function (event) {
+                event.preventDefault();
+                var imageUrl = this.getAttribute('href');
+                var image = new Image();
+                image.src = imageUrl;
+                image.onload = function () {
+                    var modal = document.createElement('div');
+                    modal.className = 'image-modal';
+                    modal.appendChild(image);
+                    document.body.appendChild(modal);
+                    modal.addEventListener('click', function () {
+                        modal.remove();
+                    });
+                    modal.style.display = 'flex';
+                };
+            });
+        }
+    </script>
+
 </body>
 
 </html>

@@ -133,7 +133,7 @@ h1 {
 						<div class="col-sm-8 col-sm-offset-1" style="margin-left: 20px;">
 							<div class="post">
 								<div class="post-thumbnail">
-									<img src="/MeetBoth/html/assets/images/shop/個人賣場.jpg"
+									<img src="/MeetBoth/html/assets/images/shop/我的平台.jpg"
 										style="padding-bottom: 10px;">
 								</div>
 

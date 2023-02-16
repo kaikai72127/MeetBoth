@@ -8,7 +8,7 @@
 							class="fa-solid fa-angle-double-down"></i></a>
 					<ul style="">
 						<li><a href="/MeetBoth/admin/_01_member.admin.controller"
-								style="color: white; font-weight: 600;" class="btn btn-d btn-round">所有會員清單</a></li>
+								style="color: white; font-weight: 600;" class="btn btn-d btn-round">會員清單</a></li>
 					</ul>
 				</li>
 				<li><a href="#" style="color: white; font-size: 20px;" class="btn btn-d btn-round">商品管理&ensp;<i

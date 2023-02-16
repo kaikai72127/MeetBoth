@@ -16,6 +16,8 @@
                             <jsp:include page="/WEB-INF/html/fragment/headMVC.jsp" />
                             <%-- <jsp:include page="/WEB-INF/html/fragment/topMVC.jsp" /> --%>
                             <jsp:include page="/WEB-INF/html/fragment/jsPath.jsp" />
+                            <!-- <link rel="stylecheet" href="//cdn.datatables.net/1.13.2/css/jquery.dataTables.min.css">
+                            <link rel="script" href="//cdn.datatables.net/1.13.2/js/jquery.dataTables.min.js"> -->
 
                             <style>
                                 .star-off {
@@ -177,6 +179,7 @@
                                     /* 给边框添加圆角 */
                                     border-radius: 6px;
                                     /* 字母转大写 */
+
                                     border: none;
                                     color: white;
                                     padding: 0;
@@ -191,6 +194,10 @@
                                     cursor: pointer;
                                     text-decoration: none;
                                     text-transform: uppercase;
+                                }
+
+                                .btn1 {
+                                    border: 1px ridge white;
                                 }
 
                                 .btn1:hover {
@@ -214,11 +221,16 @@
                                 }
                             </style>
                             <!-- CSS -->
-                            <link rel="stylesheet"
-                                href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.min.css">
+                            <!-- <link rel="stylesheet"
+                                href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.min.css"> -->
                             <!-- jq -->
                             <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
                             <script src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
+                            <script>
+                                $(document).ready(function () {
+                                    $('#member').DataTable();
+                                });
+                            </script>
             </head>
 
             <body data-spy="scroll" data-target=".onpage-navigation" data-offset="60">
@@ -284,7 +296,7 @@
                                                         </form> -->
 
                                                         <div>
-                                                            <table
+                                                            <table id="member"
                                                                 style="color: rgb(255, 255, 255); text-align: center; width: 100%;"
                                                                 class="prodtable">
                                                                 <thead>

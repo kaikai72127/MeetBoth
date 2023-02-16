@@ -105,15 +105,15 @@
 										<div class="form-group">
 											<button class="btn btn-round btn-p"
 												style="font-size: 20px; font-family: 微軟正黑體 ; padding: 0.7% 3% 0.7% 3%;">登入</button>
+											<a style="font-size: large;padding-left: 10px;"
+												href="<%=request.getContextPath()%>/forgetpassword"><i
+													class="fa-solid fa-circle-xmark"></i>忘記密碼?</a>
 											<!-- <button class="btn btn-round btn-p"
 												style="font-size: 20px; font-family: 微軟正黑體 ; padding: 0.7% 3% 0.7% 3%;"
 												href="<%=request.getContextPath()%>/oauth2/authorization/google">Google登入</button> -->
 										</div>
 
-										<div class="form-group">
-											<a href="<%=request.getContextPath()%>/forgetpassword"><i
-													class="fa-solid fa-circle-xmark"></i>忘記密碼?</a>
-										</div>
+
 
 										<input type="button" id="admin" class="btn btn-round btn-p"
 											onclick='event.preventDefault();adminlog();' value="管理員一鍵登入"

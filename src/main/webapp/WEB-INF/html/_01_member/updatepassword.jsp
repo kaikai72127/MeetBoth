@@ -59,7 +59,7 @@
                                                 readonly />
                                             <input type="hidden" class="form-control" style=" text-transform: none;"
                                                 id="mailcheck" type="text" name="mailcheck" value='${member.eMail}'
-                                                readonly />123
+                                                readonly />
                                             <input class="form-control" style="text-transform: none;" id="email"
                                                 type="text" name="mail" value='${value}' placeholder="請輸入信箱" />
                                         </div>

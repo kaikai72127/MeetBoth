@@ -206,7 +206,7 @@ a:hover {
 								<!-- 							標題 -->
 								<!--       右邊第一部分開始 -->
 								<div class="post">
-								<form action="<c:url value='/admin/_05_teacStu.updatedata.controller' />" method="Post" enctype="multipart/form-data">
+								<form action="<c:url value='/admin/_05_teacStu.updatedataStud.controller' />" method="Post" enctype="multipart/form-data">
 								<input name="views" type="hidden" value="${bean.views}">
 									<div class="post-video embed-responsive embed-responsive-16by9"
 										style="height: auto; padding-bottom: 100px;">

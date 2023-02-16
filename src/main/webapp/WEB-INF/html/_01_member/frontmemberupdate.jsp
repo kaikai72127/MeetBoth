@@ -237,6 +237,8 @@
 													<tr height="42">
 														<td colspan='4'>
 															<div align="center">
+																<input class="btn1" type="button" name="cancel"
+																	id="allin" value="一鍵輸入">
 																<input class="btn1" type="submit" name="submit"
 																	id="submit" value="儲存" />
 																<input class="btn1" type="reset" name="cancel"

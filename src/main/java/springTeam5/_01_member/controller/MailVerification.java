@@ -67,7 +67,7 @@ public class MailVerification {
 				 System.out.println(e);
 //				 runtime exception; compiler will not force you to handle it
 			}
-			return "_01_member/mailsend";
+			return "redirect:/";
 		}
 	
 	@PostMapping(path = "verifymember")

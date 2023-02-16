@@ -65,15 +65,14 @@ public class MemberBean implements Serializable {
 	@Column(name = "memname")
 	private String memName = "";
 		
-	@JsonIgnore
 	@Column(name = "memnickname")
 	private String memNickName = "";
 		
-	@JsonIgnore
+	
 	@Column(name = "memold")
 	private int memOld;
 		
-	@JsonIgnore
+	
 	@Column(name = "membirth")
 	private String memBirth = "";
 
@@ -90,7 +89,7 @@ public class MemberBean implements Serializable {
 	@Column(name = "photo")
 	private Blob photo = null;
 		
-	@JsonIgnore
+	
 	@Column(name = "address")
 	private String address = "";
 

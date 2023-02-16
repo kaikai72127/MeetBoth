@@ -16,6 +16,8 @@
                             <jsp:include page="/WEB-INF/html/fragment/headMVC.jsp" />
                             <%-- <jsp:include page="/WEB-INF/html/fragment/topMVC.jsp" /> --%>
                             <jsp:include page="/WEB-INF/html/fragment/jsPath.jsp" />
+                            <!-- <link rel="stylecheet" href="//cdn.datatables.net/1.13.2/css/jquery.dataTables.min.css">
+                            <link rel="script" href="//cdn.datatables.net/1.13.2/js/jquery.dataTables.min.js"> -->
 
                             <style>
                                 .star-off {
@@ -160,11 +162,13 @@
                                 .prodtable>thead>tr>th {
                                     border-right: solid 1px white;
                                     text-align: center;
+                                    font-size: 25px;
                                 }
 
                                 .prodtable>tbody>tr>td {
                                     border-right: solid 1px white;
                                     border-top: solid 1px white;
+                                    font-size: 25px;
                                 }
 
                                 .btn1 {
@@ -177,6 +181,7 @@
                                     /* 给边框添加圆角 */
                                     border-radius: 6px;
                                     /* 字母转大写 */
+
                                     border: none;
                                     color: white;
                                     padding: 0;
@@ -193,6 +198,11 @@
                                     text-transform: uppercase;
                                 }
 
+                                .btn1 {
+                                    border: 1px ridge white;
+                                    font-size: 18px;
+                                }
+
                                 .btn1:hover {
                                     background-color: rgb(255, 255, 255);
                                     color: rgb(0, 0, 0);
@@ -203,6 +213,8 @@
                                     border-color: azure;
                                     background-color: #000;
                                     color: azure;
+                                    width: 300px;
+
                                     caret-color: auto;
                                     /* 預設 */
                                     caret-color: transparent;
@@ -212,13 +224,132 @@
                                     outline: none;
                                     /* 外框效果 */
                                 }
+
+                                input:focus::-webkit-input-placeholder {
+                                    color: transparent;
+                                }
+
+                                input:focus:-moz-placeholder {
+                                    color: transparent;
+                                }
+
+                                /* FF 4-18 */
+                                input:focus::-moz-placeholder {
+                                    color: transparent;
+                                }
+
+                                /* FF 19+ */
+                                input:focus:-ms-input-placeholder {
+                                    color: transparent;
+                                }
+
+                                ::placeholder {
+                                    font-size: 18px;
+                                    color: aliceblue;
+                                }
                             </style>
                             <!-- CSS -->
-                            <link rel="stylesheet"
-                                href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.min.css">
+
+                            <!-- <link rel="stylesheet"
+                                href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.min.css"> -->
+                            <link rel="stylesheet" href="js/datatable.css">
                             <!-- jq -->
                             <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
                             <script src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
+                            <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+                            <script>
+                                $(document).ready(function () {
+                                    $('#member').DataTable({
+                                        "searching": true,
+                                        "lengthMenu": [8],
+
+                                        "language": {
+                                            "processing": "處理中...",
+                                            "loadingRecords": "載入中...",
+                                            "lengthMenu": "顯示 _MENU_ 項結果",
+                                            "zeroRecords": "沒有符合的結果",
+                                            "info": "顯示第 _START_ 至 _END_ 項結果，共 _TOTAL_ 項",
+                                            "infoEmpty": "顯示第 0 至 0 項結果，共 0 項",
+                                            "infoFiltered": "(從 _MAX_ 項結果中過濾)",
+                                            "infoPostFix": "",
+                                            "search": "搜尋:",
+                                            "paginate": {
+                                                "first": "第一頁",
+                                                "previous": "上一頁",
+                                                "next": "下一頁",
+                                                "last": "最後一頁"
+                                            }
+                                        },
+                                        "ajax": {
+                                            url: 'ajaxdata',
+                                            dataSrc: "",
+                                            type: 'GET'
+                                        },
+                                        "columns": [ //列的標題一般是從DOM中讀取（你還可以使用這個屬性為表格創建列標題)
+                                            { data: "memberID" },
+                                            { data: "account" },
+                                            { data: "memName" },
+                                            { data: "memGender" },
+                                            { data: "eMail" },
+                                            { data: "phone" },
+                                            { data: "registime" },
+                                            {
+                                                title: "修改", render: function (data, type, row) {
+                                                    // 回傳一個 HTML 按鈕，並以 memberID 傳遞參數
+                                                    return '<form method="post" action="_01_member.preupdate.controller">'
+                                                        + '<button name="preupdate" value="' + row.memberID + '">'
+                                                        + '<i style="color: #000;" class="fa-solid fa-user"></i>'
+                                                        + '</button>'
+                                                        + '</form>';
+                                                }
+                                            },
+                                            {
+                                                title: "移除", render: function (data, type, row) {
+                                                    // 回傳一個 HTML 按鈕，並以 memberID 傳遞參數
+                                                    return '<form id="delete" method="post" action="_01_member.delete.controller">'
+                                                        + '<button name="delete" onclick="cb()" value="' + row.memberID + '">'
+                                                        + '<i style="color: #ff0000;" class=" fa-solid fa-xmark"></i>'
+                                                        + '</button>'
+                                                        + '</form>';
+                                                }
+                                            }
+                                        ]
+
+
+                                    });
+                                });
+                            </script>
+                            <script>
+                                function cb() {
+                                    event.preventDefault();
+                                    Swal.fire({
+                                        title: '確定要刪除嗎?',
+                                        text: "資料會消失喔!",
+                                        icon: 'warning',
+                                        showCancelButton: true,
+                                        confirmButtonColor: '#3085d6',
+                                        cancelButtonColor: '#d33',
+                                        confirmButtonText: 'Yes, delete it!'
+                                    }).then((result) => {
+                                        if (result.isConfirmed) {
+                                            $("#delete").submit();
+                                            Swal.fire(
+                                                'Deleted!',
+                                                'Your file has been deleted.',
+                                                'success'
+                                            )
+                                        }
+                                    })
+                                }
+                                function registery() {
+                                    location.href = "_01_member.backregister.controller";
+                                }
+
+                                function allMember() {
+                                    location.href = "_01_member.selectAll.controller";
+                                }
+                            </script>
+
             </head>
 
             <body data-spy="scroll" data-target=".onpage-navigation" data-offset="60">
@@ -257,25 +388,26 @@
                                                             <h3 style="color: aliceblue;text-align: center;">會員管理列表</h3>
                                                         </div>
                                                         <div style="text-align: center;">
-                                                            <form action="#" method="POST" modelAttribute="Member">
-                                                                <input type="text" name="value" value="${value}"
+                                                            <form action="_01_member.selectByKeyword.controller"
+                                                                method="POST" modelAttribute="Member">
+                                                                <!-- <input type="text" name="value" value="${value}"
                                                                     style="text-align: center;" placeholder="請輸入查詢文字"
                                                                     required>
-                                                                <input class="btn1" type="submit" name="selectByAccount"
-                                                                    value="以帳號查詢"
-                                                                    onclick="this.form.action='_01_member.selectByAccount.controller'" />
-                                                                <input class="btn1" type="submit" name="selectByName"
+                                                                <input class="btn1" style="width: 100px;" type="submit"
+                                                                    name="selectByAccount" value="查詢" /> -->
+                                                                <!-- onclick="this.form.action='_01_member.selectByAccount.controller'" /> -->
+                                                                <!-- <input class="btn1" type="submit" name="selectByName"
                                                                     value="以姓名查詢"
-                                                                    onclick="this.form.action='_01_member.selectByName.controller'" />
+                                                                    onclick="this.form.action='_01_member.selectByName.controller'" /> -->
+                                                                <button class="btn1" name="register"
+                                                                    style="padding: 0% 30px;"
+                                                                    onclick="event.preventDefault(); registery()">新增會員</button>
+                                                                <!-- <button class="btn1" name="selectAll"
+                                                                    style="padding: 0% 30px;"
+                                                                    onclick="event.preventDefault(); allMember()">取得所有會員</button> -->
                                                             </form>
                                                             <form action="#" method="POST" modelAttribute="Member">
 
-                                                                <button class="btn1" name="register"
-                                                                    style="padding: 0% 30px;"
-                                                                    onclick="this.form.action='_01_member.backregister.controller'">新增會員</button>
-                                                                <button class="btn1" name="selectAll"
-                                                                    style="padding: 0% 30px;"
-                                                                    onclick="this.form.action='_01_member.selectAll.controller'">取得所有會員</button>
                                                             </form>
                                                         </div>
 
@@ -284,9 +416,10 @@
                                                         </form> -->
 
                                                         <div>
-                                                            <table
-                                                                style="color: rgb(255, 255, 255); text-align: center; width: 100%;"
-                                                                class="prodtable">
+                                                            <table id="member"
+                                                                style="width: 100%; color: aliceblue; font-size: 22px;">
+                                                                <!-- style="color: rgb(255, 255, 255); text-align: center; width: 100%;"
+                                                                class="prodtable"> -->
                                                                 <thead>
                                                                     <tr>
                                                                         <th>會員編號</th>
@@ -305,45 +438,7 @@
                                                                         <th>移除</th>
                                                                     </tr>
                                                                 </thead>
-                                                                <c:forEach var="Member" items="${Member}">
-                                                                    <tbody>
-                                                                        <tr>
-                                                                            <td>${Member.memberID}</td>
-                                                                            <td>${Member.account}</td>
-                                                                            <!-- <td>${Member.password}</td> -->
-                                                                            <!-- <td>${Member.idNumber}</td> -->
-                                                                            <td>${Member.memName}</td>
-                                                                            <!-- <td>${Member.memOld}</td> -->
-                                                                            <!-- <td>${Member.memBirth}</td> -->
-                                                                            <td>${Member.memGender}</td>
-                                                                            <td>${Member.eMail}</td>
-                                                                            <td>${Member.phone}</td>
-                                                                            <!-- <td>${Member.address}</td> -->
-                                                                            <td>${Member.registime}</td>
-                                                                            <td>
-                                                                                <form method="post"
-                                                                                    action="_01_member.preupdate.controller">
-                                                                                    <button name="preupdate"
-                                                                                        value="${Member.memberID}">
-                                                                                        <i style="color: #000;"
-                                                                                            class="fa-solid fa-user"></i>
-                                                                                    </button>
-                                                                                </form>
-                                                                            </td>
-                                                                            <td>
-                                                                                <form method="post"
-                                                                                    action="_01_member.delete.controller">
-                                                                                    <button name="delete"
-                                                                                        value="${Member.memberID}">
-                                                                                        <i style="color: #ff0000;"
-                                                                                            class=" fa-solid
-                                                                                            fa-xmark"></i>
-                                                                                    </button>
-                                                                                </form>
-                                                                            </td>
-                                                                        </tr>
-                                                                    </tbody>
-                                                                </c:forEach>
+
                                                             </table>
                                                         </div>
                                                     </section>

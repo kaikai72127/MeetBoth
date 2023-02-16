@@ -190,67 +190,7 @@ a:hover {
 					<div class="row">
 						<!-- 整頁 -->
 						<!-- 左邊欄位開始 -->
-						<div class="col-sm-4 col-md-3 sidebar"
-							style="width: 20%; padding-right: 0px;">
-							<div class="widget">
-								<a href="/MeetBoth/_03_product.index.controller"><img
-									src="/MeetBoth/html/assets/images/shop/警告.jpg"
-									style="padding-bottom: 10px;"></a>
-								<ul class="cart">
-									<li><a href="#" style="color: white; font-size: 20px;"
-										class="btn btn-d btn-round">會員管理&ensp;<i
-											class="fa-solid fa-angle-double-down"></i></a>
-										<ul style="">
-											<li><a href="#" style="color: white; font-weight: 600;"
-												class="btn btn-d btn-round">所有會員清單</a></li>
-										</ul></li>
-									<li><a href="" style="color: white; font-size: 20px;"
-										class="btn btn-d btn-round">商品管理&ensp;<i
-											class="fa-solid fa-angle-double-down"></i></a>
-										<ul style="">
-											<li><a
-												href="/MeetBoth/_03_product.productindex.controller"
-												style="color: white; font-weight: 600;"
-												class="btn btn-d btn-round">所有商品清單</a></li>
-											<li><a
-												href="/MeetBoth/_03_product.MBinsertProd.controller"
-												style="color: white; font-weight: 600;"
-												class="btn btn-d btn-round">新增商品</a></li>
-										</ul></li>
-									<li><a href="#" style="color: white; font-size: 20px;"
-										class="btn btn-d btn-round">課程管理&ensp;<i
-											class="fa-solid fa-angle-double-down"></i></a>
-										<ul style="">
-											<li><a href="#" style="color: white; font-weight: 600;"
-												class="btn btn-d btn-round">所有課程清單</a></li>
-										</ul></li>
-									<li><a href="#" style="color: white; font-size: 20px;"
-										class="btn btn-d btn-round">徵才管理&ensp;<i
-											class="fa-solid fa-angle-double-down"></i></a>
-										<ul style="">
-											<li><a href="#" style="color: white; font-weight: 600;"
-												class="btn btn-d btn-round">所有貼文清單</a></li>
-										</ul></li>
-									<li><a href="#" style="color: white; font-size: 20px;"
-										class="btn btn-d btn-round">討論區管理&ensp;<i
-											class="fa-solid fa-angle-double-down"></i></a>
-										<ul style="">
-											<li><a href="#" style="color: white; font-weight: 600;"
-												class="btn btn-d btn-round">所有貼文清單</a></li>
-										</ul></li>
-									<li><a href="#" style="color: white; font-size: 20px;"
-										class="btn btn-d btn-round">購物車管理&ensp;<i
-											class="fa-solid fa-angle-double-down"></i></a>
-										<ul style="">
-											<li><a href="#" style="color: white; font-weight: 600;"
-												class="btn btn-d btn-round">所有購物單清單</a></li>
-										</ul></li>
-								</ul>
-								<a href="#"><img
-									src="/MeetBoth/html/assets/images/shop/警告2.jpg"
-									style="padding-bottom: 10px;"></a>
-							</div>
-						</div>
+						<jsp:include page="/WEB-INF/html/fragment/AdminIndexSideBar.jsp" />
 						<!-- 左邊欄位結束 -->
 						<!-- 						右邊欄位開始 -->
 						<div class="col-sm-8 col-sm-offset-1"
@@ -272,6 +212,7 @@ a:hover {
 										<div style="display: flex">
 											<button class="MBbtn" id="cancel-btn"
 												onclick="window.location='/MeetBoth/admin/_05_teacStu.searchAllStud.controller/1'">返回</button>
+											<button class="MBbtn" id="fast-btn" >一鍵輸入</button>
 										</div>
 										<div>
 											<span>會員編號 :&ensp;&ensp;&ensp;&ensp;&ensp;<input value="${bean.memberID}" type="text" class="MBinput" placeholder="自動產生" readonly></span>
@@ -395,6 +336,35 @@ a:hover {
               event.preventDefault();
               window.location.href = "/MeetBoth/admin/_05_teacStu.searchAllStud.controller/1";
           });
+          document.getElementById("fast-btn").addEventListener("click", function(event) {
+          	event.preventDefault();
+          	var subjectItem = 'Java';
+          	var studLoc = '澎湖';
+          	var object = '國小一年級少女';
+          	var textBook = '想要有更多教材';
+          	var startDate = '隨時';
+          	var period = '每周5次，持續半年';
+          	var studTime = '隨時';
+          	var classMode = '面授';
+          	var price = 250;
+          	var testTeacMode = '需試教，線上試教';
+          	var educaLimit = '高中以上';
+          	var conMethod = '電話聯絡';
+          	var conTime = '隨時';
+          	document.getElementsByName('subjectItem')[0].value = subjectItem;
+          	document.getElementsByName('studLoc')[0].value = studLoc;
+          	document.getElementsByName('object')[0].value = object;
+          	document.getElementsByName('textBook')[0].value = textBook;
+          	document.getElementsByName('startDate')[0].value = startDate;
+          	document.getElementsByName('period')[0].value = period;
+          	document.getElementsByName('studTime')[0].value = studTime;
+          	document.getElementsByName('classMode')[0].value = classMode;
+          	document.getElementsByName('price')[0].value = price;
+          	document.getElementsByName('testTeacMode')[0].value = testTeacMode;
+          	document.getElementsByName('educaLimit')[0].value = educaLimit;
+          	document.getElementsByName('conMethod')[0].value = conMethod;
+          	document.getElementsByName('conTime')[0].value = conTime;
+        		});
     </script>
 </body>
 </html>

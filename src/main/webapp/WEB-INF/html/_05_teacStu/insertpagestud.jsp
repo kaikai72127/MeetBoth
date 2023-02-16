@@ -417,6 +417,7 @@ color:lightgrey;
                     </div>
                     	<div style="display:flex">
                         <button style="display:flex; justify-content:center; align-items:center; margin:15px auto 0 auto" class="btn btn-b btn-circle" type="submit">確定新增</button>
+                        <button type="button" id="fast-btn" style="display:flex; justify-content:center; align-items:center; margin:15px auto 0 auto" class="btn btn-b btn-circle">一鍵輸入</button>
                         <button type="button" id="cancel-btn" style="display:flex; justify-content:center; align-items:center; margin:15px auto 0 auto" class="btn btn-b btn-circle">取消</button>
                         </div>
                 </div>
@@ -443,6 +444,35 @@ color:lightgrey;
   		document.getElementById("cancel-btn").addEventListener("click", function(event) {
     	event.preventDefault();
     	window.location.href = "/MeetBoth/_05_teacStu.searchAllStud.controller/1";
+  		});
+  		document.getElementById("fast-btn").addEventListener("click", function(event) {
+    	event.preventDefault();
+    	var subjectItem = 'Java';
+    	var studLoc = '澎湖';
+    	var object = '國小一年級少女';
+    	var textBook = '想要有更多教材';
+    	var startDate = '隨時';
+    	var period = '每周5次，持續半年';
+    	var studTime = '隨時';
+    	var classMode = '面授';
+    	var price = 250;
+    	var testTeacMode = '需試教，線上試教';
+    	var educaLimit = '高中以上';
+    	var conMethod = '電話聯絡';
+    	var conTime = '隨時';
+    	document.getElementsByName('subjectItem')[0].value = subjectItem;
+    	document.getElementsByName('studLoc')[0].value = studLoc;
+    	document.getElementsByName('object')[0].value = object;
+    	document.getElementsByName('textBook')[0].value = textBook;
+    	document.getElementsByName('startDate')[0].value = startDate;
+    	document.getElementsByName('period')[0].value = period;
+    	document.getElementsByName('studTime')[0].value = studTime;
+    	document.getElementsByName('classMode')[0].value = classMode;
+    	document.getElementsByName('price')[0].value = price;
+    	document.getElementsByName('testTeacMode')[0].value = testTeacMode;
+    	document.getElementsByName('educaLimit')[0].value = educaLimit;
+    	document.getElementsByName('conMethod')[0].value = conMethod;
+    	document.getElementsByName('conTime')[0].value = conTime;
   		});
 	</script>
 </body>

@@ -411,8 +411,8 @@
                             </div>
                             <div class="case-list-body">
                                 <div class="comment-table">
-                                    <div class="comment-table-row">
-                                        <c:forEach var="teac" items="${teac}">
+                                    <c:forEach var="teac" items="${teac}">
+                                    	<div class="comment-table-row" onclick="window.location='<c:url value='/_05_teacStu.teacpostpageMain.controller?teacno=${teac.teacno}'/>'">
                                             <div class="comment-table-col">
                                                 <div class="comment-table-col-content">
                                                     ${teac.updateDate}</div>
@@ -437,14 +437,52 @@
                                             <div class="comment-table-col">
                                                 <div class="comment-table-col-content">${teac.views}</div>
                                             </div>
-                                        </c:forEach>
-                                    </div>
+                                    	</div>
+                                    </c:forEach>
                                 </div>
                             </div>
                         </div>
                     </div>
 
                     <!-- 內容-教師履歷 -->
+
+                    <!-- 內容-課程訊息 -->
+                    <div class="page-container">
+                        <div class="resume-container">
+                            <h1 class="resume-title">會員課程</h1>
+                            <div style="overflow-x: auto; overflow-y: hidden; display: -webkit-box;">
+                                <c:forEach var="courseBean" items="${memberBean.course}">
+                                    <div id="eachProd" style="margin: 0 20px;">
+                                        <div id="photo" style="width: 200px; height: 200px; text-align: center;">
+                                            <a href="/MeetBoth/PathToCourseDetail.controller?id=${courseBean.courseID}">
+                                                <img style="max-width: 100%; max-height: 100%; height: auto; width: auto;"
+                                                    src="<c:url value='/showCoursePicture.controller?id=${courseBean.courseID}' />"
+                                                    style="height: 250px; width: 200px;" />
+                                            </a>
+                                        </div>
+                                        <div id="info" style="text-align: center;">
+                                            <div id="prodName">
+                                                <strong style="font-size: 16px">${courseBean.courseName}</strong>
+                                            </div>
+                                            <div id="scoreAVG">
+                                                <c:forEach var="commentBean" items="${courseBean.courseComment}">
+                                                    <input type="hidden" id="starAVG"
+                                                        value="${commentBean.courseScore}">
+                                                </c:forEach>
+                                                <div id="starAVGDiv" style="font-size: 17px;"></div>
+                                            </div>
+                                            <div id="price">
+                                                <strong style="font-size: 16px">價格 :
+                                                    NT$${courseBean.coursePrice}</strong>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </c:forEach>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 內容-課程訊息 -->
 
                     <!-- 內容-學生需求 -->
                     <div class="page-container">
@@ -475,8 +513,8 @@
                                             <div class="comment-table-col-content">瀏覽次數</div>
                                         </div>
                                     </div>
-                                    <div class="comment-table-row">
-                                        <c:forEach var="stud" items="${stud}">
+                                    <c:forEach var="stud" items="${stud}">
+                                    	<div class="comment-table-row" onclick="window.location='<c:url value='/_05_teacStu.studpostpageMain.controller?studno=${stud.studno}'/>'">
                                             <div class="comment-table-col">
                                                 <div class="comment-table-col-content">
                                                     ${stud.updateDate}</div>
@@ -497,8 +535,8 @@
                                             <div class="comment-table-col">
                                                 <div class="comment-table-col-content">${stud.views}</div>
                                             </div>
-                                        </c:forEach>
-                                    </div>
+                                    	</div>
+                                    </c:forEach>
                                 </div>
                             </div>
                         </div>

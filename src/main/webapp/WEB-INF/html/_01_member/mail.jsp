@@ -9,6 +9,7 @@
 			<head>
 				<!-- 引入共同的headMVC -->
 				<jsp:include page="../fragment/headMVC.jsp" />
+				<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 				<script>
 					function mailcheck() {
 						var email = $("#mail").val();
@@ -58,26 +59,25 @@
 								<div class="col-sm-5 col-sm-offset-1 mb-sm-40">
 									<h4 class="font-alt h4-p">開始註冊前，請先驗證信箱</h4>
 									<hr class="divider-w mb-10">
-									<form class="form" action="<%=request.getContextPath()%>/mailVerify.controller"
-										method="Post">
+									<form class="form" id="give"
+										action="<%=request.getContextPath()%>/mailVerify.controller" method="Post">
 										<div class="form-group">
 											<input class="form-control" style="text-transform: none;" id="mail"
-												type="text" name="email" oninput='mailcheck()' value='${value}'
-												placeholder="請輸入正確的電子郵件信箱" />
+												type="text" name="email" onchange="mailcheck()" oninput='mailcheck()'
+												value='${value}' placeholder="請輸入正確的電子郵件信箱" />
 										</div>
 
 										<div class="form-group">
-											<button class="btn btn-round btn-p" id="push"
-												style="display: none;">進行驗證</button>
+											<button class="btn btn-round btn-p" id="push" style="display: none;"
+												onclick="hint()">進行驗證</button>
 											<label id="errormessage" style="font-size: medium; color: red;">
 											</label>
 
 										</div>
 
 										<div class="form-group">
-											<button id="push" class="btn btn-round btn-p"
-												style="display: none;">進行驗證</button>
-
+											<button id="pass" class="btn btn-round btn-p"
+												onclick="inmail()">快速填入</button>
 										</div>
 
 
@@ -92,6 +92,26 @@
 					<!-- Footer -->
 					<!-- 引入共同的footerMVC -->
 					<jsp:include page="../fragment/footerMVC.jsp" />
+					<script>
+						function inmail() {
+							event.preventDefault();
+							$('#mail').val('happyloveeeit56@gmail.com');
+							mailcheck();
+						}
+
+						function hint() {
+							event.preventDefault();
+
+							$('#give').submit();
+
+							Swal.fire({
+								icon: 'success',
+								title: '已經寄出驗證信囉！',
+								text: '請到信箱收信！',
+								footer: '<a href="/MeetBoth">點我回到首頁！</a>'
+							})
+						}
+					</script>
 				</main>
 
 				<!--  

@@ -125,14 +125,14 @@ h1 {
 							<div class="widget">
 								<h3 style="padding-bottom: 10px; text-align: center;">我的線上課程</h3>
 								<ul class="cart">
-									<c:forEach var="eachCourse" items="${courseBean}">
-										<li><a href="#">${eachCourse.courseName}&ensp;<i
+									<c:forEach var="eachCourse" items="${memberbuy.coureOrder}">
+										<li><a href="#">${eachCourse.courseBean.courseName}&ensp;<i
 												class="fa-solid fa-angle-double-down"></i>
 										</a>
 											<ul style="">
-												<c:forEach var="ytBean" items="${eachCourse.ytPlayer}">
+												<c:forEach var="ytBean" items="${eachCourse.courseBean.ytPlayer}">
 													<li><a
-														href="/MeetBoth/YtDetail.controller?id=${ytBean.ytPlayerID}&courseID=${eachCourse.courseID}">${ytBean.ytPlayerName}</a></li>
+														href="/MeetBoth/YtDetail.controller?id=${ytBean.ytPlayerID}&courseID=${eachCourse.courseBean.courseID}">${ytBean.ytPlayerName}</a></li>
 												</c:forEach>
 											</ul></li>
 
@@ -160,7 +160,7 @@ h1 {
 									<div class="post-header font-alt">
 										<h2 class="post-title">${bean.ytPlayerName}</h2>
 										<div class="post-meta">
-											By&nbsp;<a href="#">課程講師(會員導覽)</a>|
+											By&nbsp;<a href="#">課程講師 ${singleCourseBean.memberBean.memName}</a>|
 											&nbsp;${singleCourseBean.courseUpdate} | &nbsp;課程類別&nbsp;:<a
 												href="#">${singleCourseBean.coursetype.courseClassName}</a>
 										</div>
@@ -200,11 +200,11 @@ h1 {
 														style="margin-left: 10px; width: 70%;">
 														<div class="comment-author font-alt">
 															<h3>
-																<a href="#">賣家暱稱</a>
+																<a href="#">${singleCourseBean.memberBean.memName}</a>
 															</h3>
-															<p style="font-size: 20px;">賣家訊息1</p>
-															<p style="font-size: 20px;">賣家訊息2</p>
-															<p style="font-size: 20px;">賣家訊息3</p>
+															<p style="font-size: 20px;">${singleCourseBean.memberBean.memName}</p>
+															<p style="font-size: 20px;">${singleCourseBean.memberBean.memNickName}</p>
+															<p style="font-size: 20px;">${singleCourseBean.memberBean.eMail}</p>
 														</div>
 													</div>
 													<div style="margin-top: 170px;">

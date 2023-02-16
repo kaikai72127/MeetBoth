@@ -68,7 +68,6 @@ public class OrderBean {
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "orderbean", cascade = CascadeType.ALL)
 	@OrderBy("seqno desc") // 拿資料的順序自己決定用,增加下一個排序
 	private Set<OrderItemBean> items = new LinkedHashSet<OrderItemBean>(); // itemsList
-//	private List<OrderItemBean> items; // itemsList
 
 	public OrderBean() {
 

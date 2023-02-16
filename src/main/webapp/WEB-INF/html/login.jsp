@@ -9,7 +9,7 @@
 			<head>
 				<!-- 引入共同的headMVC -->
 				<jsp:include page="fragment/headMVC.jsp" />
-				<script src="https://apis.google.com/js/platform.js" async defer></script>
+
 				<style>
 					input[type='checkbox'] {
 						width: 15px;
@@ -38,6 +38,36 @@
 						position: absolute;
 					}
 				</style>
+				<script>
+					function adminlog() {
+						console.log("我要進去")
+						$('#account').val('MeetBest');
+						$('#pwd').val('!Aa123456');
+						$('#loginform').submit();
+					}
+
+					function userlog() {
+						$('#account').val('AwG2gX4YOa');
+						$('#pwd').val('!Aa123456');
+						$('#loginform').submit();
+					}
+
+					function happylog() {
+						$('#account').val('happyloveeeit56');
+						$('#pwd').val('!Aa123456');
+						$('#loginform').submit();
+					}
+				</script>
+				<script> $(function () {
+						$.ajax({
+							type: 'POST', url: '/MeetBoth/_01_member.checklog.controller',
+							contentType: 'application/json', success: function (user) {
+								if (user != "" && user != "anonymousUser"
+								) { location.href = '/MeetBoth/justlogin'; }
+							}
+						});
+					}); </script>
+
 			</head>
 
 			<!--BOBY-->
@@ -60,16 +90,17 @@
 							<div class="row">
 								<div class="col-sm-5 col-sm-offset-1 mb-sm-40">
 									<h4 class="font-alt h4-p">登入</h4>
+
 									<hr class="divider-w mb-10">
 									<form class="form" action="<%=request.getContextPath()%>/login/page" method="Post"
 										id="loginform">
 										<div class="form-group">
-											<input style="text-transform: none;" class="form-control" id="username"
-												type="text" name="username" placeholder="帳號" value="" />
+											<input style="text-transform: none; font-size: 18px;" class="form-control"
+												id="account" type="text" name="username" placeholder="帳號" value="" />
 										</div>
 										<div class="form-group">
-											<input style="text-transform: none;" class="form-control" id="password"
-												type="password" name="password" placeholder="密碼" value="" />
+											<input style="text-transform: none; font-size: 18px;" class="form-control"
+												id="pwd" type="password" name="password" placeholder="密碼" value="" />
 										</div>
 										<div class="form-group">
 											<label for="checkbox">
@@ -80,19 +111,27 @@
 										<div class="form-group">
 											<button class="btn btn-round btn-p"
 												style="font-size: 20px; font-family: 微軟正黑體 ; padding: 0.7% 3% 0.7% 3%;">登入</button>
+											<a style="font-size: large;padding-left: 10px;"
+												href="<%=request.getContextPath()%>/forgetpassword"><i
+													class="fa-solid fa-circle-xmark"></i>忘記密碼?</a>
+											<!-- <button class="btn btn-round btn-p"
+												style="font-size: 20px; font-family: 微軟正黑體 ; padding: 0.7% 3% 0.7% 3%;"
+												href="<%=request.getContextPath()%>/oauth2/authorization/google">Google登入</button> -->
 										</div>
 
-										<div class="form-group">
-											<a href="<%=request.getContextPath()%>/forgetpassword"><i
-													class="fa-solid fa-circle-xmark"></i>忘記密碼?</a>
-										</div>
-										<!-- <button class="btn btn-round btn-p"
-											href="<%=request.getContextPath()%>/oauth2/authorization/google">Google登入</button> -->
+
+
+										<input type="button" id="admin" class="btn btn-round btn-p"
+											onclick='event.preventDefault();adminlog();' value="管理員一鍵登入"
+											style="font-size: 20px; font-family: 微軟正黑體 ; padding: 0.7% 3% 0.7% 3%;">
+										<input type="button" id="user" class="btn btn-round btn-p"
+											onclick="event.preventDefault();userlog();" value="GARY一鍵登入"
+											style="font-size: 20px; font-family: 微軟正黑體 ; padding: 0.7% 3% 0.7% 3%;">
+										<input type="button" id="user" class="btn btn-round btn-p"
+											onclick="event.preventDefault();happylog();" value="開芯一鍵登入"
+											style="font-size: 20px; font-family: 微軟正黑體 ; padding: 0.7% 3% 0.7% 3%;">
 									</form>
-									<button id="adminlog" class="btn btn-round btn-p" onclick='adminlog()'
-										style="font-size: 20px; font-family: 微軟正黑體 ; padding: 0.7% 3% 0.7% 3%;">管理員一鍵登入</button>
-									<button id="userlog" class="btn btn-round btn-p" onclick="userlog()"
-										style="font-size: 20px; font-family: 微軟正黑體 ; padding: 0.7% 3% 0.7% 3%;">使用者一鍵登入</button>
+
 
 								</div>
 								<div class="col-sm-5">
@@ -116,32 +155,6 @@
     -->
 				<!-- 引入共同的js -->
 				<jsp:include page="fragment/jsPath.jsp" />
-				<script>
-					function adminlog() {
-						$(' #username').val('MeetBest'); $('#password').val('!Aa123456'); $('#loginform').submit();
-					}
-					function userlog() {
-						$(' #username').val('AWCzXmbyi'); $('#password').val('!Aa123456'); $('#loginform').submit();
-					}
-
-					$(function () {
-						$.ajax({
-							type: 'POST',
-							url: '/MeetBoth/_01_member.checklog.controller',
-							contentType: 'application/json',
-
-							success: function (user) {
-
-								if (user != "" && user != "anonymousUser") {
-									location.href = '/MeetBoth/justlogin';
-								}
-							}
-						});
-					});
-
-				</script>
-
-
 
 			</body>
 

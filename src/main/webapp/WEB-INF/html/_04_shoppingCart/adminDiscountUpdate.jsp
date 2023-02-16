@@ -221,80 +221,14 @@ a:hover {
 					<div class="row">
 						<!-- 整頁 -->
 						<!-- 左邊欄位開始 -->
-						<div class="col-sm-4 col-md-3 sidebar"
-							style="width: 20%; padding-right: 0px;">
-							<div class="widget">
-								<a href="/MeetBoth/_03_product.index.controller"><img
-									src="/MeetBoth/html/assets/images/shop/警告.jpg"
-									style="padding-bottom: 10px;"></a>
-								<ul class="cart">
-									<li><a href="#" style="color: white; font-size: 20px;"
-										class="btn btn-d btn-round">會員管理&ensp;<i
-											class="fa-solid fa-angle-double-down"></i></a>
-										<ul style="">
-											<li><a href="#" style="color: white; font-weight: 600;"
-												class="btn btn-d btn-round">所有會員清單</a></li>
-										</ul></li>
-									<li><a href="" style="color: white; font-size: 20px;"
-										class="btn btn-d btn-round">商品管理&ensp;<i
-											class="fa-solid fa-angle-double-down"></i></a>
-										<ul style="">
-											<li><a
-												href="/MeetBoth/_03_product.productindex.controller"
-												style="color: white; font-weight: 600;"
-												class="btn btn-d btn-round">所有商品清單</a></li>
-											<li><a
-												href="/MeetBoth/_03_product.MBinsertProd.controller"
-												style="color: white; font-weight: 600;"
-												class="btn btn-d btn-round">新增商品</a></li>
-										</ul></li>
-									<li><a href="#" style="color: white; font-size: 20px;"
-										class="btn btn-d btn-round">課程管理&ensp;<i
-											class="fa-solid fa-angle-double-down"></i></a>
-										<ul style="">
-											<li><a href="#" style="color: white; font-weight: 600;"
-												class="btn btn-d btn-round">所有課程清單</a></li>
-										</ul></li>
-									<li><a href="#" style="color: white; font-size: 20px;"
-										class="btn btn-d btn-round">徵才管理&ensp;<i
-											class="fa-solid fa-angle-double-down"></i></a>
-										<ul style="">
-											<li><a href="#" style="color: white; font-weight: 600;"
-												class="btn btn-d btn-round">所有貼文清單</a></li>
-										</ul></li>
-									<li><a href="#" style="color: white; font-size: 20px;"
-										class="btn btn-d btn-round">討論區管理&ensp;<i
-											class="fa-solid fa-angle-double-down"></i></a>
-										<ul style="">
-											<li><a href="#" style="color: white; font-weight: 600;"
-												class="btn btn-d btn-round">所有貼文清單</a></li>
-										</ul></li>
-									<li><a href="#" style="color: white; font-size: 20px;"
-										class="btn btn-d btn-round">訂單管理&ensp;<i
-											class="fa-solid fa-angle-double-down"></i></a>
-										<ul style="">
-											<li><a
-												href="/MeetBoth/admin/shoppingCartOrders.controller"
-												style="color: white; font-weight: 600;"
-												class="btn btn-d btn-round">所有訂單清單</a></li>
-											<li><a href="/MeetBoth/admin/discounts.controller"
-												style="color: white; font-weight: 600;"
-												class="btn btn-d btn-round">折扣碼管理</a></li>
-										</ul></li>
-								</ul>
-								<a href="#"><img
-									src="/MeetBoth/html/assets/images/shop/警告2.jpg"
-									style="padding-bottom: 10px;"></a>
-							</div>
-						</div>
+						<jsp:include page="/WEB-INF/html/fragment/AdminIndexSideBar.jsp" />
 						<!-- 左邊欄位結束 -->
 						<!-- 						右邊欄位開始 -->
 						<div class="col-sm-8 col-sm-offset-1"
 							style="margin-left: 20px; width: 75%; border-left: solid 1px yellow;">
 							<div class="post">
 								<!-- 							標題 -->
-								<div class=
-								"post-thumbnail"
+								<div class="post-thumbnail"
 									style="padding-bottom: 0; margin-bottom: 0;">
 									<h1
 										style="padding-bottom: 0px; margin-bottom: 0; text-align: center; font-size: 50px; color: white;">後臺管理-訂單管理</h1>
@@ -332,12 +266,12 @@ a:hover {
 												<div>
 													<span>開始&ensp;日期 :&ensp;<input name='discountStart'
 														value="${bean.discountStart}" type="text" class="MBinput">
-														</span>
+													</span>
 												</div>
 												<div>
 													<span>到期&ensp;日期 :&ensp;<input name='discountEnd'
 														value="${bean.discountEnd}" type="text" class="MBinput">
-														</span>
+													</span>
 												</div>
 											</div>
 											<div style="width: 50%;">

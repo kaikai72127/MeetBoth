@@ -63,20 +63,18 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 //         .successHandler(new Oauth2SuccessHandler()) //毛一堆  浪費時間
 //         .authorizationEndpoint()
 //         .baseUri("/login/page")
-//         .authorizationRequestRepository(authorizationRequestRepository())
 //         .and()
-         .and()
          
+         .and()
          .logout()
          .logoutUrl("/logout") //自定義登出URL
          .logoutSuccessUrl("/") //登出成功後導向首頁
          .deleteCookies("JSESSIONID") //刪除指定的Cookie
          .invalidateHttpSession(true) //使HttpSession失效
-         .and()
          
-//         .sessionManagement()
-//         .maximumSessions(1)
-         ;
+         .and()
+         .sessionManagement()
+         .maximumSessions(1);
          
        
        

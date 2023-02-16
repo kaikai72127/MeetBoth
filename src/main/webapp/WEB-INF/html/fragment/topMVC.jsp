@@ -33,7 +33,9 @@ System.out.println(baseMeetboth96x96);
 					<!--Navbar橫幅 搜尋教師 --> <a class="dropdown-toggle" href="#"
 					data-toggle="dropdown">MeetBoth</a>
 					<ul class="dropdown-menu">
-						<li><a href="index_mp_fullscreen_video_background.html">Default</a>
+						<li><a href="/MeetBoth/_05_teacStu.searchAllTeac.controller/1">履歷貼文</a>
+						</li>
+						<li><a href="/MeetBoth/_05_teacStu.searchAllStud.controller/1">需求貼文</a>
 						</li>
 					</ul>
 				</li>
@@ -117,14 +119,13 @@ System.out.println(baseMeetboth96x96);
 					</ul></li>
 
 				<!--Navbar橫幅 Blog -->
-				<li class="dropdown"><a class="dropdown-toggle" href="#"
+				<li class="dropdown"><a class="dropdown-toggle" href=""
 					data-toggle="dropdown">哈拉討論區</a>
 					<ul class="dropdown-menu" role="menu">
 						<li class="dropdown"><a class="dropdown-toggle" href="#"
 							data-toggle="dropdown">隨便聊聊</a>
 							<ul class="dropdown-menu">
-								<li><a href="blog_standard_left_sidebar.html">Left
-										Sidebar</a></li>
+								<li><a href="/MeetBoth/_06_halaAndQa.SelectAllHala.controller/1">HALA</a></li>
 								<li><a href="blog_standard_right_sidebar.html">Right
 										Sidebar</a></li>
 							</ul></li>

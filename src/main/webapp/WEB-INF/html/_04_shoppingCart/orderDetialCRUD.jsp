@@ -104,63 +104,17 @@ h1 {
 			<section class="module" style="padding-top: 10px;">
 				<div class="container">
 					<div class="row">
-						<div class="col-sm-4 col-md-3 sidebar"
-							style="position: sticky; top: 100px;">
-							<div class="widget">
-								<img src="/MeetBoth/html/assets/images/shop/賣家中心.png"
-									style="padding-bottom: 10px;">
-								<ul class="cart">
-									<li><a href="#">商品管理&ensp;<i
-											class="fa-solid fa-angle-double-down"></i></a>
-										<ul style="">
-											<li><a
-												href="<c:url value='/_03_product/pathToMyPDP.controller'/>">我的商品</a>
-											</li>
-											<li><a
-												href="<c:url value='/_03_product.pathToInsertProduct.controller'/>">新增商品</a>
-											</li>
-										</ul></li>
-									<li><a href="#" style="">訂單管理&ensp;<i
-											class="fa-solid fa-angle-double-down"></i></a>
-										<ul style="">
-											<li><a href="#">我的銷售</a></li>
-											<li><a href="#">待付款訂單</a></li>
-											<li><a href="#">待出貨訂單</a></li>
-											<li><a href="#">已完成訂單</a></li>
-										</ul></li>
-									<li><a href="#">賣場管理&ensp;<i
-											class="fa-solid fa-angle-double-down"></i></a>
-										<ul style="">
-											<li><a href="#">賣場評價</a></li>
-											<li><a href="#">賣場介紹</a></li>
-										</ul></li>
-									<li><a href="#">財務管理&ensp;<i
-											class="fa-solid fa-angle-double-down"></i></a>
-										<ul style="">
-											<li><a href="#">子選單3-1</a></li>
-											<li><a href="#">子選單3-2</a></li>
-											<li><a href="#">子選單3-3</a></li>
-										</ul></li>
-									<li><a href="#">數據中心&ensp;<i
-											class="fa-solid fa-angle-double-down"></i></a>
-										<ul style="">
-											<li><a href="#">賣家數據中心</a></li>
-											<li><a href="#">營運表現</a></li>
-										</ul></li>
-								</ul>
-							</div>
-						</div>
-
-
-
-						<div class="col-sm-8 col-sm-offset-1" style="margin-left: 20px;">
+						<!-- 						左邊欄位開始 -->
+						<jsp:include page="/WEB-INF/html/fragment/memCenterSideBar.jsp" />
+						<!-- 						左邊欄位結束 -->
+						<div class="col-sm-8 col-sm-offset-1" style="margin-left: 20px">
 							<div class="post">
-
 								<!-- 可以修改的內容 -->
 								<form
 									action="<c:url value='/memberOrdersSaleListUpdate.controller/${orderBean.orderNo}' />"
 									method="Post">
-									<table style="padding-bottom: 20px; width: 100%">
+									<table
+										style="padding-bottom: 20px; width: 100%; font-size: 20px">
 										<tbody>
 											<tr>
 												<th colspan="6"
@@ -216,15 +170,16 @@ h1 {
 										</tbody>
 
 									</table>
-									<div>
+									<div style="display: flex; justify-content: flex-end">
 										<input type="submit" class="MBbtn" value="確定"
-											style="margin-top: 15px; font-size: 16px; color: #ce7777;">
+											style="margin-top: 15px; font-size: 20px; color: #ce7777;">
 									</div>
 								</form>
 
 
 								<!-- 訂單編號 -->
-								<table style="padding-bottom: 20px; width: 100%">
+								<table
+									style="padding-bottom: 20px; width: 100%; font-size: 20px">
 									<tbody>
 										<tr>
 											<th colspan="2"
@@ -278,7 +233,8 @@ h1 {
 
 								<br>
 
-								<table style="padding-bottom: 20px; width: 100%">
+								<table
+									style="padding-bottom: 20px; width: 100%; font-size: 20px">
 									<tbody>
 										<tr>
 											<th colspan="6"

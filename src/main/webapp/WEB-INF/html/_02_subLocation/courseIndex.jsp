@@ -189,64 +189,7 @@ a:hover {
 					<div class="row">
 						<!-- 整頁 -->
 						<!-- 左邊欄位開始 -->
-						<div class="col-sm-4 col-md-3 sidebar"
-							style="width: 20%; padding-right: 0px;">
-							<div class="widget">
-								<a href="/MeetBoth/_03_product.index.controller"><img
-									src="/MeetBoth/html/assets/images/shop/警告.jpg"
-									style="padding-bottom: 10px;"></a>
-								<ul class="cart">
-									<li><a href="#" style="color: white; font-size: 20px;"
-										class="btn btn-d btn-round">會員管理&ensp;<i
-											class="fa-solid fa-angle-double-down"></i></a>
-										<ul style="">
-											<li><a href="#" style="color: white; font-weight: 600;"
-												class="btn btn-d btn-round">所有會員清單</a></li>
-										</ul></li>
-									<li><a href="" style="color: white; font-size: 20px;"
-										class="btn btn-d btn-round">商品管理&ensp;<i
-											class="fa-solid fa-angle-double-down"></i></a>
-										<ul style="">
-											<li><a
-												href="/MeetBoth/_03_product.productindex.controller"
-												style="color: white; font-weight: 600;"
-												class="btn btn-d btn-round">所有商品清單</a></li>
-										</ul></li>
-									<li><a href="#" style="color: white; font-size: 20px;"
-										class="btn btn-d btn-round">課程管理&ensp;<i
-											class="fa-solid fa-angle-double-down"></i></a>
-										<ul style="">
-											<li><a href="/MeetBoth/_02_subLocation.index.controller"
-												style="color: white; font-weight: 600;"
-												class="btn btn-d btn-round">所有課程清單</a></li>
-										</ul></li>
-									<li><a href="#" style="color: white; font-size: 20px;"
-										class="btn btn-d btn-round">徵才管理&ensp;<i
-											class="fa-solid fa-angle-double-down"></i></a>
-										<ul style="">
-											<li><a href="#" style="color: white; font-weight: 600;"
-												class="btn btn-d btn-round">所有貼文清單</a></li>
-										</ul></li>
-									<li><a href="#" style="color: white; font-size: 20px;"
-										class="btn btn-d btn-round">討論區管理&ensp;<i
-											class="fa-solid fa-angle-double-down"></i></a>
-										<ul style="">
-											<li><a href="#" style="color: white; font-weight: 600;"
-												class="btn btn-d btn-round">所有貼文清單</a></li>
-										</ul></li>
-									<li><a href="#" style="color: white; font-size: 20px;"
-										class="btn btn-d btn-round">購物車管理&ensp;<i
-											class="fa-solid fa-angle-double-down"></i></a>
-										<ul style="">
-											<li><a href="#" style="color: white; font-weight: 600;"
-												class="btn btn-d btn-round">所有購物單清單</a></li>
-										</ul></li>
-								</ul>
-								<a href="#"><img
-									src="/MeetBoth/html/assets/images/shop/警告2.jpg"
-									style="padding-bottom: 10px;"></a>
-							</div>
-						</div>
+						<jsp:include page="/WEB-INF/html/fragment/AdminIndexSideBar.jsp" />
 						<!-- 左邊欄位結束 -->
 						<!-- 						右邊欄位開始 -->
 						<div class="col-sm-8 col-sm-offset-1"
@@ -315,8 +258,8 @@ a:hover {
 													<thead>
 														<tr style="">
 															<th style="width: 5%;">編號</th>
-															<th style="width: 25%; padding-left: 5px;">名稱</th>
-															<th style="width: 15%">類別</th>
+															<th style="width: 30%; padding-left: 5px;">名稱</th>
+															<th style="width: 10%">類別</th>
 															<th style="width: 10%">價格</th>
 															<th style="width: 5%">上架者</th>
 															<th style="width: 15%">上架日期</th>
@@ -339,7 +282,7 @@ a:hover {
 																<td><input type="button" class="MBbtn" value="修改"
 																	onclick="window.location='/MeetBoth/_02_subLocation.pathToMBupdateCourse.controller?id=${bean.courseID}'"></td>
 																<td style="border-right: none"><input type="button"
-																	class="MBbtn deleteThisProduct"  value="刪除" id=""
+																	class="MBbtn deleteThisProduct" value="刪除" id=""
 																	name="${bean.courseID}"></td>
 															</tr>
 														</c:forEach>

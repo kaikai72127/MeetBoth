@@ -116,15 +116,33 @@
 }
 
 .image-modal {
-  display: none;
-  position: fixed;
-  z-index: 999;
-  
-  top:20%;
-  left: 10%;
-  width: 80%;
-  height: 80%;
-  background-color: rgba(0,0,0,0.0);
+	display: none;
+	position: fixed;
+	z-index: 999;
+	top: 20%;
+	left: 10%;
+	width: 80%;
+	height: 80%;
+	background-color: rgba(0, 0, 0, 0.0);
+}
+
+.user-card {
+	display: flex;
+	align-items: center;
+	/* 設置外框大小 */
+	width: 150px;
+	height: 150px;
+}
+
+.user-card img {
+	/* 設置圖片大小自動填充外框 */
+	width: 100%;
+	height: 100%;
+	/* 設置圖片最大寬度和高度 */
+	max-width: 100%;
+	max-height: 100%;
+	/* 設置圖片置中 */
+	object-fit: contain;
 }
 </style>
 </head>
@@ -160,7 +178,7 @@
 							<div class="user-card">
 								<a class="image-link"
 									href="<c:url value='/_06_halaAndQa.picsave.controller?id=${bean.halaId}' />">
-									<img width='80'
+									<img
 									src="<c:url value='/_06_halaAndQa.picsave.controller?id=${bean.halaId}' />">
 								</a>
 							</div>
@@ -241,9 +259,9 @@
 								</div>
 
 
-								<div id="div1" class="reply-editor">
+								<div id="div1" class="reply-editor" style="margin: 1%">
 									<input class="reply-article" id="textForRespHala"
-										onkeypress="handleKeyPress(event)" type="text"
+										onkeypress="handleKeyPress(event)" type="text" maxlength="58"
 										placeholder="Reply">
 								</div>
 							</div>
@@ -270,9 +288,12 @@
 					<div class="post-container">
 						<div class="user-section">
 							<div class="user-card">
-								<img
-									src="<c:url value='/_01_member.ShowPhoto.controller?account=${answer.memberBean.account}'/>"
-									alt="">
+								<a class="image-link"
+									href="<c:url value='/_01_member.ShowPhoto.controller?account=${answer.memberBean.account}' />">
+									<img width='80'
+									src="<c:url value='/_01_member.ShowPhoto.controller?account=${answer.memberBean.account}' />">
+								</a>
+
 							</div>
 						</div>
 
@@ -282,7 +303,7 @@
 									<div class="post-index">${count.index + 2}樓</div>
 									<div class="post-user">
 										<a href="" class="user-name">${answer.memberBean.memNickName}</a>
-										<a href="" class="user-id">@${answer.memberBean.memberID}</a>
+										<a href="" class="user-id">@${answer.memberBean.account}</a>
 									</div>
 								</div>
 								<div class="post-detail">${answer.answerDate}</div>
@@ -320,7 +341,7 @@
 									<!-- -------------------------------------------------------------回覆留言迴圈結束------------------------ -->
 
 								</div>
-								<div id="div1" class="reply-editor">
+								<div id="div1" class="reply-editor" style="margin: 1%">
 									<input class="reply-article textForRespAnswer"
 										onkeypress="handleKeyPress2(event)" type="text"
 										placeholder="Reply">
@@ -649,25 +670,25 @@
 		}
 	</script>
 	<script>
-	var links = document.querySelectorAll('.image-link');
-	for (var i = 0; i < links.length; i++) {
-	  links[i].addEventListener('click', function(event) {
-	    event.preventDefault();
-	    var imageUrl = this.getAttribute('href');
-	    var image = new Image();
-	    image.src = imageUrl;
-	    image.onload = function() {
-	      var modal = document.createElement('div');
-	      modal.className = 'image-modal';
-	      modal.appendChild(image);
-	      document.body.appendChild(modal);
-	      modal.addEventListener('click', function() {
-	        modal.remove();
-	      });
-	      modal.style.display = 'flex';
-	    };
-	  });
-	}
+		var links = document.querySelectorAll('.image-link');
+		for (var i = 0; i < links.length; i++) {
+			links[i].addEventListener('click', function(event) {
+				event.preventDefault();
+				var imageUrl = this.getAttribute('href');
+				var image = new Image();
+				image.src = imageUrl;
+				image.onload = function() {
+					var modal = document.createElement('div');
+					modal.className = 'image-modal';
+					modal.appendChild(image);
+					document.body.appendChild(modal);
+					modal.addEventListener('click', function() {
+						modal.remove();
+					});
+					modal.style.display = 'flex';
+				};
+			});
+		}
 	</script>
 </body>
 </html>

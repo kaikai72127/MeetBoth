@@ -16,16 +16,16 @@ import springTeam5._05_teacStu.service.TeacServiceInterface;
 
 @Controller
 public class IndexController {
-	
+
 	@Autowired
 	private TeacServiceInterface tService;
-	
+
 	@Autowired
 	private StudServiceInterface sService;
-	
+
 	@Autowired
 	private ProductService pService;
-	
+
 	@GetMapping("/index.controller")
 	public String processMainAction(Model m) {
 		List<TeacBean> teac = tService.findFirst6ByOrderByUpdateDateDesc();

@@ -217,15 +217,15 @@ body {
 		rgba(0, 0, 0, 0.23);
 	border: #ce7777 0.25rem solid;
 	position: relative;
-	padding: 40px;
+	padding: 0 40px 50px;
 	width: 50%;
-	height: 45%;
-	transform: scale(0);
+	height: 63%;
+	transform: scale(0) translateY(0);
 	transition: all 0.5s ease-in-out;
 }
 
 #formContainer.shown .form-section {
-	transform: scale(1);
+	transform: scale(1) translateY(50px);
 }
 
 #formContainer form {
@@ -609,7 +609,7 @@ to {
 								<div class="resume-item">
 									<div class="resume-item-title">請選擇您希望教師的上課地區</div>
 									<div class="resume-item-content">
-										<select name="locChoose" style="width: 100%">
+										<select name="locChoose" style="width: 100%" required>
 											<option value="">--請選擇您希望教師的上課地區--</option>
 											<option value="北部">北部</option>
 											<option value="中部">中部</option>
@@ -621,7 +621,7 @@ to {
 								<div class="resume-item">
 									<div class="resume-item-title">請選擇您希望教師的上課對象</div>
 									<div class="resume-item-content">
-										<select name="objectChoose" style="width: 100%">
+										<select name="objectChoose" style="width: 100%" required>
 											<option value="">--請選擇您希望教師的上課對象--</option>
 											<option value="國小">國小</option>
 											<option value="國中">國中</option>
@@ -633,11 +633,51 @@ to {
 								<div class="resume-item">
 									<div class="resume-item-title">請選擇您希望教師的上課時段</div>
 									<div class="resume-item-content">
-										<select name="timeChoose" style="width: 100%">
+										<select name="timeChoose" style="width: 100%" required>
 											<option value="">--請選擇您希望教師的上課時段--</option>
 											<option value="平日">平日</option>
 											<option value="假日">假日</option>
 											<option value="皆可">皆可</option>
+										</select>
+									</div>
+								</div>
+								<div class="resume-item">
+									<div class="resume-item-title">請選擇您希望教師的擅長科目</div>
+									<div class="resume-item-content">
+										<select name="subChoose" style="width: 100%" required>
+											<option value="">--請選擇您希望教師的擅長科目--</option>
+											<option value="國文">國文</option>
+											<option value="英文">英文</option>
+											<option value="數學">數學</option>
+											<option value="自然">自然</option>
+											<option value="社會">社會</option>
+											<option value="其他">其他</option>
+										</select>
+									</div>
+								</div>
+								<div class="resume-item">
+									<div class="resume-item-title">請選擇您希望教師擅長的語言能力</div>
+									<div class="resume-item-content">
+										<select name="lanChoose" style="width: 100%" required>
+											<option value="">--請選擇您希望教師擅長的語言能力--</option>
+											<option value="英文">英文</option>
+											<option value="日文">日文</option>
+											<option value="韓文">韓文</option>
+											<option value="法文">法文</option>
+											<option value="德文">德文</option>
+											<option value="希伯來文">希伯來文</option>
+											<option value="其他">其他</option>
+										</select>
+									</div>
+								</div>
+								<div class="resume-item">
+									<div class="resume-item-title">請選擇您希望給教師的時薪</div>
+									<div class="resume-item-content">
+										<select name="priceChoose" style="width: 100%" required>
+											<option value="">--請選擇您希望給教師的時薪--</option>
+											<option value="500以下">500以下</option>
+											<option value="501~1000">501~1000</option>
+											<option value="1000以上">1000以上</option>
 										</select>
 									</div>
 								</div>
@@ -658,10 +698,9 @@ to {
 									<div class="front">
 										<img src="../html/assets/images/meatball/meatball-144x144.png">
 									</div>
-									<div class="back"
+									<div class="back" id="connect1"
 										style="background-color: white; display: flex;">
-										<div class="tutor-avatar" style="margin: 20px">
-											<img src="<c:url value='/_01_member.ShowPhoto.controller?account=${bean.member.account}' />">
+										<div id="img1" class="tutor-avatar" style="margin: 20px">
 										</div>
 										<div class="tutor-detail" style="margin: 20px">
 											<div id="jsonsubjectItem" class="subject-items"></div>
@@ -682,7 +721,7 @@ to {
 												</div>
 											</div>
 										</div>
-										<div class="match-score">97%</div>
+										<div id="goal" class="match-score"></div>
 									</div>
 								</div>
 							</div>
@@ -693,10 +732,9 @@ to {
 									<div class="front">
 										<img src="../html/assets/images/meatball/meatball-144x144.png">
 									</div>
-									<div class="back"
+									<div class="back" id="connect2"
 										style="background-color: white; display: flex;">
-										<div class="tutor-avatar" style="margin: 20px">
-											<img src="<c:url value='/_01_member.ShowPhoto.controller?account=${bean.member.account}' />">
+										<div id="img2" class="tutor-avatar" style="margin: 20px">
 										</div>
 										<div class="tutor-detail" style="margin: 20px">
 											<div id="jsonsubjectItem2" class="subject-items"></div>
@@ -717,7 +755,7 @@ to {
 												</div>
 											</div>
 										</div>
-										<div class="match-score">86%</div>
+										<div id="goal2" class="match-score"></div>
 									</div>
 								</div>
 							</div>
@@ -728,10 +766,9 @@ to {
 									<div class="front">
 										<img src="../html/assets/images/meatball/meatball-144x144.png">
 									</div>
-									<div class="back"
+									<div class="back" id="connect3"
 										style="background-color: white; display: flex;">
-										<div class="tutor-avatar" style="margin: 20px">
-											<img src="<c:url value='/_01_member.ShowPhoto.controller?account=${bean.member.account}' />">
+										<div id="img3" class="tutor-avatar" style="margin: 20px">
 										</div>
 										<div class="tutor-detail" style="margin: 20px">
 											<div id="jsonsubjectItem3" class="subject-items"></div>
@@ -752,7 +789,7 @@ to {
 												</div>
 											</div>
 										</div>
-										<div class="match-score">77%</div>
+										<div id="goal3" class="match-score"></div>
 									</div>
 								</div>
 							</div>
@@ -763,10 +800,9 @@ to {
 									<div class="front">
 										<img src="../html/assets/images/meatball/meatball-144x144.png">
 									</div>
-									<div class="back"
+									<div class="back" id="connect4"
 										style="background-color: white; display: flex;">
-										<div class="tutor-avatar" style="margin: 20px">
-											<img src="<c:url value='/_01_member.ShowPhoto.controller?account=${bean.member.account}' />">
+										<div id="img4" class="tutor-avatar" style="margin: 20px">
 										</div>
 										<div class="tutor-detail" style="margin: 20px">
 											<div id="jsonsubjectItem4" class="subject-items"></div>
@@ -787,7 +823,7 @@ to {
 												</div>
 											</div>
 										</div>
-										<div class="match-score">69%</div>
+										<div id="goal4" class="match-score"></div>
 									</div>
 								</div>
 							</div>
@@ -839,8 +875,7 @@ to {
 				<!-- 貼文開始 -->
 
 				<c:forEach var="bean" items="${pageTeac}">
-					<a
-						href="<c:url value='/_05_teacStu.teacpostpageMain.controller?teacno=${bean.teacno}'/>">
+					<a href="<c:url value='/_05_teacStu.teacpostpageMain.controller?teacno=${bean.teacno}'/>">
 						<div class="tutor-item">
 							<div class="tutor-left-section">
 								<div class="tutor-avatar">
@@ -996,6 +1031,9 @@ to {
 				location: this.elements.locChoose.value,
 				object: this.elements.objectChoose.value,
 				time: this.elements.timeChoose.value,
+				sub: this.elements.subChoose.value,
+				lan: this.elements.lanChoose.value,
+				price: this.elements.priceChoose.value,
 		};
 
 		fetch("/MeetBoth/_05_teacStu.match.controller", {
@@ -1008,6 +1046,16 @@ to {
 			.then(response => response.json())
 			.then(data => {
 				var firstData = data[0];
+				console.log(firstData);
+				var teacno1 = firstData.teacno;
+				var account1 = firstData.member.account;
+				var i1 = document.createElement('img');
+				i1.src = "<c:url value='/_01_member.ShowPhoto.controller?account=" + account1 + "' />";
+				var img1 = document.getElementById('img1');
+				img1.innerHTML = '';
+				img1.appendChild(i1);
+				const goal1 = firstData.goal;
+				$('#goal').html(goal1 + "%");
 				var jsonsubjectItem = firstData.subjectItem;
 				$('#jsonsubjectItem').html(jsonsubjectItem);
 				var jsonName = firstData.member.memName + "(" + firstData.member.memNickName + ")";
@@ -1018,8 +1066,20 @@ to {
 				$('#jsontutorExp').html(jsontutorExp);
 				var jsonteacLoc = firstData.teacLoc;
 				$('#jsonteacLoc').html(jsonteacLoc);
+				document.querySelector('#connect1').addEventListener("click", function () {
+					window.location.href = "/MeetBoth/_05_teacStu.teacpostpageMain.controller?teacno=" + teacno1;
+				});
 				
 				var secondData = data[1];
+				var teacno2 = secondData.teacno;
+				var account2 = secondData.member.account;
+				var i2 = document.createElement('img');
+				i2.src = "<c:url value='/_01_member.ShowPhoto.controller?account=" + account2 + "' />";
+				var img2 = document.getElementById('img2');
+				img2.innerHTML = '';
+				img2.appendChild(i2);
+				var goal2 = secondData.goal;
+				$('#goal2').html(goal2 + "%");
 				var jsonsubjectItem2 = secondData.subjectItem;
 				$('#jsonsubjectItem2').html(jsonsubjectItem2);
 				var jsonName2 = secondData.member.memName + "(" + secondData.member.memNickName + ")";
@@ -1030,8 +1090,20 @@ to {
 				$('#jsontutorExp2').html(jsontutorExp2);
 				var jsonteacLoc2 = secondData.teacLoc;
 				$('#jsonteacLoc2').html(jsonteacLoc2);
+				document.querySelector('#connect2').addEventListener("click", function () {
+					window.location.href = "/MeetBoth/_05_teacStu.teacpostpageMain.controller?teacno=" + teacno2;
+				});
 				
 				var thirdData = data[2];
+				var teacno3 = thirdData.teacno;
+				var account3 = thirdData.member.account;
+				var i3 = document.createElement('img');
+				i3.src = "<c:url value='/_01_member.ShowPhoto.controller?account=" + account3 + "' />";
+				var img3 = document.getElementById('img3');
+				img3.innerHTML = '';
+				img3.appendChild(i3);
+				var goal3 = thirdData.goal;
+				$('#goal3').html(goal3 + "%");
 				var jsonsubjectItem3 = thirdData.subjectItem;
 				$('#jsonsubjectItem3').html(jsonsubjectItem3);
 				var jsonName3 = thirdData.member.memName + "(" + thirdData.member.memNickName + ")";
@@ -1042,8 +1114,20 @@ to {
 				$('#jsontutorExp3').html(jsontutorExp3);
 				var jsonteacLoc3 = thirdData.teacLoc;
 				$('#jsonteacLoc3').html(jsonteacLoc3);
+				document.querySelector('#connect3').addEventListener("click", function () {
+					window.location.href = "/MeetBoth/_05_teacStu.teacpostpageMain.controller?teacno=" + teacno3;
+				});
 				
 				var forthData = data[3];
+				var teacno4 = forthData.teacno;
+				var account4 = forthData.member.account;
+				var i4 = document.createElement('img');
+				i4.src = "<c:url value='/_01_member.ShowPhoto.controller?account=" + account4 + "' />";
+				var img4 = document.getElementById('img4');
+				img4.innerHTML = '';
+				img4.appendChild(i4);
+				var goal4 = forthData.goal;
+				$('#goal4').html(goal4 + "%");
 				var jsonsubjectItem4 = forthData.subjectItem;
 				$('#jsonsubjectItem4').html(jsonsubjectItem4);
 				var jsonName4 = forthData.member.memName + "(" + forthData.member.memNickName + ")";
@@ -1054,6 +1138,10 @@ to {
 				$('#jsontutorExp4').html(jsontutorExp4);
 				var jsonteacLoc4 = forthData.teacLoc;
 				$('#jsonteacLoc4').html(jsonteacLoc4);
+				document.querySelector('#connect4').addEventListener("click", function () {
+					window.location.href = "/MeetBoth/_05_teacStu.teacpostpageMain.controller?teacno=" + teacno4;
+				});
+				
 			setTimeout(() => {
 				closeDialog();
 				showCardContainer();

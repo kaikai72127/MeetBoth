@@ -96,7 +96,7 @@ public class ShoppingCartController {
 			session.setAttribute("Member", member);
 
 		}
-		// 將明細資料(價格，數量，與BookBean)封裝到OrderItemBean物件內
+		// 將明細資料(價格，數量，與Product)封裝到OrderItemBean物件內
 		Product product = productService.searchSingleProductFromProdID(prodID);
 
 		OrderItemBean ordetItemBean = new OrderItemBean(null, null, null, product, qty, qty * product.getProdPrice());
@@ -153,7 +153,7 @@ public class ShoppingCartController {
 
 		}
 		// 如果沒有商品 則跳轉回搜尋商品的頁面
-		return "redirect:/_03_product.searchAllProduct.controller";
+		return "redirect:/_03_product.searchAllProduct.controller/1";
 	}
 
 	// 移除一個item
@@ -166,7 +166,7 @@ public class ShoppingCartController {
 
 		// 如果購物車內沒有東西 跳轉回搜尋全部商品的頁面
 		if (shoppingCart == null) {
-			return "redirect:/_03_product.searchAllProduct.controller";
+			return "redirect:/_03_product.searchAllProduct.controller/1";
 		}
 
 		// 刪除購物車內的商品 跳轉回查看我的購物車Controller
@@ -191,7 +191,7 @@ public class ShoppingCartController {
 			sessionStatus.setComplete();
 		}
 		// 放棄購物會跳轉回找所有商品的頁面
-		return "redirect:/_03_product.searchAllProduct.controller";
+		return "redirect:/_03_product.searchAllProduct.controller/1";
 	}
 
 	// 更新購物車內的Item

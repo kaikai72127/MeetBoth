@@ -60,6 +60,9 @@ public class MemberService {
 	public List<MemberBean> searchMemByMail(String email) {
 		return memberRepository.searchMemByMail(email);
 	}
+	public List<MemberBean> searchMemBykeyword(String key) {
+		return memberRepository.searchMemBykey(key);
+	}
 	public Blob showPhoto(String account) throws SQLException, IOException {
 		List<MemberBean> member = memberRepository.searchMemByAccount(account);
 		Iterator<MemberBean> it = member.iterator();

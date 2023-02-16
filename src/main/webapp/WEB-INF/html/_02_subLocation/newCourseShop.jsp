@@ -130,7 +130,7 @@ String basePathimg2 = request.getScheme() + "://" + request.getServerName() + ":
 										</div>
 									</div>
 									<div id="memberName">
-										<strong style="font-size: 16px">賣家 : ${bean.memberID}</strong>
+										<strong style="font-size: 16px">賣家 : ${bean.memberBean.memName}</strong>
 									</div>
 									<div id="courseName">
 										<strong style="font-size: 16px">${bean.courseName}</strong>
@@ -140,7 +140,7 @@ String basePathimg2 = request.getScheme() + "://" + request.getServerName() + ":
 											NT$${bean.coursePrice}</strong>
 									</div>
 									<div id="soldout">
-										<strong style="font-size: 16px">已售出 : 0</strong>
+										<strong style="font-size: 16px">已售出 : ${bean.courseOrder.size()}</strong>
 									</div>
 								</div>
 							</div>

@@ -167,11 +167,13 @@ a:hover {
 .prodtable>thead>tr>th {
 	border-right: solid 1px white;
 	text-align: center;
+	font-size: 20px;
 }
 
 .prodtable>tbody>tr>td {
 	border-right: solid 1px white;
 	border-top: solid 1px white;
+	font-size: 20px;
 }
 </style>
 </head>
@@ -189,67 +191,7 @@ a:hover {
 					<div class="row">
 						<!-- 整頁 -->
 						<!-- 左邊欄位開始 -->
-						<div class="col-sm-4 col-md-3 sidebar"
-							style="width: 20%; padding-right: 0px;">
-							<div class="widget">
-								<a href="/MeetBoth/_03_product.index.controller"><img
-									src="/MeetBoth/html/assets/images/shop/警告.jpg"
-									style="padding-bottom: 10px;"></a>
-								<ul class="cart">
-									<li><a href="#" style="color: white; font-size: 20px;"
-										class="btn btn-d btn-round">會員管理&ensp;<i
-											class="fa-solid fa-angle-double-down"></i></a>
-										<ul style="">
-											<li><a href="#" style="color: white; font-weight: 600;"
-												class="btn btn-d btn-round">所有會員清單</a></li>
-										</ul></li>
-									<li><a href="" style="color: white; font-size: 20px;"
-										class="btn btn-d btn-round">商品管理&ensp;<i
-											class="fa-solid fa-angle-double-down"></i></a>
-										<ul style="">
-											<li><a
-												href="/MeetBoth/_03_product.productindex.controller"
-												style="color: white; font-weight: 600;"
-												class="btn btn-d btn-round">所有商品清單</a></li>
-											<li><a
-												href="/MeetBoth/_03_product.MBinsertProd.controller"
-												style="color: white; font-weight: 600;"
-												class="btn btn-d btn-round">新增商品</a></li>
-										</ul></li>
-									<li><a href="#" style="color: white; font-size: 20px;"
-										class="btn btn-d btn-round">課程管理&ensp;<i
-											class="fa-solid fa-angle-double-down"></i></a>
-										<ul style="">
-											<li><a href="#" style="color: white; font-weight: 600;"
-												class="btn btn-d btn-round">所有課程清單</a></li>
-										</ul></li>
-									<li><a href="#" style="color: white; font-size: 20px;"
-										class="btn btn-d btn-round">徵才管理&ensp;<i
-											class="fa-solid fa-angle-double-down"></i></a>
-										<ul style="">
-											<li><a href="#" style="color: white; font-weight: 600;"
-												class="btn btn-d btn-round">所有貼文清單</a></li>
-										</ul></li>
-									<li><a href="#" style="color: white; font-size: 20px;"
-										class="btn btn-d btn-round">討論區管理&ensp;<i
-											class="fa-solid fa-angle-double-down"></i></a>
-										<ul style="">
-											<li><a href="#" style="color: white; font-weight: 600;"
-												class="btn btn-d btn-round">所有貼文清單</a></li>
-										</ul></li>
-									<li><a href="#" style="color: white; font-size: 20px;"
-										class="btn btn-d btn-round">購物車管理&ensp;<i
-											class="fa-solid fa-angle-double-down"></i></a>
-										<ul style="">
-											<li><a href="#" style="color: white; font-weight: 600;"
-												class="btn btn-d btn-round">所有購物單清單</a></li>
-										</ul></li>
-								</ul>
-								<a href="#"><img
-									src="/MeetBoth/html/assets/images/shop/警告2.jpg"
-									style="padding-bottom: 10px;"></a>
-							</div>
-						</div>
+						<jsp:include page="/WEB-INF/html/fragment/AdminIndexSideBar.jsp" />
 						<!-- 左邊欄位結束 -->
 						<!-- 						右邊欄位開始 -->
 						<div class="col-sm-8 col-sm-offset-1"
@@ -270,7 +212,7 @@ a:hover {
 										<div>
 											<span>所有貼文資料 :&ensp;</span>
 										</div>
-										
+
 										<form class="row"
 											action="<c:url value='/admin/_06_halaAndQa.SelectHalaClassIndex.controller'/>"
 											method="get">
@@ -308,25 +250,25 @@ a:hover {
 													</select>
 												</div>
 
-												<input type="hidden" name="lowprice" value="0" /> <input
-													type="hidden" name="highprice" value="9999999" />
+
 												<div class="" style=""></div>
 												<div style="">
 													<button class="MBbtn" type="submit" style="">搜尋</button>
-													
-													
-													
+
+
+
 													<input type="button" class="MBbtn" value="新增"
 														onclick="window.location='/MeetBoth/admin/_06_halaAndQa.goAddHalaIndex.controller'">
-														
+
 												</div>
-												
+
 											</div>
-											
+
 										</form>
 										<div>
-											<form method="post" action="<c:url value='/admin/_06_halaAndQa.searchAllLikeIndex.controller' />">
-												
+											<form method="post"
+												action="<c:url value='/admin/_06_halaAndQa.searchAllLikeIndex.controller' />">
+
 												<input class="MBinput" type="text" name="search"
 													style="font-size: 17px; color: white; margin: 10px 10px;"
 													placeholder="搜尋名稱" />
@@ -334,7 +276,18 @@ a:hover {
 												<button class="MBbtn" type="submit" style="">搜尋</button>
 											</form>
 										</div>
-										
+										<div>
+
+											<form
+												action="<c:url value='/admin/_06_halaAndQa.SelectAllHalaIndex.controller' />">
+												<button class="MBbtn" type="submit">
+													<span>查詢全部貼文</span>
+												</button>
+											</form>
+
+										</div>
+
+
 										<div>
 
 
@@ -347,7 +300,7 @@ a:hover {
 															<th style="width: 25%; padding-left: 5px;">標題</th>
 															<th style="width: 10%">類別</th>
 															<th style="width: 10%">瀏覽次數</th>
-															<th style="width: 5%">發文者</th>
+															<th style="width: 8%">發文者</th>
 															<th style="width: 15%">發文日期</th>
 															<th></th>
 															<th></th>
@@ -363,6 +316,8 @@ a:hover {
 																<td>&#129321;${bean.watch}</td>
 																<td>${bean.memberBean.memberID}</td>
 																<td>${bean.postdate}</td>
+																<td><input type="button" class="MBbtn" value="更多"
+																	onclick="window.location='/MeetBoth/admin/_06_halaAndQa.oneHala.controller?halaId=${bean.halaId}'"></td>
 																<td><input type="button" class="MBbtn" value="修改"
 																	onclick="window.location='/MeetBoth/admin/_06_halaAndQa.GoHalaUpdateIndex.controller?halaId=${bean.halaId}'"></td>
 																<td style="border-right: none"><input type="button"

@@ -99,7 +99,7 @@
                                 p {
                                     color: white;
                                     font-size: 25px;
-                                    font-width: 550;
+
                                 }
 
                                 input {
@@ -117,17 +117,38 @@
                                 }
 
                                 .member {
-                                    table-layout: auto;
-                                    outline: 1px dotted rgb(255, 179, 179);
 
-                                    border-radius: 3px;
+                                    table-layout: auto;
+                                    outline: 3px solid rgb(255, 255, 255);
+                                    width: 60%;
+                                    overflow-y: scroll;
+                                    border-radius: 6px;
+                                }
+
+                                .member>tbody {
+                                    overflow: scroll;
+                                    border-radius: 6px;
                                 }
 
                                 .member>tbody>tr {
-                                    height: 60px;
-
-                                    overflow: hidden;
+                                    height: 40px;
+                                    overflow-y: scroll;
+                                    margin: 10px;
+                                    padding: 10px;
+                                    font-size: 18.5px;
                                 }
+
+                                .member>tbody>tr>td {
+                                    padding-left: 2%;
+                                    padding-right: 2%;
+                                    padding-top: 0.5%;
+                                    padding-bottom: 0.5%;
+                                    border: 2px dotted rgb(255, 255, 255);
+                                }
+
+                                /* .member>tbody>tr>td>input {
+                                    font-size: 18px;
+                                } */
 
                                 .btn1 {
                                     /* 文字颜色 */
@@ -153,6 +174,10 @@
                                     cursor: pointer;
                                     text-decoration: none;
                                     text-transform: uppercase;
+                                }
+
+                                .btn1 {
+                                    border: 1px ridge white;
                                 }
 
                                 .btn1:hover {
@@ -204,18 +229,20 @@
                                                         <form method="POST" action="_01_member.update.controller"
                                                             enctype='multipart/form-data'>
 
-                                                            <div style="text-align: center;">
+                                                            <div style="overflow: auto;">
                                                                 <table
                                                                     style="color: rgb(255, 255, 255); width: 80%;margin: auto;"
-                                                                    class="">
+                                                                    class="member">
                                                                     <c:forEach var="Member" items="${Member}">
                                                                         <tr>
                                                                             <td style="width: 150px;"><label>帳號：</label>
                                                                             </td>
                                                                             <td><input type="text" name="account"
-                                                                                    value="${Member.account}" required>
+                                                                                    value="${Member.account}" required
+                                                                                    readonly
+                                                                                    style="background-color: darkblue;">
                                                                             </td>
-                                                                            <td rowspan="4" align="center"
+                                                                            <td rowspan="7" align="center"
                                                                                 style="width: 250px; height: 250px">
                                                                                 <!-- 												<div style="float:right;"> -->
                                                                                 <input style="padding-left: 35px"
@@ -232,7 +259,9 @@
                                                                             </td>
                                                                             <td><input type="password" id="pas1check"
                                                                                     name="password" onblur="pasvalid()"
-                                                                                    value="${Member.password}" required>
+                                                                                    value="${Member.password}" required
+                                                                                    readonly
+                                                                                    style="background-color: darkblue;">
                                                                             </td>
                                                                         </tr>
                                                                         <!-- 										<tr> -->
@@ -245,7 +274,9 @@
                                                                                 <label>身分證字號：</label>
                                                                             </td>
                                                                             <td><input type="text" name="idNumber"
-                                                                                    value="${Member.idNumber}" required>
+                                                                                    value="${Member.idNumber}" required
+                                                                                    readonly
+                                                                                    style="background-color: darkblue;">
                                                                             </td>
                                                                         </tr>
                                                                         <tr>
@@ -267,7 +298,9 @@
                                                                             <td colspan="2"><input type="text"
                                                                                     name="memOld"
                                                                                     oninput="value=value.replace(/[^\d]/g,'')"
-                                                                                    value='${Member.memOld}' required>
+                                                                                    value='${Member.memOld}' required
+                                                                                    readonly
+                                                                                    style="background-color: darkblue;">
                                                                             </td>
                                                                         </tr>
                                                                         <tr>
@@ -303,7 +336,9 @@
                                                                             <td colspan="2"><input type="text"
                                                                                     name="phone"
                                                                                     oninput="value=value.replace(/[^\d]/g,'')"
-                                                                                    value="${Member.phone}" required>
+                                                                                    value="${Member.phone}" required
+                                                                                    readonly
+                                                                                    style="background-color: darkblue;">
                                                                             </td>
                                                                         </tr>
                                                                         <tr>
@@ -346,6 +381,7 @@
                                                                         </tr>
                                                                     </c:forEach>
                                                                 </table>
+                                                            </div>
                                                         </form>
 
                                                 </div>
@@ -412,6 +448,21 @@
                                                 });
 
                                             });
+                                    </script>
+                                    <script>
+                                        $("#images5278").change(function () {
+                                            readURL(this);
+                                        });
+
+                                        function readURL(input) {
+                                            if (input.files && input.files[0]) {
+                                                var reader = new FileReader();
+                                                reader.onload = function (e) {
+                                                    $("#preImg").attr('src', e.target.result);
+                                                }
+                                                reader.readAsDataURL(input.files[0]);
+                                            }
+                                        }
                                     </script>
 
             </html>

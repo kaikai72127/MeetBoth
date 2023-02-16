@@ -99,8 +99,8 @@
 												</select>
 											</div>
 											<div style="float: right; width: 30%">
-												<input type="text" class="form-control" name="memberid"
-													value="${Member.memberID}" placeholder="id">
+												id:<input type="text" class="form-control" name="memberid"
+													value="${Member.memberID}" placeholder="id"  readonly>
 											</div>
 											<input type="text" class="form-control" name="title" value=""
 												placeholder="請輸入文章標題⋯">
@@ -115,6 +115,8 @@
 												<button class="btn btn-primary btn-circle" type="submit">確定送出</button>
 												<button class="btn btn-danger btn-circle" type="button"
 													onclick="window.location.href='http://localhost:8080/MeetBoth/_06_halaAndQa.SelectAllHala.controller/{page}'">取消</button>
+													<button class="btn btn-primary btn-circle" type="button" id="fill-form-btn">一鍵輸入</button>
+
 											</div>
 										</form>
 									</div>
@@ -133,50 +135,66 @@
     JavaScripts
     =============================================
     -->
-				<script src="html/assets/lib/jquery/dist/jquery.js"></script>
-				<script src="html/assets/lib/bootstrap/dist/js/bootstrap.min.js"></script>
-				<script src="html/assets/lib/wow/dist/wow.js"></script>
-				<script src="html/assets/lib/jquery.mb.ytplayer/dist/jquery.mb.YTPlayer.js"></script>
-				<script src="html/assets/lib/isotope/dist/isotope.pkgd.js"></script>
-				<script src="html/assets/lib/imagesloaded/imagesloaded.pkgd.js"></script>
-				<script src="html/assets/lib/flexslider/jquery.flexslider.js"></script>
-				<script src="html/assets/lib/owl.carousel/dist/owl.carousel.min.js"></script>
-				<script src="html/assets/lib/smoothscroll.js"></script>
-				<script src="html/assets/lib/magnific-popup/dist/jquery.magnific-popup.js"></script>
-				<script src="html/assets/lib/simple-text-rotator/jquery.simple-text-rotator.min.js"></script>
-				<script src="html/assets/js/plugins.js"></script>
-				<script src="html/assets/js/main.js"></script>
-				<script>
-					$("#images5278").change(function () {
-						readURL(this);
-					});
+	<script src="html/assets/lib/jquery/dist/jquery.js"></script>
+	<script src="html/assets/lib/bootstrap/dist/js/bootstrap.min.js"></script>
+	<script src="html/assets/lib/wow/dist/wow.js"></script>
+	<script
+		src="html/assets/lib/jquery.mb.ytplayer/dist/jquery.mb.YTPlayer.js"></script>
+	<script src="html/assets/lib/isotope/dist/isotope.pkgd.js"></script>
+	<script src="html/assets/lib/imagesloaded/imagesloaded.pkgd.js"></script>
+	<script src="html/assets/lib/flexslider/jquery.flexslider.js"></script>
+	<script src="html/assets/lib/owl.carousel/dist/owl.carousel.min.js"></script>
+	<script src="html/assets/lib/smoothscroll.js"></script>
+	<script
+		src="html/assets/lib/magnific-popup/dist/jquery.magnific-popup.js"></script>
+	<script
+		src="html/assets/lib/simple-text-rotator/jquery.simple-text-rotator.min.js"></script>
+	<script src="html/assets/js/plugins.js"></script>
+	<script src="html/assets/js/main.js"></script>
+	<script>
+		$("#images5278").change(function(){
+	     readURL(this);
+	   	});
+		
+		function readURL(input){
+			  if(input.files && input.files[0]){
+			    var reader = new FileReader();
+			    reader.onload = function (e) {
+			       $("#preImg").attr('src', e.target.result);
+			    }
+			    reader.readAsDataURL(input.files[0]);
+			  }
+			}
+		function onlyNumberKey(event){
+			var ASCIICode = (event.which) ? event.which : event.keyCode
+		            if (ASCIICode > 31 && (ASCIICode < 48 || ASCIICode > 57))
+		            return false;
+		            return true;
+		}
+	</script>
+	<script>
+                        ClassicEditor
+                                .create( document.querySelector( '#editor' ) )
+                                .then( editor => {
+                                        console.log( editor );
+                                } )
+                                .catch( error => {
+                                        console.error( error );
+                                } );
+                </script>
+                <script>
+                document.getElementById('fill-form-btn').addEventListener('click', function() {
+                    // 範例標題文字
+                    var title = 'MEETBOTH的老師有推薦的嗎';
+                    
+                    // 範例內容文字
+                    var content = '我最近想學JAVA，不知道有沒有推薦的老師';
 
-					function readURL(input) {
-						if (input.files && input.files[0]) {
-							var reader = new FileReader();
-							reader.onload = function (e) {
-								$("#preImg").attr('src', e.target.result);
-							}
-							reader.readAsDataURL(input.files[0]);
-						}
-					}
-					function onlyNumberKey(event) {
-						var ASCIICode = (event.which) ? event.which : event.keyCode
-						if (ASCIICode > 31 && (ASCIICode < 48 || ASCIICode > 57))
-							return false;
-						return true;
-					}
-				</script>
-				<script>
-					ClassicEditor
-						.create(document.querySelector('#editor'))
-						.then(editor => {
-							console.log(editor);
-						})
-						.catch(error => {
-							console.error(error);
-						});
-				</script>
-			</body>
+                    // 將範例文字填入標題與內容欄位
+                    document.getElementsByName('title')[0].value = title;
+                    document.getElementsByName('halacontent')[0].value = content;
+                });
 
-			</html>
+</script>
+</body>
+</html>

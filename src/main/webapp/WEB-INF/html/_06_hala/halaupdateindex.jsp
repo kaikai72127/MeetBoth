@@ -189,67 +189,7 @@ a:hover {
 					<div class="row">
 						<!-- 整頁 -->
 						<!-- 左邊欄位開始 -->
-						<div class="col-sm-4 col-md-3 sidebar"
-							style="width: 20%; padding-right: 0px;">
-							<div class="widget">
-								<a href="/MeetBoth/_03_product.index.controller"><img
-									src="/MeetBoth/html/assets/images/shop/警告.jpg"
-									style="padding-bottom: 10px;"></a>
-								<ul class="cart">
-									<li><a href="#" style="color: white; font-size: 20px;"
-										class="btn btn-d btn-round">會員管理&ensp;<i
-											class="fa-solid fa-angle-double-down"></i></a>
-										<ul style="">
-											<li><a href="#" style="color: white; font-weight: 600;"
-												class="btn btn-d btn-round">所有會員清單</a></li>
-										</ul></li>
-									<li><a href="" style="color: white; font-size: 20px;"
-										class="btn btn-d btn-round">商品管理&ensp;<i
-											class="fa-solid fa-angle-double-down"></i></a>
-										<ul style="">
-											<li><a
-												href="/MeetBoth/_03_product.productindex.controller"
-												style="color: white; font-weight: 600;"
-												class="btn btn-d btn-round">所有商品清單</a></li>
-											<li><a
-												href="/MeetBoth/_03_product.MBinsertProd.controller"
-												style="color: white; font-weight: 600;"
-												class="btn btn-d btn-round">新增商品</a></li>
-										</ul></li>
-									<li><a href="#" style="color: white; font-size: 20px;"
-										class="btn btn-d btn-round">課程管理&ensp;<i
-											class="fa-solid fa-angle-double-down"></i></a>
-										<ul style="">
-											<li><a href="#" style="color: white; font-weight: 600;"
-												class="btn btn-d btn-round">所有課程清單</a></li>
-										</ul></li>
-									<li><a href="#" style="color: white; font-size: 20px;"
-										class="btn btn-d btn-round">徵才管理&ensp;<i
-											class="fa-solid fa-angle-double-down"></i></a>
-										<ul style="">
-											<li><a href="#" style="color: white; font-weight: 600;"
-												class="btn btn-d btn-round">所有貼文清單</a></li>
-										</ul></li>
-									<li><a href="#" style="color: white; font-size: 20px;"
-										class="btn btn-d btn-round">討論區管理&ensp;<i
-											class="fa-solid fa-angle-double-down"></i></a>
-										<ul style="">
-											<li><a href="#" style="color: white; font-weight: 600;"
-												class="btn btn-d btn-round">所有貼文清單</a></li>
-										</ul></li>
-									<li><a href="#" style="color: white; font-size: 20px;"
-										class="btn btn-d btn-round">購物車管理&ensp;<i
-											class="fa-solid fa-angle-double-down"></i></a>
-										<ul style="">
-											<li><a href="#" style="color: white; font-weight: 600;"
-												class="btn btn-d btn-round">所有購物單清單</a></li>
-										</ul></li>
-								</ul>
-								<a href="#"><img
-									src="/MeetBoth/html/assets/images/shop/警告2.jpg"
-									style="padding-bottom: 10px;"></a>
-							</div>
-						</div>
+						<jsp:include page="/WEB-INF/html/fragment/AdminIndexSideBar.jsp" />
 						<!-- 左邊欄位結束 -->
 						<!-- 						右邊欄位開始 -->
 						<div class="col-sm-8 col-sm-offset-1"
@@ -265,82 +205,94 @@ a:hover {
 								<!-- 							標題 -->
 								<!--       右邊第一部分開始 -->
 								<div class="post">
-								<form action="<c:url value='/admin/_06_halaAndQa.updateHalaIndex.controller' />" method="Post" enctype="multipart/form-data">
-									<div class="post-video embed-responsive embed-responsive-16by9"
-										style="height: auto; padding-bottom: 100px;">
-										<div style="display: flex">
-											<button class="MBbtn"
-												onclick="window.location='/MeetBoth/admin/_06_halaAndQa.GoHalaUpdateIndex.controller'">返回</button>
-										</div>
-										
-										
-										<div>
-											<span>文章標題 :&ensp;<input value="${bean.title}" type="text" name="title" class="MBinput" placeholder="不能為空"></span>
-										</div>
-										<div>
-											<input type="hidden" value="${bean.halaId}" name="halaId">
-											<span>文章類別 :&ensp;<select name="halaclassname"
-												style="" class="MBinput">
-									<option value="">--請選擇分類--</option>
-														<option value="公告">公告</option>
-														<option value="閱讀心得">閱讀心得</option>
-														<option value="資料分享">資料分享</option>
-														<option value="圖書推薦">圖書推薦</option>
-														<option value="教學文章">教學文章</option>
-														<option value="JAVA">JAVA</option>
-														<option value="HTML">HTML</option>
-														<option value="Spring">Spring</option>
-														<option value="SpringBoot">SpringBoot</option>
-														<option value="SpringMVC">SpringMVC</option>
-														<option value="SQL Server">SQL Server</option>
-														<option value="My SQL">My SQL</option>
-														<option value="Hibernate">Hibernate</option>
-														<option value="VScode">VScode</option>
-														<option value="eclipse">eclipse</option>
-														<option value="SpringTool">SpringTool</option>
-														<option value="JDBC">JDBC</option>
-														<option value="Servlet">Servlet</option>
-														<option value="JavaScript">JavaScript</option>
-														<option value="jQuery">jQuery</option>
-														<option value="Azure">Azureoption</option>
-														<option value="RESTful">RESTful</option>
-														<option value="c++">c++</option>
-														<option value="python">python</option>
-														<option value="其他">其他</option>
-											</select></span>
-										</div>
-										
-										<div>
-											<span>會員編號 :&ensp;<input value="${Member.memberID}" type="text" name="memberid" class="MBinput"></span>
-										</div>
-										
-										<div>
-											<span>發文時間 :&ensp;<input value="${bean.postdate}" type="text" name="postdate" class="MBinput" placeholder="自動產生" readonly></span>
-										</div>
-										
-										
-										
-										<div style="display: flex;">
-											<span>上傳照片</span> 
-											<div style="height:200px;width:200px;background-color:#272727;text-align:center;margin:15px;">
-											<img id="preImg" style="max-width: 100%; max-height: 100%; height: auto; width: auto;" src="<c:url value='/_06_halaAndQa.picsave.controller?id=${bean.halaId}' />" />
+									<form
+										action="<c:url value='/admin/_06_halaAndQa.updateHalaIndex.controller' />"
+										method="Post" enctype="multipart/form-data">
+										<div
+											class="post-video embed-responsive embed-responsive-16by9"
+											style="height: auto; padding-bottom: 100px;">
+											<div style="display: flex">
+												<button class="MBbtn"
+													onclick="window.location='/MeetBoth/admin/_06_halaAndQa.GoHalaUpdateIndex.controller'">返回</button>
 											</div>
-											<input class="MBinput" type="file" name="images" id="images5278" accept=".jpg,.png"> 
-										</div>
-										<div>
-											<div id="commentDiv">
-												<span>文章內容 :&ensp;</span>
+
+
+											<div>
+												<span>文章標題 :&ensp;<input value="${bean.title}"
+													type="text" name="title" class="MBinput" placeholder="不能為空"></span>
+											</div>
+											<div>
+												<input type="hidden" value="${bean.halaId}" name="halaId">
+												<span>文章類別 :&ensp;</span> <select name="halaclassname"
+													style="" class="MBinput">
+													<option value="">--請選擇分類--</option>
+													<option value="公告">公告</option>
+													<option value="閱讀心得">閱讀心得</option>
+													<option value="資料分享">資料分享</option>
+													<option value="圖書推薦">圖書推薦</option>
+													<option value="教學文章">教學文章</option>
+													<option value="JAVA">JAVA</option>
+													<option value="HTML">HTML</option>
+													<option value="Spring">Spring</option>
+													<option value="SpringBoot">SpringBoot</option>
+													<option value="SpringMVC">SpringMVC</option>
+													<option value="SQL Server">SQL Server</option>
+													<option value="My SQL">My SQL</option>
+													<option value="Hibernate">Hibernate</option>
+													<option value="VScode">VScode</option>
+													<option value="eclipse">eclipse</option>
+													<option value="SpringTool">SpringTool</option>
+													<option value="JDBC">JDBC</option>
+													<option value="Servlet">Servlet</option>
+													<option value="JavaScript">JavaScript</option>
+													<option value="jQuery">jQuery</option>
+													<option value="Azure">Azureoption</option>
+													<option value="RESTful">RESTful</option>
+													<option value="c++">c++</option>
+													<option value="python">python</option>
+													<option value="其他">其他</option>
+												</select>
+											</div>
+
+											<div>
+												<span>會員編號 :&ensp;<input value="${Member.memberID}"
+													type="text" name="memberid" class="MBinput" readonly></span>
+											</div>
+
+											<div>
+												<span>發文時間 :&ensp;<input value="${bean.postdate}"
+													type="text" name="postdate" class="MBinput"
+													placeholder="自動產生" readonly></span>
+											</div>
+
+
+
+											<div style="display: flex;">
+												<span>上傳照片</span>
+												<div
+													style="height: 200px; width: 200px; background-color: #272727; text-align: center; margin: 15px;">
+													<img id="preImg"
+														style="max-width: 100%; max-height: 100%; height: auto; width: auto;"
+														src="<c:url value='/_06_halaAndQa.picsave.controller?id=${bean.halaId}' />" />
+												</div>
+												<input class="MBinput" type="file" name="images"
+													id="images5278" accept=".jpg,.png">
+											</div>
+											<div>
+												<div id="commentDiv">
+													<span>文章內容 :&ensp;</span>
+												</div>
+											</div>
+											<div>
+												<textarea name="halacontent"
+													style="margin-left: 10px; resize: none; height: 325px; width: 975px; overflow-y: auto; overflow-y: auto; font-size: 25px; color: white; background-color: black;"
+													placeholder="商品評論 可以不填">${bean.halacontent}</textarea>
+											</div>
+											<div>
+												<input type="submit" class="MBbtn" value="確定"
+													style="margin-top: 15px; margin-left: 900px; font-size: 35px;">
 											</div>
 										</div>
-										<div>
-											<textarea name="halacontent" 
-												style="margin-left: 10px; resize: none; height: 325px; width: 975px; overflow-y: auto; overflow-y: auto; font-size: 25px; color: white; background-color: black;" placeholder="商品評論 可以不填"
-												>${bean.halacontent}</textarea>
-										</div>
-										<div>
-											<input type="submit" class="MBbtn" value="確定" style="margin-top:15px;margin-left:900px;font-size:35px;">
-										</div>
-									</div>
 									</form>
 								</div>
 								<!--       右邊第一部分結束 -->
@@ -426,9 +378,9 @@ a:hover {
 	</script>
 	<script type="text/javascript">
 		// 選取 select 元素
-		var selectElement = document.getElementsByName("pty");
+		var selectElement = document.getElementsByName("halaclassname");
 		// 取得 typeClassNum 的值
-		var typeClassNum = document.getElementsByName("pClass").value;
+		var typeClassNum = document.getElementsByName("halaId").value;
 		// 選取特定的 option 元素
 		for (var i = 0; i < selectElement.options.length; i++) {
 			if (selectElement.options[i].value == typeClassNum) {
@@ -438,5 +390,6 @@ a:hover {
 			}
 		}
 	</script>
-	</body>
+
+</body>
 </html>

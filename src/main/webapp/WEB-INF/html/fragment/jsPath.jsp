@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 
+
+
 <%
 String path = request.getContextPath();
 String basePath1 = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path
@@ -68,6 +70,10 @@ String basePath14 = request.getScheme() + "://" + request.getServerName() + ":" 
 String basePath15 = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path
 		+ "/html/assets/js/jquery-tablepage-1.0.js";
 %>
+<%
+String basePath16 = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path
+		+ "/html/assets/js/heart.js";
+%>
 <script src=<%=basePath1%>></script>
 <script src=<%=basePath2%>></script>
 <script src=<%=basePath3%>></script>
@@ -83,6 +89,7 @@ String basePath15 = request.getScheme() + "://" + request.getServerName() + ":" 
 <script src=<%=basePath13%>></script>
 <script src=<%=basePath14%>></script>
 <script src=<%=basePath15%>></script>
+<script src=<%=basePath16%>></script>
 
 <script src="https://kit.fontawesome.com/25590258af.js"
 	crossorigin="anonymous"></script>

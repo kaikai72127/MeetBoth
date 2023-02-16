@@ -102,7 +102,7 @@ public class OrderController {
 	@GetMapping("/admin/shoppingCart.DeleteOrder.controller")
 	public String processDeleteOrderAction(@RequestParam("orderNo") Integer orderNo) {
 		orderService.deleteById(orderNo);
-		return "redirect:shoppingCartOrders.controller";
+		return "redirect:/admin/shoppingCartOrders.controller/1";
 	}
 
 // 修改------
@@ -142,26 +142,7 @@ public class OrderController {
 		obean.setUporderDate(orderService.getCurrentDate());
 		orderService.updateOrder(obean);
 
-		return "redirect:shoppingCartUpdateOrder.controller/" + orderNo;
-	}
-
-	// 主頁面直接修改
-	@PostMapping("/shoppingCart.UpdateOrder.controller")
-	public String processUpdateOrderMainAction2(@RequestParam("orderNo") Integer orderNo,
-			@RequestParam("ordStstus") String ordStstus, @RequestParam("paymentStstus") String paymentStstus,
-			@RequestParam("deliveryStstus") String deliveryStstus, @RequestParam("paymentMethod") String paymentMethod,
-			@RequestParam("discountId") String discountId, @ModelAttribute("OrderBean") OrderBean obean) {
-
-		System.out.println("有喔~" + ordStstus);
-		// 可以修改的地方
-		obean.setOrdStstus(ordStstus);
-		obean.setPaymentStstus(paymentStstus);
-		obean.setDeliveryStstus(deliveryStstus);
-		obean.setUporderDate(orderService.getCurrentDate());
-		System.out.println("有喔~" + ordStstus);
-		orderService.updateOrder(obean);
-
-		return "redirect:shoppingCart.SelectAll.controller";
+		return "redirect:/admin/shoppingCartUpdateOrder.controller/" + orderNo;
 	}
 
 // 查詢------

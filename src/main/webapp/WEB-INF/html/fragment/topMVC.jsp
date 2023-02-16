@@ -42,15 +42,15 @@ System.out.println(baseMeetboth96x96);
 
 				<!--Navbar橫幅 隨堂測驗 -->
 				<li class="dropdown"><a class="dropdown-toggle" href="#"
-					data-toggle="dropdown">隨堂測驗</a>
+					data-toggle="dropdown">線上課程</a>
 					<ul class="dropdown-menu">
-						<li><a href="#" data-toggle="dropdown">會員資料數據</a></li>
+					<li class="dropdown">
+						<a href="/MeetBoth/searchAllCourse.controller">線上課程目錄</a>
+							</li>
 						<li class="dropdown"><a class="dropdown-toggle" href="#"
-							data-toggle="dropdown">會員管理</a>
+							data-toggle="dropdown">課程管理</a>
 							<ul class="dropdown-menu">
-								<li><a href="index_mp_fullscreen_flexslider.html">會員查詢</a>
-								</li>
-								<li><a href="index_mp_classic_flexslider.html">會員新增</a></li>
+								<li><a href="/MeetBoth/pathToSearchAllCourseMember.controller">我購買的課程</a>
 							</ul></li>
 					</ul></li>
 
@@ -126,30 +126,6 @@ System.out.println(baseMeetboth96x96);
 							data-toggle="dropdown">隨便聊聊</a>
 							<ul class="dropdown-menu">
 								<li><a href="/MeetBoth/_06_halaAndQa.SelectAllHala.controller/1">HALA</a></li>
-								<li><a href="blog_standard_right_sidebar.html">Right
-										Sidebar</a></li>
-							</ul></li>
-						<li class="dropdown"><a class="dropdown-toggle" href="#"
-							data-toggle="dropdown">我有問題</a>
-							<ul class="dropdown-menu">
-								<li><a href="blog_grid_col_2.html">2 Columns</a></li>
-								<li><a href="blog_grid_col_3.html">3 Columns</a></li>
-								<li><a href="blog_grid_col_4.html">4 Columns</a></li>
-							</ul></li>
-						<li class="dropdown"><a class="dropdown-toggle" href="#"
-							data-toggle="dropdown">Masonry</a>
-							<ul class="dropdown-menu">
-								<li><a href="blog_grid_masonry_col_2.html">2 Columns</a></li>
-								<li><a href="blog_grid_masonry_col_3.html">3 Columns</a></li>
-								<li><a href="blog_grid_masonry_col_4.html">4 Columns</a></li>
-							</ul></li>
-						<li class="dropdown"><a class="dropdown-toggle" href="#"
-							data-toggle="dropdown">Single</a>
-							<ul class="dropdown-menu">
-								<li><a href="blog_single_left_sidebar.html">Left
-										Sidebar</a></li>
-								<li><a href="blog_single_right_sidebar.html">Right
-										Sidebar</a></li>
 							</ul></li>
 					</ul></li>
 
@@ -202,9 +178,6 @@ System.out.println(baseMeetboth96x96);
                   <li><a href="/MeetBoth/_03_product/pathToMyPDP.controller" class="dropdown-item">我的平台<i
                         class="fa-solid fa-right-from-bracket"></i>
                     </a></li>
-                  <li><a href="/MeetBoth/pathToMemberCourse.controller" class="dropdown-item">我的課程 <i
-                        class="fa-solid fa-right-from-bracket"></i>
-                    </a></li> 
                   <li id="admincontroller"><a href="/MeetBoth/_03_product.index.controller" class="dropdown-item">後臺管理
                       <i class="fa-solid fa-right-from-bracket"></i>
                     </a></li>

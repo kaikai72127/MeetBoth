@@ -58,47 +58,24 @@ marquee a:hover {
 /* 放大圖片使用 */
 
 /* 閃爍的折扣碼 */
-.discountblink {
-	animation: blink 1s linear infinite;
+.blink {
+  animation: blink-animation 2s ease-in-out infinite;
 }
 
-@
-keyframes blink { 0% {
-	opacity: 1;
+@keyframes blink-animation {
+  0% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
 }
-
-50
-%
-{
-opacity
-:
-0;
-}
-100
-%
-{
-opacity
-:
-1;
-}
-}
-.discountcenter {
-	position: absolute;
-	top: 50%;
-	left: 50%;
-	transform: translate(-50%, -50%);
-}
-
-.discountbox {
-	width: 100px;
-	height: 100px;
-	background-color: #ff0;
-}
-
 /* 閃爍的折扣碼 */
 </style>
-<style>
-</style>
+
 
 </head>
 
@@ -159,15 +136,20 @@ opacity
 		<!-- 		折扣碼 ----跑馬燈 -->
 		<div style="display: flex; justify-content: center;">
 			<c:if test="${not empty discount}">
-				<div class="discountcenter">
-					<div class="discountbox discountblink">(*ฅ•ᗜ•*) 立即輸入 ${discount.discountNo} 折扣碼 即可優惠 ${discount.discountDesc} (*•ᗜ•ฅ*)</div>
+				<div>
+					<div style="font-size: 25px;height: 80px;line-height: 80px;">
+						(*ฅ•ᗜ•*)　　立即輸入 <span class="blink" style="color:#ce7777;font-size:30px;font-weight:800">${discount.discountNo}</span>
+						折扣碼 即可於商城使用優惠券<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRnTKPkclYtpbwvXZSgvGMNDS0JtjyPKBRKFQ&usqp=CAU" width="50px"
+					height="50px"> <span class="blink" style="color:#ce7777;font-size:30px;font-weight:800">${discount.discountDesc}</span>　　(*•ᗜ•ฅ*)
+					</div>
 				</div>
 			</c:if>
 			<c:if test="${empty discount}">
 				<img src="https://i.imgur.com/53AabEX.png" width="48px"
 					height="48px">
-				<span style="font-size: 22px;margin-left:20px;margin-right:20px" >  目前沒有折扣碼 敬請期待小編灑 優 惠 劵  
-					（♡╹ω╹♡）ﾉ”♡</span> <img src="https://i.imgur.com/53AabEX.png" width="48px"
+				<span style="font-size: 22px; margin-left: 20px; margin-right: 20px">
+					目前沒有折扣碼 敬請期待小編灑 優 惠 劵 （♡╹ω╹♡）ﾉ”♡</span>
+				<img src="https://i.imgur.com/53AabEX.png" width="48px"
 					height="48px">
 
 			</c:if>

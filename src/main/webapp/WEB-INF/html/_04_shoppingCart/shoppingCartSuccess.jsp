@@ -28,7 +28,7 @@
 		<section style="margin-top: 110px; margin-bottom: 120px">
 			<!-- check out-->
 			<div class="container"
-				style="text-align: center;border-style:outset">
+				style="text-align: center;border-style:outset;height:100%">
 				<h1 class="animate__animated animate__bounce" style="font-weight: 800">- 訂購完成 -</h1>
 				<h2>${member.memName}先生/小姐 感謝您的訂購</h2>
 				<h3 style="margin-bottom: 35px">已收到您的訂單，請您檢視訂單，會盡速為您發貨。</h3>

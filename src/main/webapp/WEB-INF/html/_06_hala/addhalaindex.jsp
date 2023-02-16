@@ -265,24 +265,29 @@ a:hover {
 								<!-- 							標題 -->
 								<!--       右邊第一部分開始 -->
 								<div class="post">
-								<form action="<c:url value='/admin/_06_halaAndQa.AddHalaIndex.controller' />" method="Post" enctype="multipart/form-data">
-									<div class="post-video embed-responsive embed-responsive-16by9"
-										style="height: auto; padding-bottom: 100px;">
-										<div style="display: flex">
-											<button class="MBbtn"
-												onclick="window.location='/MeetBoth/admin/_06_halaAndQa.SelectAllHalaIndex.controller'">返回</button>
-										</div>
-										
-										<div>
-											<span>貼文編號 :&ensp;<input type="text" name="halaId" class="MBinput" placeholder="自動產生" readonly></span>
-										</div>
-										<div>
-											<span>標題 :&ensp;<input type="text" name="title" class="MBinput" placeholder="不能為空"></span>
-										</div>
-										<div>
-											<span>貼文類別 :&ensp;<select name="halaclassname"
-												style="" class="MBinput">
-												<option value="公告">公告</option>
+									<form
+										action="<c:url value='/admin/_06_halaAndQa.AddHalaIndex.controller' />"
+										method="Post" enctype="multipart/form-data">
+										<div
+											class="post-video embed-responsive embed-responsive-16by9"
+											style="height: auto; padding-bottom: 100px;">
+											<div style="display: flex">
+												<button class="MBbtn"
+													onclick="window.location='/MeetBoth/admin/_06_halaAndQa.SelectAllHalaIndex.controller'">返回</button>
+											</div>
+
+											<div>
+												<span>貼文編號 :&ensp;<input type="text" name="halaId"
+													class="MBinput" placeholder="自動產生" readonly></span>
+											</div>
+											<div>
+												<span>貼文標題 :&ensp;<input type="text" name="title"
+													class="MBinput" placeholder="不能為空"></span>
+											</div>
+											<div>
+												<span>貼文類別 :&ensp;<select name="halaclassname"
+													style="" class="MBinput">
+														<option value="公告">公告</option>
 														<option value="閱讀心得">閱讀心得</option>
 														<option value="資料分享">資料分享</option>
 														<option value="圖書推薦">圖書推薦</option>
@@ -307,34 +312,43 @@ a:hover {
 														<option value="c++">c++</option>
 														<option value="python">python</option>
 														<option value="其他">其他</option>
-											</select></span>
-										</div>
-										
-										<div>
-											<span>會員編號 :&ensp;<input type="text" name="memberid" class="MBinput" value="${Member.memberID}"></span>
-										</div>
-										
-										<div style="display: flex;">
-											<span>上傳照片</span> 
-											<div style="height:200px;width:200px;background-color:#272727;text-align:center;margin:15px;">
-											<img id="preImg" style="max-width: 100%; max-height: 100%; height: auto; width: auto;" src="#" />
+												</select></span>
 											</div>
-											<input class="MBinput" type="file" name="images" id="images5278" accept=".jpg,.png"> 
-										</div>
-										<div>
-											<div id="commentDiv">
-												<span>文章內容 :&ensp;</span>
+
+											<div>
+												<span>會員編號 :&ensp;<input type="text" name="memberid"
+													class="MBinput" value="${Member.memberID}" readonly></span>
+											</div>
+
+											<div style="display: flex;">
+												<span>上傳照片</span>
+												<div
+													style="height: 200px; width: 200px; background-color: #272727; text-align: center; margin: 15px;">
+													<img id="preImg"
+														style="max-width: 100%; max-height: 100%; height: auto; width: auto;"
+														src="<c:url value='/html/images/meatball-200.png'/>" />
+												</div>
+												<input class="MBinput" type="file" name="images"
+													id="images5278" accept=".jpg,.png">
+											</div>
+
+											<div>
+												<div id="commentDiv">
+													<span>文章內容 :&ensp;</span>
+												</div>
+											</div>
+											<div>
+												<textarea name="halacontent"
+													style="margin-left: 10px; resize: none; height: 325px; width: 975px; overflow-y: auto; overflow-y: auto; font-size: 25px; color: white; background-color: black;"
+													placeholder="請輸入文章內容"></textarea>
+											</div>
+											<div>
+												<input type="submit" class="MBbtn" value="確定"
+													style="margin-top: 15px; margin-left: 900px; font-size: 35px;">
+												<button class="MBbtn" type="button" id="fill-form-btn"
+													style="margin-top: 15px; margin-left: 900px; font-size: 35px;">一鍵輸入</button>
 											</div>
 										</div>
-										<div>
-											<textarea name="halacontent"
-												style="margin-left: 10px; resize: none; height: 325px; width: 975px; overflow-y: auto; overflow-y: auto; font-size: 25px; color: white; background-color: black;" placeholder="請輸入文章內容"
-												></textarea>
-										</div>
-										<div>
-											<input type="submit" class="MBbtn" value="確定" style="margin-top:15px;margin-left:900px;font-size:35px;">
-										</div>
-									</div>
 									</form>
 								</div>
 								<!--       右邊第一部分結束 -->
@@ -404,7 +418,7 @@ a:hover {
 		});
 	</script>
 	<script>
-		$("#images5278").change(function() {
+		$("#imageas5278").change(function() {
 			readURL(this);
 		});
 
@@ -418,5 +432,23 @@ a:hover {
 			}
 		}
 	</script>
-	</body>
+	<script>
+		document
+				.getElementById('fill-form-btn')
+				.addEventListener(
+						'click',
+						function() {
+							// 範例標題文字
+							var title = '花花的原味內褲';
+
+							// 範例內容文字
+							var content = '真香';
+
+							// 將範例文字填入標題與內容欄位
+							document.getElementsByName('title')[0].value = title;
+							document.getElementsByName('halacontent')[0].value = content;
+						});
+	</script>
+	
+</body>
 </html>

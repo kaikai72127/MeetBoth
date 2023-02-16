@@ -167,13 +167,11 @@ a:hover {
 .prodtable>thead>tr>th {
 	border-right: solid 1px white;
 	text-align: center;
-	font-size:20px;
 }
 
 .prodtable>tbody>tr>td {
 	border-right: solid 1px white;
 	border-top: solid 1px white;
-	font-size:20px;
 }
 </style>
 </head>
@@ -213,7 +211,7 @@ a:hover {
 												href="/MeetBoth/_03_product.productindex.controller"
 												style="color: white; font-weight: 600;"
 												class="btn btn-d btn-round">所有商品清單</a></li>
-											<li><a
+												<li><a
 												href="/MeetBoth/_03_product.MBinsertProd.controller"
 												style="color: white; font-weight: 600;"
 												class="btn btn-d btn-round">新增商品</a></li>
@@ -261,7 +259,7 @@ a:hover {
 								<div class="post-thumbnail"
 									style="padding-bottom: 0; margin-bottom: 0;">
 									<h1
-										style="padding-bottom: 0px; margin-bottom: 0; text-align: center; font-size: 50px; color: white;">哈拉區後臺管理</h1>
+										style="padding-bottom: 0px; margin-bottom: 0; text-align: center; font-size: 50px; color: white;">貼文資訊後臺管理</h1>
 								</div>
 								<hr class="divider-w pt-20">
 								<!-- 							標題 -->
@@ -269,126 +267,51 @@ a:hover {
 								<div class="post">
 									<div class="post-video embed-responsive embed-responsive-16by9"
 										style="height: auto; padding-bottom: 100px;">
-										<div>
-											<span>所有貼文資料 :&ensp;</span>
+										<div style="display: flex">
+											<span>文章資料 :&ensp;</span>
 										</div>
-
-										<form class="row"
-											action="<c:url value='/admin/_06_halaAndQa.SelectHalaClassIndex.controller'/>"
-											method="get">
-											<div style="display: flex; margin-bottom: 15px;">
-
-												<div style="padding-right: 0; margin: auto 10px;">
-													<select name="halaclassname" class="form-control"
-														style="font-size: 17px; color: black;">
-														<option value="">--請選擇分類--</option>
-														<option value="公告">公告</option>
-														<option value="閱讀心得">閱讀心得</option>
-														<option value="資料分享">資料分享</option>
-														<option value="圖書推薦">圖書推薦</option>
-														<option value="教學文章">教學文章</option>
-														<option value="JAVA">JAVA</option>
-														<option value="HTML">HTML</option>
-														<option value="Spring">Spring</option>
-														<option value="SpringBoot">SpringBoot</option>
-														<option value="SpringMVC">SpringMVC</option>
-														<option value="SQL Server">SQL Server</option>
-														<option value="My SQL">My SQL</option>
-														<option value="Hibernate">Hibernate</option>
-														<option value="VScode">VScode</option>
-														<option value="eclipse">eclipse</option>
-														<option value="SpringTool">SpringTool</option>
-														<option value="JDBC">JDBC</option>
-														<option value="Servlet">Servlet</option>
-														<option value="JavaScript">JavaScript</option>
-														<option value="jQuery">jQuery</option>
-														<option value="Azure">Azureoption</option>
-														<option value="RESTful">RESTful</option>
-														<option value="c++">c++</option>
-														<option value="python">python</option>
-														<option value="其他">其他</option>
-													</select>
-												</div>
-
-												
-												<div class="" style=""></div>
-												<div style="">
-													<button class="MBbtn" type="submit" style="">搜尋</button>
-
-
-
-													<input type="button" class="MBbtn" value="新增"
-														onclick="window.location='/MeetBoth/admin/_06_halaAndQa.goAddHalaIndex.controller'">
-
-												</div>
-
+										<div style="display: flex">
+											<button class="MBbtn" onclick="window.location='/MeetBoth/admin/_06_halaAndQa.SelectAllHalaIndex.controller'">返回</button>
+											<button class="MBbtn" onclick="window.location='/MeetBoth/admin/_06_halaAndQa.GoHalaUpdateIndex.controller?halaId=${bean.halaId}'">修改</button>
+											<button class="MBbtn" id="deleteThisProduct"
+												name="${bean.halaId}">刪除</button>
+										</div>
+										<div>
+											<span>貼文編號 :&ensp;${bean.halaId}</span>
+										</div>
+										<div>
+											<span>會員帳號 :&ensp;${bean.memberBean.account}</span>
+										</div>
+										<div>
+											<span>標題 :&ensp;${bean.title}</span>
+										</div>
+										<div style="display: flex;">
+											<span>圖片 :&ensp;</span>
+											<div
+												style="width: 150px; height: 200px; display: flex; justify-content: center; align-items: center; text-align: center;">
+												<img id="preImg"
+													style="max-width: 100%; max-height: 100%; height: auto; width: auto;"
+													src="<c:url value='/_06_halaAndQa.picsave.controller?id=${bean.halaId}' />" />
 											</div>
-
-										</form>
-										<div>
-											<form method="post"
-												action="<c:url value='/admin/_06_halaAndQa.searchAllLikeIndex.controller' />">
-
-												<input class="MBinput" type="text" name="search"
-													style="font-size: 17px; color: white; margin: 10px 10px;"
-													placeholder="搜尋名稱" />
-
-												<button class="MBbtn" type="submit" style="">搜尋</button>
-											</form>
 										</div>
 										<div>
-										
-											<form
-										action="<c:url value='/admin/_06_halaAndQa.SelectAllHalaIndex.controller' />">
-										<button class="MBbtn"
-											type="submit">
-											<span>查詢全部貼文</span>
-										</button>
-									</form>
-									
+											<span>文章類別 :&ensp;${bean.halaclassname}</span>
 										</div>
 										
+											<span>發文時間 :&ensp;${bean.postdate}</span>
+										</div>
+										<div>
+											<span>瀏覽次數 :&ensp;${bean.watch}</span>
+										</div>
+										<div>
+											<span>文章內容:<textarea
+												style="margin-left: 10px; resize: none; height: 325px; width: 975px; overflow-y: auto; overflow-y: auto; font-size: 17px; color: white; background-color: black;"
+												readonly>${bean.halacontent}</textarea></span>
+										</div>
 
 										<div>
-
-
-											<div>
-												<table style="color: white; text-align: center;"
-													class="prodtable">
-													<thead>
-														<tr style="">
-															<th style="width: 5%;">編號</th>
-															<th style="width: 25%; padding-left: 5px;">標題</th>
-															<th style="width: 10%">類別</th>
-															<th style="width: 10%">瀏覽次數</th>
-															<th style="width: 8%">發文者</th>
-															<th style="width: 15%">發文日期</th>
-															<th></th>
-															<th></th>
-															<th style="border-right: none"></th>
-														</tr>
-													</thead>
-													<tbody>
-														<c:forEach var="bean" items="${classList}">
-															<tr>
-																<td style="">${bean.halaId}</td>
-																<td>${bean.title}</td>
-																<td>${bean.halaclassname}</td>
-																<td>&#129321;${bean.watch}</td>
-																<td>${bean.memberBean.memberID}</td>
-																<td>${bean.postdate}</td>
-																<td><input type="button" class="MBbtn" value="更多"
-																	onclick="window.location='/MeetBoth/admin/_06_halaAndQa.oneHala.controller?halaId=${bean.halaId}'"></td>
-																<td><input type="button" class="MBbtn" value="修改"
-																	onclick="window.location='/MeetBoth/admin/_06_halaAndQa.GoHalaUpdateIndex.controller?halaId=${bean.halaId}'"></td>
-																<td style="border-right: none"><input type="button"
-																	class="MBbtn deleteThisProduct" value="刪除"
-																	name="${bean.halaId}"></td>
-															</tr>
-														</c:forEach>
-													</tbody>
-												</table>
-											</div>
+											
+											
 										</div>
 									</div>
 								</div>
@@ -439,12 +362,12 @@ a:hover {
 	<script src=<%=basePath3%>></script>
 	<script src=<%=basePath4%>></script>
 	<script src=<%=basePath5%>></script>
-	<script type="text/javascript"
-		src="https://www.gstatic.com/charts/loader.js"></script>
-	<script src="assets/lib/jquery.mb.ytplayer/dist/jquery.mb.YTPlayer.js"></script>
 	<!-- SweetAlert js -->
 	<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 	<!-- SweetAlert js -->
+	<script type="text/javascript"
+		src="https://www.gstatic.com/charts/loader.js"></script>
+	<script src="assets/lib/jquery.mb.ytplayer/dist/jquery.mb.YTPlayer.js"></script>
 	<script>
 		$(document).ready(function() {
 			//以ul li包子選單
@@ -464,11 +387,11 @@ a:hover {
 	<script>
 	
         $(function(){
-        	$('.deleteThisProduct').click(function(){
+        	$('#deleteThisProduct').click(function(){
                 let id=$(this).attr("name");
                 Swal.fire({
                   title: '你確定要刪除嗎?',
-                  text: "將無法恢復此貼文!!!",
+                  text: "將無法恢復此筆訂單!!!",
                   icon: 'warning',
                   //icon:  "success", "error", "warning", "info" or "question" 這幾種選項
                   showCancelButton: true,
@@ -500,28 +423,21 @@ a:hover {
         });
         //function end
     </script>
+
 	<script>
-	var commentAmounts = document.querySelectorAll("#commentAmount");
-	var AVGscores = document.querySelectorAll("#AVGscore");
-
-	for (var i = 0; i < commentAmounts.length; i++) {
-		var commentList = commentAmounts[i].querySelector("#commmentList").value;
-    	if(commentList === '[]'){
-  		commentAmounts[i].innerHTML = 0;
-    	}else{
-  		commentAmounts[i].innerHTML = commentList.split(",").length;
-    	}
-
-  		var scoreList = AVGscores[i].querySelectorAll("#commmentList");
-  		var sum = 0;
-  		for (var j = 0; j < scoreList.length; j++) {
-    		sum += parseInt(scoreList[j].value);
-  		}
-  		if(isNaN((sum / scoreList.length).toFixed(2))){
-  			AVGscores[i].innerHTML = '無'
-  		}else{
-	  		AVGscores[i].innerHTML = (sum / scoreList.length).toFixed(2);
-  		}
-	}
+    window.onload = function() {
+    	var tbody = document.getElementById("commentBody")
+    	var div = document.getElementById("commentDiv")
+    	var div2 = document.getElementById("commentTable")
+        if (tbody.innerHTML.trim()==='') {
+          div.innerHTML = "<span>商品評論 :&ensp;</span><span>沒有商品評論評論</span>";
+          div2.innerHTML = "";
+        }
+    	};
+    
+  
 </script>
+</body>
+
+
 </html>

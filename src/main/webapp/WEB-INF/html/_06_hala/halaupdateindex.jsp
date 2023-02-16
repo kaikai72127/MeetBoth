@@ -265,23 +265,27 @@ a:hover {
 								<!-- 							標題 -->
 								<!--       右邊第一部分開始 -->
 								<div class="post">
-								<form action="<c:url value='/admin/_06_halaAndQa.updateHalaIndex.controller' />" method="Post" enctype="multipart/form-data">
-									<div class="post-video embed-responsive embed-responsive-16by9"
-										style="height: auto; padding-bottom: 100px;">
-										<div style="display: flex">
-											<button class="MBbtn"
-												onclick="window.location='/MeetBoth/admin/_06_halaAndQa.GoHalaUpdateIndex.controller'">返回</button>
-										</div>
-										
-										
-										<div>
-											<span>文章標題 :&ensp;<input value="${bean.title}" type="text" name="title" class="MBinput" placeholder="不能為空"></span>
-										</div>
-										<div>
-											<input type="hidden" value="${bean.halaId}" name="halaId">
-											<span>文章類別 :&ensp;<select name="halaclassname"
-												style="" class="MBinput">
-									<option value="">--請選擇分類--</option>
+									<form
+										action="<c:url value='/admin/_06_halaAndQa.updateHalaIndex.controller' />"
+										method="Post" enctype="multipart/form-data">
+										<div
+											class="post-video embed-responsive embed-responsive-16by9"
+											style="height: auto; padding-bottom: 100px;">
+											<div style="display: flex">
+												<button class="MBbtn"
+													onclick="window.location='/MeetBoth/admin/_06_halaAndQa.GoHalaUpdateIndex.controller'">返回</button>
+											</div>
+
+
+											<div>
+												<span>文章標題 :&ensp;<input value="${bean.title}"
+													type="text" name="title" class="MBinput" placeholder="不能為空"></span>
+											</div>
+											<div>
+												<input type="hidden" value="${bean.halaId}" name="halaId">
+												<span>文章類別 :&ensp;</span>
+												<select name="halaclassname"style="" class="MBinput">
+														<option value="">--請選擇分類--</option>
 														<option value="公告">公告</option>
 														<option value="閱讀心得">閱讀心得</option>
 														<option value="資料分享">資料分享</option>
@@ -307,40 +311,48 @@ a:hover {
 														<option value="c++">c++</option>
 														<option value="python">python</option>
 														<option value="其他">其他</option>
-											</select></span>
-										</div>
-										
-										<div>
-											<span>會員編號 :&ensp;<input value="${Member.memberID}" type="text" name="memberid" class="MBinput"></span>
-										</div>
-										
-										<div>
-											<span>發文時間 :&ensp;<input value="${bean.postdate}" type="text" name="postdate" class="MBinput" placeholder="自動產生" readonly></span>
-										</div>
-										
-										
-										
-										<div style="display: flex;">
-											<span>上傳照片</span> 
-											<div style="height:200px;width:200px;background-color:#272727;text-align:center;margin:15px;">
-											<img id="preImg" style="max-width: 100%; max-height: 100%; height: auto; width: auto;" src="<c:url value='/_06_halaAndQa.picsave.controller?id=${bean.halaId}' />" />
+												</select>
 											</div>
-											<input class="MBinput" type="file" name="images" id="images5278" accept=".jpg,.png"> 
-										</div>
-										<div>
-											<div id="commentDiv">
-												<span>文章內容 :&ensp;</span>
+
+											<div>
+												<span>會員編號 :&ensp;<input value="${Member.memberID}"
+													type="text" name="memberid" class="MBinput" readonly></span>
+											</div>
+
+											<div>
+												<span>發文時間 :&ensp;<input value="${bean.postdate}"
+													type="text" name="postdate" class="MBinput"
+													placeholder="自動產生" readonly></span>
+											</div>
+
+
+
+											<div style="display: flex;">
+												<span>上傳照片</span>
+												<div
+													style="height: 200px; width: 200px; background-color: #272727; text-align: center; margin: 15px;">
+													<img id="preImg"
+														style="max-width: 100%; max-height: 100%; height: auto; width: auto;"
+														src="<c:url value='/_06_halaAndQa.picsave.controller?id=${bean.halaId}' />" />
+												</div>
+												<input class="MBinput" type="file" name="images"
+													id="images5278" accept=".jpg,.png">
+											</div>
+											<div>
+												<div id="commentDiv">
+													<span>文章內容 :&ensp;</span>
+												</div>
+											</div>
+											<div>
+												<textarea name="halacontent"
+													style="margin-left: 10px; resize: none; height: 325px; width: 975px; overflow-y: auto; overflow-y: auto; font-size: 25px; color: white; background-color: black;"
+													placeholder="商品評論 可以不填">${bean.halacontent}</textarea>
+											</div>
+											<div>
+												<input type="submit" class="MBbtn" value="確定"
+													style="margin-top: 15px; margin-left: 900px; font-size: 35px;">
 											</div>
 										</div>
-										<div>
-											<textarea name="halacontent" 
-												style="margin-left: 10px; resize: none; height: 325px; width: 975px; overflow-y: auto; overflow-y: auto; font-size: 25px; color: white; background-color: black;" placeholder="商品評論 可以不填"
-												>${bean.halacontent}</textarea>
-										</div>
-										<div>
-											<input type="submit" class="MBbtn" value="確定" style="margin-top:15px;margin-left:900px;font-size:35px;">
-										</div>
-									</div>
 									</form>
 								</div>
 								<!--       右邊第一部分結束 -->
@@ -426,9 +438,9 @@ a:hover {
 	</script>
 	<script type="text/javascript">
 		// 選取 select 元素
-		var selectElement = document.getElementsByName("pty");
+		var selectElement = document.getElementsByName("halaclassname");
 		// 取得 typeClassNum 的值
-		var typeClassNum = document.getElementsByName("pClass").value;
+		var typeClassNum = document.getElementsByName("halaId").value;
 		// 選取特定的 option 元素
 		for (var i = 0; i < selectElement.options.length; i++) {
 			if (selectElement.options[i].value == typeClassNum) {
@@ -438,5 +450,6 @@ a:hover {
 			}
 		}
 	</script>
-	</body>
+
+</body>
 </html>

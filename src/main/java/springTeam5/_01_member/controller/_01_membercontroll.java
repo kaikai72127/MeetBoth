@@ -206,7 +206,7 @@ public class _01_membercontroll {
 		return "_01_member/admin";
 	}
 	
-	@PostMapping("/admin/_01_member.selectAll.controller")
+	@GetMapping("/admin/_01_member.selectAll.controller")
 	public String selectAll(Model m) {
 		List<MemberBean> all = ms.searchAllMember();
 		m.addAttribute("Member", all);

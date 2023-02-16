@@ -194,8 +194,10 @@
 											<tr height="42">
 												<td colspan='4'>
 													<div align="center">
-														<input type="submit" name="submit" id="submit" value="儲存" />
-														<input type="reset" name="cancel" id="cancel" value="重填">
+														<input class="btn1" type="submit" name="submit" id="submit"
+															value="儲存" />
+														<input class="btn1" type="reset" name="cancel" id="cancel"
+															value="重填">
 													</div>
 												</td>
 											</tr>

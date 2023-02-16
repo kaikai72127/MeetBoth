@@ -162,11 +162,13 @@
                                 .prodtable>thead>tr>th {
                                     border-right: solid 1px white;
                                     text-align: center;
+                                    font-size: 25px;
                                 }
 
                                 .prodtable>tbody>tr>td {
                                     border-right: solid 1px white;
                                     border-top: solid 1px white;
+                                    font-size: 25px;
                                 }
 
                                 .btn1 {
@@ -210,6 +212,8 @@
                                     border-color: azure;
                                     background-color: #000;
                                     color: azure;
+                                    width: 300px;
+
                                     caret-color: auto;
                                     /* 預設 */
                                     caret-color: transparent;
@@ -218,6 +222,11 @@
                                     /* 指定色 */
                                     outline: none;
                                     /* 外框效果 */
+                                }
+
+                                ::placeholder {
+                                    font-size: 18px;
+                                    color: aliceblue;
                                 }
                             </style>
                             <!-- CSS -->
@@ -230,6 +239,14 @@
                                 $(document).ready(function () {
                                     $('#member').DataTable();
                                 });
+
+                                function registery() {
+                                    location.href = "_01_member.backregister.controller";
+                                }
+
+                                function allMember() {
+                                    location.href = "_01_member.selectAll.controller";
+                                }
                             </script>
             </head>
 
@@ -279,15 +296,15 @@
                                                                 <input class="btn1" type="submit" name="selectByName"
                                                                     value="以姓名查詢"
                                                                     onclick="this.form.action='_01_member.selectByName.controller'" />
+                                                                <button class="btn1" name="register"
+                                                                    style="padding: 0% 30px;"
+                                                                    onclick="event.preventDefault(); registery()">新增會員</button>
+                                                                <button class="btn1" name="selectAll"
+                                                                    style="padding: 0% 30px;"
+                                                                    onclick="event.preventDefault(); allMember()">取得所有會員</button>
                                                             </form>
                                                             <form action="#" method="POST" modelAttribute="Member">
 
-                                                                <button class="btn1" name="register"
-                                                                    style="padding: 0% 30px;"
-                                                                    onclick="this.form.action='_01_member.backregister.controller'">新增會員</button>
-                                                                <button class="btn1" name="selectAll"
-                                                                    style="padding: 0% 30px;"
-                                                                    onclick="this.form.action='_01_member.selectAll.controller'">取得所有會員</button>
                                                             </form>
                                                         </div>
 

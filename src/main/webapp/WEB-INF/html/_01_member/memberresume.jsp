@@ -411,8 +411,8 @@
                             </div>
                             <div class="case-list-body">
                                 <div class="comment-table">
-                                    <div class="comment-table-row">
-                                        <c:forEach var="teac" items="${teac}">
+                                    <c:forEach var="teac" items="${teac}">
+                                    	<div class="comment-table-row" onclick="window.location='<c:url value='/_05_teacStu.teacpostpageMain.controller?teacno=${teac.teacno}'/>'">
                                             <div class="comment-table-col">
                                                 <div class="comment-table-col-content">
                                                     ${teac.updateDate}</div>
@@ -437,8 +437,8 @@
                                             <div class="comment-table-col">
                                                 <div class="comment-table-col-content">${teac.views}</div>
                                             </div>
-                                        </c:forEach>
-                                    </div>
+                                    	</div>
+                                    </c:forEach>
                                 </div>
                             </div>
                         </div>
@@ -513,8 +513,8 @@
                                             <div class="comment-table-col-content">瀏覽次數</div>
                                         </div>
                                     </div>
-                                    <div class="comment-table-row">
-                                        <c:forEach var="stud" items="${stud}">
+                                    <c:forEach var="stud" items="${stud}">
+                                    	<div class="comment-table-row" onclick="window.location='<c:url value='/_05_teacStu.studpostpageMain.controller?studno=${stud.studno}'/>'">
                                             <div class="comment-table-col">
                                                 <div class="comment-table-col-content">
                                                     ${stud.updateDate}</div>
@@ -535,8 +535,8 @@
                                             <div class="comment-table-col">
                                                 <div class="comment-table-col-content">${stud.views}</div>
                                             </div>
-                                        </c:forEach>
-                                    </div>
+                                    	</div>
+                                    </c:forEach>
                                 </div>
                             </div>
                         </div>

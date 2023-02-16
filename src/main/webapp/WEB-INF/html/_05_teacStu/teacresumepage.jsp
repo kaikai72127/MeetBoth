@@ -330,7 +330,7 @@ body {
 				<div class="resume-body">
 					<div class="resume-section">
 						<h2 class="resume-body-title">PROFILE</h2>
-						<div class="resume-no">@${bean.member.account}</div>
+						<div class="resume-no"><a style="color: #6495ed;" href="/MeetBoth/memberresume?id=${bean.member.memberID}">@${bean.member.account}</a></div>
 						<div class="resume-name">${bean.member.memName}
 							(${bean.member.memNickName})</div>
 						<div class="resume-contact">
@@ -422,7 +422,7 @@ body {
 							<button
 								onclick="window.location='/MeetBoth/_05_teacStu.searchAllTeac.controller/1'"
 								style="display: flex; justify-content: center; align-items: center; margin: 15px auto 0 auto"
-								class="btn btn-b btn-circle" type="submit">返回上一頁</button>
+								class="btn btn-b btn-circle" type="submit">返回貼文頁</button>
 						</div>
 					</div>
 					<div class="avatar-section">

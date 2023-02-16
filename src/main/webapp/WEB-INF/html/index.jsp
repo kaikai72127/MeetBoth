@@ -28,6 +28,15 @@ marquee a:hover {
 	color: white;
 	background-color: #ce7777;
 }
+
+.work-item.illustration.webdesign {
+	height: 175px;
+	padding: 0 15px 15px 0;
+}
+
+.work-title {
+	font-size: 25px;
+}
 </style>
 
 <!-- 愛心特效使用 -->
@@ -67,8 +76,62 @@ marquee a:hover {
 
 
 		<!-- 內容 2-->
-		<section class="module-medium" id="demos"></section>
+		<!-- 			熱門商品 -->
+		<section class="module-small"
+			style="padding-top: 0px; padding-bottom: 0px;">
+			<div class="container">
 
+				<div class="row multi-columns-row" style="padding-bottom: 35px;">
+					<div class="row">
+						<div class="col-sm-12" style="">
+							<img src="/MeetBoth/html/assets/images/shop/熱門商品橫幅.jpg"
+								alt="Title of Image" />
+						</div>
+					</div>
+				</div>
+				<div class="row multi-columns-row">
+					<c:forEach var="HotBean" items="${Hotprodlist}">
+						<div class="col-sm-6 col-md-3 col-lg-3"
+							style="padding-bottom: 30px; display: flex;">
+							<div class="works-grid works-grid-4 works-hover-w" id=""
+								style="text-align: center;">
+								<div class="work-item illustration webdesign" id="typeBlock"
+									style="height: 250px; width: 100%;">
+									<a
+										href="/MeetBoth/_03_product.PathToProductDetail.controller?id=${HotBean.prodID}">
+										<span class="work-image"
+										style="width: 100%; height: 100%; margin: auto; display: flex; justify-content: center; align-items: center; margin-right: 15px; text-align: center;">
+											<img
+											style="max-width: 100%; max-height: 100%; height: auto; width: auto;"
+											src="<c:url value='/_03_product.showPicture.controller?id=${HotBean.prodID}' />"
+											alt="Portfolio Item" /> <span class="work-caption font-alt">
+												<span class="work-title"><img style=""
+													src="/MeetBoth/html/assets/images/shop/seesee.png"
+													alt="Portfolio Item" /></span>
+										</span>
+									</span>
+									</a>
+								</div>
+								<div id="prodName" style="padding-top: 30px;">
+									<strong style="font-size: 16px">${HotBean.prodName}</strong>
+								</div>
+								<div id="prodCheck">
+									<strong style="font-size: 16px">瀏覽次數:&ensp;${HotBean.prodCheck}次</strong>
+								</div>
+								<div id="scoreAVG">
+									<c:forEach var="commentBean" items="${HotBean.productComment}">
+										<input type="hidden" id="starAVG"
+											value="${commentBean.prodScore}">
+									</c:forEach>
+									<div id="starAVGDiv" style="font-size: 17px;"></div>
+								</div>
+							</div>
+						</div>
+					</c:forEach>
+				</div>
+			</div>
+		</section>
+		<!-- 			熱門商品 -->
 		<!-- 內容3 -->
 		<div class="page-container">
 			<div class="newest-list">

@@ -353,12 +353,12 @@ public class _01_membercontroll {
 			MemberBean check = list.get(0);
 			newMem.setMemberID(check.getMemberID());
 			newMem.setAccount(member.getAccount());
-			String pwd = new BCryptPasswordEncoder().encode(member.getPassword());
-			if (check.getPassword().equals(pwd)) {
-				newMem.setPassword(pwd);				
-			}else {
-				newMem.setPassword(check.getPassword());
-			}
+//			String pwd = new BCryptPasswordEncoder().encode(member.getPassword());
+//			if (check.getPassword() != pwd) {
+//				newMem.setPassword(pwd);				
+//			}else {
+//			}
+			newMem.setPassword(check.getPassword());
 			newMem.setIdNumber(member.getIdNumber());
 			newMem.setMemName(member.getMemName());
 			newMem.setMemNickName(member.getMemNickName());
@@ -400,12 +400,12 @@ public class _01_membercontroll {
 			MemberBean check = list.get(0);
 			newMem.setMemberID(check.getMemberID());
 			newMem.setAccount(member.getAccount());
-			String pwd = new BCryptPasswordEncoder().encode(member.getPassword());
-			if (check.getPassword() != pwd) {
-				newMem.setPassword(pwd);				
-			}else {
-				newMem.setPassword(check.getPassword());
-			}
+//			String pwd = new BCryptPasswordEncoder().encode(member.getPassword());
+//			if (check.getPassword() != pwd) {
+//				newMem.setPassword(pwd);				
+//			}else {
+//			}
+			newMem.setPassword(check.getPassword());
 			newMem.setIdNumber(member.getIdNumber());
 			newMem.setMemName(member.getMemName());
 			newMem.setMemNickName(member.getMemNickName());

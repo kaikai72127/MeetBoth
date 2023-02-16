@@ -16,15 +16,32 @@
 						<style>
 							.member {
 								table-layout: auto;
-								outline: 1px dotted rgb(255, 179, 179);
-
-								border-radius: 3px;
+								outline: 3px solid rgb(255, 179, 179);
+								width: 60%;
+								border-radius: 6px;
+								margin: auto;
 							}
 
-							.member>tr {
-								height: 60px;
+							.member>tbody {
+								box-shadow: 10px 10px rgb(255, 225, 225);
+								border-radius: 6px;
+							}
 
+							.member>tbody>tr {
+								height: 60px;
 								overflow: hidden;
+								margin: 10px;
+								padding: 10px;
+								font-size: 18.5px;
+							}
+
+							.member>tbody>tr>td {
+								padding: 1.5%;
+								border: 2px dotted rgb(255, 179, 179);
+							}
+
+							.member>tbody>tr>td>input {
+								font-size: 18px;
 							}
 
 							.btn1 {
@@ -38,11 +55,11 @@
 								border-radius: 6px;
 								/* 字母转大写 */
 								border: none;
-								color: white;
-								padding: 16px 32px;
+								color: rgb(0, 0, 0);
+								padding: 8px 16px;
 								text-align: center;
 								display: inline-block;
-								font-size: 10px;
+								font-size: 20px;
 								margin: 4px 2px;
 								-webkit-transition-duration: 0.4s;
 								/* Safari */
@@ -54,7 +71,7 @@
 
 							.btn1 {
 								background-color: white;
-								color: black;
+								color: rgb(254, 105, 105);
 								border: 2px solid rgb(255, 179, 179);
 							}
 
@@ -83,9 +100,9 @@
 							<section class="register">
 								<form class="form-controll" action="_01_member.backadd.controller" method="POST"
 									enctype="multipart/form-data">
-
+									<h1 style="color: darksalmon; text-align: center;">會員註冊</h1>
 									<div class="form-group">
-										<table style="margin: auto;">
+										<table class="member">
 											<tr>
 												<td style="width: 150px;"><label>帳號：</label></td>
 												<td><input class="form-control" type="text"
@@ -166,11 +183,12 @@
 											</tr>
 											<tr>
 												<td><label class="fontSize">照片：</label><br>&nbsp;</td>
-												<td><input class="form-control" name='photofile' id="images5278"
-														type='file' accept="image/jpg"
-														placeholder="請使用jpg檔案">請使用jpg檔案<br>&nbsp;
-													<img id="preImg" style="width: 180px; height: 200px"
-														src="<%=basePathimg2%>" />
+												<td><input class="" name='photofile' id="images5278" type='file'
+														accept="image/jpg">
+													<label style="text-align: center ;"><img id="preImg"
+															style="width: 180px; height: 200px"
+															src="<%=basePathimg2%>" /><br>
+														請使用JPG/PNG檔案</label>
 												</td>
 											</tr>
 											<tr height="42">

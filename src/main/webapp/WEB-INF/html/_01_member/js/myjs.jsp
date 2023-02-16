@@ -1,8 +1,9 @@
 <%@ page contentType="text/html; charset=UTF-8" language="java" %>
+	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 	<script type="text/javascript">
 		function checkpwd() {
 			if (document.getElementById("pas1check").value != document.getElementById("pas2check").value) {
-				alert("密碼不一致");
+				Swal.fire('密碼不一樣喔！')
 				pas2check.value = "";
 			}
 		}
@@ -32,7 +33,7 @@
 				}
 			}
 			if (fl == false) {
-				alert("電子郵件格式錯誤");
+				Swal.fire("電子郵件格式錯誤");
 				mail.value = "";
 			}
 		}
@@ -48,23 +49,23 @@
 						let numberCheck = "0123456789"
 						for (let i = 2; i < check.length; i++) {
 							if (numberCheck.indexOf(check[i]) == (-1)) {
-								alert("身分證數字列出現非數字！");
+								Swal.fire("身分證數字列出現非數字！");
 								idNumber.value = "";
 								return;
 							}
 						}
 					} else {
-						alert("性別數字不合規範！");
+						Swal.fire("性別數字不合規範！");
 						idNumber.value = "";
 						return;
 					}
 				} else {
-					alert("首字不是英文！");
+					Swal.fire("首字不是英文！");
 					idNumber.value = "";
 					return;
 				}
 			} else {
-				alert("身分證長度不符！");
+				Swal.fire("身分證長度不符！");
 				idNumber.value = "";
 				return;
 			}
@@ -87,7 +88,7 @@
 			total = total + num1 * 1 + num2 * 9;
 			let checknumber = 10 - (total % 10);
 			if (lastchar != checknumber) {
-				alert("身分證檢查碼錯誤");
+				Swal.fire("身分證檢查碼錯誤");
 				idNumber.value = "";
 			}
 		}
@@ -99,9 +100,9 @@
 				/^((?=.{8,}$)(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).*|(?=.{8,}$)(?=.*\d)(?=.*[a-zA-Z])(?=.*[!\u0022#$%&'\''()*+,./:;<=>?@[\]\^_`{|}~-]).*)/,
 				"g");
 			if (password.length < 6 || password.length > 12) {
-				alert("密碼過長或過短");
+				Swal.fire('密碼過長或過短！<br>請輸入6到12字密碼！')
 			} else if (password.match(regex) == null) {
-				alert("密碼不符合規範！");
+				Swal.fire('密碼強度不夠喔！<br>請包含英文大寫、小寫、<br>數字及特殊符號中的三種！')
 				pas1check.value = "";
 			}
 		}

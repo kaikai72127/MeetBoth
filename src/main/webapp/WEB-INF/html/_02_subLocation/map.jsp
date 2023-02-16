@@ -74,38 +74,41 @@ ul {
 <!--BOBY-->
 <body data-spy="scroll" data-target=".onpage-navigation"
 	data-offset="60">
-	
-	<!-- header -->
-	<!-- 引入共同的topMVC -->
-	<jsp:include page="/WEB-INF/html/fragment/topMVC.jsp" />
-	
-	<!-- Google Tag Manager (noscript)-->
-	<noscript>
-		<iframe src="https://www.googletagmanager.com/ns.html?id=GTM-PGQ9WQT"
-			height="0" width="0" style="display: none; visibility: hidden"></iframe>
-	</noscript>
+	<main>
+		<div class="main">
+			<!-- header -->
+			<!-- 引入共同的topMVC -->
+			<jsp:include page="/WEB-INF/html/fragment/topMVC.jsp" />
+
+			<!-- Google Tag Manager (noscript)-->
+			<noscript>
+				<iframe
+					src="https://www.googletagmanager.com/ns.html?id=GTM-PGQ9WQT"
+					height="0" width="0" style="display: none; visibility: hidden"></iframe>
+			</noscript>
 
 
-	<div id="app" class="container">
+			<div id="app" class="container">
 
-		<!-- 搜尋框 -->
-		<div class="row">
-			<div class="col google-map">
-				<h5>Search：</h5>
-				<div class="form-group">
-					<input type="text" class="form-control" ref="site" v-model="site">
+				<!-- 搜尋框 -->
+				<div class="row">
+					<div class="col google-map">
+						<h5>Search：</h5>
+						<div class="form-group">
+							<input type="text" class="form-control  input-lg" ref="site"
+								v-model="site">
+						</div>
+					</div>
 				</div>
-			</div>
-		</div>
 
-		<!-- 放google map的div -->
-		<div class="row">
-			<div class="col">
-				<div id="map" class="embed-responsive embed-responsive-16by9"></div>
-			</div>
-		</div>
+				<!-- 放google map的div -->
+				<div class="row">
+					<div class="col">
+						<div id="map" class="embed-responsive embed-responsive-16by9"></div>
+					</div>
+				</div>
 
-		<!-- <div class="row">
+				<!-- <div class="row">
             <div class="col">
                 <button type="button" class="btn btn-outline-secondary" v-for="f in features"
                     @click="openInfoWindows(f.properties.id)">
@@ -117,7 +120,7 @@ ul {
 
 
 
-		<!-- 放google map的div
+				<!-- 放google map的div
         <div class="row">
             <div class="col google-map">
                 <h5>Google Map：</h5>
@@ -125,9 +128,9 @@ ul {
             </div>
         </div> -->
 
-		<!-- <hr> -->
+				<!-- <hr> -->
 
-		<!-- 放評論摘要的div
+				<!-- 放評論摘要的div
         <div class="row" v-if="place != null">
             <div class="col" v-if="place.reviews != null">
                 <h5>評論：</h5>
@@ -150,8 +153,11 @@ ul {
             </div>
         </div> -->
 
-	</div>
-	<!-- 將 YOUR_API_KEY 替換成你的 API Key 即可 -->
+			</div>
+			<!-- 將 YOUR_API_KEY 替換成你的 API Key 即可 -->
+			<jsp:include page="/WEB-INF/html/fragment/footerMVC.jsp" />
+		</div>
+	</main>
 	<script
 		src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBqv3UCHAPGEKO_TA9vZzEghUQSme859hE&libraries=places"
 		async defer></script>
@@ -160,117 +166,174 @@ ul {
 
 	<!-- map -->
 	<script>
-        const googleMap = new Vue({
-            el: '#app',
-            data: {
-                map: null,
-                autocomplete: null,
-                site: '', // place API要綁定的搜尋框
-                place: null, // 存place確定後回傳的資料
-                features: [], // 存入每一個地點
-                infowindowAll: {} // 存入每一個marker上的info windows
-            },
-            methods: {
-                // init google map
-                initMap() {
-                    // 預設顯示的地點：台北市政府親子劇場
-                    let location = {
-                        lat: 25.0374865, // 經度
-                        lng: 121.5647688 // 緯度
-                    };
+	var markers = [];
+    var position = [
+        { label: 'A', lat: 25.0374865, lng: 121.5647688 },
+        { label: 'B', lat: 25.0397146, lng: 121.5653771 }, 
+        { label: 'C', lat: 25.0405919, lng:  121.5647644 },
+        { label: 'D', lat: 25.039982, lng: 121.572258 }, 
+        { label: 'E', lat: 25.0400306, lng: 121.5602452 }, 
+        { label: 'F', lat: 25.0336076, lng: 121.5647587 }  
+    ];
+	const googleMap = new Vue({
+        el: '#app',
+        data: {
+            map: null,
+            autocomplete: null,
+            site: '', // place API要綁定的搜尋框
+            place: null, // 存place確定後回傳的資料
+            features: [], // 存入每一個地點
+            infowindowAll: {} // 存入每一個marker上的info windows
+        },
+        methods: {
+            // init google map
+            initMap() {
+                // 預設顯示的地點：台北市政府親子劇場
+                let location = {
+                    lat: 25.0374865, // 經度
+                    lng: 121.5647688 // 緯度
+                };
 
-                    // 建立地圖
-                    this.map = new google.maps.Map(document.getElementById('map'), {
-                        center: location,
-                        zoom: 16,
-                        mapTypeId: 'terrain'
+                // 建立地圖
+                this.map = new google.maps.Map(document.getElementById('map'), {
+                    center: location,
+                    zoom: 16,
+                    mapTypeId: 'terrain'
+                });
+                for (var i = 0; i < position.length; i++) {
+
+                    markers[i] = new google.maps.Marker({
+                        position: {
+                            lat: position[i].lat,
+                            lng: position[i].lng
+                        },
+                        map: this.map,
+                        label: position[i].label,
+                        icon:"/MeetBoth/html/images/favicon.png"
+                    };
+                    
+                 // info window
+                    let infowindow = new google.maps.InfoWindow({
+                        content: `<h6>xxxx</h6>`
                     });
+                   
+                    infowindow.open(this.map, markers[i]);
+                    
+                 // 監聽 marker click 事件
+                    marker.addListener('click', e => {
+                        // 如果目前有開啟中的訊息視窗，先將其關閉 
+                        if (this.infowindow) this.infowindow.close();
+                        // 顯示被點擊地標的訊息視窗
+                        infowindow.open(this.map, markers[i]);
+                        // 存入目前開啟的訊息視窗
+                        this.infowindow = infowindow;
+                    });
+                    
+                    
+                        
+                        
+                        
+//                      // info window 
+//                         let infowindow = new google.maps.InfoWindow({
+//                             content: `<h6>${r.properties.name} <hr>${r.properties.site}</h6>` // 支援html
+
+//                         });
+                        
+//                      // 監聽 marker click 事件
+//                         markers.addListener('click', e => {
+//                             // 如果目前有開啟中的訊息視窗，先將其關閉 
+//                             if (this.infowindow) this.infowindow.close();
+//                             // 顯示被點擊地標的訊息視窗
+//                             infowindow.open(this.map, marker);
+//                             // 存入目前開啟的訊息視窗
+//                             this.infowindow = infowindow;
+//                         });
+
+                    
+                
 
 
 
-                    // 放置多個marker
-                    fetch('./WEB-INF/resources/images/map.geojson')
-                        .then(results => results.json())
-                        .then(result => {
-                            this.features = result.features;
-                            Array.prototype.forEach.call(this.features, r => {
-                                let latLng = new google.maps.LatLng(r.geometry.coordinates[1], r.geometry.coordinates[0]);
-                                let marker = new google.maps.Marker({
-                                    position: latLng,
-                                    map: this.map,
-                                });
-
-                                // info window
-                                let infowindow = new google.maps.InfoWindow({
-                                    content: `<h6>${r.properties.name} <hr>${r.properties.site}</h6>` // 支援html
-
-                                });
-
-                                // 監聽 marker click 事件
-                                marker.addListener('click', e => {
-                                    // 如果目前有開啟中的訊息視窗，先將其關閉 
-                                    if (this.infowindow) this.infowindow.close();
-                                    // 顯示被點擊地標的訊息視窗
-                                    infowindow.open(this.map, marker);
-                                    // 存入目前開啟的訊息視窗
-                                    this.infowindow = infowindow;
-                                });
-
-                                // 加一個open的method，就可由外部按鈕開啟
-                                this.infowindowAll[r.properties.id] = {
-                                    open: function () {
-                                        infowindow.open(this.map, marker);
-                                    }
-                                };
-
-                            });
-
-                        });
-                },
-                // 地址自動完成 + 地圖的中心移到輸入結果的地址上
-                siteAuto() {
-
-                    let options = {
-                        componentRestrictions: { country: 'tw' } // 限制在台灣範圍
-                    };
-                    this.autocomplete = new google.maps.places.Autocomplete(this.$refs.site, options);
-                    this.autocomplete.addListener('place_changed', () => {
-                        this.place = this.autocomplete.getPlace();
-                        if (this.place.geometry) {
-                            let searchCenter = this.place.geometry.location;
-                            this.map.panTo(searchCenter); // panTo是平滑移動、setCenter是直接改變地圖中心
-
-                            // 放置標記
+                // 放置多個marker
+                fetch('./map.geojson')
+                    .then(results => results.json())
+                    .then(result => {
+                        this.features = result.features;
+                        Array.prototype.forEach.call(this.features, r => {
+                            let latLng = new google.maps.LatLng(r.geometry.coordinates[0], r.geometry.coordinates[1]);
                             let marker = new google.maps.Marker({
-                                position: searchCenter,
-                                icon: {
-                                    path: google.maps.SymbolPath.CIRCLE,
-                                    scale: 3
-                                },
-                                map: this.map
+                                position: latLng,
+                                map: this.map,
                             });
 
                             // info window
                             let infowindow = new google.maps.InfoWindow({
-                                content: this.place.formatted_address
+                                content: `<h6>${r.properties.name} <hr>${r.properties.site}</h6>` // 支援html
+
                             });
-                            infowindow.open(this.map, marker);
 
-                        }
+                            // 監聽 marker click 事件
+                            marker.addListener('click', e => {
+                                // 如果目前有開啟中的訊息視窗，先將其關閉 
+                                if (this.infowindow) this.infowindow.close();
+                                // 顯示被點擊地標的訊息視窗
+                                infowindow.open(this.map, marker);
+                                // 存入目前開啟的訊息視窗
+                                this.infowindow = infowindow;
+                            });
+
+                            // 加一個open的method，就可由外部按鈕開啟
+//                             this.infowindowAll[r.properties.id] = {
+//                                 open: function () {
+//                                     infowindow.open(this.map, marker);
+//                                 }
+//                             };
+
+                        });
+
                     });
-                }
-
-
             },
-            mounted() {
-                window.addEventListener('load', () => {
+            // 地址自動完成 + 地圖的中心移到輸入結果的地址上
+            siteAuto() {
 
-                    this.initMap();
-                    this.siteAuto();
+                let options = {
+                    componentRestrictions: { country: 'tw' } // 限制在台灣範圍
+                };
+                this.autocomplete = new google.maps.places.Autocomplete(this.$refs.site, options);
+                this.autocomplete.addListener('place_changed', () => {
+                    this.place = this.autocomplete.getPlace();
+                    if (this.place.geometry) {
+                        let searchCenter = this.place.geometry.location;
+                        this.map.panTo(searchCenter); // panTo是平滑移動、setCenter是直接改變地圖中心
 
+                        // 放置標記
+                        let marker = new google.maps.Marker({
+                            position: searchCenter,
+                            icon:"/MeetBoth/html/images/meatball-map.png",
+                            map: this.map
+                        });
+
+                        // info window
+                        let infowindow = new google.maps.InfoWindow({
+                            content: this.place.formatted_address
+                        });
+                        infowindow.open(this.map, marker);
+
+                    }
                 });
             }
-        })
+
+
+        },
+        mounted() {
+            window.addEventListener('load', () => {
+
+                this.initMap();
+                this.siteAuto();
+
+            });
+        }
+    })
     </script>
 </body>
 </html>

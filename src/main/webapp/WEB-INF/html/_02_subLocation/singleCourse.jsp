@@ -140,17 +140,18 @@ String basePathimg2 = request.getScheme() + "://" + request.getServerName() + ":
 									<!-- 								課程資訊 -->
 									<div class="row mb-20">
 
-										<div class="col-sm-4 mb-sm-20">
-											<input class="form-control input-lg" type="number"
-												name="chooseAmount" id="amount" value="1" max="1" min="1"
-												required="required"
-												style="font-size: 25px; letter-spacing: 0px; border: 3px solid #ce7777; border-radius: 30px; text-align: center;" />
-										</div>
 										<div class="col-sm-8">
 											<input class="btn btn-p btn-circle" type="submit"
-												value="直接購買課程"
-												style="height: 43px; font-size: 19px;">
+												value="直接購買課程" style="height: 43px; font-size: 19px;">
 										</div>
+
+										<div class="col-sm-4 mb-sm-20">
+											<input type="hidden" class="form-control input-lg"
+												type="number" name="chooseAmount" id="amount" value="1"
+												max="1" min="1" required="required"
+												style="font-size: 25px; letter-spacing: 0px; border: 3px solid #ce7777; border-radius: 30px; text-align: center;" />
+										</div>
+
 									</div>
 
 									<!-- 								課程資訊 -->
@@ -175,18 +176,18 @@ String basePathimg2 = request.getScheme() + "://" + request.getServerName() + ":
 										<div style="display: flex;">
 											<div class="shop-item-image"
 												style="width: 200px; height: 250px;">
-												<img src="html/assets/images/shop/product-12.jpg"
-													alt="avatar" />
+													<img src="<c:url value='/_01_member.ShowPhoto.controller?account=${bean.memberBean.account}'/>"
+                                            alt="avatar">
 											</div>
 											<div class="comment-content clearfix"
 												style="margin-left: 10px; width: 70%;">
 												<div class="comment-author font-alt">
 													<h3>
-														<a href="#">賣家暱稱</a>
+														<a href="#">${bean.memberBean.memName}</a>
 													</h3>
-													<p style="font-size: 20px;">賣家訊息1</p>
-													<p style="font-size: 20px;">賣家訊息2</p>
-													<p style="font-size: 20px;">賣家訊息3</p>
+													<p style="font-size: 20px;">${bean.memberBean.memNickName}</p>
+													<p style="font-size: 20px;">${bean.memberBean.phone}</p>
+													<p style="font-size: 20px;">${bean.memberBean.eMail}</p>
 												</div>
 											</div>
 											<div style="margin-top: 170px;">
@@ -214,12 +215,13 @@ String basePathimg2 = request.getScheme() + "://" + request.getServerName() + ":
 												<c:forEach var="commbean" items="${commBean}">
 													<div class="comment clearfix">
 														<div class="comment-avatar">
-															<img src="html/assets/images/shop/product-12.jpg"
-																alt="賣家圖片" />
+															
+																<img src="<c:url value='/_01_member.ShowPhoto.controller?account=${bean.memberBean.account}'/>"
+                                            alt="賣家圖片">
 														</div>
 														<div class="comment-content clearfix">
 															<div class="comment-author font-alt" style="margin: 0;">
-																<a href="#" style="font-size: 15px;">賣家暱稱</a>
+																<a href="#" style="font-size: 15px;">${commbean.memberBean.memNickName}</a>
 															</div>
 															<div class="comment-meta font-alt"
 																style="font-size: 14px;">
@@ -251,8 +253,8 @@ String basePathimg2 = request.getScheme() + "://" + request.getServerName() + ":
 														<div class="form-group">
 															<label class="sr-only" for="name">Name</label> <input
 																class="form-control" id="name" type="text" name="name"
-																placeholder="Name"
-																style="text-transform: none; font-size: 17px; height: 35px;" />
+																placeholder="${bean.memberBean.memNickName}"
+																style="text-transform: none; font-size: 17px; height: 35px;" readonly />
 														</div>
 													</div>
 													<div class="col-sm-4">

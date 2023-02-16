@@ -315,8 +315,8 @@ a:hover {
 													<thead>
 														<tr style="">
 															<th style="width: 5%;">編號</th>
-															<th style="width: 25%; padding-left: 5px;">名稱</th>
-															<th style="width: 15%">類別</th>
+															<th style="width: 30%; padding-left: 5px;">名稱</th>
+															<th style="width: 10%">類別</th>
 															<th style="width: 10%">價格</th>
 															<th style="width: 5%">上架者</th>
 															<th style="width: 15%">上架日期</th>

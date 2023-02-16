@@ -360,19 +360,19 @@ body {
 									</div>
 								</div>
 								<div class="resume-item">
-									<div class="resume-item-title">家教經驗</div>
+									<div class="resume-item-title">留學經驗</div>
 									<div class="resume-item-content">
 										<input name="studExp" style="width: 500%"
 											class="form-control input-sm" type="text"
-											placeholder="請輸入您的家教經驗...Ex:國中數學2年" required>
+											placeholder="請輸入您的留學經驗...Ex:美國念MBA2年" required>
 									</div>
 								</div>
 								<div class="resume-item">
-									<div class="resume-item-title">留學經驗</div>
+									<div class="resume-item-title">家教經驗</div>
 									<div class="resume-item-content">
 										<input name="tutorExp" style="width: 500%"
 											class="form-control input-sm" type="text"
-											placeholder="請輸入您的留學經驗...Ex:美國念MBA2年" required>
+											placeholder="請輸入您的家教經驗...Ex:國中數學2年" required>
 									</div>
 								</div>
 								<div class="resume-item">
@@ -474,6 +474,9 @@ body {
 								<button
 									style="display: flex; justify-content: center; align-items: center; margin: 15px auto 0 auto"
 									class="btn btn-b btn-circle" type="submit">確定新增</button>
+								<button type="button" id="fast-btn"
+									style="display: flex; justify-content: center; align-items: center; margin: 15px auto 0 auto"
+									class="btn btn-b btn-circle">一鍵輸入</button>
 								<button type="button" id="cancel-btn"
 									style="display: flex; justify-content: center; align-items: center; margin: 15px auto 0 auto"
 									class="btn btn-b btn-circle">取消</button>
@@ -510,6 +513,40 @@ body {
 			event.preventDefault();
 			window.location.href = "/MeetBoth/_05_teacStu.searchAllTeac.controller/1";
 		});
+		
+		document.getElementById("fast-btn").addEventListener(
+				"click",
+			function(event) {
+				event.preventDefault();
+				var highEdu = '東海大學財務金融系';
+				var studExp = '哥倫比亞大學2年';
+				var tutorExp = '國中數學5年';
+				var lanAbility = '台語:精通';
+				var skills = '2018年榮獲重型摩托車駕照';
+				var subjectItem = '數學、Java';
+				var teacLoc = '台中市、桃園市';
+				var teacObject = '國小、國中';
+				var teacTime = '隨時';
+				var classMode = '面授';
+				var willTeac = '可試教';
+				var conMethod = '微信';
+				var conTime = '隨時';
+				var price = 999;
+				document.getElementsByName('highEdu')[0].value = highEdu;
+				document.getElementsByName('studExp')[0].value = studExp;
+				document.getElementsByName('tutorExp')[0].value = tutorExp;
+				document.getElementsByName('lanAbility')[0].value = lanAbility;
+				document.getElementsByName('skills')[0].value = skills;
+				document.getElementsByName('subjectItem')[0].value = subjectItem;
+				document.getElementsByName('teacLoc')[0].value = teacLoc;
+				document.getElementsByName('teacObject')[0].value = teacObject;
+				document.getElementsByName('teacTime')[0].value = teacTime;
+				document.getElementsByName('classMode')[0].value = classMode;
+				document.getElementsByName('willTeac')[0].value = willTeac;
+				document.getElementsByName('conMethod')[0].value = conMethod;
+				document.getElementsByName('conTime')[0].value = conTime;
+				document.getElementsByName('price')[0].value = price;
+			});
 	</script>
 </body>
 </html>

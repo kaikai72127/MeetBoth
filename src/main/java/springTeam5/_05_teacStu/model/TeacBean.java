@@ -12,6 +12,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import org.springframework.stereotype.Component;
 
@@ -59,6 +60,8 @@ public class TeacBean {
 	private String lanAbility;
 	@Column(name = "VIEWS")
 	private Integer views;
+	@Transient
+	private Integer goal;
 	
 	@JsonIgnore
 	@OneToMany(mappedBy = "teacher")
@@ -74,7 +77,7 @@ public class TeacBean {
 	public TeacBean(Integer teacno, String updateDate, String highEdu, String studExp,
 			String tutorExp, String teacLoc, String teacObject, String classMode, String willTeac, String teacTime,
 			String skills, String conMethod, String conTime, Double price, String subjectItem, String lanAbility,
-			Integer views, List<ReplyTeac> replyTeacs, MemberBean member) {
+			Integer views, List<ReplyTeac> replyTeacs, MemberBean member, Integer goal) {
 		this.teacno = teacno;
 		this.updateDate = updateDate;
 		this.highEdu = highEdu;
@@ -94,6 +97,7 @@ public class TeacBean {
 		this.views = views;
 		this.replyTeacs = replyTeacs;
 		this.member = member;
+		this.goal = goal;
 	}
 
 	public Integer getTeacno() {
@@ -247,5 +251,13 @@ public class TeacBean {
 
 	public void setMember(MemberBean member) {
 		this.member = member;
+	}
+	
+	public Integer getGoal() {
+		return goal;
+	}
+	
+	public void setGoal(Integer goal) {
+		this.goal = goal;
 	}
 }

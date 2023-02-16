@@ -560,7 +560,7 @@ body {
 							</div>
 							<!-- 星星 -->
 							<textarea name="reply" class="form-control" rows="7"
-								placeholder="Textarea"></textarea>
+								placeholder="Textarea" required></textarea>
 							<button
 								style="display: flex; justify-content: center; align-items: center; margin: 15px auto 0 auto"
 								class="btn btn-b btn-circle" type="submit">留言</button>

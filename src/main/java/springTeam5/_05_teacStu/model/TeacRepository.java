@@ -26,6 +26,12 @@ public interface TeacRepository extends JpaRepository<TeacBean, Integer>{
 //	用陣列模糊搜尋教學時段欄位
 	public List<TeacBean> findByTeacTimeIn(List<String> teacTime);
 	
+//	用陣列模糊搜尋科目欄位
+	public List<TeacBean> findBySubjectItemIn(List<String> subjectItem);
+	
+//	用陣列模糊搜尋語言能力欄位
+	public List<TeacBean> findByLanAbilityIn(List<String> lanAbility);
+	
 //  透過時薪區間建立教師貼文查詢
 	public List<TeacBean> findByPriceBetween(Double low, Double high);
 

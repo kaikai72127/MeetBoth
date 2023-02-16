@@ -108,15 +108,15 @@
 						</script>
 						<script>
 							function typedata() {
-								$('#act').val();
-								$('#pas1check').val();
-								$('#pas2check').val();
-								$('#idNr').val();
-								$('#name').val();
-								$('#nickname').val();
-								$('#').val();
-								$('#').val();
-								$('#').val();
+								$('#act').val('happyloveeeit56');
+								$('#pas1check').val('!Aa123456');
+								$('#pas2check').val('!Aa123456');
+								$('#idNr').val('H271926362');
+								$('#name').val('曾開芯');
+								$('#nickname').val('開芯');
+
+								$('#cellphone').val('0927990003');
+								$('#adr').val('桃園市中壢區新生路二段19號');
 							}
 						</script>
 						<main>

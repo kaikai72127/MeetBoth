@@ -51,6 +51,12 @@
 						$('#pwd').val('!Aa123456');
 						$('#loginform').submit();
 					}
+
+					function happylog() {
+						$('#account').val('happyloveeeit56');
+						$('#pwd').val('!Aa123456');
+						$('#loginform').submit();
+					}
 				</script>
 				<script> $(function () {
 						$.ajax({
@@ -119,7 +125,10 @@
 											onclick='event.preventDefault();adminlog();' value="管理員一鍵登入"
 											style="font-size: 20px; font-family: 微軟正黑體 ; padding: 0.7% 3% 0.7% 3%;">
 										<input type="button" id="user" class="btn btn-round btn-p"
-											onclick="event.preventDefault();userlog();" value="使用者一鍵登入"
+											onclick="event.preventDefault();userlog();" value="GARY一鍵登入"
+											style="font-size: 20px; font-family: 微軟正黑體 ; padding: 0.7% 3% 0.7% 3%;">
+										<input type="button" id="user" class="btn btn-round btn-p"
+											onclick="event.preventDefault();happylog();" value="開芯一鍵登入"
 											style="font-size: 20px; font-family: 微軟正黑體 ; padding: 0.7% 3% 0.7% 3%;">
 									</form>
 

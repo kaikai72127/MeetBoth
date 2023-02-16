@@ -312,7 +312,7 @@ public String selectByAccountLike(@RequestParam("value") String key, Model m) {
 				ms.add(newMember);
 			}
 		}
-		return "redirect:/index.controller";
+		return "redirect:/login/page";
 	}
 	
 	@PostMapping("/admin/_01_member.backadd.controller")

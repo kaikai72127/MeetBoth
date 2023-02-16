@@ -47,7 +47,7 @@
 					}
 
 					function userlog() {
-						$('#account').val('AWCzXmbyi');
+						$('#account').val('AwG2gX4YOa');
 						$('#pwd').val('!Aa123456');
 						$('#loginform').submit();
 					}

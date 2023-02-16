@@ -106,6 +106,19 @@
 								});
 							});
 						</script>
+						<script>
+							function typedata() {
+								$('#act').val();
+								$('#pas1check').val();
+								$('#pas2check').val();
+								$('#idNr').val();
+								$('#name').val();
+								$('#nickname').val();
+								$('#').val();
+								$('#').val();
+								$('#').val();
+							}
+						</script>
 						<main>
 
 
@@ -119,7 +132,7 @@
 										<table class="member">
 											<tr>
 												<td style="width: 150px;"><label>帳號：</label></td>
-												<td><input class="form-control" type="text"
+												<td><input class="form-control" type="text" id="act"
 														style="text-transform: none;" placeholder="請輸入帳號" name="account"
 														value="${param.account}" required></td>
 											</tr>
@@ -140,17 +153,17 @@
 											<tr>
 												<td style="width: 150px;"><label>身分證字號：</label></td>
 												<td><input class="form-control" type="text" placeholder="請輸入中華民國身分證字號"
-														id="idNumber" name="idNumber" onblur="checkID()"
+														id="idNr" name="idNumber" onblur="checkID()"
 														value="${param.idNumber}" required></td>
 											</tr>
 											<tr>
 												<td style="width: 150px;"><label>姓名：</label></td>
 												<td><input class="form-control" type="text" placeholder="請輸入真實姓名"
-														name="memName" value="${param.memname}" required></td>
+														id="name" name="memName" value="${param.memname}" required></td>
 											</tr>
 											<tr>
 												<td style="width: 150px;"><label>暱稱：</label></td>
-												<td><input class="form-control" type="text"
+												<td><input class="form-control" type="text" id="nickname"
 														style="text-transform: none;" placeholder="請輸入暱稱"
 														name="memNickName" value="${param.memNickname}">
 												</td>
@@ -173,7 +186,7 @@
 												<td><select name="memGender" style="width: 150px;" required>
 														<option value="">請選擇</option>
 														<option value="男">男</option>
-														<option value="女">女</option>
+														<option value="女" selected>女</option>
 													</select></td>
 											</tr>
 											<tr>
@@ -185,13 +198,13 @@
 											</tr>
 											<tr>
 												<td style="width: 150px;"><label>手機：</label></td>
-												<td><input class="form-control" type="text" name="phone"
+												<td><input class="form-control" type="text" name="phone" id="cellphone"
 														oninput="value=value.replace(/[^\d]/g,'')"
 														value="${param.phone}" required></td>
 											</tr>
 											<tr>
 												<td style="width: 150px;"><label>地址：</label></td>
-												<td><input class="form-control" type="text" name="address"
+												<td><input class="form-control" type="text" name="address" id="adr"
 														value="${param.address}" required>
 												</td>
 											</tr>
@@ -208,6 +221,8 @@
 											<tr height="42">
 												<td colspan='4'>
 													<div align="center">
+														<input class="btn1" type="button" name="data" id="data"
+															onclick="typedata()" value="一鍵輸入" />
 														<input class="btn1" type="submit" name="submit" id="submit"
 															value="儲存" />
 														<input class="btn1" type="reset" name="cancel" id="cancel"

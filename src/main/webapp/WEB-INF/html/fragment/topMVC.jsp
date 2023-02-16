@@ -33,7 +33,9 @@ System.out.println(baseMeetboth96x96);
 					<!--Navbar橫幅 搜尋教師 --> <a class="dropdown-toggle" href="#"
 					data-toggle="dropdown">MeetBoth</a>
 					<ul class="dropdown-menu">
-						<li><a href="index_mp_fullscreen_video_background.html">Default</a>
+						<li><a href="/MeetBoth/_05_teacStu.searchAllTeac.controller/1">履歷貼文</a>
+						</li>
+						<li><a href="/MeetBoth/_05_teacStu.searchAllStud.controller/1">需求貼文</a>
 						</li>
 					</ul>
 				</li>

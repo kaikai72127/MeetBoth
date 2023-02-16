@@ -189,67 +189,7 @@ a:hover {
 					<div class="row">
 						<!-- 整頁 -->
 						<!-- 左邊欄位開始 -->
-						<div class="col-sm-4 col-md-3 sidebar"
-							style="width: 20%; padding-right: 0px;">
-							<div class="widget">
-								<a href="/MeetBoth/_03_product.index.controller"><img
-									src="/MeetBoth/html/assets/images/shop/警告.jpg"
-									style="padding-bottom: 10px;"></a>
-								<ul class="cart">
-									<li><a href="#" style="color: white; font-size: 20px;"
-										class="btn btn-d btn-round">會員管理&ensp;<i
-											class="fa-solid fa-angle-double-down"></i></a>
-										<ul style="">
-											<li><a href="#" style="color: white; font-weight: 600;"
-												class="btn btn-d btn-round">所有會員清單</a></li>
-										</ul></li>
-									<li><a href="" style="color: white; font-size: 20px;"
-										class="btn btn-d btn-round">商品管理&ensp;<i
-											class="fa-solid fa-angle-double-down"></i></a>
-										<ul style="">
-											<li><a
-												href="/MeetBoth/_03_product.productindex.controller"
-												style="color: white; font-weight: 600;"
-												class="btn btn-d btn-round">所有商品清單</a></li>
-											<li><a
-												href="/MeetBoth/_03_product.MBinsertProd.controller"
-												style="color: white; font-weight: 600;"
-												class="btn btn-d btn-round">新增商品</a></li>
-										</ul></li>
-									<li><a href="#" style="color: white; font-size: 20px;"
-										class="btn btn-d btn-round">課程管理&ensp;<i
-											class="fa-solid fa-angle-double-down"></i></a>
-										<ul style="">
-											<li><a href="/MeetBoth/_02_subLocation.index.controller" style="color: white; font-weight: 600;"
-												class="btn btn-d btn-round">所有課程清單</a></li>
-										</ul></li>
-									<li><a href="#" style="color: white; font-size: 20px;"
-										class="btn btn-d btn-round">徵才管理&ensp;<i
-											class="fa-solid fa-angle-double-down"></i></a>
-										<ul style="">
-											<li><a href="#" style="color: white; font-weight: 600;"
-												class="btn btn-d btn-round">所有貼文清單</a></li>
-										</ul></li>
-									<li><a href="#" style="color: white; font-size: 20px;"
-										class="btn btn-d btn-round">討論區管理&ensp;<i
-											class="fa-solid fa-angle-double-down"></i></a>
-										<ul style="">
-											<li><a href="#" style="color: white; font-weight: 600;"
-												class="btn btn-d btn-round">所有貼文清單</a></li>
-										</ul></li>
-									<li><a href="#" style="color: white; font-size: 20px;"
-										class="btn btn-d btn-round">購物車管理&ensp;<i
-											class="fa-solid fa-angle-double-down"></i></a>
-										<ul style="">
-											<li><a href="#" style="color: white; font-weight: 600;"
-												class="btn btn-d btn-round">所有購物單清單</a></li>
-										</ul></li>
-								</ul>
-								<a href="#"><img
-									src="/MeetBoth/html/assets/images/shop/警告2.jpg"
-									style="padding-bottom: 10px;"></a>
-							</div>
-						</div>
+						<jsp:include page="/WEB-INF/html/fragment/AdminIndexSideBar.jsp" />
 						<!-- 左邊欄位結束 -->
 						<!-- 						右邊欄位開始 -->
 						<div class="col-sm-8 col-sm-offset-1"
@@ -265,65 +205,80 @@ a:hover {
 								<!-- 							標題 -->
 								<!--       右邊第一部分開始 -->
 								<div class="post">
-								<form action="<c:url value='/_02_subLocation.MBinsertCourseAction.controller' />" method="Post" enctype="multipart/form-data">
-									<div class="post-video embed-responsive embed-responsive-16by9"
-										style="height: auto; padding-bottom: 100px;">
-										<div style="display: flex">
-											<button class="MBbtn"
-												onclick="window.location='/MeetBoth/_02_subLocation.index.controller'">返回</button>
-										</div>
-<!-- 										<div> -->
-<!-- 											<span>課程狀態 :&ensp;<input type="text" name="pst" class="MBinput" placeholder="上架或下架"></span> -->
-<!-- 										</div> -->
-										<div>
-											<span>課程編號 :&ensp;<input type="text" name="cid" class="MBinput" placeholder="自動產生" readonly></span>
-										</div>
-										<div>
-											<span>課程名稱 :&ensp;<input type="text" name="cName" class="MBinput" placeholder="不能為空"></span>
-										</div>
-										<div>
-											<span>課程類別 :&ensp;<select name="cClass"
-												style="" class="MBinput">
-												<option value="1">語言學習</option>
-												<option value="2">升學補習</option>
-												<option value="3">專業科目</option>
-												<option value="4">人文課程</option>
-												<option value="5">程式課程</option>
-											</select></span>
-										</div>
-										<div>
-											<span>課程價格 :&ensp;<input type="number" value="1" min="0" name="cPrice" class="MBinput" placeholder="只能數字"></span>
-										</div>
-										<div>
-											<span>賣家編號 :&ensp;<input type="text" name="memID" class="MBinput" placeholder="只能編號" required="required" value="${memberBean.memberID}"></span>
-										</div>
-										<div>
-											<span>上架時間 :&ensp;<input type="text" name="ppo" class="MBinput" placeholder="自動產生" readonly></span>
-										</div>
-										<div>
-											<span>更新時間 :&ensp;<input type="text" name="pup" class="MBinput" placeholder="自動產生" readonly></span>
-										</div>
-										<div style="display: flex;">
-											<span>上傳課程照片</span> 
-											<div style="height:200px;width:200px;background-color:#272727;text-align:center;margin:15px;">
-											<img id="preImg" style="max-width: 100%; max-height: 100%; height: auto; width: auto;" src="#" />
+									<form
+										action="<c:url value='/_02_subLocation.MBinsertCourseAction.controller' />"
+										method="Post" enctype="multipart/form-data">
+										<div
+											class="post-video embed-responsive embed-responsive-16by9"
+											style="height: auto; padding-bottom: 100px;">
+											<div style="display: flex">
+												<button class="MBbtn"
+													onclick="window.location='/MeetBoth/_02_subLocation.index.controller'">返回</button>
 											</div>
-											<input class="MBinput" type="file" name="cPic" id="images5278" accept=".jpg,.png"> 
-										</div>
-										<div>
-											<div id="commentDiv">
-												<span>課程介紹 :&ensp;</span>
+											<!-- 										<div> -->
+											<!-- 											<span>課程狀態 :&ensp;<input type="text" name="pst" class="MBinput" placeholder="上架或下架"></span> -->
+											<!-- 										</div> -->
+											<div>
+												<span>課程編號 :&ensp;<input type="text" name="cid"
+													class="MBinput" placeholder="自動產生" readonly></span>
+											</div>
+											<div>
+												<span>課程名稱 :&ensp;<input type="text" name="cName"
+													class="MBinput" placeholder="不能為空"></span>
+											</div>
+											<div>
+												<span>課程類別 :&ensp;<select name="cClass" style=""
+													class="MBinput">
+														<option value="1">語言學習</option>
+														<option value="2">升學補習</option>
+														<option value="3">專業科目</option>
+														<option value="4">人文課程</option>
+														<option value="5">程式課程</option>
+												</select></span>
+											</div>
+											<div>
+												<span>課程價格 :&ensp;<input type="number" value="1"
+													min="0" name="cPrice" class="MBinput" placeholder="只能數字"></span>
+											</div>
+											<div>
+												<span>賣家編號 :&ensp;<input type="text" name="memID"
+													class="MBinput" placeholder="只能編號" required="required"
+													value="${memberBean.memberID}"></span>
+											</div>
+											<div>
+												<span>上架時間 :&ensp;<input type="text" name="ppo"
+													class="MBinput" placeholder="自動產生" readonly></span>
+											</div>
+											<div>
+												<span>更新時間 :&ensp;<input type="text" name="pup"
+													class="MBinput" placeholder="自動產生" readonly></span>
+											</div>
+											<div style="display: flex;">
+												<span>上傳課程照片</span>
+												<div
+													style="height: 200px; width: 200px; background-color: #272727; text-align: center; margin: 15px;">
+													<img id="preImg"
+														style="max-width: 100%; max-height: 100%; height: auto; width: auto;"
+														src="#" />
+												</div>
+												<input class="MBinput" type="file" name="cPic"
+													id="images5278" accept=".jpg,.png">
+											</div>
+											<div>
+												<div id="commentDiv">
+													<span>課程介紹 :&ensp;</span>
+												</div>
+											</div>
+											<div>
+												<textarea name="directions"
+													style="margin-left: 10px; resize: none; height: 325px; width: 975px; overflow-y: auto; overflow-y: auto; font-size: 25px; color: white; background-color: black;"
+													placeholder="課程評論 可以不填"></textarea>
+											</div>
+											<div>
+												<input type="submit" class="MBbtn" value="確定"
+													style="margin-top: 15px; margin-left: 900px; font-size: 35px;">
 											</div>
 										</div>
-										<div>
-											<textarea name="directions"
-												style="margin-left: 10px; resize: none; height: 325px; width: 975px; overflow-y: auto; overflow-y: auto; font-size: 25px; color: white; background-color: black;" placeholder="課程評論 可以不填"
-												></textarea>
-										</div>
-										<div>
-											<input type="submit" class="MBbtn" value="確定" style="margin-top:15px;margin-left:900px;font-size:35px;">
-										</div>
-									</div>
 									</form>
 								</div>
 								<!--       右邊第一部分結束 -->
@@ -407,8 +362,7 @@ a:hover {
 			}
 		}
 	</script>
-<<<<<<< HEAD
-	</body>
-=======
->>>>>>> origin/_01_Seal
+	<<<<<<< HEAD
+</body>
+======= >>>>>>> origin/_01_Seal
 </html>

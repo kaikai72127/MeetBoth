@@ -189,72 +189,7 @@ a:hover {
 					<div class="row">
 						<!-- 整頁 -->
 						<!-- 左邊欄位開始 -->
-						<div class="col-sm-4 col-md-3 sidebar"
-							style="width: 20%; padding-right: 0px;">
-							<div class="widget">
-								<a href="/MeetBoth/_03_product.index.controller"><img
-									src="/MeetBoth/html/assets/images/shop/警告.jpg"
-									style="padding-bottom: 10px;"></a>
-								<ul class="cart">
-									<li><a href="#" style="color: white; font-size: 20px;"
-										class="btn btn-d btn-round">會員管理&ensp;<i
-											class="fa-solid fa-angle-double-down"></i></a>
-										<ul style="">
-											<li><a href="#" style="color: white; font-weight: 600;"
-												class="btn btn-d btn-round">所有會員清單</a></li>
-										</ul></li>
-									<li><a href="" style="color: white; font-size: 20px;"
-										class="btn btn-d btn-round">商品管理&ensp;<i
-											class="fa-solid fa-angle-double-down"></i></a>
-										<ul style="">
-											<li><a
-												href="/MeetBoth/_03_product.productindex.controller"
-												style="color: white; font-weight: 600;"
-												class="btn btn-d btn-round">所有商品清單</a></li>
-											<li><a
-												href="/MeetBoth/_03_product.MBinsertProd.controller"
-												style="color: white; font-weight: 600;"
-												class="btn btn-d btn-round">新增商品</a></li>
-										</ul></li>
-									<li><a href="#" style="color: white; font-size: 20px;"
-										class="btn btn-d btn-round">課程管理&ensp;<i
-											class="fa-solid fa-angle-double-down"></i></a>
-										<ul style="">
-											<li><a href="#" style="color: white; font-weight: 600;"
-												class="btn btn-d btn-round">所有課程清單</a></li>
-										</ul></li>
-									<li><a href="#" style="color: white; font-size: 20px;"
-										class="btn btn-d btn-round">徵才管理&ensp;<i
-											class="fa-solid fa-angle-double-down"></i></a>
-										<ul style="">
-											<li><a href="#" style="color: white; font-weight: 600;"
-												class="btn btn-d btn-round">所有貼文清單</a></li>
-										</ul></li>
-									<li><a href="#" style="color: white; font-size: 20px;"
-										class="btn btn-d btn-round">討論區管理&ensp;<i
-											class="fa-solid fa-angle-double-down"></i></a>
-										<ul style="">
-											<li><a href="#" style="color: white; font-weight: 600;"
-												class="btn btn-d btn-round">所有貼文清單</a></li>
-										</ul></li>
-									<li><a href="#" style="color: white; font-size: 20px;"
-										class="btn btn-d btn-round">訂單管理&ensp;<i
-											class="fa-solid fa-angle-double-down"></i></a>
-										<ul style="">
-											<li><a
-												href="/MeetBoth/admin/shoppingCartOrders.controller/1"
-												style="color: white; font-weight: 600;"
-												class="btn btn-d btn-round">所有訂單清單</a></li>
-											<li><a href="/MeetBoth/admin/discounts.controller/1"
-												style="color: white; font-weight: 600;"
-												class="btn btn-d btn-round">折扣碼管理</a></li>
-										</ul></li>
-								</ul>
-								<a href="#"><img
-									src="/MeetBoth/html/assets/images/shop/警告2.jpg"
-									style="padding-bottom: 10px;"></a>
-							</div>
-						</div>
+						<jsp:include page="/WEB-INF/html/fragment/AdminIndexSideBar.jsp" />
 						<!-- 左邊欄位結束 -->
 						<!-- 						右邊欄位開始 -->
 						<div class="col-sm-8 col-sm-offset-1"
@@ -309,7 +244,6 @@ a:hover {
 													<select name="deliveryStstus" class="form-control"
 														style="font-size: 17px; color: black;">
 														<option value="0">送貨狀態</option>
-														<option value="無">無</option>
 														<option value="備貨中">備貨中</option>
 														<option value="已發貨">已發貨</option>
 														<option value="已取貨">已取貨</option>
@@ -336,7 +270,7 @@ a:hover {
 													class="prodtable">
 													<thead>
 														<tr style="">
-															<th style="width: 5%;">編號</th>
+															<th style="width: 20%;">編號</th>
 															<th style="width: 10%; padding-left: 5px;">訂購會員</th>
 															<th style="width: 15%; padding-left: 10px">訂單日期</th>
 															<th style="width: 15%; padding-left: 10px">更新日期</th>
@@ -497,7 +431,7 @@ a:hover {
                           data: {"orderNo":id},
                         })
                             .done(function () {
-                            	window.location='/MeetBoth/admin/shoppingCartOrders.controller'
+                            	window.location='/MeetBoth/admin/shoppingCartOrders.controller/1'
                                 console.log("delete")
                              })//done
                              .fail(function(error) {

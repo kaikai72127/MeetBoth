@@ -189,72 +189,7 @@ a:hover {
 					<div class="row">
 						<!-- 整頁 -->
 						<!-- 左邊欄位開始 -->
-						<div class="col-sm-4 col-md-3 sidebar"
-							style="width: 20%; padding-right: 0px;">
-							<div class="widget">
-								<a href="/MeetBoth/_03_product.index.controller"><img
-									src="/MeetBoth/html/assets/images/shop/警告.jpg"
-									style="padding-bottom: 10px;"></a>
-								<ul class="cart">
-									<li><a href="#" style="color: white; font-size: 20px;"
-										class="btn btn-d btn-round">會員管理&ensp;<i
-											class="fa-solid fa-angle-double-down"></i></a>
-										<ul style="">
-											<li><a href="#" style="color: white; font-weight: 600;"
-												class="btn btn-d btn-round">所有會員清單</a></li>
-										</ul></li>
-									<li><a href="" style="color: white; font-size: 20px;"
-										class="btn btn-d btn-round">商品管理&ensp;<i
-											class="fa-solid fa-angle-double-down"></i></a>
-										<ul style="">
-											<li><a
-												href="/MeetBoth/_03_product.productindex.controller"
-												style="color: white; font-weight: 600;"
-												class="btn btn-d btn-round">所有商品清單</a></li>
-											<li><a
-												href="/MeetBoth/_03_product.MBinsertProd.controller"
-												style="color: white; font-weight: 600;"
-												class="btn btn-d btn-round">新增商品</a></li>
-										</ul></li>
-									<li><a href="#" style="color: white; font-size: 20px;"
-										class="btn btn-d btn-round">課程管理&ensp;<i
-											class="fa-solid fa-angle-double-down"></i></a>
-										<ul style="">
-											<li><a href="#" style="color: white; font-weight: 600;"
-												class="btn btn-d btn-round">所有課程清單</a></li>
-										</ul></li>
-									<li><a href="#" style="color: white; font-size: 20px;"
-										class="btn btn-d btn-round">徵才管理&ensp;<i
-											class="fa-solid fa-angle-double-down"></i></a>
-										<ul style="">
-											<li><a href="#" style="color: white; font-weight: 600;"
-												class="btn btn-d btn-round">所有貼文清單</a></li>
-										</ul></li>
-									<li><a href="#" style="color: white; font-size: 20px;"
-										class="btn btn-d btn-round">討論區管理&ensp;<i
-											class="fa-solid fa-angle-double-down"></i></a>
-										<ul style="">
-											<li><a href="#" style="color: white; font-weight: 600;"
-												class="btn btn-d btn-round">所有貼文清單</a></li>
-										</ul></li>
-									<li><a href="#" style="color: white; font-size: 20px;"
-										class="btn btn-d btn-round">訂單管理&ensp;<i
-											class="fa-solid fa-angle-double-down"></i></a>
-										<ul style="">
-											<li><a
-												href="/MeetBoth/admin/shoppingCartOrders.controller"
-												style="color: white; font-weight: 600;"
-												class="btn btn-d btn-round">所有訂單清單</a></li>
-											<li><a href="/MeetBoth/admin/discounts.controller"
-												style="color: white; font-weight: 600;"
-												class="btn btn-d btn-round">折扣碼管理</a></li>
-										</ul></li>
-								</ul>
-								<a href="/MeetBoth/index.controller"><img
-									src="/MeetBoth/html/assets/images/shop/警告2.jpg"
-									style="padding-bottom: 10px;"></a>
-							</div>
-						</div>
+						<jsp:include page="/WEB-INF/html/fragment/AdminIndexSideBar.jsp" />
 						<!-- 左邊欄位結束 -->
 						<!-- 						右邊欄位開始 -->
 						<div class="col-sm-8 col-sm-offset-1"
@@ -277,7 +212,7 @@ a:hover {
 										</div>
 										<div style="display: flex">
 											<form class="row"
-												action="<c:url value='/discountsSearch.controller'/>"
+												action="<c:url value='/admin/discountsSearch.controller'/>"
 												method="post">
 												<div style="display: flex; margin-bottom: 15px;">
 													<div class="" style="">
@@ -338,6 +273,33 @@ a:hover {
 														</c:forEach>
 													</tbody>
 												</table>
+												<!-- 分頁按鈕 -->
+												<div class="pagination font-alt"
+													style="display: flex; justify-content: center; align-items: center">
+													<c:if test="${currentPage != 1}">
+														<a
+															href="/MeetBoth/_05_teacStu.searchAllTeac.controller/${currentPage-1}"><i
+															class="fa fa-angle-left"></i></a>
+													</c:if>
+													<!-- 迴圈生成每一頁的按鈕 -->
+													<c:forEach var="i" begin="1" end="${totalPages}">
+														<c:choose>
+															<c:when test="${currentPage == i}">
+																<a class="active"
+																	href="/MeetBoth/admin/discounts.controller/${i}">${i}</a>
+															</c:when>
+															<c:otherwise>
+																<a href="/MeetBoth/admin/discounts.controller/${i}">${i}</a>
+															</c:otherwise>
+														</c:choose>
+													</c:forEach>
+													<c:if test="${currentPage != totalPages}">
+														<a
+															href="/MeetBoth/admin/discounts.controller/${currentPage+1}"><i
+															class="fa fa-angle-right"></i></a>
+													</c:if>
+												</div>
+												<!-- 分頁按鈕結束 -->
 											</div>
 										</div>
 									</div>

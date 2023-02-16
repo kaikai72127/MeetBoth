@@ -87,7 +87,7 @@ public class DiscountController {
 
 		discountService.createDiscount(discount);
 
-		return "redirect:/admin/discounts.controller";
+		return "redirect:/admin/discounts.controller/1";
 
 	}
 
@@ -97,7 +97,7 @@ public class DiscountController {
 
 		discountService.deleteDiscountByDiscountId(discountId);
 
-		return "redirect:/admin/discounts.controller";
+		return "redirect:/admin/discounts.controller/1";
 	}
 
 	// 修改------
@@ -127,7 +127,7 @@ public class DiscountController {
 		discount.setDiscountEnd(discountEnd);
 
 		discountService.updateDiscount(discount);
-		return "redirect:/admin/discounts.controller";
+		return "redirect:/admin/discounts.controller/1";
 	}
 	
 	// 模糊搜尋全部

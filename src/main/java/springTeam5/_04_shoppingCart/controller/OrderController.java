@@ -102,7 +102,7 @@ public class OrderController {
 	@GetMapping("/admin/shoppingCart.DeleteOrder.controller")
 	public String processDeleteOrderAction(@RequestParam("orderNo") Integer orderNo) {
 		orderService.deleteById(orderNo);
-		return "redirect:shoppingCartOrders.controller";
+		return "redirect:/admin/shoppingCartOrders.controller/1";
 	}
 
 // 修改------
@@ -142,7 +142,7 @@ public class OrderController {
 		obean.setUporderDate(orderService.getCurrentDate());
 		orderService.updateOrder(obean);
 
-		return "redirect:shoppingCartUpdateOrder.controller/" + orderNo;
+		return "redirect:/admin/shoppingCartUpdateOrder.controller/" + orderNo;
 	}
 
 	// 主頁面直接修改

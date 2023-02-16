@@ -1,88 +1,94 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
-	<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-		<! DOCTYPE html>
-			<html>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<! DOCTYPE html>
+<html>
 
-			<head>
-				<% String path=request.getContextPath(); String basePath=request.getScheme() + "://" +
-					request.getServerName() + ":" + request.getServerPort() + path + "/html/assets/css/main.css" ; %>
-					<% String pathimg=request.getContextPath(); String basePathimg=request.getScheme() + "://" +
-						request.getServerName() + ":" + request.getServerPort() + pathimg
-						+ "/html/images/meatball-icon.png" ; %>
-						<% String basePathimg2=request.getScheme() + "://" + request.getServerName() + ":" +
-							request.getServerPort() + path + "/html/images/meatball-200.png" ; %>
+<head>
+<%
+String path = request.getContextPath();
+String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path
+		+ "/html/assets/css/main.css";
+%>
+<%
+String pathimg = request.getContextPath();
+String basePathimg = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + pathimg
+		+ "/html/images/meatball-icon.png";
+%>
+<%
+String basePathimg2 = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path
+		+ "/html/images/meatball-200.png";
+%>
 
-							<!-- 引入共同的頁首 -->
-							<jsp:include page="/WEB-INF/html/fragment/headMVC.jsp" />
-							<jsp:include page="/WEB-INF/html/fragment/topMVC.jsp" />
-							<jsp:include page="/WEB-INF/html/fragment/jsPath.jsp" />
+<!-- 引入共同的頁首 -->
+<jsp:include page="/WEB-INF/html/fragment/headMVC.jsp" />
+<jsp:include page="/WEB-INF/html/fragment/topMVC.jsp" />
+<jsp:include page="/WEB-INF/html/fragment/jsPath.jsp" />
 
-							<style>
-								.star-off {
-									color: black;
-								}
+<style>
+.star-off {
+	color: black;
+}
 
-								h1 {
-									font-size: 18px;
-									font-weight: 700;
-									text-align: center;
-									margin: 20px 0;
-								}
+h1 {
+	font-size: 18px;
+	font-weight: 700;
+	text-align: center;
+	margin: 20px 0;
+}
 
-								.cart>li>a {
-									border: 1px solid gray;
-									border-radius: 10px;
-									color: gray;
-									font-weight: 600;
-									font-size: 16px;
-									padding: 10px;
-									text-align: center;
-								}
+.cart>li>a {
+	border: 1px solid gray;
+	border-radius: 10px;
+	color: gray;
+	font-weight: 600;
+	font-size: 16px;
+	padding: 10px;
+	text-align: center;
+}
 
-								.cart>li {
-									padding-bottom: 10px;
-								}
+.cart>li {
+	padding-bottom: 10px;
+}
 
-								.cart>li>ul>li>a {
-									border: solid 1px black;
-									border-radius: 10px;
-									height: 35px;
-									text-align: center;
-									font-size: 18px;
-								}
+.cart>li>ul>li>a {
+	border: solid 1px black;
+	border-radius: 10px;
+	height: 35px;
+	text-align: center;
+	font-size: 18px;
+}
 
-								.cart>li>ul>li>a:hover,
-								.cart>li>ul>li>a.active {
-									background: gray;
-									color: #fff;
-								}
+.cart>li>ul>li>a:hover, .cart>li>ul>li>a.active {
+	background: gray;
+	color: #fff;
+}
 
-								.cart>li>a:hover,
-								.cart>li>a.active {
-									background: gray;
-									color: #fff;
-								}
+.cart>li>a:hover, .cart>li>a.active {
+	background: gray;
+	color: #fff;
+}
 
-								.cart a {
-									display: block;
-									text-decoration: none;
-								}
+.cart a {
+	display: block;
+	text-decoration: none;
+}
 
-								.cart ul {
-									display: none;
-								}
+.cart ul {
+	display: none;
+}
 
-								.cart ul li {
-									margin: 10px;
-								}
+.cart ul li {
+	margin: 10px;
+}
 
-								.cart ul li a {
-									color: #000;
-								}
+.cart ul li a {
+	color: #000;
+}
 
-								#ChartData>div>div>div>div>svg>g>text {
-									font-size: 22px;
-								}
+#ChartData>div>div>div>div>svg>g>text {
+	font-size: 22px;
+}
 
 #ChartData>div>div>div>div>svg>g>g>g>text {
 	font-size: 17px;
@@ -99,53 +105,13 @@
 			<section class="module" style="padding-top: 10px;">
 				<div class="container">
 					<div class="row">
-						<div class="col-sm-4 col-md-3 sidebar"
-							style="position: sticky; top: 100px;">
-							<div class="widget">
-								<img src="/MeetBoth/html/assets/images/shop/賣家中心.png"
-									style="padding-bottom: 10px;">
-								<ul class="cart">
-									<li><a href="#">商品管理&ensp;<i
-											class="fa-solid fa-angle-double-down"></i></a>
-										<ul style="">
-											<li><a href="<c:url value='/_03_product/pathToMyPDP.controller'/>">我的商品</a></li>
-											<li><a href="<c:url value='/_03_product.pathToInsertProduct.controller'/>">新增商品</a></li>
-										</ul></li>
-									<li><a href="/MeetBoth/memberOrdersList.controller" style="">訂單管理&ensp;<i
-											class="fa-solid fa-angle-double-down"></i></a>
-										<ul style="">
-											<li><a href="/MeetBoth/memberOrdersList.controller">我的銷售</a></li>
-											<li><a href="#">待付款訂單</a></li>
-											<li><a href="#">待出貨訂單</a></li>
-											<li><a href="#">已完成訂單</a></li>
-										</ul></li>
-									<li><a href="#">賣場管理&ensp;<i
-											class="fa-solid fa-angle-double-down"></i></a>
-										<ul style="">
-											<li><a href="#">賣場評價</a></li>
-											<li><a href="#">賣場介紹</a></li>
-										</ul></li>
-									<li><a href="#">財務管理&ensp;<i
-											class="fa-solid fa-angle-double-down"></i></a>
-										<ul style="">
-											<li><a href="#">子選單3-1</a></li>
-											<li><a href="#">子選單3-2</a></li>
-											<li><a href="#">子選單3-3</a></li>
-										</ul></li>
-									<li><a href="#">數據中心&ensp;<i
-											class="fa-solid fa-angle-double-down"></i></a>
-										<ul style="">
-											<li><a href="#">賣家數據中心</a></li>
-											<li><a href="#">營運表現</a></li>
-										</ul></li>
-								</ul>
-							</div>
-						</div>
+						<!-- 						左邊欄位開始 -->
+						<jsp:include page="/WEB-INF/html/fragment/memCenterSideBar.jsp" />
+						<!-- 						左邊欄位結束 -->
 						<div class="col-sm-8 col-sm-offset-1" style="margin-left: 20px;">
 							<div class="post">
 								<div class="post-thumbnail">
-									<img
-										src="/MeetBoth/html/assets/images/shop/個人賣場.jpg"
+									<img src="/MeetBoth/html/assets/images/shop/我的平台.jpg"
 										style="padding-bottom: 10px;">
 								</div>
 								<div class="post-header font-alt" style="display: flex;">
@@ -195,7 +161,7 @@
 													style="font-size: 17px" placeholder="搜尋名稱" />
 											</div>
 											<input type="hidden" name="lowprice" value="0" /> <input
-													type="hidden" name="highprice" value="9999999" />
+												type="hidden" name="highprice" value="9999999" />
 											<div class="col-sm-3" style="width: 10%">
 												<button class="btn btn-d btn-round" type="submit"
 													style="font-size: 17px">搜尋</button>
@@ -220,33 +186,38 @@
 								<div class="post-entry"
 									style="overflow-y: scroll; overflow-x: hidden; width: 110%; height: 720px;">
 									<div class="widget">
-										<ul class="widget-posts">
+										<ul class="widget-posts" id="prodList">
 											<c:forEach var="prodBean" items="${memberBean.product}">
 												<li class="clearfix"
 													style="background-image: url('/MeetBoth/html/assets/images/shop/backgroundimg.jpg'); background-size: cover; padding-left: 10px; height: 322.5px;">
 													<div class="widget-posts-image"
 														style="height: 300px; width: 200px; margin: auto; display: flex; justify-content: center; align-items: center; margin-right: 15px;">
-														<a href="<c:url value='/_03_product.PathToProductDetail.controller?id=${prodBean.prodID}' />"
+														<a
+															href="<c:url value='/_03_product.PathToProductDetail.controller?id=${prodBean.prodID}' />"
 															style="margin: auto; display: flex; justify-content: center; align-items: center;"><img
 															style="padding: auto;"
 															src="<c:url value='/_03_product.showPicture.controller?id=${prodBean.prodID}' />" /></a>
 													</div>
 													<div class="widget-posts-body" style="font-size: 22px;">
 														<div class="widget-posts-title">
-															<a href="<c:url value='/_03_product.PathToProductDetail.controller?id=${prodBean.prodID}' />">商品名稱 : ${prodBean.prodName}</a>
+															<a
+																href="<c:url value='/_03_product.PathToProductDetail.controller?id=${prodBean.prodID}' />">商品名稱
+																: ${prodBean.prodName}</a>
 														</div>
-														<div class="widget-posts-meta" style="display: flex;height:38px;">
+														<div class="widget-posts-meta"
+															style="display: flex; height: 38px;">
 															商品狀態 : ${prodBean.prodState}
-															<div style="position: relative; left: 280; bottom: 30;display:grid;">
+															<div
+																style="position: relative; left: 280; bottom: 30; display: grid;">
 																<button class="btn btn-b btn-circle"
-																	style="font-size: 17px;margin-bottom:10px;"onclick="window.location='/MeetBoth/_03_product.catchSingleProductDate.controller?id=${prodBean.prodID}'">修改</button>
-																<button class="btn btn-b btn-circle deleteThisProduct" name="${prodBean.prodID}"
-																	style="font-size: 17px;">刪除</button>
+																	style="font-size: 17px; margin-bottom: 10px;"
+																	onclick="window.location='/MeetBoth/_03_product.catchSingleProductDate.controller?id=${prodBean.prodID}'">修改</button>
+																<button class="btn btn-b btn-circle deleteThisProduct"
+																	name="${prodBean.prodID}" style="font-size: 17px;">刪除</button>
 															</div>
 														</div>
 														<div class="widget-posts-meta" style="display: flex">
-															商品價格 : NT$${prodBean.prodPrice}
-														</div>
+															商品價格 : NT$${prodBean.prodPrice}</div>
 														<div class="widget-posts-meta">商品庫存 :
 															${prodBean.inventory}</div>
 														<div class="widget-posts-meta">商品瀏覽次數 :
@@ -272,56 +243,59 @@
 								<img src="/MeetBoth/html/assets/images/shop/兔年海報3.jpg"
 									style="padding-bottom: 10px;">
 							</div>
-						<form method="Post" action="<c:url value='/_03_product.updateProductState.controller' />">
-							<div class="container" style="padding: 0px 10px 0px 20px;">
-								<input type="submit" value="商品上架"
-									class="btn btn-info btn-circle"
-									style="font-size: 17px; color: black;" onclick="#">
-								&nbsp; <input type="submit" value="商品下架"
-									class="btn btn-warning btn-circle"
-									style="font-size: 17px; color: black;" onclick="#">
-							</div>
-							<hr class="divider-w pt-20">
-							<div class="row">
-								<div class="col-sm-12">
-									<table class="table table-striped table-border checkout-table">
-										<tbody>
-											<tr>
-												<th></th>
-												<th>商品名稱</th>
-												<th>商品類別</th>
-												<th class="hidden-xs">價格</th>
-												<th>庫存</th>
-												<th>狀態</th>
-											</tr>
-											<c:forEach var="prodBean" items="${memberBean.product}">
-											<tr>
-												<td class="hidden-xs"style="text-align: center; vertical-align: middle;">
-													<input type="checkbox" name="selectForUpdateState" value="${prodBean.prodID}" />
-													<label for="check"></label>
-													</td>
-												<td>
-													<h5 class="product-title font-alt">${prodBean.prodName}</h5>
-												</td>
-												<td class="hidden-xs">
-													<h5 class="product-title font-alt">${prodBean.prodtype.prodClassName}</h5>
-												</td>
-												<td>
-													<h5 class="product-title font-alt">NT$${prodBean.prodPrice}</h5>
-												</td>
-												<td>
-													<h5 class="product-title font-alt">${prodBean.inventory}</h5>
-												</td>
-												<td>
-													<h5 class="product-title font-alt" style="color: Blue;">${prodBean.prodState}</h5>
-												</td>
-											</tr>
-											</c:forEach>
-										</tbody>
-									</table>
+							<form method="Post"
+								action="<c:url value='/_03_product.updateProductState.controller' />">
+								<div class="container" style="padding: 0px 10px 0px 20px;">
+									<input type="submit" value="商品上架"
+										class="btn btn-info btn-circle"
+										style="font-size: 17px; color: black;" onclick="#">
+									&nbsp; <input type="submit" value="商品下架"
+										class="btn btn-warning btn-circle"
+										style="font-size: 17px; color: black;" onclick="#">
 								</div>
-							</div>
-						</form>
+								<hr class="divider-w pt-20">
+								<div class="row">
+									<div class="col-sm-12">
+										<table class="table table-striped table-border checkout-table">
+											<tbody>
+												<tr>
+													<th style="text-align: center;"></th>
+													<th style="text-align: center;">商品名稱</th>
+													<th style="text-align: center;">商品類別</th>
+													<th style="text-align: center;" class="hidden-xs">價格</th>
+													<th style="text-align: center;">庫存</th>
+													<th style="text-align: center;">狀態</th>
+												</tr>
+												<tr id="tr1" style="text-align: center;"></tr>
+												<c:forEach var="prodBean" items="${memberBean.product}">
+													<tr>
+														<td class="hidden-xs"
+															style="text-align: center; vertical-align: middle;">
+															<input type="checkbox" name="selectForUpdateState"
+															value="${prodBean.prodID}" /> <label for="check"></label>
+														</td>
+														<td>
+															<h5 class="product-title font-alt">${prodBean.prodName}</h5>
+														</td>
+														<td class="hidden-xs">
+															<h5 class="product-title font-alt">${prodBean.prodtype.prodClassName}</h5>
+														</td>
+														<td>
+															<h5 class="product-title font-alt">NT$${prodBean.prodPrice}</h5>
+														</td>
+														<td>
+															<h5 class="product-title font-alt">${prodBean.inventory}</h5>
+														</td>
+														<td>
+															<h5 class="product-title font-alt" style="color: Blue;">${prodBean.prodState}</h5>
+														</td>
+													</tr>
+												</c:forEach>
+											</tbody>
+										</table>
+									</div>
+								</div>
+							</form>
 							<!--       賣場管理列 -->
 							<!--訂單管理 -->
 							<div class="post-header font-alt" style="display: flex;">
@@ -336,32 +310,40 @@
 								</div>
 							</div>
 
-										<!-- 數據中心 -->
-									</div>
-								</div>
-							</div>
-						</section>
-						<jsp:include page="/WEB-INF/html/fragment/footerMVC.jsp" />
+							<!-- 數據中心 -->
+						</div>
 					</div>
-					<div class="scroll-up">
-						<a href="#totop"><i class="fa fa-angle-double-up"></i></a>
-					</div>
-				</main>
-				<!--  
+				</div>
+			</section>
+			<jsp:include page="/WEB-INF/html/fragment/footerMVC.jsp" />
+		</div>
+		<div class="scroll-up">
+			<a href="#totop"><i class="fa fa-angle-double-up"></i></a>
+		</div>
+	</main>
+	<!--  
     JavaScripts
     =============================================
     -->
-				<% String basePath1=request.getScheme() + "://" + request.getServerName() + ":" +
-					request.getServerPort() + path + "/html/assets/js/jquery.min.js" ; %>
+	<%
+	String basePath1 = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path
+			+ "/html/assets/js/jquery.min.js";
+	%>
 
-					<% String basePath2=request.getScheme() + "://" + request.getServerName() + ":" +
-						request.getServerPort() + path + "/html/assets/js/browser.min.js" ; %>
+	<%
+	String basePath2 = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path
+			+ "/html/assets/js/browser.min.js";
+	%>
 
-						<% String basePath3=request.getScheme() + "://" + request.getServerName() + ":" +
-							request.getServerPort() + path + "/html/assets/js/breakpoints.min.js" ; %>
+	<%
+	String basePath3 = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path
+			+ "/html/assets/js/breakpoints.min.js";
+	%>
 
-							<% String basePath4=request.getScheme() + "://" + request.getServerName() + ":" +
-								request.getServerPort() + path + "/html/assets/js/util.js" ; %>
+	<%
+	String basePath4 = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path
+			+ "/html/assets/js/util.js";
+	%>
 
 	<%
 	String basePath5 = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path
@@ -374,12 +356,29 @@
 	<script src=<%=basePath5%>></script>
 	<script src="https://kit.fontawesome.com/25590258af.js"
 		crossorigin="anonymous"></script>
-			<!-- SweetAlert js -->
-<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-<!-- SweetAlert js -->
+	<!-- SweetAlert js -->
+	<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+	<!-- SweetAlert js -->
 	<script type="text/javascript"
 		src="https://www.gstatic.com/charts/loader.js"></script>
-		<script>
+	<script>
+		window.onload = function () {
+			var body = document.getElementById("prodList")
+			var body2 = document.getElementById("tr1")
+			if (body.innerHTML.trim() === '') {
+				body.innerHTML = "<span style='font-size:30px;margin-left:50px;'>目前沒有商品</span>";
+				var str = '';
+				str += "<td style='font-size:30px;margin-left:50px;'>目</td>";
+				str += "<td style='font-size:30px;margin-left:50px;'>前</td>";
+				str += "<td style='font-size:30px;margin-left:50px;'>沒</td>";
+				str += "<td style='font-size:30px;margin-left:50px;'>有</td>";
+				str += "<td style='font-size:30px;margin-left:50px;'>商</td>";
+				str += "<td style='font-size:30px;margin-left:50px;'>品</td>";
+				body2.innerHTML = str;
+			}
+		};
+		</script>
+	<script>
 	
         $(function(){
         	$('.deleteThisProduct').click(function(){
@@ -418,7 +417,7 @@
 											});
         //function end
 									</script>
-									<script>
+	<script>
 										function roundToTwo(num) {
 											return +(Math.round(num + "e+2") + "e-2");
 										}
@@ -462,7 +461,7 @@
 													}
 												});
 									</script>
-									<script type="text/javascript">
+	<script type="text/javascript">
 										google.charts.load('current', { 'packages': ['corechart'] });
 										google.charts.setOnLoadCallback(drawChart);
 
@@ -486,7 +485,7 @@
 											chart.draw(data, options);
 										}
 									</script>
-									<script type="text/javascript">
+	<script type="text/javascript">
 										google.charts.load("current", { packages: ["corechart"] });
 										google.charts.setOnLoadCallback(drawChart);
 										function drawChart() {
@@ -530,7 +529,7 @@
 											chart.draw(data, options);
 										}
 									</script>
-									<script>
+	<script>
 										$(document).ready(function () {
 											//以ul li包子選單
 											$('.cart>li>a').click(function (event) {
@@ -546,7 +545,7 @@
 
 										});
 									</script>
-									<script>
+	<script>
 										var ctx = document.getElementById("example"),
 											example = new Chart(ctx, {
 												// 參數設定[註1]
@@ -566,6 +565,6 @@
 												}
 											});
 									</script>
-			</body>
+</body>
 
-			</html>
+</html>

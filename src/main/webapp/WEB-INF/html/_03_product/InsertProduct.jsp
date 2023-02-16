@@ -47,8 +47,8 @@ String basePathimg2 = request.getScheme() + "://" + request.getServerName() + ":
 								<span class="icon-browser">&ensp;回到商品目錄</span>
 							</button>
 							&nbsp;
-							<button class="btn btn-primary  btn-circle" type="button" id="speedInsert"
-								style="height: 43px; font-size: 19px;">
+							<button class="btn btn-primary  btn-circle" type="button"
+								id="speedInsert" style="height: 43px; font-size: 19px;">
 								<span class=" icon-gears">&ensp;一鍵輸入</span>
 							</button>
 
@@ -61,9 +61,9 @@ String basePathimg2 = request.getScheme() + "://" + request.getServerName() + ":
 							<div class="col-sm-6 mb-sm-40" style="width: 42%;">
 								<span class="amount">上傳商品照片</span> <input type="file"
 									name="pPic" id="images5278" style="width: 80%"
-									accept=".jpg,.png">
-									 <img id="preImg" name="preImg" style="" src="html/assets/images/shop/noimage.jpg"/>
-									 
+									accept=".jpg,.png"> <img id="preImg" name="preImg"
+									style="" src="html/assets/images/shop/noimage.jpg" />
+
 							</div>
 							<!-- 							圖片右邊BLOCK -->
 							<div class="col-sm-6" style="margin-top: 68px; width: 58%">
@@ -72,7 +72,7 @@ String basePathimg2 = request.getScheme() + "://" + request.getServerName() + ":
 										<div class="price font-alt" style="display: flex;">
 											<span class="amount"
 												style="font-size: 25px; text-align: center;">商品名稱:&ensp;</span>
-											<input class="form-control input-lg" type="text" name="pName"
+											<input class="form-control input-lg" type="text" name="pName" id="pName"
 												required="required"
 												style="text-transform: none; width: 80%; font-size: 20px; letter-spacing: 0px; border: 1px solid black; border-radius: 15px; text-align: center;" />
 										</div>
@@ -107,7 +107,7 @@ String basePathimg2 = request.getScheme() + "://" + request.getServerName() + ":
 											<span class="amount"
 												style="font-size: 25px; text-align: center;">商品價格:&ensp;</span>
 											<input class="form-control input-lg" type="number"
-												name="pPrice" id="amount" value="1" min="0"
+												name="pPrice" id="pPrice" value="1" min="0"
 												required="required"
 												style="width: 80%; font-size: 20px; letter-spacing: 0px; border: 1px solid black; border-radius: 15px; text-align: center;" />
 										</div>
@@ -123,7 +123,7 @@ String basePathimg2 = request.getScheme() + "://" + request.getServerName() + ":
 											<span class="amount"
 												style="font-size: 25px; text-align: center;">商品庫存:&ensp;</span>
 											<input class="form-control input-lg" type="number"
-												name="invt" id="amount" value="1" min="0"
+												name="invt" id="invt" value="1" min="0"
 												required="required"
 												style="width: 80%; font-size: 20px; letter-spacing: 0px; border: 1px solid black; border-radius: 15px; text-align: center;" />
 										</div>
@@ -217,11 +217,13 @@ String basePathimg2 = request.getScheme() + "://" + request.getServerName() + ":
 	</script>
 	<script>
 		var si = document.getElementById('speedInsert');
-		si.addEventListener('click', function () { 
-			console.log("speedInsert")
-		})
-		
-	
+		si.addEventListener('click', function() {
+			console.log("123");
+			document.getElementById('pName').value = '狐狸的電話亭';
+			document.getElementById('pPrice').value = '150';
+			document.getElementById('invt').value = '10';
+			document.getElementById('directions').innerHTML = '這是一本描述了 -> 母愛的偉大 <- 的好書';
+		});
 	</script>
 </body>
 </html>

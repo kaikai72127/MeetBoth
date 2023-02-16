@@ -88,7 +88,7 @@ public interface ProductRepository extends JpaRepository<Product, Integer> {
 	public List<Product> findHotestProductsAndOnlyOnSales();
 
 //	---------------------------透過memID找prod但不顯示 下架產品-------------------------------
-	@Query(value = "select * from product where memberID = ?! and prodState != '下架'",nativeQuery = true)
+	@Query(value = "select * from product where memberID = ?1 and prodState != '下架'",nativeQuery = true)
 	public List<Product> findByMemidAndOnlyOnSales(Integer memId);
 	
 }

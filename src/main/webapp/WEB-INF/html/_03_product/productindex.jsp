@@ -191,67 +191,9 @@ a:hover {
 					<div class="row">
 						<!-- 整頁 -->
 						<!-- 左邊欄位開始 -->
-						<div class="col-sm-4 col-md-3 sidebar"
-							style="width: 20%; padding-right: 0px;height:100%;">
-							<div class="widget">
-								<a href="/MeetBoth/_03_product.index.controller"><img
-									src="/MeetBoth/html/assets/images/shop/警告.jpg"
-									style="padding-bottom: 10px;"></a>
-								<ul class="cart">
-									<li><a href="#" style="color: white; font-size: 20px;"
-										class="btn btn-d btn-round">會員管理&ensp;<i
-											class="fa-solid fa-angle-double-down"></i></a>
-										<ul style="">
-											<li><a href="#" style="color: white; font-weight: 600;"
-												class="btn btn-d btn-round">所有會員清單</a></li>
-										</ul></li>
-									<li><a href="" style="color: white; font-size: 20px;"
-										class="btn btn-d btn-round">商品管理&ensp;<i
-											class="fa-solid fa-angle-double-down"></i></a>
-										<ul style="">
-											<li><a
-												href="/MeetBoth/_03_product.productindex.controller/1"
-												style="color: white; font-weight: 600;"
-												class="btn btn-d btn-round">所有商品清單</a></li>
-											<li><a
-												href="/MeetBoth/_03_product.MBinsertProd.controller"
-												style="color: white; font-weight: 600;"
-												class="btn btn-d btn-round">新增商品</a></li>
-										</ul></li>
-									<li><a href="#" style="color: white; font-size: 20px;"
-										class="btn btn-d btn-round">課程管理&ensp;<i
-											class="fa-solid fa-angle-double-down"></i></a>
-										<ul style="">
-											<li><a href="#" style="color: white; font-weight: 600;"
-												class="btn btn-d btn-round">所有課程清單</a></li>
-										</ul></li>
-									<li><a href="#" style="color: white; font-size: 20px;"
-										class="btn btn-d btn-round">徵才管理&ensp;<i
-											class="fa-solid fa-angle-double-down"></i></a>
-										<ul style="">
-											<li><a href="#" style="color: white; font-weight: 600;"
-												class="btn btn-d btn-round">所有貼文清單</a></li>
-										</ul></li>
-									<li><a href="#" style="color: white; font-size: 20px;"
-										class="btn btn-d btn-round">討論區管理&ensp;<i
-											class="fa-solid fa-angle-double-down"></i></a>
-										<ul style="">
-											<li><a href="#" style="color: white; font-weight: 600;"
-												class="btn btn-d btn-round">所有貼文清單</a></li>
-										</ul></li>
-									<li><a href="#" style="color: white; font-size: 20px;"
-										class="btn btn-d btn-round">購物車管理&ensp;<i
-											class="fa-solid fa-angle-double-down"></i></a>
-										<ul style="">
-											<li><a href="#" style="color: white; font-weight: 600;"
-												class="btn btn-d btn-round">所有購物單清單</a></li>
-										</ul></li>
-								</ul>
-								<a href="#"><img
-									src="/MeetBoth/html/assets/images/shop/警告2.jpg"
-									style="padding-bottom: 10px;"></a>
-							</div>
-						</div>
+						<jsp:include
+                page="/WEB-INF/html/fragment/AdminIndexSideBar.jsp"
+              />
 						<!-- 左邊欄位結束 -->
 						<!-- 						右邊欄位開始 -->
 						<div class="col-sm-8 col-sm-offset-1"
@@ -273,7 +215,7 @@ a:hover {
 											<span>所有商品資料 :&ensp;</span>
 										</div>
 										<form class="row"
-											action="<c:url value='/_03_product.searchProductWithCondition2.controller/1'/>"
+											action="<c:url value='/admin/_03_product.searchProductWithCondition2.controller/1'/>"
 											method="post">
 											<div style="display: flex; margin-bottom: 15px;">
 												<div style="padding-right: 0; margin: auto 10px;">
@@ -315,7 +257,7 @@ a:hover {
 												<div style="">
 													<button class="MBbtn" type="submit" style="">搜尋</button>
 													<input type="button" class="MBbtn" value="新增"
-														onclick="window.location='/MeetBoth/_03_product.MBinsertProd.controller'">
+														onclick="window.location='/MeetBoth/admin/_03_product.MBinsertProd.controller'">
 												</div>
 											</div>
 										</form>
@@ -361,9 +303,9 @@ a:hover {
 																<td>${prodBean.prodCheck}次</td>
 																<td>${prodBean.prodPost}</td>
 																<td><input type="button" class="MBbtn" value="更多"
-																	onclick="window.location='/MeetBoth/_03_product.singleProductIndex.controller?id=${prodBean.prodID}'"></td>
+																	onclick="window.location='/MeetBoth/admin/_03_product.singleProductIndex.controller?id=${prodBean.prodID}'"></td>
 																<td><input type="button" class="MBbtn" value="修改"
-																	onclick="window.location='/MeetBoth/_03_product.pathToMBinsertProd.controller?id=${prodBean.prodID}'"></td>
+																	onclick="window.location='/MeetBoth/admin/_03_product.pathToMBinsertProd.controller?id=${prodBean.prodID}'"></td>
 																<td style="border-right: none"><input type="button"
 																	class="MBbtn deleteThisProduct" value="刪除"
 																	id="deleteThisProduct" name="${prodBean.prodID}"></td>
@@ -382,7 +324,7 @@ a:hover {
 									style="display: flex; justify-content: center; align-items: center">
 									<c:if test="${currentPage != 1}">
 										<a
-											href="/MeetBoth/_03_product.productindex.controller/${currentPage-1}"><i
+											href="/MeetBoth/admin/_03_product.productindex.controller/${currentPage-1}"><i
 											class="fa fa-angle-left"></i></a>
 									</c:if>
 									<!-- 迴圈生成每一頁的按鈕 -->
@@ -390,17 +332,17 @@ a:hover {
 										<c:choose>
 											<c:when test="${currentPage == i}">
 												<a class="active"
-													href="/MeetBoth/_03_product.productindex.controller/${i}">${i}</a>
+													href="/MeetBot/adminh/_03_product.productindex.controller/${i}">${i}</a>
 											</c:when>
 											<c:otherwise>
 												<a
-													href="/MeetBoth/_03_product.productindex.controller/${i}">${i}</a>
+													href="/MeetBoth/admin/_03_product.productindex.controller/${i}">${i}</a>
 											</c:otherwise>
 										</c:choose>
 									</c:forEach>
 									<c:if test="${currentPage != totalPages}">
 										<a
-											href="/MeetBoth/_03_product.productindex.controller/${currentPage+1}"><i
+											href="/MeetBoth/admin/_03_product.productindex.controller/${currentPage+1}"><i
 											class="fa fa-angle-right"></i></a>
 									</c:if>
 								</div>
@@ -498,7 +440,7 @@ a:hover {
                           data: {"id":id},
                         })
                             .done(function () {
-                            	window.location='/MeetBoth/_03_product.productindex.controller/1'
+                            	window.location='/MeetBoth/admin/_03_product.productindex.controller/1'
                                 console.log("delete")
                              })//done
                              .fail(function(error) {

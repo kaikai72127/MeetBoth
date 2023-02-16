@@ -68,7 +68,7 @@ String basePathimg2 = request.getScheme() + "://" + request.getServerName() + ":
 				<ul class="works-grid works-grid-4 works-hover-w" id="works-grid">
 					<li class="work-item illustration webdesign" id="typeBlock">
 							<a
-								href="/MeetBoth/_03_product.searchProductByType.controller?type=1">
+								href="/MeetBoth/_03_product.searchProductByType.controller/1/1">
 						<span class="work-image"  onclick="window.location='/MeetBoth/_03_product.searchProductByType.controller/1/1'"
 							style="width: 100%; height: 100%;">
 								<img style="height:100%" src="/MeetBoth/html/assets/images/shop/文具.jpg"
@@ -81,7 +81,7 @@ String basePathimg2 = request.getScheme() + "://" + request.getServerName() + ":
 							</a>
 					</li>
 					<li class="work-item illustration webdesign" id="typeBlock"><a
-						href="/MeetBoth/_03_product.searchProductByType.controller?type=2">
+						href="/MeetBoth/_03_product.searchProductByType.controller/1/2">
 							<span class="work-image"
 							onclick="window.location='/MeetBoth/_03_product.searchProductByType.controller/1/2'"
 							style="width: 100%; height: 100%;"> <img
@@ -93,7 +93,7 @@ String basePathimg2 = request.getScheme() + "://" + request.getServerName() + ":
 						</span>
 					</a></li>
 					<li class="work-item illustration webdesign" id="typeBlock"><a
-						href="/MeetBoth/_03_product.searchProductByType.controller?type=3">
+						href="/MeetBoth/_03_product.searchProductByType.controller/1/3">
 							<span class="work-image"
 							onclick="window.location='/MeetBoth/_03_product.searchProductByType.controller/1/3'"
 							style="width: 100%; height: 100%;"> <img
@@ -105,7 +105,7 @@ String basePathimg2 = request.getScheme() + "://" + request.getServerName() + ":
 						</span>
 					</a></li>
 					<li class="work-item illustration webdesign" id="typeBlock"><a
-						href="/MeetBoth/_03_product.searchProductByType.controller?type=4">
+						href="/MeetBoth/_03_product.searchProductByType.controller/1/4">
 							<span class="work-image"
 							onclick="window.location='/MeetBoth/_03_product.searchProductByType.controller/1/4'"
 							style="width: 100%; height: 100%;"> <img
@@ -117,7 +117,7 @@ String basePathimg2 = request.getScheme() + "://" + request.getServerName() + ":
 						</span>
 					</a></li>
 					<li class="work-item illustration webdesign" id="typeBlock"><a
-						href="/MeetBoth/_03_product.searchProductByType.controller?type=5">
+						href="/MeetBoth/_03_product.searchProductByType.controller/1/5">
 							<span class="work-image"
 							onclick="window.location='/MeetBoth/_03_product.searchProductByType.controller/1/5'"
 							style="width: 100%; height: 100%;"> <img
@@ -129,7 +129,7 @@ String basePathimg2 = request.getScheme() + "://" + request.getServerName() + ":
 						</span>
 					</a></li>
 					<li class="work-item illustration webdesign" id="typeBlock"><a
-						href="/MeetBoth/_03_product.searchProductByType.controller?type=6">
+						href="/MeetBoth/_03_product.searchProductByType.controller/1/6">
 							<span class="work-image"
 							onclick="window.location='/MeetBoth/_03_product.searchProductByType.controller/1/6'"
 							style="width: 100%; height: 100%;"> <img
@@ -141,7 +141,7 @@ String basePathimg2 = request.getScheme() + "://" + request.getServerName() + ":
 						</span>
 					</a></li>
 					<li class="work-item illustration webdesign" id="typeBlock"><a
-						href="/MeetBoth/_03_product.searchProductByType.controller?type=7">
+						href="/MeetBoth/_03_product.searchProductByType.controller/1/7">
 							<span class="work-image"
 							onclick="window.location='/MeetBoth/_03_product.searchProductByType.controller/1/7'"
 							style="width: 100%; height: 100%;"> <img
@@ -153,7 +153,7 @@ String basePathimg2 = request.getScheme() + "://" + request.getServerName() + ":
 						</span>
 					</a></li>
 					<li class="work-item illustration webdesign" id="typeBlock"><a
-						href="/MeetBoth/_03_product.searchProductByType.controller?type=8">
+						href="/MeetBoth/_03_product.searchProductByType.controller/1/8">
 							<span class="work-image"
 							onclick="window.location='/MeetBoth/_03_product.searchProductByType.controller/1/8'"
 							style="width: 100%; height: 100%;"> <img
@@ -165,7 +165,7 @@ String basePathimg2 = request.getScheme() + "://" + request.getServerName() + ":
 						</span>
 					</a></li>
 					<li class="work-item illustration webdesign" id="typeBlock"><a
-						href="/MeetBoth/_03_product.searchProductByType.controller?type=9">
+						href="/MeetBoth/_03_product.searchProductByType.controller/1/9">
 							<span class="work-image"
 							onclick="window.location='/MeetBoth/_03_product.searchProductByType.controller/1/9'"
 							style="width: 100%; height: 100%;"> <img
@@ -177,7 +177,7 @@ String basePathimg2 = request.getScheme() + "://" + request.getServerName() + ":
 						</span>
 					</a></li>
 					<li class="work-item illustration webdesign" id="typeBlock"><a
-						href="/MeetBoth/_03_product.searchProductByType.controller?type=10">
+						href="/MeetBoth/_03_product.searchProductByType.controller/1/10">
 							<span class="work-image"
 							onclick="window.location='/MeetBoth/_03_product.searchProductByType.controller/1/10'"
 							style="width: 100%; height: 100%;"> <img
@@ -189,7 +189,7 @@ String basePathimg2 = request.getScheme() + "://" + request.getServerName() + ":
 						</span>
 					</a></li>
 					<li class="work-item illustration webdesign" id="typeBlock"><a
-						href="/MeetBoth/_03_product.searchProductByType.controller?type=11">
+						href="/MeetBoth/_03_product.searchProductByType.controller/1/11">
 							<span class="work-image"
 							onclick="window.location='/MeetBoth/_03_product.searchProductByType.controller/1/11'"
 							style="width: 100%; height: 100%;"> <img
@@ -201,7 +201,7 @@ String basePathimg2 = request.getScheme() + "://" + request.getServerName() + ":
 						</span>
 					</a></li>
 					<li class="work-item illustration webdesign" id="typeBlock"><a
-						href="/MeetBoth/_03_product.searchProductByType.controller?type=12">
+						href="/MeetBoth/_03_product.searchProductByType.controller/1/12">
 							<span class="work-image"
 							onclick="window.location='/MeetBoth/_03_product.searchProductByType.controller/1/12'"
 							style="width: 100%; height: 100%;"> <img

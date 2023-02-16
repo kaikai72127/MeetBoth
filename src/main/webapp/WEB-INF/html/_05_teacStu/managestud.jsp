@@ -309,7 +309,7 @@ a:hover {
 														</tr>
 													</thead>
 													<tbody>
-														<c:forEach var="bean" items="${pageTeac}">
+														<c:forEach var="bean" items="${pageStud}">
 															<tr>
 																<td>${bean.member.memberID}</td>
 																<td>${bean.studno}</td>
@@ -337,7 +337,7 @@ a:hover {
 													style="display: flex; justify-content: center; align-items: center">
 													<c:if test="${currentPage != 1}">
 														<a
-															href="/MeetBoth/admin/_05_teacStu.searchAllTeac.controller/${currentPage-1}"><i
+															href="/MeetBoth/admin/_05_teacStu.searchAllStud.controller/${currentPage-1}"><i
 															class="fa fa-angle-left"></i></a>
 													</c:if>
 													<!-- 迴圈生成每一頁的按鈕 -->
@@ -345,17 +345,17 @@ a:hover {
 														<c:choose>
 															<c:when test="${currentPage == i}">
 																<a class="active"
-																	href="/MeetBoth/admin/_05_teacStu.searchAllTeac.controller/${i}">${i}</a>
+																	href="/MeetBoth/admin/_05_teacStu.searchAllStud.controller/${i}">${i}</a>
 															</c:when>
 															<c:otherwise>
 																<a
-																	href="/MeetBoth/admin/_05_teacStu.searchAllTeac.controller/${i}">${i}</a>
+																	href="/MeetBoth/admin/_05_teacStu.searchAllStud.controller/${i}">${i}</a>
 															</c:otherwise>
 														</c:choose>
 													</c:forEach>
 													<c:if test="${currentPage != totalPages}">
 														<a
-															href="/MeetBoth/admin/_05_teacStu.searchAllTeac.controller/${currentPage+1}"><i
+															href="/MeetBoth/admin/_05_teacStu.searchAllStud.controller/${currentPage+1}"><i
 															class="fa fa-angle-right"></i></a>
 													</c:if>
 												</div>

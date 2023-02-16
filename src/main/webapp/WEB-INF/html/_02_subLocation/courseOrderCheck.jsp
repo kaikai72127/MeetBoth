@@ -97,7 +97,7 @@ button.removeProduct:hover {
 											<tr style="font-size: 20px">
 												<!-- <td class=""><input type="checkbox"></td> -->
 												<td class="hidden-xs"><a href="#"><img
-														src="<c:url value='#' />" alt=""
+														src="<c:url value='/showCoursePicture.controller?id=${Course.courseID}' />" alt=""
 														style="width: 100px; float: left;"></a></td>
 												<td>
 													<h5 style="font-size: 20px" class="product-title font-alt">${Course.courseName}</h5>
@@ -193,7 +193,7 @@ button.removeProduct:hover {
 									type="reset" name="cancel" id="cancel" value="重填訂單">
 							</div>
 							<div align="center">
-								<a href="<c:url value='/shoppingcart.controller' />"
+								<a href="<c:url value='/PathToCourseDetail.controller?id=${Course.courseID}' />"
 									class="btn border"
 									style="font-size: 20px; color: #ce7777; font-weight: 1000;">
 									<i class="fa-regular fa-circle-left"></i>返回

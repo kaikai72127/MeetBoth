@@ -48,21 +48,7 @@ String basePathimg2 = request.getScheme() + "://" + request.getServerName() + ":
 
 		<div class="main" style="background-color: #F0F0F0;">
 			
-			<!-- 			上方按鈕導覽 -->
-			<div class="container" style="padding: 10px 10px 20px 20px;">
-				<input type="button" value="返回首頁" class="btn btn-info btn-circle"
-					style="font-size: 17px; color: black;font-weight:700;"
-					onclick="window.location='/MeetBoth/_03_product.searchAllProduct.controller/1'">
-				&nbsp; <input type="button" value="隨便看看"
-					class="btn btn-success btn-circle"
-					style="font-size: 17px; color: black;font-weight:700;"
-					onclick="window.location='/MeetBoth/_03_product.searchRandomProduct.controller/1'">
-				&nbsp; <input type="button" value="新增商品"
-					class="btn btn-warning btn-circle"
-					style="font-size: 17px; color: black;font-weight:700;"
-					onclick="window.location='/MeetBoth/_03_product.pathToInsertProduct.controller/1'">
-			</div>
-			<!-- 			上方導覽 -->
+			
 			<!-- 			中間按鈕導覽 -->
 			<div class="container" style="padding: 10px 10px 20px 20px;">
 				<ul class="works-grid works-grid-4 works-hover-w" id="works-grid">
@@ -298,24 +284,42 @@ String basePathimg2 = request.getScheme() + "://" + request.getServerName() + ":
 					</form>
 				</div>
 			</section>
+			<!-- 			上方按鈕導覽 -->
+			<div class="container" style="padding: 10px 10px 20px 20px;">
+				<input type="button" value="返回首頁" class="btn btn-info btn-circle"
+					style="font-size: 17px; color: black;font-weight:700;"
+					onclick="window.location='/MeetBoth/_03_product.searchAllProduct.controller/1'">
+				&nbsp; <input type="button" value="隨便看看"
+					class="btn btn-success btn-circle"
+					style="font-size: 17px; color: black;font-weight:700;"
+					onclick="window.location='/MeetBoth/_03_product.searchRandomProduct.controller/1'">
+			</div>
+			<!-- 			上方導覽 -->
 			<!--         商品陳列 -->
-			<section class="module-small" style="padding-top:0px;">
+			<section class="module-small" style="padding-top: 0px;">
 				<div class="container">
 					<div class="row multi-columns-row">
 						<c:forEach var="bean" items="${allprodlist}">
 							<div class="col-sm-6 col-md-3 col-lg-3"
-								style="padding-bottom: 10px;">
-								<div class="shop-item">
-									<div id="shop-item-image"
-										style="height: 282px; width: 210px; margin: auto; display: flex; justify-content: center; align-items: center;">
-										<img style="padding: auto;" alt="${bean.prodName}"
-											src="<c:url value='/_03_product.showPicture.controller?id=${bean.prodID}' />">
-										<div class="shop-item-detail">
-											<a
-												href="/MeetBoth/_03_product.PathToProductDetail.controller?id=${bean.prodID}"
-												class="btn btn-round btn-b" style="font-size: 14px;"><span
-												class="icon-heart">進入商品頁面</span><span class="icon-heart"></span></a>
-										</div>
+								style="padding-bottom: 10px; display: flex;">
+								<div class="works-grid works-grid-4 works-hover-w"
+									id="works-grid" style="text-align: center;">
+									<div class="work-item illustration webdesign" id="typeBlock"
+										style="height: 250px; width: 100%;">
+										<a
+											href="/MeetBoth/_03_product.PathToProductDetail.controller?id=${bean.prodID}">
+											<span class="work-image"
+											style="width: 100%; height: 100%; margin: auto; display: flex; justify-content: center; align-items: center; margin-right: 15px; text-align: center;">
+												<img
+												style="max-width: 100%; max-height: 100%; height: auto; width: auto;"
+												src="<c:url value='/_03_product.showPicture.controller?id=${bean.prodID}' />"
+												alt="Portfolio Item" /> <span class="work-caption font-alt">
+													<span class="work-title"><img style=""
+														src="/MeetBoth/html/assets/images/shop/seesee.png"
+														alt="Portfolio Item" /></span>
+											</span>
+										</span>
+										</a>
 									</div>
 									<div id="prodName">
 										<strong style="font-size: 16px">${bean.prodName}</strong>
@@ -326,6 +330,10 @@ String basePathimg2 = request.getScheme() + "://" + request.getServerName() + ":
 												value="${commentBean.prodScore}">
 										</c:forEach>
 										<div id="starAVGDiv" style="font-size: 17px;"></div>
+									</div>
+									<div id="price">
+										<strong style="font-size: 16px">
+											瀏覽次數:&nbsp;${bean.prodCheck}&nbsp;次</strong>
 									</div>
 									<div id="price">
 										<strong style="font-size: 16px">價格 :
@@ -342,14 +350,30 @@ String basePathimg2 = request.getScheme() + "://" + request.getServerName() + ":
 							</div>
 						</c:forEach>
 					</div>
-					<div class="row">
-						<div class="col-sm-12">
-							<div class="pagination font-alt">
-								<a href="#"><i class="fa fa-angle-left"></i></a><a
-									class="active" href="#">1</a><a href="#">2</a><a href="#">3</a><a
-									href="#">4</a><a href="#"><i class="fa fa-angle-right"></i></a>
-							</div>
-						</div>
+					<div class="pagination font-alt"
+						style="display: flex; justify-content: center; align-items: center">
+						<c:if test="${currentPage != 1}">
+							<a
+								href="/MeetBoth/_03_product.searchAllProduct.controller/${currentPage-1}"><i
+								class="fa fa-angle-left"></i></a>
+						</c:if>
+						<!-- 迴圈生成每一頁的按鈕 -->
+						<c:forEach var="i" begin="1" end="${totalPages}">
+							<c:choose>
+								<c:when test="${currentPage == i}">
+									<a class="active"
+										href="/MeetBoth/_03_product.searchAllProduct.controller/${i}">${i}</a>
+								</c:when>
+								<c:otherwise>
+									<a href="/MeetBoth/_03_product.searchAllProduct.controller/${i}">${i}</a>
+								</c:otherwise>
+							</c:choose>
+						</c:forEach>
+						<c:if test="${currentPage != totalPages}">
+							<a
+								href="/MeetBoth/_03_product.searchAllProduct.controller/${currentPage+1}"><i
+								class="fa fa-angle-right"></i></a>
+						</c:if>
 					</div>
 				</div>
 			</section>

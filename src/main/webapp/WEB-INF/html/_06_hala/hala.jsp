@@ -99,6 +99,7 @@ input[type="submit"] {
 
 .color-text {
 	color: red;
+	
 }
 
 .titlesize {
@@ -232,6 +233,10 @@ input[type="submit"] {
   }
 }
 
+.search-box input[type="text"] {
+    color: #000;
+    background-color: #E6CAFF;
+}
 </style>
 
 
@@ -284,14 +289,14 @@ input[type="submit"] {
 
 			<div class="container">
 				<div>
-					<table style='margin: auto; width: 70%;'>
+					<table style='margin: auto; width: 85%; height:350px'>
 						<tr style='width: 100px'>
 							<th><h2>&#x1F451;TOP&#9316;熱門貼文 &#x1F451;</h2></th>
 						</tr>
-						<tr style='border-style: outset; background-color: #FFFF6F'>
-							<td class="color-text"><h3>標題</h3></td>
-							<td class="color-text" style="border-left: outset black"><h3>瀏覽次數</h3></td>
-							<td class="color-text" style="border-left: outset black"><h3>作者</h3></td>
+						<tr style='border-style: outset; background-color: #FFFF6F;'>
+							<td class="color-text" ><h3>&#x1F49C;標題&#x1F49C;</h3></td>
+							<td class="color-text" style="border-left: outset black;"><h3>&#x1F440;瀏覽次數&#x1F440;</h3></td>
+							<td class="color-text" style="border-left: outset black"><h3>&#x1F465;作者&#x1F465;</h3></td>
 						</tr>
 						<c:forEach var="topList" items="${topList}">
 							<tr style='border-style: outset; background-color: #FFFFCE;'>
@@ -299,7 +304,7 @@ input[type="submit"] {
 									href="<c:url value='/_06_halaAndQa.goHalaPage.controller?halaid=${topList.halaId}'/>">
 										&#128293;&nbsp;&nbsp; ${topList.title} </a></td>
 								<td style="border-left: outset black">&#129321;&nbsp;&nbsp;${topList.watch}</td>
-								<td style="border-left: outset black">&#128585;&nbsp;&nbsp;${topList.memberBean.memberID}</td>
+								<td style="border-left: outset black">&#128585;&nbsp;&nbsp;${topList.memberBean.account}</td>
 							</tr>
 						</c:forEach>
 					</table>

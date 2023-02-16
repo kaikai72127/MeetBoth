@@ -270,7 +270,7 @@ a:hover {
 										<div>
 											<span>所有貼文資料 :&ensp;</span>
 										</div>
-										
+
 										<form class="row"
 											action="<c:url value='/admin/_06_halaAndQa.SelectHalaClassIndex.controller'/>"
 											method="get">
@@ -308,25 +308,25 @@ a:hover {
 													</select>
 												</div>
 
-												<input type="hidden" name="lowprice" value="0" /> <input
-													type="hidden" name="highprice" value="9999999" />
+												
 												<div class="" style=""></div>
 												<div style="">
 													<button class="MBbtn" type="submit" style="">搜尋</button>
-													
-													
-													
+
+
+
 													<input type="button" class="MBbtn" value="新增"
 														onclick="window.location='/MeetBoth/admin/_06_halaAndQa.goAddHalaIndex.controller'">
-														
+
 												</div>
-												
+
 											</div>
-											
+
 										</form>
 										<div>
-											<form method="post" action="<c:url value='/admin/_06_halaAndQa.searchAllLikeIndex.controller' />">
-												
+											<form method="post"
+												action="<c:url value='/admin/_06_halaAndQa.searchAllLikeIndex.controller' />">
+
 												<input class="MBinput" type="text" name="search"
 													style="font-size: 17px; color: white; margin: 10px 10px;"
 													placeholder="搜尋名稱" />
@@ -334,7 +334,19 @@ a:hover {
 												<button class="MBbtn" type="submit" style="">搜尋</button>
 											</form>
 										</div>
+										<div>
 										
+											<form
+										action="<c:url value='/admin/_06_halaAndQa.SelectAllHalaIndex.controller' />">
+										<button class="MBbtn"
+											type="submit">
+											<span>查詢全部貼文</span>
+										</button>
+									</form>
+									
+										</div>
+										
+
 										<div>
 
 
@@ -363,6 +375,8 @@ a:hover {
 																<td>&#129321;${bean.watch}</td>
 																<td>${bean.memberBean.memberID}</td>
 																<td>${bean.postdate}</td>
+																<td><input type="button" class="MBbtn" value="更多"
+																	onclick="window.location='/MeetBoth/admin/_06_halaAndQa.oneHala.controller?halaId=${bean.halaId}'"></td>
 																<td><input type="button" class="MBbtn" value="修改"
 																	onclick="window.location='/MeetBoth/admin/_06_halaAndQa.GoHalaUpdateIndex.controller?halaId=${bean.halaId}'"></td>
 																<td style="border-right: none"><input type="button"

@@ -211,7 +211,7 @@ a:hover {
 												href="/MeetBoth/_03_product.productindex.controller"
 												style="color: white; font-weight: 600;"
 												class="btn btn-d btn-round">所有商品清單</a></li>
-											<li><a
+												<li><a
 												href="/MeetBoth/_03_product.MBinsertProd.controller"
 												style="color: white; font-weight: 600;"
 												class="btn btn-d btn-round">新增商品</a></li>
@@ -259,97 +259,61 @@ a:hover {
 								<div class="post-thumbnail"
 									style="padding-bottom: 0; margin-bottom: 0;">
 									<h1
-										style="padding-bottom: 0px; margin-bottom: 0; text-align: center; font-size: 50px; color: white;">後臺管理-新增貼文</h1>
+										style="padding-bottom: 0px; margin-bottom: 0; text-align: center; font-size: 50px; color: white;">單一商品後臺管理</h1>
 								</div>
 								<hr class="divider-w pt-20">
 								<!-- 							標題 -->
 								<!--       右邊第一部分開始 -->
 								<div class="post">
-									<form
-										action="<c:url value='/admin/_06_halaAndQa.AddHalaIndex.controller' />"
-										method="Post" enctype="multipart/form-data">
-										<div
-											class="post-video embed-responsive embed-responsive-16by9"
-											style="height: auto; padding-bottom: 100px;">
-											<div style="display: flex">
-												<button class="MBbtn"
-													onclick="window.location='/MeetBoth/admin/_06_halaAndQa.SelectAllHalaIndex.controller'">返回</button>
-											</div>
-
-											<div>
-												<span>貼文編號 :&ensp;<input type="text" name="halaId"
-													class="MBinput" placeholder="自動產生" readonly></span>
-											</div>
-											<div>
-												<span>標題 :&ensp;<input type="text" name="title"
-													class="MBinput" placeholder="不能為空"></span>
-											</div>
-											<div>
-												<span>貼文類別 :&ensp;<select name="halaclassname"
-													style="" class="MBinput">
-														<option value="公告">公告</option>
-														<option value="閱讀心得">閱讀心得</option>
-														<option value="資料分享">資料分享</option>
-														<option value="圖書推薦">圖書推薦</option>
-														<option value="教學文章">教學文章</option>
-														<option value="JAVA">JAVA</option>
-														<option value="HTML">HTML</option>
-														<option value="Spring">Spring</option>
-														<option value="SpringBoot">SpringBoot</option>
-														<option value="SpringMVC">SpringMVC</option>
-														<option value="SQL Server">SQL Server</option>
-														<option value="My SQL">My SQL</option>
-														<option value="Hibernate">Hibernate</option>
-														<option value="VScode">VScode</option>
-														<option value="eclipse">eclipse</option>
-														<option value="SpringTool">SpringTool</option>
-														<option value="JDBC">JDBC</option>
-														<option value="Servlet">Servlet</option>
-														<option value="JavaScript">JavaScript</option>
-														<option value="jQuery">jQuery</option>
-														<option value="Azure">Azureoption</option>
-														<option value="RESTful">RESTful</option>
-														<option value="c++">c++</option>
-														<option value="python">python</option>
-														<option value="其他">其他</option>
-												</select></span>
-											</div>
-
-											<div>
-												<span>會員編號 :&ensp;<input type="text" name="memberid"
-													class="MBinput" value="${Member.memberID}" readonly></span>
-											</div>
-
-											<div style="display: flex;">
-												<span>上傳照片</span>
-												<div
-													style="height: 200px; width: 200px; background-color: #272727; text-align: center; margin: 15px;">
-													<img id="preImg"
-														style="max-width: 100%; max-height: 100%; height: auto; width: auto;"
-														src="<c:url value='/html/images/meatball-200.png'/>" />
-												</div>
-												<input class="MBinput" type="file" name="images"
-													id="images5278" accept=".jpg,.png">
-											</div>
-
-											<div>
-												<div id="commentDiv">
-													<span>文章內容 :&ensp;</span>
-												</div>
-											</div>
-											<div>
-												<textarea name="halacontent"
-													style="margin-left: 10px; resize: none; height: 325px; width: 975px; overflow-y: auto; overflow-y: auto; font-size: 25px; color: white; background-color: black;"
-													placeholder="請輸入文章內容"></textarea>
-											</div>
-											<div>
-												<input type="submit" class="MBbtn" value="確定"
-													style="margin-top: 15px; margin-left: 900px; font-size: 35px;">
-												<button class="MBbtn" type="button" id="fill-form-btn"
-													style="margin-top: 15px; margin-left: 900px; font-size: 35px;">一鍵輸入</button>
+									<div class="post-video embed-responsive embed-responsive-16by9"
+										style="height: auto; padding-bottom: 100px;">
+										<div style="display: flex">
+											<span>文章資料 :&ensp;</span>
+										</div>
+										<div style="display: flex">
+											<button class="MBbtn" onclick="window.location='/MeetBoth/admin/_06_halaAndQa.SelectAllHalaIndex.controller'">返回</button>
+											<button class="MBbtn" onclick="window.location='/MeetBoth/admin/_06_halaAndQa.GoHalaUpdateIndex.controller?halaId=${bean.halaId}'">修改</button>
+											<button class="MBbtn" id="deleteThisProduct"
+												name="${bean.halaId}">刪除</button>
+										</div>
+										<div>
+											<span>貼文編號 :&ensp;${bean.halaId}</span>
+										</div>
+										<div>
+											<span>會員帳號 :&ensp;${bean.memberBean.account}</span>
+										</div>
+										<div>
+											<span>標題 :&ensp;${bean.title}</span>
+										</div>
+										<div style="display: flex;">
+											<span>圖片 :&ensp;</span>
+											<div
+												style="width: 150px; height: 200px; display: flex; justify-content: center; align-items: center; text-align: center;">
+												<img id="preImg"
+													style="max-width: 100%; max-height: 100%; height: auto; width: auto;"
+													src="<c:url value='/_06_halaAndQa.picsave.controller?id=${bean.halaId}' />" />
 											</div>
 										</div>
-									</form>
+										<div>
+											<span>文章類別 :&ensp;${bean.halaclassname}</span>
+										</div>
+										
+											<span>發文時間 :&ensp;${bean.postdate}</span>
+										</div>
+										<div>
+											<span>瀏覽次數 :&ensp;${bean.watch}</span>
+										</div>
+										<div>
+											<span>文章內容:<textarea
+												style="margin-left: 10px; resize: none; height: 325px; width: 975px; overflow-y: auto; overflow-y: auto; font-size: 17px; color: white; background-color: black;"
+												readonly>${bean.halacontent}</textarea></span>
+										</div>
+
+										<div>
+											
+											
+										</div>
+									</div>
 								</div>
 								<!--       右邊第一部分結束 -->
 								<hr class="divider-w pt-20">
@@ -398,6 +362,9 @@ a:hover {
 	<script src=<%=basePath3%>></script>
 	<script src=<%=basePath4%>></script>
 	<script src=<%=basePath5%>></script>
+	<!-- SweetAlert js -->
+	<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+	<!-- SweetAlert js -->
 	<script type="text/javascript"
 		src="https://www.gstatic.com/charts/loader.js"></script>
 	<script src="assets/lib/jquery.mb.ytplayer/dist/jquery.mb.YTPlayer.js"></script>
@@ -418,36 +385,59 @@ a:hover {
 		});
 	</script>
 	<script>
-		$("#imageas5278").change(function() {
-			readURL(this);
-		});
+	
+        $(function(){
+        	$('#deleteThisProduct').click(function(){
+                let id=$(this).attr("name");
+                Swal.fire({
+                  title: '你確定要刪除嗎?',
+                  text: "將無法恢復此筆訂單!!!",
+                  icon: 'warning',
+                  //icon:  "success", "error", "warning", "info" or "question" 這幾種選項
+                  showCancelButton: true,
+                  confirmButtonColor: '#f7d966',
+                  cancelButtonColor: '#3d3b39',
+                  cancelButtonText: '取消',
+                  confirmButtonText: '確定刪除'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        $.ajax({
+                          //專案名稱+servlet
+                         url:'/MeetBoth/admin/_06_halaAndQa.deleteHalaIndex.controller',
+                          method:"get",
+                          dataType:"text",
+                          //對應name設定的名稱 並非value的名稱
+                          data: {"halaId":id},
+                        })
+                            .done(function () {
+                            	window.location='/MeetBoth/admin/_06_halaAndQa.SelectAllHalaIndex.controller'
+                                console.log("delete")
+                             })//done
+                             .fail(function(error) {
+                                 console.log(error)
+                             })//fail end
+                    }//if
+                  })//then
 
-		function readURL(input) {
-			if (input.files && input.files[0]) {
-				var reader = new FileReader();
-				reader.onload = function(e) {
-					$("#preImg").attr('src', e.target.result);
-				}
-				reader.readAsDataURL(input.files[0]);
-			}
-		}
-	</script>
+              })//click end
+        });
+        //function end
+    </script>
+
 	<script>
-		document
-				.getElementById('fill-form-btn')
-				.addEventListener(
-						'click',
-						function() {
-							// 範例標題文字
-							var title = '花花的原味內褲';
-
-							// 範例內容文字
-							var content = '真香';
-
-							// 將範例文字填入標題與內容欄位
-							document.getElementsByName('title')[0].value = title;
-							document.getElementsByName('halacontent')[0].value = content;
-						});
-	</script>
+    window.onload = function() {
+    	var tbody = document.getElementById("commentBody")
+    	var div = document.getElementById("commentDiv")
+    	var div2 = document.getElementById("commentTable")
+        if (tbody.innerHTML.trim()==='') {
+          div.innerHTML = "<span>商品評論 :&ensp;</span><span>沒有商品評論評論</span>";
+          div2.innerHTML = "";
+        }
+    	};
+    
+  
+</script>
 </body>
+
+
 </html>

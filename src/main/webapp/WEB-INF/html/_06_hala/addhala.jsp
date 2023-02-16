@@ -107,8 +107,8 @@ String basePathimg2 = request.getScheme() + "://" + request.getServerName() + ":
 												</select>
 											</div>
 											<div style="float: right; width: 30%">
-												<input type="text" class="form-control" name="memberid"
-													value="${Member.memberID}" placeholder="id">
+												id:<input type="text" class="form-control" name="memberid"
+													value="${Member.memberID}" placeholder="id"  readonly>
 											</div>
 											<input type="text" class="form-control" name="title" value=""
 												placeholder="請輸入文章標題⋯">
@@ -123,6 +123,8 @@ String basePathimg2 = request.getScheme() + "://" + request.getServerName() + ":
 												<button class="btn btn-primary btn-circle" type="submit">確定送出</button>
 												<button class="btn btn-danger btn-circle" type="button"
 													onclick="window.location.href='http://localhost:8080/MeetBoth/_06_halaAndQa.SelectAllHala.controller/{page}'">取消</button>
+													<button class="btn btn-primary btn-circle" type="button" id="fill-form-btn">一鍵輸入</button>
+
 											</div>
 										</form>
 									</div>
@@ -188,5 +190,19 @@ String basePathimg2 = request.getScheme() + "://" + request.getServerName() + ":
                                         console.error( error );
                                 } );
                 </script>
+                <script>
+                document.getElementById('fill-form-btn').addEventListener('click', function() {
+                    // 範例標題文字
+                    var title = '花花的原味內褲';
+                    
+                    // 範例內容文字
+                    var content = '台中花老師原味內褲真香\n666666666666666666';
+
+                    // 將範例文字填入標題與內容欄位
+                    document.getElementsByName('title')[0].value = title;
+                    document.getElementsByName('halacontent')[0].value = content;
+                });
+
+</script>
 </body>
 </html>

@@ -482,16 +482,27 @@ public class HalaController {
 		// 新增
 		@PostMapping("/admin/_06_halaAndQa.AddHalaIndex.controller")
 		public String processMainAction27(@RequestParam("halaclassname") String halaclassname,
-				@RequestParam("memberid") Integer memberid, @RequestParam("title") String title,
-				@RequestParam("halacontent") String halacontent, @RequestParam("images") MultipartFile mf)
-				throws IllegalStateException, IOException, SQLException {
+		        @RequestParam("memberid") Integer memberid, @RequestParam("title") String title,
+		        @RequestParam("halacontent") String halacontent, @RequestParam(value = "images", required = false) MultipartFile mf)
+		        throws IllegalStateException, IOException, SQLException {
+			Optional<MemberBean> member = memberService.searchMemByID(memberid);
+			InputStream in;
+		    long size;
+		    Blob b;
 
-			InputStream in = mf.getInputStream();
-			long size = mf.getSize();
-			Blob b = PictureService.fileToBlob(in, size);
+		    if (mf != null && !mf.isEmpty()) {
+		        in = mf.getInputStream();
+		        size = mf.getSize();
+		        b = PictureService.fileToBlob(in, size);
+		    } else {
+		        // 設定預設圖片
+		        byte[] defaultImage = Files.readAllBytes(Paths.get("C:\\hibernate\\workspace\\MeetBoth\\src\\main\\webapp\\WEB-INF\\resources\\images\\meatball-200.png"));
+		        b = new SerialBlob(defaultImage);
+		    }
+			
 			HalaBean hb = new HalaBean();
 			hb.setHalaclassname(halaclassname);
-			hb.setMemberID(memberid);
+	       hb.setMemberBean(member.get());
 			hb.setTitle(title);
 			hb.setPostdate(getCurrentDate());
 			hb.setHalacontent(halacontent);
@@ -527,4 +538,26 @@ public class HalaController {
 
 				return "redirect:/_06_halaAndQa.halaFontPage.controller";
 			}
+		// 前往後台貼文頁面
+			@RequestMapping(path = "/admin/_06_halaAndQa.oneHala.controller", method = RequestMethod.GET)
+			public String processAction18(HttpServletRequest request,@RequestParam("halaId") Integer halaId, Model haModel, Model resModel) {
+				HalaBean Bean = halaRepo.findByHalaId(halaId);
+				haModel.addAttribute("bean", Bean);
+				
+				HttpSession session = request.getSession(false);
+				
+				String account = SecurityContextHolder.getContext().getAuthentication().getName();
+				List<MemberBean> mem = memberService.searchMemByAccount(account);
+				if (mem.size() == 0) {
+					return "_06_hala/halapostpage";
+				}else {
+				resModel.addAttribute("member",mem.get(0) );
+
+			
+
+				return "_06_hala/onehalaindex";
+				}
+			}
+		 
+		 
 }

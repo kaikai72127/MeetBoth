@@ -55,6 +55,11 @@ public class DiscountServiceImpl implements DiscountService {
 	public List<Discount> findDiscountBySearchAllLike(String dateStart, String dateEnd, String search) {
 		return discountRepository.findDiscountBySearchAllLike(dateStart, dateEnd, search);
 	}
+
+	@Override
+	public Discount findDiscountTopOne() {
+		return discountRepository.findDiscountTopOne();
+	}
 	
 	
 

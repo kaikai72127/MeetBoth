@@ -56,6 +56,46 @@ marquee a:hover {
 	background-color: rgba(0, 0, 0, 0.0);
 }
 /* 放大圖片使用 */
+
+/* 閃爍的折扣碼 */
+.discountblink {
+	animation: blink 1s linear infinite;
+}
+
+@
+keyframes blink { 0% {
+	opacity: 1;
+}
+
+50
+%
+{
+opacity
+:
+0;
+}
+100
+%
+{
+opacity
+:
+1;
+}
+}
+.discountcenter {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+}
+
+.discountbox {
+	width: 100px;
+	height: 100px;
+	background-color: #ff0;
+}
+
+/* 閃爍的折扣碼 */
 </style>
 <style>
 </style>
@@ -116,12 +156,22 @@ marquee a:hover {
 			</div>
 
 		</div>
-
 		<!-- 		折扣碼 ----跑馬燈 -->
-		<marquee onMouseOver="this.stop()" onMouseOut="this.start()">
-			<img src="https://i.imgur.com/53AabEX.png" width="48px" height="48px">
-			肉丸家教網歡迎您的加入 點擊<a href="/MeetBoth/login/page">註冊</a> ꉂꉂ꒰•̤▿•̤*ૢ꒱
-		</marquee>
+		<div style="display: flex; justify-content: center;">
+			<c:if test="${not empty discount}">
+				<div class="discountcenter">
+					<div class="discountbox discountblink">(*ฅ•ᗜ•*) 立即輸入 ${discount.discountNo} 折扣碼 即可優惠 ${discount.discountDesc} (*•ᗜ•ฅ*)</div>
+				</div>
+			</c:if>
+			<c:if test="${empty discount}">
+				<img src="https://i.imgur.com/53AabEX.png" width="48px"
+					height="48px">
+				<span style="font-size: 22px;margin-left:20px;margin-right:20px" >  目前沒有折扣碼 敬請期待小編灑 優 惠 劵  
+					（♡╹ω╹♡）ﾉ”♡</span> <img src="https://i.imgur.com/53AabEX.png" width="48px"
+					height="48px">
+
+			</c:if>
+		</div>
 		<!-- 		折扣碼 ----跑馬燈 -->
 
 

@@ -21,6 +21,10 @@ public interface DiscountRepository extends JpaRepository<Discount, Integer> {
 
 	// 模糊選擇的條件式訂單資料搜尋
 	@Query(value = "select * from discount where DISCOUNT_START >= ?1 and DISCOUNT_END <= ?2 and (DISCOUNT_NO like concat('%',?3,'%') or DISCOUNT_PRICE like concat('%',?3,'%')) order by DISCOUNT_ID", nativeQuery = true)
-	public List<Discount> findDiscountBySearchAllLike(String dateStart, String dateEnd,String search);
+	public List<Discount> findDiscountBySearchAllLike(String dateStart, String dateEnd, String search);
+
+	// 搜尋最新一筆資料的折扣碼
+	@Query(value = "select top 1 * from discount order by DISCOUNT_ID DESC", nativeQuery = true)
+	public Discount findDiscountTopOne();
 
 }

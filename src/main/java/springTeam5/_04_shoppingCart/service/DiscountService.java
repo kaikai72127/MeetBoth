@@ -27,5 +27,8 @@ public interface DiscountService {
 	
 	//模糊搜尋折扣碼
 	List<Discount> findDiscountBySearchAllLike(String dateStart, String dateEnd,String search);
+	
+	// 搜尋最新一筆資料的折扣碼
+	Discount findDiscountTopOne();
 
 }

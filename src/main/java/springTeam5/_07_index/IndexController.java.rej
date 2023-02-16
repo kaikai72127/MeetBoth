@@ -1,0 +1,8 @@
+diff a/src/main/java/springTeam5/_07_index/IndexController.java b/src/main/java/springTeam5/_07_index/IndexController.java	(rejected hunks)
+@@ -41,5 +41,6 @@
+ 		m.addAttribute("teac", teac);
+ 		m.addAttribute("stud", stud);
+ 		return "index";
++	}
+ 
+ }

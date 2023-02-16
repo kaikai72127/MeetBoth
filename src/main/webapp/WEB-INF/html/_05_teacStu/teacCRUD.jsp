@@ -721,7 +721,7 @@ to {
 												</div>
 											</div>
 										</div>
-										<div class="match-score">97%</div>
+										<div id="goal" class="match-score"></div>
 									</div>
 								</div>
 							</div>
@@ -755,7 +755,7 @@ to {
 												</div>
 											</div>
 										</div>
-										<div class="match-score">86%</div>
+										<div id="goal2" class="match-score"></div>
 									</div>
 								</div>
 							</div>
@@ -789,7 +789,7 @@ to {
 												</div>
 											</div>
 										</div>
-										<div class="match-score">77%</div>
+										<div id="goal3" class="match-score"></div>
 									</div>
 								</div>
 							</div>
@@ -823,7 +823,7 @@ to {
 												</div>
 											</div>
 										</div>
-										<div class="match-score">69%</div>
+										<div id="goal4" class="match-score"></div>
 									</div>
 								</div>
 							</div>
@@ -1031,6 +1031,9 @@ to {
 				location: this.elements.locChoose.value,
 				object: this.elements.objectChoose.value,
 				time: this.elements.timeChoose.value,
+				sub: this.elements.subChoose.value,
+				lan: this.elements.lanChoose.value,
+				price: this.elements.priceChoose.value,
 		};
 
 		fetch("/MeetBoth/_05_teacStu.match.controller", {
@@ -1043,6 +1046,7 @@ to {
 			.then(response => response.json())
 			.then(data => {
 				var firstData = data[0];
+				console.log(firstData);
 				var teacno1 = firstData.teacno;
 				var account1 = firstData.member.account;
 				var i1 = document.createElement('img');
@@ -1050,6 +1054,8 @@ to {
 				var img1 = document.getElementById('img1');
 				img1.innerHTML = '';
 				img1.appendChild(i1);
+				const goal1 = firstData.goal;
+				$('#goal').html(goal1 + "%");
 				var jsonsubjectItem = firstData.subjectItem;
 				$('#jsonsubjectItem').html(jsonsubjectItem);
 				var jsonName = firstData.member.memName + "(" + firstData.member.memNickName + ")";
@@ -1072,6 +1078,8 @@ to {
 				var img2 = document.getElementById('img2');
 				img2.innerHTML = '';
 				img2.appendChild(i2);
+				var goal2 = secondData.goal;
+				$('#goal2').html(goal2 + "%");
 				var jsonsubjectItem2 = secondData.subjectItem;
 				$('#jsonsubjectItem2').html(jsonsubjectItem2);
 				var jsonName2 = secondData.member.memName + "(" + secondData.member.memNickName + ")";
@@ -1094,6 +1102,8 @@ to {
 				var img3 = document.getElementById('img3');
 				img3.innerHTML = '';
 				img3.appendChild(i3);
+				var goal3 = thirdData.goal;
+				$('#goal3').html(goal3 + "%");
 				var jsonsubjectItem3 = thirdData.subjectItem;
 				$('#jsonsubjectItem3').html(jsonsubjectItem3);
 				var jsonName3 = thirdData.member.memName + "(" + thirdData.member.memNickName + ")";
@@ -1116,6 +1126,8 @@ to {
 				var img4 = document.getElementById('img4');
 				img4.innerHTML = '';
 				img4.appendChild(i4);
+				var goal4 = forthData.goal;
+				$('#goal4').html(goal4 + "%");
 				var jsonsubjectItem4 = forthData.subjectItem;
 				$('#jsonsubjectItem4').html(jsonsubjectItem4);
 				var jsonName4 = forthData.member.memName + "(" + forthData.member.memNickName + ")";

@@ -3,8 +3,11 @@ package springTeam5._05_teacStu.controller;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 import javax.servlet.annotation.MultipartConfig;
@@ -650,7 +653,6 @@ public class TeacStudController {
 	@PostMapping("/_05_teacStu.match.controller")
 	@ResponseBody
 	public List<TeacBean> processMatchAction(@RequestBody MatchOption options) {
-		Integer goal = 0;
 		List<String> north = Arrays.asList("台北市","臺北市","新北市","基隆市","宜蘭縣","桃園市","新竹縣","新竹市");
 		List<String> middle = Arrays.asList("台中市","臺中市","苗栗縣","彰化縣","南投縣","雲林縣");
 		List<String> south = Arrays.asList("台南市","臺南市","高雄市","嘉義市","嘉義縣","屏東縣","澎湖縣");
@@ -659,10 +661,23 @@ public class TeacStudController {
 		List<String> holiday = Arrays.asList("假日早上","假日下午","假日晚上");
 		List<String> chinese = Arrays.asList("國文","中文");
 		List<String> english = Arrays.asList("英文","美語");
+		List<String> mathe = Arrays.asList("數學");
+		List<String> nat = Arrays.asList("自然","物理","化學","生物","地球科學");
+		List<String> soc = Arrays.asList("社會","地理","歷史","公民");
+		List<String> subother = Arrays.asList("藝術","音樂","美術","鋼琴","軍訓","健康教育","吉他","做人","畫畫");
+		List<String> japan = Arrays.asList("日文","日語");
+		List<String> korea = Arrays.asList("韓文","韓語");
+		List<String> france = Arrays.asList("法文","法語");
+		List<String> deu = Arrays.asList("德文","德語");
+		List<String> shiba = Arrays.asList("希伯來文","希伯來語");
+		List<String> lanother = Arrays.asList("印尼語","印度語","埃及文","剛果語","菲律賓語","台語","香港話","甲骨文","俄語");
 		List<TeacBean> query1 = new ArrayList<>();
 		String location = options.getLocation();
 		String object = options.getObject();
 		String time = options.getTime();
+		String sub = options.getSub();
+		String lan = options.getLan();
+		String price = options.getPrice();
 		switch (location) {
 		case "北部":
 			query1 = tService.findByTeacLocIn(north);
@@ -676,10 +691,6 @@ public class TeacStudController {
 		case "東部":
 			query1 = tService.findByTeacLocIn(east);
 			break;
-		}
-		
-		if (query1.size() > 0) {
-			goal = goal + 33;
 		}
 		
 		List<TeacBean> query2 = new ArrayList<>();
@@ -698,10 +709,6 @@ public class TeacStudController {
 			break;
 		}
 		
-		if (query2.size() > 0) {
-			goal = goal + 33;
-		}
-		
 		List<TeacBean> query3 = new ArrayList<>();
 		switch (time) {
 		case "平日":
@@ -715,12 +722,6 @@ public class TeacStudController {
 			break;
 		}
 		
-		if (query3.size() > 0) {
-			goal = goal + 33;
-		}
-		
-//		以下功能測試中
-		/*
 		List<TeacBean> query4 = new ArrayList<>();
 		switch (sub) {
 		case "國文":
@@ -729,41 +730,83 @@ public class TeacStudController {
 		case "英文":
 			query4 = tService.findBySubjectItemIn(english);
 			break;
+		case "數學":
+			query4 = tService.findBySubjectItemIn(mathe);
+			break;
+		case "自然":
+			query4 = tService.findBySubjectItemIn(nat);
+			break;
+		case "社會":
+			query4 = tService.findBySubjectItemIn(soc);
+			break;
+		case "其他":
+			query4 = tService.findBySubjectItemIn(subother);
+			break;
 		}
-		*/
+		
+		List<TeacBean> query5 = new ArrayList<>();
+		switch (lan) {
+		case "英文":
+			query5 = tService.findByLanAbilityIn(english);
+			break;
+		case "日文":
+			query5 = tService.findByLanAbilityIn(japan);
+			break;
+		case "韓文":
+			query5 = tService.findByLanAbilityIn(korea);
+			break;
+		case "法文":
+			query5 = tService.findByLanAbilityIn(france);
+			break;
+		case "德文":
+			query5 = tService.findByLanAbilityIn(deu);
+			break;
+		case "希伯來文":
+			query5 = tService.findByLanAbilityIn(shiba);
+			break;
+		case "其他":
+			query5 = tService.findByLanAbilityIn(lanother);
+			break;
+		}
+		
+		List<TeacBean> query6 = new ArrayList<>();
+		switch (price) {
+		case "500以下":
+			query6 = tService.searchTeacByPrice(0.0, 500.0);
+			break;
+		case "501~1000":
+			query6 = tService.searchTeacByPrice(501.0, 1000.0);
+			break;
+		case "1000以上":
+			query6 = tService.searchTeacByPrice(1000.0, 9999999.0);
+			break;
+		}
 		
 		List<TeacBean> allData = new ArrayList<>();
 		allData.addAll(query1);
 		allData.addAll(query2);
 		allData.addAll(query3);
-
-		// 刪除重複資料
-		allData = allData.stream().distinct().collect(Collectors.toList());
-		// 根據條件符合最多的資料從最前面開始排列
-		allData.sort((o1, o2) -> {
-		int count1 = 0, count2 = 0;
-		if (north.contains(o1.getTeacLoc())) {
-		count1++;
-		}
-		if (north.contains(o2.getTeacLoc())) {
-		count2++;
-		}
-		if (o1.getTeacObject().contains(object)) {
-		count1++;
-		}
-		if (o2.getTeacObject().contains(object)) {
-		count2++;
-		}
-		if (weekday.contains(o1.getTeacTime()) || holiday.contains(o1.getTeacTime())) {
-		count1++;
-		}
-		if (weekday.contains(o2.getTeacTime()) || holiday.contains(o2.getTeacTime())) {
-		count2++;
-		}
-		return count2 - count1;
-		});
+		allData.addAll(query4);
+		allData.addAll(query5);
+		allData.addAll(query6);
 		
-		return allData;
+		Map<Integer, Integer> scores = new HashMap<>();
+		int score = 13;
+
+		for (TeacBean bean : allData) {
+		    Integer key = bean.getTeacno();
+		    if (scores.containsKey(key)) {
+		        score += 6;
+		    }
+		    scores.put(key, score);
+		    bean.setGoal(score); // 設置分數
+		}
+
+		List<TeacBean> sortedData = allData.stream()
+		    .sorted(Comparator.comparingInt(TeacBean::getGoal).reversed())
+		    .distinct()
+		    .collect(Collectors.toList());
+		return sortedData;
 	}
 	
 //  增加教師履歷瀏覽次數

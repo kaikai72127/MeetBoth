@@ -347,8 +347,8 @@
                                         </div>
 
                                     </div>
-                                    <div class="comment-table-row">
                                         <c:forEach var="bean" items="${classList}">
+                                    <div class="comment-table-row">
                                             <div class="comment-table-col">
                                                 <div class="comment-table-col-content">
                                                     ${bean.halaId}</div>
@@ -365,8 +365,8 @@
                                                 <div class="comment-table-col-content">
                                                     ${bean.postdate}</div>
                                             </div>
-                                        </c:forEach>
                                     </div>
+                                        </c:forEach>
                                 </div>
                             </div>
                         </div>

@@ -58,14 +58,8 @@ System.out.println(baseMeetboth96x96);
 				<li class="dropdown"><a class="dropdown-toggle" href="#"
 					data-toggle="dropdown">地圖搜尋</a>
 					<ul class="dropdown-menu" role="menu">
-						<li class="dropdown"><a class="dropdown-toggle" href="#"
-							data-toggle="dropdown">Product</a>
-							<ul class="dropdown-menu">
-								<li><a href="shop_product_col_3.html">3 columns</a></li>
-								<li><a href="shop_product_col_4.html">4 columns</a></li>
-							</ul></li>
-						<li><a href="shop_single_product.html">Single Product</a></li>
-						<li><a href="shop_checkout.html">Checkout</a></li>
+						<li><a href="/MeetBoth/searchAllMap.controller">我的地圖</a></li>
+<!-- 						<li><a href="shop_checkout.html">Checkout</a></li> -->
 					</ul></li>
 
 				<!--Navbar橫幅 Pages -->

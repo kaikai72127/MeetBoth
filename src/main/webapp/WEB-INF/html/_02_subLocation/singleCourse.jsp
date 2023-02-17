@@ -176,8 +176,9 @@ String basePathimg2 = request.getScheme() + "://" + request.getServerName() + ":
 										<div style="display: flex;">
 											<div class="shop-item-image"
 												style="width: 200px; height: 250px;">
-													<img src="<c:url value='/_01_member.ShowPhoto.controller?account=${bean.memberBean.account}'/>"
-                                            alt="avatar">
+												<img
+													src="<c:url value='/_01_member.ShowPhoto.controller?account=${bean.memberBean.account}'/>"
+													alt="avatar">
 											</div>
 											<div class="comment-content clearfix"
 												style="margin-left: 10px; width: 70%;">
@@ -191,9 +192,12 @@ String basePathimg2 = request.getScheme() + "://" + request.getServerName() + ":
 												</div>
 											</div>
 											<div style="margin-top: 170px;">
-												<input class="btn btn-p btn-circle" type="button"
+												<a
+													href="<c:url value='/memberresume?id=${bean.memberBean.memberID}'/>">
+													<input class="btn btn-p btn-circle" type="button"
 													value="前往賣家個人頁面"
 													style="height: 43px; font-size: 19px; float: right;">
+												</a>
 											</div>
 										</div>
 									</div>
@@ -215,9 +219,10 @@ String basePathimg2 = request.getScheme() + "://" + request.getServerName() + ":
 												<c:forEach var="commbean" items="${commBean}">
 													<div class="comment clearfix">
 														<div class="comment-avatar">
-															
-																<img src="<c:url value='/_01_member.ShowPhoto.controller?account=${bean.memberBean.account}'/>"
-                                            alt="賣家圖片">
+
+															<img
+																src="<c:url value='/_01_member.ShowPhoto.controller?account=${bean.memberBean.account}'/>"
+																alt="賣家圖片">
 														</div>
 														<div class="comment-content clearfix">
 															<div class="comment-author font-alt" style="margin: 0;">
@@ -254,7 +259,8 @@ String basePathimg2 = request.getScheme() + "://" + request.getServerName() + ":
 															<label class="sr-only" for="name">Name</label> <input
 																class="form-control" id="name" type="text" name="name"
 																placeholder="${bean.memberBean.memNickName}"
-																style="text-transform: none; font-size: 17px; height: 35px;" readonly />
+																style="text-transform: none; font-size: 17px; height: 35px;"
+																readonly />
 														</div>
 													</div>
 													<div class="col-sm-4">

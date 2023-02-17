@@ -168,12 +168,12 @@ ul {
 	<script>
 	var markers = [];
     var position = [
-        { label: 'A', lat: 25.0374865, lng: 121.5647688 },
-        { label: 'B', lat: 25.0397146, lng: 121.5653771 }, 
-        { label: 'C', lat: 25.0405919, lng:  121.5647644 },
-        { label: 'D', lat: 25.039982, lng: 121.572258 }, 
-        { label: 'E', lat: 25.0400306, lng: 121.5602452 }, 
-        { label: 'F', lat: 25.0336076, lng: 121.5647587 }  
+        { label: '小羽', lat: 24.985459154018237, lng: 121.22226082767808, loc: '中壢區新生路二段421號' }, 
+        { label: '小李', lat: 24.9899477702909, lng: 121.22167595465892, loc: '中壢區新生路三段111號' }, 
+        { label: '彬彬', lat: 24.98540500292972, lng:  121.22019377000503, loc: '中壢區大圳路一段178號' }, 
+        { label: '昆君', lat: 24.985125429803908, lng: 121.22416926814918, loc: '中壢區新生路二段378號' },  
+        { label: '苓苓', lat: 24.989076071946243, lng: 121.22322104116847, loc: '中壢區新生路三段120巷68號' },  
+        { label: '阿泰', lat: 24.982205535100352, lng: 121.22226572582218, loc: '中壢區新生路三段25號' }  
     ];
 	const googleMap = new Vue({
         el: '#app',
@@ -188,12 +188,12 @@ ul {
         methods: {
             // init google map
             initMap() {
-                // 預設顯示的地點：台北市政府親子劇場
+                // 預設顯示的地點：聖德
                 let location = {
-                    lat: 25.0374865, // 經度
-                    lng: 121.5647688 // 緯度
+                    lat: 24.985064755434966, // 經度
+                    lng: 121.2224708104762 // 緯度
                 };
-
+                 
                 // 建立地圖
                 this.map = new google.maps.Map(document.getElementById('map'), {
                     center: location,
@@ -201,6 +201,8 @@ ul {
                     mapTypeId: 'terrain'
                 });
                 for (var i = 0; i < position.length; i++) {
+                	
+                	var contentString= '<div style="color:#DC5345;"><strong>'+position[i].label+'</strong></div><div>'+position[i].loc+'</div>';
 
                     markers[i] = new google.maps.Marker({
                         position: {
@@ -208,28 +210,9 @@ ul {
                             lng: position[i].lng
                         },
                         map: this.map,
-                        label: position[i].label,
+//                         label: position[i].label,
                         icon:"/MeetBoth/html/images/favicon.png"
-                    };
-                    
-                 // info window
-                    let infowindow = new google.maps.InfoWindow({
-                        content: `<h6>xxxx</h6>`
-                    });
-                   
-                    infowindow.open(this.map, markers[i]);
-                    
-                 // 監聽 marker click 事件
-                    marker.addListener('click', e => {
-                        // 如果目前有開啟中的訊息視窗，先將其關閉 
-                        if (this.infowindow) this.infowindow.close();
-                        // 顯示被點擊地標的訊息視窗
-                        infowindow.open(this.map, markers[i]);
-                        // 存入目前開啟的訊息視窗
-                        this.infowindow = infowindow;
-                    });
-                    
-                    
+
                         
                         
                         
@@ -239,59 +222,71 @@ ul {
 
 //                         });
                         
-//                      // 監聽 marker click 事件
-//                         markers.addListener('click', e => {
-//                             // 如果目前有開啟中的訊息視窗，先將其關閉 
-//                             if (this.infowindow) this.infowindow.close();
-//                             // 顯示被點擊地標的訊息視窗
-//                             infowindow.open(this.map, marker);
-//                             // 存入目前開啟的訊息視窗
-//                             this.infowindow = infowindow;
-//                         });
+
+                        });
+                        
+                 // info window `<h6>${position[i].label}</h6>`
+                    let infowindow = new google.maps.InfoWindow({
+                        content: contentString,
+                        maxWidth:250
+                    });
+                 
+                    infowindow.open(this.map, markers[i]);
+                    
+                 // 監聽 marker click 事件
+//                  markers.addListener('click', e => {
+//                      // 如果目前有開啟中的訊息視窗，先將其關閉 
+//                      if (this.infowindow) this.infowindow.close();
+//                      // 顯示被點擊地標的訊息視窗
+//                      infowindow.open(this.map, marker);
+//                      // 存入目前開啟的訊息視窗
+//                      this.infowindow = infowindow;};
+
+                   
 
                     
-                
+                };
 
 
 
-                // 放置多個marker
-                fetch('./map.geojson')
-                    .then(results => results.json())
-                    .then(result => {
-                        this.features = result.features;
-                        Array.prototype.forEach.call(this.features, r => {
-                            let latLng = new google.maps.LatLng(r.geometry.coordinates[0], r.geometry.coordinates[1]);
-                            let marker = new google.maps.Marker({
-                                position: latLng,
-                                map: this.map,
-                            });
+//                 // 放置多個marker
+//                 fetch('./map.geojson')
+//                     .then(results => results.json())
+//                     .then(result => {
+//                         this.features = result.features;
+//                         Array.prototype.forEach.call(this.features, r => {
+//                             let latLng = new google.maps.LatLng(r.geometry.coordinates[0], r.geometry.coordinates[1]);
+//                             let marker = new google.maps.Marker({
+//                                 position: latLng,
+//                                 map: this.map,
+//                             });
 
-                            // info window
-                            let infowindow = new google.maps.InfoWindow({
-                                content: `<h6>${r.properties.name} <hr>${r.properties.site}</h6>` // 支援html
+//                             // info window
+//                             let infowindow = new google.maps.InfoWindow({
+//                                 content: `<h6>${r.properties.name} <hr>${r.properties.site}</h6>` // 支援html
 
-                            });
+//                             });
 
-                            // 監聽 marker click 事件
-                            marker.addListener('click', e => {
-                                // 如果目前有開啟中的訊息視窗，先將其關閉 
-                                if (this.infowindow) this.infowindow.close();
-                                // 顯示被點擊地標的訊息視窗
-                                infowindow.open(this.map, marker);
-                                // 存入目前開啟的訊息視窗
-                                this.infowindow = infowindow;
-                            });
+//                             // 監聽 marker click 事件
+//                             marker.addListener('click', e => {
+//                                 // 如果目前有開啟中的訊息視窗，先將其關閉 
+//                                 if (this.infowindow) this.infowindow.close();
+//                                 // 顯示被點擊地標的訊息視窗
+//                                 infowindow.open(this.map, marker);
+//                                 // 存入目前開啟的訊息視窗
+//                                 this.infowindow = infowindow;
+//                             });
 
-                            // 加一個open的method，就可由外部按鈕開啟
+//                             // 加一個open的method，就可由外部按鈕開啟
 //                             this.infowindowAll[r.properties.id] = {
 //                                 open: function () {
 //                                     infowindow.open(this.map, marker);
 //                                 }
 //                             };
 
-                        });
+//                         });
 
-                    });
+//                     });
             },
             // 地址自動完成 + 地圖的中心移到輸入結果的地址上
             siteAuto() {
@@ -309,15 +304,27 @@ ul {
                         // 放置標記
                         let marker = new google.maps.Marker({
                             position: searchCenter,
-                            icon:"/MeetBoth/html/images/meatball-map.png",
-                            map: this.map
+                            icon:"/MeetBoth/html/images/meatball-map1.png",
+                            map: this.map,
+                            animation: google.maps.Animation.DROP,
+                            draggable:true
                         });
 
                         // info window
                         let infowindow = new google.maps.InfoWindow({
                             content: this.place.formatted_address
                         });
-                        infowindow.open(this.map, marker);
+                       
+                        
+                     // 監聽 marker click 事件
+                        marker.addListener('click', e => {
+                            // 如果目前有開啟中的訊息視窗，先將其關閉 
+                            if (this.infowindow) this.infowindow.close();
+                            // 顯示被點擊地標的訊息視窗
+                            infowindow.open(this.map, marker);
+                            // 存入目前開啟的訊息視窗
+                            this.infowindow = infowindow;
+                        });
 
                     }
                 });

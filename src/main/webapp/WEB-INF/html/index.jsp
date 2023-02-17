@@ -276,7 +276,7 @@
 										<div class="works-grid works-grid-4 works-hover-w" id=""
 											style="text-align: center;">
 											<div class="work-item illustration webdesign" id="typeBlock"
-												style="height: 30rem; width: 100%;">
+												style="height: 366px; width: 100%;">
 												<a
 													href="/MeetBoth/_03_product.PathToProductDetail.controller?id=${HotBean.prodID}">
 													<span class="work-image"

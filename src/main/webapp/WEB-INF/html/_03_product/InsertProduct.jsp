@@ -232,10 +232,10 @@ String basePathimg2 = request.getScheme() + "://" + request.getServerName() + ":
 		var si = document.getElementById('speedInsert');
 		si.addEventListener('click', function() {
 			console.log("123");
-			document.getElementById('pName').value = '狐狸的電話亭';
-			document.getElementById('pPrice').value = '150';
-			document.getElementById('invt').value = '10';
-			document.getElementById('directions').innerHTML = '這是一本描述了 -> 母愛的偉大 <- 的好書';
+			document.getElementById('pName').value = '全新平板';
+			document.getElementById('pPrice').value = '15600';
+			document.getElementById('invt').value = '1';
+			document.getElementById('directions').innerHTML = '尾牙抽到 甩賣';
 		});
 	</script>
 </body>

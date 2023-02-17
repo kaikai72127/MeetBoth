@@ -67,6 +67,7 @@
 							}
 						});
 					}); </script>
+				<script src="https://www.google.com/recaptcha/api.js" async defer></script>
 
 			</head>
 
@@ -109,7 +110,9 @@
 											</label>
 										</div>
 										<div class="form-group">
-											<button class="btn btn-round btn-p"
+											<button class="btn btn-round btn-p g-recaptcha"
+												data-sitekey="6LdxZYskAAAAABbdq9T-558ROSD4Uf0GpCvfprcH"
+												data-action="verify1" data-callback="verifyCallback"
 												style="font-size: 20px; font-family: 微軟正黑體 ; padding: 0.7% 3% 0.7% 3%;">登入</button>
 											<a style="font-size: large;padding-left: 10px;"
 												href="<%=request.getContextPath()%>/forgetpassword"><i
@@ -129,7 +132,7 @@
 											style="font-size: 20px; font-family: 微軟正黑體 ; padding: 0.7% 3% 0.7% 3%;">
 										<input type="button" id="user" class="btn btn-round btn-p"
 											onclick="event.preventDefault();happylog();" value="開芯一鍵登入"
-											style="font-size: 20px; font-family: 微軟正黑體 ; padding: 0.7% 3% 0.7% 3%;">
+											style="font-size: 20px; font-family: 微軟正黑體 ; padding: 0.7% 3% 0.7% 3%; margin-top: 3%;">
 									</form>
 
 

@@ -68,7 +68,59 @@
 						});
 					}); </script>
 				<script src="https://www.google.com/recaptcha/api.js" async defer></script>
+				<script>
+					function verifyCallback(token) {
+						console.log(token);
+						$('#loginform').submit();
+						// let formData = new FormData();
+						// formData.append('token', token);
 
+						// fetch(uriGAS, {
+						// 	method: "POST",
+						// 	body: formData
+						// }).then(response => response.json())
+						// 	.then(result => {
+						// 		if (result.success) {
+						// 			// 分數大過 0.5，才當作是真實人類操作
+						// 			if (result.score > 0.5) {
+						// 				$('#loginform').submit();
+						// 			}
+
+						// 			else {
+						// 				$('#error').text('驗證不通過');
+						// 			}
+						// 		} else {
+						// 			window.alert(result['error-codes'][0])
+						// 		}
+						// 	})
+						// 	.catch(err => {
+						// 		window.alert(err)
+						// 	})
+					}
+
+					// function doPost(e) {
+
+					// 	var params = e.parameter;
+					// 	var token = params.token; // 從前端傳來的 token
+
+
+					// 	var uri = 'https://www.google.com/recaptcha/api/siteverify';
+					// 	var data = {
+					// 		secret: '6LdxZYskAAAAAKc0nTph64_4fGJp3t5-DbtAjtzS',
+					// 		response: token,
+
+					// 	}
+
+					// 	var option = {
+					// 		method: 'post',
+					// 		payload: data
+					// 	};
+
+					// 	var response = UrlFetchApp.fetch(uri, option);
+					// 	return ContentService.createTextOutput(response).setMimeType(ContentService.MimeType.JSON);
+
+					// }
+				</script>
 			</head>
 
 			<!--BOBY-->
@@ -115,8 +167,8 @@
 												data-action="verify1" data-callback="verifyCallback"
 												style="font-size: 20px; font-family: 微軟正黑體 ; padding: 0.7% 3% 0.7% 3%;">登入</button>
 											<a style="font-size: large;padding-left: 10px;"
-												href="<%=request.getContextPath()%>/forgetpassword"><i
-													class="fa-solid fa-circle-xmark"></i>忘記密碼?</a>
+												href="<%=request.getContextPath()%>/forgetpassword"><label
+													id="error"></label><i class="fa-solid fa-circle-xmark"></i>忘記密碼?</a>
 											<!-- <button class="btn btn-round btn-p"
 												style="font-size: 20px; font-family: 微軟正黑體 ; padding: 0.7% 3% 0.7% 3%;"
 												href="<%=request.getContextPath()%>/oauth2/authorization/google">Google登入</button> -->

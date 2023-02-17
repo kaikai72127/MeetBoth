@@ -172,14 +172,14 @@ public class ShoppingCartCheck {
 			System.out.println("------------------------自動生成" + orderService.generateOrderNumber());
 			orderBean = new OrderBean(null, orderService.generateOrderNumber(), memberBean,
 					orderService.getCurrentDate(), orderService.getCurrentDate(), shippingName, shippingPhone,
-					shippingAddress, "處理中", "未付款", "無", paymentMethod, discountUse, totalAmount, null);
+					shippingAddress, "處理中", "未付款", "備貨中", paymentMethod, discountUse, totalAmount, null);
 		} else {
 
 			System.out.println("-------------------" + totalAmount);
 			System.out.println("------------------------自動生成" + orderService.generateOrderNumber());
 			orderBean = new OrderBean(null, orderService.generateOrderNumber(), memberBean,
 					orderService.getCurrentDate(), orderService.getCurrentDate(), shippingName, shippingPhone,
-					shippingAddress, "處理中", "未付款", "處理中", paymentMethod, null, shoppingCart.getItemAmount(), null);
+					shippingAddress, "處理中", "未付款", "備貨中", paymentMethod, null, shoppingCart.getItemAmount(), null);
 		}
 
 		orderService.createOrder(orderBean);

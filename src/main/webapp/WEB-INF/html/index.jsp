@@ -142,8 +142,8 @@
 			<c:if test="${empty discount}">
 				<img src="https://i.imgur.com/53AabEX.png" width="48px"
 					height="48px">
-				<span style="font-size: 22px; margin-left: 20px; margin-right: 20px">
-					目前沒有折扣碼 敬請期待小編灑 優 惠 劵 （♡╹ω╹♡）ﾉ”♡</span>
+				<span style="font-size: 24px; margin-left: 20px; margin-right: 20px">
+					目前沒有折扣碼 <span class="blink" style="color:#ce7777;font-size:30px;font-weight:800">敬請期待</span> 小編灑 優 惠 劵 （♡╹ω╹♡）ﾉ”♡</span>
 				<img src="https://i.imgur.com/53AabEX.png" width="48px"
 					height="48px">
 

@@ -130,7 +130,8 @@ h1 {
 												class="fa-solid fa-angle-double-down"></i>
 										</a>
 											<ul style="">
-												<c:forEach var="ytBean" items="${eachCourse.courseBean.ytPlayer}">
+												<c:forEach var="ytBean"
+													items="${eachCourse.courseBean.ytPlayer}">
 													<li><a
 														href="/MeetBoth/YtDetail.controller?id=${ytBean.ytPlayerID}&courseID=${eachCourse.courseBean.courseID}">${ytBean.ytPlayerName}</a></li>
 												</c:forEach>
@@ -160,7 +161,8 @@ h1 {
 									<div class="post-header font-alt">
 										<h2 class="post-title">${bean.ytPlayerName}</h2>
 										<div class="post-meta">
-											By&nbsp;<a href="#">課程講師 ${singleCourseBean.memberBean.memName}</a>|
+											By&nbsp;<a href="#">課程講師
+												${singleCourseBean.memberBean.memName}</a>|
 											&nbsp;${singleCourseBean.courseUpdate} | &nbsp;課程類別&nbsp;:<a
 												href="#">${singleCourseBean.coursetype.courseClassName}</a>
 										</div>
@@ -208,9 +210,12 @@ h1 {
 														</div>
 													</div>
 													<div style="margin-top: 170px;">
-														<input class="btn btn-d btn-circle" type="button"
+														<a
+															href="<c:url value='/memberresume?id=${bean.memberBean.memberID}'/>">
+															<input class="btn btn-p btn-circle" type="button"
 															value="前往賣家個人頁面"
 															style="height: 43px; font-size: 19px; float: right;">
+														</a>
 													</div>
 												</div>
 											</div>
@@ -254,8 +259,10 @@ h1 {
 														class="comment-form-title font-alt">新增評論</h2>
 													<form method="post"
 														action="<c:url value='/InsertCourseCommentUnderYt.controller' />">
-														<input type="hidden" name="id" value="${singleCourseBean.courseID}" />
-														<input type="hidden" name="ytPlayerID" value="${bean.ytPlayerID}" />
+														<input type="hidden" name="id"
+															value="${singleCourseBean.courseID}" /> <input
+															type="hidden" name="ytPlayerID"
+															value="${bean.ytPlayerID}" />
 														<div class="row">
 															<div class="col-sm-4">
 																<div class="form-group">
@@ -294,20 +301,20 @@ h1 {
 												</div>
 											</div>
 											<!-- 										課程評論 end -->
+										</div>
 									</div>
 								</div>
+								<!--       右邊第二部分 -->
+								<!-- 		課程資訊結束 -->
 							</div>
-							<!--       右邊第二部分 -->
-							<!-- 		課程資訊結束 -->
 						</div>
+						<!-- 		右邊欄位結束 -->
 					</div>
-					<!-- 		右邊欄位結束 -->
 				</div>
+			</section>
+			<jsp:include page="/WEB-INF/html/fragment/footerMVC.jsp" />
 		</div>
-		</section>
-		<jsp:include page="/WEB-INF/html/fragment/footerMVC.jsp" />
-		</div>
-		
+
 	</main>
 	<!--  
     JavaScripts
@@ -411,7 +418,7 @@ h1 {
 					stars += offstar;
 				}
 			}
-			stars += '&nbsp;('+ score.length +'則評論)'
+			stars += '&nbsp;(' + score.length + '則評論)'
 			document.getElementById("starAVGDiv").innerHTML = stars;
 		});
 	</script>

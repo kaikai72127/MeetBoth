@@ -101,7 +101,7 @@
 											<h4>課程類別名稱 : ${bean.coursetype.courseClassName}</h4>
 										</div>
 									</div>
-								</div> 
+								</div>
 								<div class="row mb-20">
 									<div class="col-sm-12">
 										<div class="description">
@@ -152,13 +152,15 @@
 											<div style="height: 300px; width: 100%; overflow-y: scroll;">
 												<c:forEach var="ytBean" items="${bean.ytPlayer}">
 													<div class="col-sm-6 col-md-3 col-lg-3"
-														style="padding-bottom: 10px; width: 445px; height: 600px; display: flex; justify-content: center;">
+														style="padding-bottom: 0px; width: 300px; height: 250px; display: flex; justify-content: center;">
 														<div class="comment-content clearfix">
 															<div class="comment-author font-alt" style="margin: 0;">
 																<a href="#" style="font-size: 15px;">${ytBean.ytPlayerName}</a>
 															</div>
 															<div>
-																<iframe style="max-width: 100%; max-height: 100%; height: auto; width: auto;" class="embed-responsive-item"
+																<iframe
+																	style="max-width: 100%; max-height: 100%; height: auto; width: auto;"
+																	class="embed-responsive-item"
 																	src="//www.youtube.com/embed/${ytBean.ytPlayerURL}"
 																	frameborder="0" allowfullscreen="allowfullscreen"></iframe>
 															</div>
@@ -193,10 +195,16 @@
 																style="text-transform: none; font-size: 17px; height: 35px;" />
 														</div>
 													</div>
-													<div class="col-sm-12">
-														<button class="btn btn-round btn-d" type="submit"
+													<div class="col-sm-12" >
+														<button class="btn btn-round btn-p" type="submit"
 															style="height: 50px; font-size: 22px; float: right;">新增課程影片</button>
+														
+														<button class="btn btn-round btn-p" type="button"
+															onclick="setDefaultValues()"
+															style="height: 50px; font-size: 22px; float: right;margin: 0 10px;">一鍵輸入</button>
+
 													</div>
+
 												</div>
 											</form>
 										</div>
@@ -225,6 +233,14 @@
 	<jsp:include page="/WEB-INF/html/fragment/jsPath.jsp" />
 	<!-- SweetAlert js -->
 	<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+	<!-- 	一鍵輸入 -->
+	<script>
+	function setDefaultValues() {
+    document.getElementById("ytPlayerName").value = "線上課程-課後練習";
+    document.getElementById("ytPlayerURL").value = "NcdD6gwh12w";
+    }
+	</script>
+	
 	<script>
 		const scores = document.querySelectorAll("#score");
 

@@ -46,8 +46,8 @@ String basePathimg2 = request.getScheme() + "://" + request.getServerName() + ":
 							</button>
 							&nbsp;
 							<button class="btn btn-primary  btn-circle" type="button"
-								style="height: 43px; font-size: 19px;" onclick="#">
-								<span class=" icon-gears">&ensp;一件輸入</span>
+								style="height: 43px; font-size: 19px;" id="fill-form-btn" onclick="setDefaultValues()">
+								<span class=" icon-gears">&ensp;一鍵輸入</span>
 							</button>
 
 						</div>
@@ -68,7 +68,7 @@ String basePathimg2 = request.getScheme() + "://" + request.getServerName() + ":
 										<div class="price font-alt" style="display: flex;">
 											<span class="amount"
 												style="font-size: 25px; text-align: center;">課程名稱:&ensp;</span>
-											<input class="form-control input-lg" type="text" name="cName"
+											<input class="form-control input-lg" type="text" name="cName" id="cName"
 												required="required"
 												style="text-transform: none; width: 80%; font-size: 20px; letter-spacing: 0px; border: 1px solid black; border-radius: 15px; text-align: center;" />
 										</div>
@@ -79,7 +79,7 @@ String basePathimg2 = request.getScheme() + "://" + request.getServerName() + ":
 										<div class="price font-alt" style="display: flex;">
 											<span class="amount"
 												style="font-size: 25px; text-align: center;">課程類別:&ensp;</span>
-											<select name="cClass"
+											<select name="cClass" id="cClass"
 												style="width: 80%; font-size: 20px; letter-spacing: 0px; border: 1px solid black; border-radius: 15px; text-align: center;">
 												<option value="1">語言學習</option>
 												<option value="2">升學補習</option>
@@ -96,7 +96,7 @@ String basePathimg2 = request.getScheme() + "://" + request.getServerName() + ":
 											<span class="amount"
 												style="font-size: 25px; text-align: center;">課程價格:&ensp;</span>
 											<input class="form-control input-lg" type="number"
-												name="cPrice" id="amount" value="1" min="0"
+												name="cPrice" id="cPrice" value="1" min="0"
 												required="required"
 												style="width: 80%; font-size: 20px; letter-spacing: 0px; border: 1px solid black; border-radius: 15px; text-align: center;" />
 										</div>
@@ -154,6 +154,16 @@ String basePathimg2 = request.getScheme() + "://" + request.getServerName() + ":
     -->
 	<!-- 引入共同的js -->
 	<jsp:include page="/WEB-INF/html/fragment/jsPath.jsp" />
+<!-- 	一鍵輸入 -->
+	<script>
+	function setDefaultValues(){
+    document.getElementById('cName').value = '網頁全端開發';
+    document.getElementById('cClass').value = '5';
+    document.getElementById('cPrice').value = '1999';
+    document.getElementById('directions').value = '課程內容包含基本語法、物件導向的程式架構、解決問題的邏輯思路、遇到問題狀況的處理、Debug技巧，建立扎實的程式開發必備知識。網頁開發分為前端與後端部分。網頁全端開發課程前半段著重HMTL, CSS, JavaScript三大網頁開發基石，透過實作四個專案、兩個遊戲來鞏固所學基礎。後半部分著重於後端開發工具，包含業界常見的MongoDB, Node.js等後端程式設計工具。課程最後會統整前端React框架與後端API連結系統，製作出網頁開發中非常熱門的MERN專案系統！你不需要有任何的程式設計經驗，也不需要有相關的背景知識。此課程包含網頁前端與後端所需內容，帶你學會成為網頁全端工程師的必備技巧';
+    }
+	</script>
+	
 	<script>
 		$("#images5278").change(function() {
 			readURL(this);

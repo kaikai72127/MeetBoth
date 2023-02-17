@@ -120,6 +120,8 @@ body {
     padding: 1rem 1.5rem 0;
     color: #333333;
     min-height: 22rem;
+    font-size: 18px;
+    white-space: pre-line;
 }
 
 /* #region Post Footer*/

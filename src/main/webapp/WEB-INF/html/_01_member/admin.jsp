@@ -417,7 +417,7 @@
 
                                                         <div>
                                                             <table id="member"
-                                                                style="width: 100%; color: aliceblue; font-size: 22px;">
+                                                                style="width: 100%; color: aliceblue; font-size: 19px;">
                                                                 <!-- style="color: rgb(255, 255, 255); text-align: center; width: 100%;"
                                                                 class="prodtable"> -->
                                                                 <thead>

@@ -47,5 +47,21 @@ public class IndexController {
 		m.addAttribute("Hotprodlist", Hotprodlist);
 		return "index";
 	}
+	@GetMapping("/")
+	public String processMainAction2(Model m) {
+		List<TeacBean> teac = tService.findFirst6ByOrderByUpdateDateDesc();
+		List<StudBean> stud = sService.findFirst6ByOrderByUpdateDateDesc();
+		List<Product> Hotprodlist = pService.findHotestProductsAndOnlyOnSales();
+		Discount discount =new Discount();
+		discount = discountService.findDiscountTopOne();
+		
+		if(discount != null) {
+			m.addAttribute("discount", discount);
+		}
+		m.addAttribute("teac", teac);
+		m.addAttribute("stud", stud);
+		m.addAttribute("Hotprodlist", Hotprodlist);
+		return "index";
+	}
 
 }

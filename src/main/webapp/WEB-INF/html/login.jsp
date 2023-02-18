@@ -68,6 +68,7 @@
 						});
 					}); </script>
 				<script src="https://www.google.com/recaptcha/api.js" async defer></script>
+				<script src="https://www.google.com/recaptcha/api.js" async defer></script>
 				<script>
 					function verifyCallback(token) {
 						console.log(token);

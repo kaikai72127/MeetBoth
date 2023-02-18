@@ -361,6 +361,9 @@
                                                                                     <option value="admin"
                                                                                         style="background-color: black;">
                                                                                         管理員</option>
+                                                                                    <option value="ban"
+                                                                                        style="background-color: black;">
+                                                                                        停權</option>
                                                                                 </select>
                                                                             </td>
                                                                         </tr>

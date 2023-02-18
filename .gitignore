@@ -31,3 +31,10 @@ build/
 
 ### VS Code ###
 .vscode/
+src/main/java/springTeam5/_01_member/controller/UserController.java
+src/main/java/springTeam5/_01_member/controller/UserRepository.java
+src/main/java/springTeam5/_01_member/model/authAccountService.java
+src/main/java/springTeam5/_01_member/model/User.java
+src/main/java/springTeam5/_01_member/model/UserDTO.java
+src/main/java/springTeam5/_01_member/model/UsereService.java
+src/main/java/springTeam5/_01_member/model/UserServiceImpl.java

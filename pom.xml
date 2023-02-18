@@ -126,6 +126,7 @@
 			<artifactId>spring-security-oauth2-jose</artifactId>
 		</dependency>
 <!-- 	第三方Oauth API --> 
+
 		<dependency>
 			<groupId>org.springframework.security.oauth.boot</groupId>
 			<artifactId>spring-security-oauth2-autoconfigure</artifactId>

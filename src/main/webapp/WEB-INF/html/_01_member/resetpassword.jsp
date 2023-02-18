@@ -11,6 +11,40 @@
 					<!-- 引入共同的headMVC -->
 					<jsp:include page="../fragment/headMVC.jsp" />
 					<jsp:include page="js/myjs.jsp" />
+					<style>
+						#checkEye {
+							position: absolute;
+							top: 50%;
+							right: 20px;
+							transform: translateY(-50%);
+						}
+
+						#checkEye2 {
+							position: absolute;
+							top: 65%;
+							right: 20px;
+							transform: translateY(-50%);
+						}
+					</style>
+					<script>
+						function view() {
+							if ($("#checkEye").hasClass('fa-eye')) {
+								$("#pas1check").attr('type', 'text');
+							} else {
+								$("#pas1check").attr('type', 'password');
+							}
+							$("#checkEye").toggleClass('fa-eye').toggleClass('fa-eye-slash');
+						}
+						function view2() {
+							if ($("#checkEye2").hasClass('fa-eye')) {
+								$("#pas2check").attr('type', 'text');
+							} else {
+								$("#pas2check").attr('type', 'password');
+							}
+							$("#checkEye2").toggleClass('fa-eye').toggleClass('fa-eye-slash');
+						}
+
+					</script>
 				</head>
 
 				<!--BOBY-->
@@ -35,19 +69,30 @@
 										<form class="form" action="resetpass" method="Post">
 
 											<div class="form-group">
-												<input class="form-control" style="text-transform: none;" id="account"
-													type="text" name="account" value='${account}' placeholder="請輸入帳號"
-													readonly />
-												<input class="form-control" style="text-transform: none;" id="pas1check"
-													type="text" name="password" value='${value}' onblur="pasvalid()"
-													placeholder="請輸入新密碼" />
-												<input class="form-control" style="text-transform: none;" id="pas2check"
-													type="text" name="password2" onblur="checkpwd()" value='${value}'
-													placeholder="請再輸入一次新密碼" />
+												<div style="width: 95%;">
+													<input class="form-control" style="text-transform: none;"
+														id="account" type="text" name="account" value='${account}'
+														placeholder="請輸入帳號" readonly />
+												</div>
+												<div style="width: 95%;">
+													<input class="form-control" style="text-transform: none;"
+														id="pas1check" type="password" name="password" value='${value}'
+														onblur="pasvalid()" placeholder="請輸入新密碼" required><span><i
+															onclick='view()' class="fas fa-eye"
+															id="checkEye"></i></span>
+
+												</div>
+												<div style="width: 95%;">
+													<input class="form-control" style="text-transform: none;"
+														id="pas2check" type="text" name="password2" onblur="checkpwd()"
+														value='${value}' placeholder="請再輸入一次新密碼" required /><i
+														class="fas fa-eye" onclick="view2()" id="checkEye2"></i>
+
+												</div>
 											</div>
 
 											<div class="form-group">
-												<button class="btn btn-round btn-p">送出</button>
+												<button class="btn btn-round btn-p" onclick="submitcheck()">送出</button>
 											</div>
 
 
@@ -61,7 +106,9 @@
 
 						<!-- Footer -->
 						<!-- 引入共同的footerMVC -->
-						<jsp:include page="../fragment/footerMVC.jsp" />
+						<div>
+							<jsp:include page="../fragment/footerMVC.jsp" />
+						</div>
 					</main>
 
 					<!--  

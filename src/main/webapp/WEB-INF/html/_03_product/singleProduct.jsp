@@ -550,7 +550,7 @@ String basePathimg2 = request.getScheme() + "://" + request.getServerName() + ":
 		messageBox.style.fontSize = "16px";
 		messageBox.style.textAlign = "center";
 		messageBox.style.fontWeight = "800";
-		// 設定定時器，在3秒後隱藏訊息框
+		// 設定定時器，在0.7秒後隱藏訊息框
 		setTimeout(function() {
 			messageBox.style.display = "none";
 		}, 700);

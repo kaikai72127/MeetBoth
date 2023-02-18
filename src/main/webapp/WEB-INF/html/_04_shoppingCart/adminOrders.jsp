@@ -172,11 +172,53 @@ a:hover {
 .prodtable>tbody>tr>td {
 	border-right: solid 1px white;
 	border-top: solid 1px white;
+	
 }
+/* 顯示金額使用*/	
+
+ .total-price {
+        font-size: 50px;
+        font-weight: bold;
+        color: yellow;
+        position: relative;
+        animation: jump 0.0005s ease-in-out;
+      }
+
+      @keyframes jump {
+        0% {
+          top: 0;
+        }
+        50% {
+          top: -50px;
+        }
+        100% {
+          top: 0;
+        }
+      }
+	
+/* 顯示金額使用*/	
 </style>
+
+<!-- 顯示金額使用 -->
+<script>
+function animatePrice(startPrice, endPrice) {
+    var el = document.querySelector('.total-price');
+    var intervalId = setInterval(function() {
+        if (el.innerHTML == endPrice) {
+            clearInterval(intervalId);
+        } else {
+            el.innerHTML = parseInt(el.innerHTML) + 1;
+        }
+    }, 0.00001);
+    el.innerHTML = startPrice;
+}
+	</script>
+<!-- 顯示金額使用 -->
+
+
 </head>
 <body data-spy="scroll" data-target=".onpage-navigation"
-	data-offset="60">
+	data-offset="60" onload="animatePrice(${mbTotal - 1000}, ${mbTotal})">
 	<main>
 		<div class="page-loader">
 			<div class="loader">Loading...</div>
@@ -209,7 +251,11 @@ a:hover {
 										style="height: auto; padding-bottom: 100px;">
 										<div>
 											<span>所有訂單資料 :&ensp;</span>
+											<span>累計總訂單數 :<span style="font-size: 50px;color:yellow" > ${order}</span>  筆&ensp;</span>
+											<span>累積消費總金額 : <span class="total-price"></span> 元&ensp;</span>
 										</div>
+										<!--搜尋列表 -->
+
 										<form class="row"
 											action="<c:url value='/admin/shoppingCartSearchOrders.controller/1'/>"
 											method="post">
@@ -221,9 +267,8 @@ a:hover {
 														style="padding-right: 0; font-size: 17px; color: black;">
 														<option value="0">訂單狀態</option>
 														<option value="處理中">處理中</option>
-														<option value="備貨中">備貨中</option>
 														<option value="已完成">已完成</option>
-														<option value="取消">取消</option>
+														<!-- <option value="取消">取消</option> -->
 													</select>
 												</div>
 												<div style="padding-right: 0; margin: auto 10px;">
@@ -261,9 +306,10 @@ a:hover {
 												</div>
 											</div>
 										</form>
+										<!--搜尋列表 -->
+										
+										
 										<div>
-
-
 											<div>
 												<table
 													style="color: white; text-align: center; font-size: 20px"
@@ -446,30 +492,4 @@ a:hover {
     </script>
 
 	<!--     刪除訂單 -->
-
-
-	<script>
-	var commentAmounts = document.querySelectorAll("#commentAmount");
-	var AVGscores = document.querySelectorAll("#AVGscore");
-
-	for (var i = 0; i < commentAmounts.length; i++) {
-		var commentList = commentAmounts[i].querySelector("#commmentList").value;
-    	if(commentList === '[]'){
-  		commentAmounts[i].innerHTML = 0;
-    	}else{
-  		commentAmounts[i].innerHTML = commentList.split(",").length;
-    	}
-
-  		var scoreList = AVGscores[i].querySelectorAll("#commmentList");
-  		var sum = 0;
-  		for (var j = 0; j < scoreList.length; j++) {
-    		sum += parseInt(scoreList[j].value);
-  		}
-  		if(isNaN((sum / scoreList.length).toFixed(2))){
-  			AVGscores[i].innerHTML = '無'
-  		}else{
-	  		AVGscores[i].innerHTML = (sum / scoreList.length).toFixed(2);
-  		}
-	}
-</script>
 </html>

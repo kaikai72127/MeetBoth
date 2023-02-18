@@ -18,9 +18,6 @@
 					class="fa-solid fa-angle-double-down"></i></a>
 				<ul style="">
 					<li><a href="/MeetBoth/memberOrdersList.controller">我的訂單</a></li>
-					<li><a href="#">待付款訂單</a></li>
-					<li><a href="#">待出貨訂單</a></li>
-					<li><a href="#">已完成訂單</a></li>
 				</ul></li>
 			<li><a href="#">我的課程&ensp;<i
 					class="fa-solid fa-angle-double-down"></i></a>

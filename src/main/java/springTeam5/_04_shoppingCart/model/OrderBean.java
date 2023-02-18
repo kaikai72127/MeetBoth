@@ -50,13 +50,13 @@ public class OrderBean {
 
 	// 狀態
 	@Column(name = "ORDSTSTUS")
-	private String ordStstus = "處理中"; // 訂單狀態 處理中(預設)/備貨中/已完成/取消
+	private String ordStstus = "處理中"; // 訂單狀態 處理中(預設)/已完成
 	@Column(name = "PAYMENTSTSTUS")
 	private String paymentStstus = "未付款"; // 付款狀態 未付款(預設)/已付款/退款中/已退款
 	@Column(name = "DELIVERYSTSTUS")
-	private String deliveryStstus = "處理中"; // 送貨狀態 處理中(預設)/備貨中/已發貨/已取貨/退貨中/已退貨
+	private String deliveryStstus = "處理中"; // 送貨狀態 備貨中(預設)/已發貨/已取貨/退貨中/已退貨
 	@Column(name = "PAYMENTMETHOD")
-	private String paymentMethod; // 付款方式 信用卡/轉帳
+	private String paymentMethod; // 付款方式 信用卡/轉帳 暫時沒有使用到 統一都是綠界付款
 
 	@ManyToOne
 	@JoinColumn(name = "DISCOUNTID_FK")

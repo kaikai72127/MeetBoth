@@ -143,6 +143,13 @@ h1 {
 									<img src="/MeetBoth/html/assets/images/shop/兔年海報2.jpg"
 										style="padding-bottom: 10px;">
 								</div>
+								<!--訂單管理 -->
+
+								<div>目前累積訂單總數: ${order} 筆</div>
+								<div>目前累積消費金額: ${mbTotal} 元 </div>
+
+
+								<!--搜尋列表區 -->
 								<form class="row"
 									action="<c:url value='/searchOrdersList.controller'/>"
 									method="post">
@@ -154,9 +161,7 @@ h1 {
 												style="padding-right: 0; font-size: 17px; color: black;">
 												<option value="0">訂單狀態</option>
 												<option value="處理中">處理中</option>
-												<option value="備貨中">備貨中</option>
 												<option value="已完成">已完成</option>
-												<option value="取消">取消</option>
 											</select>
 										</div>
 										<div style="padding-right: 0; margin: auto 10px;">
@@ -193,7 +198,8 @@ h1 {
 										<div></div>
 									</div>
 								</form>
-
+								<!--搜尋列表區 -->
+								<!--訂購記錄-->
 								<div class="row ">
 									<div class="col-sm-12">
 										<ul class="nav nav-tabs font-alt" role="tablist">
@@ -257,7 +263,7 @@ h1 {
 										</div>
 									</div>
 								</div>
-								<!-- 123 -->
+							<!--訂購記錄-->
 							</div>
 						</div>
 					</div>

@@ -249,8 +249,7 @@ a:hover {
 														name='ordStstus' class="fieldWidth MBinput"
 														style="width: 312px; height: 66.1px;">
 															<option class="A1" value="處理中">處理中</option>
-															<option class="A2" value="備貨中">備貨中</option>
-															<option class="A3" value="已完成">已完成</option>
+															<option class="A2" value="已完成">已完成</option>
 													</select></span>
 												</div>
 												<div>
@@ -405,11 +404,8 @@ a:hover {
 		case '處理中':
 			$(".A1").attr('selected', true)
 			break;
-		case '備貨中':
-			$(".A2").attr('selected', true)
-			break;
 		case '已完成':
-			$(".A3").attr('selected', true)
+			$(".A2").attr('selected', true)
 			break;
 		}
 	</script>

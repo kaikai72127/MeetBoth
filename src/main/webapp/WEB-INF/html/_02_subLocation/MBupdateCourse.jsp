@@ -232,7 +232,7 @@ a:hover {
 											<div>
 												<input type="hidden"
 													value="${course.coursetype.courseClass}" name="pClass">
-												<span>課程類別 :&ensp;<select name="courseClass" style=""
+												<span>課程類別 :&ensp;<select name="courseClass" style="width: 316px; height: 66.1px;"
 													class="MBinput">
 														<option value="1">語言學習</option>
 														<option value="2">升學補習</option>

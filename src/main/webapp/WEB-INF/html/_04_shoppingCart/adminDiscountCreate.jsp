@@ -357,10 +357,10 @@ a:hover {
 		var si = document.getElementById('speedInsert');
 		si.addEventListener('click', function() {
 			console.log("123456789");
-			document.getElementById('discountNo').value = 'EEIT156';
-			document.getElementById('discountName').value = 'EEIT156畢業快樂';
-			document.getElementById('discountPrice').value = '156';
-			document.getElementById('discountDesc').value = 'EEIT156即將畢業 折156元';
+			document.getElementById('discountNo').value = 'EEIT56';
+			document.getElementById('discountName').value = 'EEIT56畢業快樂';
+			document.getElementById('discountPrice').value = '56';
+			document.getElementById('discountDesc').value = 'EEIT56即將畢業 折56元';
 			document.getElementById('discountStart').value = '2023-02-14 00:00:00:00';
 			document.getElementById('discountEnd').value = '2023-03-14 00:00:00:00';
 		});

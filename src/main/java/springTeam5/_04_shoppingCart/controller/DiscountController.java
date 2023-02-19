@@ -92,8 +92,8 @@ public class DiscountController {
 	}
 
 	// 刪除------
-	@GetMapping("/admin/discountsDelete.controller/{discountId}")
-	public String processDeleteOrderAction(@PathVariable("discountId") int discountId) {
+	@GetMapping("/admin/discountsDelete.controller")
+	public String processDeleteOrderAction(@RequestParam("discountId") Integer discountId) {
 
 		discountService.deleteDiscountByDiscountId(discountId);
 

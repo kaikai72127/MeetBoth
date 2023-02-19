@@ -220,7 +220,7 @@ a:hover {
 										class="btn btn-d btn-round">課程管理&ensp;<i
 											class="fa-solid fa-angle-double-down"></i></a>
 										<ul style="">
-											<li><a href="#" style="color: white; font-weight: 600;"
+											<li><a href="/MeetBoth/admin/_02_subLocation.index.controller" style="color: white; font-weight: 600;"
 												class="btn btn-d btn-round">所有課程清單</a></li>
 										</ul></li>
 									<li><a href="#" style="color: white; font-size: 20px;"
@@ -266,14 +266,14 @@ a:hover {
 								<!--       右邊第一部分開始 -->
 								<div class="post">
 									<form
-										action="<c:url value='/_02_subLocation.MBupdateCourseAction.controller' />"
+										action="<c:url value='/admin/_02_subLocation.MBupdateCourseAction.controller' />"
 										method="Post" enctype="multipart/form-data">
 										<div
 											class="post-video embed-responsive embed-responsive-16by9"
 											style="height: auto; padding-bottom: 100px;">
 											<div style="display: flex">
 												<button class="MBbtn"
-													onclick="window.location='/MeetBoth/_02_subLocation.index.controller'">返回</button>
+													onclick="window.location='/MeetBoth/admin/_02_subLocation.index.controller'">返回</button>
 											</div>
 											<!-- 											<div> -->
 											<%-- 												<span>商品狀態 :&ensp;<input value="${prod.prodState}" --%>

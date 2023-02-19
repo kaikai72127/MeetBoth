@@ -216,7 +216,7 @@ a:hover {
 										class="btn btn-d btn-round">課程管理&ensp;<i
 											class="fa-solid fa-angle-double-down"></i></a>
 										<ul style="">
-											<li><a href="/MeetBoth/_02_subLocation.index.controller"
+											<li><a href="/MeetBoth/admin/_02_subLocation.index.controller"
 												style="color: white; font-weight: 600;"
 												class="btn btn-d btn-round">所有課程清單</a></li>
 										</ul></li>
@@ -268,7 +268,7 @@ a:hover {
 											<span>所有課程資料 :&ensp;</span>
 										</div>
 										<form class="row"
-											action="<c:url value='/searchCourseWithCondition1.controller'/>"
+											action="<c:url value='/admin/searchCourseWithCondition1.controller'/>"
 											method="post">
 											<div style="display: flex; margin-bottom: 15px;">
 												<div style="padding-right: 0; margin: auto 10px;">
@@ -302,7 +302,7 @@ a:hover {
 												<div style="">
 													<button class="MBbtn" type="submit" style="">搜尋</button>
 													<input type="button" class="MBbtn" value="新增"
-														onclick="window.location='/MeetBoth/_02_subLocation.MBinsertCourse.controller'">
+														onclick="window.location='/MeetBoth/admin/_02_subLocation.MBinsertCourse.controller'">
 												</div>
 											</div>
 										</form>
@@ -335,9 +335,9 @@ a:hover {
 																<td>${bean.memberBean.memberID}</td>
 																<td>${bean.coursePost}</td>
 																<td><input type="button" class="MBbtn" value="更多"
-																	onclick="window.location='/MeetBoth/_02_subLocation.singleCourseIndex.controller?id=${bean.courseID}'"></td>
+																	onclick="window.location='/MeetBoth/admin/_02_subLocation.singleCourseIndex.controller?id=${bean.courseID}'"></td>
 																<td><input type="button" class="MBbtn" value="修改"
-																	onclick="window.location='/MeetBoth/_02_subLocation.pathToMBupdateCourse.controller?id=${bean.courseID}'"></td>
+																	onclick="window.location='/MeetBoth/admin/_02_subLocation.pathToMBupdateCourse.controller?id=${bean.courseID}'"></td>
 																<td style="border-right: none"><input type="button"
 																	class="MBbtn deleteThisProduct"  value="刪除" id=""
 																	name="${bean.courseID}"></td>
@@ -437,14 +437,14 @@ a:hover {
                     if (result.isConfirmed) {
                         $.ajax({
                           //專案名稱+servlet
-                         url:'/MeetBoth/_02_subLocation.MBdeleteCourseById.controller',
+                         url:'/MeetBoth/admin/_02_subLocation.MBdeleteCourseById.controller',
                           method:"post",
                           dataType:"text",
                           //對應name設定的名稱 並非value的名稱
                           data: {"id":id},
                         })
                             .done(function () {
-                            	window.location='/MeetBoth/_02_subLocation.index.controller'
+                            	window.location='/MeetBoth/admin/_02_subLocation.index.controller'
                                 console.log("delete")
                              })//done
                              .fail(function(error) {

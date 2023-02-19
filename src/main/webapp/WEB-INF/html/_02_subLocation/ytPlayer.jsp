@@ -195,7 +195,7 @@ h1 {
 												<div style="display: flex;">
 													<div class="shop-item-image"
 														style="width: 200px; height: 250px;">
-														<img src="html/assets/images/shop/product-12.jpg"
+														<img src="<c:url value='/_01_member.ShowPhoto.controller?account=${singleCourseBean.memberBean.account}'/>"
 															alt="avatar" />
 													</div>
 													<div class="comment-content clearfix"
@@ -211,7 +211,7 @@ h1 {
 													</div>
 													<div style="margin-top: 170px;">
 														<a
-															href="<c:url value='/memberresume?id=${bean.memberBean.memberID}'/>">
+															href="<c:url value='/memberresume?id=${singleCourseBean.memberBean.memberID}'/>">
 															<input class="btn btn-p btn-circle" type="button"
 															value="前往賣家個人頁面"
 															style="height: 43px; font-size: 19px; float: right;">
@@ -228,12 +228,12 @@ h1 {
 														<c:forEach var="commbean" items="${commBean}">
 															<div class="comment clearfix">
 																<div class="comment-avatar">
-																	<img src="html/assets/images/shop/product-12.jpg"
+																	<img src="<c:url value='/_01_member.ShowPhoto.controller?account=${bean.memberBean.account}'/>"
 																		alt="賣家圖片" />
 																</div>
 																<div class="comment-content clearfix">
 																	<div class="comment-author font-alt" style="margin: 0;">
-																		<a href="#" style="font-size: 15px;">賣家暱稱</a>
+																		<a href="#" style="font-size: 15px;">${singleCourseBean.memberBean.memNickName}</a>
 																	</div>
 																	<div class="comment-meta font-alt"
 																		style="font-size: 14px;">

@@ -145,9 +145,15 @@ h1 {
 								</div>
 								<!--訂單管理 -->
 
-								<div>目前累積訂單總數: ${order} 筆</div>
-								<div>目前累積消費金額: ${mbTotal} 元 </div>
-
+								<div style="display: flex; justify-content: center;">
+									<h4>
+										目前訂單總數:
+										<sapn style="color:red"> ${order} </sapn>
+										筆　　　　　累積消費金額:
+										<sapn style="color:red">${mbTotal}</sapn>
+										元
+									</h4>
+								</div>
 
 								<!--搜尋列表區 -->
 								<form class="row"
@@ -263,7 +269,7 @@ h1 {
 										</div>
 									</div>
 								</div>
-							<!--訂購記錄-->
+								<!--訂購記錄-->
 							</div>
 						</div>
 					</div>

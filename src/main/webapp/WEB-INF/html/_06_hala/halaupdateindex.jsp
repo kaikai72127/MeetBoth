@@ -223,40 +223,42 @@ a:hover {
 											</div>
 											<div>
 												<input type="hidden" value="${bean.halaId}" name="halaId">
-												<span>文章類別 :&ensp;</span> <select name="halaclassname"
-													style="" class="MBinput">
-													<option value="">--請選擇分類--</option>
-													<option value="公告">公告</option>
-													<option value="閱讀心得">閱讀心得</option>
-													<option value="資料分享">資料分享</option>
-													<option value="圖書推薦">圖書推薦</option>
-													<option value="教學文章">教學文章</option>
-													<option value="JAVA">JAVA</option>
-													<option value="HTML">HTML</option>
-													<option value="Spring">Spring</option>
-													<option value="SpringBoot">SpringBoot</option>
-													<option value="SpringMVC">SpringMVC</option>
-													<option value="SQL Server">SQL Server</option>
-													<option value="My SQL">My SQL</option>
-													<option value="Hibernate">Hibernate</option>
-													<option value="VScode">VScode</option>
-													<option value="eclipse">eclipse</option>
-													<option value="SpringTool">SpringTool</option>
-													<option value="JDBC">JDBC</option>
-													<option value="Servlet">Servlet</option>
-													<option value="JavaScript">JavaScript</option>
-													<option value="jQuery">jQuery</option>
-													<option value="Azure">Azureoption</option>
-													<option value="RESTful">RESTful</option>
-													<option value="c++">c++</option>
-													<option value="python">python</option>
-													<option value="其他">其他</option>
-												</select>
+												<span>文章類別 :&ensp;<select
+													style="width: 312px; height: 66.1px;" name="halaclassname"
+													 class="MBinput">
+														<option value="">--請選擇分類--</option>
+														<option value="公告">公告</option>
+														<option value="閱讀心得">閱讀心得</option>
+														<option value="資料分享">資料分享</option>
+														<option value="圖書推薦">圖書推薦</option>
+														<option value="教學文章">教學文章</option>
+														<option value="JAVA">JAVA</option>
+														<option value="HTML">HTML</option>
+														<option value="Spring">Spring</option>
+														<option value="SpringBoot">SpringBoot</option>
+														<option value="SpringMVC">SpringMVC</option>
+														<option value="SQL Server">SQL Server</option>
+														<option value="My SQL">My SQL</option>
+														<option value="Hibernate">Hibernate</option>
+														<option value="VScode">VScode</option>
+														<option value="eclipse">eclipse</option>
+														<option value="SpringTool">SpringTool</option>
+														<option value="JDBC">JDBC</option>
+														<option value="Servlet">Servlet</option>
+														<option value="JavaScript">JavaScript</option>
+														<option value="jQuery">jQuery</option>
+														<option value="Azure">Azureoption</option>
+														<option value="RESTful">RESTful</option>
+														<option value="c++">c++</option>
+														<option value="python">python</option>
+														<option value="其他">其他</option>
+												</select></span>
 											</div>
 
 											<div>
-												<span>會員編號 :&ensp;<input value="${bean.memberBean.memberID}"
-													type="text" name="memberid" class="MBinput" readonly></span>
+												<span>會員編號 :&ensp;<input
+													value="${bean.memberBean.memberID}" type="text"
+													name="memberid" class="MBinput" readonly></span>
 											</div>
 
 											<div>

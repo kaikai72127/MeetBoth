@@ -92,7 +92,7 @@ public class CoursePayConcroller {
 
 		Integer courseOId = courseOrder.getCourseOId();
 		// ----------------綠借使用
-		String meetBothCNo = "MeetBothCTTT";
+		String meetBothCNo = "MeetBothCTT";
 		meetBothCNo = meetBothCNo + String.valueOf(courseOId); // 訂單流水號
 
 		// 綠界
@@ -120,7 +120,7 @@ public class CoursePayConcroller {
 		// 取得會員資料
 
 		String id = obj.getMerchantTradeNo();
-		id = id.replace("MeetBothCTTT", "");
+		id = id.replace("MeetBothCTT", "");
 		int cOrderNo = Integer.parseInt(id);
 		System.out.println(cOrderNo);
 		

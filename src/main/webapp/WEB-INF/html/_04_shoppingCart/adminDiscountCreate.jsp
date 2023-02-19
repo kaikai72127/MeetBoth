@@ -248,36 +248,39 @@ a:hover {
 											style="height: auto; padding-bottom: 100px; display: flex;">
 											<div style="width: 50%;">
 												<div style="margin-top: 20px">
-													<span>折扣&ensp;編碼 :&ensp;<input name='discountNo'
+													<span>折扣&ensp;編碼 :&ensp;<input name='discountNo' id='discountNo'
 														type="text" class="MBinput" placeholder="英文+數字" required></span>
 												</div>
 												<div>
-													<span>折扣&ensp;名稱 :&ensp;<input name='discountName'
+													<span>折扣&ensp;名稱 :&ensp;<input name='discountName' id='discountName'
 														type="text" class="MBinput" placeholder="折扣碼名稱" required></span>
 												</div>
 												<div>
-													<span>折扣&ensp;金額 :&ensp;<input name='discountPrice'
+													<span>折扣&ensp;金額 :&ensp;<input name='discountPrice' id='discountPrice'
 														type="text" class="MBinput" placeholder="只能是數字" required></span>
 												</div>
 												<div>
-													<span>折扣&ensp;敘述 :&ensp;<input name='discountDesc'
+													<span>折扣&ensp;敘述 :&ensp;<input name='discountDesc' id='discountDesc'
 														type="text" class="MBinput" placeholder="折扣碼敘述"></span>
 												</div>
 												<div>
-													<span>開始&ensp;日期 :&ensp;<input name='discountStart'
+													<span>開始&ensp;日期 :&ensp;<input name='discountStart' id='discountStart'
 														type="text" class="MBinput"
 														placeholder="yyyy-MM-dd hh:mm:ss" required>
 													</span>
 												</div>
 												<div>
-													<span>到期&ensp;日期 :&ensp;<input name='discountEnd'
+													<span>到期&ensp;日期 :&ensp;<input name='discountEnd' id="discountEnd"
 														type="text" class="MBinput"
 														placeholder="yyyy-MM-dd hh:mm:ss" required>
 													</span>
 												</div>
-												<div>
+												<div style="display: flex; ">
+													<input type="button" class="MBbtn" value="一鍵輸入"
+														id="speedInsert"
+														style="margin-top: 15px; margin-left: 220px; font-size: 35px;">
 													<input type="submit" class="MBbtn" value="確定"
-														style="margin-top: 15px; margin-left: 400px; font-size: 35px;">
+														style="margin-top: 15px; font-size: 35px;">
 												</div>
 											</div>
 											<div style="width: 50%;"></div>
@@ -349,118 +352,18 @@ a:hover {
 
 		});
 	</script>
-
-	<!-- 用於下拉選單 -->
+	<!-- 一鍵輸入使用 -->
 	<script>
-		// 	var v = document.querySelector('#ii').getAttribute('value');
-		var v = $('#ordS').val();
-		console.log(v)
-		switch (v) {
-		case '處理中':
-			$(".A1").attr('selected', true)
-			break;
-		case '備貨中':
-			$(".A2").attr('selected', true)
-			break;
-		case '已完成':
-			$(".A3").attr('selected', true)
-			break;
-		}
-	</script>
-	<script>
-		// 	var v = document.querySelector('#ii').getAttribute('value');
-		var v = $('#paymentS').val();
-		console.log(v)
-		switch (v) {
-		case '未付款':
-			$(".B1").attr('selected', true)
-			break;
-		case '已付款':
-			$(".B2").attr('selected', true)
-			break;
-		case '退款中':
-			$(".B3").attr('selected', true)
-			break;
-		case '已退款':
-			$(".B4").attr('selected', true)
-			break;
-		}
-	</script>
-	<script>
-		// 	var v = document.querySelector('#ii').getAttribute('value');
-		var v = $('#deliveryS').val();
-		console.log(v)
-		switch (v) {
-		case '無':
-			$(".C1").attr('selected', true)
-			break;
-		case '備貨中':
-			$(".C2").attr('selected', true)
-			break;
-		case '已發貨':
-			$(".C3").attr('selected', true)
-			break;
-		case '已取貨':
-			$(".C4").attr('selected', true)
-			break;
-		case '退貨中':
-			$(".C5").attr('selected', true)
-			break;
-		case '已退貨':
-			$(".C6").attr('selected', true)
-			break;
-		}
-
-		//-----更新商品數量--------------------------
-		$(".itemQtyChange").change(function() {
-			let seqno = $(this).attr("id");
-			var updateQty = $(this).val();
-			console.log("---------------" + seqno);
-			console.log(updateQty);
-			$.ajax({
-				url : '/MeetBoth/updateOrderItemQty.controller',
-				method : "post",
-				dataType : "text",
-				//這邊的"id"是給controller的變數名
-				data : {
-					"seqno" : seqno,
-					"updateQty" : updateQty
-				},
-			}).done(function() {
-				location.reload();
-			})
-
+		var si = document.getElementById('speedInsert');
+		si.addEventListener('click', function() {
+			console.log("123456789");
+			document.getElementById('discountNo').value = 'EEIT156';
+			document.getElementById('discountName').value = 'EEIT156畢業快樂';
+			document.getElementById('discountPrice').value = '156';
+			document.getElementById('discountDesc').value = 'EEIT156即將畢業 折156元';
+			document.getElementById('discountStart').value = '2023-02-14 00:00:00:00';
+			document.getElementById('discountEnd').value = '2023-03-14 00:00:00:00';
 		});
 	</script>
-	<!-- 用於下拉選單 -->
-
-	<script>
-		$("#images5278").change(function() {
-			readURL(this);
-		});
-
-		function readURL(input) {
-			if (input.files && input.files[0]) {
-				var reader = new FileReader();
-				reader.onload = function(e) {
-					$("#preImg").attr('src', e.target.result);
-				}
-				reader.readAsDataURL(input.files[0]);
-			}
-		}
-	</script>
-	<script type="text/javascript">
-		// 選取 select 元素
-		var selectElement = document.getElementsByName("pty");
-		// 取得 typeClassNum 的值
-		var typeClassNum = document.getElementsByName("pClass").value;
-		// 選取特定的 option 元素
-		for (var i = 0; i < selectElement.options.length; i++) {
-			if (selectElement.options[i].value == typeClassNum) {
-				// 將選到的 option 元素的 selected 屬性設為 true
-				selectElement.options[i].selected = true;
-				break;
-			}
-		}
-	</script>
+	<!-- 一鍵輸入使用 -->
 </html>

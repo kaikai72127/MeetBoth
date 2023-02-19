@@ -189,7 +189,67 @@ a:hover {
 					<div class="row">
 						<!-- 整頁 -->
 						<!-- 左邊欄位開始 -->
-						<jsp:include page="/WEB-INF/html/fragment/AdminIndexSideBar.jsp" />
+						<div class="col-sm-4 col-md-3 sidebar"
+							style="width: 20%; padding-right: 0px;">
+							<div class="widget">
+								<a href="/MeetBoth/_03_product.index.controller"><img
+									src="/MeetBoth/html/assets/images/shop/警告.jpg"
+									style="padding-bottom: 10px;"></a>
+								<ul class="cart">
+									<li><a href="#" style="color: white; font-size: 20px;"
+										class="btn btn-d btn-round">會員管理&ensp;<i
+											class="fa-solid fa-angle-double-down"></i></a>
+										<ul style="">
+											<li><a href="#" style="color: white; font-weight: 600;"
+												class="btn btn-d btn-round">所有會員清單</a></li>
+										</ul></li>
+									<li><a href="" style="color: white; font-size: 20px;"
+										class="btn btn-d btn-round">商品管理&ensp;<i
+											class="fa-solid fa-angle-double-down"></i></a>
+										<ul style="">
+											<li><a
+												href="/MeetBoth/_03_product.productindex.controller"
+												style="color: white; font-weight: 600;"
+												class="btn btn-d btn-round">所有商品清單</a></li>
+											<li><a
+												href="/MeetBoth/_03_product.MBinsertProd.controller"
+												style="color: white; font-weight: 600;"
+												class="btn btn-d btn-round">新增商品</a></li>
+										</ul></li>
+									<li><a href="#" style="color: white; font-size: 20px;"
+										class="btn btn-d btn-round">課程管理&ensp;<i
+											class="fa-solid fa-angle-double-down"></i></a>
+										<ul style="">
+											<li><a href="#" style="color: white; font-weight: 600;"
+												class="btn btn-d btn-round">所有課程清單</a></li>
+										</ul></li>
+									<li><a href="#" style="color: white; font-size: 20px;"
+										class="btn btn-d btn-round">徵才管理&ensp;<i
+											class="fa-solid fa-angle-double-down"></i></a>
+										<ul style="">
+											<li><a href="#" style="color: white; font-weight: 600;"
+												class="btn btn-d btn-round">所有貼文清單</a></li>
+										</ul></li>
+									<li><a href="#" style="color: white; font-size: 20px;"
+										class="btn btn-d btn-round">討論區管理&ensp;<i
+											class="fa-solid fa-angle-double-down"></i></a>
+										<ul style="">
+											<li><a href="#" style="color: white; font-weight: 600;"
+												class="btn btn-d btn-round">所有貼文清單</a></li>
+										</ul></li>
+									<li><a href="#" style="color: white; font-size: 20px;"
+										class="btn btn-d btn-round">購物車管理&ensp;<i
+											class="fa-solid fa-angle-double-down"></i></a>
+										<ul style="">
+											<li><a href="#" style="color: white; font-weight: 600;"
+												class="btn btn-d btn-round">所有購物單清單</a></li>
+										</ul></li>
+								</ul>
+								<a href="#"><img
+									src="/MeetBoth/html/assets/images/shop/警告2.jpg"
+									style="padding-bottom: 10px;"></a>
+							</div>
+						</div>
 						<!-- 左邊欄位結束 -->
 						<!-- 						右邊欄位開始 -->
 						<div class="col-sm-8 col-sm-offset-1"
@@ -223,39 +283,39 @@ a:hover {
 											</div>
 											<div>
 												<input type="hidden" value="${bean.halaId}" name="halaId">
-												<span>文章類別 :&ensp;</span> <select name="halaclassname"
-													style="" class="MBinput">
-													<option value="">--請選擇分類--</option>
-													<option value="公告">公告</option>
-													<option value="閱讀心得">閱讀心得</option>
-													<option value="資料分享">資料分享</option>
-													<option value="圖書推薦">圖書推薦</option>
-													<option value="教學文章">教學文章</option>
-													<option value="JAVA">JAVA</option>
-													<option value="HTML">HTML</option>
-													<option value="Spring">Spring</option>
-													<option value="SpringBoot">SpringBoot</option>
-													<option value="SpringMVC">SpringMVC</option>
-													<option value="SQL Server">SQL Server</option>
-													<option value="My SQL">My SQL</option>
-													<option value="Hibernate">Hibernate</option>
-													<option value="VScode">VScode</option>
-													<option value="eclipse">eclipse</option>
-													<option value="SpringTool">SpringTool</option>
-													<option value="JDBC">JDBC</option>
-													<option value="Servlet">Servlet</option>
-													<option value="JavaScript">JavaScript</option>
-													<option value="jQuery">jQuery</option>
-													<option value="Azure">Azureoption</option>
-													<option value="RESTful">RESTful</option>
-													<option value="c++">c++</option>
-													<option value="python">python</option>
-													<option value="其他">其他</option>
+												<span>文章類別 :&ensp;</span>
+												<select name="halaclassname"style="" class="MBinput">
+														<option value="">--請選擇分類--</option>
+														<option value="公告">公告</option>
+														<option value="閱讀心得">閱讀心得</option>
+														<option value="資料分享">資料分享</option>
+														<option value="圖書推薦">圖書推薦</option>
+														<option value="教學文章">教學文章</option>
+														<option value="JAVA">JAVA</option>
+														<option value="HTML">HTML</option>
+														<option value="Spring">Spring</option>
+														<option value="SpringBoot">SpringBoot</option>
+														<option value="SpringMVC">SpringMVC</option>
+														<option value="SQL Server">SQL Server</option>
+														<option value="My SQL">My SQL</option>
+														<option value="Hibernate">Hibernate</option>
+														<option value="VScode">VScode</option>
+														<option value="eclipse">eclipse</option>
+														<option value="SpringTool">SpringTool</option>
+														<option value="JDBC">JDBC</option>
+														<option value="Servlet">Servlet</option>
+														<option value="JavaScript">JavaScript</option>
+														<option value="jQuery">jQuery</option>
+														<option value="Azure">Azureoption</option>
+														<option value="RESTful">RESTful</option>
+														<option value="c++">c++</option>
+														<option value="python">python</option>
+														<option value="其他">其他</option>
 												</select>
 											</div>
 
 											<div>
-												<span>會員編號 :&ensp;<input value="${bean.memberBean.memberID}"
+												<span>會員編號 :&ensp;<input value="${Member.memberID}"
 													type="text" name="memberid" class="MBinput" readonly></span>
 											</div>
 

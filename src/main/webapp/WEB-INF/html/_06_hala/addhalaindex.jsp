@@ -329,7 +329,7 @@ a:hover {
 														src="<c:url value='/html/images/meatball-200.png'/>" />
 												</div>
 												<input class="MBinput" type="file" name="images"
-													id="images5278" accept=".jpg,.png">
+													id="images5278" accept=".jpg, .png">
 											</div>
 
 											<div>
@@ -418,7 +418,7 @@ a:hover {
 		});
 	</script>
 	<script>
-		$("#imageas5278").change(function() {
+		$("#images5278").change(function() {
 			readURL(this);
 		});
 
@@ -439,10 +439,10 @@ a:hover {
 						'click',
 						function() {
 							// 範例標題文字
-							var title = '花花的原味內褲';
+							var title = '家教網會員權益公告';
 
 							// 範例內容文字
-							var content = '真香';
+							var content = '近期接到會員檢舉有不肖人士，利用1111家教網名義騷擾會員，經查證確有此事，我方已開始進行法律提告程序中，以確保家教網會員權益。\n提醒您若有遇到有心人士騷擾\n1.請記下相關的「案件編號」或「履歷編號」\n2.提供騷擾人士的FB或通訊軟體的帳號及相關對話記錄的截圖\n以上兩者請同時附上(資料提供我方客服查證)，以便我們後續處理進行處分。';
 
 							// 將範例文字填入標題與內容欄位
 							document.getElementsByName('title')[0].value = title;

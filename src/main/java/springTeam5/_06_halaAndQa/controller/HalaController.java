@@ -473,11 +473,6 @@ public class HalaController {
 
 		}
 		
-		// 前往後台新增畫面
-		@RequestMapping(path = "/admin/_06_halaAndQa.goAddHalaIndex.controller", method = RequestMethod.GET)
-		public String processMainActio26() {
-			return "_06_hala/addhalaindex";
-		}
 		
 		// 新增
 		@PostMapping("/admin/_06_halaAndQa.AddHalaIndex.controller")
@@ -556,6 +551,20 @@ public class HalaController {
 			
 
 				return "_06_hala/onehalaindex";
+				}
+			}
+			// 前往後台新增畫面
+			@RequestMapping(path = "/admin/_06_halaAndQa.goAddHalaIndex.controller", method = RequestMethod.GET)
+			public String processMainActio26(HttpServletRequest request) {
+				HttpSession session = request.getSession(false);
+				String account = SecurityContextHolder.getContext().getAuthentication().getName();
+				List<MemberBean> mem = memberService.searchMemByAccount(account);
+				
+				if (mem.size() == 0) {
+					return "login";
+				}else {
+					session.setAttribute("Member", mem.get(0));
+					return "_06_hala/addhalaindex";
 				}
 			}
 		 

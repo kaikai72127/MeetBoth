@@ -212,9 +212,9 @@ a:hover {
 										</div>
 										<div style="display: flex">
 											<button class="MBbtn"
-												onclick="window.location='/MeetBoth/_02_subLocation.index.controller'">返回</button>
+												onclick="window.location='/MeetBoth/admin/_02_subLocation.index.controller'">返回</button>
 											<button class="MBbtn"
-												onclick="window.location='/MeetBoth/_02_subLocation.pathToMBupdateCourse.controller?id=${course.courseID}'">修改</button>
+												onclick="window.location='/MeetBoth/admin/_02_subLocation.pathToMBupdateCourse.controller?id=${course.courseID}'">修改</button>
 											<button class="MBbtn" id="deleteThisProduct"
 												name="${course.courseID}">刪除</button>
 										</div>
@@ -383,14 +383,14 @@ a:hover {
                     if (result.isConfirmed) {
                         $.ajax({
                           //專案名稱+servlet
-                         url:'/MeetBoth/_02_subLocation.MBdeleteCourseById.controller',
+                         url:'/MeetBoth/admin/_02_subLocation.MBdeleteCourseById.controller',
                           method:"post",
                           dataType:"text",
                           //對應name設定的名稱 並非value的名稱
                           data: {"id":id},
                         })
                             .done(function () {
-                            	window.location='/MeetBoth/_02_subLocation.index.controller'
+                            	window.location='/MeetBoth/admin/_02_subLocation.index.controller'
                                 console.log("delete")
                              })//done
                              .fail(function(error) {

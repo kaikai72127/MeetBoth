@@ -258,7 +258,7 @@ String basePathimg2 = request.getScheme() + "://" + request.getServerName() + ":
 														<div class="form-group">
 															<label class="sr-only" for="name">Name</label> <input
 																class="form-control" id="name" type="text" name="name"
-																placeholder="${bean.memberBean.memNickName}"
+																placeholder="${memberBean.memNickName}"
 																style="text-transform: none; font-size: 17px; height: 35px;"
 																readonly />
 														</div>

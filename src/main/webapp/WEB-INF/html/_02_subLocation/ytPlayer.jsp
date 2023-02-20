@@ -233,7 +233,7 @@ h1 {
 																</div>
 																<div class="comment-content clearfix">
 																	<div class="comment-author font-alt" style="margin: 0;">
-																		<a href="#" style="font-size: 15px;">${singleCourseBean.memberBean.memNickName}</a>
+																		<a href="#" style="font-size: 15px;">${commbean.memberBean.memNickName}</a>
 																	</div>
 																	<div class="comment-meta font-alt"
 																		style="font-size: 14px;">
@@ -260,15 +260,16 @@ h1 {
 													<form method="post"
 														action="<c:url value='/InsertCourseCommentUnderYt.controller' />">
 														<input type="hidden" name="id"
-															value="${singleCourseBean.courseID}" /> <input
+															value="${singleCourseBean.courseID}" /> 
+															<input
 															type="hidden" name="ytPlayerID"
-															value="${bean.ytPlayerID}" />
+															value="${bean.ytPlayerID}" placeholder="${bean.ytPlayerID}"/>
 														<div class="row">
 															<div class="col-sm-4">
 																<div class="form-group">
 																	<label class="sr-only" for="name">Name</label> <input
 																		class="form-control" id="name" type="text" name="name"
-																		placeholder="Name"
+																		placeholder="${memberbuy.memNickName}"
 																		style="text-transform: none; font-size: 17px; height: 35px;" />
 																</div>
 															</div>

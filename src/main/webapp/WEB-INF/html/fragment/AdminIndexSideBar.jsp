@@ -38,7 +38,7 @@ String basePath16 = request.getScheme() + "://" + request.getServerName() + ":" 
 				class="btn btn-d btn-round">課程管理&ensp;<i
 					class="fa-solid fa-angle-double-down"></i></a>
 				<ul style="">
-					<li><a href="/MeetBoth/_02_subLocation.index.controller"
+					<li><a href="/MeetBoth/admin/_02_subLocation.index.controller"
 						style="color: white; font-weight: 600" class="btn btn-d btn-round">所有課程清單</a>
 					</li>
 				</ul></li>
@@ -56,7 +56,7 @@ String basePath16 = request.getScheme() + "://" + request.getServerName() + ":" 
 					</li>
 				</ul></li>
 			<li><a href="#" style="color: white; font-size: 20px"
-				class="btn btn-d btn-round">討論區管理&ensp;<i
+				class="btn btn-d btn-round">論壇管理&ensp;<i
 					class="fa-solid fa-angle-double-down"></i></a>
 				<ul style="">
 					<li><a

@@ -612,7 +612,7 @@ public class ProductController {
 	@PostMapping("/_03_product.MBdeleteProductById.controller")
 	public String processMBDeleteProductByIdAction(@RequestParam("id") Integer id) {
 		pService.deleteProdFromProdID(id);
-		return "redirect:_03_product.productindex.controller/1";
+		return "redirect:/admin/_03_product.productindex.controller/1";
 	}
 
 //	模糊搜尋(前台)

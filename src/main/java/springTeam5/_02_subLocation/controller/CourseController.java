@@ -64,7 +64,7 @@ public class CourseController {
 
 //	-----------------------------後台-----------------------
 //  後台查詢全部
-	@GetMapping("/_02_subLocation.index.controller")
+	@GetMapping("/admin/_02_subLocation.index.controller")
 	public String processpathToCourseIndexAction(Model mCourse) {
 		List<Course> result;
 		try {
@@ -79,7 +79,7 @@ public class CourseController {
 	}
 
 //	後台模糊搜尋
-	@PostMapping("/searchCourseWithCondition1.controller")
+	@PostMapping("/admin/searchCourseWithCondition1.controller")
 	public String processSearchCourseWithCondtion1(@RequestParam("case") int order,
 			@RequestParam("typecase") Integer type, @RequestParam("lowprice") int low,
 			@RequestParam("highprice") int high, @RequestParam("searchName") String name, Model pm)
@@ -109,7 +109,7 @@ public class CourseController {
 	}
 
 //	導到後台新增
-	@GetMapping("/_02_subLocation.MBinsertCourse.controller")
+	@GetMapping("/admin/_02_subLocation.MBinsertCourse.controller")
 	public String processpathToMBinsertPordAction(HttpServletRequest request, Model m) {
 		HttpSession session = request.getSession(false);
 
@@ -126,7 +126,7 @@ public class CourseController {
 	}
 
 //	後台新增	
-	@PostMapping("/_02_subLocation.MBinsertCourseAction.controller")
+	@PostMapping("/admin/_02_subLocation.MBinsertCourseAction.controller")
 	public String processMBinsertCourseAction(@RequestParam("cName") String cName,
 			@RequestParam("cClass") Integer cClass, @RequestParam("cPrice") Integer cPrice,
 			@RequestParam("memID") Integer memID, @RequestParam("directions") String directions,
@@ -160,11 +160,11 @@ public class CourseController {
 
 		cService.insertCourse(newCourse);
 
-		return "redirect:_02_subLocation.index.controller";
+		return "redirect:admin/_02_subLocation.index.controller";
 	}
 
 //  前往後台修改畫面	
-	@GetMapping("/_02_subLocation.pathToMBupdateCourse.controller")
+	@GetMapping("/admin/_02_subLocation.pathToMBupdateCourse.controller")
 	public String processpathToMBupdateCourseAction(HttpServletRequest request, Model m, Model mCourse,
 			@RequestParam("id") Integer courseid) throws SQLException {
 
@@ -187,7 +187,7 @@ public class CourseController {
 	}
 
 //  後台修改	
-	@PostMapping("/_02_subLocation.MBupdateCourseAction.controller")
+	@PostMapping("/admin/_02_subLocation.MBupdateCourseAction.controller")
 	public String processMBupdateCourseAction(@RequestParam("courseClass") Integer cClass,
 			@RequestParam("courseName") String cName, @RequestParam("courseID") Integer courseID,
 			@RequestParam("coursePrice") Integer cPrice, @RequestParam("memberID") Integer memID,
@@ -219,18 +219,18 @@ public class CourseController {
 			cService.updateCourse(course);
 		}
 
-		return "redirect:_02_subLocation.index.controller";
+		return "redirect:/admin/_02_subLocation.index.controller";
 	}
 
 //	後台delete
-	@PostMapping("/_02_subLocation.MBdeleteCourseById.controller")
+	@PostMapping("/admin/_02_subLocation.MBdeleteCourseById.controller")
 	public String processMBDeleteMBCourseByIdAction(@RequestParam("id") Integer id) {
 		cService.deleteCourseFromCourseID(id);
-		return "redirect:_02_subLocation.index.controller";
+		return "redirect:/admin/_02_subLocation.index.controller";
 	}
 
 //	調轉到單一的管理者課程後台
-	@GetMapping("/_02_subLocation.singleCourseIndex.controller")
+	@GetMapping("/admin/_02_subLocation.singleCourseIndex.controller")
 	public String processSingleCourseIndexAction(@RequestParam("id") Integer courseID, Model mCourse)
 			throws SQLException {
 

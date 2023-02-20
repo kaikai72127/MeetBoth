@@ -125,7 +125,7 @@ String basePathimg2 = request.getScheme() + "://" + request.getServerName() + ":
 											src="<c:url value='/showCoursePicture.controller?id=${bean.courseBean.courseID}' />">
 										<div class="shop-item-detail">
 											<a
-												href="/MeetBoth/YtDetail.controller?id=1&courseID=${bean.courseBean.courseID}"
+												href="/MeetBoth/YtDetail.controller?courseID=${bean.courseBean.courseID}"
 												class="btn btn-round btn-p" style="font-size: 14px;"><span
 												class="icon-heart">進入課程影片</span><span class="icon-heart"></span></a>
 										</div>

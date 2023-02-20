@@ -230,15 +230,16 @@ a:hover {
 													placeholder="不能為空"></span>
 											</div>
 											<div>
-												<input type="hidden"
-													value="${course.coursetype.courseClass}" name="pClass">
-												<span>課程類別 :&ensp;<select name="courseClass" style="width: 312px; height: 66.1px;"
+												<span>課程類別 :&ensp;<input type="hidden"
+														id="cClass" class="MBinput"
+														value="${course.coursetype.courseClass}${param.cClass}"><select
+													name="courseClass" style="width: 312px; height: 66.1px;"
 													class="MBinput">
-														<option value="1">語言學習</option>
-														<option value="2">升學補習</option>
-														<option value="3">專業科目</option>
-														<option value="4">人文課程</option>
-														<option value="5">程式課程</option>
+														<option class="A1" value="1">語言學習</option>
+														<option class="A2" value="2">升學補習</option>
+														<option class="A3" value="3">專業科目</option>
+														<option class="A4" value="4">人文課程</option>
+														<option class="A5" value="5">程式課程</option>
 												</select></span>
 											</div>
 											<div>
@@ -383,6 +384,37 @@ a:hover {
 			}
 		}
 	</script>
+	
+	<!-- 用於下拉選單 -->
+	<script>
+		// 	var v = document.querySelector('#ii').getAttribute('value');
+		var v = $('#cClass').val();
+		console.log(v)
+		console.log('1231254')
+		switch (v) {
+		case '1':
+			$(".A1").attr('selected', true)
+			console.log('1------')
+			break;
+		case '2':
+			$(".A2").attr('selected', true)
+			console.log('2------')
+			break;
+		case '3':
+			$(".A3").attr('selected', true)
+			console.log('3------')
+			break;
+		case '4':
+			$(".A4").attr('selected', true)
+			console.log('4------')
+			break;
+		case '5':
+			$(".A5").attr('selected', true)
+			console.log('5------')
+			break;
+		}
+	</script>
+	<!-- 用於下拉選單 -->
 
 </body>
 

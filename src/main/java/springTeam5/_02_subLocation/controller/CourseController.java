@@ -160,7 +160,7 @@ public class CourseController {
 
 		cService.insertCourse(newCourse);
 
-		return "redirect:admin/_02_subLocation.index.controller";
+		return "redirect:/admin/_02_subLocation.index.controller";
 	}
 
 //  前往後台修改畫面	
@@ -636,7 +636,7 @@ public class CourseController {
 
 //	課程影片明細
 	@GetMapping("/YtDetail.controller")
-	public String processYtDetail(HttpServletRequest request,Model m,@RequestParam("id") Integer id, @RequestParam("courseID") Integer courseID,
+	public String processYtDetail(HttpServletRequest request,Model m, @RequestParam("courseID") Integer courseID,
 			Model mCourse, Model mSingleCourse, Model mYtPlayer, Model mComm) throws SQLException {
 		HttpSession session = request.getSession(false);
 
@@ -648,8 +648,8 @@ public class CourseController {
 		} else {
 		m.addAttribute("memberbuy", mem.get(0));
 		Course course = cService.searchSingleCourseFromCourseID(courseID);
-		YtPlayer yt = ytService.searchYtPlayerByYtPlayerID(id);
-
+		List<YtPlayer> yts = ytService.findByCourseCourseID(courseID);
+		YtPlayer yt = yts.get(0);
 		mSingleCourse.addAttribute("singleCourseBean", course);
 		mYtPlayer.addAttribute("bean", yt);
 

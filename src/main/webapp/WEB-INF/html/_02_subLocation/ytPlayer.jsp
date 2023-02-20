@@ -228,7 +228,7 @@ h1 {
 														<c:forEach var="commbean" items="${commBean}">
 															<div class="comment clearfix">
 																<div class="comment-avatar">
-																	<img src="<c:url value='/_01_member.ShowPhoto.controller?account=${bean.memberBean.account}'/>"
+																	<img src="<c:url value='/_01_member.ShowPhoto.controller?account=${commbean.memberBean.account}'/>"
 																		alt="賣家圖片" />
 																</div>
 																<div class="comment-content clearfix">

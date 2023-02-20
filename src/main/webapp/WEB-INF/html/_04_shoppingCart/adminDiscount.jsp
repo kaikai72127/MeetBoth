@@ -380,7 +380,7 @@ a:hover {
 	<!--     刪除訂單 -->
 	<script>
         $(function(){
-        	$('.deleteThisOrder').click(function(){
+        	$('.deleteThisDiscount').click(function(){
                 let id=$(this).attr("name");
                 Swal.fire({
                   title: '你確定要刪除嗎?',
@@ -400,10 +400,10 @@ a:hover {
                           method:"get",
                           dataType:"text",
                           //對應name設定的名稱 並非value的名稱
-                          data: {"orderNo":id},
+                          data: {"discountId":id},
                         })
                             .done(function () {
-                            	window.location='/MeetBoth/admin/discountsDelete.controller.controller'
+                            	window.location='/MeetBoth/admin/discounts.controller/1'
                                 console.log("delete")
                              })//done
                              .fail(function(error) {

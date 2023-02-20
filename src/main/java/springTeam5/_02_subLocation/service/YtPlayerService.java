@@ -44,6 +44,8 @@ public class YtPlayerService {
 		return ytRepo.findByYtPlayerID(id);
 	}
 	
-
+	public List<YtPlayer> findByCourseCourseID(Integer courseID) {
+		return ytRepo.findByCourseCourseID(courseID);
+	}
 
 }

@@ -403,6 +403,15 @@ public class MemberBean implements Serializable {
 	public void setCoureOrder(Set<CourseOrderBean> coureOrder) {
 		this.coureOrder = coureOrder;
 	}
+	
+
+	public Set<YtPlayer> getYtPlayer() {
+		return ytPlayer;
+	}
+
+	public void setYtPlayer(Set<YtPlayer> ytPlayer) {
+		this.ytPlayer = ytPlayer;
+	}
 
 	@Override
 	public String toString() {

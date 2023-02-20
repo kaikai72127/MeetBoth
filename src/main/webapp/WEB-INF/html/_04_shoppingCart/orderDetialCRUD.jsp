@@ -131,8 +131,7 @@ h1 {
 													value="${orderBean.ordStstus}${param.ordS}"><select
 													name='ordStstus' class="fieldWidth MBinput" style="">
 														<option class="A1" value="處理中">處理中</option>
-														<option class="A2" value="備貨中">備貨中</option>
-														<option class="A3" value="已完成">已完成</option>
+														<option class="A2" value="已完成">已完成</option>
 												</select>
 												</td>
 												<td
@@ -464,11 +463,8 @@ h1 {
 		case '處理中':
 			$(".A1").attr('selected', true)
 			break;
-		case '備貨中':
-			$(".A2").attr('selected', true)
-			break;
 		case '已完成':
-			$(".A3").attr('selected', true)
+			$(".A2").attr('selected', true)
 			break;
 		}
 	</script>

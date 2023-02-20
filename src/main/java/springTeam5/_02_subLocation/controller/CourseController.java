@@ -297,16 +297,25 @@ public class CourseController {
 
 //	跳轉到商品明細
 	@GetMapping("/PathToCourseDetail.controller")
-	public String processPathToCourseDetail2(@RequestParam("id") Integer id, Model mCourse, Model mComm,
-			Model mCourseLike) throws SQLException {
+	public String processPathToCourseDetail2(HttpServletRequest request,@RequestParam("id") Integer id, Model mCourse, Model mComm,
+			Model mCourseLike, Model m) throws SQLException {
 		Course course = cService.searchSingleCourseFromCourseID(id);
 		List<CourseComment> list = course.getCourseComment();
 		ArrayList<CourseComment> comms = new ArrayList<CourseComment>();
 		CourseComment comm = new CourseComment();
 
+		HttpSession session = request.getSession(false);
+
+		String account = SecurityContextHolder.getContext().getAuthentication().getName();
+		List<MemberBean> mem = memberService.searchMemByAccount(account);
+
+		if (mem.size() == 0) {
+			return "login";
+		} else {
+			m.addAttribute("memberBean", mem.get(0));
 		if (list.isEmpty()) {
 			comm.setCourseScore(0);
-//			comm.setCourseCustomID(404);
+			comm.setMemberBean(mem.get(0));
 			comm.setCourseComment("no comment");
 			comms.add(comm);
 			mComm.addAttribute("commBean", comms);
@@ -327,6 +336,7 @@ public class CourseController {
 		courses.add(course);
 		mCourse.addAttribute("bean", courses);
 		return "_02_subLocation/singleCourse";
+		}
 	}
 
 	// 搜相似產品(4)
@@ -626,7 +636,7 @@ public class CourseController {
 
 //	課程影片明細
 	@GetMapping("/YtDetail.controller")
-	public String processYtDetail(HttpServletRequest request,Model m,@RequestParam("id") Integer id, @RequestParam("courseID") Integer courseID,
+	public String processYtDetail(HttpServletRequest request,Model m, @RequestParam("courseID") Integer courseID,
 			Model mCourse, Model mSingleCourse, Model mYtPlayer, Model mComm) throws SQLException {
 		HttpSession session = request.getSession(false);
 
@@ -638,8 +648,8 @@ public class CourseController {
 		} else {
 		m.addAttribute("memberbuy", mem.get(0));
 		Course course = cService.searchSingleCourseFromCourseID(courseID);
-		YtPlayer yt = ytService.searchYtPlayerByYtPlayerID(id);
-
+		List<YtPlayer> yts = ytService.findByCourseCourseID(courseID);
+		YtPlayer yt = yts.get(0);
 		mSingleCourse.addAttribute("singleCourseBean", course);
 		mYtPlayer.addAttribute("bean", yt);
 
@@ -649,7 +659,7 @@ public class CourseController {
 
 		if (list.isEmpty()) {
 			comm.setCourseScore(0);
-//			comm.setCourseCustomID(404);
+			comm.setMemberBean(null);
 			comm.setCourseComment("no comment");
 			comms.add(comm);
 			mComm.addAttribute("commBean", comms);
@@ -682,16 +692,21 @@ public class CourseController {
 		}
 	}
 
-//	新增商品評論 ??
+//	新增商品評論 
 	@PostMapping("/InsertCourseCommentUnderYt.controller")
 	public String processInsertCourseCommentUnderYtAction(
 			@RequestParam(value = "id", required = false) Integer courseID, @RequestParam("comm") String comment,
-			@RequestParam("score") Integer score, @RequestParam("ytPlayerID") Integer ytPlayerID) {
+			@RequestParam("score") Integer score, @RequestParam("ytPlayerID") Integer ytPlayerID, HttpServletRequest request) {
 		try {
 			Course Course = cService.searchSingleCourseFromCourseID(courseID);
 			CourseComment comm = new CourseComment();
+			
+			HttpSession session = request.getSession(false);
 
-//			comm.setCourseCustomID(1001);
+			String account = SecurityContextHolder.getContext().getAuthentication().getName();
+			List<MemberBean> mem = memberService.searchMemByAccount(account);
+
+			comm.setMemberBean(mem.get(0));
 			comm.setCourseScore(score);
 			comm.setCourseComment(comment);
 			comm.setCourseCommentDate(getCurrentDate());

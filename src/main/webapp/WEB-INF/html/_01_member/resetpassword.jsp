@@ -84,9 +84,10 @@
 												</div>
 												<div style="width: 95%;">
 													<input class="form-control" style="text-transform: none;"
-														id="pas2check" type="text" name="password2" onblur="checkpwd()"
-														value='${value}' placeholder="請再輸入一次新密碼" required /><i
-														class="fas fa-eye" onclick="view2()" id="checkEye2"></i>
+														id="pas2check" type="password" name="password2"
+														onblur="checkpwd()" value='${value}' placeholder="請再輸入一次新密碼"
+														required /><i class="fas fa-eye" onclick="view2()"
+														id="checkEye2"></i>
 
 												</div>
 											</div>

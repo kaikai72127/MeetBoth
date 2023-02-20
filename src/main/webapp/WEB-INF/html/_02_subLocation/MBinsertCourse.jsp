@@ -227,7 +227,7 @@ a:hover {
 													class="MBinput" placeholder="不能為空"></span>
 											</div>
 											<div>
-												<span>課程類別 :&ensp;<select name="cClass" style=""
+												<span>課程類別 :&ensp;<select name="cClass" style="width: 312px; height: 66.1px;"
 													class="MBinput">
 														<option value="1">語言學習</option>
 														<option value="2">升學補習</option>

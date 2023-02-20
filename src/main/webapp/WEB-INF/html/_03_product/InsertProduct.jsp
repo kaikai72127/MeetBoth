@@ -83,7 +83,7 @@ String basePathimg2 = request.getScheme() + "://" + request.getServerName() + ":
 										<div class="price font-alt" style="display: flex;">
 											<span class="amount"
 												style="font-size: 25px; text-align: center;">商品類別:&ensp;</span>
-											<select name="pClass"
+											<select name="pClass" id="pType"
 												style="width: 80%; font-size: 20px; letter-spacing: 0px; border: 1px solid black; border-radius: 15px; text-align: center;">
 												<option value="1">文具</option>
 												<option value="2">教具</option>
@@ -234,6 +234,7 @@ String basePathimg2 = request.getScheme() + "://" + request.getServerName() + ":
 			console.log("123");
 			document.getElementById('pName').value = '全新平板';
 			document.getElementById('pPrice').value = '15600';
+			document.getElementById('pType').value = '11';
 			document.getElementById('invt').value = '1';
 			document.getElementById('directions').innerHTML = '尾牙抽到 甩賣';
 		});

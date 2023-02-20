@@ -189,67 +189,7 @@ a:hover {
 					<div class="row">
 						<!-- 整頁 -->
 						<!-- 左邊欄位開始 -->
-						<div class="col-sm-4 col-md-3 sidebar"
-							style="width: 20%; padding-right: 0px;">
-							<div class="widget">
-								<a href="/MeetBoth/_03_product.index.controller"><img
-									src="/MeetBoth/html/assets/images/shop/警告.jpg"
-									style="padding-bottom: 10px;"></a>
-								<ul class="cart">
-									<li><a href="#" style="color: white; font-size: 20px;"
-										class="btn btn-d btn-round">會員管理&ensp;<i
-											class="fa-solid fa-angle-double-down"></i></a>
-										<ul style="">
-											<li><a href="#" style="color: white; font-weight: 600;"
-												class="btn btn-d btn-round">所有會員清單</a></li>
-										</ul></li>
-									<li><a href="" style="color: white; font-size: 20px;"
-										class="btn btn-d btn-round">商品管理&ensp;<i
-											class="fa-solid fa-angle-double-down"></i></a>
-										<ul style="">
-											<li><a
-												href="/MeetBoth/_03_product.productindex.controller"
-												style="color: white; font-weight: 600;"
-												class="btn btn-d btn-round">所有商品清單</a></li>
-											<li><a
-												href="/MeetBoth/_03_product.MBinsertProd.controller"
-												style="color: white; font-weight: 600;"
-												class="btn btn-d btn-round">新增商品</a></li>
-										</ul></li>
-									<li><a href="#" style="color: white; font-size: 20px;"
-										class="btn btn-d btn-round">課程管理&ensp;<i
-											class="fa-solid fa-angle-double-down"></i></a>
-										<ul style="">
-											<li><a href="#" style="color: white; font-weight: 600;"
-												class="btn btn-d btn-round">所有課程清單</a></li>
-										</ul></li>
-									<li><a href="#" style="color: white; font-size: 20px;"
-										class="btn btn-d btn-round">徵才管理&ensp;<i
-											class="fa-solid fa-angle-double-down"></i></a>
-										<ul style="">
-											<li><a href="#" style="color: white; font-weight: 600;"
-												class="btn btn-d btn-round">所有貼文清單</a></li>
-										</ul></li>
-									<li><a href="#" style="color: white; font-size: 20px;"
-										class="btn btn-d btn-round">討論區管理&ensp;<i
-											class="fa-solid fa-angle-double-down"></i></a>
-										<ul style="">
-											<li><a href="#" style="color: white; font-weight: 600;"
-												class="btn btn-d btn-round">所有貼文清單</a></li>
-										</ul></li>
-									<li><a href="#" style="color: white; font-size: 20px;"
-										class="btn btn-d btn-round">購物車管理&ensp;<i
-											class="fa-solid fa-angle-double-down"></i></a>
-										<ul style="">
-											<li><a href="#" style="color: white; font-weight: 600;"
-												class="btn btn-d btn-round">所有購物單清單</a></li>
-										</ul></li>
-								</ul>
-								<a href="#"><img
-									src="/MeetBoth/html/assets/images/shop/警告2.jpg"
-									style="padding-bottom: 10px;"></a>
-							</div>
-						</div>
+						<jsp:include page="/WEB-INF/html/fragment/AdminIndexSideBar.jsp" />
 						<!-- 左邊欄位結束 -->
 						<!-- 						右邊欄位開始 -->
 						<div class="col-sm-8 col-sm-offset-1"
@@ -286,7 +226,7 @@ a:hover {
 											</div>
 											<div>
 												<span>貼文類別 :&ensp;<select name="halaclassname"
-													style="" class="MBinput">
+													style="width: 312px; height: 66.1px;" class="MBinput">
 														<option value="公告">公告</option>
 														<option value="閱讀心得">閱讀心得</option>
 														<option value="資料分享">資料分享</option>
@@ -329,7 +269,7 @@ a:hover {
 														src="<c:url value='/html/images/meatball-200.png'/>" />
 												</div>
 												<input class="MBinput" type="file" name="images"
-													id="images5278" accept=".jpg,.png">
+													id="images5278" accept=".jpg, .png">
 											</div>
 
 											<div>
@@ -418,7 +358,7 @@ a:hover {
 		});
 	</script>
 	<script>
-		$("#imageas5278").change(function() {
+		$("#images5278").change(function() {
 			readURL(this);
 		});
 
@@ -439,16 +379,16 @@ a:hover {
 						'click',
 						function() {
 							// 範例標題文字
-							var title = '花花的原味內褲';
+							var title = '家教網會員權益公告';
 
 							// 範例內容文字
-							var content = '真香';
+							var content = '近期接到會員檢舉有不肖人士，利用1111家教網名義騷擾會員，經查證確有此事，我方已開始進行法律提告程序中，以確保家教網會員權益。\n提醒您若有遇到有心人士騷擾\n1.請記下相關的「案件編號」或「履歷編號」\n2.提供騷擾人士的FB或通訊軟體的帳號及相關對話記錄的截圖\n以上兩者請同時附上(資料提供我方客服查證)，以便我們後續處理進行處分。';
 
 							// 將範例文字填入標題與內容欄位
 							document.getElementsByName('title')[0].value = title;
 							document.getElementsByName('halacontent')[0].value = content;
 						});
 	</script>
-	
+
 </body>
 </html>

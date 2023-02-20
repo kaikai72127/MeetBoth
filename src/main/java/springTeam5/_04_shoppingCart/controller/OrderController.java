@@ -152,6 +152,17 @@ public class OrderController {
 	public String processSelectAllAcction(@ModelAttribute("OrderBean") OrderBean od, Model odModel,
 			@PathVariable("page") String page) {
 		List<OrderBean> classList = orderService.selectAll();
+		//計算數量用
+		Integer mbTotal =0;
+		Integer order =0;
+		for(OrderBean o:classList) {
+			Integer totalAmount = o.getTotalAmount();
+			mbTotal = mbTotal+ totalAmount;
+			order+=1;
+		}
+		//計算數量用
+
+		
 		int page2 = 1;
 		try {
 			page2 = Integer.parseInt(page);
@@ -179,6 +190,8 @@ public class OrderController {
 		odModel.addAttribute("orderList", orderList);
 		odModel.addAttribute("totalPages", totalPages);
 		odModel.addAttribute("currentPage", page2);
+		odModel.addAttribute("order", order);
+		odModel.addAttribute("mbTotal", mbTotal);
 		return "_04_shoppingCart/adminOrders";
 	}
 
@@ -190,6 +203,19 @@ public class OrderController {
 			@RequestParam(value = "search", required = false) String search, @ModelAttribute("OrderBean") OrderBean od,
 			Model odModel,@PathVariable("page") String page) {
 
+		//計算數量用
+		List<OrderBean> oClassList = orderService.selectAll();
+		Integer mbTotal =0;
+		Integer order =0;
+		for(OrderBean o:oClassList) {
+			Integer totalAmount = o.getTotalAmount();
+			mbTotal = mbTotal+ totalAmount;
+			order+=1;
+		}
+		//計算數量用
+
+		
+		
 		if (search == null) {
 			search = "";
 		}
@@ -224,7 +250,8 @@ public class OrderController {
 		odModel.addAttribute("orderList", orderList);
 		odModel.addAttribute("totalPages", totalPages);
 		odModel.addAttribute("currentPage", page2);
-		
+		odModel.addAttribute("order", order);
+		odModel.addAttribute("mbTotal", mbTotal);
 		return "_04_shoppingCart/adminOrders";
 	}
 
@@ -241,13 +268,25 @@ public class OrderController {
 			return "login";
 		} else {
 			MemberBean memberBean = mem.get(0);
-			System.out.println("----------------找資料");
 			List<OrderBean> orderList = orderService.findByMemberbuy(memberBean.getMemberID());
-			System.out.println("----------------找資料");
 			List<OrderBean> orderSaleList = orderService.findByMemberSale(memberBean.getMemberID());
+			
+			//計算數量用
+			Integer mbTotal =0;
+			Integer order =0;
+			for(OrderBean o:orderList) {
+				Integer totalAmount = o.getTotalAmount();
+				mbTotal = mbTotal+ totalAmount;
+				order+=1;
+			}
+			//計算數量用
+			
+			
 			model.addAttribute("memberBean", memberBean);
 			model.addAttribute("orderList", orderList);
 			model.addAttribute("orderSaleList", orderSaleList);
+			model.addAttribute("order", order);
+			model.addAttribute("mbTotal", mbTotal);
 			return "/_04_shoppingCart/memberOrderList";
 		}
 	}

@@ -221,7 +221,7 @@ String basePathimg2 = request.getScheme() + "://" + request.getServerName() + ":
 														<div class="comment-avatar">
 
 															<img
-																src="<c:url value='/_01_member.ShowPhoto.controller?account=${bean.memberBean.account}'/>"
+																src="<c:url value='/_01_member.ShowPhoto.controller?account=${commbean.memberBean.account}'/>"
 																alt="賣家圖片">
 														</div>
 														<div class="comment-content clearfix">
@@ -258,7 +258,7 @@ String basePathimg2 = request.getScheme() + "://" + request.getServerName() + ":
 														<div class="form-group">
 															<label class="sr-only" for="name">Name</label> <input
 																class="form-control" id="name" type="text" name="name"
-																placeholder="${bean.memberBean.memNickName}"
+																placeholder="${memberBean.memNickName}"
 																style="text-transform: none; font-size: 17px; height: 35px;"
 																readonly />
 														</div>

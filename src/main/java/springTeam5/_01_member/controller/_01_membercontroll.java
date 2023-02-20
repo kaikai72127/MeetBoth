@@ -451,7 +451,7 @@ public String selectByAccountLike(@RequestParam("value") String key, Model m) {
 			newMem.setPhone(member.getPhone());
 			newMem.setPhoto(check.getPhoto());
 			newMem.setAddress(member.getAddress());
-			newMem.setRole(member.getRole());
+			newMem.setRole(check.getRole());
 			fileName = mf.getOriginalFilename();
 			if (fileName != null && fileName != "" && fileName.trim().length() > 0) {
 				System.out.println("這有圖?"+fileName);

@@ -57,16 +57,108 @@ marquee a:hover {
 }
 /* 放大圖片使用 */
 
-#change-img {
-transform: scale(1);
+/* 閃爍的折扣碼 */
+.blink {
+	animation: blink-animation 2s ease-in-out infinite;
 }
 
-#change-img.shown {
-transform: scale(2);
+@
+keyframes blink-animation { 0% {
+	opacity: 0;
 }
+50
+
+
+
+
+%
+{
+opacity
+
+
+
+
+:
+
+
+
+
+1
+
+
+;
+}
+100
+
+
+
+
+%
+{
+opacity
+
+
+
+
+:
+
+
+
+
+0
+
+
+;
+}
+}
+/* 閃爍的折扣碼 */
+
+/* 折扣碼複製 */
+
+/* 折扣碼複製 */
 </style>
-<style>
-</style>
+
+
+<!-- 折扣碼複製 -->
+<script>
+		function copyToClipboard(text) {
+			var input = document.createElement('textarea');
+			input.innerHTML = text;
+			document.body.appendChild(input);
+			input.select();
+			var result = document.execCommand('copy');
+			document.body.removeChild(input);
+			if (result) {
+				// 取得訊息框元素
+				var messageBox = document.getElementById("messageBox");
+				// 設定訊息內容
+				messageBox.innerHTML = "已複製折扣碼: "+text;
+				// 設定訊息框樣式
+				messageBox.style.display = "block";
+				messageBox.style.position = "fixed";
+				messageBox.style.top = "50%";
+				messageBox.style.left = "50%";
+				messageBox.style.transform = "translate(-50%, -50%)";
+				messageBox.style.color = "white";
+				messageBox.style.backgroundColor = "#ce7777";
+				messageBox.style.boxShadow = "0px 0px 2px 3px rgba(0, 0, 0, 0.2)";
+				messageBox.style.borderRadius = "10px";
+				messageBox.style.padding = "15px";
+				messageBox.style.fontSize = "16px";
+				messageBox.style.textAlign = "center";
+				messageBox.style.fontWeight = "800";
+				// 設定定時器，在1秒後隱藏訊息框
+				setTimeout(function() {
+					messageBox.style.display = "none";
+				}, 1000);
+			}
+			return result;
+		}
+</script>
+
+<!-- 折扣碼複製 -->
+
+
 
 </head>
 
@@ -99,12 +191,10 @@ transform: scale(2);
 					<a class="image-link" href="html/assets/images/shop/sport.gif"><img
 						style="box-shadow: 4px 4px 5px rgba(0, 0, 0, 0.5); border-radius: 10px; padding: 3px;"
 						src="html/assets/images/shop/sport.gif" alt="Title of Image" /> </a>
-						<div id="change-img">
-					<img
+					<a class="image-link" href="html/assets/images/shop/lulu.jpg"><img
 						class="image-link"
 						style="box-shadow: 4px 4px 5px rgba(0, 0, 0, 0.5); border-radius: 10px; padding: 3px;"
-						src="html/assets/images/shop/lulu.jpg" alt="Title of Image" />
-						</div>
+						src="html/assets/images/shop/lulu.jpg" alt="Title of Image" /></a>
 				</div>
 				<div>
 					<img
@@ -126,12 +216,36 @@ transform: scale(2);
 			</div>
 
 		</div>
-
 		<!-- 		折扣碼 ----跑馬燈 -->
-		<marquee onMouseOver="this.stop()" onMouseOut="this.start()">
-			<img src="https://i.imgur.com/53AabEX.png" width="48px" height="48px">
-			肉丸家教網歡迎您的加入 點擊<a href="/MeetBoth/login/page">註冊</a> ꉂꉂ꒰•̤▿•̤*ૢ꒱
-		</marquee>
+		<div style="display: flex; justify-content: center;">
+			<c:if test="${not empty discount}">
+				<div>
+					<div style="font-size: 25px; height: 80px; line-height: 80px;">
+						(*ฅ•ᗜ•*) 立即輸入 <span id="discount-code"
+							onclick="copyToClipboard(this.innerText)" class="blink"
+							style="color: #ce7777; font-size: 30px; font-weight: 800">${discount.discountNo}</span>
+						折扣碼 即可於商城使用優惠券<img
+							src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRnTKPkclYtpbwvXZSgvGMNDS0JtjyPKBRKFQ&usqp=CAU"
+							width="50px" height="50px"> <span class="blink"
+							style="color: #ce7777; font-size: 30px; font-weight: 800">${discount.discountDesc}</span>
+						(*•ᗜ•ฅ*)
+					</div>
+					<div id="messageBox"></div>
+				</div>
+			</c:if>
+			<c:if test="${empty discount}">
+				<img src="https://i.imgur.com/53AabEX.png" width="48px"
+					height="48px">
+				<span style="font-size: 24px; margin-left: 20px; margin-right: 20px">
+					目前沒有折扣碼 <span class="blink"
+					style="color: #ce7777; font-size: 30px; font-weight: 800">敬請期待</span>
+					小編灑 優 惠 劵 （♡╹ω╹♡）ﾉ”♡
+				</span>
+				<img src="https://i.imgur.com/53AabEX.png" width="48px"
+					height="48px">
+
+			</c:if>
+		</div>
 		<!-- 		折扣碼 ----跑馬燈 -->
 
 
@@ -145,9 +259,9 @@ transform: scale(2);
 				<div class="newest-list-header">
 					<div class="newest-list-header-icon">
 						<svg viewbox="0 0 48 48">
-											<path
+										<path
 								d="m23.95 42-14.5-7.95v-12L2 18 23.95 6 46 18v15.85h-3v-14.1l-4.55 2.3v12Zm0-15.4L39.7 18 23.95 9.55 8.3 18Zm0 12 11.5-6.35v-8.4L23.95 30l-11.5-6.25v8.5Zm.05-12Zm-.05 3.7Zm0 0Z" />
-										</svg>
+									</svg>
 					</div>
 					<h1>最新老師</h1>
 					<div class="more-button">
@@ -185,9 +299,9 @@ transform: scale(2);
 				<div class="case-list-header">
 					<div class="case-list-header-icon">
 						<svg viewbox="0 0 48 48">
-											<path
+										<path
 								d="m23.95 42-14.5-7.95v-12L2 18 23.95 6 46 18v15.85h-3v-14.1l-4.55 2.3v12Zm0-15.4L39.7 18 23.95 9.55 8.3 18Zm0 12 11.5-6.35v-8.4L23.95 30l-11.5-6.25v8.5Zm.05-12Zm-.05 3.7Zm0 0Z" />
-										</svg>
+									</svg>
 					</div>
 					<h1>最新案件</h1>
 					<div class="more-button">
@@ -262,7 +376,7 @@ transform: scale(2);
 							<div class="works-grid works-grid-4 works-hover-w" id=""
 								style="text-align: center;">
 								<div class="work-item illustration webdesign" id="typeBlock"
-									style="height: 30rem; width: 100%;">
+									style="height: 366px; width: 100%;">
 									<a
 										href="/MeetBoth/_03_product.PathToProductDetail.controller?id=${HotBean.prodID}">
 										<span class="work-image"
@@ -335,61 +449,70 @@ transform: scale(2);
 					});
 				</script>
 	<script>
-		function roundToTwo(num) {
-			return +(Math.round(num + "e+2") + "e-2");
-		}
+					function roundToTwo(num) {
+						return +(Math.round(num + "e+2") + "e-2");
+					}
 
-		const score = document.querySelectorAll("#starAVG");
+					const score = document.querySelectorAll("#starAVG");
 
-		document
-				.addEventListener(
-						"DOMContentLoaded",
-						function() {
-							const scores = document
+					document
+						.addEventListener(
+							"DOMContentLoaded",
+							function () {
+								const scores = document
 									.querySelectorAll("#scoreAVG");
-							for (let i = 0; i < scores.length; i++) {
-								const score = scores[i];
-								const starAVGs = score
+								for (let i = 0; i < scores.length; i++) {
+									const score = scores[i];
+									const starAVGs = score
 										.querySelectorAll("#starAVG");
-								let totalScore = 0;
-								for (let j = 0; j < starAVGs.length; j++) {
-									const starNum = starAVGs[j].value;
-									totalScore += Number(starNum);
-								}
-								let avgScore = roundToTwo(totalScore
-										/ starAVGs.length);
-								let stars = '';
-								if (isNaN(avgScore)) {
-									stars = '&nbsp;(0)';
-								} else {
-									stars = '&nbsp;(' + avgScore + ')';
-								}
-								let onstar = '<span><i class="fa fa-star star"></i></span>';
-								let offstar = '<span><i class="fa fa-star star-off"></i></span>';
-								for (var k = 0; k < 5; k++) {
-									if (k < avgScore) {
-										stars += onstar;
-									} else {
-										stars += offstar;
+									let totalScore = 0;
+									for (let j = 0; j < starAVGs.length; j++) {
+										const starNum = starAVGs[j].value;
+										totalScore += Number(starNum);
 									}
+									let avgScore = roundToTwo(totalScore
+										/ starAVGs.length);
+									let stars = '';
+									if (isNaN(avgScore)) {
+										stars = '&nbsp;(0)';
+									} else {
+										stars = '&nbsp;(' + avgScore + ')';
+									}
+									let onstar = '<span><i class="fa fa-star star"></i></span>';
+									let offstar = '<span><i class="fa fa-star star-off"></i></span>';
+									for (var k = 0; k < 5; k++) {
+										if (k < avgScore) {
+											stars += onstar;
+										} else {
+											stars += offstar;
+										}
+									}
+									stars += '&nbsp;(' + starAVGs.length + '則評論)'
+									score.querySelector("#starAVGDiv").innerHTML = stars;
 								}
-								stars += '&nbsp;(' + starAVGs.length + '則評論)'
-								score.querySelector("#starAVGDiv").innerHTML = stars;
-							}
-						});
-	</script>
+							});
+				</script>
 	<script>
-	document.getElementById("change-img").addEventListener("click", function () {
-		setTimeout(() => {
-			document.getElementById("change-img").ClassList.add("shown");
-		}, 10)
-	});
-	document.getElementById("shown").addEventListener("click", function () {
-		setTimeout(() => {
-			document.getElementById("shown").ClassList.remove("shown");
-		}, 10)
-	});
-    </script>
+					var links = document.querySelectorAll('.image-link');
+					for (var i = 0; i < links.length; i++) {
+						links[i].addEventListener('click', function (event) {
+							event.preventDefault();
+							var imageUrl = this.getAttribute('href');
+							var image = new Image();
+							image.src = imageUrl;
+							image.onload = function () {
+								var modal = document.createElement('div');
+								modal.className = 'image-modal';
+								modal.appendChild(image);
+								document.body.appendChild(modal);
+								modal.addEventListener('click', function () {
+									modal.remove();
+								});
+								modal.style.display = 'flex';
+							};
+						});
+					}
+				</script>
 
 </body>
 

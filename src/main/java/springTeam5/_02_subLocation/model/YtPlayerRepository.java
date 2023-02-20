@@ -17,4 +17,6 @@ public interface YtPlayerRepository extends JpaRepository<YtPlayer, Integer> {
 	
 //	刪除某個ytPlayer
 	public void deleteByYtPlayerID(Integer ytPlayerID);
+	
+	public List<YtPlayer> findByCourseCourseID(Integer courseID);
 }

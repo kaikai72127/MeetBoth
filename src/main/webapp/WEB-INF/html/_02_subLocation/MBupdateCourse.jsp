@@ -206,14 +206,14 @@ a:hover {
 								<!--       右邊第一部分開始 -->
 								<div class="post">
 									<form
-										action="<c:url value='/_02_subLocation.MBupdateCourseAction.controller' />"
+										action="<c:url value='/admin/_02_subLocation.MBupdateCourseAction.controller' />"
 										method="Post" enctype="multipart/form-data">
 										<div
 											class="post-video embed-responsive embed-responsive-16by9"
 											style="height: auto; padding-bottom: 100px;">
 											<div style="display: flex">
 												<button class="MBbtn"
-													onclick="window.location='/MeetBoth/_02_subLocation.index.controller'">返回</button>
+													onclick="window.location='/MeetBoth/admin/_02_subLocation.index.controller'">返回</button>
 											</div>
 											<!-- 											<div> -->
 											<%-- 												<span>商品狀態 :&ensp;<input value="${prod.prodState}" --%>
@@ -232,7 +232,7 @@ a:hover {
 											<div>
 												<input type="hidden"
 													value="${course.coursetype.courseClass}" name="pClass">
-												<span>課程類別 :&ensp;<select name="courseClass" style=""
+												<span>課程類別 :&ensp;<select name="courseClass" style="width: 312px; height: 66.1px;"
 													class="MBinput">
 														<option value="1">語言學習</option>
 														<option value="2">升學補習</option>

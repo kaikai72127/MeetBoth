@@ -260,9 +260,10 @@ h1 {
 													<form method="post"
 														action="<c:url value='/InsertCourseCommentUnderYt.controller' />">
 														<input type="hidden" name="id"
-															value="${singleCourseBean.courseID}" /> <input
+															value="${singleCourseBean.courseID}" /> 
+															<input
 															type="hidden" name="ytPlayerID"
-															value="${bean.ytPlayerID}" />
+															value="${bean.ytPlayerID}" placeholder="${bean.ytPlayerID}"/>
 														<div class="row">
 															<div class="col-sm-4">
 																<div class="form-group">

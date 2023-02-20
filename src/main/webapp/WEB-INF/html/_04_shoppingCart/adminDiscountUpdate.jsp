@@ -231,7 +231,7 @@ a:hover {
 								<div class="post-thumbnail"
 									style="padding-bottom: 0; margin-bottom: 0;">
 									<h1
-										style="padding-bottom: 0px; margin-bottom: 0; text-align: center; font-size: 50px; color: white;">後臺管理-訂單管理</h1>
+										style="padding-bottom: 0px; margin-bottom: 0; text-align: center; font-size: 50px; color: white;">訂單後臺管理-折扣碼</h1>
 								</div>
 								<hr class="divider-w pt-20">
 								<!-- 							標題 -->

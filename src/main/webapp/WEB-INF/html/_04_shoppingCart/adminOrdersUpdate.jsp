@@ -214,9 +214,11 @@ a:hover {
 											class="post-video embed-responsive embed-responsive-16by9"
 											style="height: auto; padding-bottom: 100px; display: flex;">
 											<div style="width: 50%;">
+												<input type="hidden" class="MBinput"
+													value="${orderBean.orderNo}" name="orderNo">
 												<div>
 													<span>訂單&ensp;&ensp;編號 :&ensp;<input
-														value="${orderBean.orderNo}" type="text" name="orderNo"
+														value="${orderBean.orderUID}" type="text" name="orderNo"
 														class="MBinput" readonly></span>
 												</div>
 												<div>

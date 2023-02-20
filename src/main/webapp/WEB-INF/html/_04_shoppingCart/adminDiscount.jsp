@@ -199,7 +199,7 @@ a:hover {
 								<div class="post-thumbnail"
 									style="padding-bottom: 0; margin-bottom: 0;">
 									<h1
-										style="padding-bottom: 0px; margin-bottom: 0; text-align: center; font-size: 50px; color: white;">訂單後臺管理</h1>
+										style="padding-bottom: 0px; margin-bottom: 0; text-align: center; font-size: 50px; color: white;">訂單後臺管理-折扣碼</h1>
 								</div>
 								<hr class="divider-w pt-20">
 								<!-- 							標題 -->
@@ -244,10 +244,10 @@ a:hover {
 													<thead>
 														<tr style="">
 															<th style="width: 5%;">編號</th>
-															<th style="width: 15%; padding-left: 5px;">折扣碼</th>
-															<th style="width: 10%">折扣名稱</th>
-															<th style="width: 30%;">折扣開始日</th>
-															<th style="width: 30%">折扣結束日</th>
+															<th style="width: 20%; padding-left: 5px;">折扣碼</th>
+															<th style="width: 25%">折扣名稱</th>
+															<th style="width: 20%;">折扣開始日</th>
+															<th style="width: 20%">折扣結束日</th>
 															<th></th>
 															<th style="border-right: none;"></th>
 														</tr>

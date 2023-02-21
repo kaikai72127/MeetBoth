@@ -393,7 +393,7 @@ a:hover {
                           method:"get",
                           dataType:"text",
                           //對應name設定的名稱 並非value的名稱
-                          data: {"teacno":id},
+                          data: {"studno":id},
                         })
                             .done(function () {
                             	window.location='/MeetBoth/admin/_05_teacStu.searchAllStud.controller/1'

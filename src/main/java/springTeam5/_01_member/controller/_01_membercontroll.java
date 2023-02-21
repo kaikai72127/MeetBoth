@@ -468,6 +468,7 @@ public String selectByAccountLike(@RequestParam("value") String key, Model m) {
 	public String delete() {
 		List<MemberBean> member = ms.searchMemByNameLike("開芯");
 		int memberID = member.get(0).getMemberID();
+		System.out.println("-----------帳號"+memberID);
 		ms.delete(memberID);
 		return "redirect:/index.controller";
 	}

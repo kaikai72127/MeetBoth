@@ -416,9 +416,9 @@ color:lightgrey;
                         </div>
                     </div>
                     	<div style="display:flex">
-                        <button style="display:flex; justify-content:center; align-items:center; margin:15px auto 0 auto" class="btn btn-b btn-circle" type="submit">確定新增</button>
-                        <button type="button" id="fast-btn" style="display:flex; justify-content:center; align-items:center; margin:15px auto 0 auto" class="btn btn-b btn-circle">一鍵輸入</button>
-                        <button type="button" id="cancel-btn" style="display:flex; justify-content:center; align-items:center; margin:15px auto 0 auto" class="btn btn-b btn-circle">取消</button>
+                        <button style="display:flex; justify-content:center; align-items:center; margin:15px auto 0 auto" class="btn btn-p btn-circle" type="submit">確定新增</button>
+                        <button type="button" id="fast-btn" style="display:flex; justify-content:center; align-items:center; margin:15px auto 0 auto" class="btn btn-p btn-circle">一鍵輸入</button>
+                        <button type="button" id="cancel-btn" style="display:flex; justify-content:center; align-items:center; margin:15px auto 0 auto" class="btn btn-p btn-circle">取消</button>
                         </div>
                 </div>
                 <div class="avatar-section">

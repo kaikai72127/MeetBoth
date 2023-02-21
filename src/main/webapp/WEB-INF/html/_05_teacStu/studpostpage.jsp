@@ -421,8 +421,8 @@ color:lightgrey;
                         </div>
                     </div>
                     	<div style="display:flex">
-                        <button onclick="window.location='/MeetBoth/_05_teacStu.studmail.controller?studno=${bean.studno}'" style="display:flex; justify-content:center; align-items:center; margin:15px auto 0 auto" class="btn btn-b btn-circle mail" id="${bean.studno}">連絡他</button>
-                        <button onclick="window.location='/MeetBoth/_05_teacStu.searchAllStud.controller/1'" style="display:flex; justify-content:center; align-items:center; margin:15px auto 0 auto" class="btn btn-b btn-circle" type="submit">返回貼文頁</button>
+                        <button onclick="window.location='/MeetBoth/_05_teacStu.studmail.controller?studno=${bean.studno}'" style="display:flex; justify-content:center; align-items:center; margin:15px auto 0 auto" class="btn btn-p btn-circle mail" id="${bean.studno}">連絡他</button>
+                        <button onclick="window.location='/MeetBoth/_05_teacStu.searchAllStud.controller/1'" style="display:flex; justify-content:center; align-items:center; margin:15px auto 0 auto" class="btn btn-p btn-circle" type="submit">返回貼文頁</button>
                         </div>
                 </div>
                 <div class="avatar-section">

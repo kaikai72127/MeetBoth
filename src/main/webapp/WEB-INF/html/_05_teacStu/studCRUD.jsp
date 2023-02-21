@@ -171,7 +171,7 @@ body {
         <!-- 標題 -->
         <div class="post-header font-alt">
            <h2 class="post-title"><a href="#">案件貼文列表</a></h2>
-           <form action="<c:url value='/_05_teacStu.insertdataStudMain.controller' />"><button style="float:right" class="btn btn-b btn-circle" type="submit">發布需求</button></form>
+           <form action="<c:url value='/_05_teacStu.insertdataStudMain.controller' />"><button style="float:right" class="btn btn-p btn-circle" type="submit">發布需求</button></form>
         </div>
         <!-- 標題結束 -->
         

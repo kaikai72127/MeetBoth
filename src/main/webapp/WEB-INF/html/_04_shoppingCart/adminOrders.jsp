@@ -218,7 +218,7 @@ function animatePrice(startPrice, endPrice) {
 
 </head>
 <body data-spy="scroll" data-target=".onpage-navigation"
-	data-offset="60" onload="animatePrice(${mbTotal - 1000}, ${mbTotal})">
+	data-offset="60" onload="animatePrice(${mbTotal - 500}, ${mbTotal})">
 	<main>
 		<div class="page-loader">
 			<div class="loader">Loading...</div>

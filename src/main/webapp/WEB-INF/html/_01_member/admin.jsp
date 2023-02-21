@@ -307,7 +307,7 @@
                                                 title: "移除", render: function (data, type, row) {
                                                     // 回傳一個 HTML 按鈕，並以 memberID 傳遞參數
                                                     return '<form id="delete" method="post" action="_01_member.delete.controller">'
-                                                        + '<button name="delete" onclick="cb()" value="' + row.memberID + '">'
+                                                        + '<button name="delete" onclick="cb(' + row.memberID + ')" >'
                                                         + '<i style="color: #ff0000;" class=" fa-solid fa-xmark"></i>'
                                                         + '</button>'
                                                         + '</form>';
@@ -320,8 +320,9 @@
                                 });
                             </script>
                             <script>
-                                function cb() {
+                                function cb(memberID) {
                                     event.preventDefault();
+                                    console.log(memberID)
                                     Swal.fire({
                                         title: '確定要刪除嗎?',
                                         text: "資料會消失喔!",
@@ -332,7 +333,7 @@
                                         confirmButtonText: 'Yes, delete it!'
                                     }).then((result) => {
                                         if (result.isConfirmed) {
-                                            $("#delete").submit();
+                                            $("#delete").append('<input type="hidden" name="delete" value="' + memberID + '">').submit();
                                             Swal.fire(
                                                 'Deleted!',
                                                 'Your file has been deleted.',

@@ -30,7 +30,7 @@ public class MemberService {
 	
 //	刪除
 	public void delete(Integer memberID) {
-		memberRepository.deleteById(memberID);
+		memberRepository.deletemember(memberID);
 	}
 	
 //	修改

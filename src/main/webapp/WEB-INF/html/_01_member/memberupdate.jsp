@@ -128,6 +128,7 @@
                                 .member>tbody {
                                     overflow: scroll;
                                     border-radius: 6px;
+                                    height: 100%;
                                 }
 
                                 .member>tbody>tr {
@@ -141,8 +142,8 @@
                                 .member>tbody>tr>td {
                                     padding-left: 2%;
                                     padding-right: 2%;
-                                    padding-top: 0.5%;
-                                    padding-bottom: 0.5%;
+                                    padding-top: 0.3%;
+                                    padding-bottom: 0.3%;
                                     border: 2px dotted rgb(255, 255, 255);
                                 }
 

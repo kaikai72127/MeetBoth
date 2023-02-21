@@ -45,8 +45,23 @@
 					<!-- 引入共同的footerMVC -->
 					<jsp:include page="../fragment/footerMVC.jsp" />
 				</main>
-				<script type="text/javascript">
-					//設定秒數
+				<script>
+					let countban = 5;
+					function countDownban() {
+						// 將秒數寫在指定元素中
+						document.getElementById("timeBox").innerHTML = countban + "秒後登出！";
+						// 每次執行就減1
+						countban -= 1;
+						// 當 count = 0 時跳轉頁面
+						if (countban == 0) {
+							location.href = "/MeetBoth/logout";
+						}
+						// 設定每秒執行1次
+						setTimeout("countDownban()", 1000);
+					}
+					// 執行 countDown
+				</script>
+				<script>
 					let count = 5;
 					function countDown() {
 						// 將秒數寫在指定元素中
@@ -61,8 +76,34 @@
 						setTimeout("countDown()", 1000);
 					}
 					// 執行 countDown
-					countDown();
 				</script>
+				<script type="text/javascript">
+					$(function () {
+						$.ajax({
+							type: 'POST',
+							url: '/MeetBoth/memberdata',
+							contentType: 'application/json',
+
+							success: function (memberdata) {
+
+								var role = memberdata.role;
+
+								if (role == "ban") {
+									console.log("654321");
+									countDownban();
+								} else {
+									console.log("123456");
+									countDown();
+								}
+							}
+						});
+					});
+					//設定秒數
+
+
+				</script>
+
+
 				<!--  
     JavaScripts
     =============================================

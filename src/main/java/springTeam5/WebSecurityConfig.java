@@ -43,6 +43,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
          .antMatchers(HttpMethod.GET,"/backIndex.controller").hasAnyAuthority("admin")
          .antMatchers(HttpMethod.POST,"/backIndex.controller").hasAnyAuthority("admin")
          .antMatchers(HttpMethod.GET,"/_03_product.index.controller").hasAnyAuthority("admin")
+         .antMatchers("/").hasAnyAuthority("admin","newbie","user")
          .antMatchers("/admin/**").hasAnyAuthority("admin")
          .anyRequest().permitAll()
          

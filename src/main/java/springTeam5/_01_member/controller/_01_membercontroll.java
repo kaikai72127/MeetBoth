@@ -473,7 +473,7 @@ public String selectByAccountLike(@RequestParam("value") String key, Model m) {
 	
 //	刪除
 	@PostMapping(path = "/admin/_01_member.delete.controller")
-	public String delete(@RequestParam("delete") int memberID) {
+	public String delete(@RequestParam("delete") Integer memberID) {
 		ms.delete(memberID);
 		return "redirect:/admin/_01_member.admin.controller";
 	}

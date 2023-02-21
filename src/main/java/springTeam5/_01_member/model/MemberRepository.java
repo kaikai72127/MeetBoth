@@ -3,6 +3,7 @@ package springTeam5._01_member.model;
 import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 
 
@@ -23,7 +24,9 @@ public interface MemberRepository extends JpaRepository<MemberBean, Integer> {
 	@Query(value = "SELECT m FROM MemberBean m WHERE memName LIKE %:keyword% OR account LIKE %:keyword%")
 	public List<MemberBean> searchMemBykey(String keyword);
 
-
+	@Modifying
+	@Query(value = "DELETE FROM MemberBean WHERE memberID = :id")
+	public void deletemember(Integer id);
 
 
 }

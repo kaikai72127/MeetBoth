@@ -187,7 +187,11 @@
 											onclick="event.preventDefault();happylog();" value="開芯一鍵登入"
 											style="font-size: 20px; font-family: 微軟正黑體 ; padding: 0.7% 3% 0.7% 3%; margin-top: 3%;">
 									</form>
-
+									<form method="post" action="<c:url value='/_01_member.delete.controller' />">
+										<button name="delete" class="btn btn-round btn-p"
+											value="" type="submit"
+											style="font-size: 20px; font-family: 微軟正黑體 ; padding: 0.7% 3% 0.7% 3%; margin-top: 3%;">開芯一鍵刪除</button>
+									</form>
 
 								</div>
 								<div class="col-sm-5">

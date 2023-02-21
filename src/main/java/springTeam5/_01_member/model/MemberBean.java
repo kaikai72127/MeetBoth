@@ -412,6 +412,38 @@ public class MemberBean implements Serializable {
 	public void setYtPlayer(Set<YtPlayer> ytPlayer) {
 		this.ytPlayer = ytPlayer;
 	}
+	
+	public Set<HalaBean> getHalaBean() {
+		return halaBean;
+	}
+
+	public void setHalaBean(Set<HalaBean> halaBean) {
+		this.halaBean = halaBean;
+	}
+
+	public Set<ResponseHalaBean> getResponseHalaBean() {
+		return responseHalaBean;
+	}
+
+	public void setResponseHalaBean(Set<ResponseHalaBean> responseHalaBean) {
+		this.responseHalaBean = responseHalaBean;
+	}
+
+	public Set<AnswerHalaBean> getAnswerHalaBean() {
+		return answerHalaBean;
+	}
+
+	public void setAnswerHalaBean(Set<AnswerHalaBean> answerHalaBean) {
+		this.answerHalaBean = answerHalaBean;
+	}
+
+	public Set<ResponseAnswerBean> getResponseAnswerBean() {
+		return responseAnswerBean;
+	}
+
+	public void setResponseAnswerBean(Set<ResponseAnswerBean> responseAnswerBean) {
+		this.responseAnswerBean = responseAnswerBean;
+	}
 
 	@Override
 	public String toString() {
